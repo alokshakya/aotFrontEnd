@@ -7,7 +7,7 @@ import {AppComponent} from './app.component';
         <div class="topbar clearfix">
             <div class="topbar-left">            
                 <div class="logo">
-                    <img src="assets/layout/images/logo-black.png" alt="Logo">
+                    <img src="assets/layout/images/logo.png" alt="Logo">
                 </div>
             </div>
             
