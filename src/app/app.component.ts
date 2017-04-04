@@ -9,7 +9,7 @@ enum MenuOrientation {
 declare var jQuery: any;
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-rot',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

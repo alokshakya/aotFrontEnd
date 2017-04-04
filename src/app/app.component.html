@@ -9,32 +9,44 @@
     <div class="layout-menu-container" (click)="onMenuClick($event)">
         <div #layoutMenuScroller class="nano">
             <div class="nano-content menu-scroll-content">
-                <div class="search-input">
+        
+                <!--<div class="search-input">
                     <input type="text" placeholder="Search"/>
                     <i class="fa fa-search"></i>
+                </div>-->
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-g-nopad">
+                        <img id="ob-profile-image" src="../assets/layout/images/Profile_picture.png" >
+                    </div>
+                    NAME:<br>
+                    CLASS:<br>
+                    EMAIL:<br>
+                    
                 </div>
+                <hr>
+
                 <app-menu [reset]="resetMenu"></app-menu>
                 <div class="layout-menu-footer">
-                    <span class="layout-menu-footer-title">Tasks Overview</span>
+                   <!-- <span class="layout-menu-footer-title">Tasks Overview</span>
                     
                     <p-progressBar [value]="50" [showValue]="false"></p-progressBar>
                     Today
                     
                     <p-progressBar [value]="80" [showValue]="false"></p-progressBar>
-                    Overall
+                    Overall-->
                 </div>
             </div>
         </div>
     </div>
+    
 
     <div class="layout-main">
         <div class="layout-main-content">
             <router-outlet></router-outlet>
-            
             <app-footer></app-footer>
         </div>
     </div>
     
     <div class="layout-mask"></div>
-    
+
 </div>
