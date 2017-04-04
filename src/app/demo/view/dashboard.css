@@ -1,0 +1,43 @@
+
+.ui-g-4{
+    height:150px;
+    width: 200px;
+    text-align: center;
+    border: solid 1px black;
+    padding-bottom: 150px;
+}
+
+img {
+    width:30px;
+    height:30px;
+}
+
+#cyber{
+    background-color: #00add6;
+    margin: 12px 12px 12px 12px;
+}
+
+#science{
+    background-color: #55c58e;
+    margin: 12px 12px 12px 0;
+}
+
+#math{
+    background-color: #e8b639;
+    margin: 12px 12px 12px 0;
+}
+
+#gk{
+    background-color: #f6816d;
+    margin: 12px 12px 12px 12px;
+}
+
+#english{
+    background-color: #ad6fb9;
+    margin: 12px 12px 12px 0;
+}
+
+#reasoning{
+    background-color: #f5a06e;
+    margin: 12px 12px 12px 0;
+}
