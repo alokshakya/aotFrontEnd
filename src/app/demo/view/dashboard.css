@@ -1,5 +1,5 @@
 
-.ui-g-4{
+#cyber,#science,#math,#gk,#english,#reasoning{
     height:150px;
     width: 200px;
     text-align: center;
@@ -13,31 +13,67 @@ img {
 }
 
 #cyber{
-    background-color: #00add6;
+    background-color: #5CB85C;
     margin: 12px 12px 12px 12px;
 }
 
 #science{
-    background-color: #55c58e;
+    background-color: #B54352;
     margin: 12px 12px 12px 0;
 }
 
 #math{
-    background-color: #e8b639;
+    background-color: salmon;
     margin: 12px 12px 12px 0;
 }
 
 #gk{
-    background-color: #f6816d;
+    background-color: #B378D3;
     margin: 12px 12px 12px 12px;
 }
 
 #english{
-    background-color: #ad6fb9;
+    background-color:#FFFF00;
     margin: 12px 12px 12px 0;
 }
 
 #reasoning{
-    background-color: #f5a06e;
+    background-color: coral;
     margin: 12px 12px 12px 0;
 }
+
+#notice{    
+    height: 266px;
+    overflow: auto;
+    overflow-x: hidden;
+    
+}
+
+.alert{
+    background-color: white;
+    border: solid 1px;
+    border-radius: 0px;
+}
+
+
+.testimonial{
+    border: solid 1px;
+    margin-bottom: 15px;
+}
+
+.time{
+    font-style: italic;
+    float:right;
+}
+
+.image{
+    height:50px;
+    width:50px;
+}
+
+#reviews{
+    height:200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+

@@ -9,6 +9,7 @@ import {SelectItem} from 'primeng/primeng';
     styleUrls: ['dashboard.css']
 })
 export class DashboardDemo implements OnInit {
+
     
     cities: SelectItem[];
     
