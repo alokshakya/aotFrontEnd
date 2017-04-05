@@ -43,7 +43,7 @@ img {
 }
 
 #notice{    
-    height: 266px;
+    height: 385px;
     overflow: auto;
     overflow-x: hidden;
     
@@ -66,14 +66,20 @@ img {
     float:right;
 }
 
-.image{
-    height:50px;
-    width:50px;
-}
+
 
 #reviews{
     height:200px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.testimonial.image{
+    width:200px;
+    height:200px;
+}
+#image{
+    height:200px;
+    width:200px;
 }
 
