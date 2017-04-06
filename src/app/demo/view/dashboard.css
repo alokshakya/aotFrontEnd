@@ -3,8 +3,10 @@
     height:150px;
     width: 200px;
     text-align: center;
-    border: solid 1px black;
+    border: solid 1px #cccccc;
     padding-bottom: 150px;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px #888888;
 }
 
 img {
@@ -13,32 +15,32 @@ img {
 }
 
 #cyber{
-    background-color: #5CB85C;
-    margin: 12px 12px 12px 12px;
+    background-color: #4395DA;
+    margin: 12px;
 }
 
 #science{
-    background-color: #B54352;
+    background-color: #ECB049;
     margin: 12px 12px 12px 0;
 }
 
 #math{
-    background-color: salmon;
+    background-color: #DD4855;
     margin: 12px 12px 12px 0;
 }
 
 #gk{
-    background-color: #B378D3;
-    margin: 12px 12px 12px 12px;
+    background-color: #F6885B;
+    margin: 12px;
 }
 
 #english{
-    background-color:#FFFF00;
+    background-color:#29B6B3;
     margin: 12px 12px 12px 0;
 }
 
 #reasoning{
-    background-color: coral;
+    background-color: #94B92B;
     margin: 12px 12px 12px 0;
 }
 
@@ -82,4 +84,3 @@ img {
     height:200px;
     width:200px;
 }
-

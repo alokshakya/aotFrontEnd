@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "olympiadbox";
+  src:url("fonts/olympiadbox.eot");
+  src:url("fonts/olympiadbox.eot?#iefix") format("embedded-opentype"),
+    url("fonts/olympiadbox.woff") format("woff"),
+    url("fonts/olympiadbox.ttf") format("truetype"),
+    url("fonts/olympiadbox.svg#olympiadbox") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+
+}
+
+[data-icon]:before {
+  font-family: "olympiadbox" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "olympiadbox" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cyber:before {
+  content: "\63";
+}
+.icon-english:before {
+  content: "\65";
+}
+.icon-gk:before {
+  content: "\67";
+}
+.icon-maths:before {
+  content: "\6d";
+}
+.icon-reasoning:before {
+  content: "\72";
+}
+.icon-science:before {
+  content: "\73";
+}
+
+/* Custom Size */
+.icon-1x{
+  font-size: 10px !important;
+}
+.icon-2x{
+  font-size: 20px !important;
+}
+.icon-3x{
+  font-size: 30px !important;
+}
+.icon-4x{
+  font-size: 40px !important;
+}
+.icon-5x{
+  font-size: 50px !important;
+}
+
