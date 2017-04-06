@@ -20,10 +20,20 @@ export class AppMenuComponent implements OnInit {
     
     ngOnInit() {
         this.model = [
-            {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['/']},
-            {label: 'Account Settings', icon: 'fa fa-pencil-square-o', routerLink: ['/']},
+            {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['/dashboard']},
+            {label: 'Account Settings', icon: 'fa fa-pencil-square-o', routerLink: ['/accountsettings']},
             {
-                label: 'Computer/Cyber', icon: 'fa fa-laptop',
+                label: 'Computer/Cyber', icon: 'icon-cyber',
+                items: [
+                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/computer/demotest']},
+                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/computer/chapterwisetest']},
+                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/']},
+                    ]
+            },
+            {
+                label: 'Science', icon: 'icon-science',
                 items: [
                     {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
                     {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
@@ -33,7 +43,7 @@ export class AppMenuComponent implements OnInit {
                     ]
             },
             {
-                label: 'Science', icon: 'fa fa-flask',
+                label: 'Mathematics', icon: 'icon-maths',
                 items: [
                     {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
                     {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
@@ -43,17 +53,7 @@ export class AppMenuComponent implements OnInit {
                     ]
             },
             {
-                label: 'Mathematics', icon: 'fa fa-line-chart',
-                items: [
-                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
-                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
-                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/']},
-                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/']},
-                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/']},
-                    ]
-            },
-            {
-                label: 'General Knowledge', icon: 'fa fa-globe',
+                label: 'General Knowledge', icon: 'icon-gk',
                 items: [
                     {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
                     {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
@@ -64,7 +64,7 @@ export class AppMenuComponent implements OnInit {
             },
 
             {
-                label: 'English', icon: 'fa fa-book',
+                label: 'English', icon: 'icon-english',
                 items: [
                     {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
                     {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
@@ -75,7 +75,7 @@ export class AppMenuComponent implements OnInit {
             },
 
             {
-                label: 'Reasoning', icon: 'fa fa-cogs',
+                label: 'Reasoning', icon: 'icon-reasoning',
                 items: [
                     {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
                     {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},

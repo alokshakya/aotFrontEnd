@@ -46,7 +46,7 @@ import {AppComponent} from './app.component';
                                 </a>
                             </li>
                             <li role="menuitem">
-                                <a href="#">
+                                <a href="../assets/template-pages/login.html">
                                     <i class="fa fa-fw fa-sign-out"></i>
                                     <span>Logout</span>
                                 </a>
