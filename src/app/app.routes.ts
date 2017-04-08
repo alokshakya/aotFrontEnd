@@ -17,6 +17,11 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { AccountsettingsComponent } from './accountsettings/accountsettings.component'
 import { DemotestComponent } from './ComputerCyber/demotest/demotest.component'
 import { ChapterwisetestComponent } from './ComputerCyber/chapterwisetest/chapterwisetest.component'
+import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.component';
+import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
+import { ResultComponent } from './ComputerCyber/result/result.component';
+
+
 
 
 export const routes: Routes = [
@@ -25,6 +30,9 @@ export const routes: Routes = [
     {path: 'accountsettings', component: AccountsettingsComponent},
     {path: 'computer/demotest', component: DemotestComponent}, 
     {path: 'computer/chapterwisetest', component: ChapterwisetestComponent},           
+    {path: 'computer/sampletest', component: SampletestComponent},
+    {path: 'computer/mocktest', component: MocktestComponent},
+    {path: 'computer/result', component: ResultComponent},
     {path: 'sample', component: SampleDemo},
     {path: 'forms', component: FormsDemo},
     {path: 'data', component: DataDemo},

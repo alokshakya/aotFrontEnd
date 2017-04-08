@@ -27,9 +27,9 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/computer/demotest']},
                     {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/computer/chapterwisetest']},
-                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/']},
-                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/']},
-                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/']},
+                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/computer/sampletest']},
+                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/computer/mocktest']},
+                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/computer/result']},
                     ]
             },
             {

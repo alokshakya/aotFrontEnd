@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-chapterwisetest',
-  templateUrl: './chapterwisetest.component.html',
-  styleUrls: ['./chapterwisetest.component.scss']
+  selector: 'app-sampletest',
+  templateUrl: './sampletest.component.html',
+  styleUrls: ['./sampletest.component.scss']
 })
-export class ChapterwisetestComponent implements OnInit {
+export class SampletestComponent implements OnInit {
 
-  data: any;
-
-
+  data:any;
   constructor() { }
 
-  ngOnInit() {
-
-    this.data = {
+  ngOnInit() {this.data = {
             labels: ['Remaining','Completed','Generated'],
             datasets: [
                 {
@@ -31,7 +27,6 @@ export class ChapterwisetestComponent implements OnInit {
                     ]
                 }]    
             };
-    }
   }
 
-
+}

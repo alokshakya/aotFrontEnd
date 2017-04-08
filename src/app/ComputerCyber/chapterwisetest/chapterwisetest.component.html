@@ -1,3 +1,339 @@
-<p>
-  chapterwisetest works!
-</p>
+<div class="ui-g">
+  <div class="ui-g-12">
+    <p-panel header="Subscribe">
+      <div style="text-align: center">
+        <h1>No test available</h1><br>
+        <button id="subscribe" pButton type="text" class="ui-button-warning" label="Subscribe Now"></button>
+      </div>
+    </p-panel>
+  </div>
+
+  <div class="ui-g-6">
+    <p-panel header="Introduction">
+      <div id="intro">
+        <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry.
+           Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
+           scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting
+           , remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+          and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<p><br><br><br>
+          <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry.
+           Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
+           scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting
+           , remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+          and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<p>
+      </div>
+    </p-panel>
+  </div>
+
+  <div class="ui-g-6">
+    <p-panel header="Progress">
+      <p-chart type="doughnut" [data]="data"></p-chart>
+    </p-panel>
+  </div>
+
+  <div class="ui-g-6">
+    <p-panel><p-header>Chapterwise Test & Syllabus<button id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button></p-header>
+        <br>
+        <p-radioButton (mouseover)="op1.toggle($event)" (mouseout)="op1.toggle($event)" name="groupname" label="Chapter 1"></p-radioButton><br><br>
+        <p-radioButton (mouseover)="op2.toggle($event)" (mouseout)="op2.toggle($event)" name="groupname" label="Chapter 2"></p-radioButton><br><br>
+        <p-radioButton (mouseover)="op3.toggle($event)" (mouseout)="op3.toggle($event)" name="groupname" label="Chapter 3"></p-radioButton><br><br>
+        <p-radioButton (mouseover)="op4.toggle($event)" (mouseout)="op4.toggle($event)" name="groupname" label="Chapter 4"></p-radioButton><br><br>
+        <p-radioButton (mouseover)="op5.toggle($event)" (mouseout)="op5.toggle($event)" name="groupname" label="Chapter 5"></p-radioButton><br><br>
+    </p-panel>
+
+    <p-overlayPanel #op1>
+      <h6>Topic 1</h6>
+      <h6>Topic 2</h6>
+      <h6>Topic 3</h6>
+      <h6>Topic 4</h6>
+      <h6>Topic 5</h6>
+    </p-overlayPanel>
+    <p-overlayPanel #op2>
+      <h6>Topic 1</h6>
+      <h6>Topic 2</h6>
+      <h6>Topic 3</h6>
+      <h6>Topic 4</h6>
+      <h6>Topic 5</h6>
+    </p-overlayPanel>
+    <p-overlayPanel #op3>
+      <h6>Topic 1</h6>
+      <h6>Topic 2</h6>
+      <h6>Topic 3</h6>
+      <h6>Topic 4</h6>
+      <h6>Topic 5</h6>
+    </p-overlayPanel>
+    <p-overlayPanel #op4>
+      <h6>Topic 1</h6>
+      <h6>Topic 2</h6>
+      <h6>Topic 3</h6>
+      <h6>Topic 4</h6>
+      <h6>Topic 5</h6>
+    </p-overlayPanel>
+    <p-overlayPanel #op5>
+      <h6>Topic 1</h6>
+      <h6>Topic 2</h6>
+      <h6>Topic 3</h6>
+      <h6>Topic 4</h6>
+      <h6>Topic 5</h6>
+    </p-overlayPanel>
+  </div>
+
+  <div class="ui-g-6">
+    <p-panel header="Generated" >
+        <p-tabView>
+          <p-tabPanel header="Chapter 1">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="20/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="34/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Chapter 2">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="15/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="24/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="35/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Chapter 3">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="10/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="24/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="40/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Chapter 4">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="20/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="34/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Chapter 5">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="28/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="19/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Chapter 6">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Chapter 7">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="19/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="34/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Chapter 8">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="38/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="34/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="29/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Chapter 9">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="20/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="34/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="20/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="30/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="24/40">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+          <p-tabPanel header="Chapter 10">
+            <div>
+              <span style="padding-left:30%">Test 1 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="20/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 2 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="34/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 3 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="30/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 4 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="05/40">
+                </button>
+              </span><hr>
+              <span style="padding-left:30%">Test 5 
+                <button style="margin-left: 20%" pButton type="text" class="ui-button-info" label="Start">
+                </button>
+              </span><hr>
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+    </p-panel>
+  </div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+

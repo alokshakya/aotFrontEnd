@@ -98,6 +98,9 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import { AccountsettingsComponent } from './accountsettings/accountsettings.component';
 import { DemotestComponent } from './ComputerCyber/demotest/demotest.component';
 import { ChapterwisetestComponent } from './ComputerCyber/chapterwisetest/chapterwisetest.component';
+import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.component';
+import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
+import { ResultComponent } from './ComputerCyber/result/result.component';
 
 @NgModule({
     imports: [
@@ -193,7 +196,10 @@ import { ChapterwisetestComponent } from './ComputerCyber/chapterwisetest/chapte
         DashboardComponent,
         AccountsettingsComponent,
         DemotestComponent,
-        ChapterwisetestComponent
+        ChapterwisetestComponent,
+        SampletestComponent,
+        MocktestComponent,
+        ResultComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

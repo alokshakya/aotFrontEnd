@@ -8,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class DemotestComponent implements OnInit {
 
   data:any;
+
+  topics:any=["Topic 1","Topic 2","Topic 3","Topic 4","Topic 5"];
+  
   constructor() { }
 
   ngOnInit() {
@@ -15,16 +18,16 @@ export class DemotestComponent implements OnInit {
             labels: ['Remaining','Completed','Generated'],
             datasets: [
                 {
-                    data: [300, 50, 100],
+                    data: [110, 90, 200],
                     backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
+                        "#D9534F",
+                        "#5CB85C",
                         "#FFCE56"
                     ],
                     hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+                        "#D9534F",
+                        "#5CB85C",
+                        "#F0AD4E"
                     ]
                 }]    
   }
