@@ -22,7 +22,7 @@ import {AppComponent} from './app.component';
                 <ul class="topbar-items fadeInDown animated" [ngClass]="{'topbar-items-visible': app.topbarMenuActive}">
                     <li #profile class="profile-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === profile}">
                         <a href="#" (click)="app.onTopbarItemClick($event,profile)">                            
-                            <img class="profile-image" src="assets/layout/images/avatar.png">
+                            <img class="profile-image" src="assets/layout/images/Profile_picture.png">
                             <span class="topbar-item-name">Jane Williams</span>
                         </a>
                         
