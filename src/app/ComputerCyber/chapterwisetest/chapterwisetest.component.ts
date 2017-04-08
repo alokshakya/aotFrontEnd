@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ChapterwisetestComponent implements OnInit {
 
   data: any;
-
+  var:boolean = true;
 
   constructor() { }
 
@@ -32,6 +32,7 @@ export class ChapterwisetestComponent implements OnInit {
                 }]    
             };
     }
+    
   }
 
 

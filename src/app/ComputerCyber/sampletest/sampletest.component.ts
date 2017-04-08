@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SelectItem } from 'primeng/primeng'
 
 @Component({
   selector: 'app-sampletest',
@@ -7,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SampletestComponent implements OnInit {
 
+  exampattern: SelectItem[];
   data:any;
-  constructor() { }
+  constructor() { 
+      this.exampattern = [];
+      this.exampattern.push({label:"Select Exam Pattern", value:"null"})
+      this.exampattern.push({label:"Exam Pattern 1", value:"null"})
+      this.exampattern.push({label:"Exam Pattern 2", value:"null"})
+      this.exampattern.push({label:"Exam Pattern 3", value:"null"})
+  }
 
   ngOnInit() {this.data = {
             labels: ['Remaining','Completed','Generated'],

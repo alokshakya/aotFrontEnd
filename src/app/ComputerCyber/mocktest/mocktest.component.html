@@ -2,7 +2,7 @@
   <div class="ui-g-12">
     <p-panel header="Subscribe">
       <div style="text-align:center">
-        <h1>No test available</h1><br>
+        <h1>No Test Available</h1><br>
         <button id="subscribe" pButton type="text" class="ui-button-warning" label="Subscribe Now"></button>
       </div>
     </p-panel>
@@ -32,7 +32,7 @@
   </div>
 
   <div class="ui-g-6">
-    <p-panel header="Mock Test">
+    <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="exampattern"></p-dropdown></p-header>
       <div id="mocktable">
         <p-dataTable [value]="tabledata">
           <p-column field="Testnumber" header="Testnumber"></p-column>

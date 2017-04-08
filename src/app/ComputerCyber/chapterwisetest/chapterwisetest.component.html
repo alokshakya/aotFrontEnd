@@ -2,7 +2,7 @@
   <div class="ui-g-12">
     <p-panel header="Subscribe">
       <div style="text-align: center">
-        <h1>No test available</h1><br>
+        <h1>No Test Available</h1><br>
         <button id="subscribe" pButton type="text" class="ui-button-warning" label="Subscribe Now"></button>
       </div>
     </p-panel>
@@ -33,56 +33,139 @@
 
   <div class="ui-g-6">
     <p-panel><p-header>Chapterwise Test & Syllabus<button id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button></p-header>
-        <br>
-        <p-radioButton (mouseover)="op1.toggle($event)" (mouseout)="op1.toggle($event)" name="groupname" label="Chapter 1"></p-radioButton><br><br>
-        <p-radioButton (mouseover)="op2.toggle($event)" (mouseout)="op2.toggle($event)" name="groupname" label="Chapter 2"></p-radioButton><br><br>
-        <p-radioButton (mouseover)="op3.toggle($event)" (mouseout)="op3.toggle($event)" name="groupname" label="Chapter 3"></p-radioButton><br><br>
-        <p-radioButton (mouseover)="op4.toggle($event)" (mouseout)="op4.toggle($event)" name="groupname" label="Chapter 4"></p-radioButton><br><br>
-        <p-radioButton (mouseover)="op5.toggle($event)" (mouseout)="op5.toggle($event)" name="groupname" label="Chapter 5"></p-radioButton><br><br>
+        <div class="ui-g">
+          <div class="ui-g-6">
+            <div>
+              <p-overlayPanel #op1>
+              <h3>Chapter 1</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+              <p-overlayPanel #op2>
+              <h3>Chapter 2</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+              <p-overlayPanel #op3>
+              <h3>Chapter 3</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+              <p-overlayPanel #op4>
+              <h3>Chapter 4</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+              <p-overlayPanel #op5>
+              <h3>Chapter 5</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+              <p-overlayPanel #op6>
+              <h3>Chapter 6</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+              <p-overlayPanel #op7>
+              <h3>Chapter 7</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+              <p-overlayPanel #op8>
+              <h3>Chapter 8</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+              <p-overlayPanel #op9>
+              <h3>Chapter 9</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+              <p-overlayPanel #op10>
+              <h3>Chapter 10</h3>
+              <ul>
+                <li>Topic 1</li>
+                <li>Topic 2</li>
+                <li>Topic 3</li>
+                <li>Topic 4</li>
+                <li>Topic 5</li>
+              </ul>
+              </p-overlayPanel>
+            </div>
+
+            <p-radioButton (mouseover)="op1.show($event,actualTarget)" (mouseout)="op1.hide($event,actualTarget)" name="groupname" label="Chapter 1"></p-radioButton><br><br>
+            <p-radioButton (mouseover)="op2.show($event,actualTarget)" (mouseout)="op2.hide($event,actualTarget)" name="groupname" label="Chapter 2"></p-radioButton><br><br>
+            <p-radioButton (mouseover)="op3.show($event,actualTarget)" (mouseout)="op3.hide($event,actualTarget)" name="groupname" label="Chapter 3"></p-radioButton><br><br>
+            <p-radioButton (mouseover)="op4.show($event,actualTarget)" (mouseout)="op4.hide($event,actualTarget)" name="groupname" label="Chapter 4"></p-radioButton><br><br>
+            <p-radioButton (mouseover)="op5.show($event,actualTarget)" (mouseout)="op5.hide($event,actualTarget)" name="groupname" label="Chapter 5"></p-radioButton><br><br>
+            <p-radioButton (mouseover)="op6.show($event,actualTarget)" (mouseout)="op6.hide($event,actualTarget)" name="groupname" label="Chapter 6"></p-radioButton><br><br>
+            <p-radioButton (mouseover)="op7.show($event,actualTarget)" (mouseout)="op7.hide($event,actualTarget)" name="groupname" label="Chapter 7"></p-radioButton><br><br>
+            <p-radioButton (mouseover)="op8.show($event,actualTarget)" (mouseout)="op8.hide($event,actualTarget)" name="groupname" label="Chapter 8"></p-radioButton><br><br>
+            <p-radioButton (mouseover)="op9.show($event,actualTarget)" (mouseout)="op9.hide($event,actualTarget)" name="groupname" label="Chapter 9"></p-radioButton><br><br>
+            <p-radioButton (mouseover)="op10.show($event,actualTarget)" (mouseout)="op10.hide($event,actualTarget)" name="groupname" label="Chapter 10"></p-radioButton><br>
+
+          </div>
+          <div class="ui-g-6">
+            <div #actualTarget>
+            </div>
+          </div>
+        </div>
+
     </p-panel>
 
-    <p-overlayPanel #op1>
-      <h6>Topic 1</h6>
-      <h6>Topic 2</h6>
-      <h6>Topic 3</h6>
-      <h6>Topic 4</h6>
-      <h6>Topic 5</h6>
-    </p-overlayPanel>
-    <p-overlayPanel #op2>
-      <h6>Topic 1</h6>
-      <h6>Topic 2</h6>
-      <h6>Topic 3</h6>
-      <h6>Topic 4</h6>
-      <h6>Topic 5</h6>
-    </p-overlayPanel>
-    <p-overlayPanel #op3>
-      <h6>Topic 1</h6>
-      <h6>Topic 2</h6>
-      <h6>Topic 3</h6>
-      <h6>Topic 4</h6>
-      <h6>Topic 5</h6>
-    </p-overlayPanel>
-    <p-overlayPanel #op4>
-      <h6>Topic 1</h6>
-      <h6>Topic 2</h6>
-      <h6>Topic 3</h6>
-      <h6>Topic 4</h6>
-      <h6>Topic 5</h6>
-    </p-overlayPanel>
-    <p-overlayPanel #op5>
-      <h6>Topic 1</h6>
-      <h6>Topic 2</h6>
-      <h6>Topic 3</h6>
-      <h6>Topic 4</h6>
-      <h6>Topic 5</h6>
-    </p-overlayPanel>
+    
   </div>
 
   <div class="ui-g-6">
     <p-panel header="Generated" >
         <p-tabView>
           <p-tabPanel header="Chapter 1">
-            <div>
+            <div><br>
               <span style="padding-left:30%">Test 1 
                 <button style="margin-left: 20%" pButton type="text" class="ui-button-warning" label="20/40">
                 </button>
