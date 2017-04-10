@@ -1,28 +1,28 @@
 
-<div class="ui-g-12">
-  <p-panel header="Subscription Details">
-    <p-dataTable [value]="data">
-    <p-column field = "Order ID" header="Order ID"></p-column>
-    <p-column field = "Subject" header="Subject"></p-column>
-    <p-column field = "Subscription Date" header="Subscription Date"></p-column>
-    <p-column field = "Valid Till" header="Valid Till"></p-column>
+<div class="ui-g">
+  <div class="ui-g-12">
+    <p-panel header="Subscription Details">
+      <i class="fa fa-filter" style="margin:4px 10px 0 0 "></i><input  #gb type="text" pInputText size="50" placeholder="Global Filter"><br><br>
+      <p-dataTable [value]="data" [rows]="3" [paginator]=true [globalFilter]="gb" #dt>
+      <p-column field = "Order ID" header="Order ID"></p-column>
+      <p-column field = "Subject" header="Subject"></p-column>
+      <p-column field = "Subscription Date" header="Subscription Date"></p-column>
+      <p-column field = "Valid Till" header="Valid Till"></p-column>
+      </p-dataTable><br>
+    </p-panel>
+  </div>
 
-
-  </p-dataTable>
-  </p-panel>
+  <div class="ui-g-12">
+    <div>
+      <p-panel header="Subscribe Now"><br>
+        <p-checkbox name="groupname" value="val1" label="English Mathematics-Essential (Rs. 599)"></p-checkbox><br><br>
+        <p-checkbox name="groupname" value="val2" label="Science English-Essential (Rs. 599)"></p-checkbox><br><br>
+        <p-checkbox name="groupname" value="val1" label="Science Science-Essential (Rs. 599)"></p-checkbox><br><br>
+        <span style="padding-right:5%"><strong>Enter Coupon/School Code*</strong></span><input size="40" type="text" pInputText/><br><br>
+        <div style="padding-left:40%"><button type="button" pButton label="Pay Now"></button></div><br>
+      </p-panel>   
+    </div>
+  </div>
 </div>
-
-<div class="ui-g-12">
-  <div>
-    <p-panel header="Subscribe Now"><br>
-      <p-checkbox name="groupname" value="val1" label="English Mathematics-Essential (Rs. 599)"></p-checkbox><br><br>
-      <p-checkbox name="groupname" value="val2" label="Science English-Essential (Rs. 599)"></p-checkbox><br><br>
-      <p-checkbox name="groupname" value="val1" label="Science Science-Essential (Rs. 599)"></p-checkbox><br><br>
-      <span style="padding-right:5%"><strong>Enter Coupon/School Code*</strong></span><input size="40" type="text" pInputText/><br><br>
-      <div style="padding-left:40%"><button type="button" pButton label="Pay Now"></button></div><br>
-
-    </p-panel>   
-</div>
-
 
 
