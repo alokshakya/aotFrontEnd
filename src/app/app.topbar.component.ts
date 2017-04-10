@@ -28,7 +28,7 @@ import {AppComponent} from './app.component';
                         
                         <ul class="poseidon-menu fadeInDown">
                             <li role="menuitem">
-                                <a href="#">
+                                <a href="#/profile">
                                     <i class="fa fa-fw fa-user"></i>
                                     <span>Profile</span>
                                 </a>

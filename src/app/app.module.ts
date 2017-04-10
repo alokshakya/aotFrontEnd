@@ -101,6 +101,7 @@ import { ChapterwisetestComponent } from './ComputerCyber/chapterwisetest/chapte
 import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.component';
 import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
 import { ResultComponent } from './ComputerCyber/result/result.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
     imports: [
@@ -199,7 +200,8 @@ import { ResultComponent } from './ComputerCyber/result/result.component';
         ChapterwisetestComponent,
         SampletestComponent,
         MocktestComponent,
-        ResultComponent
+        ResultComponent,
+        ProfileComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
