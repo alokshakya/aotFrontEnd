@@ -89,3 +89,38 @@ img {
 }
 
 
+.comp{
+    text-align: center;
+    background-color: #5CB85C;
+    border-radius:5px;
+    color: white;
+    padding: 1px 24px 1px 23px;
+    font-size: 12px;
+}
+
+.gen{
+    text-align: center;
+    background-color: #F0AD4E;
+    border-radius:5px;
+    color: white;
+    padding: 1px 26px 1px 24px;
+    font-size: 12px;
+}
+
+.notcomp{
+    text-align: center;
+    background-color: #D9534F;
+    border-radius:5px;
+    color: white;
+    padding: 1px 13px 1px 10px;
+    font-size: 12px;
+}
+
+.wrong{
+    text-align: center;
+    background-color: #D9534F;
+    border-radius:5px;
+    color: white;
+    padding: 1px 26px 1px 26px;
+    font-size: 12px;
+}
