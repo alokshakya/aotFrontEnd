@@ -4,8 +4,8 @@
   </div>
   <div class="ui-g-3" id="profileimage">
     <img src="../../assets/layout/images/Profile_picture.png"><br>
-    <h4>Rahul Sharma</h4>
-    <p>Student ID: 847584</p>
+    <h4>{{studentName}}</h4>
+    <p>Student ID: {{studentId}}</p>
     <a href="#/profile/edit"><i class="fa fa-edit"></i> Edit</a>
   </div>
   
@@ -13,34 +13,34 @@
     <p-tabView>
       <p-tabPanel header="Basic Info" leftIcon="fa-user-circle">
           <div class="ui-g">
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-user"></i> Name</h4><p>Rahul Sharma</p></div></div>
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-male"></i> Father's Name</h4><p>R.P Sharma</p></div></div>
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-female"></i> Mother's Name</h4><p>Pooja</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-envelope"></i> Email</h4><p>abc@ymail.com</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-mobile"></i> Mobile</h4><p>9856748374</p></div></div>
+            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-user"></i> Name</h4><p>{{studentName}}</p></div></div>
+            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-male"></i> Father's Name</h4><p>{{fatherName}}</p></div></div>
+            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-female"></i> Mother's Name</h4><p>{{motherName}}</p></div></div>
+            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-envelope"></i> Email</h4><p>{{email}}</p></div></div>
+            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-mobile"></i> Mobile</h4><p>{{mobile}}</p></div></div>
           </div>
       </p-tabPanel>
       <p-tabPanel header="Guardian Info" leftIcon="fa-address-card">
           <div class="ui-g">
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-user"></i> Name</h4><p>R.P Sharma</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-group"></i> Relation</h4><p>Father</p></div></div>
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-home"></i> Present Address</h4><p>XYZ....... DELHI</p></div></div>
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-home"></i> Permannent Address</h4><p>xYZ....... DELHI</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-envelope"></i> Email</h4><p>pqr@gmail.com</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-mobile"></i> Mobile</h4><p>8126761662</p></div></div>
+            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-user"></i> Name</h4><p>{{guardianName}}</p></div></div>
+            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-group"></i> Relation</h4><p>{{relation}}</p></div></div>
+            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-home"></i> Present Address</h4><p>{{presentAddress}}</p></div></div>
+            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-home"></i> Permannent Address</h4><p>{{permanentAddress}}</p></div></div>
+            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-envelope"></i> Email</h4><p>{{guardianEmail}}</p></div></div>
+            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-mobile"></i> Mobile</h4><p>{{guardianMobile}}</p></div></div>
           </div>
 
       </p-tabPanel>
       <p-tabPanel header="Academic Info" leftIcon="fa-graduation-cap">
           <div class="ui-g">
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-th-large"></i> Class</h4><p>Ninth</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-book"></i> Department</h4><p>Science</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-cubes"></i> Section</h4><p>A</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-bell-o"></i> Shift </h4><p>Morning</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-calendar"></i> Session</h4><p>2017-18</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-pencil-square-o"></i> Exam Version</h4><p>English</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-table"></i> Course</h4><p>Mathematics, Science</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-sort-numeric-asc"></i> Roll Number</h4><p>020</p></div></div>
+            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-th-large"></i> Class</h4><p>{{class}}</p></div></div>
+            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-book"></i> Department</h4><p>{{department}}</p></div></div>
+            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-cubes"></i> Section</h4><p>{{section}}</p></div></div>
+            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-bell-o"></i> Shift </h4><p>{{shift}}</p></div></div>
+            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-calendar"></i> Session</h4><p>{{session}}-18</p></div></div>
+            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-pencil-square-o"></i> Exam Version</h4><p>{{examVersion}}</p></div></div>
+            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-table"></i> Course</h4><p>{{course}}</p></div></div>
+            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-sort-numeric-asc"></i> Roll Number</h4><p>{{rollNumber}}</p></div></div>
           </div>    
       </p-tabPanel>
     </p-tabView>

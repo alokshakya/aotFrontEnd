@@ -14,7 +14,14 @@ declare var jQuery: any;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-    
+
+    //student info to be displayed above menubar
+    studentName: string = "Rahul Sharma";
+    class: string = "Ninth";
+    email: string = "abc@gmail.com"; 
+
+
+    //
     layoutCompact: boolean = false;
 
     layoutMode: MenuOrientation = MenuOrientation.STATIC;

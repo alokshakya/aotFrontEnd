@@ -806,57 +806,19 @@
     <div class="ui-g-12 ui-md-6 ui-lg-4">
        <p-panel header="Notice Board">
            <div id="notice">
-               <div class="noticebox">
-                   <h3>NOTICE 1</h3>
-                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                       when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                       It has survived not only five centuries, but also the leap into electronic typesetting, 
-                       remaining essentially unchanged. </p>
+               <div class="noticebox" *ngFor = "let item of notice">
+                   <h3>{{item.head}}</h3>
+                   <p>{{item.value}}</p>
                </div>
-               <div class="noticebox">
-                   <h3>NOTICE 2</h3>
-                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                       when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                       It has survived not only five centuries, but also the leap into electronic typesetting, 
-                       remaining essentially unchanged. </p>
-               </div>
-               <div class="noticebox">
-                   <h3>NOTICE 3</h3>
-                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                       Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                       when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                       It has survived not only five centuries, but also the leap into electronic typesetting, 
-                       remaining essentially unchanged. </p>
-               </div>
-                
            </div>
-
-       </p-panel><br><br>
+        </p-panel><br><br>
 
 
        <p-panel header="Testimonials">
            <div id="testimonials">
-            <div class="testbox">
-                <img src="../../../assets/layout/images/testimonialAvatar.jpg" style="margin-right:40%"><em>few minutes ago</em>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-            </div>
-            <div class="testbox">
-                <img src="../../../assets/layout/images/testimonialAvatar.jpg" style="margin-right:40%"><em>few minutes ago</em>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-            </div>
-            <div class="testbox">
-                <img src="../../../assets/layout/images/testimonialAvatar.jpg" style="margin-right:40%"><em>few minutes ago</em>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-            </div>
-            <div class="testbox">
-                <img src="../../../assets/layout/images/testimonialAvatar.jpg" style="margin-right:40%"><em>few minutes ago</em>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+            <div class="testbox" *ngFor = "let item of testimonial">
+                <img src="" style="padding-right:60%" ><em>{{item.time}}</em>
+                <p>{{item.data}}</p>
             </div>
            </div>
        </p-panel>
