@@ -7,30 +7,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DemotestComponent implements OnInit {
 
-  data:any;
+  demoTestData:any;
 
-  topics:any=["Topic 1","Topic 2","Topic 3","Topic 4","Topic 5"];
+  topicNames:Array<string>;
+
+  chapterNames:Array<string>;
   
   constructor() { }
 
   ngOnInit() {
-    this.data = {
-            labels: ['Remaining','Completed','Generated'],
+
+    this.topicNames = ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5"];
+
+    this.chapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5" , "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10"]
+
+    this.demoTestData = {
+            labels: ['Completed','Remaining'],
             datasets: [
                 {
-                    data: [110, 90, 200],
+                    data: [40, 20],
                     backgroundColor: [
-                        "#D9534F",
                         "#5CB85C",
-                        "#FFCE56"
+                        "#D9534F"
                     ],
                     hoverBackgroundColor: [
-                        "#D9534F",
                         "#5CB85C",
-                        "#F0AD4E"
+                        "#D9534F"
                     ]
                 }]    
-  }
+  };
 
 }
 }

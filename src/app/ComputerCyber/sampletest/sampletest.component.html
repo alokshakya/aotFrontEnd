@@ -27,23 +27,15 @@
 
   <div class="ui-g-6">
     <p-panel header="Progress">
-      <p-chart type="doughnut" [data]="data"></p-chart>
+      <p-chart type="doughnut" [data]="sampleTestData"></p-chart>
     </p-panel>
   </div>
 
   <div class="ui-g-6">
-    <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="exampattern"></p-dropdown></p-header>
+    <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
       <div id="sampletestpanel"><br>
-        <span>Sample Test 1</span><button type="text" pButton class="ui-button-warning" label="45/50"></button><br><br>
-        <span>Sample Test 2</span><button type="text" pButton class="ui-button-success" label="Resume"></button><br><br>
-        <span>Sample Test 3</span><button type="text" pButton class="ui-button-info" label="Start"></button><br><br>
-        <span>Sample Test 4</span><button type="text" pButton class="ui-button-warning" label="45/50"></button><br><br>
-        <span>Sample Test 5</span><button type="text" pButton class="ui-button-danger" label="45/50"></button><br><br>
-        <span>Sample Test 6</span><button type="text" pButton class="ui-button-success" label="Resume"></button><br><br>
-        <span>Sample Test 7</span><button type="text" pButton class="ui-button-warning" label="45/50"></button><br><br>
-        <span>Sample Test 8</span><button type="text" pButton class="ui-button-warning" label="45/50"></button><br><br>
-        <span>Sample Test 9</span><button type="text" pButton class="ui-button-info" label="Start"></button><br><br>
-        <span>Sample Test 10</span><button id="last" type="text" pButton class="ui-button-danger" label="45/50"></button><br><br>  
+        <span *ngFor="let number of sampleTestNumbers">{{number}}<button type="text" pButton class="ui-button-warning" label="45/50"></button><br><br></span>
+          
       </div>
     </p-panel>
   </div>

@@ -5,13 +5,28 @@
 }
 
 #subscribe{
-    
+    border: none;
+    background-color: #1D8ECD;
     width:200px;
+    margin-right: 20%;
 }
 
 #inlinebutton{
-    padding:auto;
+    border:transparent;
+    background-color: #1D8ECD;
+    border-radius: 10px;
     text-align: center;
-    margin-left: 40%;
+    float: right;
 }
 
+#testdetailspanel {
+    text-align: center
+}
+
+#subscribepanel {
+    text-align: center;
+}
+
+.ui-button-warning {
+    margin-left: 20%;
+}

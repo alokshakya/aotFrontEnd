@@ -7,18 +7,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChapterwisetestComponent implements OnInit {
 
-  data: any;
-  var:boolean = true;
+  chapterwiseTestData: any;
+
+  chapterNames:Array<string>;
+
+  testNumbers:Array<string>;
+
 
   constructor() { }
 
   ngOnInit() {
 
-    this.data = {
+    this.chapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10" ];
+
+    this.testNumbers = ["Test 1", "Test 2", "Test 3", "Test 4", "Test 5" ];
+
+    this.chapterwiseTestData = {
             labels: ['Remaining','Completed','Generated'],
             datasets: [
                 {
-                    data: [50, 150, 200],
+                    data: [163, 237, 400],
                     backgroundColor: [
                         "#D9534F",
                         "#5CB85C",

@@ -817,7 +817,7 @@
        <p-panel header="Testimonials">
            <div id="testimonials">
             <div class="testbox" *ngFor = "let item of testimonial">
-                <img src="" style="padding-right:60%" ><em>{{item.time}}</em>
+                <img src={{imgsrc}} class="testimonialimage" ><em>{{item.time}}</em>
                 <p>{{item.data}}</p>
             </div>
            </div>

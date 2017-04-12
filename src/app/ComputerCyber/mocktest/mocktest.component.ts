@@ -9,24 +9,41 @@ import { SelectItem } from 'primeng/primeng';
 })
 export class MocktestComponent implements OnInit {
 
-  tabledata:any = [
-                    {"Testnumber":"Mock Test 1", "Slot 1":"95 Percentile", "Slot 2":"NA" },
-                    {"Testnumber":"Mock Test 2", "Slot 1":"DATE&TIME", "Slot 2":"DATE&TIME" },
-                    {"Testnumber":"Mock Test 3", "Slot 1":"DATE&TIME", "Slot 2":"DATE&TIME" }
-  
-                  ]
-  data:any;
+  mockTestTableData:any;
 
-  exampattern: SelectItem[];
+  mockTestTableHeader:any;
+
+  mockTestData:any;
+
+  examPattern: SelectItem[];
+
+
   constructor() {
-      this.exampattern = [];
-      this.exampattern.push({label:"Select Exam Pattern", value:"null"})
-      this.exampattern.push({label:"Exam Pattern 1", value:"null"})
-      this.exampattern.push({label:"Exam Pattern 2", value:"null"})
-      this.exampattern.push({label:"Exam Pattern 3", value:"null"})
+
+      this.mockTestTableData =[ 
+                            {"Test":"Mock Test 1", "Slot 1":"95 Percentile", "Slot 2":"NA" },
+                            {"Test":"Mock Test 2", "Slot 1":"DATE&TIME", "Slot 2":"DATE&TIME" },
+                            {"Test":"Mock Test 3", "Slot 1":"DATE&TIME", "Slot 2":"DATE&TIME" }
+                            ];
+
+     this.mockTestTableHeader = [
+                                {header:"Test", field:"Test"},
+                                {header:"Slot 1", field:"Slot 1"},
+                                {header:"Slot 2", field:"Slot 2"},                                
+                                 ]
+
+    
+
+
+
+      this.examPattern = [];
+      this.examPattern.push({label:"Select Exam Pattern", value:"null"})
+      this.examPattern.push({label:"Exam Pattern 1", value:"null"})
+      this.examPattern.push({label:"Exam Pattern 2", value:"null"})
+      this.examPattern.push({label:"Exam Pattern 3", value:"null"})
    }
 
-  ngOnInit() {this.data = {
+  ngOnInit() {this.mockTestData = {
             labels: ['Remaining','Completed','Generated'],
             datasets: [
                 {

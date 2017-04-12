@@ -30,9 +30,9 @@ export class DashboardComponent implements OnInit {
 
     
     testimonial:any = [
-                        {"imgsrc":"../../../assets/layout/images/testimonialAvatar.jpg", "time":"1 April 2017", "data":"I find the former much more readable."},
-                        {"imgsrc":"../../../assets/layout/images/testimonialAvatar.jpg", "time":"3 hours ago" , "data":"As you can see there's no more ng-repeat, it's ngFor now. You are probably thinking:. The answer to that is, it's syntactic sugar. What you're really doing is:I find the former much more readable."},
-                        {"imgsrc":"../../../assets/layout/images/testimonialAvatar.jpg", "time":"2 March 2017", "data":"I find the former much more readable."},
+                        {"imgsrc":"./assets/layout/images/testimonialAvatar.jpg", "time":"1 April 2017", "data":"I find the former much more readable."},
+                        {"imgsrc":"./assets/layout/images/testimonialAvatar.jpg", "time":"3 hours ago" , "data":"As you can see there's no more ng-repeat, it's ngFor now. You are probably thinking:. The answer to that is, it's syntactic sugar. What you're really doing is:I find the former much more readable."},
+                        {"imgsrc":"./../assets/layout/images/testimonialAvatar.jpg", "time":"2 March 2017", "data":"I find the former much more readable."},
                         
                         ];
 

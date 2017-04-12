@@ -27,17 +27,15 @@
 
   <div class="ui-g-6">
     <p-panel header="Progress">
-      <p-chart type="doughnut" [data]="data"></p-chart>
+      <p-chart type="doughnut" [data]="mockTestData"></p-chart>
     </p-panel>
   </div>
 
   <div class="ui-g-6">
-    <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="exampattern"></p-dropdown></p-header>
+    <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
       <div id="mocktable">
-        <p-dataTable [value]="tabledata">
-          <p-column field="Testnumber" header="Testnumber"></p-column>
-          <p-column field="Slot 1" header="Slot 1"></p-column>
-          <p-column field="Slot 2" header="Slot 2"></p-column>
+        <p-dataTable [value]="mockTestTableData">
+          <p-column *ngFor="let head of mockTestTableHeader" [header]="head.header" [field]="head.field" ></p-column>
         </p-dataTable>
       </div>
     </p-panel>

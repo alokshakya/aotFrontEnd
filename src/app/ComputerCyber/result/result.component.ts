@@ -7,14 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultComponent implements OnInit {
 
-  ch1result:boolean = false;
-  ch2result:boolean = false;
-  ch3result:boolean = false;
+  testNames:Array<string>;
+
+  chapterNames:Array<string>;
   
 
   
 
-  constructor() { }
+  constructor() {
+
+
+    this.testNames = ["Chapterwise Test", "Sample Test", "Mock Test", "Demo Test"]
+    this.chapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10"]
+
+
+
+
+   }
 
   ngOnInit() {
   }
