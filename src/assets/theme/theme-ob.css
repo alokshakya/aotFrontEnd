@@ -807,10 +807,10 @@ body .ui-panel {
     border-top-right-radius: 10px;
     -moz-border-radius-bottomleft: 0px;
     -webkit-border-bottom-left-radius: 0px;
-    border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 0px;
     -moz-border-radius-bottomright: 0px;
     -webkit-border-bottom-right-radius: 0px;
-    border-bottom-right-radius: 10px; }
+    border-bottom-right-radius: 0px; }
 
 
 
@@ -864,7 +864,6 @@ body .ui-notificationbar {
   background-color: #00acac;
   color: #ffffff; }
 body .ui-accordion .ui-accordion-header {
-  border-radius: 10px;
   background-color: lightslategrey;
   padding: 0;
   color: #ffffff;
@@ -908,7 +907,6 @@ body .ui-accordion .ui-accordion-header {
     padding: .5em 1em .5em 2em;
     color: #ffffff; }
 body .ui-accordion .ui-accordion-content {
-  border-radius: 10px;
   padding: 0.5em 1em; }
 body .ui-tabview {
   border-radius:10px;
@@ -917,7 +915,7 @@ body .ui-tabview {
   body .ui-tabview.ui-tabview-top .ui-tabview-nav, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav, 
   body .ui-tabview.ui-tabview-left .ui-tabview-nav, body .ui-tabview.ui-tabview-right .ui-tabview-nav {
     background-color: lightslategray;
-    border-radius: 10px;
+    
     padding: 0; }
     body .ui-tabview.ui-tabview-top .ui-tabview-nav li, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li,
      body .ui-tabview.ui-tabview-left .ui-tabview-nav li, body .ui-tabview.ui-tabview-right .ui-tabview-nav li {
@@ -929,7 +927,6 @@ body .ui-tabview {
       transition: background-color 0.3s;
       -moz-border-radius: 0;
       -webkit-border-radius: 0;
-      border-radius: 10px;
       margin: 0;
       box-sizing: border-box; }
       body .ui-tabview.ui-tabview-top .ui-tabview-nav li a, body .ui-tabview.ui-tabview-bottom .ui-tabview-nav li a, body .ui-tabview.ui-tabview-left .ui-tabview-nav li a, body .ui-tabview.ui-tabview-right .ui-tabview-nav li a {
