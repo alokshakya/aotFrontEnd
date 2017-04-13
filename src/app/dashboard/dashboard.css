@@ -9,6 +9,10 @@
     box-shadow: 10px 10px 5px #888888;
 }
 
+#subjectsummary{
+    padding-left: 16px; 
+}
+
 img {
     width:30px;
     height:30px;
@@ -17,6 +21,7 @@ img {
 #cyber{
     background-color: #4395DA;
     margin: 12px;
+    margin-left: 2px;
 }
 
 #science{
@@ -32,6 +37,7 @@ img {
 #gk{
     background-color: #F6885B;
     margin: 12px;
+    margin-left: 2px;
 }
 
 #english{
