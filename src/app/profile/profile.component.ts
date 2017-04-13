@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { HttpService } from '../services/http.service';
+
+import  { Response } from '@angular/http';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
 
   //personal info
   studentName:string = "Rahul Sharma";
@@ -32,9 +35,20 @@ export class ProfileComponent implements OnInit {
   examVersion:string = "English";
   course:string = "Mathematics, Science";
   rollNumber:number = 20;
-  constructor() { }
 
-  ngOnInit() {
+  dialogBoxDisplay:boolean;
+  clickListener:number = 0;
+
+  
+
+  constructor(private httpService: HttpService) { }
+
+  go() {
+    this.httpService.getData()
+      .subscribe(
+        (data: Response)=>console.log(data)
+
+      );
   }
 
 }

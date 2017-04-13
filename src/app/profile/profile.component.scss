@@ -17,3 +17,28 @@
 .userinfo p{
     color: #3664dc;
 }
+
+#editdialogbox {
+    text-align: center;
+}
+
+.userdetails{
+    margin-right: 3%;
+    
+}
+
+a{
+    cursor:pointer;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+#savebuttton{
+    border:transparent;
+    background-color:#3664dc;
+
+}

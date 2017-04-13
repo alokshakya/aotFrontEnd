@@ -6,44 +6,132 @@
     <img src="../../assets/layout/images/Profile_picture.png"><br>
     <h4>{{studentName}}</h4>
     <p>Student ID: {{studentId}}</p>
-    <a href="#/profile/edit"><i class="fa fa-edit"></i> Edit</a>
   </div>
   
   <div class="ui-g-9">
+    
+    <p-dialog  header="Edit" [(visible)]="dialogBoxDisplay" closable="true" closeOnEscape="true" dismissableMask="false">
+      <div id="editdialogbox"> 
+        <input *ngIf="clickListener==1" type="text" pInputText placeholder="Enter Name">
+        <input *ngIf="clickListener==2" type="text" pInputText placeholder="Enter Father's Name">
+        <input *ngIf="clickListener==3" type="text" pInputText placeholder="Enter Mother's Name">
+        <input *ngIf="clickListener==4" type="number" pInputText placeholder="Enter Mobile Number"><br><br>
+        <button id="savebutton" pButton type="text" (click)="dialogBoxDisplay=!dialogBoxDisplay" class="ui-button-info" label="Save"></button>
+        <button id="cancelbutton" pButton type="text" (click)="dialogBoxDisplay=!dialogBoxDisplay" class="ui-button-danger" label="Cancel"></button>
+      </div>
+    </p-dialog>
+
+
     <p-tabView>
       <p-tabPanel header="Basic Info" leftIcon="fa-user-circle">
           <div class="ui-g">
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-user"></i> Name</h4><p>{{studentName}}</p></div></div>
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-male"></i> Father's Name</h4><p>{{fatherName}}</p></div></div>
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-female"></i> Mother's Name</h4><p>{{motherName}}</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-envelope"></i> Email</h4><p>{{email}}</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-mobile"></i> Mobile</h4><p>{{mobile}}</p></div></div>
+            <div class="ui-g-12">
+              <div class="userinfo">
+                <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails">{{studentName}}</span> <a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=1"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-12">
+              <div class="userinfo">
+              <h4><i class="fa fa-male"></i> Father's Name</h4><p><span class="userdetails">{{fatherName}}</span> <a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=2"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-12">
+              <div class="userinfo">
+              <h4><i class="fa fa-female"></i> Mother's Name</h4><p><span class="userdetails">{{motherName}}</span> <a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=3"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-6"><div class="userinfo">
+              <h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">{{email}}</span></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-6"><div class="userinfo">
+              <h4><i class="fa fa-mobile"></i> Mobile</h4><p><span class="userdetails">{{mobile}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=4"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
           </div>
       </p-tabPanel>
+      
+      
       <p-tabPanel header="Guardian Info" leftIcon="fa-address-card">
           <div class="ui-g">
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-user"></i> Name</h4><p>{{guardianName}}</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-group"></i> Relation</h4><p>{{relation}}</p></div></div>
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-home"></i> Present Address</h4><p>{{presentAddress}}</p></div></div>
-            <div class="ui-g-12"><div class="userinfo"><h4><i class="fa fa-home"></i> Permannent Address</h4><p>{{permanentAddress}}</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-envelope"></i> Email</h4><p>{{guardianEmail}}</p></div></div>
-            <div class="ui-g-6"><div class="userinfo"><h4><i class="fa fa-mobile"></i> Mobile</h4><p>{{guardianMobile}}</p></div></div>
+            <div class="ui-g-6">
+              <div class="userinfo"><h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails">{{guardianName}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=5"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+
+            <div class="ui-g-6">
+              <div class="userinfo"><h4><i class="fa fa-group"></i> Relation</h4><p><span class="userdetails">{{relation}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=6"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+
+            <div class="ui-g-12">
+              <div class="userinfo"><h4><i class="fa fa-home"></i> Present Address</h4><p><span class="userdetails">{{presentAddress}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=7"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-12">
+              <div class="userinfo"><h4><i class="fa fa-home"></i> Permannent Address</h4><p><span class="userdetails">{{permanentAddress}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=8"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-6">
+              <div class="userinfo"><h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">{{guardianEmail}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=9"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+
+            <div class="ui-g-6">
+              <div class="userinfo"><h4><i class="fa fa-mobile"></i> Mobile</h4><p><span class="userdetails">{{guardianMobile}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=10"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+
           </div>
 
       </p-tabPanel>
+      
       <p-tabPanel header="Academic Info" leftIcon="fa-graduation-cap">
           <div class="ui-g">
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-th-large"></i> Class</h4><p>{{class}}</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-book"></i> Department</h4><p>{{department}}</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-cubes"></i> Section</h4><p>{{section}}</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-bell-o"></i> Shift </h4><p>{{shift}}</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-calendar"></i> Session</h4><p>{{session}}-18</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-pencil-square-o"></i> Exam Version</h4><p>{{examVersion}}</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-table"></i> Course</h4><p>{{course}}</p></div></div>
-            <div class="ui-g-4"><div class="userinfo"><h4><i class="fa fa-sort-numeric-asc"></i> Roll Number</h4><p>{{rollNumber}}</p></div></div>
+            <div class="ui-g-4">
+              <div class="userinfo"><h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails">{{class}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;clickListener=12"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-4">
+              <div class="userinfo"><h4><i class="fa fa-cubes"></i> Section</h4><p><span class="userdetails">{{section}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;listener=13"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-4">
+              <div class="userinfo"><h4><i class="fa fa-bell-o"></i> Shift </h4><p><span class="userdetails">{{shift}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;listener=14"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-4">
+              <div class="userinfo"><h4><i class="fa fa-calendar"></i> Session</h4><p><span class="userdetails">{{session}}-18</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;listener=15"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-4">
+              <div class="userinfo"><h4><i class="fa fa-pencil-square-o"></i> Exam Version</h4><p><span class="userdetails">{{examVersion}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;listener=16"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-4">
+              <div class="userinfo"><h4><i class="fa fa-table"></i> Course</h4><p><span class="userdetails">{{course}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;listener=17"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
+            
+            <div class="ui-g-4">
+              <div class="userinfo"><h4><i class="fa fa-sort-numeric-asc"></i> Roll Number</h4><p><span class="userdetails">{{rollNumber}}</span><a (click)="dialogBoxDisplay=!dialogBoxDisplay;listener=18"><i class="fa fa-edit"></i></a></p>
+              </div>
+            </div>
           </div>    
       </p-tabPanel>
     </p-tabView>
+  
 
   </div>
 </div>
