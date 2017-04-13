@@ -1,0 +1,25 @@
+
+<div class="ui-g">
+  <div class="ui-g-12">
+    <p-panel header="Subscription Details">
+      <i class="fa fa-filter" style="margin:4px 10px 0 0 "></i><input  #gb type="text" pInputText size="50" placeholder="Global Filter"><br><br>
+      <p-dataTable [value]="subscriptionTableData"  [rows]="3" [paginator]=true [globalFilter]="gb" #dt>
+        <p-column *ngFor="let head of subscriptionTableHeaders" [header]="head.header" [field]="head.field"></p-column>
+      </p-dataTable><br>
+    </p-panel>
+  </div>
+
+  <div class="ui-g-12">
+    <div>
+      <p-panel header="Subscribe Now"><br>
+        <span  *ngFor="let sub of subjectsAndPrice"><p-checkbox name="groupname" [(ngModel)]="selectedPackage" label={{sub.subject}}{{sub.price}}></p-checkbox><br><br></span>
+        <span id="coupontext"><strong>Enter Coupon/School Code*</strong></span><input size="40" type="text" pInputText/>
+        <button id="applybutton" type="button" pButton label="Apply"></button><br><br>
+        
+        <div id="paybutton"><button type="button" pButton label="Pay Now"></button></div><br>
+      </p-panel>   
+    </div>
+  </div>
+</div>
+
+

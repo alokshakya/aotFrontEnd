@@ -1,0 +1,27 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+        <p-panel header="Result">
+            <p-tabView>
+                <p-tabPanel *ngFor="let name of testNames" header={{name}}>
+                    <div class="ui-g">
+                        <div class="ui-g-6">
+                            left panel
+                            <div class="ui-g">
+                                <div class="ui-g-6">
+                                    left-left panel
+                                </div>
+                                <div class="ui-g-6">
+                                    left-right panel
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g-6">
+                            right panel
+                        </div>
+                        </div>
+                </p-tabPanel>
+                    
+            </p-tabView>
+        </p-panel>
+    </div>
+</div>

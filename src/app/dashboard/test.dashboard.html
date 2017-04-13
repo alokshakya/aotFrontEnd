@@ -1,0 +1,155 @@
+<div class="ui-g dashboard">            
+    <div class="ui-g-12 ui-md-6 ui-lg-8">
+        
+            <p-panel header="Subject Summary">
+                <div class="ui-g">
+                    <div id="cyber" class="ui-g-4">
+                        <br>
+                        <i class="icon-cyber icon-4x"></i> 
+                        <p>COMPUTER/CYBER</p>
+                        <button pButton class="ui-button-success" class="ui-button-success" label="Demo"></button>
+                        <button pButton class="ui-button-warning" label="Subscribe"></button>
+                    </div>
+
+                    <div id="science" class="ui-g-4">
+                        <br>
+                        <i class="icon-science icon-4x"></i>
+                        <p>SCIENCE</p>
+                        <button pButton class="ui-button-success" label="Demo"></button>
+                        <button pButton class="ui-button-danger" label="Subscribe"></button>
+                    </div>
+
+                    <div id="math" class="ui-g-4">
+                        <br>
+                        <i class="icon-maths icon-4x"></i>
+                        <p>MATHEMATICS</p>
+                        <button pButton class="ui-button-success" label="Demo"></button>
+                        <button pButton class="ui-button-warning" label="Subscribe"></button>
+                    </div>
+                </div>
+            
+                <div class="ui-g">
+                    <div id="gk" class="ui-g-4">
+                        <br>
+                        <i class="icon-gk icon-4x"></i>
+                        <p>GENERAL KNOWLEDGE</p>
+                        <button pButton class="ui-button-success" label="Demo"></button>
+                        <button pButton class="ui-button-warning" label="Subscribe"></button>
+                    </div>
+
+                    <div id="english" class="ui-g-4">
+                        <br>
+                        <i class="icon-english icon-4x"></i>
+                        <p> ENGLISH</p>
+                        <button pButton class="ui-button-success" label="Demo"></button>
+                        <button pButton class="ui-button-danger" label="Subscribe"></button>
+                    </div>
+
+                    <div id="reasoning" class="ui-g-4">
+                        <br>
+                        <i class="icon-reasoning icon-4x"></i>
+                        <p>REASONING</p>
+                        <button pButton class="ui-button-success" type="text" label="Demo"></button>
+                        <button pButton class="ui-button-warning" type="text" label="Subscribe"></button>
+                    </div>
+                </div>
+            </p-panel><br><br>
+
+            <p-panel header="Test Summary">
+                    <p-tabView id="tab head">
+                         <p-tabPanel *ngFor="let test of testName" header={{test}}>
+                             <div class="ui-g">
+                                 <div class="ui-g-9">
+                                     <div class="ui-g">
+                                        <div class="ui-g-5" *ngFor="let subject of subjectName">
+                                            {{subject}}<br><br>
+                                        </div>
+
+                                        <div class="ui-g-7">
+                                             <div class="progress" *ngFor="let sub of subdata">
+                                                <div class="progress-bar progress-bar-success" role="progressbar" style="width:{sub.completed}">
+                                                     {{sub.completed}}
+                                                </div>
+                                                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:{sub.generated}">
+                                                     {{sub.generated}}
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:{sub.notcompleted}">
+                                                     {{sub.notcompleted}}
+                                                </div>
+                                             </div>
+                                        </div>
+                                     </div>
+                                 </div>
+                                 <div class="ui-g-3">
+                                    <br>
+                                    <span class="comp">Completed</span><br>
+                                    <span class="gen">Generated</span><br>
+                                    <span class="notcomp">Not Completed</span><br>
+                                </div>
+                             </div>
+                         </p-tabPanel>
+                    </p-tabView>
+            </p-panel><br><br>
+
+            <p-panel header="Result Summary">
+                    <p-tabView id="tab head">
+                         <p-tabPanel *ngFor="let test of testData" header={{test.head}}>
+                             <div class="ui-g">
+                                 <div class="ui-g-9">
+                                     <div class="ui-g">
+                                        <div class="ui-g-5" *ngFor="let subject of test.value">
+                                            {{subject}}<br><br>
+                                        </div>
+
+                                        <!--<div class="ui-g-7">
+                                             <div class="progress" *ngFor = "let data of testData">
+                                                <div class="progress-bar progress-bar-success" role="progressbar" style="width:30%">
+                                                     {{data.completed}}
+                                                </div>
+                                                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">
+                                                     {{data.generated}}
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:30%">
+                                                     {{data.notCompleted}}
+                                                </div>
+                                             </div>
+                                        </div>-->
+                                     </div>
+                                 </div>
+                                 <div class="ui-g-3">
+                                    <br>
+                                    <span class="comp">Correct</span><br>
+                                    <span class="gen">Review</span><br>
+                                    <span class="wrong">Wrong</span><br>
+                                </div>
+                             </div>
+                         </p-tabPanel>
+                    </p-tabView>
+            </p-panel><br><br>
+
+    </div>
+                
+            
+    <div class="ui-g-12 ui-md-6 ui-lg-4">
+       <p-panel header="Notice Board">
+           <div id="notice">
+               <div class="noticebox" *ngFor = "let item of notice">
+                   <h3>{{item.head}}</h3>
+                   <p>{{item.value}}</p>
+               </div>
+           </div>
+
+       </p-panel><br><br>
+
+
+       <p-panel header="Testimonials">
+           <div id="testimonials">
+            <div class="testbox" *ngFor = "let info of testimonial">
+                <img src="{{info.imgsrc}}" style="padding-right:50%" ><em>{{info.time}}</em>
+                <p>{{info.data}}</p>
+            </div>
+           </div>
+       </p-panel>
+    </div>
+
+</div>

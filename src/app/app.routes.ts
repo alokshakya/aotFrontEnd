@@ -1,6 +1,5 @@
 import {Routes,RouterModule} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
-import {DashboardDemo} from './demo/view/dashboarddemo';
 import {SampleDemo} from './demo/view/sampledemo';
 import {FormsDemo} from './demo/view/formsdemo';
 import {DataDemo} from './demo/view/datademo';
@@ -14,9 +13,32 @@ import {ChartsDemo} from './demo/view/chartsdemo';
 import {FileDemo} from './demo/view/filedemo';
 import {UtilsDemo} from './demo/view/utilsdemo';
 import {Documentation} from './demo/view/documentation';
+import { DashboardComponent } from './dashboard/dashboard.component'
+import { AccountsettingsComponent } from './accountsettings/accountsettings.component'
+import { DemotestComponent } from './ComputerCyber/demotest/demotest.component'
+import { ChapterwisetestComponent } from './ComputerCyber/chapterwisetest/chapterwisetest.component'
+import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.component';
+import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
+import { ResultComponent } from './ComputerCyber/result/result.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditprofileComponent } from './profile/editprofile/editprofile.component'
+
+
+
 
 export const routes: Routes = [
-    {path: '', component: DashboardDemo},
+    {path: '', redirectTo:'dashboard', pathMatch:'full'},
+    {path: 'dashboard', component: DashboardComponent},
+    {path: 'accountsettings', component: AccountsettingsComponent},
+    {path: 'computer/demotest', component: DemotestComponent}, 
+    {path: 'computer/chapterwisetest', component: ChapterwisetestComponent},           
+    {path: 'computer/sampletest', component: SampletestComponent},
+    {path: 'computer/mocktest', component: MocktestComponent},
+    {path: 'computer/result', component: ResultComponent},
+    {path: 'profile' , component: ProfileComponent },
+    {path: 'profile/edit' , component: EditprofileComponent},
+
+
     {path: 'sample', component: SampleDemo},
     {path: 'forms', component: FormsDemo},
     {path: 'data', component: DataDemo},

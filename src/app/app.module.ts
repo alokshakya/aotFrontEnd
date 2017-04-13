@@ -75,7 +75,6 @@ import {AppMenuComponent,AppSubMenu}  from './app.menu.component';
 import {AppTopBar}  from './app.topbar.component';
 import {AppFooter}  from './app.footer.component';
 import {InlineProfileComponent}  from './app.profile.component';
-import {DashboardDemo} from './demo/view/dashboarddemo';
 import {SampleDemo} from './demo/view/sampledemo';
 import {FormsDemo} from './demo/view/formsdemo';
 import {DataDemo} from './demo/view/datademo';
@@ -94,6 +93,16 @@ import {CarService} from './demo/service/carservice';
 import {CountryService} from './demo/service/countryservice';
 import {EventService} from './demo/service/eventservice';
 import {NodeService} from './demo/service/nodeservice';
+
+import {DashboardComponent} from './dashboard/dashboard.component';
+import { AccountsettingsComponent } from './accountsettings/accountsettings.component';
+import { DemotestComponent } from './ComputerCyber/demotest/demotest.component';
+import { ChapterwisetestComponent } from './ComputerCyber/chapterwisetest/chapterwisetest.component';
+import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.component';
+import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
+import { ResultComponent } from './ComputerCyber/result/result.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditprofileComponent } from './profile/editprofile/editprofile.component';
 
 @NgModule({
     imports: [
@@ -172,7 +181,6 @@ import {NodeService} from './demo/service/nodeservice';
         AppTopBar,
         AppFooter,
         InlineProfileComponent,
-        DashboardDemo,
         SampleDemo,
         FormsDemo,
         DataDemo,
@@ -186,7 +194,16 @@ import {NodeService} from './demo/service/nodeservice';
         EmptyDemo,
         FileDemo,
         UtilsDemo,
-        Documentation
+        Documentation,
+        DashboardComponent,
+        AccountsettingsComponent,
+        DemotestComponent,
+        ChapterwisetestComponent,
+        SampletestComponent,
+        MocktestComponent,
+        ResultComponent,
+        ProfileComponent,
+        EditprofileComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

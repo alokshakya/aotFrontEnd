@@ -20,11 +20,76 @@ export class AppMenuComponent implements OnInit {
     
     ngOnInit() {
         this.model = [
-            {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['/']},
+            {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['/dashboard']},
+            {label: 'Account Settings', icon: 'fa fa-pencil-square-o', routerLink: ['/accountsettings']},
+            {
+                label: 'Computer/Cyber', icon: 'icon-cyber',
+                items: [
+                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/computer/demotest']},
+                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/computer/chapterwisetest']},
+                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/computer/sampletest']},
+                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/computer/mocktest']},
+                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/computer/result']},
+                    ]
+            },
+            {
+                label: 'Science', icon: 'icon-science',
+                items: [
+                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/']},
+                    ]
+            },
+            {
+                label: 'Mathematics', icon: 'icon-maths',
+                items: [
+                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/']},
+                    ]
+            },
+            {
+                label: 'General Knowledge', icon: 'icon-gk',
+                items: [
+                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/']},
+                    ]
+            },
+
+            {
+                label: 'English', icon: 'icon-english',
+                items: [
+                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Result', icon: 'fa fa-calculaor', routerLink:['/']},
+                    ]
+            },
+
+            {
+                label: 'Reasoning', icon: 'icon-reasoning',
+                items: [
+                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/']},
+                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/']}
+                    ]
+            }],
+
+
             {
                 label: 'Themes', icon: 'fa fa-fw fa-paint-brush',
                 items: [
-                    {label: 'Turquoise', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('turquoise')}},
+                    {label: 'Turquoise', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme}},
                     {label: 'Blue', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('blue')}},
                     {label: 'Purple', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('purple')}},
                     {label: 'Orange', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('orange')}},
@@ -113,8 +178,7 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
-            {label: 'Documentation', icon: 'fa fa-fw fa-book', routerLink: ['/documentation']}
-        ];
+            {label: 'Documentation', icon: 'fa fa-fw fa-book', routerLink: ['/documentation']};
     }
 
     changeTheme(theme) {
@@ -124,7 +188,7 @@ export class AppMenuComponent implements OnInit {
         themeLink.href = 'assets/theme/theme-' + theme +'.css';
         layoutLink.href = 'assets/layout/css/layout-' + theme +'.css';
     }
-}
+} 
 
 @Component({
     selector: '[app-submenu]',
@@ -136,7 +200,6 @@ export class AppMenuComponent implements OnInit {
                     <span>{{child.label}}</span>
                     <i class="fa fa-fw fa-angle-down" *ngIf="child.items"></i>
                 </a>
-
                 <a (click)="itemClick($event,child,i)" class="ripplelink" *ngIf="child.routerLink"
                     [routerLink]="child.routerLink" routerLinkActive="active-menuitem-routerlink" [routerLinkActiveOptions]="{exact: true}">
                     <i [ngClass]="child.icon"></i>
@@ -174,7 +237,7 @@ export class AppSubMenu {
 
     constructor(@Inject(forwardRef(() => AppComponent)) public app:AppComponent, public router: Router, public location: Location) {}
         
-    itemClick(event: Event, item: MenuItem, index: number) {
+    itemClick(event: Event, item: MenuItem, index: number) {
         //avoid processing disabled items
         if(item.disabled) {
             event.preventDefault();

@@ -22,6 +22,7 @@ import {TreeNode} from 'primeng/primeng';
     encapsulation: ViewEncapsulation.None
 })
 export class DataDemo implements OnInit {
+    date:number = Date.now();
 
     cars1: Car[];
     

@@ -1,0 +1,54 @@
+input{
+    height:35px;
+    width:300px;
+    background-color: #FAFFBD;
+    border:none;
+    border-bottom:solid 1px; 
+}
+
+#log{
+    font-family: olympiadbox;
+    padding: 10% 0 100% 30%;
+}
+
+#feat{
+    color:white;
+    font-family: olympiadbox;
+}
+
+ul {
+  list-style: none;
+  font-size: 20px;
+}
+
+ul li:before {
+  content: '✓  ';
+}
+
+#dummybutton{
+    background-color: #32A0FF;
+    width:300px;
+    height:50px;
+    margin-bottom: 20px;
+    border:none;
+    font-size: 20px;
+    color:white;
+    border-radius: 50px;
+}
+
+#loginbutton{
+    background-color: #32A0FF;
+    width:100px;
+    height: 40px;
+    color: white;
+    margin-left: 105px;
+    border:none;
+    border-radius: 15px;
+}
+
+a{
+    color: #32A0FF;
+}
+a:hover{
+    text-decoration:underline;
+}
