@@ -1,12 +1,11 @@
 # Project Olympiad Box [A Portal for growing Students]
 
-
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build Development
 
-Run `ng build` to build the project. The build  will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `ng build` to build the project. The build  will be stored in the `dist/` directory.
 
 ## Build Production
 
