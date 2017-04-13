@@ -21,7 +21,6 @@ import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.compo
 import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
 import { ResultComponent } from './ComputerCyber/result/result.component';
 import { ProfileComponent } from './profile/profile.component';
-import { EditprofileComponent } from './profile/editprofile/editprofile.component'
 
 
 
@@ -36,7 +35,6 @@ export const routes: Routes = [
     {path: 'computer/mocktest', component: MocktestComponent},
     {path: 'computer/result', component: ResultComponent},
     {path: 'profile' , component: ProfileComponent },
-    {path: 'profile/edit' , component: EditprofileComponent},
 
 
     {path: 'sample', component: SampleDemo},

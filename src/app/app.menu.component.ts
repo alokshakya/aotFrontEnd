@@ -86,53 +86,10 @@ export class AppMenuComponent implements OnInit {
             }],
 
 
-            {
-                label: 'Themes', icon: 'fa fa-fw fa-paint-brush',
-                items: [
-                    {label: 'Turquoise', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme}},
-                    {label: 'Blue', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('blue')}},
-                    {label: 'Purple', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('purple')}},
-                    {label: 'Orange', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('orange')}},
-                    {label: 'Pink', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('pink')}},
-                    {label: 'Light Blue', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('light-blue')}},
-                    {label: 'Green', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('green')}},
-                    {label: 'Deep Purple', icon: 'fa fa-fw fa-paint-brush', command: (event) => {this.changeTheme('deep-purple')}}
-                ]
-            },
-            {
-                label: 'Customization', icon: 'fa fa-fw fa-bars',
-                items: [
-                    {label: 'Static Menu', icon: 'fa fa-fw fa-bars',  command: () => this.app.changeToStaticMenu()},
-                    {label: 'Overlay Menu', icon: 'fa fa-fw fa-bars',  command: () => this.app.changeToOverlayMenu()},
-                    {label: 'Horizontal Menu', icon: 'fa fa-fw fa-bars',  command: () => this.app.changeToHorizontalMenu()}
-                ]
-            },
-            {
-                label: 'Components', icon: 'fa fa-fw fa-sitemap',
-                items: [
-                    {label: 'Sample Page', icon: 'fa fa-fw fa-columns', routerLink: ['/sample']},
-                    {label: 'Forms', icon: 'fa fa-fw fa-code', routerLink: ['/forms']},
-                    {label: 'Data', icon: 'fa fa-fw fa-table', routerLink: ['/data']},
-                    {label: 'Panels', icon: 'fa fa-fw fa-list-alt', routerLink: ['/panels']},
-                    {label: 'Overlays', icon: 'fa fa-fw fa-square', routerLink: ['/overlays']},
-                    {label: 'Menus', icon: 'fa fa-fw fa-minus-square-o', routerLink: ['/menus']},
-                    {label: 'Messages', icon: 'fa fa-fw fa-circle-o-notch', routerLink: ['/messages']},
-                    {label: 'Charts', icon: 'fa fa-fw fa-area-chart', routerLink: ['/charts']},
-                    {label: 'File', icon: 'fa fa-fw fa-arrow-circle-o-up', routerLink: ['/file']},
-                    {label: 'Misc', icon: 'fa fa-fw fa-user-secret', routerLink: ['/misc']}
-                ]
-            },
-            {
-                label: 'Template Pages', icon: 'fa fa-fw fa-life-saver',
-                items: [
-                    {label: 'Empty Page', icon: 'fa fa-fw fa-square-o', routerLink: ['/empty']},
-                    {label: 'Landing Page', icon: 'fa fa-fw fa-certificate', url: 'landing.html'},
-                    {label: 'Login Page', icon: 'fa fa-fw fa-sign-in', url: 'login.html'},
-                    {label: 'Error Page', icon: 'fa fa-fw fa-exclamation-circle', url: 'error.html'},
-                    {label: '404 Page', icon: 'fa fa-fw fa-times', url: '404.html'},
-                    {label: 'Access Denied Page', icon: 'fa fa-fw fa-exclamation-triangle', url: 'access.html'}
-                ]
-            },
+            
+            
+            
+            
             {
                 label: 'Menu Hierarchy', icon: 'fa fa-fw fa-gg',
                 items: [
@@ -181,13 +138,7 @@ export class AppMenuComponent implements OnInit {
             {label: 'Documentation', icon: 'fa fa-fw fa-book', routerLink: ['/documentation']};
     }
 
-    changeTheme(theme) {
-        let themeLink: HTMLLinkElement = <HTMLLinkElement> document.getElementById('theme-css');
-        let layoutLink: HTMLLinkElement = <HTMLLinkElement> document.getElementById('layout-css');
-        
-        themeLink.href = 'assets/theme/theme-' + theme +'.css';
-        layoutLink.href = 'assets/layout/css/layout-' + theme +'.css';
-    }
+    
 } 
 
 @Component({

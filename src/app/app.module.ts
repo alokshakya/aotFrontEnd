@@ -89,6 +89,7 @@ import {FileDemo} from './demo/view/filedemo';
 import {UtilsDemo} from './demo/view/utilsdemo';
 import {Documentation} from './demo/view/documentation';
 
+import { HttpService } from './services/http.service' //service
 import {CarService} from './demo/service/carservice';
 import {CountryService} from './demo/service/countryservice';
 import {EventService} from './demo/service/eventservice';
@@ -102,7 +103,7 @@ import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.compo
 import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
 import { ResultComponent } from './ComputerCyber/result/result.component';
 import { ProfileComponent } from './profile/profile.component';
-import { EditprofileComponent } from './profile/editprofile/editprofile.component';
+
 
 @NgModule({
     imports: [
@@ -203,11 +204,10 @@ import { EditprofileComponent } from './profile/editprofile/editprofile.componen
         MocktestComponent,
         ResultComponent,
         ProfileComponent,
-        EditprofileComponent
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        CarService,CountryService,EventService,NodeService
+        CarService,CountryService,EventService,NodeService,HttpService
     ],
     bootstrap:[AppComponent]
 })
