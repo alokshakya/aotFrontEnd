@@ -19,7 +19,7 @@ export class ProfileComponent {
   mobile:number = 8126761663;
 
   //parent/guardian info
-  guardianName = "Lalu Sharma"
+  guardianName = "Rakesh Sharma"
   relation:string = "Uncle";
   presentAddress:string = "ABCD......, New Delhi";
   permanentAddress:string = "PQRS......, Uttar Pradesh";
@@ -41,9 +41,12 @@ export class ProfileComponent {
 
   
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService) {
 
-  go() {
+
+   }
+
+  receive() {
     this.httpService.getData()
       .subscribe(
         (data: Response)=>console.log(data)
