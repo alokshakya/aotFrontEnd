@@ -804,7 +804,7 @@
     <div class="ui-g-12 ui-md-6 ui-lg-4">
        <p-panel header="Notice Board">
            <div id="notice">
-               <div class="noticebox" *ngFor = "let item of notice">
+               <div class="noticebox" *ngFor = "let item of noticeBoard">
                    <h3>{{item.head}}</h3>
                    <p>{{item.value}}</p>
                </div>
@@ -814,7 +814,7 @@
 
        <p-panel header="Testimonials">
            <div id="testimonials">
-            <div class="testbox" *ngFor = "let item of testimonial">
+            <div class="testbox" *ngFor = "let item of testimonials">
                 <img src={{imgsrc}} class="testimonialimage" ><em>{{item.time}}</em>
                 <p>{{item.data}}</p>
             </div>

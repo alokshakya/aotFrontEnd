@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit {
     email: string = "abc@gmail.com"; 
 
 
-    //
+    
     layoutCompact: boolean = false;
 
     layoutMode: MenuOrientation = MenuOrientation.STATIC;
