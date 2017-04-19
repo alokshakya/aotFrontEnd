@@ -72,9 +72,9 @@ import {TreeTableModule} from 'primeng/primeng';
 
 import {AppComponent}  from './app.component';
 import {AppMenuComponent,AppSubMenu}  from './app.menu.component';
-import {AppTopBar}  from './app.topbar.component';
-import {AppFooter}  from './app.footer.component';
-import {InlineProfileComponent}  from './app.profile.component';
+import {AppTopBar}  from './apptopbar/app.topbar.component';
+import {AppFooter}  from './appfooter/app.footer.component';
+import {InlineProfileComponent}  from './appProfile/app.profile.component';
 import {SampleDemo} from './demo/view/sampledemo';
 import {FormsDemo} from './demo/view/formsdemo';
 import {DataDemo} from './demo/view/datademo';
@@ -89,7 +89,8 @@ import {FileDemo} from './demo/view/filedemo';
 import {UtilsDemo} from './demo/view/utilsdemo';
 import {Documentation} from './demo/view/documentation';
 
-import { HttpService } from './services/http.service' //service
+import { HttpService } from './services/http.service'; //service
+import { BaseHttpService } from './services/base-http.service'; //service
 import {CarService} from './demo/service/carservice';
 import {CountryService} from './demo/service/countryservice';
 import {EventService} from './demo/service/eventservice';
@@ -103,6 +104,7 @@ import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.compo
 import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
 import { ResultComponent } from './ComputerCyber/result/result.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -204,10 +206,11 @@ import { ProfileComponent } from './profile/profile.component';
         MocktestComponent,
         ResultComponent,
         ProfileComponent,
+        LoginComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        CarService,CountryService,EventService,NodeService,HttpService
+        CarService,CountryService,EventService,NodeService,HttpService,BaseHttpService
     ],
     bootstrap:[AppComponent]
 })
