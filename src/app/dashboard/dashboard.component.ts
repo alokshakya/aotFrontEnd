@@ -1,18 +1,25 @@
 import {Component,OnInit} from '@angular/core';
 import {SelectItem} from 'primeng/primeng';
+import { Router } from '@angular/router'
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.html',
     styleUrls: ['./dashboard.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent{
 
     noticeBoard:Array<any>;
     
     testimonials:Array<any>;
 
-    constructor() {
+    constructor(private _router: Router) {
+
+        var token = localStorage.getItem('session_token');
+        if (token==''){
+            this._router.navigate(['login']);
+        }
+
         this.noticeBoard = [
                     {"head":"Notice 1", "value":"Lorem Ipsum is simply dummy text of the printing and typesetting industry,"},
                     {"head":"Notice 2", "value":"Lorem Ipsum is simply dummy text of the printing and typesetting industry, Lorem Ipsum is simply dummy text of the printing and typesetting industry,"},
@@ -28,7 +35,5 @@ export class DashboardComponent implements OnInit {
                         ];            
      }
     
-    ngOnInit() {
-        
-    }
+    
 }

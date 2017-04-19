@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Router }from '@angular/router'
 
 @Component({
   selector: 'app-accountsettings',
   templateUrl: './accountsettings.component.html',
   styleUrls: ['./accountsettings.component.scss']
 })
-export class AccountsettingsComponent implements OnInit {
+export class AccountsettingsComponent  {
 
   subscriptionTableData: any;
   subscriptionTableHeaders: any;
   subjectsAndPrice:any;
   selectedPackage: Array<string> = [];
   
-  constructor() {
+  constructor(private _router:Router) {
+
+    var token = localStorage.getItem('session_token');
+    if (token==''||token==null){
+        this._router.navigate(['/login']); 
+    }
 
     this.subscriptionTableData = [
                                     {"Order ID":"OB26DF", "Subject":"Science", "Subscription Date":"23 March 2017", "Valid Till":"23 September 2017", "Download Invoice":"Invoice .pdf"},
@@ -46,7 +52,5 @@ export class AccountsettingsComponent implements OnInit {
                            ]
                 }
 
-  ngOnInit() {
-  }
 
 }

@@ -1,0 +1,44 @@
+<p-growl [value]="errorMesssage" life="4000"></p-growl>
+<div class="container">
+    <div class="pen-title">
+      <h1>Login with OlympiadBox</h1>
+    </div>
+          
+          
+
+    <div class="module form-module">
+      <div class="toggle" pTooltip=" Register" ><i class="fa fa-times fa-pencil" (click)="display=!display"></i>
+      </div>
+      <div class="form">
+        <h2>Login to your account</h2>
+
+        <form #formCtrl="ngForm" novalidate> 
+
+          <div class="ui-message ui-messages-error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">
+            &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Please Enter Valid Email Id
+          </div><br>
+          <input type="text"  name="email"
+            #email="ngModel" [(ngModel)]="user.email"  pInputText placeholder="Username"
+            pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"/>
+             
+
+          <input type="password"  name="password"
+            #password="ngModel" [(ngModel)]="user.password" pInputText placeholder="Password" required/>
+          
+          <button pButton (click)="postdata()" [disabled]="user.password==''" type="submit" label="Login"></button><br><br>
+          
+          <span id="lostpassword"><a href="">Forgot Password?</a></span>
+
+        </form>
+        <div class="ui-g" id="optional">
+            <div class="ui-g-5"><hr></div>
+            <div class="ui-g-2"><h4>OR</h4></div>
+            <div class="ui-g-5"><hr></div>
+            <button id="google" pButton type="button" icon="fa-google" label="Sign in"></button><br>
+            <button id="facebook" pButton type="button" icon="fa-facebook" label="Sign in"></button>
+        </div>
+
+        
+      </div>
+    </div>
+</div>

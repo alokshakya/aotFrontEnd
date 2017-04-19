@@ -21,12 +21,13 @@ import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.compo
 import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
 import { ResultComponent } from './ComputerCyber/result/result.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LoginComponent } from './login/login.component';
 
 
 
 
 export const routes: Routes = [
-    {path: '', redirectTo:'dashboard', pathMatch:'full'},
+    {path: '', redirectTo:'login', pathMatch:'full'},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'accountsettings', component: AccountsettingsComponent},
     {path: 'computer/demotest', component: DemotestComponent}, 
@@ -35,6 +36,7 @@ export const routes: Routes = [
     {path: 'computer/mocktest', component: MocktestComponent},
     {path: 'computer/result', component: ResultComponent},
     {path: 'profile' , component: ProfileComponent },
+    {path: 'login', component: LoginComponent},
 
 
     {path: 'sample', component: SampleDemo},
