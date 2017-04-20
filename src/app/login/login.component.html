@@ -1,4 +1,5 @@
-<p-growl [value]="errorMesssage" life="4000"></p-growl>
+<p-growl [value]="errorMessage" life="4000"></p-growl>
+<p-growl [value]="successMessage" life="4000"></p-growl>
 <div class="container">
     <div class="pen-title">
       <h1>Login with OlympiadBox</h1>
@@ -7,25 +8,28 @@
           
 
     <div class="module form-module">
-      <div class="toggle" pTooltip=" Register" ><i class="fa fa-times fa-pencil" (click)="display=!display"></i>
+      <div class="toggle" pTooltip=" Register" (click)="display=!display" ><i class="fa fa-times fa-pencil" ></i>
       </div>
-      <div class="form">
+      
+      <!--LOGIN BOX-->
+      <div class="form" *ngIf="!display">
         <h2>Login to your account</h2>
 
         <form #formCtrl="ngForm" novalidate> 
 
+          <!--Email Validator-->
           <div class="ui-message ui-messages-error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">
             &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Please Enter Valid Email Id
           </div><br>
           <input type="text"  name="email"
-            #email="ngModel" [(ngModel)]="user.email"  pInputText placeholder="Username"
-            pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"/>
+            #email="ngModel" [(ngModel)]="userLoginCreds.email"  pInputText placeholder="Username"
+            pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" required/>
              
 
           <input type="password"  name="password"
-            #password="ngModel" [(ngModel)]="user.password" pInputText placeholder="Password" required/>
+            #password="ngModel" [(ngModel)]="userLoginCreds.password" pInputText placeholder="Password" required/>
           
-          <button pButton (click)="postdata()" [disabled]="user.password==''" type="submit" label="Login"></button><br><br>
+          <button pButton (click)="sendLoginCreds()" [disabled]="email.errors||userLoginCreds.password==''" type="submit" label="Login"></button><br><br>
           
           <span id="lostpassword"><a href="">Forgot Password?</a></span>
 
@@ -34,11 +38,52 @@
             <div class="ui-g-5"><hr></div>
             <div class="ui-g-2"><h4>OR</h4></div>
             <div class="ui-g-5"><hr></div>
+            <p-messages [value]="googleMessage"></p-messages>
             <button id="google" pButton type="button" icon="fa-google" label="Sign in"></button><br>
+            <p-messages [value]="facebookMessage"></p-messages>
             <button id="facebook" pButton type="button" icon="fa-facebook" label="Sign in"></button>
         </div>
 
-        
+      </div>
+
+      <!--Registration Box-->
+      <div class="form" *ngIf="display">
+
+        <!--Name Validator -->  
+        <h2>Create an account</h2>
+        <div class="ui-message ui-messages-error" [hidden]="firstname.untouched" *ngIf="firstname.errors && firstname.errors.pattern">
+            &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Please Enter Valid Firstname
+        </div>  
+        <input type="text" name="firstname"
+            #firstname="ngModel"  [(ngModel)]="userRegCreds.firstname" pInputText placeholder="Firstname"
+            pattern="^[a-zA-Z]+"/>
+
+        <!--LastName Validator -->
+        <div class="ui-message ui-messages-error" [hidden]="lastname.untouched" *ngIf="lastname.errors && lastname.errors.pattern">
+            &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Please Enter Valid Lastname
+        </div>
+        <input type="text" name="lastname"
+            #lastname="ngModel"  [(ngModel)]="userRegCreds.lastname" pInputText placeholder="Lastname"
+            pattern="^[a-zA-Z]+"/>
+
+        <!--Email Validators -->
+        <div class="ui-message ui-messages-error" [hidden]="regEmail.untouched" *ngIf="regEmail.errors && regEmail.errors.pattern">
+            &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Please Enter Valid Email Id
+        </div>
+        <input type="text"  name="regEmail"
+            #regEmail="ngModel" [(ngModel)]="userRegCreds.email"  pInputText placeholder="Email"
+            pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"/>
+
+
+        <div class="ui-message ui-messages-error" [hidden]="regPassword.untouched" *ngIf="regPassword.errors && regPassword.errors.pattern">
+            &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Minimum 6 Characters
+        </div>
+        <input type="password"  name="regPassword" pInputText
+            #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password"
+            pattern="^[^\s]{6,}"/>
+          
+          <button pButton (click)="sendRegCreds()" [disabled]="regEmail.errors || firstname.errors || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''" type="submit" label="Register"></button><br><br>
+
       </div>
     </div>
 </div>

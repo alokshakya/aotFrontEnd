@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule, FormBuilder, Validators, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Headers, RequestOptions } from '@angular/http';
 import { BaseHttpService } from '../services/base-http.service';
@@ -16,11 +15,15 @@ import { Message} from 'primeng/primeng';
 })
 export class LoginComponent {
 
-  user:any={"email":"", "password":""};
+  userLoginCreds:any={"email":"", "password":""};
 
-  errorMesssage: Message[] = [];
- 
-  userform: FormGroup;
+  userRegCreds:any={"firstname":"","lastname":"", "email":"","password":""};
+
+  errorMessage: Message[] = [];
+
+  successMessage: Message[] = [];
+
+  display:boolean = false; 
 
   
   constructor(private httpService: BaseHttpService, private _router: Router) {
@@ -36,24 +39,40 @@ export class LoginComponent {
      this._router.navigate(['dashboard']);
    }
 
-   showerror(){
-      this.errorMesssage = [];
-      this.errorMesssage.push({severity:'info', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
-    }
 
-   postdata() {
+   sendLoginCreds() {
         var queryHeaders = new Headers();
         queryHeaders.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: queryHeaders });
-        this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/session', this.user, options)
+        this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/session', this.userLoginCreds, options)
             .subscribe((data) => {
                 this.storeToken(data.json());
             }, (error) => {
-                      this.showerror();
-            }
+                      this.errorMessage = [];
+                      this.errorMessage.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
+                      }
             );
+    }
+
+    sendRegCreds(){
+      var queryHeaders = new Headers();
+      queryHeaders.append('Content-Type','application/json');
+      queryHeaders.append("DREAMFACTORY_API_KEY",constants.DREAMFACTORY_API_KEY);
+      let options = new RequestOptions({headers: queryHeaders});
+      this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/register', this.userRegCreds, options)
+          .subscribe((data) => {
+            this.successMessage=[];
+            this.successMessage.push({severity:'success', summary:'Registration Successful', detail:'Please Login'});
+            this.display = !this.display;},
+
+            (error) => {
+                    this.errorMessage=[];
+                    this.errorMessage.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
+                  }
+          );
     }
 
   
 
 }
+
