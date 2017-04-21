@@ -1,0 +1,62 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div class="ui-g" id="header">
+      <div class="ui-g-2">
+        <img src="../../../../assets/layout/images/Olympiadbox-logo.png" height="70px" width="70px">
+      </div>
+      <div class="ui-g-2">
+        <p>sample test</p>
+      </div>
+      <div class="ui-g-2">
+        <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
+      </div>
+      <div class="ui-g-3">
+        <p>Progress bar</p>  
+      </div>
+      <div class="ui-g-3">
+        <i class="fa fa-user"></i>
+      </div>
+    </div>
+  </div>
+  <div class="ui-g-12">
+    <div class="ui-g">
+      <div class="ui-g-1" id="navbar">
+        <div class="help"><i class="fa fa-bars fa-2x"></i></div>
+        <div class="help"><i class="fa fa-question-circle fa-2x"></i></div>        
+        <div class="questionpallete" (click)="question1=true;question2=false"><div class="circle">1</div></div>
+        <div class="questionpallete" (click)="question2=true;question1=false"><div class="circle">2</div></div>
+        <div class="questionpallete"><div class="circle">3</div></div>
+      </div>
+      <div class="ui-g-11">
+        <div class="ui-g">
+          <div class="ui-g-12"  *ngIf="question1">
+            <div class="question"><h3>What is the capital of india?</h3></div><hr>
+            <p>Pick one of the choices</p>
+            <div class="ui-g-12"><p-radioButton name="ques1" value="New Delhi" label="New Delhi" [(ngModel)]="answers.question1"></p-radioButton></div>
+            <div class="ui-g-12"><p-radioButton name="ques1" value="Punjab" label="Punjab" [(ngModel)]="answers.question1"></p-radioButton></div>
+            <div class="ui-g-12"><p-radioButton name="ques1" value="Rajasthan" label="Rajasthan" [(ngModel)]="answers.question1"></p-radioButton></div>
+            <div class="ui-g-12"><p-radioButton name="ques1" value="Chattisgarh" label="Chattisgarh" [(ngModel)]="answers.question1"></p-radioButton></div>
+            <div class="ui-g-12"><p><strong>Selected option:</strong> {{answers.question1}}</p><br></div>
+            <div class="ui-g-12">
+              <a class="clear" (click)="answers.question1=''">Clear Selection</a><br><br>
+              <button type="button" label="Save and Next" pButton class="ui-button-success"></button><br>
+            </div>
+          </div>
+          <div class="ui-g-12"  *ngIf="question2">
+            <div class="question"><h3>Who invented Alternating Current?</h3></div><hr>
+            <p>Pick one of the choices</p>
+            <div class="ui-g-12"><p-radioButton name="ques2" value="Albert Einstein" label="Albert Einstein" [(ngModel)]="answers.question2"></p-radioButton></div>
+            <div class="ui-g-12"><p-radioButton name="ques2" value="Thomas Edison" label="Thomas Edison" [(ngModel)]="answers.question2"></p-radioButton></div>
+            <div class="ui-g-12"><p-radioButton name="ques2" value="Nikola Tesla" label="Nikola Tesla" [(ngModel)]="answers.question2"></p-radioButton></div>
+            <div class="ui-g-12"><p-radioButton name="ques2" value="Lenore Blum" label="Lenore Blum" [(ngModel)]="answers.question2"></p-radioButton></div>
+            <div class="ui-g-12"><p><strong>Selected option:</strong> {{answers.question2}}</p><br></div>
+            <div class="ui-g-12">
+              <a class="clear" (click)="answers.question2=''">Clear Selection</a><br><br>
+              <button type="button" label="Save and Next" pButton class="ui-button-success"></button><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

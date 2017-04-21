@@ -1,0 +1,45 @@
+#header , #navbar{
+    padding:0;
+    margin:0;
+    background-color: #2D353C;
+    color: white;
+}
+
+
+.questionpallete:hover{
+    background-color: grey;
+}
+
+.questionpallete{
+    margin:none;
+    text-align: center;
+    height:60px;
+    padding-top:10%;
+    padding-left: 25%;
+    padding-bottom: 15%;
+}
+.circle {
+    border: 2px solid white;
+    padding-top: 15%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 12px;
+    color: white;
+    background: #2D353C
+}
+
+.help{
+    text-align: center;
+    padding:10% 0 10% 0;
+}
+
+.clear{
+    color: #1D8ECD;
+    cursor: pointer;
+}
+
+.ui-g{
+    padding: none;
+    margin: none;
+}

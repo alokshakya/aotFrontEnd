@@ -105,6 +105,7 @@ import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
 import { ResultComponent } from './ComputerCyber/result/result.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
+import { Sampletest1Component } from './ComputerCyber/sampletest/sampletest1/sampletest1.component';
 
 
 @NgModule({
@@ -207,6 +208,7 @@ import { LoginComponent } from './login/login.component';
         ResultComponent,
         ProfileComponent,
         LoginComponent,
+        Sampletest1Component,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
