@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {Routes,RouterModule} from '@angular/router';
 import {ModuleWithProviders} from '@angular/core';
 import {SampleDemo} from './demo/view/sampledemo';
@@ -23,11 +24,33 @@ import { ResultComponent } from './ComputerCyber/result/result.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { Sampletest1Component } from './ComputerCyber/sampletest/sampletest1/sampletest1.component';
+=======
+import { Routes, RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
 
+import { SampleDemo } from './demo/view/sampledemo';
+import { FormsDemo } from './demo/view/formsdemo';
+import { DataDemo } from './demo/view/datademo';
+import { PanelsDemo } from './demo/view/panelsdemo';
+import { OverlaysDemo } from './demo/view/overlaysdemo';
+import { MenusDemo } from './demo/view/menusdemo';
+import { MessagesDemo } from './demo/view/messagesdemo';
+import { MiscDemo } from './demo/view/miscdemo';
+import { EmptyDemo } from './demo/view/emptydemo';
+import { ChartsDemo } from './demo/view/chartsdemo';
+import { FileDemo } from './demo/view/filedemo';
+import { UtilsDemo } from './demo/view/utilsdemo';
+import { Documentation } from './demo/view/documentation';
+>>>>>>> a7000cf7b747d0e7f298dea9e18bc5018fda5dd6
+
+import { AccountRoutes } from "./account/account.routes";
+import { LoginComponent } from './login/login.component';
+import { AccountMainComponent } from "./account/main/main.component";
 
 
 
 export const routes: Routes = [
+<<<<<<< HEAD
     {path: '', redirectTo:'login', pathMatch:'full'},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'accountsettings', component: AccountsettingsComponent},
@@ -41,20 +64,25 @@ export const routes: Routes = [
 
     {path: 'computer/sampletest1', component: Sampletest1Component},
 
+=======
+    ...AccountRoutes,
+    { path: 'login', component: LoginComponent },
+    {path : 'account', component : AccountMainComponent},
+>>>>>>> a7000cf7b747d0e7f298dea9e18bc5018fda5dd6
 
-    {path: 'sample', component: SampleDemo},
-    {path: 'forms', component: FormsDemo},
-    {path: 'data', component: DataDemo},
-    {path: 'panels', component: PanelsDemo},
-    {path: 'overlays', component: OverlaysDemo},
-    {path: 'menus', component: MenusDemo},
-    {path: 'messages', component: MessagesDemo},
-    {path: 'misc', component: MiscDemo},
-    {path: 'empty', component: EmptyDemo},
-    {path: 'charts', component: ChartsDemo},
-    {path: 'file', component: FileDemo},
-    {path: 'utils', component: UtilsDemo},
-    {path: 'documentation', component: Documentation}
+    { path: 'sample', component: SampleDemo },
+    { path: 'forms', component: FormsDemo },
+    { path: 'data', component: DataDemo },
+    { path: 'panels', component: PanelsDemo },
+    { path: 'overlays', component: OverlaysDemo },
+    { path: 'menus', component: MenusDemo },
+    { path: 'messages', component: MessagesDemo },
+    { path: 'misc', component: MiscDemo },
+    { path: 'empty', component: EmptyDemo },
+    { path: 'charts', component: ChartsDemo },
+    { path: 'file', component: FileDemo },
+    { path: 'utils', component: UtilsDemo },
+    { path: 'documentation', component: Documentation }
 ];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);
