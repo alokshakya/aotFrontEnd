@@ -71,10 +71,10 @@ import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
 
 import {AppComponent}  from './app.component';
-import {AppMenuComponent,AppSubMenu}  from './app.menu.component';
-import {AppTopBar}  from './apptopbar/app.topbar.component';
-import {AppFooter}  from './appfooter/app.footer.component';
-import {InlineProfileComponent}  from './appProfile/app.profile.component';
+import {AppMenuComponent,AppSubMenu}  from './account/main/main.menu.component';
+import {AppTopBar}  from './account/apptopbar/app.topbar.component';
+import {AppFooter}  from './account/appfooter/app.footer.component';
+import {InlineProfileComponent}  from './account/appProfile/app.profile.component';
 import {SampleDemo} from './demo/view/sampledemo';
 import {FormsDemo} from './demo/view/formsdemo';
 import {DataDemo} from './demo/view/datademo';
@@ -96,14 +96,15 @@ import {CountryService} from './demo/service/countryservice';
 import {EventService} from './demo/service/eventservice';
 import {NodeService} from './demo/service/nodeservice';
 
-import {DashboardComponent} from './dashboard/dashboard.component';
-import { AccountsettingsComponent } from './accountsettings/accountsettings.component';
-import { DemotestComponent } from './ComputerCyber/demotest/demotest.component';
-import { ChapterwisetestComponent } from './ComputerCyber/chapterwisetest/chapterwisetest.component';
-import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.component';
-import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
-import { ResultComponent } from './ComputerCyber/result/result.component';
-import { ProfileComponent } from './profile/profile.component';
+import { AccountMainComponent } from "./account/main/main.component";
+import { DashboardComponent } from './account/dashboard/dashboard.component';
+import { AccountsettingsComponent } from './account/accountsettings/accountsettings.component';
+import { DemotestComponent } from './account/ComputerCyber/demotest/demotest.component';
+import { ChapterwisetestComponent } from './account/ComputerCyber/chapterwisetest/chapterwisetest.component';
+import { SampletestComponent } from './account/ComputerCyber/sampletest/sampletest.component';
+import { MocktestComponent } from './account/ComputerCyber/mocktest/mocktest.component';
+import { ResultComponent } from './account/ComputerCyber/result/result.component';
+import { ProfileComponent } from './account/profile/profile.component';
 import { LoginComponent } from './login/login.component';
 
 
@@ -198,6 +199,7 @@ import { LoginComponent } from './login/login.component';
         FileDemo,
         UtilsDemo,
         Documentation,
+        AccountMainComponent,
         DashboardComponent,
         AccountsettingsComponent,
         DemotestComponent,
