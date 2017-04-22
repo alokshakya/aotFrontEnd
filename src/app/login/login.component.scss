@@ -118,7 +118,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 #footer{
-  padding-top:auto;
+  position:fixed;
+  right:0;
+  bottom:0;
   float: right;
   color: white;
 }
