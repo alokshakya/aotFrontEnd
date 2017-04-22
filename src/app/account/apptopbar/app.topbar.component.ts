@@ -12,6 +12,6 @@ export class AppTopBar {
 
     logout(){
         localStorage.setItem('session_token','');
-        this._router.navigate(['login']);
+        // this._router.navigate(['login']);
     };
 }
