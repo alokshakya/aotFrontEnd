@@ -1,4 +1,5 @@
-import {Component,AfterViewInit,ElementRef,Renderer,ViewChild} from '@angular/core';
+import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild} from '@angular/core';
+import { Router } from '@angular/router';
 
 enum MenuOrientation {
     STATIC,
@@ -14,6 +15,7 @@ declare var jQuery: any;
   styleUrls: ['./main.component.scss']
 })
 export class AccountMainComponent implements AfterViewInit {
+    
 
     //student info to be displayed above menubar
     studentName: string = "Rahul Sharma";
@@ -60,7 +62,17 @@ export class AccountMainComponent implements AfterViewInit {
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
 
-    constructor(public renderer: Renderer) {}
+    constructor(public renderer: Renderer, private router: Router) {}
+
+    ngOnInit(){
+
+        var token = localStorage.getItem('session_token');
+        if(token==''||token=='null'){
+            this.router.navigate(['login'])
+        };
+
+
+    }
 
     ngAfterViewInit() {
         this.layoutContainer = <HTMLDivElement> this.layourContainerViewChild.nativeElement;

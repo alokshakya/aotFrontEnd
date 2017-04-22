@@ -9,6 +9,7 @@ import { ChapterwisetestComponent } from './ComputerCyber/chapterwisetest/chapte
 import { SampletestComponent } from './ComputerCyber/sampletest/sampletest.component';
 import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
 import { ResultComponent } from './ComputerCyber/result/result.component';
+import { TakedemotestComponent } from './ComputerCyber/demotest/takedemotest/takedemotest.component';
 import { ProfileComponent } from './profile/profile.component';
 
 
@@ -16,9 +17,11 @@ export const AccountRoutes: Routes = [
   { path : '', redirectTo : '/login', pathMatch : 'full'},
   { path : 'account', component : AccountMainComponent,
   children : [
+    { path: '' , redirectTo: 'dashboard', pathMatch: 'full'},
     { path: 'dashboard', component: DashboardComponent },
     { path: 'accountsettings', component: AccountsettingsComponent },
-    { path: 'computer/demotest', component: DemotestComponent }, 
+    { path: 'computer/demotest', component: DemotestComponent },
+    { path: 'computer/demotest/takedemotest', component: TakedemotestComponent}, 
     { path: 'computer/chapterwisetest', component: ChapterwisetestComponent },           
     { path: 'computer/sampletest', component: SampletestComponent },
     { path: 'computer/mocktest', component: MocktestComponent },

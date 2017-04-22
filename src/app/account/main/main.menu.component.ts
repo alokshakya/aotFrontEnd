@@ -20,16 +20,16 @@ export class AppMenuComponent implements OnInit {
     
     ngOnInit() {
         this.model = [
-            {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['/dashboard']},
-            {label: 'Account Settings', icon: 'fa fa-pencil-square-o', routerLink: ['/accountsettings']},
+            {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['dashboard']},
+            {label: 'Account Settings', icon: 'fa fa-pencil-square-o', routerLink: ['accountsettings']},
             {
                 label: 'Computer/Cyber', icon: 'icon-cyber',
                 items: [
-                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['/computer/demotest']},
-                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['/computer/chapterwisetest']},
-                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['/computer/sampletest']},
-                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['/computer/mocktest']},
-                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['/computer/result']},
+                    {label: 'Demo Test', icon: 'fa fa-circle-o', routerLink:['computer/demotest']},
+                    {label: 'Chapterwise Test', icon: 'fa fa-circle-o', routerLink:['computer/chapterwisetest']},
+                    {label: 'Sample Test', icon: 'fa fa-circle-o', routerLink:['computer/sampletest']},
+                    {label: 'Mock Test', icon: 'fa fa-circle-o', routerLink:['computer/mocktest']},
+                    {label: 'Result', icon: 'fa fa-calculator', routerLink:['computer/result']},
                     ]
             },
             {

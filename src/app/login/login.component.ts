@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, RequestOptions } from '@angular/http';
 import { BaseHttpService } from '../services/base-http.service';
@@ -13,7 +13,7 @@ import { Message} from 'primeng/primeng';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   userLoginCreds:any={"email":"", "password":""};
 
@@ -26,34 +26,26 @@ export class LoginComponent {
   display:boolean = false; 
 
   
-  constructor(private httpService: BaseHttpService, private _router: Router) {
+  constructor(private httpService: BaseHttpService, private router: Router) {}
 
-    var token=localStorage.getItem('session_token');
-    if (token!=''){
-      this._router.navigate(['dashboard']);
-    }
-  }
-
-   private storeToken(data){
-     localStorage.setItem('session_token', data.session_token);
-     this._router.navigate(['dashboard']);
-   }
-
-
+   //CALLED WHEN CLICKED ON LOGIN BUTTON
    sendLoginCreds() {
-        var queryHeaders = new Headers();
-        queryHeaders.append('Content-Type', 'application/json');
-        let options = new RequestOptions({ headers: queryHeaders });
-        this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/session', this.userLoginCreds, options)
-            .subscribe((data) => {
-                this.storeToken(data.json());
-            }, (error) => {
-                      this.errorMessage = [];
-                      this.errorMessage.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
-                      }
-            );
+      var queryHeaders = new Headers();
+      queryHeaders.append('Content-Type', 'application/json');
+      let options = new RequestOptions({ headers: queryHeaders });
+      this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/session', this.userLoginCreds, options)
+          .subscribe((data) => {
+            localStorage.setItem('session_token', data.json().session_token )
+            this.router.navigate(['account/dashboard']);}, 
+            
+            (error) => {
+                  this.errorMessage = [];
+                  this.errorMessage.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
+                  }
+          );
     }
 
+    //CALLED WHEN CLICKED ON REGISTER BUTTON
     sendRegCreds(){
       var queryHeaders = new Headers();
       queryHeaders.append('Content-Type','application/json');
@@ -72,6 +64,15 @@ export class LoginComponent {
           );
     }
 
+    ngOnInit(){
+
+      var token = localStorage.getItem('session_token');
+      if (token==''||token==null){
+        this.router.navigate(['login'])
+      } else{
+        this.router.navigate(['account/dashboard'])
+      }
+    }
   
 
 }

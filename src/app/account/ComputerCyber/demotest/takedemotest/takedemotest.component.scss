@@ -1,6 +1,6 @@
 #header , #navbar{
-    padding:0;
-    margin:0;
+    margin: 0px 0px 0px 0px  ;
+    padding: 0px 0px 0px 0px  ;
     background-color: #2D353C;
     color: white;
 }
@@ -39,7 +39,11 @@
     cursor: pointer;
 }
 
-.ui-g{
-    padding: none;
-    margin: none;
+#questionwindow{
+    background-color: white;
+}
+
+#navpanel {
+    margin:0px;
+    padding:0px 0px 0px 7px;
 }

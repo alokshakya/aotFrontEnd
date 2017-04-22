@@ -22,7 +22,7 @@
                     
                     <ul class="poseidon-menu fadeInDown">
                         <li role="menuitem">
-                            <a href="#/profile">
+                            <a href="#/account/profile">
                                 <i class="fa fa-fw fa-user"></i>
                                 <span>Profile</span>
                             </a>
@@ -34,7 +34,7 @@
                             </a>
                         </li>
                         <li role="menuitem">
-                            <a href="#/accountsettings">
+                            <a href="#/account/accountsettings">
                                 <i class="fa fa-fw fa-cog"></i>
                                 <span>Settings</span>
                             </a>
@@ -48,7 +48,7 @@
                     </ul>
                 </li>
                 <li #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
-                    <a href="#/accountsettings"> <!--(click)="app.onTopbarItemClick($event,settings)">-->
+                    <a href="#/account/accountsettings"> <!--(click)="app.onTopbarItemClick($event,settings)">-->
                         <i class="topbar-icon fa fa-fw fa-cog"></i>
                         <span class="topbar-item-name">Settings</span>
                     </a>

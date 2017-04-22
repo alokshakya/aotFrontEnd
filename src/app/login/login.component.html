@@ -1,18 +1,20 @@
 <p-growl [value]="errorMessage" life="4000"></p-growl>
 <p-growl [value]="successMessage" life="4000"></p-growl>
+
 <div class="container">
     <div class="pen-title">
-      <h1>Login with OlympiadBox</h1>
+        <img src="../../assets/layout/images/Olympiadbox-logo.png" height="100px" width="100px">
+      <!--<h1>Login with OlympiadBox</h1>-->
     </div>
           
           
 
-    <div class="module form-module">
-      <div class="toggle" pTooltip=" Register" (click)="display=!display" ><i class="fa fa-times fa-pencil" ></i>
+    <div class="module form-module" *ngIf="!display">
+      <div class="toggle" pTooltip=" Register" (click)="display=!display" ><i class="fa fa-user-plus fa-lg" ></i>
       </div>
       
       <!--LOGIN BOX-->
-      <div class="form" *ngIf="!display">
+      <div class="form">
         <h2>Login to your account</h2>
 
         <form #formCtrl="ngForm" novalidate> 
@@ -20,7 +22,7 @@
           <!--Email Validator-->
           <div class="ui-message ui-messages-error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">
             &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Please Enter Valid Email Id
-          </div><br>
+          </div>
           <input type="text"  name="email"
             #email="ngModel" [(ngModel)]="userLoginCreds.email"  pInputText placeholder="Username"
             pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" required/>
@@ -45,9 +47,14 @@
         </div>
 
       </div>
+    </div>
 
       <!--Registration Box-->
-      <div class="form" *ngIf="display">
+      <div class="module form-module" style="border-color:#F44336" *ngIf="display">
+        <div class="toggle" style="background-color:#F44336" pTooltip=" Login" (click)="display=!display" ><i class="fa fa-sign-in fa-lg" ></i>
+      </div>
+    
+      <div class="form">
 
         <!--Name Validator -->  
         <h2>Create an account</h2>
@@ -75,15 +82,16 @@
             pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$"/>
 
 
-        <div class="ui-message ui-messages-error" [hidden]="regPassword.untouched" *ngIf="regPassword.errors && regPassword.errors.pattern">
+        <!--<div class="ui-message ui-messages-error" [hidden]="regPassword.untouched" *ngIf="regPassword.errors && regPassword.errors.pattern">
             &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Minimum 6 Characters
-        </div>
-        <input type="password"  name="regPassword" pInputText
-            #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password"
+        </div>-->
+        <input type="password"  name="regPassword" pPassword weakLabel="Min 6 Characters" promptLabel="Min 6 Characters" strongLabel="Great" mediumLabel="OK" 
+            indicator="false" #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password"
             pattern="^[^\s]{6,}"/>
           
-          <button pButton (click)="sendRegCreds()" [disabled]="regEmail.errors || firstname.errors || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''" type="submit" label="Register"></button><br><br>
+          <button style="background-color:#F44336"pButton (click)="sendRegCreds()" [disabled]="regEmail.errors || firstname.errors || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''" type="submit" label="Register"></button>
 
       </div>
-    </div>
+     </div>
+     <div id="footer"><p>Copyright &copy; 2017 OlympiadBox. All Rights Reserved.</p> </div>
 </div>
