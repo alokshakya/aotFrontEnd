@@ -1,4 +1,4 @@
-import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild} from '@angular/core';
+import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 
 enum MenuOrientation {
@@ -64,15 +64,13 @@ export class AccountMainComponent implements AfterViewInit {
 
     constructor(public renderer: Renderer, private router: Router) {}
 
-    ngOnInit(){
-
+    ngOnInit() {
         var token = localStorage.getItem('session_token');
         if(token==''||token=='null'){
             this.router.navigate(['login'])
         };
-
-
     }
+    
 
     ngAfterViewInit() {
         this.layoutContainer = <HTMLDivElement> this.layourContainerViewChild.nativeElement;
@@ -193,8 +191,8 @@ export class AccountMainComponent implements AfterViewInit {
     ngOnDestroy() {
         if(this.documentClickListener) {
             this.documentClickListener();
-        }  
-
+        }
+      
         jQuery(this.layoutMenuScroller).nanoScroller({flash:true});
     }
 
