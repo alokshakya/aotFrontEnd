@@ -9,7 +9,7 @@
       </div>
       <div class="ui-g-2">
         <div class="ui-g">
-          <div class="ui-g-4"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i></div>
+          <div class="ui-g-2"><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i></div>
           <div class="ui-g-6">2h:16m:52s<br>remaining</div>
         </div>
       </div>
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="ui-g-3">
-        <i class="fa fa-user"></i>
+        <h5><i class="fa fa-user"></i> Gaurav Pant</h5>
       </div>
     </div>
   </div>
@@ -38,14 +38,14 @@
         <div> <!--repeat-->
           <div class="help"><i class="fa fa-bars fa-2x"></i></div>
           <div class="help"><i class="fa fa-question-circle fa-2x"></i></div>        
-          <div class="questionpallete" (click)="question1=true;question2=false"><div class="circle">1</div></div>
-          <div class="questionpallete" (click)="question2=true;question1=false"><div class="circle">2</div></div>
-          <div class="questionpallete"><div class="circle">3</div></div>
+          <div class="quesunclick" (click)="q1=true;q2=false;q3=false" [ngClass]="{'quesclick':q1, 'quesunclick':!q1}"><div [style.background-color]="select(1)" class="circle">1</div></div>
+          <div class="quesunclick" (click)="q2=true;q1=false;q3=false" [ngClass]="{'quesclick':q2, 'quesunclick':!q2}"><div [style.background-color]="select(2)" class="circle">2</div></div>
+          <div class="quesunclick" (click)="q3=true;q1=false;q2=false" [ngClass]="{'quesclick':q3, 'quesunclick':!q3}"><div [style.background-color]="select(3)" class="circle">3</div></div>
         </div>
       </div>
       <div class="ui-g-11">
         <div class="ui-g">
-          <div class="ui-g-12"  *ngIf="question1">
+          <div class="ui-g-12"  *ngIf="q1">
             <div class="question"><h3>What is the capital of india?</h3></div><hr>
             <p>Pick one of the choices</p>
             <div class="ui-g-12"><p-radioButton name="ques1" value="New Delhi" label="New Delhi" [(ngModel)]="answers.question1"></p-radioButton></div>
@@ -55,10 +55,10 @@
             <div class="ui-g-12"><p><strong>Selected option:</strong> {{answers.question1}}</p><br></div>
             <div class="ui-g-12">
               <a class="clear" (click)="answers.question1=''">Clear Selection</a><br><br>
-              <button type="button" (click)="question2=true;question1=false" [disabled]="!answers.question1" label="Save and Next" pButton class="ui-button-success"></button><br>
+              <button type="button" (click)="q2=true;q1=false;q3=false" [disabled]="!answers.question1" label="Save and Next" pButton class="ui-button-success"></button><br>
             </div>
           </div>
-          <div class="ui-g-12"  *ngIf="question2">
+          <div class="ui-g-12"  *ngIf="q2">
             <div class="question"><h3>Who invented Alternating Current?</h3></div><hr>
             <p>Pick one of the choices</p>
             <div class="ui-g-12"><p-radioButton name="ques2" value="Albert Einstein" label="Albert Einstein" [(ngModel)]="answers.question2"></p-radioButton></div>
@@ -68,7 +68,20 @@
             <div class="ui-g-12"><p><strong>Selected option:</strong> {{answers.question2}}</p><br></div>
             <div class="ui-g-12">
               <a class="clear" (click)="answers.question2=''">Clear Selection</a><br><br>
-              <button type="button" label="Save and Next" pButton [disabled]="!answers.question2" class="ui-button-success"></button><br>
+              <button type="button" (click)="q3=true;q1=false;q2=false" label="Save and Next" pButton [disabled]="!answers.question2" class="ui-button-success"></button><br>
+            </div>
+          </div>
+          <div class="ui-g-12"  *ngIf="q3">
+            <div class="question"><h3>What is the capital of Goa</h3></div><hr>
+            <p>Pick one of the choices</p>
+            <div class="ui-g-12"><p-radioButton name="ques3" value="Lucknow" label="Lucknow" [(ngModel)]="answers.question3"></p-radioButton></div>
+            <div class="ui-g-12"><p-radioButton name="ques3" value="New Delhi" label="New Delhi" [(ngModel)]="answers.question3"></p-radioButton></div>
+            <div class="ui-g-12"><p-radioButton name="ques3" value="Raipur" label="Raipur" [(ngModel)]="answers.question3"></p-radioButton></div>
+            <div class="ui-g-12"><p-radioButton name="ques3" value="Patna" label="Patna" [(ngModel)]="answers.question3"></p-radioButton></div>
+            <div class="ui-g-12"><p><strong>Selected option:</strong> {{answers.question2}}</p><br></div>
+            <div class="ui-g-12">
+              <a class="clear" (click)="answers.question3=''">Clear Selection</a><br><br>
+              <button type="button" label="Save and Next" pButton [disabled]="!answers.question3" class="ui-button-success"></button><br>
             </div>
           </div>
         </div>

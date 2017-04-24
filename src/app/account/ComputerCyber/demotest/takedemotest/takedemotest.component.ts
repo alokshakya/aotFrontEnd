@@ -8,11 +8,18 @@ import { Component, OnInit } from '@angular/core';
 export class TakedemotestComponent implements OnInit {
 
 
-    answers = {"question1":""};
-    question1:boolean=true;
-    question2:boolean=false;
-
+  answers = {"question1":"","question2":"","question3":""};
+  q1:boolean=true;
+  q2:boolean=false;
+  q3:boolean=false;
+  
   constructor() { }
+
+  select(number){
+    if (this.answers['question'+number]!=''){
+      return "#2BBF61";
+    }
+  }
 
   ngOnInit() {
   }
