@@ -13,7 +13,7 @@ export class DashboardComponent{
     
     testimonials:Array<any>;
 
-    constructor(private _router: Router) {
+    constructor(private router: Router) {
 
        this.noticeBoard = [
                     {"head":"Notice 1", "value":"Lorem Ipsum is simply dummy text of the printing and typesetting industry,"},
@@ -28,6 +28,10 @@ export class DashboardComponent{
                         {"imgsrc":"assets/layout/images/testimonialAvatar.jpg", "time":"2 March 2017", "data":"I find the former much more readable."},
                         
                         ];            
+     }
+
+     redirect(){
+         this.router.navigate(['account/computer/demotest']);
      }
     
     

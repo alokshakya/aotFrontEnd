@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-demotest',
@@ -13,7 +14,12 @@ export class DemotestComponent implements OnInit {
 
   chapterNames:Array<string>;
   
-  constructor() { }
+  constructor(private router: Router) { }
+
+
+  takedemotest(){
+      this.router.navigate(['account/computer/demotest/takedemotest']);
+  }
 
   ngOnInit() {
 
