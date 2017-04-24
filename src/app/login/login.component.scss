@@ -6,35 +6,50 @@
     font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 
-.pen-title {
+.logo {
   padding: 25px 0;
   text-align: center;
   letter-spacing: 2px;
+  animation: bounce 2s;
+  -webkit-animation: bounce 2s;
 }
 
-.pen-title h1 {
-  margin: 0 0 20px;
-  font-size: 38px;
-  font-weight: 200;
-  color: #ffffff;
+@keyframes bounce{
+    0% { transform: translateY(-100%);}
+   20% { transform: translateY(0);}
+   30% { transform: translateY(-50%);}
+   40% { transform: translateY(0%);}
+   50% { transform: translateY(-25%);}
+   60% { transform: translateY(0%);}
+   70% { transform: translateY(-12%);}
+   80% { transform: translateY(0);}
+   90% { transform:  translateY(-6%);}
+  100% { transform:  translateY(0);}
 }
 
-.pen-title span {
-  font-size: 12px;
+@-webkit-keyframes bounce {
+    0% { transform: translateY(-100%);}
+   20% { transform: translateY(0);}
+   30% { transform: translateY(-50%);}
+   40% { transform: translateY(0%);}
+   50% { transform: translateY(-25%);}
+   60% { transform: translateY(0%);}
+   70% { transform: translateY(-12%);}
+   80% { transform: translateY(0);}
+   90% { transform:  translateY(-6%);}
+  100% { transform:  translateY(0);}
 }
 
-.pen-title span .fa {
-  color: #1D8ECD;
-}
 
-.pen-title span a {
-  color: #1D8ECD;
-  font-weight: 600;
-  text-decoration: none;
-}
+
+
+
+
+
 
 /* Form Module */
 .form-module {
@@ -124,3 +139,4 @@ input[type=number]::-webkit-outer-spin-button {
   float: right;
   color: white;
 }
+

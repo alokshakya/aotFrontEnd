@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {style, state, animate, transition, trigger} from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, RequestOptions } from '@angular/http';
 import { BaseHttpService } from '../services/base-http.service';
@@ -12,6 +13,20 @@ import { Message} from 'primeng/primeng';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  animations: [
+      trigger('fadeInOut', [
+          state('*', style({ 'overflow-y': 'hidden' })),
+          state('void', style({ 'overflow-y': 'hidden' })),
+          transition('* => void', [
+          style({ height: '*' }),
+          animate(250, style({ height: 0 }))
+          ]),
+        transition('void => *', [
+        style({ height: '0' }),
+        animate(250, style({ height: '*' }))
+          ]),
+  ])],
+
 })
 
 export class LoginComponent implements OnInit {
@@ -74,7 +89,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['account/dashboard'])
       }
     }
-  
+    
 
 }
 

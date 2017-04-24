@@ -2,14 +2,14 @@
 <p-growl [value]="successMessage" life="4000"></p-growl>
 
 <div class="container">
-    <div class="pen-title">
+    <div class="logo">
         <img src="../../assets/layout/images/Olympiadbox-logo.png" height="100px" width="100px">
       <!--<h1>Login with OlympiadBox</h1>-->
     </div>
           
           
 
-    <div class="module form-module" *ngIf="!display">
+    <div class="module form-module" *ngIf="!display" [@fadeInOut]>
       <div class="toggle" pTooltip=" Register" (click)="display=!display" ><i class="fa fa-user-plus fa-lg" ></i>
       </div>
       
@@ -25,7 +25,7 @@
           </div>
           <input type="text"  name="email"
             #email="ngModel" [(ngModel)]="userLoginCreds.email"  pInputText placeholder="Username"
-            pattern="^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" required/>
+            pattern="^[a-z0-9]+(\.[a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$" required/>
              
 
           <input type="password"  name="password"
@@ -50,7 +50,7 @@
     </div>
 
       <!--Registration Box-->
-      <div class="module form-module" style="border-color:#F44336" *ngIf="display">
+      <div class="module form-module" style="border-color:#F44336" *ngIf="display" [@fadeInOut]>
         <div class="toggle" style="background-color:#F44336" pTooltip=" Login" (click)="display=!display" ><i class="fa fa-sign-in fa-lg" ></i>
       </div>
     
@@ -88,7 +88,7 @@
         <input type="password"  name="regPassword" pPassword weakLabel="Min 6 Characters" promptLabel="Min 6 Characters" strongLabel="Great" mediumLabel="OK" 
             indicator="false" #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password"
             pattern="^[^\s]{6,}"/>
-          
+  
           <button style="background-color:#F44336"pButton (click)="sendRegCreds()" [disabled]="regEmail.errors || firstname.errors || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''" type="submit" label="Register"></button>
 
       </div>
