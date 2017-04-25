@@ -35,14 +35,48 @@ export class LoginComponent implements OnInit {
 
   userRegCreds:any={"firstname":"","lastname":"", "email":"","password":""};
 
+  mobile:number;
+
   errorMessage: Message[] = [];
 
   successMessage: Message[] = [];
 
-  display:boolean = false; 
+  otpverified:Message[] = [];
+
+  display:boolean = false; //login-register toggle
+
+  dialog:boolean = false;  //otp verify dialogbox
+
+  errorSection:boolean = false; //invalid otp entered
+
+  otp:number;
+
+  actualOTP:number = 123456;
+
+  otpFlag:boolean=true;
 
   
   constructor(private httpService: BaseHttpService, private router: Router) {}
+
+  hide(){
+    this.errorSection=false;
+  }
+
+  verify(){
+    if(this.otp==this.actualOTP){
+      this.dialog=false;
+      this.otpFlag=false;
+      this.errorSection=false;
+      this.otp=null;
+      this.successMessage.push({severity:'success', summary:'Mobile Verified', detail:'You can change your number from User Profile'});
+
+    }
+    else{
+    this.errorSection=true;
+    this.otpFlag=true;
+    this.otp=null;
+    }
+  }
 
    //CALLED WHEN CLICKED ON LOGIN BUTTON
    sendLoginCreds() {
@@ -81,6 +115,8 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit(){
+
+      this.otpFlag=true;
 
       var token = localStorage.getItem('session_token');
       if (token==''||token==null){

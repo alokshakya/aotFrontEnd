@@ -14,41 +14,27 @@
   padding: 25px 0;
   text-align: center;
   letter-spacing: 2px;
-  animation: bounce 2s;
-  -webkit-animation: bounce 2s;
+}
+
+#oblogo:hover{
+   cursor: pointer; 
+   animation: bounce 2s;
+  -webkit-animation: bounce 2s ease-out infinite;
 }
 
 @keyframes bounce{
-    0% { transform: translateY(-100%);}
-   20% { transform: translateY(0);}
-   30% { transform: translateY(-50%);}
-   40% { transform: translateY(0%);}
-   50% { transform: translateY(-25%);}
-   60% { transform: translateY(0%);}
-   70% { transform: translateY(-12%);}
-   80% { transform: translateY(0);}
-   90% { transform:  translateY(-6%);}
+   25% { transform: translateY(-25%);}
+   50% { transform: translateY(0);}
+   75% { transform:  translateY(-25%);}
   100% { transform:  translateY(0);}
 }
 
 @-webkit-keyframes bounce {
-    0% { transform: translateY(-100%);}
-   20% { transform: translateY(0);}
-   30% { transform: translateY(-50%);}
-   40% { transform: translateY(0%);}
-   50% { transform: translateY(-25%);}
-   60% { transform: translateY(0%);}
-   70% { transform: translateY(-12%);}
-   80% { transform: translateY(0);}
-   90% { transform:  translateY(-6%);}
+   25% { transform: translateY(-25%);}
+   50% { transform: translateY(0);}
+   75% { transform:  translateY(-25%);}
   100% { transform:  translateY(0);}
 }
-
-
-
-
-
-
 
 
 /* Form Module */
@@ -63,6 +49,21 @@
 }
 
 .form-module .toggle {
+  cursor: pointer;
+  position: absolute;
+  top: -0;
+  right: -0;
+  background: #1D8ECD;
+  width: 30px;
+  height: 30px;
+  margin: -5px 0 0;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.register .toggle {
   cursor: pointer;
   position: absolute;
   top: -0;
@@ -140,3 +141,42 @@ input[type=number]::-webkit-outer-spin-button {
   color: white;
 }
 
+.register{
+  text-align: center;
+  position: relative;
+  background: #ffffff;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+.register .toggle {
+  cursor: pointer;
+  position: absolute;
+  top: -0;
+  right: -0;
+  background: #2D4;
+  width: 30px;
+  height: 30px;
+  margin: -5px 0 0;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 30px;
+  text-align: center;
+}
+
+#otpbtn button{
+  border:none;
+  background-color: #DC4E42;
+  margin-left: opx;
+  text-align: left;
+  width:85px;
+  height:42px;
+}
+
+#dialog {
+  text-align: center;
+  height:220px;
+  width: 300px;
+}
