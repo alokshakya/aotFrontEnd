@@ -96,3 +96,73 @@
     margin:0px;
     padding:0px 0px 0px 7px;
 }
+
+//unclicked question number
+.q{
+    text-align: center;
+    padding-top:5px;
+    padding-bottom: 5px;
+    padding-left:35%;
+}
+
+.q:hover, .qclick:hover{
+    background-color: lightgrey;
+    cursor:pointer;
+}
+
+.qnumber{
+    vertical-align: middle;
+    padding-top:1%;
+    height:27px;
+    width:27px;
+    border:2px solid white;
+    color: white;
+    border-radius: 50%;
+    background-color: #2D353C;
+}
+
+
+//clicked question number
+.qclick{
+    background-color: black;
+    text-align: center;
+    padding-top:5px;
+    padding-bottom: 5px;
+    padding-left:35%;
+}
+
+.qnumberclick{
+     vertical-align: middle;
+    padding-top:1%;
+    height:27px;
+    width:27px;
+    border:2px solid #2D353C;
+    color: white;
+    border-radius: 50%;
+    background-color: #2D353C;
+}
+
+.qnumberseen{
+     vertical-align: middle;
+    padding-top:1%;
+    height:27px;
+    width:27px;
+    border:2px solid white;
+    color: #2D353C;
+    border-radius: 50%;
+    background-color: white;
+    font-weight: bold;
+}
+.qnumberdone{
+     vertical-align: middle;
+    padding-top:1%;
+    height:27px;
+    width:27px;
+    border:2px solid #2BBF61 ;
+    color: white;
+    border-radius: 50%;
+    background-color: #2BBF61;
+}
+
+
+
