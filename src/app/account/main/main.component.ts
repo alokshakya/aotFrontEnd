@@ -1,5 +1,10 @@
 import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
+import { UserinfoService } from '../../services/userinfo.service';
+import { LoginRegisterService } from '../../services/loginRegister.service';
+import { Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx'
+
 
 enum MenuOrientation {
     STATIC,
@@ -18,11 +23,9 @@ export class AccountMainComponent implements AfterViewInit {
     
 
     //student info to be displayed above menubar
-    studentName: string = "Rahul Sharma";
-    class: string = "Ninth";
-    email: string = "abc@gmail.com"; 
-
-
+    studentName: string;
+    class: string;
+    email: string; 
     
     layoutCompact: boolean = false;
 
@@ -58,19 +61,25 @@ export class AccountMainComponent implements AfterViewInit {
 
     resetMenu: boolean;
 
+    userDetails //will be used in child components
+
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
 
-    constructor(public renderer: Renderer, private router: Router) {}
+    constructor(public renderer: Renderer, private router: Router, private http: UserinfoService, private login: LoginRegisterService) {}
 
     ngOnInit() {
-        var token = localStorage.getItem('session_token');
-        if(token==''||token=='null'){
+        var sessionToken = localStorage.getItem('session_token');
+        if(sessionToken==''||sessionToken=='null'){
             this.router.navigate(['login'])
         };
-    }
-    
+
+        var timer = Observable.timer(0,3000)
+        timer.subscribe(t => {
+        })
+        
+        }        
 
     ngAfterViewInit() {
         this.layoutContainer = <HTMLDivElement> this.layourContainerViewChild.nativeElement;
@@ -90,6 +99,17 @@ export class AccountMainComponent implements AfterViewInit {
             this.topbarItemClick = false;
             this.menuClick = false;
         });
+
+        //hitting service to show Name etc.
+        this.http.getUserInfo().subscribe((response: Response)=>{
+                this.userDetails = response
+                this.studentName = this.userDetails.user_info_by_user_info_id.firstname + ' ' + this.userDetails.user_info_by_user_info_id.lastname;
+                this.class = this.userDetails.class_by_class_id.name;
+                this.email = this.userDetails.user_info_by_user_info_id.email; 
+        })
+
+
+
         
         setTimeout(() => {
             jQuery(this.layoutMenuScroller).nanoScroller({flash:true});
