@@ -1,60 +1,44 @@
 
-#cyber,#science,#math,#gk,#english,#reasoning{
+.sub{
+    margin-right:18px;
+    margin-bottom: 15px;
     height:150px;
-    width: 200px;
+    width:200px;
     text-align: center;
     border: solid 1px #cccccc;
-    padding-bottom: 150px;
     border-radius: 10px;
     box-shadow: 10px 10px 5px #888888;
 }
 
-#subjectsummary{
-    padding-left: 16px; 
-}
-
-img {
-    width:30px;
-    height:30px;
-}
-
 #cyber{
     background-color: #4395DA;
-    margin: 12px;
-    margin-left: 2px;
 }
 
 #science{
     background-color: #ECB049;
-    margin: 12px 12px 12px 0;
 }
-
+ 
 #math{
     background-color: #DD4855;
-    margin: 12px 12px 12px 0;
 }
 
 #gk{
     background-color: #F6885B;
-    margin: 12px;
-    margin-left: 2px;
 }
 
 #english{
     background-color:#29B6B3;
-    margin: 12px 12px 12px 0;
 }
 
 #reasoning{
     background-color: #94B92B;
-    margin: 12px 12px 12px 0;
 }
 
 #notice{    
-    height: 366px;
+    /*height: 366px;*/
+    height: 330px;
     overflow: auto;
     overflow-x: hidden;
-    
 }
 
 .alert{
@@ -65,17 +49,11 @@ img {
 
 
 #testimonials{
-    
     height:318px;
     overflow-x: hidden;
     overflow-y: auto;
 }
-
-
-#image{
-    height:200px;
-    width:200px;
-}
+    
 
 .noticebox, .testbox {
     border:solid 1px;
@@ -122,6 +100,7 @@ img {
     font-size: 12px;
 }
 
-.testimonialimage{
-    margin-right: 50%;
+.testimonialimg{
+    height:50px;
+    width:50px;
 }
