@@ -56,7 +56,7 @@
                             <div class="ui-g-9">
                                 <div class="ui-g">
                                     <div class="ui-g-5">
-                                        <span class="ui-g-12" *ngFor="let sub of item.value|keys">{{sub.key}}<br></span>
+                                        <span class="testsubject" *ngFor="let sub of item.value|keys">{{sub.key}}<br><br></span>
                                     </div>
                                     <div class="ui-g-7">
                                         <div class="progress" *ngFor="let data of item.value|keys">
@@ -89,16 +89,16 @@
                             <div class="ui-g-9">
                                 <div class="ui-g">
                                     <div class="ui-g-5">
-                                        <span class="ui-g-12" *ngFor="let sub of item.value|keys">{{sub.key}}<br></span>
+                                        <span class="testsubject" *ngFor="let sub of item.value|keys">{{sub.key}}<br><br></span>
                                     </div>
                                     <div class="ui-g-7">
                                         <div class="progress" *ngFor="let data of item.value|keys">
-                                                <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.completed+'%'}">{{data.value.completed}}
-                                                </div>
-                                                <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.generated+'%'}">{{data.value.generated}}
-                                                </div>
-                                                <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':data.value.notcompleted+'%'}">{{data.value.notcompleted}}
-                                                </div>
+                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.completed+'%'}">{{data.value.completed}}
+                                            </div>
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.generated+'%'}">{{data.value.generated}}
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':data.value.notcompleted+'%'}">{{data.value.notcompleted}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>    
@@ -142,8 +142,7 @@
             </p-panel>
         </div>
     </div>
-
-
+    
 </div>
 
 
