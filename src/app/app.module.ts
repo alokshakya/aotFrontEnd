@@ -70,32 +70,14 @@ import {TooltipModule} from 'primeng/primeng';
 import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
 
+//Default Components
 import {AppComponent}  from './app.component';
 import {AppMenuComponent,AppSubMenu}  from './account/main/main.menu.component';
 import {AppTopBar}  from './account/apptopbar/app.topbar.component';
 import {AppFooter}  from './account/appfooter/app.footer.component';
 import {InlineProfileComponent}  from './account/appProfile/app.profile.component';
-// import {SampleDemo} from './demo/view/sampledemo';
-// import {FormsDemo} from './demo/view/formsdemo';
-// import {DataDemo} from './demo/view/datademo';
-// import {PanelsDemo} from './demo/view/panelsdemo';
-// import {OverlaysDemo} from './demo/view/overlaysdemo';
-// import {MenusDemo} from './demo/view/menusdemo';
-// import {MessagesDemo} from './demo/view/messagesdemo';
-// import {MiscDemo} from './demo/view/miscdemo';
-// import {EmptyDemo} from './demo/view/emptydemo';
-// import {ChartsDemo} from './demo/view/chartsdemo';
-// import {FileDemo} from './demo/view/filedemo';
-// import {UtilsDemo} from './demo/view/utilsdemo';
-// import {Documentation} from './demo/view/documentation';
 
-import { HttpService } from './services/http.service'; //service
-import { BaseHttpService } from './services/base-http.service'; //service
-// import {CarService} from './demo/service/carservice';
-// import {CountryService} from './demo/service/countryservice';
-// import {EventService} from './demo/service/eventservice';
-// import {NodeService} from './demo/service/nodeservice';
-
+//Added Components
 import { AccountMainComponent } from "./account/main/main.component";
 import { DashboardComponent } from './account/dashboard/dashboard.component';
 import { AccountsettingsComponent } from './account/accountsettings/accountsettings.component';
@@ -107,7 +89,10 @@ import { ResultComponent } from './account/ComputerCyber/result/result.component
 import { ProfileComponent } from './account/profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemotest/takedemotest.component';
-//import { Sampletest1Component } from './ComputerCyber/sampletest/sampletest1/sampletest1.component';
+
+import { LoginRegisterService } from './services/loginRegister.service';
+import { UserinfoService } from './services/userinfo.service';
+import { KeysPipe } from './pipes/keys.pipe';//Added
 
 
 @NgModule({
@@ -187,20 +172,6 @@ import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemo
         AppTopBar,
         AppFooter,
         InlineProfileComponent,
-        // SampleDemo,
-        // FormsDemo,
-        // DataDemo,
-        // PanelsDemo,
-        // OverlaysDemo,
-        // MenusDemo,
-        // MessagesDemo,
-        // MessagesDemo,
-        // MiscDemo,
-        // ChartsDemo,
-        // EmptyDemo,
-        // FileDemo,
-        // UtilsDemo,
-        // Documentation,
         AccountMainComponent,
         DashboardComponent,
         AccountsettingsComponent,
@@ -212,12 +183,11 @@ import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemo
         ProfileComponent,
         LoginComponent,
         TakedemotestComponent,
-        //Sampletest1Component,
+        KeysPipe,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        // CarService,CountryService,EventService,NodeService,
-        HttpService,BaseHttpService
+        LoginRegisterService, UserinfoService
     ],
     bootstrap:[AppComponent]
 })
