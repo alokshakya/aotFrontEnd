@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {style, state, animate, transition, trigger} from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers, RequestOptions } from '@angular/http';
-import { BaseHttpService } from '../services/base-http.service';
+import { LoginRegisterService } from '../services/loginRegister.service';
 import * as constants from '../../config/constants';
 import {NgForm} from '@angular/forms';
 import { Message} from 'primeng/primeng';
@@ -14,118 +14,107 @@ import { Message} from 'primeng/primeng';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   animations: [
-      trigger('fadeInOut', [
-          state('*', style({ 'overflow-y': 'hidden' })),
-          state('void', style({ 'overflow-y': 'hidden' })),
-          transition('* => void', [
-          style({ height: '*' }),
-          animate(250, style({ height: 0 }))
-          ]),
-        transition('void => *', [
-        style({ height: '0' }),
-        animate(250, style({ height: '*' }))
-          ]),
-  ])],
+                trigger('fadeInOut', [
+                    state('*', style({ 'overflow-y': 'hidden' })),
+                    state('void', style({ 'overflow-y': 'hidden' })),
+                    transition('* => void', [
+                    style({ height: '*' }),
+                    animate(250, style({ height: 0 }))
+                    ]),
+                  transition('void => *', [
+                  style({ height: '0' }),
+                  animate(250, style({ height: '*' }))
+                    ]),
+                                     ]
+                       )
+              ],
 
 })
 
 export class LoginComponent implements OnInit {
+  
+  loginRegToggle:boolean = false; //login-register toggle
 
   userLoginCreds:any={"email":"", "password":""};
-
   userRegCreds:any={"firstname":"","lastname":"", "email":"","password":""};
-
   mobile:number;
 
   errorMessage: Message[] = [];
-
   successMessage: Message[] = [];
 
+  actualOTP:number = 123456;
+  otp:number;
+  otpDialog:boolean = false;  //otp verify dialogbox
+  errorSection:boolean = false; //invalid otp entered
   otpverified:Message[] = [];
 
-  display:boolean = false; //login-register toggle
-
-  dialog:boolean = false;  //otp verify dialogbox
-
-  errorSection:boolean = false; //invalid otp entered
-
-  otp:number;
-
-  actualOTP:number = 123456;
-
-  otpFlag:boolean=true;
+  otpUnverified:boolean=true;
 
   
-  constructor(private httpService: BaseHttpService, private router: Router) {}
+  constructor(private httpService: LoginRegisterService, private router: Router) {}
 
+  ngOnInit(){
+
+    this.otpUnverified=true; 
+
+    var token = localStorage.getItem('session_token');
+    if (token==''||token==null){
+      this.router.navigate(['login']);
+    } else{
+      this.router.navigate(['account/dashboard']);
+    }
+  }
+  
+  
   hide(){
     this.errorSection=false;
   }
 
   verify(){
     if(this.otp==this.actualOTP){
-      this.dialog=false;
-      this.otpFlag=false;
+      this.otpDialog=false;
+      this.otpUnverified=false;
       this.errorSection=false;
       this.otp=null;
       this.successMessage.push({severity:'success', summary:'Mobile Verified', detail:'You can change your number from User Profile'});
-
     }
     else{
     this.errorSection=true;
-    this.otpFlag=true;
+    this.otpUnverified=true;
     this.otp=null;
     }
   }
 
-   //CALLED WHEN CLICKED ON LOGIN BUTTON
-   sendLoginCreds() {
-      var queryHeaders = new Headers();
-      queryHeaders.append('Content-Type', 'application/json');
-      let options = new RequestOptions({ headers: queryHeaders });
-      this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/session', this.userLoginCreds, options)
-          .subscribe((data) => {
-            localStorage.setItem('session_token', data.json().session_token )
-            this.router.navigate(['account/dashboard']);}, 
-            
-            (error) => {
-                  this.errorMessage = [];
-                  this.errorMessage.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
-                  }
-          );
-    }
+  signIn() {
+    this.httpService.login(this.userLoginCreds)
+    .subscribe((data) => {
+      localStorage.setItem('session_token', data.json().session_token);
+      this.router.navigate(['account/dashboard']);}, 
+      
+      (error) => {
+            this.errorMessage = [];
+            this.errorMessage.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
+            }
+    );
+  }
 
-    //CALLED WHEN CLICKED ON REGISTER BUTTON
-    sendRegCreds(){
-      var queryHeaders = new Headers();
-      queryHeaders.append('Content-Type','application/json');
-      queryHeaders.append("DREAMFACTORY_API_KEY",constants.DREAMFACTORY_API_KEY);
-      let options = new RequestOptions({headers: queryHeaders});
-      this.httpService.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/user/register', this.userRegCreds, options)
-          .subscribe((data) => {
-            this.successMessage=[];
-            this.successMessage.push({severity:'success', summary:'Registration Successful', detail:'Please Login'});
-            this.display = !this.display;},
+  signUp() {
+    this.httpService.register(this.userRegCreds)
+    .subscribe((data) => {
+      this.successMessage=[];
+      this.successMessage.push({severity:'success', summary:'Registration Successful', detail:'Please Login'});
+      this.loginRegToggle = !this.loginRegToggle;},
 
-            (error) => {
-                    this.errorMessage=[];
-                    this.errorMessage.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
-                  }
-          );
-    }
+      (error) => {
+              this.errorMessage=[];
+              this.errorMessage.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
+            }
+    );
+  }
 
-    ngOnInit(){
-
-      this.otpFlag=true;
-
-      var token = localStorage.getItem('session_token');
-      if (token==''||token==null){
-        this.router.navigate(['login'])
-      } else{
-        this.router.navigate(['account/dashboard'])
-      }
-    }
-    
-
+  
 }
+
+   
+
 
