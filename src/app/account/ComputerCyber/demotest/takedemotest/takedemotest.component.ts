@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Rx'
   styleUrls: ['./takedemotest.component.scss']
 })
 export class TakedemotestComponent implements OnInit {
+
+  info=true;
   
   hour=0;
   min=0;

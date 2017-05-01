@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChapterwisetestComponent implements OnInit {
 
+  subscribed=true;  
+
   chapterwiseTestData: any;
 
   chapterNames:Array<string>;

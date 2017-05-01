@@ -1,5 +1,5 @@
 <div class="ui-g">
-  <div class="ui-g-12">
+  <div class="ui-g-12" *ngIf="!subscribed">
     <p-panel header="Subscribe">
       <div style="text-align:center">
         <h1>No Test Available</h1><br>
@@ -33,8 +33,8 @@
 
   <div class="ui-g-6">
     <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
-      <div id="sampletestpanel"><br>
-        <span *ngFor="let number of sampleTestNumbers">{{number}}<button type="text" pButton class="ui-button-warning" label="45/50"></button><br><br></span>
+      <div id="sampletestpanel" class="ui-g">
+        <div *ngFor="let test of testData|keys" class="ui-g-12">{{test.key}}<button type="text" pButton class="ui-button-warning" label="{{test.value}}"></button><br><br></div>
           
       </div>
     </p-panel>

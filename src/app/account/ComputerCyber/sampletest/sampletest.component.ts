@@ -10,14 +10,28 @@ export class SampletestComponent implements OnInit {
 
   examPattern: SelectItem[];
 
-  sampleTestNumbers: Array<string>;
+  testData:any;
 
   sampleTestData:any;
+
+  subscribed=true;
 
 
   constructor() { 
 
-      this.sampleTestNumbers = ["Sample Test 1", "Sample Test 2", "Sample Test 3", "Sample Test 4", "Sample Test 5", "Sample Test 6", "Sample Test 7", "Sample Test 8", "Sample Test 9", "Sample Test 10", ]
+      this.testData = {
+                        "Sample Test 1": "45/50",
+                        "Sample Test 2": "40/50",
+                        "Sample Test 3": "Start",
+                        "Sample Test 4": "30/40",
+                        "Sample Test 5": "45/50",
+                        "Sample Test 6": "40/50",
+                        "Sample Test 7": "Start",
+                        "Sample Test 8": "30/40",
+                        "Sample Test 9": "45/50",
+                        "Sample Test 10": "Start"
+                        }
+
 
 
       this.examPattern = [];

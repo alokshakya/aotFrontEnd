@@ -74,10 +74,6 @@ export class AccountMainComponent implements AfterViewInit {
         if(sessionToken==''||sessionToken=='null'){
             this.router.navigate(['login'])
         };
-
-        var timer = Observable.timer(0,3000)
-        timer.subscribe(t => {
-        })
         
         }        
 

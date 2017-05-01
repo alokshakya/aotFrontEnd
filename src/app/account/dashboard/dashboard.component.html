@@ -8,7 +8,8 @@
                         <i class="icon-cyber icon-4x"></i> 
                         <p>COMPUTER/CYBER</p>
                         <button pButton class="ui-button-success" (click)="redirect()" class="ui-button-success" label="Demo"></button>
-                        <button pButton class="ui-button-warning" label="Subscribe"></button>
+                        <button *ngIf="!computerSubscribed"pButton class="ui-button-warning" label="Subscribe"></button>
+                        <button *ngIf="computerSubscribed"pButton class="ui-button-warning" (click)="startTest()" label="Start Test"></button>
                     </div>
 
                     <div class="ui-g-4 sub" id="science">
@@ -70,7 +71,7 @@
                                     </div>
                                 </div>    
                             </div>
-                            <div class="ui-g-3">
+                            <div class="ui-g-3 ui-fluid">
                                 <br>
                                 <span class="comp">Correct</span><br>
                                 <span class="gen">Review</span><br>
@@ -121,8 +122,8 @@
         <div class="ui-g-12">
             <p-panel header="Notice Board">
             <div id="notice">
-                <div class="noticebox" *ngFor = "let item of noticeBoard">
-                    <h3>{{item.head}}</h3>
+                <div class="noticebox" *ngFor = "let item of noticeBoard|keys">
+                    <h3>{{item.key}}</h3>
                     <p>{{item.value}}</p>
                 </div>
             </div>

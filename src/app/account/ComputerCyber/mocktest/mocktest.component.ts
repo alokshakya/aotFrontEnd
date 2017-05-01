@@ -9,13 +9,15 @@ import { SelectItem } from 'primeng/primeng';
 })
 export class MocktestComponent implements OnInit {
 
-  mockTestTableData:any;
+    subscribed="true";
 
-  mockTestTableHeader:any;
+    mockTestTableData:any;
 
-  mockTestData:any;
+    mockTestTableHeader:any;
 
-  examPattern: SelectItem[];
+    mockTestData:any;
+
+    examPattern: SelectItem[];
 
 
   constructor() {
