@@ -3,22 +3,18 @@
     <p-panel header="Result">
       <p-tabView>
         <p-tabPanel *ngFor="let result of resultData | keys;let i=index" header="{{result.key}}">
-          <div class="ui-g">
-            <div class="ui-g-6"  *ngFor="let test of result.value | keys;let j=index">
-              <div class="ui-g">
-                <div class="ui-g-4" >{{test.key}}</div>
-                <div class="ui-g-6"><p-progressBar value="85" ></p-progressBar></div>
-              </div>
-              <div>
-                <div *ngFor="let field of test.value | keys;let k=index">
-                  <div class="ui-g"> 
-                    <div class="ui-g-1"></div>
-                    <div class="ui-g-3">{{field.key}}</div>
-                    <div class="ui-g-4"><p-progressBar value="{{field.value}}"></p-progressBar></div>
-                    <div class="ui-g-4"></div>  
-                  </div> 
-                </div>
-              </div>
+          <div class="ui-g">  
+            <div class="ui-g-6">
+              <p-accordion>
+                <p-accordionTab *ngFor="let test of result.value | keys" header="{{test.key}}">
+                  <div class="ui-g" *ngFor="let data of test.value | keys">
+                    <div class="ui-g-2"></div>
+                    <div class="ui-g-4">{{data.key}}</div>
+                    <div class="ui-g-4"><p-progressBar value="{{data.value}}"></p-progressBar></div>
+                    <div class="ui-g-2"></div>
+                  </div>
+                </p-accordionTab>
+              </p-accordion>
             </div>
           </div>
         </p-tabPanel>
@@ -26,4 +22,3 @@
     </p-panel>
   </div>
 </div>
-        
