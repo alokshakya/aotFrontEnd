@@ -61,6 +61,8 @@ export class AccountMainComponent implements AfterViewInit {
 
     resetMenu: boolean;
 
+    viewed:boolean=false;
+
     userDetails //will be used in child components
 
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
@@ -73,7 +75,17 @@ export class AccountMainComponent implements AfterViewInit {
         var sessionToken = localStorage.getItem('session_token');
         if(sessionToken==''||sessionToken=='null'){
             this.router.navigate(['login'])
-        };
+        }else if(!this.viewed){
+            
+        //hitting service to show Name etc.
+        this.http.getUserInfo().subscribe((response: Response)=>{
+                this.userDetails = response
+                this.studentName = this.userDetails.user_info_by_user_info_id.firstname + ' ' + this.userDetails.user_info_by_user_info_id.lastname;
+                this.class = this.userDetails.class_by_class_id.name;
+                this.email = this.userDetails.user_info_by_user_info_id.email; 
+                this.viewed=true;
+        })
+        }
         
         }        
 
@@ -96,13 +108,6 @@ export class AccountMainComponent implements AfterViewInit {
             this.menuClick = false;
         });
 
-        //hitting service to show Name etc.
-        this.http.getUserInfo().subscribe((response: Response)=>{
-                this.userDetails = response
-                this.studentName = this.userDetails.user_info_by_user_info_id.firstname + ' ' + this.userDetails.user_info_by_user_info_id.lastname;
-                this.class = this.userDetails.class_by_class_id.name;
-                this.email = this.userDetails.user_info_by_user_info_id.email; 
-        })
 
 
 

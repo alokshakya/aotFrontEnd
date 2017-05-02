@@ -4,47 +4,12 @@
         <div class="ui-g-12">  <!--SUBJECTS PANEL-->
             <p-panel header="Subject Summary">
                 <div class="ui-g">
-                    <div class="ui-g-4 sub" id="cyber" >
-                        <i class="icon-cyber icon-4x"></i> 
-                        <p>COMPUTER/CYBER</p>
+                    <div class="ui-g-4 sub" *ngFor="let sub of subjectSummary|keys" id="{{sub.key | lowercase | cssId}}" >
+                        <i class="{{sub.value.icon}}"></i> 
+                        <p>{{sub.key | uppercase}}</p>
                         <button pButton class="ui-button-success" (click)="redirect()" class="ui-button-success" label="Demo"></button>
-                        <button *ngIf="!computerSubscribed"pButton class="ui-button-warning" label="Subscribe"></button>
-                        <button *ngIf="computerSubscribed"pButton class="ui-button-warning" (click)="startTest()" label="Start Test"></button>
-                    </div>
-
-                    <div class="ui-g-4 sub" id="science">
-                        <i class="icon-science icon-4x"></i>
-                        <p>SCIENCE</p>
-                        <button pButton class="ui-button-success" label="Demo"></button>
-                        <button pButton class="ui-button-danger" label="Subscribe"></button>
-                    </div>
-
-                    <div class="ui-g-4 sub" id="math">
-                        <i class="icon-maths icon-4x"></i>
-                        <p>MATHEMATICS</p>
-                        <button pButton class="ui-button-success" label="Demo"></button>
-                        <button pButton class="ui-button-warning" label="Subscribe"></button>
-                    </div>
-                
-                    <div class="ui-g-4 sub" id="gk">
-                        <i class="icon-gk icon-4x"></i>
-                        <p>GENERAL KNOWLEDGE</p>
-                        <button pButton class="ui-button-success" label="Demo"></button>
-                        <button pButton class="ui-button-warning" label="Subscribe"></button>
-                    </div>
-
-                    <div class="ui-g-4 sub" id="english">
-                        <i class="icon-english icon-4x"></i>
-                        <p> ENGLISH</p>
-                        <button pButton class="ui-button-success" label="Demo"></button>
-                        <button pButton class="ui-button-danger" label="Subscribe"></button>
-                    </div>
-
-                    <div class="ui-g-4 sub" id="reasoning">
-                        <i class="icon-reasoning icon-4x"></i>
-                        <p>REASONING</p>
-                        <button pButton class="ui-button-success" type="text" label="Demo"></button>
-                        <button pButton class="ui-button-warning" type="text" label="Subscribe"></button>
+                        <button *ngIf="!computerSubscribed"pButton class="ui-button-warning" [ngClass] ="{'ui-button-danger':sub.key=='Science'||sub.key=='English'}" label="Subscribe"></button>
+                        <button *ngIf="computerSubscribed"pButton class="ui-button-warning" (click)="startTest()" label="Start Test"></button><br>
                     </div>
                 </div>
             </p-panel>
@@ -52,7 +17,7 @@
         <div class="ui-g-12">  <!--TEST SUMMARY PANEL-->
             <p-panel header="Test Summary">
                 <p-tabView id="tab head">
-                    <p-tabPanel *ngFor="let item of resultSummary|keys" header="{{item.key}}">
+                    <p-tabPanel *ngFor="let item of testSummary|keys" header="{{item.key}}">
                         <div class="ui-g">
                             <div class="ui-g-9">
                                 <div class="ui-g">
@@ -61,11 +26,11 @@
                                     </div>
                                     <div class="ui-g-7">
                                         <div class="progress" *ngFor="let data of item.value|keys">
-                                                <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.completed+'%'}"> {{data.value.completed}}
+                                                <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.completed+'%'}"> {{data.value.completed}}%
                                                 </div>
-                                                <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.generated+'%'}">{{data.value.generated}}
+                                                <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.generated+'%'}">{{data.value.generated}}%
                                                 </div>
-                                                <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':data.value.notcompleted+'%'}">{{data.value.notcompleted}}
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':data.value.notcompleted+'%'}">{{data.value.notcompleted}}%
                                                 </div>
                                         </div>
                                     </div>
@@ -73,9 +38,9 @@
                             </div>
                             <div class="ui-g-3 ui-fluid">
                                 <br>
-                                <span class="comp">Correct</span><br>
-                                <span class="gen">Review</span><br>
-                                <span class="wrong">Wrong</span><br>
+                                <span class="comp">Completed</span><br>
+                                <span class="gen">Generated</span><br>
+                                <span class="notcomp">Not Completed</span><br>
                             </div>
                         </div>
                     </p-tabPanel>
@@ -94,11 +59,11 @@
                                     </div>
                                     <div class="ui-g-7">
                                         <div class="progress" *ngFor="let data of item.value|keys">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.completed+'%'}">{{data.value.completed}}
+                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.right+'%'}">{{data.value.right}}%
                                             </div>
-                                            <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.generated+'%'}">{{data.value.generated}}
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.review+'%'}">{{data.value.review}}%
                                             </div>
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':data.value.notcompleted+'%'}">{{data.value.notcompleted}}
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':data.value.wrong+'%'}">{{data.value.wrong}}%
                                             </div>
                                         </div>
                                     </div>
@@ -132,11 +97,11 @@
         <div class="ui-g-12">
             <p-panel header="Testimonials">
                 <div id="testimonials">
-                    <div class="testbox" *ngFor = "let item of testimonials">
+                    <div class="testbox" *ngFor = "let item of testimonials|keys">
                         <div class="ui-g">
-                            <div class="ui-g-7"><img class="testimonialimg" src={{item.imgsrc}}></div>
-                            <div class="ui-g-5">{{item.time}}</div>
-                            <div class="ui-g-12">{{item.data}}</div>
+                            <div class="ui-g-7"><img class="testimonialimg" src={{item.value.imgsrc}}></div>
+                            <div class="ui-g-5">{{item.value.time}}</div>
+                            <div class="ui-g-12">{{item.value.data}}</div>
                         </div>
                     </div>
                 </div>

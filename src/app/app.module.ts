@@ -92,7 +92,8 @@ import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemo
 
 import { LoginRegisterService } from './services/loginRegister.service';
 import { UserinfoService } from './services/userinfo.service';
-import { KeysPipe } from './pipes/keys.pipe';//Added
+import { KeysPipe } from './pipes/keys.pipe';
+import { CssIdPipe } from './pipes/css-id.pipe';//Added
 
 
 @NgModule({
@@ -184,6 +185,7 @@ import { KeysPipe } from './pipes/keys.pipe';//Added
         LoginComponent,
         TakedemotestComponent,
         KeysPipe,
+        CssIdPipe,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
