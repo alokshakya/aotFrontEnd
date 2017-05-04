@@ -6,11 +6,10 @@ import 'rxjs/Rx';
 @Injectable()
 export class LoginRegisterService {
 
-  sessionToken:string = localStorage.getItem('session_token')
-
   constructor(private http: Http) { }
 
   login(loginCreds){
+    localStorage.setItem('session_token','');
     var queryHeaders = new Headers();
     queryHeaders.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: queryHeaders });
@@ -19,6 +18,7 @@ export class LoginRegisterService {
   }
 
   register(registerCreds){
+    localStorage.setItem('session_token','');
     var queryHeaders = new Headers();
       queryHeaders.append('Content-Type','application/json');
       queryHeaders.append("DREAMFACTORY_API_KEY",constants.DREAMFACTORY_API_KEY);

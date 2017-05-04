@@ -28,17 +28,15 @@ export class DemotestComponent implements OnInit {
     this.chapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5" , "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10"]
 
     this.demoTestData = {
-            labels: ['Completed','Remaining'],
+            labels: ['Remaining'],
             datasets: [
                 {
-                    data: [40, 20],
+                    data: [1],
                     backgroundColor: [
-                        "#5CB85C",
                         "#D9534F"
                     ],
                     hoverBackgroundColor: [
-                        "#5CB85C",
-                        "#D9534F"
+                        "#D9534F",
                     ]
                 }]    
   };

@@ -26,12 +26,12 @@
                                     </div>
                                     <div class="ui-g-7">
                                         <div class="progress" *ngFor="let data of item.value|keys">
-                                                <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.completed+'%'}"> {{data.value.completed}}%
-                                                </div>
-                                                <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.generated+'%'}">{{data.value.generated}}%
-                                                </div>
-                                                <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':data.value.notcompleted+'%'}">{{data.value.notcompleted}}%
-                                                </div>
+                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.completed+'%'}"> {{data.value.completed}}%
+                                            </div>
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.generated+'%'}">{{data.value.generated}}%
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':data.value.notcompleted+'%'}">{{data.value.notcompleted}}%
+                                            </div>
                                         </div>
                                     </div>
                                 </div>    

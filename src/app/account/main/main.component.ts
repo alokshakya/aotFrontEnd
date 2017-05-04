@@ -73,7 +73,7 @@ export class AccountMainComponent implements AfterViewInit {
 
     ngOnInit() {
         var sessionToken = localStorage.getItem('session_token');
-        if(sessionToken==''||sessionToken=='null'){
+        if(sessionToken==''||sessionToken==null){
             this.router.navigate(['login'])
         }else if(!this.viewed){
             
@@ -210,6 +210,7 @@ export class AccountMainComponent implements AfterViewInit {
     }
 
     ngOnDestroy() {
+        localStorage.setItem('session_token',null);
         if(this.documentClickListener) {
             this.documentClickListener();
         }

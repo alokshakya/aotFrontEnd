@@ -50,18 +50,17 @@ export class LoginComponent implements OnInit {
 
   otpUnverified:boolean=true;
 
+  token:string
+
   
   constructor(private httpService: LoginRegisterService, private router: Router) {}
 
   ngOnInit(){
-
-    this.otpUnverified=true; 
-
-    var token = localStorage.getItem('session_token');
-    if (token==''||token==null){
+    this.otpUnverified=true;
+    var token = localStorage.getItem('session_token') 
+    if(token=='' || token==null){
       this.router.navigate(['login']);
-    } 
-    
+    }else console.log(token)//this.router.navigate(['account/dashboard'])
   }
   
   
@@ -87,6 +86,7 @@ export class LoginComponent implements OnInit {
   signIn() {
     this.httpService.login(this.userLoginCreds)
     .subscribe((data) => {
+      this.token = data.json().session_token;
       localStorage.setItem('session_token', data.json().session_token);
       this.router.navigate(['account/dashboard']);}, 
       

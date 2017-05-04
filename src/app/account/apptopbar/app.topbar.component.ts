@@ -11,7 +11,8 @@ export class AppTopBar {
     constructor(@Inject(forwardRef(() => AccountMainComponent)) public app:AccountMainComponent, private _router:Router) {}
 
     logout(){
-        localStorage.setItem('session_token',null);
+        localStorage.setItem('session_token','');
         this._router.navigate(['/login']);
+
     };
 }

@@ -337,10 +337,7 @@ export class DashboardComponent implements OnInit{
      }
 
     ngOnInit(){
-        var token=localStorage.getItem("session_token");
-        if (token==''||token==null){
-            this.router.navigate(['login'])
-        }
+       
     }
 }
     
