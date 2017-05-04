@@ -4,17 +4,50 @@
       <p-tabView>
         <p-tabPanel *ngFor="let result of resultData | keys;let i=index" header="{{result.key}}">
           <div class="ui-g">  
-            <div class="ui-g-6">
+            <div class="ui-g-4">
               <p-accordion>
                 <p-accordionTab *ngFor="let test of result.value | keys" header="{{test.key}}">
                   <div class="ui-g" *ngFor="let data of test.value | keys">
-                    <div class="ui-g-2"></div>
-                    <div class="ui-g-4">{{data.key}}</div>
-                    <div class="ui-g-4"><p-progressBar value="{{data.value}}"></p-progressBar></div>
-                    <div class="ui-g-2"></div>
+                    <div class="ui-g-6">{{data.key}}</div>
+                    <div class="ui-g-6"><p-progressBar value="{{data.value}}" (click)="showSubPanel(result.key,test.key,data.key)"></p-progressBar></div>
                   </div>
                 </p-accordionTab>
               </p-accordion>
+            </div>
+            <div class="ui-g-8" *ngIf="chapterwiseTestView">   <!-- For Chapterwise Test Only -->
+              <p-panel [header]="panelHead">
+                <div class="ui-g">
+                  <div class="ui-g-1"></div>
+                  <div class="ui-g-2" *ngFor="let details of chapterwiseTestResultData|keys">
+                    <button type="button" pButton  label="{{details.key}}" (click)="showWindow(details.key)"></button>
+                  </div>
+                  <div class="ui-g-1"></div>
+                </div><hr>
+                <div *ngIf="windowToggle">
+                  <div class="ui-g">
+                    <div class="ui-g-6 chart"><p-chart #piechart type="pie" [data]="chapterwiseTestChart" refresh></p-chart><h3>{{testName}}</h3></div>
+                    <div class="ui-g-6">
+                      <div class="ui-g"  *ngFor="let testdata of resultWindow|keys">
+                        <div class="ui-g-6 window">{{testdata.key}}</div>
+                        <div class="ui-g-6 data">{{testdata.value}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-panel>
+            </div>
+            <div class="ui-g-8" *ngIf="otherTestView">  <!-- For remaining tests -->
+              <p-panel [header]="panelHead">
+                <div class="ui-g">
+                  <div class="ui-g-6 chart"><p-chart #chart type="pie" [data]="otherTestChart" refresh></p-chart><h3>{{testName}}</h3></div>
+                  <div class="ui-g-6">
+                    <div class="ui-g" *ngFor="let sample of otherTestResultData|keys">
+                      <div class="ui-g-6 window">{{sample.key}}</div>
+                      <div class="ui-g-6 data">{{sample.value}}</div>
+                    </div>
+                  </div>
+                </div>
+              </p-panel>
             </div>
           </div>
         </p-tabPanel>
@@ -22,3 +55,4 @@
     </p-panel>
   </div>
 </div>
+                  
