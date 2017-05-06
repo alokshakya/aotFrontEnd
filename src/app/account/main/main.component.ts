@@ -76,18 +76,23 @@ export class AccountMainComponent implements AfterViewInit {
         if(sessionToken==''||sessionToken==null){
             this.router.navigate(['login'])
         }else if(!this.viewed){
-            
-        //hitting service to show Name etc.
-        this.http.getUserInfo().subscribe((response: Response)=>{
-                this.userDetails = response
-                this.studentName = this.userDetails.user_info_by_user_info_id.firstname + ' ' + this.userDetails.user_info_by_user_info_id.lastname;
-                this.class = this.userDetails.class_by_class_id.name;
-                this.email = this.userDetails.user_info_by_user_info_id.email; 
-                this.viewed=true;
-        })
+            this.http.getUserInfo().subscribe((response: Response)=>{
+                    this.userDetails = response
+                    this.studentName = this.userDetails.user_info_by_user_info_id.firstname + ' ' + this.userDetails.user_info_by_user_info_id.lastname;
+                    this.class = this.userDetails.class_by_class_id.name;
+                    this.email = this.userDetails.user_info_by_user_info_id.email; 
+                    this.viewed=true;
+            },
+            (error)=>{
+                this.router.navigate(['login']);
+                localStorage.setItem('session_token','');
+            }
+            )
         }
+    }      
+
         
-        }        
+        
 
     ngAfterViewInit() {
         this.layoutContainer = <HTMLDivElement> this.layourContainerViewChild.nativeElement;

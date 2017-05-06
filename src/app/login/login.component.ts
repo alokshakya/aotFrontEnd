@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     var token = localStorage.getItem('session_token') 
     if(token=='' || token==null){
       this.router.navigate(['login']);
-    }else console.log(token)//this.router.navigate(['account/dashboard'])
+    }
   }
   
   

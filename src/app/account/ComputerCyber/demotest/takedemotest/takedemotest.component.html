@@ -1,61 +1,51 @@
+<!--[ngStyle]="{'background-color':  clickListener==n+1 ? 'cyan' : '#2D353C'}"-->
 <div class="ui-g">
-  <div class="ui-g-12" id="header" style="margin-left:7px;">
+  <p-dialog header="Instructions" [(visible)]="instructions" modal="true" responsive="true" closable="false" (onHide)="startTest()">
+    <div class="ui-g-12">Important Instructions</div>
+    <div class="ui-g-12">1</div>
+    <div class="ui-g-12">2</div>
+    <div class="ui-g-12">3</div>
+    <div class="ui-g-5"><button type="button" pButton label="Start" [disabled]="start" (click)="startTest()"></button></div>
+  </p-dialog>
+
+  <div class="ui-g-12" id="header">
     <div class="ui-g">
-      <div class="ui-g-2">
-        <img src="../../../../assets/layout/images/Olympiadbox-logo.png" height="70px" width="70px">
-      </div>
-      <div class="ui-g-2">
-        <h5>Demo test</h5>
-      </div>
-      <div class="ui-g-2">
-        <div class="ui-g">
-          <div class="ui-g-2"><i class="fa fa-clock-o fa-lg" aria-hidden="true"></i></div>
-          <div class="ui-g-10">{{hour}}h {{min}}m {{sec}}s<br></div>
-        </div>
-      </div>
-      <div class="ui-g-3">
-        <div class="ui-g">
-          <div class="ui-g-4">
-              <p-progressBar [value]="ProgressbarValue"></p-progressBar>
-          </div>
-          <div class="ui-g-6">
-              {{answered}}/{{totalQuestions}} Completed
-          </div>
-        </div>
-      </div>
-      <div class="ui-g-3">
-        <h5><i class="fa fa-user"></i> Gaurav Pant</h5>
-      </div>
+      <div class="ui-g-1"><i class="fa fa-home fa-2x" aria-hidden="true"></i></div>
+      <div class="ui-g-1">{{test}}</div>
+      <div class="ui-g-2">{{subject}}</div>
+      <div class="ui-g-2"><button type="button" pButton class="ui-button-warning" label="  "><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s </button></div>
+      <div class="ui-g-2"><p-progressBar [value]="counter"></p-progressBar></div>
+      <div class="ui-g-2">{{counter/10}}/{{totalQuestions}} Attempted</div>
+      <div class="ui-g-2"><i class="fa fa-user"></i> Student1 Stud1</div>
     </div>
   </div>
-  <div id="navpanel" class="ui-g-12">
-    <div  class="ui-g">
-      <div class="ui-g-1" id="navbar">
-        <div> <!--repeat-->
-          <div class="help"><i class="fa fa-bars fa-2x"></i></div>
-          <div class="help"><i class="fa fa-question-circle fa-2x"></i></div>
-          <div *ngFor="let id of questions" (click)="select(id.id)" [ngClass]="{'q':!id.click, 'qclick':id.click}"><div [ngClass]="{'qnumber':!id.click, 'qnumberclick':id.click, 'qnumberseen':id.seen, 'qnumberdone':id.answered}">{{id.id}}</div></div>        
-        </div>
+  <div class="ui-g-3" id="sidebar">
+      <div class="ui-g">
+        <div class="ui-g-3" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
       </div>
-      <div class="ui-g-11">
-        <div class="ui-g" *ngFor="let item of questions;let i = index">
-          <div class="ui-g-12" *ngIf="item.click">
-            <div class="question"><h3>{{item.question}}</h3></div><hr>
-            <p>Pick one of the choices</p>
-            <span *ngFor="let opt of item.options"><p-radioButton name="ques{{i+1}}" value="{{opt}}" [(ngModel)]="answers[i]" label={{opt}} ></p-radioButton><br><br></span>
-            
-            <div class="ui-g-12">
-              <br>
-              <button class="ui-button-success" pButton type="button" [disabled]="answers[i]==null||answers[i]==''" (click)="save(i)"label="Save and Next"></button>
-              <button class="ui-button-info" pButton type="button" [disabled]="answers[i]==null||answers[i]==''" (click)="clear(i)" label="Clear response"></button>
-            </div>
+  </div>
+  <div class="ui-g-8">
+    <div class="ui-g" *ngIf="questionWindow">
+      <div class="ui-g-8">{{questionNumber}}{{selectedQuestion?.Question}}</div>
+      <div class="ui-g-4"><button type="button" [disabled]="validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button></div>
+      <div class="ui-g-12">
+        <div class="ui-g">
+          <div class="ui-g-4">(A).<p-radioButton name="ques" value="A" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.A}}</div>
+          <div class="ui-g-4">(B).<p-radioButton name="ques" value="B" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.B}}</div>
+          <div class="ui-g-4"></div>
+          <div class="ui-g-4">(C).<p-radioButton name="ques" value="C" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.C}}</div>
+          <div class="ui-g-4">(D).<p-radioButton name="ques" value="D" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.D}}</div>
+          <div class="ui-g-4"></div><br>
+          <div class="ui-g-3"><button type="button" pButton label="Validate" [disabled]="answer==null||validated()" (click)="validate()"></button></div>
+          <div class="ui-g-1"><button type="button" pButton label="Next" class="ui-button-success" (click)="next()"></button></div>
+          <div class="ui-g-12" *ngIf="hintDisplay"><hr>
+            <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br></span>
+            <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br></span>
+            <span class="correct" *ngIf="!correct">Correct Answer: {{selectedQuestion?.CorrectAnswer}}</span><br>
+            Explaination:<br><span>{{selectedQuestion?.Explaination}}<br></span><br>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<p-dialog header="Instructions" [(visible)]="info">
-  Important Instructions
-</p-dialog>

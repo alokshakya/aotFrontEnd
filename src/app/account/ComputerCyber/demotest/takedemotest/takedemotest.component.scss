@@ -1,168 +1,60 @@
-#header , #navbar{
-    margin: 0px 0px 0px 0px  ;
-    padding: 0px 0px 0px 0px  ;
+#header, #sidebar{
     background-color: #2D353C;
+    margin-left:8px;
     color: white;
+    margin-right:0px;
 }
 
-
-.quesunclick{
-    vertical-align: middle;
-    padding-left: 35%;
-    padding-top: 5px;
-    padding-bottom: 5px;
+#header{
+    height: 60px;
 }
-.circle {
-    border: 2px solid white;
-    text-align: center;
-    padding-top: 8%;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    font-size: 12px;
-    color: white;
-    background: #2D353C
-}
-
-.quesunclick:hover{
-    background-color: grey;
-    cursor:pointer;
-}
-
-//when clicked on question number on sidebar
-.quesclick{
-    background-color: white;
-    vertical-align: middle;
-    padding-left: 35%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-.circleclick{ 
-    border: 2px solid #2D353C;
-    text-align: center;
-    padding-top: 8%;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    font-size: 12px;
-    color: White;
-    background: #2D353C;
-}
-
-.quesclick:hover{
-    cursor: pointer;
-    background-color: darkgrey;
-}
-
-//attempted
-.quesattempted
-    {
-    background-color: white;
-    vertical-align: middle;
-    padding-left: 35%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-.circleattempt{
-    background-color: #2BBF61;
-    border: 2px solid ;
-    text-align: center;
-    padding-top: 8%;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    font-size: 12px;
-    color: white;
-    background: #2D353C;
-}
-
-
-
-.help{
-    text-align: center;
-    padding:10% 0 10% 0;
-}
-
-.clear{
-    color: #1D8ECD;
-    cursor: pointer;
-}
-
-#questionwindow{
-    background-color: white;
-}
-
-#navpanel {
-    margin:0px;
-    padding:0px 0px 0px 7px;
-}
-
-//unclicked question number
-.q{
-    text-align: center;
-    padding-top:5px;
-    padding-bottom: 5px;
-    padding-left:35%;
-}
-
-.q:hover, .qclick:hover{
-    background-color: lightgrey;
-    cursor:pointer;
-}
-
 .qnumber{
-    vertical-align: middle;
-    padding-top:1%;
-    height:27px;
-    width:27px;
-    border:2px solid white;
     color: white;
-    border-radius: 50%;
-    background-color: #2D353C;
-}
-
-
-//clicked question number
-.qclick{
-    background-color: black;
     text-align: center;
-    padding-top:5px;
-    padding-bottom: 5px;
-    padding-left:35%;
+    border: 2px solid;
+    border-radius: 50%;
+    height: 40px;
+    width:40px;   
+    padding-top:15%;
 }
+
+.qnumber:hover{
+    background-color: lightgray;
+    cursor: pointer;     
+}
+
+
 
 .qnumberclick{
-     vertical-align: middle;
-    padding-top:1%;
-    height:27px;
-    width:27px;
-    border:2px solid #2D353C;
-    color: white;
-    border-radius: 50%;
-    background-color: #2D353C;
-}
-
-.qnumberseen{
-     vertical-align: middle;
-    padding-top:1%;
-    height:27px;
-    width:27px;
-    border:2px solid white;
-    color: #2D353C;
-    border-radius: 50%;
     background-color: white;
-    font-weight: bold;
-}
-.qnumberdone{
-     vertical-align: middle;
-    padding-top:1%;
-    height:27px;
-    width:27px;
-    border:2px solid #2BBF61 ;
-    color: white;
+    color: #2D353C;
+    text-align: center;
+    border: 2px solid white; 
     border-radius: 50%;
-    background-color: #2BBF61;
+    height: 40px;
+    width:40px;   
+    padding-top:15%;
 }
 
+.qnumbermark{
+    background-color: #EEA236;
+    border:2px solid #EEA236;
+}
 
+.qnumbercorrect{
+    background-color: #2BBF61;
+    border:2px solid #2BBF61;
+}
 
+.qnumberwrong{
+    background-color: #DC4E42;
+    border:2px solid #DC4E42;
+}
+
+.correct{
+    color:#2BBF61;
+}
+
+.incorrect{
+    color:#DC4E42;
+}

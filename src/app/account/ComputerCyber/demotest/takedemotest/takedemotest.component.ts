@@ -7,128 +7,245 @@ import { Observable } from 'rxjs/Rx'
   styleUrls: ['./takedemotest.component.scss']
 })
 export class TakedemotestComponent implements OnInit {
+    //header  
+    test:string;
+    subject:string; 
+    timer:number;
+    sec:number;
+    min:number;
+    hour:number;
+    
+    instructions:boolean;
+    start:boolean;
 
-  info=true;
-  
-  hour=0;
-  min=0;
-  sec=0;
+    counter:number;
+    
+    clickListener:string;
+    
+    questionNumber:string;
+    
+    questionWindow:boolean;
+    
+    questionsPool:any;
 
-  answers=[];
-  answered:number=0;
-  
-  ProgressbarValue:number=0;
-  instructions:boolean;
-
-
-
-
-
-  questions = [
-                {"id":"1","question":"What is the capital of India?","options":["Delhi","Goa","Gujarat","Haryana"],
-                "click":true,"seen":true, "answered":false, "mark":false},
-
-                {"id":"2","question":"Who invented Alternating Current?","options":["Tesla","Einstein","Franceworth","Edison"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"3","question":"What is X?","options":["12","3","12s","d"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"4","question":"What is Cl? ","options":["Chlorine","Chloride","Chloro","Chlorene"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"5","question":"Sun is _ ","options":["Star","Planet","X","Satellite"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"6","question":"What is AQW","options":["AQ","BX","CC","CD"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"7","question":"What is AXCS","options":["AQ","VB","CS","AD"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"8","question":"What is KOC","options":["AQ","B","C","D"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"9","question":"What is IKO","options":["AQ","B","C","D"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"10","question":"What is POLS","options":["AQ","B","C","D"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"11","question":"What is LSD","options":["AQ","B","C","D"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"12","question":"What is TAYS","options":["AQ","B","C","D"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"13","question":"What is SLLA","options":["AQ","B","C","D"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"14","question":"What is SSAA","options":["AQ","B","C","D"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-                
-                {"id":"15","question":"What is CCC","options":["AQ","B","C","D"],
-                "click":false,"seen":false, "answered":false, "mark":false},
-              ];
-
-
-
-  
-  constructor() {}
-
-
-  totalQuestions = this.questions.length;
-
-  select(number){
-      for(let i=0;i<this.questions.length;i++)  //hide every questions
-          {         
-            this.questions[i]['click']=false;        
-          }
-      this.questions[number-1]['click'] = true; //display clicked question
-      this.questions[number-1]['seen'] = true;  
-  }
-
-  clear(qnumber){
-    if(this.questions[qnumber]["answered"]){
-      this.answered-=1;
-      this.answers[qnumber]=null;
-      this.questions[qnumber]["answered"]=false;
-    }
-    else {this.answers[qnumber]=null} ;
-    this.ProgressbarValue = Math.floor(this.answered*100/15)
-
-  }
-
-  save(qnumber){
-    if(qnumber==14){
-      this.answered+=1;
-      this.questions[qnumber]['answered'] = true;
-      this.questions[qnumber]['mark'] = false;
-    }
-    else {
-          this.questions[qnumber]['answered'] = true;
-          this.questions[qnumber]['mark'] = false;
-          this.questions[qnumber]['click'] = false;
-          this.questions[qnumber+1]['click'] = true;
-          this.answered +=1;
-         }
-    this.ProgressbarValue = Math.floor(this.answered*100/15)
-  }
-
+    selectedQuestion:any;
+    
+    answer:Array<string>;
+    
+    response:any;
+    
+    questionStatus:any;
         
-  ngOnInit() {
-    let timer = Observable.timer(0,1000);
-    timer.subscribe(t=>{
-            this.sec+=1
-            if(this.sec==60){this.sec=0;this.min+=1;}
-            if(this.min==60){this.min=0;this.hour+=1;}
-            if(this.hour==24){this.hour=0;}
-          });
-  
+    hintDisplay:any;
+    
+    totalQuestions:number;
+    
+    correct:boolean;
+
+  constructor(){
+      this.questionsPool = {
+                          "Question1": {
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8 m/s",
+                            "image": "asd"
+                          },
+                          "Question2": {
+                            "Question": "Question 2 statement",
+                            "Options": {
+                                "A": "Option A",
+                                "B": "Option B",
+                                "C": "Option C",
+                                "D": "Option D"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Explaination of answer",
+                            "image": "asd"
+                          },
+                          "Question3": {
+                          
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8 m/s",
+                            "image": "asd"
+                          
+                          },
+                          "Question4": {
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8 m/s",
+                            "image": "asd"
+                          },
+                          "Question5": {
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8 m/s",
+                            "image": "asd"
+                          },
+                          "Question6": {
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8 m/s",
+                            "image": "asd"
+                          },
+                          "Question7": {
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8 m/s",
+                            "image": "asd"
+                          },
+                          "Question8": {
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8",
+                            "image": "asd"
+                          },
+                          "Question9": {
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8",
+                            "image": "asd"
+                          },
+                          "Question10": {
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8",
+                            "image": "asd"
+                          },
+      }
+
+      this.totalQuestions = Object.keys(this.questionsPool).length;
     }
+  
+  ngOnInit(){
+      this.counter = 0;
+      this.clickListener = '';
+      this.test = "Demo Test"
+      this.subject = "Computer/Cyber" 
+      this.start = false;
+      this.sec = 0;
+      this.min = 0;
+      this.hour = 0;
+      this.instructions = true;
+      this.hintDisplay = false;
+      this.response = {};
+      this.questionStatus = {};
+    }
+     
+
+  displayQuestion(questionDisplayed,questionNumber){  //questionDisplayed: KEY 
+      this.answer = null;
+      console.log([questionDisplayed,questionNumber])
+      this.selectedQuestion = this.questionsPool[questionDisplayed];
+      this.questionNumber = "Q" + questionNumber + ". ";
+      this.questionWindow = true;
+      this.hintDisplay = false;
+      this.clickListener = questionNumber;
+    }
+
+  validate(){
+      this.response[this.questionNumber]=this.answer[0];
+      this.hintDisplay=true;
+      this.counter+= Math.ceil(100/10);
+      if(this.answer[0]==this.selectedQuestion["CorrectAnswer"]){
+          this.correct=true;
+          this.questionStatus[this.clickListener] = "Correct";
+        }
+        else{
+            this.correct = false;
+            this.questionStatus[this.clickListener] = "Wrong";
+        }
+    }
+    
+  next(){
+      var b = this.clickListener;
+      var a = 'Question'+(b+1);
+      this.displayQuestion(a,b+1);
+    }
+
+  mark(){
+    var q = this.clickListener;
+    this.questionStatus[q]='Marked';
+  }
+
+  startTest(){
+      if(this.start==false){
+          let timer = Observable.timer(0,1000); //initiate timer
+          this.instructions=false;
+          timer.subscribe(t=>{
+              this.sec+=1;
+              if(this.sec==60){this.sec=0;this.min+=1;}
+              if(this.min==60){this.min=0;this.hour+=1;}
+              if(this.hour==24){this.hour=0;}
+            });
+            this.displayQuestion('Question1',1);
+        }
+    }  
+
+  validated(){
+      if(this.questionStatus[this.clickListener]=="Correct"||this.questionStatus[this.clickListener]=="Wrong"){
+          return true
+      }
+  }
+
 
 }
 
+  
             
     
 
