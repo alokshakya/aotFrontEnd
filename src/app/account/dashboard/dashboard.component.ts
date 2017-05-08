@@ -1,6 +1,9 @@
 import {Component,OnInit} from '@angular/core';
 import {SelectItem} from 'primeng/primeng';
 import { Router } from '@angular/router';
+import { Response } from '@angular/http';
+
+import { NotificationService } from '../../services/notification.service';
 
 
 @Component({
@@ -23,7 +26,7 @@ export class DashboardComponent implements OnInit{
     testimonials:any;
 
 
-    constructor(private router: Router, ) {
+    constructor(private router: Router, private notification: NotificationService) {
 
         this.subjectSummary = {
                                 "Computer/Cyber":{"icon":"icon-cyber icon-4x"},
@@ -32,31 +35,6 @@ export class DashboardComponent implements OnInit{
                                 "General Knowledge":{"icon":"icon-gk icon-4x"},
                                 "English":{"icon":"icon-english icon-4x"},
                                 "Reasoning":{"icon":"icon-reasoning icon-4x"}
-        }
-
-
-        this.noticeBoard = {
-                                "Notice 1":"text of the printing and typesetting industry. Lorem Ipsum has been the industry's",
-                                "Notice 2":"five centuries, but also the leap into electronic typesetting , remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently ",
-                                "Notice 3":"centuries later, It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently "
-        }
-
-        this.testimonials = {
-                                "testimonial 1": {
-                                    "imgsrc": "assets/layout/images/testimonialAvatar.jpg",
-                                    "time": "03-03-2017",
-                                    "data": "lorem ipsum is a dummy text"
-                                },
-                                "testimonial 2": {
-                                    "imgsrc": "assets/layout/images/testimonialAvatar.jpg",
-                                    "time": "15-03-2017",
-                                    "data": "lorem ipsum is a dummy textlorem ipsum is a dummy textlorem ipsum is a dummy text"
-                                },
-                                "testimonial 3": {
-                                    "imgsrc": "assets/layout/images/testimonialAvatar.jpg",
-                                    "time": "25-05-2017",
-                                    "data": ".lorem ipsum is a dummy text.lorem ipsum is a dummy text.lorem ipsum is a dummy text.lorem ipsum is a dummy text."
-                                }
         }
 
         this.testSummary= {
@@ -189,8 +167,7 @@ export class DashboardComponent implements OnInit{
                                     }
                                     }
         }
-
-        
+         
         this.resultSummary = {
                                 "Computer/Cyber": {
                                     "Chapterwise Test": {
@@ -337,6 +314,20 @@ export class DashboardComponent implements OnInit{
      }
 
     ngOnInit(){
+        //retreive notice data
+        this.noticeBoard = [];
+        this.notification.getNotices().subscribe((data: Response)=>{
+            for(let i in data['resource']){
+                this.noticeBoard.push(data['resource'][i]);
+            }
+        });
+        //retreive testimonials
+        this.testimonials = [];
+        this.notification.getTestimonials().subscribe((data: Response)=>{
+            for(let i in data['resource']){
+                this.testimonials.push(data['resource'][i]);
+            }
+        })
        
     }
 }

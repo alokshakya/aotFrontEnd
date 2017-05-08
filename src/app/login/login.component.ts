@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {style, state, animate, transition, trigger} from '@angular/core';
 import { Router } from '@angular/router';
-import { Headers, RequestOptions } from '@angular/http';
 import { LoginRegisterService } from '../services/loginRegister.service';
 import * as constants from '../../config/constants';
-import {NgForm} from '@angular/forms';
 import { Message} from 'primeng/primeng';
+import { ComponentInteractionService } from '../services/component-interaction.service';
 
 
 
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit {
   token:string
 
   
-  constructor(private httpService: LoginRegisterService, private router: Router) {}
+  constructor(private httpService: LoginRegisterService, private router: Router, public transfer: ComponentInteractionService) {}
 
   ngOnInit(){
     this.otpUnverified=true;
@@ -84,6 +83,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() {
+    localStorage.setItem('session_token','');
     this.httpService.login(this.userLoginCreds)
     .subscribe((data) => {
       this.token = data.json().session_token;
@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
             this.errorMessage.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
             }
     );
+    this.transfer.saveUserInfo(this.userLoginCreds.email, this.userRegCreds.firstname, this.userRegCreds.lastname, this.userRegCreds.mobile)
   }
 
   signUp() {
@@ -109,6 +110,7 @@ export class LoginComponent implements OnInit {
               this.errorMessage.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
             }
     );
+    this.transfer.saveUserInfo(this.userLoginCreds.email, this.userRegCreds.firstname, this.userRegCreds.lastname, this.userRegCreds.mobile)
   }
 
   

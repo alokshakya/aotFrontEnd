@@ -1,7 +1,7 @@
 import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import { UserinfoService } from '../../services/userinfo.service';
-import { LoginRegisterService } from '../../services/loginRegister.service';
+import { NotificationService } from '../../services/notification.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 
@@ -69,30 +69,30 @@ export class AccountMainComponent implements AfterViewInit {
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
 
-    constructor(public renderer: Renderer, private router: Router, private http: UserinfoService, private login: LoginRegisterService) {}
+    constructor(public renderer: Renderer, private router: Router, private http: UserinfoService, private notification: NotificationService) {}
 
     ngOnInit() {
         var sessionToken = localStorage.getItem('session_token');
+        //retreive user informations
         if(sessionToken==''||sessionToken==null){
             this.router.navigate(['login'])
         }else if(!this.viewed){
             this.http.getUserInfo().subscribe((response: Response)=>{
-                    this.userDetails = response
-                    this.studentName = this.userDetails.user_info_by_user_info_id.firstname + ' ' + this.userDetails.user_info_by_user_info_id.lastname;
-                    this.class = this.userDetails.class_by_class_id.name;
-                    this.email = this.userDetails.user_info_by_user_info_id.email; 
-                    this.viewed=true;
+                this.userDetails = response['resource'][0];
+                     this.studentName = this.userDetails.user_info_by_user_info_id.firstname + ' ' + this.userDetails.user_info_by_user_info_id.lastname;
+                     this.class = this.userDetails.class_by_class_id.name;
+                     this.email = this.userDetails.user_info_by_user_info_id.email; 
+                     this.viewed=true;
             },
             (error)=>{
                 this.router.navigate(['login']);
                 localStorage.setItem('session_token','');
             }
             )
-        }
-    }      
+        };
 
-        
-        
+
+    }      
 
     ngAfterViewInit() {
         this.layoutContainer = <HTMLDivElement> this.layourContainerViewChild.nativeElement;

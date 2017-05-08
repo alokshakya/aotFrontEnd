@@ -50,28 +50,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpService.getUserInfo()
-      .subscribe(
-        (data: Response)=>{
-          this.userInfoObject = data;
-          this.studentName = this.userInfoObject.user_info_by_user_info_id.firstname + " " +this.userInfoObject.user_info_by_user_info_id.lastname;
-          this.email = this.userInfoObject.user_info_by_user_info_id.email;
-          this.mobile = this.userInfoObject.user_info_by_user_info_id.mobile;
-          this.class = this.userInfoObject.class_by_class_id.name;
-          this.school = this.userInfoObject.school_by_school_id.name;
-          this.studentId = this.userInfoObject.student_id;
 
-          this.permanentAddress = this.userInfoObject.user_info_by_user_info_id.address + " , " +this.userInfoObject.user_info_by_user_info_id.state
-                                  + " , " +this.userInfoObject.user_info_by_user_info_id.pincode;
-          
-          this.presentAddress = this.userInfoObject.user_info_by_user_info_id.address + " , " +this.userInfoObject.user_info_by_user_info_id.state
-                                  + " , " +this.userInfoObject.user_info_by_user_info_id.pincode;
-
-          
-
-        }
-
-      );
   }
 
 

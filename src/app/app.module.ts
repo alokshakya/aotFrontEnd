@@ -90,10 +90,15 @@ import { ProfileComponent } from './account/profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemotest/takedemotest.component';
 
+//services
 import { LoginRegisterService } from './services/loginRegister.service';
 import { UserinfoService } from './services/userinfo.service';
+import { NotificationService } from './services/notification.service';
+import { ComponentInteractionService } from './services/component-interaction.service';
+
+//pipes
 import { KeysPipe } from './pipes/keys.pipe';
-import { CssIdPipe } from './pipes/css-id.pipe';//Added
+import { CssIdPipe } from './pipes/css-id.pipe';
 
 
 @NgModule({
@@ -189,7 +194,7 @@ import { CssIdPipe } from './pipes/css-id.pipe';//Added
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        LoginRegisterService, UserinfoService
+        LoginRegisterService, UserinfoService, NotificationService, ComponentInteractionService
     ],
     bootstrap:[AppComponent]
 })

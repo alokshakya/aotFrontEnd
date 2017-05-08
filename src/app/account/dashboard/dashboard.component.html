@@ -87,9 +87,10 @@
         <div class="ui-g-12">
             <p-panel header="Notice Board">
             <div id="notice">
-                <div class="noticebox" *ngFor = "let item of noticeBoard|keys">
-                    <h3>{{item.key}}</h3>
-                    <p>{{item.value}}</p>
+                <div class="noticebox" *ngFor = "let item of noticeBoard; let i=index">
+                    <h3>Notice {{i+1}}</h3>
+                    <p>{{item.date_published}}</p>
+                    <p>{{item.news}}<p>
                 </div>
             </div>
             </p-panel>
@@ -97,11 +98,11 @@
         <div class="ui-g-12">
             <p-panel header="Testimonials">
                 <div id="testimonials">
-                    <div class="testbox" *ngFor = "let item of testimonials|keys">
+                    <div class="testbox" *ngFor = "let item of testimonials">
                         <div class="ui-g">
-                            <div class="ui-g-7"><img class="testimonialimg" src={{item.value.imgsrc}}></div>
-                            <div class="ui-g-5">{{item.value.time}}</div>
-                            <div class="ui-g-12">{{item.value.data}}</div>
+                            <div class="ui-g-7"><img class="testimonialimg"></div>
+                            <div class="ui-g-5"></div>
+                            <div class="ui-g-12">{{item.text}}</div>
                         </div>
                     </div>
                 </div>

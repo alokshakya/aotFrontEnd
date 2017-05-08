@@ -15,7 +15,7 @@ export class UserinfoService {
     queryHeader.append("X-DreamFactory-Api-Key",constants.DREAMFACTORY_API_KEY);
     queryHeader.append("X-DreamFactory-Session-Token",this.sessionToken);
     
-    return this.http.get(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox/_table/student/2?related=class_by_class_id,school_by_school_id,user_info_by_user_info_id', {headers:queryHeader})
+    return this.http.get(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox/_table/student/?filter=user_info_id=2&related=user_info_by_user_info_id,class_by_class_id', {headers : queryHeader}) 
     .map((data:Response) => data.json());
   };
 
