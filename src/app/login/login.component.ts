@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
             this.errorMessage.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
             }
     );
-    this.transfer.saveUserInfo(this.userLoginCreds.email, this.userRegCreds.firstname, this.userRegCreds.lastname, this.userRegCreds.mobile)
+    this.transfer.setInfo(this.userLoginCreds['email'])
   }
 
   signUp() {
@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
               this.errorMessage.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
             }
     );
-    this.transfer.saveUserInfo(this.userLoginCreds.email, this.userRegCreds.firstname, this.userRegCreds.lastname, this.userRegCreds.mobile)
+    this.transfer.setInfo(this.userRegCreds['email']);
   }
 
   

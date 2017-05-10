@@ -3,15 +3,20 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ComponentInteractionService {
 
-  userName:string;
-  userEmail:string;
-  userMobile:string;
+  userEmail:string
+  academicInfo:any
+  personalInfo:any
   constructor() { }
 
-  saveUserInfo(firstname, lastname, email, mobile){
-    this.userName = firstname  + ' ' + lastname;
+  setInfo(email){
     this.userEmail = email;
-    this.userMobile = mobile;
   }
 
+  setAcademicInfo(object){
+    this.academicInfo = object;
+  }
+
+  setPersonalInfo(object){
+    this.personalInfo = object;
+  }
 }

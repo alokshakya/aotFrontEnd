@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
+import { SubjectService } from '../../../../services/subject.service'
 
 @Component({
   selector: 'app-takedemotest',
@@ -41,8 +44,13 @@ export class TakedemotestComponent implements OnInit {
     totalQuestions:number;
     
     correct:boolean;
+    questionPool1:any;
 
-  constructor(){
+  constructor(
+      private router: Router,
+      private demotest: SubjectService)
+      
+      {
       this.questionsPool = {
                           "Question1": {
                             "Question": "What is the speed of light",
@@ -166,12 +174,28 @@ export class TakedemotestComponent implements OnInit {
                             "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8",
                             "image": "asd"
                           },
+                          "Question11": {
+                            "Question": "What is the speed of light",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8",
+                            "image": "asd"
+                          },
       }
 
       this.totalQuestions = Object.keys(this.questionsPool).length;
     }
   
   ngOnInit(){
+      var token=localStorage.getItem('session_token')
+      if(token==''||token==null){
+        this.router.navigate(['login']);
+      }else{
       this.counter = 0;
       this.clickListener = '';
       this.test = "Demo Test"
@@ -184,12 +208,29 @@ export class TakedemotestComponent implements OnInit {
       this.hintDisplay = false;
       this.response = {};
       this.questionStatus = {};
-    }
+
+      this.demotest.getQuestionsSet()
+      .subscribe((data: Response) => {
+          data = data['resource'];
+          let k = 1
+          for(let i in data){
+            this.questionsPool['Question'+k]['Question'] = data[i]['questions_by_question_id']['question']
+              k=k+1;
+          }
+      })
+      }
+}
+
+
      
 
+  redirect(){
+      this.router.navigate(['account/dashboard']);
+  }
+  
+  
   displayQuestion(questionDisplayed,questionNumber){  //questionDisplayed: KEY 
       this.answer = null;
-      console.log([questionDisplayed,questionNumber])
       this.selectedQuestion = this.questionsPool[questionDisplayed];
       this.questionNumber = "Q" + questionNumber + ". ";
       this.questionWindow = true;
@@ -200,7 +241,7 @@ export class TakedemotestComponent implements OnInit {
   validate(){
       this.response[this.questionNumber]=this.answer[0];
       this.hintDisplay=true;
-      this.counter+= Math.ceil(100/10);
+      this.counter+= Math.ceil(100/11);
       if(this.answer[0]==this.selectedQuestion["CorrectAnswer"]){
           this.correct=true;
           this.questionStatus[this.clickListener] = "Correct";

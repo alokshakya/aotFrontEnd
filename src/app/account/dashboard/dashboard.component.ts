@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { NotificationService } from '../../services/notification.service';
+import { SubjectService } from '../../services/subject.service';
 
 
 @Component({
@@ -26,17 +27,12 @@ export class DashboardComponent implements OnInit{
     testimonials:any;
 
 
-    constructor(private router: Router, private notification: NotificationService) {
-
-        this.subjectSummary = {
-                                "Computer/Cyber":{"icon":"icon-cyber icon-4x"},
-                                "Science":{"icon":"icon-science icon-4x"},
-                                "Mathematics":{"icon":"icon-maths icon-4x"},
-                                "General Knowledge":{"icon":"icon-gk icon-4x"},
-                                "English":{"icon":"icon-english icon-4x"},
-                                "Reasoning":{"icon":"icon-reasoning icon-4x"}
-        }
-
+    constructor(
+        private router: Router, 
+        private notification: NotificationService,
+        private sub: SubjectService
+        ) {
+        
         this.testSummary= {
                                 "Chapterwise Test": {
                                     "Computer/Cyber": {
@@ -327,6 +323,15 @@ export class DashboardComponent implements OnInit{
             for(let i in data['resource']){
                 this.testimonials.push(data['resource'][i]);
             }
+        })
+
+        this.sub.getSubjectSet(1).subscribe((data: Response) => {
+            data = data['resource']
+            this.subjectSummary =[];
+            for(let i in data){
+                this.subjectSummary.push(data[i]['subjects_by_subject_id']['name']);
+            }
+            console.log(this.subjectSummary);
         })
        
     }

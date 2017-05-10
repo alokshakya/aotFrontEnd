@@ -15,13 +15,13 @@ import { ProfileComponent } from './profile/profile.component';
 
 export const AccountRoutes: Routes = [
   { path : '', redirectTo : '/login', pathMatch : 'full'},
+  { path: 'takedemotest', component: TakedemotestComponent}, 
   { path : 'account', component : AccountMainComponent,
   children : [
     { path: '' , redirectTo: 'dashboard', pathMatch: 'full'},
     { path: 'dashboard', component: DashboardComponent },
     { path: 'accountsettings', component: AccountsettingsComponent },
     { path: 'computer/demotest', component: DemotestComponent },
-    { path: 'computer/demotest/takedemotest', component: TakedemotestComponent}, 
     { path: 'computer/chapterwisetest', component: ChapterwisetestComponent },           
     { path: 'computer/sampletest', component: SampletestComponent },
     { path: 'computer/mocktest', component: MocktestComponent },

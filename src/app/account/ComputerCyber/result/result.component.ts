@@ -4398,7 +4398,6 @@ export class ResultComponent implements OnInit {
 	  
 
   reset(){
-	  console.log('click')
   }
 
   ngOnInit() {

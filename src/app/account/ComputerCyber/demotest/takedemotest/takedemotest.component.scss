@@ -1,12 +1,11 @@
 #header, #sidebar{
     background-color: #2D353C;
-    margin-left:8px;
     color: white;
     margin-right:0px;
 }
 
-#header{
-    height: 60px;
+#sidebar{
+    height:530px;
 }
 .qnumber{
     color: white;
@@ -23,7 +22,11 @@
     cursor: pointer;     
 }
 
-
+#footer{
+    text-align: right;
+    background-color: #2D353C;
+    margin: none;
+}
 
 .qnumberclick{
     background-color: white;
@@ -38,17 +41,17 @@
 
 .qnumbermark{
     background-color: #EEA236;
-    border:2px solid #EEA236;
+    border:2px solid white;
 }
 
 .qnumbercorrect{
     background-color: #2BBF61;
-    border:2px solid #2BBF61;
+    border:2px solid white;
 }
 
 .qnumberwrong{
     background-color: #DC4E42;
-    border:2px solid #DC4E42;
+    border:2px solid white;
 }
 
 .correct{
@@ -57,4 +60,20 @@
 
 .incorrect{
     color:#DC4E42;
+}
+
+#time{
+    border-radius: 5px;
+    background-color: #EEA236;
+    height:30px;
+    width:100px;
+    text-align: center;
+}
+
+.r{
+    padding-left: 30px;
+}
+
+i:hover{
+    cursor: pointer;
 }

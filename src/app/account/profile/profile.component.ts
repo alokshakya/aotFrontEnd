@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserinfoService } from '../../services/userinfo.service';
+import { ComponentInteractionService } from '../../services/component-interaction.service'
 
 import  { Response } from '@angular/http';
 
@@ -42,7 +43,10 @@ export class ProfileComponent implements OnInit {
 
   userInfoObject:any;
 
-  constructor(private httpService: UserinfoService){}  
+  constructor(
+    private httpService: UserinfoService,
+    private userInfo: ComponentInteractionService,
+    ){}  
 
   edit(number){
     this.dialogHeader=number;

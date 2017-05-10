@@ -34,17 +34,22 @@
   <div class="ui-g-6">
     <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
       <div id="sampletestpanel" class="ui-g">
-        <div *ngFor="let test of testData|keys" class="ui-g-12">{{test.key}}<button type="text" pButton class="ui-button-warning" label="{{test.value}}"></button><br><br></div>
-          
+        <div class="ui-g-12" *ngFor="let test of testData|keys">
+          {{test.key}}<button type="submit" pButton ngClass="ui-button-warning" label="{{test.value}}"></button><br><br>
+        </div>
       </div>
     </p-panel>
   </div>
 
   <div class="ui-g-6">
     <p-panel><p-header>Syllabus</p-header>
-      <p><strong>Some guidelines and rules goes here...........</strong>Ipsum is simply dummy text of the printing and typesetting industry.
-         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      <div class="ui-g">
+        <div class=ui-g-6>
+        <p-accordion>
+          <p-accordionTab *ngFor="let i of chapterNames" header={{i}}></p-accordionTab>
+        </p-accordion>
+        </div>
+      </div>
     </p-panel>
 
   </div>

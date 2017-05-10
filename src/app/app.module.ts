@@ -95,6 +95,7 @@ import { LoginRegisterService } from './services/loginRegister.service';
 import { UserinfoService } from './services/userinfo.service';
 import { NotificationService } from './services/notification.service';
 import { ComponentInteractionService } from './services/component-interaction.service';
+import { SubjectService } from './services/subject.service';
 
 //pipes
 import { KeysPipe } from './pipes/keys.pipe';
@@ -194,7 +195,7 @@ import { CssIdPipe } from './pipes/css-id.pipe';
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        LoginRegisterService, UserinfoService, NotificationService, ComponentInteractionService
+        LoginRegisterService, UserinfoService, NotificationService, ComponentInteractionService, SubjectService
     ],
     bootstrap:[AppComponent]
 })

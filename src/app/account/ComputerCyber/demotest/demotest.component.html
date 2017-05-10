@@ -24,14 +24,18 @@
   </div>
   <div class="ui-g-6">
     <p-panel header="Syllabus">
-      <div>
-        <p-accordion>
-          <p-accordionTab *ngFor = "let chapter of chapterNames" header={{chapter}}>
-            <ul>
-              <li *ngFor="let topic of topicNames">{{topic}}</li>
-            </ul>
-          </p-accordionTab>
-        </p-accordion>
+      <div class="ui-g">
+        <div class=ui-g-6>
+            <p-accordion>
+              <p-accordionTab *ngFor = "let chapter of chapterNames" header={{chapter}}>
+                <div class="ui-g">
+                  <div class=ui-g-6>
+                    <span *ngFor="let topic of topicNames">{{topic}}<br><br></span>
+                  </div>
+                </div>
+              </p-accordionTab>
+            </p-accordion>
+        </div>
       </div>
     </p-panel>
   </div>

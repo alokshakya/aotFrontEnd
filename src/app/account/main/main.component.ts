@@ -2,6 +2,7 @@ import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} 
 import { Router } from '@angular/router';
 import { UserinfoService } from '../../services/userinfo.service';
 import { NotificationService } from '../../services/notification.service';
+import { ComponentInteractionService } from '../../services/component-interaction.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 
@@ -63,13 +64,23 @@ export class AccountMainComponent implements AfterViewInit {
 
     viewed:boolean=false;
 
-    userDetails //will be used in child components
+    personalDetails:any; //will be used in child components
+    academicDetails:any;
+
+    userInfoId:string
 
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
 
-    constructor(public renderer: Renderer, private router: Router, private http: UserinfoService, private notification: NotificationService) {}
+    constructor(
+        public renderer: Renderer, 
+        private router: Router, 
+        private http: UserinfoService, 
+        private notification: NotificationService,
+        private userInfo: ComponentInteractionService
+        )
+        {}
 
     ngOnInit() {
         var sessionToken = localStorage.getItem('session_token');
@@ -77,12 +88,12 @@ export class AccountMainComponent implements AfterViewInit {
         if(sessionToken==''||sessionToken==null){
             this.router.navigate(['login'])
         }else if(!this.viewed){
-            this.http.getUserInfo().subscribe((response: Response)=>{
-                this.userDetails = response['resource'][0];
-                     this.studentName = this.userDetails.user_info_by_user_info_id.firstname + ' ' + this.userDetails.user_info_by_user_info_id.lastname;
-                     this.class = this.userDetails.class_by_class_id.name;
-                     this.email = this.userDetails.user_info_by_user_info_id.email; 
-                     this.viewed=true;
+            this.http.getUserInfo(this.email).subscribe((response: Response)=>{
+                this.personalDetails = response['resource'][0];
+                this.email = this.personalDetails.email
+                this.studentName = this.personalDetails.firstname + ' ' + this.personalDetails.lastname;
+                this.userInfoId = this.personalDetails.user_info_id;
+                this.viewed=true;
             },
             (error)=>{
                 this.router.navigate(['login']);
@@ -90,7 +101,13 @@ export class AccountMainComponent implements AfterViewInit {
             }
             )
         };
-
+        this.http.getAcademicInfo(this.userInfoId).subscribe((response: Response) =>{
+            this.academicDetails  = response;
+            this.class =  this.academicDetails.class_by_class_id.name;
+            
+        })
+        this.userInfo.setAcademicInfo(this.academicDetails);
+        this.userInfo.setPersonalInfo(this.personalDetails);
 
     }      
 

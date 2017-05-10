@@ -1,8 +1,10 @@
 import { Component,Input,OnInit,EventEmitter,ViewChild,trigger,state,transition,style,animate,Inject,forwardRef } from '@angular/core';
 import { Location } from '@angular/common';
+import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/primeng';
 import { AccountMainComponent } from './main.component';
+import { SubjectService } from '../../services/subject.service';
 
 @Component({
     selector: 'app-menu',
@@ -18,12 +20,17 @@ export class AppMenuComponent implements OnInit {
 
     model: MenuItem[];
 
-    constructor(@Inject(forwardRef(() => AccountMainComponent)) public app:AccountMainComponent) {
+    constructor(
+        @Inject(forwardRef(() => AccountMainComponent))
+        public app:AccountMainComponent,
+        private subjectSet: SubjectService 
+        )
+        {
 
         this.menuTabs =[
                         {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['dashboard']},
                         {label: 'Account Settings',icon: 'fa fa-pencil-square-o',routerLink: ['accountsettings']},
-                        {label: 'Computer/Cyber',icon: 'icon-cyber',
+                        {label: '',icon: 'icon-cyber',
                             items: [{
                                         label: 'Demo Test',
                                         icon: 'fa fa-circle-o',
@@ -50,7 +57,7 @@ export class AppMenuComponent implements OnInit {
                                         routerLink: ['computer/result']
                                     }
                                     ]},
-                        {label: 'Science',icon: 'icon-science',
+                        {label: '',icon: 'icon-science',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -77,7 +84,7 @@ export class AppMenuComponent implements OnInit {
                                     routerLink: ['/']
                                 },
                             ]}, 
-                        {label: 'Mathematics',icon: 'icon-maths',
+                        {label: '',icon: 'icon-maths',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -104,7 +111,7 @@ export class AppMenuComponent implements OnInit {
                                     routerLink: ['/']
                                 },
                             ]},
-                        {label: 'General Knowledge',icon: 'icon-gk',
+                        {label: '',icon: 'icon-gk',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -131,7 +138,7 @@ export class AppMenuComponent implements OnInit {
                                     routerLink: ['/']
                                 },
                             ]},
-                        {label: 'English',icon: 'icon-english',
+                        {label: '',icon: 'icon-english',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -158,7 +165,7 @@ export class AppMenuComponent implements OnInit {
                                     routerLink: ['/']
                                 },
                             ]},
-                        {label: 'Reasoning',icon: 'icon-reasoning',
+                        {label: '',icon: 'icon-reasoning',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -189,13 +196,20 @@ export class AppMenuComponent implements OnInit {
     }
     
     ngOnInit() {
-        this.model = [];
-        for(let i=0;i<this.menuTabs.length;i++){
-            this.model.push(this.menuTabs[i]);
+        this.model = []
+        this.subjectSet.getSubjectSet(1).subscribe((data:Response) =>{
+            data = data['resource'];
+            var k = 2;
+            for(let i in data){
+                this.menuTabs[k]['label'] = data[i]['subjects_by_subject_id']['name'];
+                this.model.push(this.menuTabs[i])
+                k++;
+            }
+        })
         }           
 
     }    
-} 
+ 
 
 @Component({
     selector: '[app-submenu]',

@@ -1,5 +1,6 @@
 import {Component,Inject,forwardRef} from '@angular/core';
 import {AccountMainComponent} from '../main/main.component';
+import { TakedemotestComponent } from '../computercyber/demotest/takedemotest/takedemotest.component'
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AppTopBar {
 
-    constructor(@Inject(forwardRef(() => AccountMainComponent)) public app:AccountMainComponent, private _router:Router) {}
+    constructor(@Inject(forwardRef(() => AccountMainComponent))  public app:AccountMainComponent, private _router:Router) {}
 
     logout(){
         localStorage.setItem('session_token','');
