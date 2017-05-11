@@ -1,6 +1,5 @@
 import {Component,Inject,forwardRef} from '@angular/core';
 import {AccountMainComponent} from '../main/main.component';
-import { TakedemotestComponent } from '../computercyber/demotest/takedemotest/takedemotest.component'
 import { Router } from '@angular/router';
 
 @Component({

@@ -41,7 +41,7 @@
           <div class="ui-g-3"><button type="button" pButton label="Validate" [disabled]="answer==null||validated()" (click)="validate()"></button></div>
           <div class="ui-g-1"><button type="button" pButton label="Next" class="ui-button-success" (click)="next()"></button></div>
           <div class="ui-g-12" *ngIf="hintDisplay"><hr>
-            <span class="incorrect" *ngIf="hintDisplay||!correct"><i class="fa fa-times"></i> Your answer is incorrect<br></span>
+            <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br></span>
             <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br></span>
             <span class="correct" *ngIf="!correct">Correct Answer: {{selectedQuestion?.CorrectAnswer}}</span><br>
             Explaination:<br><span>{{selectedQuestion?.Explaination}}<br></span><br>

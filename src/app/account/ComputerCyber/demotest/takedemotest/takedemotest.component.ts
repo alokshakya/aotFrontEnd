@@ -44,13 +44,25 @@ export class TakedemotestComponent implements OnInit {
     totalQuestions:number;
     
     correct:boolean;
-    questionPool1:any;
+    sessionToken:string
 
   constructor(
       private router: Router,
       private demotest: SubjectService)
       
       {
+      this.counter = 0;
+      this.clickListener = '';
+      this.test = "Demo Test"
+      this.subject = "Computer/Cyber" 
+      this.start = false;
+      this.sec = 0;
+      this.min = 0;
+      this.hour = 0;
+      this.instructions = true;
+      this.hintDisplay = false;
+      this.response = {};
+      this.questionStatus = {};
       this.questionsPool = {
                           "Question1": {
                             "Question": "What is the speed of light",
@@ -192,36 +204,28 @@ export class TakedemotestComponent implements OnInit {
     }
   
   ngOnInit(){
-      var token=localStorage.getItem('session_token')
-      if(token==''||token==null){
-        this.router.navigate(['login']);
-      }else{
-      this.counter = 0;
-      this.clickListener = '';
-      this.test = "Demo Test"
-      this.subject = "Computer/Cyber" 
-      this.start = false;
-      this.sec = 0;
-      this.min = 0;
-      this.hour = 0;
-      this.instructions = true;
-      this.hintDisplay = false;
-      this.response = {};
-      this.questionStatus = {};
+      this.isLogin();
+}
 
+  getQuestions(){
+      this.sessionToken = localStorage.getItem('session_token')
       this.demotest.getQuestionsSet()
       .subscribe((data: Response) => {
           data = data['resource'];
           let k = 1
           for(let i in data){
-            this.questionsPool['Question'+k]['Question'] = data[i]['questions_by_question_id']['question']
+              this.questionsPool['Question'+k]['Question'] = data[i]['questions_by_question_id']['question']
               k=k+1;
-          }
-      })
-      }
-}
+            }
+        })
 
-
+  }
+  
+  isLogin(){
+      if (this.sessionToken == null){
+          this.router.navigate(['login']); 
+      }else{ this.getQuestions() }
+  }
      
 
   redirect(){

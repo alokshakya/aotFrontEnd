@@ -15,7 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
 
 export const AccountRoutes: Routes = [
   { path : '', redirectTo : '/login', pathMatch : 'full'},
-  { path: 'takedemotest', component: TakedemotestComponent}, 
+  { path: 'demotest', component: TakedemotestComponent}, 
   { path : 'account', component : AccountMainComponent,
   children : [
     { path: '' , redirectTo: 'dashboard', pathMatch: 'full'},
