@@ -204,7 +204,7 @@ export class TakedemotestComponent implements OnInit {
     }
   
   ngOnInit(){
-      this.isLogin();
+      this.getQuestions()
 }
 
   getQuestions(){

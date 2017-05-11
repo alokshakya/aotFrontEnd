@@ -24,7 +24,7 @@ export class DemotestComponent implements OnInit {
 
 
   takedemotest(){
-      this.router.navigate(['demotest']);
+      this.router.navigate(['/demotest']);
   }
 
   ngOnInit() {

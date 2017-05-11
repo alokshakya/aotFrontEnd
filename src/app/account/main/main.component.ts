@@ -94,12 +94,7 @@ export class AccountMainComponent implements AfterViewInit {
                 this.studentName = this.personalDetails.firstname + ' ' + this.personalDetails.lastname;
                 this.userInfoId = this.personalDetails.user_info_id;
                 this.viewed=true;
-            },
-            (error)=>{
-                this.router.navigate(['login']);
-                localStorage.setItem('session_token','');
-            }
-            )
+            })
         };
         this.http.getAcademicInfo(this.userInfoId).subscribe((response: Response) =>{
             this.academicDetails  = response;
@@ -232,7 +227,6 @@ export class AccountMainComponent implements AfterViewInit {
     }
 
     ngOnDestroy() {
-        localStorage.setItem('session_token',null);
         if(this.documentClickListener) {
             this.documentClickListener();
         }
