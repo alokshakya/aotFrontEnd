@@ -23,7 +23,7 @@ export class UserinfoService {
   getAcademicInfo(id){
     id = '2';
 
-    return this.http.get(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox/_table/student/'+id+'?related=class_by_class_id,school_by_school_id', {headers: this.queryHeader} )
+    return this.http.get(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox/_table/student/2?related=class_by_class_id,school_by_school_id', {headers: this.queryHeader} )
     .map((data) => data.json());
 }
 

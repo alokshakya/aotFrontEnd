@@ -29,7 +29,12 @@ export class SubjectService {
 
    getQuestionsSet(){
      return this.http.get(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox' + '/_table/question_answers_set?related=questions_by_question_id', { headers: this.queryHeader})
-     .map((response: Response)=>response.json());
+     .map((response: Response) => response.json());
+   }
+
+   getSubjectPrice(classId){
+     return this.http.get(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox' + '/_table/fee?related=class_subject_set_by_class_subject_id&?filter=class_id=1', {headers: this.queryHeader})
+     .map((response: Response) => response.json())
    }
 
 

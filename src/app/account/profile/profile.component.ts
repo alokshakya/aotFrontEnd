@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserinfoService } from '../../services/userinfo.service';
-import { ComponentInteractionService } from '../../services/component-interaction.service'
 
 import  { Response } from '@angular/http';
 
@@ -14,18 +13,18 @@ export class ProfileComponent implements OnInit {
   //personal info
   studentName:string;
   studentId:string;
-  fatherName:string = "R.P Sharma";
-  motherName:string = "Pooja";
+  fatherName:string = "Father";
+  motherName:string = "Mother";
   email:string;
   mobile:number;
 
   //parent/guardian info
-  guardianName = "Rakesh Sharma"
+  guardianName = "Guardian"
   relation:string = "Uncle";
   presentAddress:string;
   permanentAddress:string;
   guardianMobile:number = 8768957354;
-  guardianEmail:string = "uncleofrahul@ad.com";
+  guardianEmail:string = "uncle@ad.com";
 
   //academic info
   class:string;
@@ -45,7 +44,6 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private httpService: UserinfoService,
-    private userInfo: ComponentInteractionService,
     ){}  
 
   edit(number){
@@ -54,7 +52,22 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.httpService.getUserInfo('gpantbiz@gmail.com')
+    .subscribe((data: Response)=>{
+      this.userInfoObject = data['resource'][0];
+      this.studentName = this.userInfoObject.firstname +' '+ this.userInfoObject.lastname;
+      this.email = this.userInfoObject.email;
+      this.mobile = this.userInfoObject.mobile;
+      this.presentAddress = this.userInfoObject.address + ', '  + this.userInfoObject.state + ', ' +this.userInfoObject.country + ', ' +this.userInfoObject.pincode 
+      this.permanentAddress = this.presentAddress;
+      console.log(this.userInfoObject);
+     })
 
+     this.httpService.getAcademicInfo(2)
+     .subscribe((data: Response) =>{
+       this.class = data['class_by_class_id']['name'];
+       this.school = data['school_by_school_id']['name'];
+     } )
   }
 
 
