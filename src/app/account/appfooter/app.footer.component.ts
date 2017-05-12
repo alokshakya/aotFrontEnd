@@ -6,8 +6,8 @@ import {AccountMainComponent} from '../main/main.component';
     template: `
         <div class="footer">
             <div class="card clearfix" style="background-color:#2D353C">
-                <span class="footer-text-left" style="color:white">Copyright &copy; 2017 OlympiadBox</span>
-                <span class="footer-text-right" style="color:white">All Rights Reserved.</span>
+                <span class="footer-text-right" style="color:white"> All Rights Reserved</span>
+                <span class="footer-text-right" style="color:white;margin-right:5px">Copyright &copy; 2017 OlympiadBox. </span>
             </div>
         </div>
     `
