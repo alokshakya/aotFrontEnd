@@ -62,11 +62,9 @@ export class AccountMainComponent implements AfterViewInit {
 
     resetMenu: boolean;
 
-    viewed:boolean=false;
-
     personalDetails:any; //will be used in child components
     academicDetails:any;
-
+    sessionToken:string
     userInfoId:string
 
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
@@ -83,27 +81,32 @@ export class AccountMainComponent implements AfterViewInit {
         {}
 
     ngOnInit() {
-        var sessionToken = localStorage.getItem('session_token');
-        //retreive user informations
-        if(sessionToken==''||sessionToken==null){
-            this.router.navigate(['login'])
-        }else if(!this.viewed){
-            this.http.getUserInfo(this.email).subscribe((response: Response)=>{
+        this.sessionToken = localStorage.getItem('session_token');
+        this.isLogin(this.sessionToken);
+
+    }
+
+    getUserInfo(){
+         this.http.getUserInfo(this.email).subscribe((response: Response)=>{
                 this.personalDetails = response['resource'][0];
                 this.email = this.personalDetails.email
                 this.studentName = this.personalDetails.firstname + ' ' + this.personalDetails.lastname;
                 this.userInfoId = this.personalDetails.user_info_id;
-                this.viewed=true;
-            })
-        };
+            });
         this.http.getAcademicInfo(this.userInfoId).subscribe((response: Response) =>{
             this.academicDetails  = response;
-            this.class =  this.academicDetails.class_by_class_id.name;
+            this.class =  this.academicDetails.class_by_class_id.abbreviation;
+        }),(error)=>{
+        }
             
-        })
         this.userInfo.setAcademicInfo(this.academicDetails);
         this.userInfo.setPersonalInfo(this.personalDetails);
+    }
 
+    isLogin(token){
+        if (token==null||token==''){
+            this.router.navigate(['login'])
+        }else{ this.getUserInfo()}
     }      
 
     ngAfterViewInit() {

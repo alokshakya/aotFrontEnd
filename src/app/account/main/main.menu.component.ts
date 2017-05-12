@@ -202,8 +202,10 @@ export class AppMenuComponent implements OnInit {
             var k = 2;
             for(let i in data){
                 this.menuTabs[k]['label'] = data[i]['subjects_by_subject_id']['name'];
-                this.model.push(this.menuTabs[i])
                 k++;
+            }
+            for (let j in this.menuTabs){
+                this.model.push(this.menuTabs[j])
             }
         })
         }           

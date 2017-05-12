@@ -1,5 +1,5 @@
-import {Component,OnInit} from '@angular/core';
-import {SelectItem} from 'primeng/primeng';
+import { Component,OnInit } from '@angular/core';
+import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 
@@ -26,6 +26,10 @@ export class DashboardComponent implements OnInit{
     
     testimonials:any;
 
+    sessionToken:string;
+
+    received=false;
+    subscribedSubjects:any;
 
     constructor(
         private router: Router, 
@@ -33,137 +37,141 @@ export class DashboardComponent implements OnInit{
         private sub: SubjectService
         ) {
         
-        this.testSummary= {
-                                "Chapterwise Test": {
-                                    "Computer/Cyber": {
-                                        "completed": 45,
-                                        "generated": 45,
-                                        "notcompleted": 10
+        this.testSummary = {
+                                "Computer/Cyber": {
+                                    "Chapterwise Test": {
+                                        "completed": 34,
+                                        "generated": 44,
+                                        "notcompleted": 22
                                     },
-                                    "Science": {
-                                        "completed": 25,
-                                        "generated": 45,
-                                        "notcompleted":30
+                                    "Sample Test": {
+                                        "completed": 35,
+                                        "generated": 34,
+                                        "notcompleted": 31
                                     },
-                                    "Mathematics": {
-                                        "completed": 15,
-                                        "generated": 35,
-                                        "notcompleted": 50
-                                    },
-                                    "General Knowledge": {
-                                        "completed": 45,
-                                        "generated": 45,
-                                        "notcompleted": 10
-                                    },
-                                    "English": {
-                                        "completed": 15,
-                                        "generated": 25,
-                                        "notcompleted": 60
-                                    },
-                                    "Reasoning": {
-                                        "completed": 41,
-                                        "generated": 43,
-                                        "notcompleted": 14
-                                    }
-                                    },
-                                "Sample Test": {
-                                    "Computer/Cyber": {
-                                        "completed": 15,
-                                        "generated": 5,
-                                        "notcompleted": 80
-                                    },
-                                    "Science": {
-                                        "completed": 70,
-                                        "generated": 25,
-                                        "notcompleted": 5
-                                    },
-                                    "Mathematics": {
-                                        "completed": 20,
-                                        "generated": 50,
-                                        "notcompleted": 30
-                                    },
-                                    "General Knowledge": {
-                                        "completed": 15,
-                                        "generated": 35,
-                                        "notcompleted": 50
-                                    },
-                                    "English": {
-                                        "completed": 48,
+                                    "Mock Test": {
+                                        "completed": 74,
                                         "generated": 22,
-                                        "notcompleted": 30
+                                        "notcompleted": 4
                                     },
-                                    "Reasoning": {
+                                    "Demo Test": {
+                                        "completed": 34,
+                                        "generated": 44,
+                                        "notcompleted": 22
+                                    }
+                                },
+                                "Science": {
+                                    "Chapterwise Test": {
+                                        "completed": 74,
+                                        "generated": 13,
+                                        "notcompleted": 13
+                                    },
+                                    "Sample Test": {
+                                        "completed": 60,
+                                        "generated": 34,
+                                        "notcompleted": 6
+                                    },
+                                    "Mock Test": {
+                                        "completed": 34,
+                                        "generated": 32,
+                                        "notcompleted": 34
+                                    },
+                                    "Demo Test": {
+                                        "completed": 67,
+                                        "generated": 23,
+                                        "notcompleted": 10
+                                    }
+                                },
+                                "Mathematics": {
+                                    "Chapterwise Test": {
+                                        "completed": 44,
+                                        "generated": 36,
+                                        "notcompleted": 20
+                                    },
+                                    "Sample Test": {
+                                        "completed": 42,
+                                        "generated": 42,
+                                        "notcompleted": 14
+                                    },
+                                    "Mock Test": {
+                                        "completed": 69,
+                                        "generated": 9,
+                                        "notcompleted": 22
+                                    },
+                                    "Demo Test": {
+                                        "completed": 100,
+                                        "generated": 0,
+                                        "notcompleted": 0
+                                    }
+                                },
+                                "General Knowledge": {
+                                    "Chapterwise Test": {
+                                        "completed": 48,
+                                        "generated": 20,
+                                        "notcompleted": 32
+                                    },
+                                    "Sample Test": {
+                                        "completed": 12,
+                                        "generated":5,
+                                        "notcompleted": 83
+                                    },
+                                    "Mock Test": {
                                         "completed": 45,
                                         "generated": 15,
                                         "notcompleted": 40
+                                    },
+                                    "Demo Test": {
+                                        "completed": 100,
+                                        "generated": 0,
+                                        "notcompleted": 0
                                     }
+                                },
+                                "English": {
+                                    "Chapterwise Test": {
+                                        "completed": 85,
+                                        "generated": 15,
+                                        "notcompleted": 0
                                     },
-                                "Mock Test": {
-                                    "Computer/Cyber": {
-                                        "completed": 41,
-                                        "generated": 41,
-                                        "notcompleted": 18
-                                    },
-                                    "Science": {
+                                    "Sample Test": {
                                         "completed": 45,
                                         "generated": 25,
                                         "notcompleted": 30
                                     },
-                                    "Mathematics": {
-                                        "completed": 45,
-                                        "generated": 45,
-                                        "notcompleted": 10
+                                    "Mock Test": {
+                                        "completed": 13,
+                                        "generated": 2,
+                                        "notcompleted": 85
                                     },
-                                    "General Knowledge": {
-                                        "completed": 15,
-                                        "generated": 55,
-                                        "notcompleted": 30
-                                    },
-                                    "English": {
-                                        "completed": 45,
-                                        "generated": 45,
-                                        "notcompleted": 10
-                                    },
-                                    "Reasoning": {
-                                        "completed": 44,
-                                        "generated": 41,
-                                        "notcompleted": 15
+                                    "Demo Test": {
+                                        "completed": 0,
+                                        "generated": 100,
+                                        "notcompleted": 0
                                     }
+                                },
+                                "Reasoning": {
+                                    "Chapterwise Test": {
+                                        "completed": 0,
+                                        "generated": 0,
+                                        "notcompleted": 100
                                     },
-                                "Demo Test": {
-                                    "Computer/Cyber": {
-                                        "completed": 45,
-                                        "generated": 45,
-                                        "notcompleted": 10
+                                    "Sample Test": {
+                                        "completed": 0,
+                                        "generated": 100,
+                                        "notcompleted": 0
                                     },
-                                    "Science": {
-                                        "completed": 35,
-                                        "generated": 35,
-                                        "notcompleted": 30
+                                    "Mock Test": {
+                                        "completed": 54,
+                                        "generated": 21,
+                                        "notcompleted": 25
                                     },
-                                    "Mathematics": {
-                                        "completed": 40,
-                                        "generated": 48,
-                                        "notcompleted": 12
-                                    },
-                                    "General Knowledge": {
-                                        "completed": 15,
-                                        "generated": 30,
-                                        "notcompleted": 55
-                                    },
-                                    "English": {
-                                        "completed": 48,
-                                        "generated": 48,
-                                        "notcompleted": 4
-                                    },
-                                    "Reasoning": {
-                                        "completed": 50,
-                                        "generated": 45,
-                                        "notcompleted": 5
+                                    "Demo Test": {
+                                        "completed": 34,
+                                        "generated": 44,
+                                        "notcompleted": 22
                                     }
-                                    }
+                                }
         }
-         
+
         this.resultSummary = {
                                 "Computer/Cyber": {
                                     "Chapterwise Test": {
@@ -299,17 +307,28 @@ export class DashboardComponent implements OnInit{
                                 }
 
         }
-}
+
+        this.subscribedSubjects = {"Computer/Cyber":true, "Science":true, "Mathematics":false, "General Knowledge":true, 
+                                    "English":false, "Reasoning":false}
+
+    }
+
+    ngOnInit(){
+        this.sessionToken = localStorage.getItem('session_token');
+        this.isLogin(this.sessionToken) 
+    }
                         
     startTest(){
         this.router.navigate(['account/computer/sampletest'])
     }
 
-    redirect(){
-        this.router.navigate(['account/computer/demotest']);
-     }
+    redirect(destination){
+        if(destination=='demo'){
+            this.router.navigate(['account/computer/demotest']);
+        }else {this.router.navigate(['account/accountsettings'])}
+    }
 
-    ngOnInit(){
+    getData(){
         //retreive notice data
         this.noticeBoard = [];
         this.notification.getNotices().subscribe((data: Response)=>{
@@ -323,7 +342,7 @@ export class DashboardComponent implements OnInit{
             for(let i in data['resource']){
                 this.testimonials.push(data['resource'][i]);
             }
-        })
+        });
 
         this.sub.getSubjectSet(1).subscribe((data: Response) => {
             data = data['resource']
@@ -331,10 +350,24 @@ export class DashboardComponent implements OnInit{
             for(let i in data){
                 this.subjectSummary.push(data[i]['subjects_by_subject_id']['name']);
             }
-            console.log(this.subjectSummary);
-        })
-       
+            this.received=true;
+        }),
+        (error)=>{
+        }
+    } 
+
+    isLogin(token){
+        if(token==null||token==''){
+            this.router.navigate(['login'])
+        }else{ this.getData() }
+    } 
+
+
+    check(e){
+        console.log(e.index);
+    }
+
+    subs(a){
+        return true
     }
 }
-    
-    

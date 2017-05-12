@@ -49,7 +49,7 @@
 
 
 #testimonials{
-    height:318px;
+    height:286px;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -80,6 +80,7 @@
     color: white;
     padding: 1px 26px 1px 24px;
     font-size: 12px;
+    width:150px;
 }
 
 .notcomp{
@@ -107,4 +108,39 @@
 
 .testsubject{
     margin-top:0px;
+}
+
+.cor{
+    padding: 1px 35px 1px 35px;
+    text-align: center;
+    background-color: #5CB85C;
+    border-radius:5px;
+    color: white;
+    font-size: 12px;
+}
+
+.mark{
+    padding: 1px 35px 1px 35px;
+    text-align: center;
+    background-color: #F0AD4E;
+    border-radius:5px;
+    color: white;
+    font-size: 12px;
+}
+
+.inc{
+    text-align: center;
+    background-color: #D9534F;
+    border-radius:5px;
+    color: white;
+    padding: 1px 35px 1px 35px;
+    font-size: 12px;
+}
+
+#tab{
+    padding:none;
+}
+
+.info{
+    text-align: center
 }
