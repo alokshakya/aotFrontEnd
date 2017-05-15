@@ -2,7 +2,7 @@
   <div class="ui-g-12">
     <p-tabView>
       <p-tabPanel header="Basic Info" leftIcon="fa-user-circle">
-          <div class="ui-g">
+          <div class="ui-g container">
             <div class="ui-g-12">
               <div class="userinfo"> <!--personal Info-->
                 <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails">{{studentName}}</span></p>
@@ -34,7 +34,7 @@
       </p-tabPanel>
       
       <p-tabPanel header="Guardian Info" leftIcon="fa-address-card"> <!--guardian's info-->
-          <div class="ui-g">
+          <div class="ui-g container">
             <div class="ui-g-3">
               <div class="userinfo"><h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails">{{guardianName}}</span></p>
               </div>
@@ -45,6 +45,7 @@
               </div>
             </div>
             
+
             <div class="ui-g-3">
               <div class="userinfo"><h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">{{guardianEmail}}</span></p>
               </div>
@@ -55,22 +56,19 @@
               </div>
             </div>
 
-            <div class="ui-g-6">
-              <div class="userinfo"><h4><i class="fa fa-home"></i> Present Address</h4><p><span class="userdetails">{{presentAddress}}</span></p>
+            <div class="ui-g-12">
+              <div class="userinfo"><h4><i class="fa fa-home"></i> Present Address</h4><p><span class="userdetails">{{permanentAddress}}</span></p>
               </div>
             </div>
-            
-            <div class="ui-g-6">
+            <div class="ui-g-12">
               <div class="userinfo"><h4><i class="fa fa-home"></i> Permannent Address</h4><p><span class="userdetails">{{permanentAddress}}</span></p>
               </div>
             </div>
-
           </div>
-
       </p-tabPanel>
       
       <p-tabPanel header="Academic Info" leftIcon="fa-graduation-cap"> <!--Academic info-->
-          <div class="ui-g">
+          <div class="ui-g container">
             <div class="ui-g-3">
               <div class="userinfo"><h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails">{{class}}</span></p>
               </div>
@@ -108,8 +106,21 @@
           </div>    
       </p-tabPanel>
 
-      <p-tabPanel header="Add Testimony" leftIcon="fa-pencil">span
-        asdsd
+      <p-tabPanel header="Add Testimonial" leftIcon="fa-pencil">
+        <div class="ui-g container">
+          <div class="ui-g-4 testimonial">
+            <img id="testimg" src="../../../assets/layout/images/Profile_picture.png"><br><br>
+            <input type="file">
+          </div>
+          <div class="ui-g-6">
+            <textarea pInputTextarea placeholder = 'Enter your message here....' [(ngModel)]="testimonial" autoResize="autoResize" rows="10" cols="60"></textarea><br>
+            <p-checkbox label="declaration 1" [(ngModel)]="declare"></p-checkbox><br>
+            <p-checkbox label="declaration 2" [(ngModel)]="declare"></p-checkbox><br>
+          </div>
+          <div class="ui-g-12 testimonial">
+          <button type="submit" pButton label="Submit" class="ui-button-success"></button>
+          </div>
+        </div>
       </p-tabPanel>
     </p-tabView>
   </div>

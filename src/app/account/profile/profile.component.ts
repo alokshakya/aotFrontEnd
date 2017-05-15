@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import  { Response } from '@angular/http';
+import { SelectItem } from 'primeng/primeng';
 import { UserinfoService } from '../../services/userinfo.service';
 import { SubjectService } from '../../services/subject.service';
-import { SelectItem } from 'primeng/primeng'
-
-import  { Response } from '@angular/http';
 
 @Component({
   selector: 'app-profile',
@@ -12,8 +11,8 @@ import  { Response } from '@angular/http';
 })
 export class ProfileComponent implements OnInit {
 
-  states: SelectItem[];
-  state:any;
+  testimonial:string;
+  declare=[];
 
   //personal info
   studentName:string;
@@ -52,13 +51,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private httpService: UserinfoService,
     private classService: SubjectService
-    ){
-      this.states = [];
-      this.states.push({label:'Select state', value:null});
-
-      this.classes =[];
-      this.classes.push({label:'Select Class', value:null});
-    }  
+    ){}  
 
   edit(number){
     this.dialogHeader=number;
@@ -91,13 +84,6 @@ export class ProfileComponent implements OnInit {
        }
      })
 
-    this.classService.getStates()
-    .subscribe((data) => {
-      data = data['Data']
-      for(let i in data){
-        this.states.push({label:data[i]['Name'], value:data[i]['Name']})
-      }
-    })
   }
 
 

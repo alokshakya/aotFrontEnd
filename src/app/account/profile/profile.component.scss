@@ -65,5 +65,17 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .container{
-    height: 3000px;
+    height:420px;
+    width: auto;
+}
+
+#testimg{
+    height:auto;
+    width:200px;
+    border-radius: 50%;
+    border: 1px solid blue;
+}
+
+.testimonial{
+    text-align: center;
 }
