@@ -13,7 +13,7 @@
                         <i class="icon-cyber icon-4x" *ngIf="sub=='Computer/Cyber'"></i> 
                         <p>{{sub|uppercase}}</p>
                         <button pButton class="ui-button-success" (click)="redirect('demo')" class="ui-button-success" label="Demo"></button>
-                        <button *ngIf="!subscribedSubjects[sub]" pButton class="ui-button-warning" [ngClass] ="{'ui-button-danger':sub=='Science'||sub=='English'}" label="Subscribe"></button>
+                        <button *ngIf="!subscribedSubjects[sub]" pButton class="ui-button-warning" [ngClass] ="{'ui-button-danger':sub=='Science'||sub=='English'}" (click)="redirect('chapter')" label="Subscribe"></button>
                         <button *ngIf="subscribedSubjects[sub]" pButton class="ui-button-warning" [ngClass] ="{'ui-button-danger':sub=='Science'||sub=='English'}" (click)="startTest()" label="Start Test"></button><br>
                     </div>
                 </div>
@@ -52,9 +52,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="ui-g" [ngClass]="{'hidden':subscribedSubjects[item.key]}">
+                        <div class="ui-g a" [ngClass]="{'hidden':subscribedSubjects[item.key]}">
                             <div class="ui-g-12 info"><h3>Subject not subscribed</h3></div>
-                            <div class="ui-g-12" style="text-align:center"><button pButton class="ui-button-success" label="Demo" (click)="redirect('demo')"></button><button pButton class="ui-button-warning" label="Subscribe" (click)="redirect(subscribe)"></button></div>
+                            <div class="ui-g-12 summary"><button pButton class="ui-button-success" label="Demo" (click)="redirect('demo')"></button><button pButton class="ui-button-warning" label="Subscribe" (click)="redirect(subscribe)"></button></div>
                         </div>
                     </p-tabPanel>
                 </p-tabView>
@@ -95,7 +95,7 @@
                         </div>
                         <div class="ui-g" [ngClass]="{'hidden':subscribedSubjects[item.key]}">
                             <div class="ui-g-12 info"><h3>Subject not subscribed</h3></div>
-                            <div class="ui-g-12" style="text-align:center"><button pButton class="ui-button-success" label="Demo" (click)="redirect('demo')"></button><button pButton class="ui-button-warning" label="Subscribe" (click)="redirect(subscribe)"></button></div>
+                            <div class="ui-g-12 summary"><button pButton class="ui-button-success" label="Demo" (click)="redirect('demo')"></button><button pButton class="ui-button-warning" label="Subscribe" (click)="redirect(subscribe)"></button></div>
                         </div>
                     </p-tabPanel>
                 </p-tabView>

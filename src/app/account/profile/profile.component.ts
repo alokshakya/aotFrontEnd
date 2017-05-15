@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserinfoService } from '../../services/userinfo.service';
+import { SubjectService } from '../../services/subject.service';
+import { SelectItem } from 'primeng/primeng'
 
 import  { Response } from '@angular/http';
 
@@ -10,6 +12,9 @@ import  { Response } from '@angular/http';
 })
 export class ProfileComponent implements OnInit {
 
+  states: SelectItem[];
+  state:any;
+
   //personal info
   studentName:string;
   studentId:string;
@@ -17,6 +22,7 @@ export class ProfileComponent implements OnInit {
   motherName:string = "Mother";
   email:string;
   mobile:number;
+  dob:string;
 
   //parent/guardian info
   guardianName = "Guardian"
@@ -35,6 +41,7 @@ export class ProfileComponent implements OnInit {
   shift:string = "Morning";
   examVersion:string = "English";
   course:string = "Mathematics, Science";
+  classes:SelectItem[];
 
   dialogHeader:string;
   dialogDisplay:boolean;
@@ -44,7 +51,14 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private httpService: UserinfoService,
-    ){}  
+    private classService: SubjectService
+    ){
+      this.states = [];
+      this.states.push({label:'Select state', value:null});
+
+      this.classes =[];
+      this.classes.push({label:'Select Class', value:null});
+    }  
 
   edit(number){
     this.dialogHeader=number;
@@ -60,7 +74,7 @@ export class ProfileComponent implements OnInit {
       this.mobile = this.userInfoObject.mobile;
       this.presentAddress = this.userInfoObject.address + ', '  + this.userInfoObject.state + ', ' +this.userInfoObject.country + ', ' +this.userInfoObject.pincode 
       this.permanentAddress = this.presentAddress;
-      console.log(this.userInfoObject);
+      this.dob = this.userInfoObject.birthday;
      })
 
      this.httpService.getAcademicInfo(2)
@@ -68,6 +82,22 @@ export class ProfileComponent implements OnInit {
        this.class = data['class_by_class_id']['name'];
        this.school = data['school_by_school_id']['name'];
      } )
+
+     this.classService.getClasses()
+     .subscribe((data) => {
+       data = data['resource'];
+       for(let i in data){
+         this.classes.push({label :data[i]['abbreviation'], value: data[i]['name']})
+       }
+     })
+
+    this.classService.getStates()
+    .subscribe((data) => {
+      data = data['Data']
+      for(let i in data){
+        this.states.push({label:data[i]['Name'], value:data[i]['Name']})
+      }
+    })
   }
 
 

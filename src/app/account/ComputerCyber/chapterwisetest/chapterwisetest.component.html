@@ -45,7 +45,7 @@
     <div class="ui-g-6">
       <p-panel header="Generated" >
           <p-tabView>
-            <p-tabPanel *ngFor="let chapter of chapterNames" header={{chapter}}>
+            <p-tabPanel *ngFor="let chapter of cname" header={{chapter}}>
               <div id="testdetailspanel"><br>
                 <span *ngFor="let number of testNumbers">{{number}} <button pButton type="text" class="ui-button-warning" label="20/40"></button><br><br></span>
               </div>

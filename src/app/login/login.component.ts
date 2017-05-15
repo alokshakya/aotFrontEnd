@@ -52,7 +52,10 @@ export class LoginComponent implements OnInit {
   token:string
 
   
-  constructor(private httpService: LoginRegisterService, private router: Router, public transfer: ComponentInteractionService) {}
+  constructor(
+    private httpService: LoginRegisterService, 
+    private router: Router, 
+    public transfer: ComponentInteractionService) {}
 
   ngOnInit(){
     this.otpUnverified=true;

@@ -160,7 +160,7 @@ body {
                         background-color: $primaryColor;
                         
                         &.ui-tabview-outline {
-                            background-color: lighten($primaryColor,5%);
+                            background-color:white;
                         }
                     }
                 }

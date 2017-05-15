@@ -19,7 +19,7 @@ export class SubjectService {
 
    getSubjectSet(classId){
      return this.http.get(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox/_table' + '/class_subject_set/?filter=class_id=1&related=class_by_class_id,subjects_by_subject_id', { headers:this. queryHeader } )
-     .map((response: Response) => response.json())
+     .map((response: Response) => response.json());
    }
 
    getChapters(classSubId){
@@ -34,6 +34,17 @@ export class SubjectService {
 
    getSubjectPrice(classId){
      return this.http.get(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox' + '/_table/fee?related=class_subject_set_by_class_subject_id&?filter=class_id=1', {headers: this.queryHeader})
+     .map((response: Response) => response.json());
+   }
+
+   getClasses(){
+     return this.http.get(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox/_table' + '/class', {headers: this.queryHeader})
+     .map((response: Response) => response.json());
+   }
+
+   //external service
+   getStates(){
+     return this.http.get('https://www.whizapi.com/api/v2/util/ui/in/indian-states-list?project-app-key=' + constants.WHIZAPI_KEY)
      .map((response: Response) => response.json())
    }
 

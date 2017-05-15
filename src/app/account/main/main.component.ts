@@ -92,10 +92,12 @@ export class AccountMainComponent implements AfterViewInit {
                 this.email = this.personalDetails.email
                 this.studentName = this.personalDetails.firstname + ' ' + this.personalDetails.lastname;
                 this.userInfoId = this.personalDetails.user_info_id;
+                this.userInfo.setPersonalInfo(this.personalDetails);
             });
         this.http.getAcademicInfo(this.userInfoId).subscribe((response: Response) =>{
             this.academicDetails  = response;
             this.class =  this.academicDetails.class_by_class_id.abbreviation;
+            this.userInfo.setAcademicInfo(this.academicDetails);
         }),(error)=>{
         }
             

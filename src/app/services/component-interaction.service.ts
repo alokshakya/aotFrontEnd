@@ -6,6 +6,7 @@ export class ComponentInteractionService {
   userEmail:string
   academicInfo:any
   personalInfo:any
+  
   constructor() { }
 
   setInfo(email){

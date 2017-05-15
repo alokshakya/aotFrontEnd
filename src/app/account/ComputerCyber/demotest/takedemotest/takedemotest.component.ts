@@ -204,7 +204,8 @@ export class TakedemotestComponent implements OnInit {
     }
   
   ngOnInit(){
-      this.getQuestions()
+      this.sessionToken = localStorage.getItem('session_token');
+      this.isLogin(this.sessionToken)
 }
 
   getQuestions(){
@@ -221,8 +222,8 @@ export class TakedemotestComponent implements OnInit {
 
   }
   
-  isLogin(){
-      if (this.sessionToken == null){
+  isLogin(token){
+      if (token == null||token==''){
           this.router.navigate(['login']); 
       }else{ this.getQuestions() }
   }
@@ -285,6 +286,11 @@ export class TakedemotestComponent implements OnInit {
       if(this.questionStatus[this.clickListener]=="Correct"||this.questionStatus[this.clickListener]=="Wrong"){
           return true
       }
+  }
+
+  subscribed(sub){
+      console.log(sub)
+      return true;
   }
 
 
