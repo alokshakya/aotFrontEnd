@@ -46,7 +46,11 @@
       <div class="ui-g">
         <div class=ui-g-6>
         <p-accordion>
-          <p-accordionTab *ngFor="let i of chapterNames" header={{i}}></p-accordionTab>
+          <p-accordionTab *ngFor="let i of chapterNames" header={{i}}>
+            <ul>
+              <li *ngFor="let topic of topics">{{topic}}
+            </ul>
+          </p-accordionTab>
         </p-accordion>
         </div>
       </div>

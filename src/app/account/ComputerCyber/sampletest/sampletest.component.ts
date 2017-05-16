@@ -19,6 +19,8 @@ export class SampletestComponent implements OnInit {
 
   subscribed=true;
 
+  topics:Array<string>;
+
   chapterNames:Array<string>;
 
   constructor(private subject: SubjectService) { 
@@ -40,6 +42,8 @@ export class SampletestComponent implements OnInit {
       this.examPattern.push({label:"Exam Pattern 1", value:"null"})
       this.examPattern.push({label:"Exam Pattern 2", value:"null"})
       this.examPattern.push({label:"Exam Pattern 3", value:"null"})
+
+      this.topics = ["Topic 1 CC", "Topic 2 CC", "Topic 3 CC", "Topic 4 CC", "Topic 5 CC" ]
   }
 
   ngOnInit(){

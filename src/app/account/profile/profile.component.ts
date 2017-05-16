@@ -3,6 +3,7 @@ import  { Response } from '@angular/http';
 import { SelectItem } from 'primeng/primeng';
 import { UserinfoService } from '../../services/userinfo.service';
 import { SubjectService } from '../../services/subject.service';
+import { UpdateService } from '../../services/update.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,81 +12,67 @@ import { SubjectService } from '../../services/subject.service';
 })
 export class ProfileComponent implements OnInit {
 
-  testimonial:string;
-  declare=[];
+  editBasic:boolean;
+  editAcademia:boolean;
 
-  //personal info
-  studentName:string;
-  studentId:string;
-  fatherName:string = "Father";
-  motherName:string = "Mother";
-  email:string;
-  mobile:number;
-  dob:string;
+  userBasicInfo:any;
+  newBasicInfo:any;
 
-  //parent/guardian info
-  guardianName = "Guardian"
-  relation:string = "Uncle";
-  presentAddress:string;
-  permanentAddress:string;
-  guardianMobile:number = 8768957354;
-  guardianEmail:string = "uncle@ad.com";
-
-  //academic info
   class:string;
-  session:string = "2017-18";
   school:string;
-  department:string = "Science";
-  section:string = "C";
-  shift:string = "Morning";
-  examVersion:string = "English";
-  course:string = "Mathematics, Science";
-  classes:SelectItem[];
+  newClass:any;
+  newSchool:string;
 
-  dialogHeader:string;
-  dialogDisplay:boolean;
-
-
-  userInfoObject:any;
-
+  test:any;
   constructor(
     private httpService: UserinfoService,
-    private classService: SubjectService
+    private classService: SubjectService,
+    private update: UpdateService
     ){}  
 
-  edit(number){
-    this.dialogHeader=number;
-    this.dialogDisplay=true;
-  }
 
   ngOnInit() {
     this.httpService.getUserInfo('gpantbiz@gmail.com')
     .subscribe((data: Response)=>{
-      this.userInfoObject = data['resource'][0];
-      this.studentName = this.userInfoObject.firstname +' '+ this.userInfoObject.lastname;
-      this.email = this.userInfoObject.email;
-      this.mobile = this.userInfoObject.mobile;
-      this.presentAddress = this.userInfoObject.address + ', '  + this.userInfoObject.state + ', ' +this.userInfoObject.country + ', ' +this.userInfoObject.pincode 
-      this.permanentAddress = this.presentAddress;
-      this.dob = this.userInfoObject.birthday;
-     })
+      data = data['resource'][0];
+      this.userBasicInfo = data;
+    });
 
-     this.httpService.getAcademicInfo(2)
-     .subscribe((data: Response) =>{
-       this.class = data['class_by_class_id']['name'];
-       this.school = data['school_by_school_id']['name'];
-     } )
+    this.httpService.getAcademicInfo(2)
+    .subscribe((data: Response) =>{
+      this.class = data['class_by_class_id']['abbreviation'];
+      this.school = data['school_by_school_id']['name'];
+    });
 
-     this.classService.getClasses()
-     .subscribe((data) => {
-       data = data['resource'];
-       for(let i in data){
-         this.classes.push({label :data[i]['abbreviation'], value: data[i]['name']})
-       }
-     })
+    this.newClass=[];
+    this.newClass.push({label:'I', value:'first'});
+    this.newClass.push({label:'II', value:'second'});
+    this.newClass.push({label:'III', value:'third'});
+    this.newClass.push({label:'IV', value:'fourth'});
+    this.newClass.push({label:'V', value:'fifth'});
+    this.newClass.push({label:'VII', value:'sixth'});
+  }
 
+//for basic info
+  save(){
+    this.userBasicInfo = this.newBasicInfo;
+    this.update.updateUserInfo(this.newBasicInfo)
+    .subscribe((data: Response) => {
+    });
+    this.editBasic = false;
+  }
+
+  edit(){
+    this.editBasic = true;
+    this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
+  }
+  cancel(){
+    this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
+    this.editBasic = false;
   }
 
 
-  
+  saveAcademic(){
+  return true
+  }
 }
