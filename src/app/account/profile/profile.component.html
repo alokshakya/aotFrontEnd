@@ -27,7 +27,7 @@
 
                 <div class="ui-g-4">
                   <div class="userinfo">
-                  <h4><i class="fa fa-male"></i> Gender</h4><p><span class="userdetails" *ngIf="!editBasic" >{{userBasicInfo?.gender}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="newBasicInfo.gender" > </p>
+                  <h4><i class="fa fa-male"></i> Gender</h4><p><span class="userdetails" *ngIf="!editBasic" >{{userBasicInfo?.gender}}</span><p-radioButton name="gender" value="Female" label="F" *ngIf="editBasic" [(ngModel)]="newBasicInfo.gender"></p-radioButton> &nbsp; <p-radioButton name="gender" value="Male" label="M" *ngIf="editBasic" [(ngModel)]="newBasicInfo.gender"></p-radioButton></p>
                   </div>
                 </div>
                 
