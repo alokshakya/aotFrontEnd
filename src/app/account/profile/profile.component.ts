@@ -13,15 +13,16 @@ import { UpdateService } from '../../services/update.service';
 export class ProfileComponent implements OnInit {
 
   editBasic:boolean;
-  editAcademia:boolean;
-
   userBasicInfo:any;
   newBasicInfo:any;
 
   class:string;
+  newClass:string;
   school:string;
-  newClass:any;
   newSchool:string;
+  testimonial:string;
+
+  classList:SelectItem[];
 
   test:any;
   constructor(
@@ -44,21 +45,27 @@ export class ProfileComponent implements OnInit {
       this.school = data['school_by_school_id']['name'];
     });
 
-    this.newClass=[];
-    this.newClass.push({label:'I', value:'first'});
-    this.newClass.push({label:'II', value:'second'});
-    this.newClass.push({label:'III', value:'third'});
-    this.newClass.push({label:'IV', value:'fourth'});
-    this.newClass.push({label:'V', value:'fifth'});
-    this.newClass.push({label:'VII', value:'sixth'});
+    this.classList=[];
+    this.classService.getClasses()
+    .subscribe((data: Response) => {
+      data = data['resource'];
+      for(let i in data){
+        this.classList.push({label:data[i]['abbreviation'], value:data[i]['abbreviation']})
+      }
+      console.log(this.newClass)
+    })
   }
 
 //for basic info
   save(){
     this.userBasicInfo = this.newBasicInfo;
+    this.class = this.newClass
+    
     this.update.updateUserInfo(this.newBasicInfo)
     .subscribe((data: Response) => {
     });
+    
+    //this.update.updateStudent(2,this.newClass)
     this.editBasic = false;
   }
 
@@ -68,11 +75,16 @@ export class ProfileComponent implements OnInit {
   }
   cancel(){
     this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
+    this.newClass = this.class;
+    this.newSchool = this.school;
     this.editBasic = false;
   }
 
-
-  saveAcademic(){
-  return true
+  //testimonial submit
+  submit(){
+    this.update.postTestimonial(this.testimonial)
+    .subscribe((data: Response) =>{
+    })
   }
+
 }

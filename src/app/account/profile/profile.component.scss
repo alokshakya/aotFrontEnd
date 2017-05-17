@@ -65,6 +65,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .container{
+    height: 400px;
     width: auto;
 }
 
@@ -80,4 +81,23 @@ input[type=number]::-webkit-outer-spin-button {
     height: 25px;
     background-color: lightyellow;
     border: none;
+}
+
+.imagesection{
+    text-align: center;
+    padding-top: 10%;
+}
+
+.text{
+    width:500px;
+    height:200px;
+}
+
+.testimonial input{
+    padding-left: 60px;
+}
+
+.testimonial img{
+    border-radius: 50%;
+    border:1px solid #3664dc;
 }

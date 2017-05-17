@@ -2,10 +2,12 @@
   <div class="ui-g-12">
     <p-tabView>
       <p-tabPanel header="Basic Info" leftIcon="fa-user-circle">
-          <div class="ui-g container">
+          <div class="ui-g">
             <div class="ui-g-3">
-              <img src="" height="150px" width="150px" alt="asd"><br><br>
-              <input *ngIf="editBasic" type="file">
+              <div class="imagesection">
+                <img src="../../../assets/layout/images/Profile_picture.png" height="150px" width="150px" alt="asd"><br><br>
+                <input *ngIf="editBasic" type="file">
+              </div>
             </div>
             
             <div class="ui-g-9">
@@ -32,6 +34,16 @@
                 <div class="ui-g-8">
                   <div class="userinfo">
                   <h4><i class="fa fa-calender"></i> Date Of Birth</h4><p><span class="userdetails" *ngIf="!editBasic" >{{userBasicInfo?.birthday}}</span><input *ngIf="editBasic" type="date" [(ngModel)]="newBasicInfo.birthday" ></p>
+                  </div>
+                </div>
+                
+                <div class="ui-g-4">
+                  <div class="userinfo"><h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails" *ngIf="!editBasic" >{{class}}</span><p-dropdown *ngIf="editBasic" [options]="classList" [(ngModel)]="newClass"></p-dropdown></p>
+                  </div>
+                </div>
+            
+                <div class="ui-g-8">
+                  <div class="userinfo"><h4><i class="fa fa-building"></i> School </h4><p><span *ngIf="!editBasic" class="userdetails">{{school}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="school"></p>
                   </div>
                 </div>
                 
@@ -89,7 +101,7 @@
           </div>
       </p-tabPanel>-->
       
-      <p-tabPanel header="Academic Info" leftIcon="fa-graduation-cap"> <!--Academic info-->
+      <!--<p-tabPanel header="Academic Info" leftIcon="fa-graduation-cap">
           <div class="ui-g container">
             <div class="ui-g-6">
               <div class="userinfo"><h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails" *ngIf="!editAcademia" >{{class}}</span><p-dropdown *ngIf="editAcademia" [options]="newClass" [(ngModel)]="newClass"></p-dropdown></p>
@@ -107,16 +119,17 @@
               <button type="button" *ngIf=editAcademia pButton class="ui-button-danger" label="Cancel"></button>
             </div>
           </div>    
-      </p-tabPanel>
+      </p-tabPanel>-->
 
       <p-tabPanel header="Add Testimonial" leftIcon="fa-pencil">
         <div class="ui-g container">
           <div class="ui-g-4 testimonial">
+            <img src="../../../assets/layout/images/Profile_picture.png" height="150px" width="150px" alt="asd"><br><br>
+            <input style="vertical-align:middle" type="file">
           </div>
-          <div class="ui-g-6">            
-          </div>
-          <div class="ui-g-12 testimonial">
-          <button type="submit" pButton label="Submit" class="ui-button-success"></button>
+          <div class="ui-g-8 testimonial">
+            <textarea pInputTextArea [(ngModel)]="testimonial" placeholder="Enter your message here...." class="text"></textarea><br>
+            <button type="submit" pButton label="Submit" class="ui-button-success" (click)="submit()"></button>
           </div>
         </div>
       </p-tabPanel>

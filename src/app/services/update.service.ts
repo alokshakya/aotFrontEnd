@@ -22,4 +22,18 @@ export class UpdateService {
     .map((response: Response) => response.json());
   }
 
+   updateStudent(studentId, classId){
+     var wrapper = {'resource':[]}
+     wrapper['resource'].push({'student_id':2, 'class_id':classId})
+     return this.http.put(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox/_table/student/', JSON.stringify(wrapper), {headers: this.queryHeader})
+     .map((response: Response) => response.json())
+   }
+
+   postTestimonial(data){
+     var wrapper = {'resource':[]}
+     wrapper['resource'].push({'text':data});
+     return this.http.post(constants.DREAMFACTORY_INSTANCE_URL + '/api/v2/olympiadbox/_table/testimonials/', JSON.stringify(wrapper), {headers: this.queryHeader})
+     .map((response: Response) => response.json())
+   }
+
 }

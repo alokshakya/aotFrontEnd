@@ -48,7 +48,4 @@ export class SubjectService {
      .map((response: Response) => response.json())
    }
 
-
-
-
 }
