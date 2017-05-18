@@ -1,24 +1,68 @@
-#header, #sidebar{
+.logo{
+    width:150px;
     background-color: #2D353C;
-    color: white;
-    margin-right:0px;
+    text-align: center;
 }
 
-#sidebar{
-    height:530px;
+.headpanel{
+    background-color: #2D353C; 
+    height: 50px;
+    color: white;
+    width: 87.4%;
 }
+
+.headpanel span{
+    margin-right: 30px;
+}
+
+#sub{
+    border-radius: 5px;
+    text-align: center;
+    background-color: #009393;
+    width:180px;
+    
+}
+
+#class{
+    width: 30px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #2BBF61
+}
+
+#timer{
+    width: 50px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #EEA236
+}
+
+
+.sidepanel{
+    background-color: #2D353C;
+    width: 150px;
+    color: white;
+}
+
+.questionpanel{
+    padding-bottom: 22%;
+}
+
+
 .qnumber{
     color: white;
     text-align: center;
     border: 2px solid;
     border-radius: 50%;
-    height: 40px;
-    width:40px;   
-    padding-top:15%;
+    height: 30px;
+    width:30px;
+    padding: 3px;   
 }
 
 .qnumber:hover{
+    color: black;
     background-color: lightgray;
+    border-color: lightgrey;
     cursor: pointer;     
 }
 
@@ -34,9 +78,9 @@
     text-align: center;
     border: 2px solid white; 
     border-radius: 50%;
-    height: 40px;
-    width:40px;   
-    padding-top:15%;
+    height: 30px;
+    width:30px;   
+    padding:3px;
 }
 
 .qnumbermark{
@@ -60,18 +104,6 @@
 
 .incorrect{
     color:#DC4E42;
-}
-
-#time{
-    border-radius: 5px;
-    background-color: #EEA236;
-    height:30px;
-    width:100px;
-    text-align: center;
-}
-
-.r{
-    padding-left: 30px;
 }
 
 i:hover{

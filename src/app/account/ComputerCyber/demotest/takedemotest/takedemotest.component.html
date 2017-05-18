@@ -7,9 +7,8 @@
     <div class="ui-g-5"><button type="button" pButton label="Start" [disabled]="start" (click)="startTest()"></button></div>
   </p-dialog>
 
-  <div class="ui-g-12" id="header">
+  <div class="ui-g-10" id="header">
     <div class="ui-g">
-      <div class="ui-g-1"><img src="assets/layout/images/Olympiadbox-logo.png" height="75px" width="75px" alt="Logo"></div>
       <div class="ui-g-2">{{test}}</div>
       <div class="ui-g-2">{{subject}}<br><br><i class="fa fa-question-circle fa-2x" (click)="instructions=true"></i><i class="fa fa-home fa-2x r" (click)="redirect()"></i></div>
       <div class="ui-g-2"><div id='time'><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s </div></div>
@@ -18,11 +17,9 @@
       <div class="ui-g-1"><i class="fa fa-user"></i> Gaurav Pant</div>
     </div>
   </div>
-  <div class="ui-g-3" id="sidebar">
+  <div class="ui-g-2" id="sidebar">
       <div class="ui-g">
-        <div class="ui-g-3"></div>
-        <div class="ui-g-6"></div>
-        <div class="ui-g-3"></div>
+        <div class="ui-g-12"></div>
         <div class="ui-g-3" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
       </div>
   </div>

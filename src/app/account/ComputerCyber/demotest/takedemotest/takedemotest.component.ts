@@ -2,11 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
+import { ConfirmationService } from 'primeng/primeng';
 import { SubjectService } from '../../../../services/subject.service'
 
 @Component({
   selector: 'app-takedemotest',
-  templateUrl: './takedemotest.component.html',
+  templateUrl: './test.takedemotest.component.html',
   styleUrls: ['./takedemotest.component.scss']
 })
 export class TakedemotestComponent implements OnInit {
@@ -17,8 +18,9 @@ export class TakedemotestComponent implements OnInit {
     sec:number;
     min:number;
     hour:number;
+
+    help:boolean;
     
-    instructions:boolean;
     start:boolean;
 
     counter:number;
@@ -48,7 +50,8 @@ export class TakedemotestComponent implements OnInit {
 
   constructor(
       private router: Router,
-      private demotest: SubjectService)
+      private demotest: SubjectService,
+      private confirmservice: ConfirmationService)
       
       {
       this.counter = 0;
@@ -59,7 +62,6 @@ export class TakedemotestComponent implements OnInit {
       this.sec = 0;
       this.min = 0;
       this.hour = 0;
-      this.instructions = true;
       this.hintDisplay = false;
       this.response = {};
       this.questionStatus = {};
@@ -219,6 +221,8 @@ export class TakedemotestComponent implements OnInit {
               k=k+1;
             }
         })
+        this.help = true;
+        this.startTest();
 
   }
   
@@ -271,7 +275,7 @@ export class TakedemotestComponent implements OnInit {
   startTest(){
       if(this.start==false){
           let timer = Observable.timer(0,1000); //initiate timer
-          this.instructions=false;
+          this.help=false;
           timer.subscribe(t=>{
               this.sec+=1;
               if(this.sec==60){this.sec=0;this.min+=1;}
@@ -292,6 +296,16 @@ export class TakedemotestComponent implements OnInit {
       console.log(sub)
       return true;
   }
+
+  quit(){
+     this.confirmservice.confirm({
+            message: 'Are you sure that you want to quit?',
+            accept: () => {
+                this.router.navigate(['account/dashboard']);
+
+            }
+        });
+    }
 
 
 }
