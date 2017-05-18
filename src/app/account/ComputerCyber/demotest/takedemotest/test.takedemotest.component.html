@@ -1,6 +1,6 @@
 <p-confirmDialog header="Go to dashboard" icon="fa fa-question-circle" width="425"></p-confirmDialog>
-<p-dialog header="Title" [(visible)]="help" (onHide)="start()">
-    Content
+<p-dialog header="Intsructions" [(visible)]="help" responsive="true" (onHide)="start()">
+    <h2>IMPORTANT INSTRUCTIONS</h2>
 </p-dialog>
 
 
@@ -8,13 +8,16 @@
     <div class="ui-g-2 logo">
         <img src="assets/layout/images/Olympiadbox-logo.png" width="75px" height="75px">
     </div>
-    <div class="ui-g-10 headpanel">
-        <span >Demo Test</span>
-        <span id="sub">{{subject}}</span>
-        <span id="class">class</span>
-        <span id="timer"><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span>
-        <span>{{counter/10}}/{{totalQuestions}} Attempted</span>
-        <span><i class="fa fa-user"></i> Gaurav Pant</span>
+    <div class="ui-g-10 nopad">
+        <div class="ui-g headpanel">
+            <span >Demo Test</span>
+            <span id="sub">{{subject}}</span>
+            <span id="class">class</span>
+            <span id="timer"><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span>
+            <span id="bar"><p-progressBar [value]="counter"></p-progressBar></span>
+            <p>{{counter/10}}/{{totalQuestions}} Attempted</p>
+            <span><i class="fa fa-user"></i> Gaurav Pant</span>
+        </div>
     </div>
     <div class="ui-g-1 sidepanel">
         <div class="ui-g">

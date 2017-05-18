@@ -4,34 +4,63 @@
     text-align: center;
 }
 
+.nopad{
+    padding: 0px 0px 0px 0px;
+    margin:  0px 0px 0px 0px;
+    height: 30px;
+}
+
 .headpanel{
     background-color: #2D353C; 
-    height: 50px;
     color: white;
-    width: 87.4%;
+    width: 106%;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .headpanel span{
-    margin-right: 30px;
+    margin-top:12px;
+    width:100px;
+    margin-right:40px;
+}
+
+.headpanel p{
+    margin-top: 12px;
+    margin-right: 40px;
+}
+
+#bar{
+    margin-right:4px;
 }
 
 #sub{
+    height:30px;
+    padding-top:4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width:120px;
     border-radius: 5px;
     text-align: center;
     background-color: #009393;
-    width:180px;
     
 }
 
 #class{
-    width: 30px;
+    height:30px;
+    padding-top:4px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 60px;
     border-radius: 5px;
     text-align: center;
     background-color: #2BBF61
 }
 
 #timer{
-    width: 50px;
+    height:30px;
+    margin-top:10px;
+    margin-bottom: 10px;
+    padding-top:4px;
     border-radius: 5px;
     text-align: center;
     background-color: #EEA236
@@ -45,7 +74,8 @@
 }
 
 .questionpanel{
-    padding-bottom: 22%;
+    padding-bottom: 21.5%;
+    overflow-y: hidden;
 }
 
 
