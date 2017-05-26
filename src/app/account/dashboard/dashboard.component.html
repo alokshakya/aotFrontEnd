@@ -1,16 +1,16 @@
 <div class="ui-g">            
-    <div class="ui-g-8">
+    <div class="ui-g-8 ui-sm-12">
         <div class="ui-g">
         <div class="ui-g-12">  <!--SUBJECTS PANEL-->
             <p-panel header="Subject Summary">
                 <div class="ui-g">
-                    <div class="ui-g-4 sub" *ngFor="let sub of subjectSummary" id="{{sub | lowercase | cssId }}" >
+                    <div class="ui-g-4 ui-sm-12 sub" *ngFor="let sub of subjectSummary" id="{{sub | lowercase | cssId }}" >
                         <i class="icon-science icon-4x" *ngIf="sub=='Science'"></i>
                         <i class="icon-reasoning icon-4x" *ngIf="sub=='Reasoning'"></i>
                         <i class="icon-gk icon-4x" *ngIf="sub=='General Knowledge'"></i>
                         <i class="icon-english icon-4x" *ngIf="sub=='English'"></i>
                         <i class="icon-maths icon-4x" *ngIf="sub=='Mathematics'"></i>
-                        <i class="icon-cyber icon-4x" *ngIf="sub=='Computer/Cyber'"></i> 
+                        <i class="icon-cyber icon-4x" *ngIf="sub=='Computers'"></i> 
                         <p>{{sub|uppercase}}</p>
                         <button pButton class="ui-button-success" (click)="redirect('demo')" class="ui-button-success" label="Demo"></button>
                         <button *ngIf="!subscribedSubjects[sub]" pButton class="ui-button-warning" [ngClass] ="{'ui-button-danger':sub=='Science'||sub=='English'}" (click)="redirect('chapter')" label="Subscribe"></button>
@@ -26,11 +26,11 @@
                         <div class="ui-g" [ngClass]="{'hidden':!subscribedSubjects[item.key] }">
                             <div class="ui-g-12">
                                 <div class="ui-g">
-                                    <div class="ui-g-3">
+                                    <div class="ui-g-3 ui-sm-12">
                                         <span class="testsubject" *ngFor="let sub of item.value|keys">{{sub.key}}<br><br></span>
                                     </div>
-                                    <div class="ui-g-8">
-                                        <div class="progress" *ngFor="let data of item.value|keys" >
+                                    <div class="ui-g-8 ui-sm-12">
+                                        <div class="progress hover" title="Go to {{data.key}}" *ngFor="let data of item.value|keys" (click)="redirectToTest(item.key,data.key)">
                                             <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.completed+'%'}"> {{data.value.completed}}%
                                             </div>
                                             <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.generated+'%'}">{{data.value.generated}}%
@@ -47,7 +47,7 @@
                                     <div class="ui-g-9 ui-fluid">
                                         <span class="comp">Completed</span>
                                         <span class="gen">Generated</span>
-                                        <span class="notcomp">Not Completed</span>
+                                        <span class="inc">Remaining</span>
                                     </div>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                         <span class="testsubject" *ngFor="let sub of item.value|keys">{{sub.key}}<br><br></span>
                                     </div>
                                     <div class="ui-g-8">
-                                        <div class="progress" *ngFor="let data of item.value|keys">
+                                        <div class="progress hover" title="Go to {{item.key}} result" *ngFor="let data of item.value|keys" (click)="redirectToResult(item.key)" >
                                             <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.right+'%'}">{{data.value.right}}%
                                             </div>
                                             <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.review+'%'}">{{data.value.review}}%
@@ -104,7 +104,7 @@
         </div>
     </div>
 
-    <div class="ui-g-4">
+    <div class="ui-g-4 ui-sm-12">
         <div class="ui-g-12">
             <p-panel header="Notice Board">
             <div id="notice">

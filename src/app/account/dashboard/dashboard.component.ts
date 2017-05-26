@@ -5,6 +5,7 @@ import { Response } from '@angular/http';
 
 import { NotificationService } from '../../services/notification.service';
 import { SubjectService } from '../../services/subject.service';
+import { SharedService } from '../../services/shared.service';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { SubjectService } from '../../services/subject.service';
 })
 export class DashboardComponent implements OnInit{
 
-    computerSubscribed=false;
+    computersSubscribed=false;
 
     subjectSummary:any;
 
@@ -34,11 +35,11 @@ export class DashboardComponent implements OnInit{
     constructor(
         private router: Router, 
         private notification: NotificationService,
-        private sub: SubjectService
+        private sub: SubjectService,
         ) {
         
         this.testSummary = {
-                                "Computer/Cyber": {
+                                "Computers": {
                                     "Chapterwise Test": {
                                         "completed": 34,
                                         "generated": 44,
@@ -46,18 +47,15 @@ export class DashboardComponent implements OnInit{
                                     },
                                     "Sample Test": {
                                         "completed": 35,
-                                        "generated": 34,
-                                        "notcompleted": 31
+                                        "notcompleted": 65
                                     },
                                     "Mock Test": {
                                         "completed": 74,
-                                        "generated": 22,
-                                        "notcompleted": 4
+                                        "notcompleted": 26
                                     },
-                                    "Demo Test": {
-                                        "completed": 34,
-                                        "generated": 44,
-                                        "notcompleted": 22
+                                    "Demo Test":{
+                                        "completed":100,
+                                        "notcompleted":0,
                                     }
                                 },
                                 "Science": {
@@ -68,18 +66,15 @@ export class DashboardComponent implements OnInit{
                                     },
                                     "Sample Test": {
                                         "completed": 60,
-                                        "generated": 34,
-                                        "notcompleted": 6
+                                        "notcompleted": 40
                                     },
                                     "Mock Test": {
                                         "completed": 34,
-                                        "generated": 32,
-                                        "notcompleted": 34
+                                        "notcompleted": 66
                                     },
-                                    "Demo Test": {
-                                        "completed": 67,
-                                        "generated": 23,
-                                        "notcompleted": 10
+                                    "Demo Test":{
+                                        "completed":0,
+                                        "notcompleted":100,
                                     }
                                 },
                                 "Mathematics": {
@@ -90,18 +85,15 @@ export class DashboardComponent implements OnInit{
                                     },
                                     "Sample Test": {
                                         "completed": 42,
-                                        "generated": 42,
-                                        "notcompleted": 14
+                                        "notcompleted": 58
                                     },
                                     "Mock Test": {
                                         "completed": 69,
-                                        "generated": 9,
-                                        "notcompleted": 22
+                                        "notcompleted": 31
                                     },
-                                    "Demo Test": {
-                                        "completed": 100,
-                                        "generated": 0,
-                                        "notcompleted": 0
+                                    "Demo Test":{
+                                        "completed":0,
+                                        "notcompleted":100,
                                     }
                                 },
                                 "General Knowledge": {
@@ -112,18 +104,15 @@ export class DashboardComponent implements OnInit{
                                     },
                                     "Sample Test": {
                                         "completed": 12,
-                                        "generated":5,
-                                        "notcompleted": 83
+                                        "notcompleted": 88
                                     },
                                     "Mock Test": {
                                         "completed": 45,
-                                        "generated": 15,
-                                        "notcompleted": 40
+                                        "notcompleted": 55
                                     },
-                                    "Demo Test": {
-                                        "completed": 100,
-                                        "generated": 0,
-                                        "notcompleted": 0
+                                    "Demo Test":{
+                                        "completed":0,
+                                        "notcompleted":100,
                                     }
                                 },
                                 "English": {
@@ -134,19 +123,17 @@ export class DashboardComponent implements OnInit{
                                     },
                                     "Sample Test": {
                                         "completed": 45,
-                                        "generated": 25,
-                                        "notcompleted": 30
+                                        "notcompleted": 55
                                     },
                                     "Mock Test": {
                                         "completed": 13,
-                                        "generated": 2,
-                                        "notcompleted": 85
+                                        "notcompleted": 87
                                     },
-                                    "Demo Test": {
-                                        "completed": 0,
-                                        "generated": 100,
-                                        "notcompleted": 0
+                                    "Demo Test":{
+                                        "completed":0,
+                                        "notcompleted":100,
                                     }
+
                                 },
                                 "Reasoning": {
                                     "Chapterwise Test": {
@@ -156,24 +143,21 @@ export class DashboardComponent implements OnInit{
                                     },
                                     "Sample Test": {
                                         "completed": 0,
-                                        "generated": 100,
-                                        "notcompleted": 0
+                                        "notcompleted": 100
                                     },
                                     "Mock Test": {
                                         "completed": 54,
-                                        "generated": 21,
-                                        "notcompleted": 25
+                                        "notcompleted": 46
                                     },
-                                    "Demo Test": {
-                                        "completed": 34,
-                                        "generated": 44,
-                                        "notcompleted": 22
+                                    "Demo Test":{
+                                        "completed":100,
+                                        "notcompleted":0,
                                     }
                                 }
         }
 
         this.resultSummary = {
-                                "Computer/Cyber": {
+                                "Computers": {
                                     "Chapterwise Test": {
                                         "right": 34,
                                         "review": 44,
@@ -308,7 +292,7 @@ export class DashboardComponent implements OnInit{
 
         }
 
-        this.subscribedSubjects = {"Computer/Cyber":true, "Science":true, "Mathematics":false, "General Knowledge":true, 
+        this.subscribedSubjects = {"Computers":true, "Science":true, "Mathematics":false, "General Knowledge":true, 
                                     "English":false, "Reasoning":false}
 
     }
@@ -319,12 +303,12 @@ export class DashboardComponent implements OnInit{
     }
                         
     startTest(){
-        this.router.navigate(['account/computer/sampletest'])
+        this.router.navigate(['account/computers/sampletest'])
     }
 
     redirect(destination){
         if(destination=='demo'){
-            this.router.navigate(['account/computer/demotest']);
+            this.router.navigate(['account/computers/demotest']);
         }else {this.router.navigate(['account/accountsettings'])}
     }
 
@@ -359,9 +343,20 @@ export class DashboardComponent implements OnInit{
     isLogin(token){
         if(token==null||token==''){
             this.router.navigate(['login'])
-        }else{ this.getData() }
+        }else{ 
+            this.getData(); }
     } 
 
+    redirectToTest(i,j){
+        var a = i.toLowerCase()
+        var b = j.toLowerCase().replace(/\s/g, "");
+        this.router.navigate(['account/'+a+'/'+b]);
+    }
+
+    redirectToResult(i){
+        var a = i.toLowerCase();
+        this.router.navigate(['account/'+a+'/result'])
+    }
 
     check(e){
         console.log(e.index);
