@@ -11,3 +11,24 @@
     text-align: center;
     
 }
+
+.panel span{
+    border: 1px solid;
+}
+
+.hover:hover{
+    cursor: pointer;
+}
+
+#correcthead{
+    background-color: #2BBF61;
+    border-radius: 5px;
+}
+
+#wronghead{
+    background-color: #DC4E42;
+}
+
+#markhead{
+    background-color: #F0AD4E;
+}

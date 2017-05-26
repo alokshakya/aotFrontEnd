@@ -1,58 +1,717 @@
 <div class="ui-g">
   <div class="ui-g-12">
-    <p-panel header="Result">
       <p-tabView>
-        <p-tabPanel *ngFor="let result of resultData | keys;let i=index" header="{{result.key}}">
-          <div class="ui-g">  
-            <div class="ui-g-4">
-              <p-accordion>
-                <p-accordionTab *ngFor="let test of result.value | keys" header="{{test.key}}">
-                  <div class="ui-g" *ngFor="let data of test.value | keys">
-                    <div class="ui-g-6">{{data.key}}</div>
-                    <div class="ui-g-6"><p-progressBar value="{{data.value}}" (click)="showSubPanel(result.key,test.key,data.key)"></p-progressBar></div>
+        <p-tabPanel header="Chapterwise Test">
+          <div class="ui-g">
+            <div class="ui-g-5">
+              <div data-toggle="collapse" data-target="#1">
+                <div>Chapter 1</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
                   </div>
-                </p-accordionTab>
-              </p-accordion>
-            </div>
-            <div class="ui-g-8" *ngIf="chapterwiseTestView">   <!-- For Chapterwise Test Only -->
-              <p-panel [header]="panelHead">
-                <div class="ui-g">
-                  <div class="ui-g-1"></div>
-                  <div class="ui-g-2" *ngFor="let details of chapterwiseTestResultData|keys">
-                    <button type="button" pButton  label="{{details.key}}" (click)="showWindow(details.key)"></button>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
                   </div>
-                  <div class="ui-g-1"></div>
-                </div><hr>
-                <div *ngIf="windowToggle">
-                  <div class="ui-g">
-                    <div class="ui-g-6 chart"><p-chart #piechart type="pie" [data]="chapterwiseTestChart" refresh></p-chart><h3>{{testName}}</h3></div>
-                    <div class="ui-g-6">
-                      <div class="ui-g"  *ngFor="let testdata of resultWindow|keys">
-                        <div class="ui-g-6 window">{{testdata.key}}</div>
-                        <div class="ui-g-6 data">{{testdata.value}}</div>
-                      </div>
-                    </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
                   </div>
                 </div>
-              </p-panel>
-            </div>
-            <div class="ui-g-8" *ngIf="otherTestView">  <!-- For remaining tests -->
-              <p-panel [header]="panelHead">
-                <div class="ui-g">
-                  <div class="ui-g-6 chart"><p-chart #chart type="pie" [data]="otherTestChart" refresh></p-chart><h3>{{testName}}</h3></div>
-                  <div class="ui-g-6">
-                    <div class="ui-g" *ngFor="let sample of otherTestResultData|keys">
-                      <div class="ui-g-6 window">{{sample.key}}</div>
-                      <div class="ui-g-6 data">{{sample.value}}</div>
-                    </div>
+              </div>
+              <div id="1" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar  hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-warning" role="progressbar" style="width:40%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-danger" role="progressbar" style="width:40%">
                   </div>
                 </div>
-              </p-panel>
+                Test 2<div class="progress">
+                  <div class="progress-bar  hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar  hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar  hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar  hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div data-toggle="collapse" data-target="#2">
+                <div>Chapter 2</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar  hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div id="2" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 2<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div data-toggle="collapse" data-target="#3">
+                <div>Chapter 3</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div id="3" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 2<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div data-toggle="collapse" data-target="#4">
+                <div>Chapter 4</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div id="4" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 2<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div data-toggle="collapse" data-target="#5">
+                <div>Chapter 5</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div id="5" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 2<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div data-toggle="collapse" data-target="#6">
+                <div>Chapter 6</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div id="6" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 2<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div data-toggle="collapse" data-target="#7">
+                <div>Chapter 7</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div id="7" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 2<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div data-toggle="collapse" data-target="#8">
+                <div>Chapter 8</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div id="8" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 2<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div data-toggle="collapse" data-target="#9">
+                <div>Chapter 9</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div id="9" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 2<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div data-toggle="collapse" data-target="#10">
+                <div>Chapter 10</div>
+                <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+              <div id="10" class="collapse" style="height:20%;width:60%">
+                Test 1<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 2<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 3<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 4<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+                Test 5<div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Sample Test">
+          <div class="ui-g">
+            <div class="ui-g-5">
+              Sample Test 1
+              <div class="progress">
+                  <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                  </div>
+                  <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                  </div>
+              </div>
+              Sample Test 2
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                </div>
+              </div>
+              Sample Test 3
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                </div>
+              </div>
+              Sample Test 4
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                </div>
+              </div>
+              Sample Test 5
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                </div>
+              </div>
+              Sample Test 6
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                </div>
+              </div>
+              Sample Test 7
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                </div>
+              </div>
+              Sample Test 8
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                </div>
+              </div>
+              Sample Test 9
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                </div>
+              </div>
+              Sample Test 10
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Mock Test">
+          <div class="ui-g">
+            <div class="ui-g-5">
+              Mock Test 1
+              <div class="progress" (click)="mockResult(1)" >
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">30%
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:60%">60%
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:10%">10%
+                </div>
+              </div>
+              Mock Test 2
+              <div class="progress" (click)="mockResult(2)">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:20%">20%
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:40%">40%
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">40%
+                </div>
+              </div>
+              Mock Test 3
+              <div class="progress" (click)="mockResult(3)">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:30%">30%
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:30%">30%
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:40%">40%
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-1"></div>
+            <div class="ui-g-6 panel" *ngIf="showMock">
+              <div class="ui-g" *ngFor="let data of mock|keys">
+                <div class="ui-g-5 ui-sm-6 window">{{data.key}}</div>
+                <div class="ui-g-5  ui-sm-6 data">{{data.value}}</div>
+              </div>
+              <div class="ui-g">
+                <div class="ui-g-4">Chapter 1</div><div class="ui-g-6"><p-progressBar value="34"></p-progressBar></div>
+                <div class="ui-g-4">Chapter 2</div><div class="ui-g-6"><p-progressBar value="32"></p-progressBar></div>
+                <div class="ui-g-4">Chapter 3</div><div class="ui-g-6"><p-progressBar value="43"></p-progressBar></div>
+                <div class="ui-g-4">Chapter 4</div><div class="ui-g-6"><p-progressBar value="20"></p-progressBar></div>
+                <div class="ui-g-4">Chapter 5</div><div class="ui-g-6"><p-progressBar value="40"></p-progressBar></div>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Demo Test">
+          <div class="ui-g">
+            <div class="ui-g-5" (click)="demoResult()">
+              Demo Test 1
+              <div class="progress">
+                <div class="progress-bar hover progress-bar-success" role="progressbar" style="width:45%">45%
+                </div>
+                <div class="progress-bar hover progress-bar-warning" role="progressbar" style="width:20%">20%
+                </div>
+                <div class="progress-bar hover progress-bar-danger" role="progressbar" style="width:35%">35%
+                </div>
+              </div>
+            </div>
+            <div class="ui-g-1"></div>
+            <div class="ui-g-6 panel" *ngIf="showDemo">
+              <div class="ui-g" *ngFor="let data of demo|keys">
+                <div class="ui-g-5 window">{{data.key}}</div>
+                <div class="ui-g-5 data">{{data.value}}</div>
+              </div>
+              <div class="ui-g">
+                <div class="ui-g-4">Chapter 1</div><div class="ui-g-6"><p-progressBar value="34"></p-progressBar></div>
+                <div class="ui-g-4">Chapter 2</div><div class="ui-g-6"><p-progressBar value="45"></p-progressBar></div>
+                <div class="ui-g-4">Chapter 3</div><div class="ui-g-6"><p-progressBar value="13"></p-progressBar></div>
+                <div class="ui-g-4">Chapter 4</div><div class="ui-g-6"><p-progressBar value="97"></p-progressBar></div>
+                <div class="ui-g-4">Chapter 5</div><div class="ui-g-6"><p-progressBar value="23"></p-progressBar></div>
+              </div>
             </div>
           </div>
         </p-tabPanel>
       </p-tabView>
-    </p-panel>
   </div>
 </div>
                   
