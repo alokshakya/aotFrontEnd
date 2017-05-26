@@ -1,0 +1,16 @@
+.wrapper {
+   display: relative;
+}
+
+.wrapper i {
+  position: absolute;
+  top: 1%;
+  left: 88%;
+  font-size: 25px;
+  color: #2D353C;
+}
+
+.wrapper i:hover{
+    cursor: pointer;
+    font-size: 28px;
+}

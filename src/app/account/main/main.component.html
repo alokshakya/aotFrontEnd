@@ -11,13 +11,16 @@
             <div class="nano-content menu-scroll-content">
                <div class="ui-g">
                     <div class="ui-g-12 ui-g-nopad">
-                        <a href="#/account/profile"><img id="ob-profile-image" title="View Profile" src="../../assets/layout/images/Profile_picture.png"></a>
+                        <img class="img-responsive" src="../../assets/layout/images/Profile_picture.png">
                     </div>                                      
                 </div>
                 <div style="padding-left:20px;color:white">
-                    <h5> {{studentName}}</h5>
-                    <h5>Class {{class}}</h5>
-                    <h5> {{email}}</h5>
+                    <div class="wrapper">
+                        <h5> Gaurav</h5>
+                        <h5>Class {{class}}</h5>
+                        <h5 title="{{email}}"> {{shownEmail}}</h5>
+                        <i title="Edit profile" class="fa fa-edit" (click)="gotoprofile()"></i>
+                    </div>
                 </div>
                 <hr>
                 

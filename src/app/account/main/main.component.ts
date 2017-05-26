@@ -2,7 +2,6 @@ import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} 
 import { Router } from '@angular/router';
 import { UserinfoService } from '../../services/userinfo.service';
 import { NotificationService } from '../../services/notification.service';
-import { ComponentInteractionService } from '../../services/component-interaction.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 
@@ -26,7 +25,8 @@ export class AccountMainComponent implements AfterViewInit {
     //student info to be displayed above menubar
     studentName: string;
     class: string;
-    email: string; 
+    email = "emailidlengthisgreaterthan25characters@gmail.com";
+    shownEmail = "emailidlengthisgreaterthan25characters@gmail.com";
     
     layoutCompact: boolean = false;
 
@@ -61,7 +61,7 @@ export class AccountMainComponent implements AfterViewInit {
     documentClickListener: Function;
 
     resetMenu: boolean;
-
+    
     personalDetails:any; //will be used in child components
     academicDetails:any;
     sessionToken:string
@@ -76,11 +76,13 @@ export class AccountMainComponent implements AfterViewInit {
         private router: Router, 
         private http: UserinfoService, 
         private notification: NotificationService,
-        private userInfo: ComponentInteractionService
         )
         {}
 
     ngOnInit() {
+        if (this.email.length>25){
+            this.shownEmail = this.email.slice(0,26) + '...'
+        }
         this.sessionToken = localStorage.getItem('session_token');
         this.isLogin(this.sessionToken);
 
@@ -92,24 +94,23 @@ export class AccountMainComponent implements AfterViewInit {
                 this.email = this.personalDetails.email
                 this.studentName = this.personalDetails.firstname + ' ' + this.personalDetails.lastname;
                 this.userInfoId = this.personalDetails.user_info_id;
-                this.userInfo.setPersonalInfo(this.personalDetails);
             });
         this.http.getAcademicInfo(this.userInfoId).subscribe((response: Response) =>{
             this.academicDetails  = response;
             this.class =  this.academicDetails.class_by_class_id.abbreviation;
-            this.userInfo.setAcademicInfo(this.academicDetails);
         }),(error)=>{
-        }
-            
-        this.userInfo.setAcademicInfo(this.academicDetails);
-        this.userInfo.setPersonalInfo(this.personalDetails);
+        }          
     }
 
     isLogin(token){
         if (token==null||token==''){
             this.router.navigate(['login'])
         }else{ this.getUserInfo()}
-    }      
+    }  
+
+    change(changed:boolean){
+        console.log(changed);
+    }    
 
     ngAfterViewInit() {
         this.layoutContainer = <HTMLDivElement> this.layourContainerViewChild.nativeElement;
@@ -131,12 +132,13 @@ export class AccountMainComponent implements AfterViewInit {
         });
 
 
-
-
-        
         setTimeout(() => {
             jQuery(this.layoutMenuScroller).nanoScroller({flash:true});
         }, 10);
+    }
+
+    gotoprofile(){
+        this.router.navigate(['account/profile'])
     }
 
     onMenuButtonClick(event) {
