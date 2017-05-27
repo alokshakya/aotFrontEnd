@@ -1,69 +1,123 @@
 <div class="ui-g">
+  <p-growl [(value)]="growlmsg"></p-growl>
+
   <div class="ui-g-12">
     <p-tabView>
+
+      <p-tabPanel header="Profile Pic" leftIcon="fa-picture-o">
+        <div class="ui-g box">
+          <div class="ui-g-12 imagetab">
+            <img class="img-responsive" src="../../assets/layout/images/Profile_picture.png"><br><br>
+            <input type="file">
+          </div>
+        </div>
+      </p-tabPanel>
+
       <p-tabPanel header="Basic Info" leftIcon="fa-user-circle">
-          <div class="ui-g">
-            <div class="ui-g-3">
-              <div class="imagesection">
-                <img src="../../../assets/layout/images/Profile_picture.png" height="150px" width="150px" alt="asd"><br><br>
-                <input *ngIf="editBasic" type="file">
-              </div>
-            </div>
-            
-            <div class="ui-g-9">
-              <div class="ui-g">
-                <div class="ui-g-8">
+          <div class="ui-g box">            
+                <div class="ui-g-4 ui-sm-4">
                   <div class="userinfo"> <!--personal Info-->
-                    <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails" *ngIf="!editBasic">{{userBasicInfo?.firstname}} {{userBasicInfo?.lastname}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="newBasicInfo.firstname" ><input *ngIf="editBasic" type="text" [(ngModel)]="newBasicInfo.lastname"></p>
+                    <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails" *ngIf="!editBasic">{{userBasicInfo?.firstname}} {{userBasicInfo?.lastname}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="newBasicInfo.firstname" > &nbsp; <input *ngIf="editBasic" type="text" [(ngModel)]="newBasicInfo.lastname"></p>
+                  </div>
+                </div>
+
+                <div class="ui-g-4 ui-sm-12"><div class="userinfo">
+                  <h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">{{userBasicInfo?.email}}</span></p>
                   </div>
                 </div>
                 
-                <div class="ui-g-4 btnsection">
+                <div class="ui-g-4 ui-sm-8 btnsection">
                   <button type="button" *ngIf=!editBasic pButton class="ui-button-warning" label="Edit" (click)="edit()"></button>
                   <button type="button" *ngIf=editBasic pButton class="ui-button-success" label="Save" (click)="save()"></button>
                   <button type="button" *ngIf=editBasic pButton class="ui-button-danger" label="Cancel" (click)="cancel()"></button>
                 </div>
                 
-
-                <div class="ui-g-4">
-                  <div class="userinfo">
-                  <h4><i class="fa fa-male"></i> Gender</h4><p><span class="userdetails" *ngIf="!editBasic" >{{userBasicInfo?.gender}}</span><p-radioButton name="gender" value="Female" label="F" *ngIf="editBasic" [(ngModel)]="newBasicInfo.gender"></p-radioButton> &nbsp; <p-radioButton name="gender" value="Male" label="M" *ngIf="editBasic" [(ngModel)]="newBasicInfo.gender"></p-radioButton></p>
+                <div class="ui-g-4 ui-sm-12">
+                  <div class="userinfo"><h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails">{{class}}</span></p>
                   </div>
                 </div>
                 
-                <div class="ui-g-8">
-                  <div class="userinfo">
-                  <h4><i class="fa fa-calender"></i> Date Of Birth</h4><p><span class="userdetails" *ngIf="!editBasic" >{{userBasicInfo?.birthday}}</span><input *ngIf="editBasic" type="date" [(ngModel)]="newBasicInfo.birthday" ></p>
-                  </div>
-                </div>
-                
-                <div class="ui-g-4">
-                  <div class="userinfo"><h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails" *ngIf="!editBasic" >{{class}}</span><p-dropdown *ngIf="editBasic" [options]="classList" [(ngModel)]="newClass"></p-dropdown></p>
-                  </div>
-                </div>
-            
-                <div class="ui-g-8">
-                  <div class="userinfo"><h4><i class="fa fa-building"></i> School </h4><p><span *ngIf="!editBasic" class="userdetails">{{school}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="school"></p>
-                  </div>
-                </div>
-                
-                <div class="ui-g-4"><div class="userinfo">
-                  <h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">{{userBasicInfo?.email}}</span></p>
-                  </div>
-                </div>
-                
-                <div class="ui-g-6"><div class="userinfo">
+                <div class="ui-g-8 ui-sm-12"><div class="userinfo">
                   <h4><i class="fa fa-mobile"></i> Mobile</h4><p><span class="userdetails" *ngIf="!editBasic" >{{userBasicInfo?.mobile}}</span><input *ngIf="editBasic" type="number"  [(ngModel)]="newBasicInfo.mobile" > </p>
                   </div>
                 </div>
-    
-                <div class="ui-g-12">
-                  <div class="userinfo"><h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails" *ngIf="!editBasic">{{userBasicInfo?.address}}, {{userBasicInfo?.state}}, {{userBasicInfo?.country}}, {{userBasicInfo?.pincode}}</span><input *ngIf="editBasic" [(ngModel)]="newBasicInfo.address" type="text"> &nbsp;&nbsp; <input *ngIf="editBasic" [(ngModel)]="newBasicInfo.state" type="text"> <input *ngIf="editBasic" [(ngModel)]="newBasicInfo.country" type="text"> <input *ngIf="editBasic" [(ngModel)]="newBasicInfo.pincode" type="text"> </p>
+
+                <div class="ui-g-4 ui-sm-12">
+                  <div class="userinfo">
+                  <h4><i class="fa fa-male"></i> Gender</h4><p><span class="userdetails">{{userBasicInfo?.gender}}</span></p>
                   </div>
                 </div>
-              </div>
+
+                <div class="ui-g-4 ui-sm-12">
+                  <div class="userinfo"><h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails" *ngIf="!editBasic">162 sec-5 vasundhara5 vasundharvasundharvasundharvasundharndhara5 vasundhara, ghaziabad {{userBasicInfo?.state}}, {{userBasicInfo?.country}}, {{userBasicInfo?.pincode}}</span><input *ngIf="editBasic" [(ngModel)]="newBasicInfo.address" type="text"> &nbsp;&nbsp; <input *ngIf="editBasic" [(ngModel)]="newBasicInfo.state" type="text"> <input *ngIf="editBasic" [(ngModel)]="newBasicInfo.country" type="text"> <input *ngIf="editBasic" [(ngModel)]="newBasicInfo.pincode" type="text"> </p>
+                  </div>
+                </div>
+
+                <div class="ui-g-8 ui-sm-12">
+                  <div class="userinfo">
+                  <h4><i class="fa fa-calendar"></i> Date Of Birth</h4><p><span class="userdetails" *ngIf="!editBasic" >{{userBasicInfo?.birthday}}</span><input *ngIf="editBasic" type="date" [(ngModel)]="newBasicInfo.birthday" ></p>
+                  </div>
+                </div>
+          </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="School Info" leftIcon="fa fa-graduation-cap">
+        <div class="ui-g box">
+          <div class="ui-g-4 ui-sm-5">
+            <div class="userinfo"><h4><i class="fa fa-building"></i> School Code </h4><p><span *ngIf="!editBasic" class="userdetails"></span><input *ngIf="editBasic" type="text" [(ngModel)]="schoolCode"></p>
             </div>
           </div>
+
+          <div class="ui-g-4 ui-sm-12">
+            <div class="userinfo"><h4><i class="fa fa-user"></i> Contact Person</h4><p><span *ngIf="!editBasic" class="userdetails">{{school}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="school"></p>
+            </div>
+          </div>
+
+          <div class="ui-g-4 ui-sm-3 btnsection">
+            <button type="button" *ngIf=!editBasic pButton class="ui-button-warning" label="Edit" (click)="edit()"></button>
+            <button type="button" *ngIf=editBasic pButton class="ui-button-success" label="Save" (click)="save()"></button>
+            <button type="button" *ngIf=editBasic pButton class="ui-button-danger" label="Cancel" (click)="cancel()"></button>
+          </div>
+
+          <div class="ui-g-4 ui-sm-12">
+            <div class="userinfo"><h4><i class="fa fa-building"></i> School Name </h4><p><span *ngIf="!editBasic" class="userdetails">{{school}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="school"></p>
+            </div>
+          </div>
+
+          <div class="ui-g-8 ui-sm-12">
+            <div class="userinfo"><h4><i class="fa fa-envelope-o"></i> Email</h4><p><span *ngIf="!editBasic" class="userdetails">{{school}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="school"></p>
+            </div>
+          </div>
+
+          <div class="ui-g-4 ui-sm-12">
+            <div class="userinfo"><h4><i class="fa fa-map-marker"></i> Address</h4><p><span *ngIf="!editBasic" class="userdetails">jsdhjkasjdkjasdsdlakjsdjaklsjdlkjasdiadaklsjdlasjdasdwiajlskdjjsdhjkasjdkjasdsdlakjsdjaklsjdlkjasdiadaklsjdlasjdasdwiajlskdjjsdhjkasjdkjasdsdlakjsdjaklsjdlkjasdiadaklsjdlasjdasdwiajlskdjjsdhjkasjdkjasdsdlakjsdjaklsjdlkjasdiadaklsjdlasjdasdwiajlskdjjsdhjkasjdkjasdsdlakjsdjaklsjdlkjasdiadaklsjdlasjdasdwiajlskdjjsdhjkasjdkjasdsdlakjsdjaklsjdlkjasdiadaklsjdlasjdasdwiajlskdjjsdhjkasjdkjasdsdlakjsdjaklsjdlkjasdiadaklsjdlasjdasdwiajlskdj{{school}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="school"></p>
+            </div>
+          </div>
+          
+          <div class="ui-g-8 ui-sm-12">
+            <div class="userinfo"><h4><i class="fa fa-mobile"></i> Mobile</h4><p><span *ngIf="!editBasic" class="userdetails">{{school}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="school"></p>
+            </div>
+          </div>
+
+          <div class="ui-g-4"></div>
+
+          <div class="ui-g-4 ui-sm-12">
+            <div class="userinfo"><h4><i class="fa fa-phone"></i> Landline</h4><p><span *ngIf="!editBasic" class="userdetails">{{school}}</span><input *ngIf="editBasic" type="text" [(ngModel)]="school"></p>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+
+      <p-tabPanel header="Change Password" leftIcon="fa-key">
+        <div class="container textcenter box">
+          <div class="row">
+            <div class="col-sm-6 col-md-6 col-xs-3 rightjustified"><label>Old Password:</label></div><div class="col-sm-6 col-md-6 col-xs-6 leftjustified"><input pInputText type="password" [(ngModel)]="oldPassword" ></div>
+            <div class="col-sm-6 col-md-6 col-xs-3 rightjustified"><label>New Password:</label></div><div class="col-sm-6 col-md-6 col-xs-6 leftjustified"><input pInputText #password="ngModel"  pPassword promptLabel="Atleast 6 characters" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}"/></div>
+            <div class="col-sm-6 col-md-6 col-xs-3 rightjustified"><label>Confirm New Password:</label></div><div class="col-sm-6 col-md-6 col-xs-6 leftjustified"><input pInputText type="password" [(ngModel)]="confirmNewPassword"></div>
+            
+            <button type="button" pButton label="Submit" [disabled]="password.errors || oldPassword==null||oldPassword==''||newPassword==null||newPassword==''||confirmNewPassword==null||confirmNewPassword==''" (click)="changePassword()"></button>
+          </div>
+        </div>
       </p-tabPanel>
       
       <!--<p-tabPanel header="Guardian Info" leftIcon="fa-address-card">
@@ -122,17 +176,25 @@
       </p-tabPanel>-->
 
       <p-tabPanel header="Add Testimonial" leftIcon="fa-pencil">
-        <div class="ui-g container">
-          <div class="ui-g-4 testimonial">
-            <img src="../../../assets/layout/images/Profile_picture.png" height="150px" width="150px" alt="asd"><br><br>
-            <input style="vertical-align:middle" type="file">
+        <div class="ui-g testimonial box">
+          <div class="ui-g-4 ui-sm-12">
+            <img class="img-responsive" src="../../../assets/layout/images/Profile_picture.png"><br><br>
+            <input type="file">
           </div>
-          <div class="ui-g-8 testimonial">
-            <textarea pInputTextArea [(ngModel)]="testimonial" placeholder="Enter your message here...." class="text"></textarea><br>
-            <button type="submit" pButton label="Submit" class="ui-button-success" (click)="submit()"></button>
+          <div class="ui-g-8 ui-sm-12">
+            <label>Exam </label><p-dropdown id="exam" [options]="exam" [(ngModel)]="selectedExam"></p-dropdown>
+            <label>Roll Number </label><input id="roll" type="text" pInputText [(ngModel)]="rollNumber"/>
+            <label>Exam City </label><input id="city" type="text" pInputText [(ngModel)]="rollNumber"/><br><br><br>
+            <textarea pInputTextarea [(ngModel)]="testimonial" placeholder="Enter your message....."></textarea><br><br>
+            <p-checkbox name="declaration" value="val1" label="Declaration 1" [(ngModel)]="dec"></p-checkbox><br>
+            <p-checkbox name="declaration" value="val2" label="Declaration 2" [(ngModel)]="dec"></p-checkbox><br><br><br>
+          </div>
+          <div class="ui-g-12 ui-sm-12 text-center">
+            <button type="button" pButton label="Submit" [disabled]="true" class="ui-button-success"></button>
           </div>
         </div>
       </p-tabPanel>
+
     </p-tabView>
   </div>
 </div>

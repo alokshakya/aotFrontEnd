@@ -1,35 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import  { Response } from '@angular/http';
 import { SelectItem } from 'primeng/primeng';
+import {Message} from 'primeng/primeng';
 import { UserinfoService } from '../../services/userinfo.service';
 import { SubjectService } from '../../services/subject.service';
 import { UpdateService } from '../../services/update.service';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
+  templateUrl: './test.profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
 
+  @Output() emit: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   editBasic:boolean;
+  editSchool:boolean;
+  editTestimony:boolean;
+
   userBasicInfo:any;
   newBasicInfo:any;
-
+  dec:Array<string>;
+  selectedExam:string;
   class:string;
   newClass:string;
   school:string;
   newSchool:string;
   testimonial:string;
+  rollNumber:string;
+
+  stroredPwd = 'qwe123'
+
+  newPassword:string;
+  confirmNewPassword:string;
+  oldPassword:string;
 
   classList:SelectItem[];
+  exam:SelectItem[];
+
+  growlmsg: Message[] = [];
 
   test:any;
   constructor(
     private httpService: UserinfoService,
     private classService: SubjectService,
     private update: UpdateService
-    ){}  
+    ){
+      this.exam = [];
+      this.exam.push({label:'EXAM 1', value:1});
+      this.exam.push({label:'EXAM 2', value:2});
+      this.exam.push({label:'EXAM 3', value:3});
+    }  
 
 
   ngOnInit() {
@@ -52,7 +74,6 @@ export class ProfileComponent implements OnInit {
       for(let i in data){
         this.classList.push({label:data[i]['abbreviation'], value:data[i]['abbreviation']})
       }
-      console.log(this.newClass)
     })
   }
 
@@ -66,6 +87,7 @@ export class ProfileComponent implements OnInit {
     });
     
     //this.update.updateStudent(2,this.newClass)
+    this.emit.next(true);
     this.editBasic = false;
   }
 
@@ -73,6 +95,20 @@ export class ProfileComponent implements OnInit {
     this.editBasic = true;
     this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
   }
+
+  dummyEdit(){
+    this.editBasic = true;
+  }
+
+  dummyCancel(){
+    console.log('dummycancel')
+  }
+
+  dummySave(){
+    console.log('dummysave')
+  }
+
+
   cancel(){
     this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
     this.newClass = this.class;
@@ -86,5 +122,17 @@ export class ProfileComponent implements OnInit {
     .subscribe((data: Response) =>{
     })
   }
+
+  changePassword(){
+    if(this.stroredPwd!=this.oldPassword){
+        this.growlmsg.push({severity:'error', summary:'Incorrect Old Password', detail:'Please try again'});
+
+    }else if(this.confirmNewPassword!=this.newPassword){
+    this.growlmsg.push({severity:'error', summary:"new password and confirm password doesn't match", detail:''});
+
+    }
+    else{    this.growlmsg.push({severity:'success', summary:"Password Changed", detail:''});}
+  }
+
 
 }
