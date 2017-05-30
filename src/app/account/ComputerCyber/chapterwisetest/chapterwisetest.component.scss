@@ -4,13 +4,6 @@
     overflow-y: auto; 
 }
 
-#subscribe{
-    border: none;
-    background-color: #1D8ECD;
-    width:200px;
-    margin-right: 20%;
-}
-
 #inlinebutton{
     border:transparent;
     background-color: #1D8ECD;
@@ -26,6 +19,33 @@
     text-align: center;
 }
 
-.ui-button-warning {
-    margin-left: 20%;
+.container{
+    padding-left: 5%;
+    padding-top: 2%;
+}
+
+.testnumber{
+    padding-left: 5%;
+}
+
+.testnumber button{
+    margin-bottom: 2%;
+}
+
+.chapter{
+    font-size: 17px;
+}
+
+.leftpad{
+    padding-left: 30%;
+    margin-right: 4%;
+}
+
+.low button{
+    width:70px;
+    margin-right: 5%;
+}
+
+i:hover{
+    cursor: pointer;
 }

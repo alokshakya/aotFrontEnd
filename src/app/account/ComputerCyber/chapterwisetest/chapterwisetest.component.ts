@@ -9,6 +9,10 @@ import { SubjectService } from '../../../services/subject.service';
 })
 export class ChapterwisetestComponent implements OnInit {
 
+  a:boolean;
+
+  target = '#2';
+
   subscribed=true;  
 
   chapterwiseTestData: any;
@@ -21,10 +25,93 @@ export class ChapterwisetestComponent implements OnInit {
 
   topicNames:Array<string>;
 
+  chapterwiseTestDetails:any;
+
 
   constructor(private sub:SubjectService) {
       this.cname = ['Chapter 1', 'Chapter 2', 'Chapter 3', 'Chapter 4', 'Chapter 5', 'Chapter 6', 'Chapter 7', 'Chapter 8', 'Chapter 9', 'Chapter 10']
       this.topicNames = ["Topic 1 CC", "Topic 2 CC", "Topic 3 CC", "Topic 4 CC", "Topic 5 CC" ]
+
+      this.chapterwiseTestDetails = {
+        "Chapter 1":
+        {
+          "Test 1":"13/15",
+          "Test 2":"11/15", 
+          "Test 3":"Start", 
+          "Test 4":"Start", 
+          "Test 5":"14/15"
+        },
+        "Chapter 2":
+        {
+          "Test 1":"10/15",
+          "Test 2":"9/15", 
+          "Test 3":"Start", 
+          "Test 4":"13/15", 
+          "Test 5":"Resume"
+        },
+        "Chapter 3":
+        {
+          "Test 1":"13/15",
+          "Test 2":"11/15", 
+          "Test 3":"Start", 
+          "Test 4":"Start", 
+          "Test 5":"Resume"
+        },
+         "Chapter 4":
+        {
+          "Test 1":"13/15",
+          "Test 2":"11/15", 
+          "Test 3":"Resume", 
+          "Test 4":"Start", 
+          "Test 5":"Start"
+        },
+        "Chapter 5":
+        {
+          "Test 1":"10/15",
+          "Test 2":"9/15", 
+          "Test 3":"Start", 
+          "Test 4":"13/15", 
+          "Test 5":"Resume"
+        },
+        "Chapter 6":
+        {
+          "Test 1":"13/15",
+          "Test 2":"11/15", 
+          "Test 3":"Start", 
+          "Test 4":"Start", 
+          "Test 5":"10/15"
+        },
+        "Chapter 7":
+        {
+          "Test 1":"10/15",
+          "Test 2":"9/15", 
+          "Test 3":"Start", 
+          "Test 4":"13/15", 
+          "Test 5":"Start"
+        },
+        "Chapter 8":
+        {
+          "Test 1":"Start", 
+          "Test 2":"13/15",
+          "Test 3":"11/15",  
+          "Test 5":"Resume"
+        },
+        "Chapter 9":
+        {
+          "Test 1":"13/15",
+          "Test 2":"11/15", 
+          "Test 3":"Start", 
+          "Test 4":"Start", 
+          "Test 5":"Resume"
+        },
+        "Chapter 10":
+        {
+          "Test 1":"04/15",
+          "Test 2":"15/15", 
+          "Test 3":"Start", 
+          "Test 4":"Resume",
+        },
+        }
     }
 
   ngOnInit() {

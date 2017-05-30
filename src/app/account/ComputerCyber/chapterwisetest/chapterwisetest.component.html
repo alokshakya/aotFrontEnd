@@ -1,15 +1,15 @@
  <div class="fluid">
   <div class="ui-g">
-    <div class="ui-g-12" *ngIf="!subscribed">
+    <div class="ui-g-12">
       <p-panel header="Subscribe">
         <div id="subscribepanel">
           <h1>No Test Available</h1><br>
-          <button id="subscribe" pButton type="text" class="ui-button-warning" label="Subscribe Now"></button>
+          <button pButton type="text" class="ui-button-info" label="Subscribe Now"></button>
         </div>
       </p-panel>
     </div>
 
-    <div class="ui-g-6">
+    <div class="ui-g-6 ui-sm-12 ui-lg-6">
       <p-panel header="Introduction">
         <div id="intro">
           <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry.
@@ -26,16 +26,16 @@
       </p-panel>
     </div>
 
-    <div class="ui-g-6">
+    <div class="ui-g-6 ui-sm-12 ui-lg-6">
       <p-panel header="Progress">
         <p-chart type="doughnut" [data]="chapterwiseTestData"></p-chart>
       </p-panel>
     </div>
 
-    <div class="ui-g-6">
+    <div class="ui-g-6 ui-sm-12 ui-lg-6">
         <p-panel><p-header>Chapterwise Test & Syllabus<button id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button></p-header>
             <div class="ui-g">
-              <div class="ui-g-6">
+              <div class="ui-md-6 ui-sm-12 ui-lg-12">
                 <span *ngFor="let chapter of chapterNames" ><p-radioButton name="groupname" label={{chapter}} ></p-radioButton><br><br></span>
               </div>
             </div>
@@ -43,20 +43,26 @@
     </div>
 
     <div class="ui-g-6">
-      <p-panel header="Generated" >
-          <p-tabView>
-            <p-tabPanel *ngFor="let chapter of cname" header={{chapter}}>
-              <div id="testdetailspanel"><br>
-                <span *ngFor="let number of testNumbers">{{number}} <button pButton type="text" class="ui-button-warning" label="20/40"></button><br><br></span>
+       <p-panel header="Generated">
+            <p-accordion>
+              <div class="ui-g">
+                <div class="ui-g-12">
+                  <p-accordionTab  *ngFor="let data of chapterwiseTestDetails|keys">
+                    <p-header><p class="chapter">{{data.key}}</p></p-header>
+                    <div class="ui-g">
+                      <div class="ui-g-12"  *ngFor="let test of data.value|keys">
+                        <span class="leftpad">{{test.key}}</span>
+                        <span class="low"><button label="{{test.value}}" [ngClass]="{'ui-button-success':test.value!='Resume'||test.value!='Start', 'ui-button-danger':test.value=='Start', 'ui-button-warning':test.value=='Resume'}" type="button" pButton></button><i title="Retake {{test.key}}" *ngIf=" !(test.value=='Start'|| test.value=='Resume') " class="fa fa-refresh fa-lg"></i></span>
+                      </div>
+                    </div>
+                  </p-accordionTab>
+                </div>
               </div>
-            </p-tabPanel>
-          </p-tabView>
+            </p-accordion>
       </p-panel>
     </div>
 
-
-
-  </div>
+ </div>
  </div>
 
 
