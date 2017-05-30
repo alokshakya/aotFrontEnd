@@ -1,54 +1,62 @@
-<div class="ui-g">
-  <p-dialog header="Instructions" [(visible)]="instructions" modal="true" responsive="true" closable="false" (onHide)="startTest()">
-    <div class="ui-g-12">Important Instructions</div>
-    <div class="ui-g-12">1</div>
-    <div class="ui-g-12">2</div>
-    <div class="ui-g-12">3</div>
-    <div class="ui-g-5"><button type="button" pButton label="Start" [disabled]="start" (click)="startTest()"></button></div>
-  </p-dialog>
+<p-confirmDialog header="Go to dashboard" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-dialog header="Intsructions" [(visible)]="help" responsive="true" (onHide)="start()">
+    <h2>IMPORTANT INSTRUCTIONS</h2>
+</p-dialog>
 
-  <div class="ui-g-10" id="header">
-    <div class="ui-g">
-      <div class="ui-g-2">{{test}}</div>
-      <div class="ui-g-2">{{subject}}<br><br><i class="fa fa-question-circle fa-2x" (click)="instructions=true"></i><i class="fa fa-home fa-2x r" (click)="redirect()"></i></div>
-      <div class="ui-g-2"><div id='time'><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s </div></div>
-      <div class="ui-g-1"><p-progressBar [value]="counter"></p-progressBar></div>
-      <div class="ui-g-2">{{counter/10}}/{{totalQuestions}} Attempted</div>
-      <div class="ui-g-1"><i class="fa fa-user"></i> Gaurav Pant</div>
+
+<div class="ui-g">
+    <div class="ui-g-2 logo">
+        <img src="assets/layout/images/Olympiadbox-logo.png" width="75px" height="75px">
     </div>
-  </div>
-  <div class="ui-g-2" id="sidebar">
-      <div class="ui-g">
-        <div class="ui-g-12"></div>
-        <div class="ui-g-3" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
-      </div>
-  </div>
-  <div class="ui-g-8">
-    <div class="ui-g" *ngIf="questionWindow">
-      <div class="ui-g-8">{{questionNumber}}{{selectedQuestion?.Question}}</div>
-      <div class="ui-g-4"><button type="button" [disabled]="validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button></div>
-      <div class="ui-g-12">
-        <div class="ui-g">
-          <div class="ui-g-4">(A).<p-radioButton name="ques" value="A" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.A}}</div>
-          <div class="ui-g-4">(B).<p-radioButton name="ques" value="B" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.B}}</div>
-          <div class="ui-g-4"></div>
-          <div class="ui-g-4">(C).<p-radioButton name="ques" value="C" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.C}}</div>
-          <div class="ui-g-4">(D).<p-radioButton name="ques" value="D" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.D}}</div>
-          <div class="ui-g-4"></div><br>
-          <div class="ui-g-3"><button type="button" pButton label="Validate" [disabled]="answer==null||validated()" (click)="validate()"></button></div>
-          <div class="ui-g-1"><button type="button" pButton label="Next" class="ui-button-success" (click)="next()"></button></div>
-          <div class="ui-g-12" *ngIf="hintDisplay"><hr>
-            <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br></span>
-            <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br></span>
-            <span class="correct" *ngIf="!correct">Correct Answer: {{selectedQuestion?.CorrectAnswer}}</span><br>
-            Explaination:<br><span>{{selectedQuestion?.Explaination}}<br></span><br>
-          </div>
+    <div class="ui-g-10 nopad">
+        <div class="ui-g headpanel">
+            <span >Demo Test</span>
+            <span id="sub">{{subject}}</span>
+            <span id="class">class</span>
+            <span id="timer"><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span>
+            <span id="bar"><p-progressBar [value]="counter"></p-progressBar></span>
+            <p>{{counter/10}}/{{totalQuestions}} Attempted</p>
+            <span><i class="fa fa-user"></i> Gaurav Pant</span>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="ui-g-12" id="footer">
-      <span style="color:white">Copyright &copy; 2017 OlympiadBox</span>
+    <div class="ui-g-2 sidepanel">
+        <div class="ui-g">
+            <div class="ui-g-12"></div>
+            <div class="ui-g-4"> &nbsp; <i class="fa fa-bars fa-lg"></i></div>
+            <div class="ui-g-4">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
+            <div class="ui-g-4"> &nbsp; <i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
+            <div class="ui-g-12"></div>
+            <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
+            <div class="ui-g-12 fill"></div>
+        </div>
+    </div>
+    <div class="ui-g-10 questionpanel">
+        <div class="ui-g" *ngIf="questionWindow">
+            <div class="ui-g-8">{{questionNumber}}{{selectedQuestion?.Question}}</div>
+            <div class="ui-g-4"><button type="button" [disabled]="validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button></div>
+            <div class="ui-g-12">
+                <div class="ui-g">
+                    <div class="ui-g-4">(A).<p-radioButton name="ques" value="A" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.A}}</div>
+                    <div class="ui-g-4">(B).<p-radioButton name="ques" value="B" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.B}}</div>
+                    <div class="ui-g-4"></div>
+                    <div class="ui-g-4">(C).<p-radioButton name="ques" value="C" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.C}}</div>
+                    <div class="ui-g-4">(D).<p-radioButton name="ques" value="D" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.D}}</div>
+                    <div class="ui-g-4"></div><br>
+                    <div class="ui-g-3"><button type="button" pButton label="Validate" [disabled]="answer==null||validated()" (click)="validate()"></button></div>
+                    <div class="ui-g-1"><button type="button" pButton label="Next" class="ui-button-success" (click)="next()"></button></div>
+                    <div class="ui-g-12" *ngIf="hintDisplay"><hr>
+                        <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br></span>
+                        <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br></span>
+                        <span class="correct" *ngIf="!correct">Correct Answer: {{selectedQuestion?.CorrectAnswer}}</span><br>
+                        Explaination:<br><span>{{selectedQuestion?.Explaination}}<br></span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12" id="footer">
+      <span style="color:white">Copyright &copy; 2017 OlympiadBox. &nbsp;</span>
       <span style="color:white">All Rights Reserved.</span>
-  </div>
+      <div class="ui-g-12"></div>
+    </div>
 </div>

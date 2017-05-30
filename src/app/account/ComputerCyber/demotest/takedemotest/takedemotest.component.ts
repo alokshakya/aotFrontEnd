@@ -227,9 +227,10 @@ export class TakedemotestComponent implements OnInit {
   }
   
   isLogin(token){
-      if (token == null||token==''){
-          this.router.navigate(['login']); 
-      }else{ this.getQuestions() }
+    //   if (token == null||token==''){
+    //       this.router.navigate(['login']); 
+    //   }else{ this.getQuestions() }
+    this.getQuestions();
   }
      
 
@@ -266,6 +267,10 @@ export class TakedemotestComponent implements OnInit {
       var a = 'Question'+(b+1);
       this.displayQuestion(a,b+1);
     }
+
+  previous(){
+    console.log(typeof(this.clickListener))
+  }
 
   mark(){
     var q = this.clickListener;

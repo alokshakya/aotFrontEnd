@@ -3,60 +3,88 @@
     <h2>IMPORTANT INSTRUCTIONS</h2>
 </p-dialog>
 
-
-<div class="ui-g">
-    <div class="ui-g-2 logo">
-        <img src="assets/layout/images/Olympiadbox-logo.png" width="75px" height="75px">
-    </div>
-    <div class="ui-g-10 nopad">
-        <div class="ui-g headpanel">
-            <span >Demo Test</span>
-            <span id="sub">{{subject}}</span>
-            <span id="class">class</span>
-            <span id="timer"><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span>
-            <span id="bar"><p-progressBar [value]="counter"></p-progressBar></span>
-            <p>{{counter/10}}/{{totalQuestions}} Attempted</p>
-            <span><i class="fa fa-user"></i> Gaurav Pant</span>
-        </div>
-    </div>
-    <div class="ui-g-1 sidepanel">
+<div class="ui-g body">
+    <div class="ui-g-12">
         <div class="ui-g">
-            <div class="ui-g-12"></div>
-            <div class="ui-g-4"> &nbsp; <i class="fa fa-bars fa-lg"></i></div>
-            <div class="ui-g-4">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
-            <div class="ui-g-4"> &nbsp; <i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
-            <div class="ui-g-12"></div>
-            <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
-            <div class="ui-g-12 fill"></div>
-        </div>
-    </div>
-    <div class="ui-g-10 questionpanel">
-        <div class="ui-g" *ngIf="questionWindow">
-            <div class="ui-g-8">{{questionNumber}}{{selectedQuestion?.Question}}</div>
-            <div class="ui-g-4"><button type="button" [disabled]="validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button></div>
-            <div class="ui-g-12">
+            <div class="ui-g-2 dark logo">
+                <img src="../../../../assets/layout/images/Olympiadbox-logo.png" width="75px" height="75px">
+            </div>
+            <div class="ui-g-10 head">
                 <div class="ui-g">
-                    <div class="ui-g-4">(A).<p-radioButton name="ques" value="A" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.A}}</div>
-                    <div class="ui-g-4">(B).<p-radioButton name="ques" value="B" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.B}}</div>
-                    <div class="ui-g-4"></div>
-                    <div class="ui-g-4">(C).<p-radioButton name="ques" value="C" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.C}}</div>
-                    <div class="ui-g-4">(D).<p-radioButton name="ques" value="D" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.D}}</div>
-                    <div class="ui-g-4"></div><br>
-                    <div class="ui-g-3"><button type="button" pButton label="Validate" [disabled]="answer==null||validated()" (click)="validate()"></button></div>
-                    <div class="ui-g-1"><button type="button" pButton label="Next" class="ui-button-success" (click)="next()"></button></div>
-                    <div class="ui-g-12" *ngIf="hintDisplay"><hr>
-                        <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br></span>
-                        <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br></span>
-                        <span class="correct" *ngIf="!correct">Correct Answer: {{selectedQuestion?.CorrectAnswer}}</span><br>
-                        Explaination:<br><span>{{selectedQuestion?.Explaination}}<br></span><br>
+                    <span >Demo Test</span>
+                    <span>{{subject}}</span>
+                    <span>class</span>
+                    <span><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span>
+                    <span><p-progressBar [value]="counter"></p-progressBar></span>
+                    <span>{{counter/10}}/{{totalQuestions}} Attempted</span>
+                    <span><i class="fa fa-user"></i> Gaurav Pant</span>
+                </div>
+            </div>
+        </div>
+        <div class="ui-g dark">
+            <div class="ui-g-1 minwidth">
+                <div class="ui-g-12"></div>
+                <div class="ui-g-4"></div>
+                <div class="ui-g-4">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
+                <div class="ui-g-4"> &nbsp; <i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
+                <div class="ui-g-12"></div>
+                <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
+                <div class="ui-g-12 fill"></div>
+            </div>
+            <div class="ui-g-9 light center">
+                <div class="ui-g" *ngIf="questionWindow">
+                    <div class="ui-g-12"><span class="statement">{{questionNumber}}{{selectedQuestion?.Question}}</span>
+                        <div class="image"><img src="../../../../../assets/layout/images/q2.jpg"></div>
+                        <hr>
+                    </div>
+
+                    <div class="ui-g-12">
+                        <div class="ui-g">
+                            <div class="ui-g-6">(A).<p-radioButton name="ques" value="A" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.A}}
+                                <div class="image"><img src="../../../../../assets/layout/images/q2.jpg"></div>
+                            </div>
+                            <div class="ui-g-6">(B).<p-radioButton name="ques" value="B" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.B}}
+                                <div class="image"><img src="../../../../../assets/layout/images/q5.jpg"></div>
+                            </div>
+                            <div class="ui-g-6">(C).<p-radioButton name="ques" value="C" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.C}}
+                                <div class="image"><img src="../../../../../assets/layout/images/q4.jpg"></div>
+                            </div>
+                            <div class="ui-g-6">(D).<p-radioButton name="ques" value="D" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion?.Options.D}}
+                                <div class="image"><img src="../../../../../assets/layout/images/q5.jpg"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ui-g-12">
+                        <div class="ui-g">
+                            <div class="ui-g-12 btngrp">
+                                <button type="button" pButton label="Previous" class="ui-button-success" (click)="previous()"></button>
+                                <button type="button" [disabled]="validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button>
+                                <button type="button" pButton label="Validate" [disabled]="answer==null||validated()" (click)="validate()"></button>
+                                <button type="button" pButton label="Next" class="ui-button-success" (click)="next()"></button>
+                            </div>
+                            <div class="ui-g-12" *ngIf="hintDisplay"><hr>
+                            <div class="ui-g">
+                                <div class="ui-g-6">
+                                    <div>
+                                        <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br><br></span>
+                                        <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br><br></span>
+                                        <span class="correct" *ngIf="!correct">Correct Answer: {{selectedQuestion?.CorrectAnswer}}<br><br></span>
+                                    </div>
+                                    <img src="../../../../../assets/layout/images/q2.jpg">
+                                </div>
+                                <div class="ui-g-6">
+                                    <i class="fa fa-lightbulb-o fa-lg"></i> &nbsp; Hint:<br><br><span>{{selectedQuestion?.Explaination}}<br><br></span>
+                                    <img src="../../../../../assets/layout/images/q2.jpg">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="ui-g-12" id="footer">
-      <span style="color:white">Copyright &copy; 2017 OlympiadBox. &nbsp;</span>
-      <span style="color:white">All Rights Reserved.</span>
-      <div class="ui-g-12"></div>
+        <div class="ui-g dark footer">
+            <span style="color:white">Copyright &copy; 2017 OlympiadBox. All Rights Reserved.</span>
+        </div>
     </div>
 </div>

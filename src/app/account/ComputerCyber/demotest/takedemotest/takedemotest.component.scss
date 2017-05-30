@@ -1,32 +1,29 @@
+.body{
+    background-color: #2D353C;
+}
+
 .logo{
-    width:150px;
+    width:170px;
     background-color: #2D353C;
     text-align: center;
 }
 
-.nopad{
-    padding: 0px 0px 0px 0px;
-    margin:  0px 0px 0px 0px;
-    height: 30px;
+.dark{
+    background-color: #2D353C;
+    color:white;
 }
 
-.headpanel{
-    background-color: #2D353C; 
-    color: white;
-    width: 106%;
-    overflow-x: hidden;
-    overflow-y: hidden;
+.light{
+    color: black;
+    background-color: white;;
 }
 
-.headpanel span{
-    margin-top:12px;
-    width:100px;
-    margin-right:40px;
-}
-
-.headpanel p{
-    margin-top: 12px;
-    margin-right: 40px;
+.center{
+    padding-top:2%;
+    padding-left: 5%;
+    height:80vh;
+    overflow-y: auto;
+    margin-top:0px;
 }
 
 #bar{
@@ -66,19 +63,6 @@
     background-color: #EEA236
 }
 
-
-.sidepanel{
-    background-color: #2D353C;
-    width: 150px;
-    color: white;
-}
-
-.questionpanel{
-    padding-bottom: 21.5%;
-    overflow-y: hidden;
-}
-
-
 .qnumber{
     color: white;
     text-align: center;
@@ -96,10 +80,10 @@
     cursor: pointer;     
 }
 
-#footer{
-    text-align: right;
-    background-color: #2D353C;
-    margin: none;
+.footer{
+    float:right;
+    padding-top:1%;
+
 }
 
 .qnumberclick{
@@ -138,4 +122,33 @@
 
 i:hover{
     cursor: pointer;
+}
+
+.head{
+    background-color: #2D353C;
+    color: white;
+    height:50px;
+    width: 800px;
+}
+
+.head span{
+    margin-right:30px;
+}
+
+.minwidth{
+    width:170px;
+}
+
+.image{
+    text-align: center;
+    padding-top:4%;
+    padding-bottom: 4%;
+}
+
+.statement{
+    font-size:20px;
+}
+
+.btngrp button{
+    width:200px;
 }
