@@ -10,14 +10,21 @@ export class ResultComponent implements OnInit {
   resultSummary:any;
   chapterwiseSummary:any;
 
+  testResponse:any;
+
   overview:any;
+
+  showSample:boolean;
   showDemo:boolean;
   showMock:boolean;
   showChapter:boolean;
 
-  demo:any;
-  mock:any;
+  showMark:boolean;
+
   chapter:any;
+  sample:any;
+  mock:any;
+  demo:any;
 
   constructor() {
 
@@ -886,17 +893,30 @@ export class ResultComponent implements OnInit {
 						}
 	}	
 
+	this.testResponse = {
+		"test1":{"1":"correct", "2":"mark", "3":"wrong", "4":"correct", "5":"correct", "6":"wrong", "7":"correct", "8":"correct", "9":"mark", "10":"correct", "11":"wrong", "12":"correct", "13":"mark", "14":"correct", "15":"correct", }
+	}
+
+
+
   }
   
   show(i,j){
-	  this.chapter = {}
-	  this.chapter = this.detailedResult['Chapterwise Test'][i][j]
+	  this.chapter = {};
+	  this.chapter = this.detailedResult['Chapterwise Test'][i][j];
 	  this.showChapter = true;
   }			
 
+  sampleResult(s){
+	  if(this.showSample){this.showSample=false}
+	  else{this.sample = {};
+	  this.sample = this.detailedResult['Sample Test'][s];
+	  this.showSample = true;};
+  }
+
   demoResult(){
 	  this.demo={};
-	  this.demo = this.detailedResult['Demo Test']['Demo Test 1']
+	  this.demo = this.detailedResult['Demo Test']['Demo Test 1'];
 	  this.showDemo = true;
 	  console.log(this.demo)
   }	
@@ -904,14 +924,16 @@ export class ResultComponent implements OnInit {
   mockResult(number){
 	  var a = number+1
 	  this.mock = {};
-	  this.mock = this.detailedResult['Mock Test']['Mock Test '+a]
-	  this.showMock = true
-	  console.log(this.showMock)
+	  this.mock = this.detailedResult['Mock Test']['Mock Test '+a];
+	  this.showMock = true;
+	  console.log(this.showMock);
   }
 
-  close(){
-	  this.showDemo=false;
-	  this.showMock=false;
+  close(e){
+	  this.showChapter = false;
+	  this.showDemo = false;
+	  this.showSample = false;
+	  this.showMock = false;
   }
   ngOnInit(){
 

@@ -11,6 +11,7 @@ import { SubjectService } from '../../../../services/subject.service'
   styleUrls: ['./takedemotest.component.scss']
 })
 export class TakedemotestComponent implements OnInit {
+
     //header  
     test:string;
     subject:string; 
@@ -269,7 +270,9 @@ export class TakedemotestComponent implements OnInit {
     }
 
   previous(){
-    console.log(typeof(this.clickListener))
+      var b = parseInt(this.clickListener)-1 
+      var a = 'Question'+(b-1);
+      this.displayQuestion(a, b)
   }
 
   mark(){

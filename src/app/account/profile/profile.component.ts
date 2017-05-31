@@ -1,7 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import  { Response } from '@angular/http';
 import { SelectItem } from 'primeng/primeng';
 import {Message} from 'primeng/primeng';
+import { ConfirmationService } from 'primeng/primeng';
 import { UserinfoService } from '../../services/userinfo.service';
 import { SubjectService } from '../../services/subject.service';
 import { UpdateService } from '../../services/update.service';
@@ -15,12 +16,23 @@ export class ProfileComponent implements OnInit {
 
   @Output() emit: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  maxDate: Date;
+
   editBasic:boolean;
   editSchool:boolean;
   editTestimony:boolean;
 
+  showPassword:boolean;
+
   userBasicInfo:any;
   newBasicInfo:any;
+
+  dummyBasicInfo:any;
+  dummyEditBasicInfo:any;
+
+  dummySchoolInfo:any;
+  dummyEditSchoolInfo:any;
+
   dec:Array<string>;
   selectedExam:string;
   class:string;
@@ -39,19 +51,48 @@ export class ProfileComponent implements OnInit {
   classList:SelectItem[];
   exam:SelectItem[];
 
+
   growlmsg: Message[] = [];
 
+  date:Date;
   test:any;
   constructor(
     private httpService: UserinfoService,
     private classService: SubjectService,
-    private update: UpdateService
+    private update: UpdateService,
+    private confirmservice: ConfirmationService 
     ){
-      this.exam = [];
-      this.exam.push({label:'EXAM 1', value:1});
-      this.exam.push({label:'EXAM 2', value:2});
-      this.exam.push({label:'EXAM 3', value:3});
-    }  
+      this.dummyBasicInfo = {
+        name:"Gaurav Pant", 
+        email:"gpantbiz@gmail.com", 
+        address:"123 pqr", 
+        mobile: 986957827, 
+        class:"V", 
+        dob:"06/14/1996", 
+        state:"Uttar Pradesh", 
+        city:"Ghaziabad", 
+        gender:"Male",
+        country:"India",
+        pincode:201011,
+    }
+
+    this.dummySchoolInfo = {
+      code:"OBU232",
+      schoolname:"St Thomas School",
+      contactperson:"Dave",
+      email:"dap@stschool.com",
+      landline:"0120-354345",
+      address:"pqr xyz, abc",
+      state:"Uttar Pradesh",
+      city:"Ghaziabad",
+      pincode:"21012",
+      mobile:9324567322
+    } 
+    this.date = new Date();
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(2013,0,1); 
+    this.date.setFullYear(1998,5,14);
+      }  
 
 
   ngOnInit() {
@@ -80,7 +121,6 @@ export class ProfileComponent implements OnInit {
 //for basic info
   save(){
     this.userBasicInfo = this.newBasicInfo;
-    this.class = this.newClass
     
     this.update.updateUserInfo(this.newBasicInfo)
     .subscribe((data: Response) => {
@@ -97,15 +137,17 @@ export class ProfileComponent implements OnInit {
   }
 
   dummyEdit(){
+    this.dummyEditBasicInfo = JSON.parse(JSON.stringify(this.dummyBasicInfo))
+    // this.elem.nativeElement.focus();
     this.editBasic = true;
   }
 
   dummyCancel(){
-    console.log('dummycancel')
+
   }
 
   dummySave(){
-    console.log('dummysave')
+    this.dummyBasicInfo = this.dummyEditBasicInfo
   }
 
 
@@ -123,6 +165,15 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  submitTestimonial(){
+    this.editTestimony = false;
+  }
+
+  cancelTestimonial(){
+    this.testimonial = "Enter Message here...."
+    this.editTestimony = false;
+  }
+
   changePassword(){
     if(this.stroredPwd!=this.oldPassword){
         this.growlmsg.push({severity:'error', summary:'Incorrect Old Password', detail:'Please try again'});
@@ -132,6 +183,55 @@ export class ProfileComponent implements OnInit {
 
     }
     else{    this.growlmsg.push({severity:'success', summary:"Password Changed", detail:''});}
+  }
+
+
+  onChange(){
+    if (this.editBasic){
+      this.confirmservice.confirm({
+            message: 'Save changes in Basic info ?',
+            accept: () => {
+                this.editBasic=false;
+
+            },
+            reject: () =>{
+              this.editBasic=false;
+            }
+        });
+    }
+    else if(this.editSchool){
+      this.confirmservice.confirm({
+        message: 'Save changes in School Info ?',
+        accept:() => {
+          this.editSchool = false;
+        },
+        reject:() => {
+          this.editSchool = false;
+        }
+      })
+    }
+        else if(this.editTestimony){
+      this.confirmservice.confirm({
+        message: 'Save changes in Testimonial ?',
+        accept:() => {
+          this.editTestimony = false;
+        },
+        reject:() => {
+          this.editTestimony = false;
+        }
+      })
+    }
+    else if(this.showPassword){
+      this.confirmservice.confirm({
+        message: 'Save changes ?',
+        accept:() => {
+          this.showPassword = false;
+        },
+        reject:() => {
+          this.showPassword = false;
+        }
+      })
+    }
   }
 
 

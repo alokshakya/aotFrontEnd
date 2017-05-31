@@ -15,7 +15,7 @@
                     <span>{{subject}}</span>
                     <span>class</span>
                     <span><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span>
-                    <span><p-progressBar [value]="counter"></p-progressBar></span>
+                    <div class="bar"><p-progressBar [value]="counter"></p-progressBar></div>
                     <span>{{counter/10}}/{{totalQuestions}} Attempted</span>
                     <span><i class="fa fa-user"></i> Gaurav Pant</span>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="ui-g-12 fill"></div>
             </div>
             <div class="ui-g-9 light center">
-                <div class="ui-g" *ngIf="questionWindow">
+                <div class="ui-g" *ngIf="questionWindow" #window>
                     <div class="ui-g-12"><span class="statement">{{questionNumber}}{{selectedQuestion?.Question}}</span>
                         <div class="image"><img src="../../../../../assets/layout/images/q2.jpg"></div>
                         <hr>

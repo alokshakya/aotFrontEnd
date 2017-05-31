@@ -19,8 +19,9 @@
         <a href="http://olympiadbox.com"><img src="../../assets/layout/images/Olympiadbox-logo.png" id="oblogo" height="100px" width="100px"></a>
     </div>
 
-    <div class="module form-module" *ngIf="!loginRegToggle" [@fadeInOut]>
-      <div class="toggle" pTooltip=" Register" (click)="loginRegToggle=!loginRegToggle" ><i class="fa fa-user-plus fa-lg" ></i>
+    <div class=" module form-module" *ngIf="!loginRegToggle" [@fadeInOut]>
+      <div class="toggle" pTooltip=" Register" (click)="loginRegToggle=!loginRegToggle">
+          <i class="fa fa-user-plus fa-lg" ></i>
       </div>
       
       <!--LOGIN BOX-->
@@ -55,7 +56,6 @@
             <p-messages [value]="facebookMessage"></p-messages>
             <button id="facebook" pButton type="button" icon="fa-facebook" label="Sign in"></button>
         </div>
-        <div id="footer"><p>Copyright &copy; 2017 OlympiadBox. All Rights Reserved.</p> </div>
       </div>
     </div>
 
@@ -65,58 +65,61 @@
             <i class="fa fa-sign-in fa-lg" ></i>
         </div>
     
-      <div class="form">  
-        <h2>Create an account</h2>
-        <div class="ui-g">
-            <div class="ui-g-6"> <!--FirstName Validator -->
-                <div class="ui-message ui-messages-error" [hidden]="firstname.untouched" *ngIf="firstname.errors && firstname.errors.pattern">
-                    &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Invalid Firstname
-                </div>  
-                <input type="text" name="firstname"
-                    #firstname="ngModel"  [(ngModel)]="userRegCreds.firstname" pInputText placeholder="Firstname"
-                    pattern="^[a-zA-Z]+"/>
-            </div>
-            <div class="ui-g-6"> <!--LastName Validator -->
-                <div class="ui-message ui-messages-error" [hidden]="lastname.untouched" *ngIf="lastname.errors && lastname.errors.pattern">
-                    &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Invalid Lastname
+        <div class="form">  
+            <h2>Create an account</h2>
+            <div class="ui-g">
+                <div class="ui-g-6"> <!--FirstName Validator -->
+                    <div class="ui-message ui-messages-error" [hidden]="firstname.untouched" *ngIf="firstname.errors && firstname.errors.pattern">
+                        &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Invalid Firstname
+                    </div>  
+                    <input type="text" name="firstname"
+                        #firstname="ngModel"  [(ngModel)]="userRegCreds.firstname" pInputText placeholder="Firstname"
+                        pattern="^[a-zA-Z]+"/>
                 </div>
-                <input type="text" name="lastname"
-                    #lastname="ngModel"  [(ngModel)]="userRegCreds.lastname" pInputText placeholder="Lastname"
-                    pattern="^[a-zA-Z]+"/>
-            </div>
-            <div class="ui-g-6"> <!--Email Validators -->
-                <div class="ui-message ui-messages-error" [hidden]="regEmail.untouched" *ngIf="regEmail.errors && regEmail.errors.pattern">
-                &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Invalid Email Id
+                <div class="ui-g-6"> <!--LastName Validator -->
+                    <div class="ui-message ui-messages-error" [hidden]="lastname.untouched" *ngIf="lastname.errors && lastname.errors.pattern">
+                        &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Invalid Lastname
+                    </div>
+                    <input type="text" name="lastname"
+                        #lastname="ngModel"  [(ngModel)]="userRegCreds.lastname" pInputText placeholder="Lastname"
+                        pattern="^[a-zA-Z]+"/>
                 </div>
-                <input type="text"  name="regEmail"
-                    #regEmail="ngModel" [(ngModel)]="userRegCreds.email"  pInputText placeholder="Email"
-                    pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$"/>
-            </div>
-            <div class="ui-g-6"> <!--Password validator-->
-                <input type="password"  name="regPassword" pPassword weakLabel="Min 6 Characters" promptLabel="Min 6 Characters and a number" strongLabel="Great" mediumLabel="OK" 
-                    indicator="false" #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password"
-                    pattern="^[^\s]{6,}"/>
-            </div>
-            <div class="ui-g-12">
-                <h5 *ngIf="otpUnverified" style="color:#DC4E42">You have to verify your mobile number for registration</h5>
-                <h5 *ngIf="!otpUnverified" style="color:#2BBF61"><i class="fa fa-check"></i>Mobile number verified!. Please register</h5>    
-            </div>
-            <div class="ui-g-6"><!--Mobile number Validator-->
-                <input type="number"  name="regNumber" [disabled]="!otpUnverified"
-                    #regNumber="ngModel" [(ngModel)]="mobile" placeholder="Mobile Number"
-                    pattern="^[7-9]{1}[0-9]{9}"/>
-            </div>
-            <div class="ui-g-3"><!--OTP -->
-                <span id="otpbtn"><button pButton class="ui-button-info" label="Send OTP" iconPos="right" [disabled]="!otpUnverified || regNumber.errors || mobile==null" (click)="otpDialog=true"></button></span>
-            </div>
+                <div class="ui-g-6"> <!--Email Validators -->
+                    <div class="ui-message ui-messages-error" [hidden]="regEmail.untouched" *ngIf="regEmail.errors && regEmail.errors.pattern">
+                    &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Invalid Email Id
+                    </div>
+                    <input type="text"  name="regEmail"
+                        #regEmail="ngModel" [(ngModel)]="userRegCreds.email"  pInputText placeholder="Email"
+                        pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$"/>
+                </div>
+                <div class="ui-g-6"> <!--Password validator-->
+                    <input type="password"  name="regPassword" pPassword weakLabel="Min 6 Characters" promptLabel="Min 6 Characters and a number" strongLabel="Great" mediumLabel="OK" 
+                        indicator="false" #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password"
+                        pattern="^[^\s]{6,}"/>
+                </div>
+                <div class="ui-g-12">
+                    <h5 *ngIf="otpUnverified" style="color:#DC4E42">You have to verify your mobile number for registration</h5>
+                    <h5 *ngIf="!otpUnverified" style="color:#2BBF61"><i class="fa fa-check"></i>Mobile number verified!. Please register</h5>    
+                </div>
+                <div class="ui-g-6"><!--Mobile number Validator-->
+                    <input type="number"  name="regNumber" [disabled]="!otpUnverified"
+                        #regNumber="ngModel" [(ngModel)]="mobile" placeholder="Mobile Number"
+                        pattern="^[7-9]{1}[0-9]{9}"/>
+                </div>
+                <div class="ui-g-3"><!--OTP -->
+                    <span id="otpbtn"><button pButton class="ui-button-info" label="Send OTP" iconPos="right" [disabled]="!otpUnverified || regNumber.errors || mobile==null" (click)="otpDialog=true"></button></span>
+                </div>
 
-            <div class="ui-g-12">
-                <button style="background-color:#2BBF61" pButton (click)="signUp()" [disabled]="regNumber.errors || regEmail.errors || firstname.errors 
-                || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' 
-                || userRegCreds.email=='' || mobile==null || otpUnverified" type="submit" label="Register"></button>
+                <div class="ui-g-12">
+                    <button style="background-color:#2BBF61" pButton (click)="signUp()" [disabled]="regNumber.errors || regEmail.errors || firstname.errors 
+                    || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' 
+                    || userRegCreds.email=='' || mobile==null || otpUnverified" type="submit" label="Register"></button>
+                </div>
             </div>
         </div>
-        <div id="footer"><p>Copyright &copy; 2017 OlympiadBox. All Rights Reserved.</p> </div>
-     </div>
-</div>
+      </div>
+
+      <div class="footer">
+            Copyright &copy; 2017 OlympiadBox. All rights reserved
+      </div>
 </div>

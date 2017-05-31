@@ -3,12 +3,13 @@
             <div class="logo">
                 <img src="assets/layout/images/logo.png" alt="Logo">
             </div>
-        </div>
-        
+        </div>        
         <div class="topbar-right">
             <a id="menu-button" href="#" (click)="app.onMenuButtonClick($event)">
                 <i class="fa fa-angle-left"></i>
             </a>
+            
+            <span style="font-size:17px;" *ngFor="let url of currentPage">{{url}} &nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i> &nbsp;</span>
             
             <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
                 <i class="fa fa-bars"></i>
@@ -19,7 +20,6 @@
                         <img class="profile-image" src="assets/layout/images/Profile_picture.png">
                         <span class="topbar-item-name">Jane Williams</span>
                     </a>
-                    
                     <ul class="poseidon-menu fadeInDown">
                         <li role="menuitem">
                             <a href="#/account/profile">
@@ -27,12 +27,12 @@
                                 <span>Profile</span>
                             </a>
                         </li>
-                        <li role="menuitem">
+                        <!--<li role="menuitem">
                             <a href="#">
                                 <i class="fa fa-fw fa-user-secret"></i>
                                 <span>Privacy</span>
                             </a>
-                        </li>
+                        </li>-->
                         <li role="menuitem">
                             <a href="#/account/accountsettings">
                                 <i class="fa fa-fw fa-cog"></i>

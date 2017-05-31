@@ -12,7 +12,7 @@
     <div class="ui-g-12">
         <p-panel header="Subscribe Now"><br>
             <div class="ui-g">
-              <div class="ui-g-3">
+              <div class="ui-g-3 ui-sm-12">
                 <div *ngFor="let sub of subjects;let i=index">
                   <p-checkbox name="package" [(ngModel)]="selectedPackage" value="{{sub}}" label="{{sub|uppercase}} - &#8377; {{subjectsPrice[i]}}"></p-checkbox>
                   <br><br>
@@ -24,7 +24,7 @@
           <span id="coupontext"><strong>Enter Coupon/School Code*</strong></span><input size="40" type="text" [(ngModel)]="coupon" pInputText/>
           <button id="applybutton" type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button><br><br>
           
-          <div id="paybutton"><button type="button" [disabled]="selectedPackage==''" pButton label="Pay Now" (click)="pay()"></button></div><br>
+          <div id="paybutton"><button type="button" class="ui-button-success" [disabled]="selectedPackage==''" pButton label="Pay Now" (click)="pay()"></button></div><br>
         </p-panel>   
       </div>
     </div>

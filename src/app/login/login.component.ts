@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { LoginRegisterService } from '../services/loginRegister.service';
 import * as constants from '../../config/constants';
 import { Message} from 'primeng/primeng';
-import { ComponentInteractionService } from '../services/component-interaction.service';
 
 
 
@@ -54,8 +53,7 @@ export class LoginComponent implements OnInit {
   
   constructor(
     private httpService: LoginRegisterService, 
-    private router: Router, 
-    public transfer: ComponentInteractionService) {}
+    private router: Router) {}
 
   ngOnInit(){
     this.otpUnverified=true;
@@ -98,7 +96,6 @@ export class LoginComponent implements OnInit {
             this.errorMessage.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
             }
     );
-    this.transfer.setInfo(this.userLoginCreds['email'])
   }
 
   signUp() {
@@ -113,7 +110,6 @@ export class LoginComponent implements OnInit {
               this.errorMessage.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
             }
     );
-    this.transfer.setInfo(this.userRegCreds['email']);
   }
 
   

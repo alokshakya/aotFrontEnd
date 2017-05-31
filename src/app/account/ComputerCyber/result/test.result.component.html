@@ -1,0 +1,274 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+        <p-tabView (onChange)="close($event)">
+            <p-tabPanel header="Chapterwise Test">
+                <div class="ui-g">
+                    <div class="ui-g-6">
+                        <p-accordion (onClose)="showChapter=false" (onOpen)= "showMark=false">
+                            <p-accordionTab *ngFor="let i of resultSummary['Chapterwise Test']|keys">
+                                <p-header>
+                                    <div class="padtop">{{i.key}}</div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                        </div>
+                                    </div>
+                                </p-header>
+                                <span class="toright"><p-checkbox [(ngModel)]="showMark" binary="true" label="Show Marked Questions %"></p-checkbox></span>
+                                <div class="ui-g" *ngFor="let j of i.value|keys">
+                                    <div class="ui-g-2"></div>
+                                    <div class="ui-g-10">
+                                    {{j.key}}
+                                        <div class="progress hover" *ngIf="showMark" (click)="show(i.key,j.key)">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':j.value.Correct+'%'}">{{j.value["Correct"]}}%
+                                            </div>
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':j.value.Review+'%'}">{{j.value["Review"]}}%
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':j.value.Wrong+'%'}">{{j.value["Wrong"]}}%
+                                            </div>
+                                        </div>
+                                        <div class="progress hover" *ngIf="!showMark" (click)="show(i.key,j.key)">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':61+'%'}">61%
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':39+'%'}">39%
+                                            </div>
+                                        </div>
+                                        <!--<div class="progress hover" *ngIf="!showMark" (click)="show(i.key,j.key)">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':j.value['Correct']*100/(j.value['Correct']+j.value['Wrong'])+'%'}">{{j.value["Correct"]*100/(j.value["Correct"]+j.value["Wrong"])}}%
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':j.value['Wrong']*100/(j.value['Correct']+j.value['Wrong'])+'%'}">{{j.value["Wrong"]*100/(j.value["Correct"]+j.value["Wrong"])}}%
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </p-accordionTab>
+                        </p-accordion>
+                    </div>
+                    <div class="ui-g-6">
+                        <br><br>
+                        <div class="ui-g" *ngIf="showChapter" >
+                            <div class="ui-g-1"></div>
+                            <div class="ui-g-11 container">
+                                <table class="table table-hover table-bordered">
+                                    <tr *ngFor="let data of chapter|keys">
+                                        <th>{{data.key}}</th>
+                                        <td>{{data.value}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="ui-g-1"></div>
+                            <div class="ui-g-11">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Test Response</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="ui-g">
+                                                    <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
+                                                        {{resp.key}}
+                                                    </div>
+                                                </div>      
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Sample Test">
+                <div class="ui-g">
+                    <div class="ui-g-6">
+                        <!--<p-accordion>
+                            <p-accordionTab *ngFor="let data of detailedResult['Sample Test']|keys">
+                                <p-header>
+                                    <div class="padtop">{{data.key}}</div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                                    </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                        </div>
+                                    </div>
+                                </p-header>
+                                <div class="ui-g">
+                                    <div class="ui-g-1"></div>
+                                    <div class="ui-g-11">
+                                        <div class="ui-g" *ngFor="let sample of data.value|keys" >
+                                            <div class="ui-g-5 window">{{sample.key}}</div>
+                                            <div class="ui-g-5 data">{{sample.value}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p-accordionTab>
+                        </p-accordion>-->
+                        <div class="right" *ngFor="let data of detailedResult['Sample Test']|keys">
+                            <div class="padtop">{{data.key}}</div>
+                            <div class="progress hover" (click)="sampleResult(data.key)">
+                                <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                                </div>
+                                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                </div>
+                                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-6">
+                        <br><br>
+                        <div class="ui-g" *ngIf="showSample" >
+                            <div class="ui-g-1"></div>
+                            <div class="ui-g-11 container">
+                                <table class="table table-hover table-bordered">
+                                    <tr *ngFor="let data of sample|keys">
+                                        <th>{{data.key}}</th>
+                                        <td>{{data.value}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="ui-g-1"></div>
+                            <div class="ui-g-11">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Test Response</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="ui-g">
+                                                    <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
+                                                        {{resp.key}}
+                                                    </div>
+                                                </div>      
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Mock Test">
+                <div class="ui-g">
+                    <div class="ui-g-6">
+                        <p-accordion (onOpen)="mockResult($event)" (onClose)="showMock=false">
+                            <p-accordionTab *ngFor="let data of detailedResult['Mock Test']|keys">
+                                <p-header>
+                                    <div class="padtop">{{data.key}}</div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                        </div>
+                                    </div>
+                                </p-header>
+                                <div class="ui-g">
+                                    <div class="ui-g-1"></div>
+                                    <div class="ui-g-11">
+                                        <div class="ui-g" *ngFor="let mock of data.value|keys" >
+                                            <div class="ui-g-5 window">{{mock.key}}</div>
+                                            <div class="ui-g-5 data">{{mock.value}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </p-accordionTab>
+                        </p-accordion>
+                    </div>
+                    <div class="ui-g-6" *ngIf="showMock">
+                        <div class="ui-g">
+                            <div class="ui-g-9">
+                                Chapter 1
+                                <p-progressBar value="34"></p-progressBar><br>
+                                Chapter 2
+                                <p-progressBar value="44"></p-progressBar><br>
+                                Chapter 3
+                                <p-progressBar value="56"></p-progressBar><br>
+                                Chapter 4
+                                <p-progressBar value="34"></p-progressBar><br>
+                                Chapter 5
+                                <p-progressBar value="12"></p-progressBar><br>
+                                Chapter 6
+                                <p-progressBar value="56"></p-progressBar><br>
+                                Chapter 7
+                                <p-progressBar value="64"></p-progressBar><br>
+                                Chapter 8
+                                <p-progressBar value="23"></p-progressBar><br>
+                                Chapter 9
+                                <p-progressBar value="67"></p-progressBar><br>
+                                Chapter 10
+                                <p-progressBar value="88"></p-progressBar><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Demo Test">
+                <div class="ui-g">
+                    <div class="ui-g-6">
+                        <p-accordion (onOpen)="demoResult()" (onClose)="showDemo=false" >
+                            <p-accordionTab *ngFor="let data of detailedResult['Demo Test']|keys">
+                                <p-header>
+                                    <div class="padtop">{{data.key}}</div>
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                        </div>
+                                    </div>
+                                </p-header>
+                                <div class="ui-g">
+                                    <div class="ui-g-1"></div>
+                                    <div class="ui-g-11">
+                                        <div class="ui-g" *ngFor="let data of demo|keys">
+                                            <div class="ui-g-5 window">{{data.key}}</div>
+                                            <div class="ui-g-5 data">{{data.value}}</div>
+                                        </div>
+                                        <h3 class="text-center">Demo Test 1</h3>
+                                    </div>
+                                </div>
+                            </p-accordionTab>
+                        </p-accordion>
+                    </div>
+                    <div class="ui-g-6" *ngIf="showDemo">
+                        <div class="ui-g">
+                            <div class="ui-g-9 panel panel-success">
+                                <div class="panel-heading">Correct Answers</div>
+                                <div class="panel-body">1, 3, 4, 5, 6, 7, 8</div>
+                            </div>
+                            <div class=" ui-g-9 panel panel-danger">
+                                <div class="panel-heading">Wrong Answers</div>
+                                <div class="panel-body">2, 9, 10, 11</div>
+                            </div>
+                            <div class="ui-g-9 panel panel-warning">
+                                <div class="panel-heading">Marked for review</div>
+                                <div class="panel-body">12, 13, 14, 15 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+            
+
+        </p-tabView>
+    </div>
+</div>

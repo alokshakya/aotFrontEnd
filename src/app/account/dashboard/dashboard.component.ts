@@ -341,10 +341,11 @@ export class DashboardComponent implements OnInit{
     } 
 
     isLogin(token){
-        if(token==null||token==''){
-            this.router.navigate(['login'])
-        }else{ 
-            this.getData(); }
+        // if(token==null||token==''){
+        //     this.router.navigate(['login'])
+        // }else{ 
+        //     this.getData(); }
+        this.getData();
     } 
 
     redirectToTest(i,j){

@@ -91,12 +91,15 @@ import { LoginComponent } from './login/login.component';
 import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemotest/takedemotest.component';
 
 //services
+import { ConfirmationService } from 'primeng/primeng';
 import { LoginRegisterService } from './services/loginRegister.service';
-import { UserinfoService } from './services/userinfo.service';
 import { NotificationService } from './services/notification.service';
-import { ComponentInteractionService } from './services/component-interaction.service';
 import { SubjectService } from './services/subject.service';
+import { UserinfoService } from './services/userinfo.service';
 import { UpdateService } from './services/update.service';
+import { SharedService } from './services/shared.service';
+import { EventService } from './services/event.service';
+
 
 //pipes
 import { KeysPipe } from './pipes/keys.pipe';
@@ -196,7 +199,7 @@ import { CssIdPipe } from './pipes/css-id.pipe';
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        LoginRegisterService, UserinfoService, NotificationService, ComponentInteractionService, SubjectService, UpdateService
+        LoginRegisterService, UserinfoService, NotificationService, SubjectService, UpdateService, ConfirmationService, SharedService, EventService
     ],
     bootstrap:[AppComponent]
 })

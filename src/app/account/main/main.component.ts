@@ -84,7 +84,8 @@ export class AccountMainComponent implements AfterViewInit {
             this.shownEmail = this.email.slice(0,26) + '...'
         }
         this.sessionToken = localStorage.getItem('session_token');
-        this.isLogin(this.sessionToken);
+        // this.isLogin(this.sessionToken);
+        this.getUserInfo()
 
     }
 

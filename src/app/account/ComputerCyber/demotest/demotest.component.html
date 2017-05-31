@@ -1,5 +1,5 @@
 <div class="ui-g">
-  <div class="ui-g-6">
+  <div class="ui-g-6 ui-sm-12">
     <p-panel header="Introduction">
       <div id="intro">
         <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry.
@@ -15,21 +15,21 @@
       </div>
     </p-panel>
   </div>
-  <div class="ui-g-6">
+  <div class="ui-g-6 ui-sm-12">
     <p-panel header="Progress">
       <div>
         <p-chart type="doughnut" [data]="demoTestData"></p-chart>
       </div>
     </p-panel>
   </div>
-  <div class="ui-g-6">
+  <div class="ui-g-6 ui-sm-12">
     <p-panel header="Syllabus">
       <div class="ui-g">
         <div class=ui-g-6>
             <p-accordion>
               <p-accordionTab *ngFor = "let chapter of chapterNames" header={{chapter}}>
                 <div class="ui-g">
-                  <div class=ui-g-6>
+                  <div class="ui-g-6 ui-sm-12">
                     <span *ngFor="let topic of topicNames">{{topic}}<br><br></span>
                   </div>
                 </div>
@@ -39,7 +39,7 @@
       </div>
     </p-panel>
   </div>
-  <div class="ui-g-6">
+  <div class="ui-g-6 ui-sm-12">
     <p-panel header="Demo Test">
       <div id="demotest">
         <button pButton type="button" (click)="takedemotest()" label="TAKE DEMO TEST" class="ui-button-info"></button>

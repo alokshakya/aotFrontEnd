@@ -23,11 +23,11 @@
     padding-left: 5%;
     height:80vh;
     overflow-y: auto;
-    margin-top:0px;
 }
 
-#bar{
-    margin-right:4px;
+.bar{
+    width:70px;
+    margin-right:1%;
 }
 
 #sub{
@@ -151,4 +151,5 @@ i:hover{
 
 .btngrp button{
     width:200px;
+    margin-bottom:2%;
 }
