@@ -103,7 +103,7 @@
   margin: 0 0 20px;
   padding: 10px 15px;
   box-sizing: border-box;
-  font-wieght: 400;
+  font-weight: 400;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
 }
@@ -147,6 +147,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
+  height: 400px;
 }
 
 .register .toggle {
@@ -180,4 +181,15 @@ input[type=number]::-webkit-outer-spin-button {
  .otpfield, .btngrp{
    padding-left: 20%;
    margin-top: 5% 
+}
+
+
+
+#reg{
+  width:197px;
+  background-color: #2BBF61;
+}
+
+.withinput{
+  margin-left: 2%;
 }

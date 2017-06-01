@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { LoginRegisterService } from '../services/loginRegister.service';
 import * as constants from '../../config/constants';
 import { Message} from 'primeng/primeng';
+import {SelectItem} from 'primeng/primeng';
+
 
 
 
@@ -42,13 +44,21 @@ export class LoginComponent implements OnInit {
 
   actualOTP:number = 123456;
   otp:number;
-  otpDialog:boolean = false;  //otp verify dialogbox
+  otpDialog:boolean;  //otp verify dialogbox
   errorSection:boolean = false; //invalid otp entered
   otpverified:Message[] = [];
 
   otpUnverified:boolean=true;
 
-  token:string
+  token:string;
+  
+  //temporary
+  dummyClass:SelectItem[]=[];
+  dummySelectedClass:string;
+  dummyMobile:number;
+  dummyOtpSection:boolean;
+  dummyOtp:number;
+  dummyIncorrectOtp:boolean;
 
   
   constructor(
@@ -61,6 +71,11 @@ export class LoginComponent implements OnInit {
     if(token=='' || token==null){
       this.router.navigate(['login']);
     }
+
+    //temporary
+    this.dummyClass.push({label:"Select Class", value:null}, {label:"I", value:"I"}, 
+    {label:"II", value:"II"}, {label:"III", value:"III"}, {label:"IV", value:"IV"}, {label:"V", value:"V"},
+    {label:"VI", value:"VI"}, {label:"VII", value:"VII"}, {label:"VIII", value:"VIII"})
   }
   
   
@@ -110,6 +125,26 @@ export class LoginComponent implements OnInit {
               this.errorMessage.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
             }
     );
+  }
+
+  //temporary
+  dummyRegister(){
+    this.otpDialog = true;
+  }
+
+  dummySend(){
+    this.dummyOtpSection = true;
+  }
+
+  dummyVerify(){
+    if(this.actualOTP==this.dummyOtp){
+      this.otpDialog = false;
+      this.successMessage.push({severity:'success', summary:'Mobile Verified', detail:'Please Login'})
+      this.loginRegToggle = false;
+    }
+    this.dummyIncorrectOtp = false;
+    this.dummyOtpSection = false;
+
   }
 
   

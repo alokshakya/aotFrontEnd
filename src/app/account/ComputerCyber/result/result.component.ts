@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UIChart } from 'primeng/primeng'
+import { UIChart, SelectItem } from 'primeng/primeng'
+
 @Component({
   selector: 'app-result',
   templateUrl: './test.result.component.html',
@@ -13,18 +14,30 @@ export class ResultComponent implements OnInit {
   testResponse:any;
 
   overview:any;
-
+  organisation:SelectItem[];
+  selectedOrg:string;
   showSample:boolean;
   showDemo:boolean;
   showMock:boolean;
   showChapter:boolean;
 
   showMark:boolean;
+  showMarkSample:boolean;
+  showMarkMock:boolean;
+  showMarkDemo:boolean;
 
   chapter:any;
   sample:any;
   mock:any;
   demo:any;
+
+  currentChapter:string;
+  currentTest:string;
+
+  currentSample:string;
+  currentMock:string;
+  currentDemo:string;
+
 
   constructor() {
 
@@ -904,29 +917,30 @@ export class ResultComponent implements OnInit {
   show(i,j){
 	  this.chapter = {};
 	  this.chapter = this.detailedResult['Chapterwise Test'][i][j];
+	  this.currentChapter = i;
+	  this.currentTest = j
 	  this.showChapter = true;
   }			
 
   sampleResult(s){
-	  if(this.showSample){this.showSample=false}
-	  else{this.sample = {};
+	  this.sample = {};
 	  this.sample = this.detailedResult['Sample Test'][s];
-	  this.showSample = true;};
+	  this.currentSample = s;
+	  this.showSample = true;
   }
 
-  demoResult(){
-	  this.demo={};
-	  this.demo = this.detailedResult['Demo Test']['Demo Test 1'];
+  demoResult(number){
+	  this.demo={number};
+	  this.demo = this.detailedResult['Demo Test'][number];
+	  this.currentDemo = number;
 	  this.showDemo = true;
-	  console.log(this.demo)
   }	
 
   mockResult(number){
-	  var a = number+1
 	  this.mock = {};
-	  this.mock = this.detailedResult['Mock Test']['Mock Test '+a];
+	  this.mock = this.detailedResult['Mock Test'][number];
+	  this.currentMock = number
 	  this.showMock = true;
-	  console.log(this.showMock);
   }
 
   close(e){
@@ -935,8 +949,12 @@ export class ResultComponent implements OnInit {
 	  this.showSample = false;
 	  this.showMock = false;
   }
-  ngOnInit(){
 
+  showPanel(e){
+  }
+  ngOnInit(){
+	this.organisation=[];
+	this.organisation.push({label:'Select Organisation', value:'null'},{label:'Organisation 1', value:'Organisation 1'},{label:'Organisation 2', value:'Organisation 2'}, {label:'Organisation 3', value:'Organisation 3'},)
   }
 
 }

@@ -884,7 +884,7 @@ body .ui-accordion .ui-accordion-header {
   body .ui-accordion .ui-accordion-header.ui-state-active {
     /*background-color: #00acac;*/
     background: transparent;
-    color: #ffffff; 
+    color: #ffffff;   /*added new chevron*/
     border: none;}
     body .ui-accordion .ui-accordion-header.ui-state-active a {
       /*color: #ffffff; }*/
@@ -1190,7 +1190,8 @@ body .ui-treetable .ui-treetable-footer {
 body .ui-treetable thead th {
   background-color: #ffffff;
   padding: 0.5em 1em;
-  border-color: #c9cdd2;
+  /*border-color: #c9cdd2;*/
+  border-color:white;
   color: #5f666c; }
   body .ui-treetable thead th.ui-state-hover {
     background-color: #f0f3f5;
@@ -1225,7 +1226,7 @@ body .ui-treetable tbody > div td {
 body .ui-tree {
   padding: .25em .5em; }
   body .ui-tree .ui-treenode {
-    padding: .15em 0; }
+    padding: .15em 0;}
     body .ui-tree .ui-treenode .ui-treenode-content {
       padding: 0 0 .25em 0; }
       body .ui-tree .ui-treenode .ui-treenode-content .ui-tree-toggler {
@@ -1243,7 +1244,8 @@ body .ui-tree {
         margin: 0;
         vertical-align: middle;
         display: inline-block;
-        padding: 0 .25em; }
+        padding: 0 .25em; 
+        font-size: 16px;}
         body .ui-tree .ui-treenode .ui-treenode-content .ui-treenode-label.ui-state-highlight {
           background-color: #00acac;
           color: #ffffff; }

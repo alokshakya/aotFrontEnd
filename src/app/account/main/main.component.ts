@@ -2,6 +2,7 @@ import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} 
 import { Router } from '@angular/router';
 import { UserinfoService } from '../../services/userinfo.service';
 import { NotificationService } from '../../services/notification.service';
+import { MasterHttpService } from '../../services/masterhttp.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 
@@ -28,6 +29,8 @@ export class AccountMainComponent implements AfterViewInit {
     email = "emailidlengthisgreaterthan25characters@gmail.com";
     shownEmail = "emailidlengthisgreaterthan25characters@gmail.com";
     
+    changeImg:boolean;
+
     layoutCompact: boolean = false;
 
     layoutMode: MenuOrientation = MenuOrientation.STATIC;
@@ -64,8 +67,11 @@ export class AccountMainComponent implements AfterViewInit {
     
     personalDetails:any; //will be used in child components
     academicDetails:any;
-    sessionToken:string
-    userInfoId:string
+    sessionToken:string;
+    userInfoId:string;
+
+    temporaryData:any;
+    temporaryClass:string;
 
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
 
@@ -76,6 +82,7 @@ export class AccountMainComponent implements AfterViewInit {
         private router: Router, 
         private http: UserinfoService, 
         private notification: NotificationService,
+        private masterhttp: MasterHttpService,
         )
         {}
 
@@ -86,6 +93,18 @@ export class AccountMainComponent implements AfterViewInit {
         this.sessionToken = localStorage.getItem('session_token');
         // this.isLogin(this.sessionToken);
         this.getUserInfo()
+
+        //temporary
+        this.masterhttp.getUserInfo()
+        .subscribe((data: Response) =>{
+            this.temporaryData = data;
+            console.log(this.temporaryData['firstname']);
+        })
+
+        this.masterhttp.getClass()
+        .subscribe((data: Response) =>{
+            this.temporaryClass = data['abbreviation'];
+        })
 
     }
 
@@ -136,10 +155,6 @@ export class AccountMainComponent implements AfterViewInit {
         setTimeout(() => {
             jQuery(this.layoutMenuScroller).nanoScroller({flash:true});
         }, 10);
-    }
-
-    gotoprofile(){
-        this.router.navigate(['account/profile'])
     }
 
     onMenuButtonClick(event) {

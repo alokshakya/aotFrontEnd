@@ -98,7 +98,7 @@ import { SubjectService } from './services/subject.service';
 import { UserinfoService } from './services/userinfo.service';
 import { UpdateService } from './services/update.service';
 import { SharedService } from './services/shared.service';
-import { EventService } from './services/event.service';
+import { MasterHttpService } from './services/masterhttp.service';
 
 
 //pipes
@@ -199,7 +199,14 @@ import { CssIdPipe } from './pipes/css-id.pipe';
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        LoginRegisterService, UserinfoService, NotificationService, SubjectService, UpdateService, ConfirmationService, SharedService, EventService
+        LoginRegisterService, 
+        UserinfoService, 
+        NotificationService, 
+        SubjectService, 
+        UpdateService, 
+        ConfirmationService, 
+        SharedService, 
+        MasterHttpService
     ],
     bootstrap:[AppComponent]
 })

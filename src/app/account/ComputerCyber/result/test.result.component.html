@@ -1,86 +1,96 @@
 <div class="ui-g">
     <div class="ui-g-12">
         <p-tabView (onChange)="close($event)">
+            
             <p-tabPanel header="Chapterwise Test">
                 <div class="ui-g">
                     <div class="ui-g-6">
-                        <p-accordion (onClose)="showChapter=false" (onOpen)= "showMark=false">
-                            <p-accordionTab *ngFor="let i of resultSummary['Chapterwise Test']|keys">
-                                <p-header>
-                                    <div class="padtop">{{i.key}}</div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                        <p-panel header="Result">
+                            <br>
+                            <span class="toright"><p-checkbox [(ngModel)]="showMark" binary="true" label="include 'Mark for Review' in result"></p-checkbox></span>
+                            <p-accordion (onClose)="showChapter=false" (onOpen)= "showPanel($event)">
+                                <p-accordionTab *ngFor="let i of resultSummary['Chapterwise Test']|keys">
+                                    <p-header>
+                                        <div class="padtop">{{i.key}}</div>
+                                        <div class="progress" *ngIf="showMark">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                                            </div>
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                            </div>
                                         </div>
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                        <div class="progress" *ngIf="!showMark">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" style="width:58%">58%
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" style="width:42%">42%
+                                            </div>
                                         </div>
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                    </p-header>
+                                
+                                    <div class="ui-g" *ngFor="let j of i.value|keys">
+                                        <div class="ui-g-2"></div>
+                                        <div class="ui-g-10">
+                                            {{j.key}}
+                                            <div class="progress hover" *ngIf="showMark" (click)="show(i.key,j.key)">
+                                                <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':j.value.Correct+'%'}">{{j.value["Correct"]}}%
+                                                </div>
+                                                <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':j.value.Review+'%'}">{{j.value["Review"]}}%
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':j.value.Wrong+'%'}">{{j.value["Wrong"]}}%
+                                                </div>
+                                            </div>
+                                            <div class="progress hover" *ngIf="!showMark" (click)="show(i.key,j.key)">
+                                                <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':61+'%'}">61%
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':39+'%'}">39%
+                                                </div>
+                                            </div>
+                                            <!--<div class="progress hover" *ngIf="!showMark" (click)="show(i.key,j.key)">
+                                                <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':j.value['Correct']*100/(j.value['Correct']+j.value['Wrong'])+'%'}">{{j.value["Correct"]*100/(j.value["Correct"]+j.value["Wrong"])}}%
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':j.value['Wrong']*100/(j.value['Correct']+j.value['Wrong'])+'%'}">{{j.value["Wrong"]*100/(j.value["Correct"]+j.value["Wrong"])}}%
+                                                </div>
+                                            </div>-->
                                         </div>
                                     </div>
-                                </p-header>
-                                <span class="toright"><p-checkbox [(ngModel)]="showMark" binary="true" label="Show Marked Questions %"></p-checkbox></span>
-                                <div class="ui-g" *ngFor="let j of i.value|keys">
-                                    <div class="ui-g-2"></div>
-                                    <div class="ui-g-10">
-                                    {{j.key}}
-                                        <div class="progress hover" *ngIf="showMark" (click)="show(i.key,j.key)">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':j.value.Correct+'%'}">{{j.value["Correct"]}}%
-                                            </div>
-                                            <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':j.value.Review+'%'}">{{j.value["Review"]}}%
-                                            </div>
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':j.value.Wrong+'%'}">{{j.value["Wrong"]}}%
-                                            </div>
-                                        </div>
-                                        <div class="progress hover" *ngIf="!showMark" (click)="show(i.key,j.key)">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':61+'%'}">61%
-                                            </div>
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':39+'%'}">39%
-                                            </div>
-                                        </div>
-                                        <!--<div class="progress hover" *ngIf="!showMark" (click)="show(i.key,j.key)">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':j.value['Correct']*100/(j.value['Correct']+j.value['Wrong'])+'%'}">{{j.value["Correct"]*100/(j.value["Correct"]+j.value["Wrong"])}}%
-                                            </div>
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" [ngStyle]="{'width':j.value['Wrong']*100/(j.value['Correct']+j.value['Wrong'])+'%'}">{{j.value["Wrong"]*100/(j.value["Correct"]+j.value["Wrong"])}}%
-                                            </div>
-                                        </div>-->
-                                    </div>
-                                </div>
-                            </p-accordionTab>
-                        </p-accordion>
+                                </p-accordionTab>
+                            </p-accordion>
+                        </p-panel>
                     </div>
-                    <div class="ui-g-6">
-                        <br><br>
-                        <div class="ui-g" *ngIf="showChapter" >
-                            <div class="ui-g-1"></div>
-                            <div class="ui-g-11 container">
-                                <table class="table table-hover table-bordered">
-                                    <tr *ngFor="let data of chapter|keys">
-                                        <th>{{data.key}}</th>
-                                        <td>{{data.value}}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="ui-g-1"></div>
-                            <div class="ui-g-11">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Test Response</th>
+                    <div class="ui-g-6" *ngIf="showChapter">
+                        <p-panel header="Result-Analysis >> {{currentChapter}} >> {{currentTest}}">
+                            <div class="ui-g">
+                                <div class="ui-g-12 container">
+                                    <table class="table table-hover table-bordered">
+                                        <tr *ngFor="let data of chapter|keys">
+                                            <th>{{data.key}}</th>
+                                            <td>{{data.value}}</td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="ui-g">
-                                                    <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
-                                                        {{resp.key}}
-                                                    </div>
-                                                </div>      
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                    </table>
+                                </div>
+                                <div class="ui-g-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Test Response</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="ui-g">
+                                                        <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
+                                                            {{resp.key}}
+                                                        </div>
+                                                    </div>      
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
+                        </p-panel>
                     </div>
                 </div>
             </p-tabPanel>
@@ -112,52 +122,153 @@
                                 </div>
                             </p-accordionTab>
                         </p-accordion>-->
-                        <div class="right" *ngFor="let data of detailedResult['Sample Test']|keys">
-                            <div class="padtop">{{data.key}}</div>
-                            <div class="progress hover" (click)="sampleResult(data.key)">
-                                <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                        <p-panel header="Result">
+                            <p-dropdown [options]="organisation" [(ngModel)]="selectedOrg"></p-dropdown>
+                            <div class="rightsample"><p-checkbox [(ngModel)]="showMarkSample" binary="true" label="include 'Mark for Review' in result"></p-checkbox></div>
+                            <div class="right" *ngFor="let data of detailedResult['Sample Test']|keys">
+                                <div class="padtop">{{data.key}}</div>
+                                <div *ngIf="showMarkSample" class="progress hover" (click)="sampleResult(data.key)">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                                    </div>
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                    </div>
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                    </div>
                                 </div>
-                                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
-                                </div>
-                                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                <div *ngIf="!showMarkSample" class="progress hover" (click)="sampleResult(data.key)">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:58%">58%
+                                    </div>
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:42%">42%
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </p-panel>
                     </div>
-                    <div class="ui-g-6">
-                        <br><br>
-                        <div class="ui-g" *ngIf="showSample" >
-                            <div class="ui-g-1"></div>
-                            <div class="ui-g-11 container">
-                                <table class="table table-hover table-bordered">
-                                    <tr *ngFor="let data of sample|keys">
-                                        <th>{{data.key}}</th>
-                                        <td>{{data.value}}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="ui-g-1"></div>
-                            <div class="ui-g-11">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Test Response</th>
+                    <div class="ui-g-6"  *ngIf="showSample">
+                        <p-panel header="Result Analysis >> {{currentSample}}">
+                            <div class="ui-g">
+                                <div class="ui-g-12 container">
+                                    <table class="table table-hover table-bordered">
+                                        <tr *ngFor="let data of sample|keys">
+                                            <th>{{data.key}}</th>
+                                            <td>{{data.value}}</td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="ui-g">
-                                                    <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
-                                                        {{resp.key}}
-                                                    </div>
-                                                </div>      
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                    </table>
+                                </div>
+                                <div class="ui-g-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Test Response</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="ui-g">
+                                                        <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
+                                                            {{resp.key}}
+                                                        </div>
+                                                    </div>      
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="ui-g-12">
+                                    Chapter 1
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 2
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 3
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 4
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 5
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 6
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div> 
+                                    Chapter 7
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 8
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 9
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 10
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </p-panel>
                     </div>
                 </div>
             </p-tabPanel>
@@ -165,57 +276,153 @@
             <p-tabPanel header="Mock Test">
                 <div class="ui-g">
                     <div class="ui-g-6">
-                        <p-accordion (onOpen)="mockResult($event)" (onClose)="showMock=false">
-                            <p-accordionTab *ngFor="let data of detailedResult['Mock Test']|keys">
-                                <p-header>
-                                    <div class="padtop">{{data.key}}</div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                        <p-panel header="Result">
+                            <div style="width:200px;"><p-dropdown [options]="organisation" [(ngModel)]="selectedOrg"></p-dropdown></div>
+                            <div class="rightsample"><p-checkbox [(ngModel)]="showMarkMock" binary="true" label="include 'Mark for Review' in result"></p-checkbox></div>
+                            <div class="right" *ngFor="let data of detailedResult['Mock Test']|keys">
+                                <div class="padtop">{{data.key}}</div>
+                                <div *ngIf="showMarkMock" class="progress hover" (click)="mockResult(data.key)">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
+                                    </div>
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                    </div>
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                    </div>
+                                </div>
+                                <div *ngIf="!showMarkMock" class="progress hover" (click)="mockResult(data.key)">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:58%">58%
+                                    </div>
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:42%">42%
+                                    </div>
+                                </div>
+                            </div>
+                        </p-panel>
+                    </div>
+                    <div class="ui-g-6" *ngIf="showMock">
+                            <p-panel header="Result Analysis >> {{currentMock}}">
+                            <div class="ui-g">
+                                <div class="ui-g-12 container">
+                                    <table class="table table-hover table-bordered">
+                                        <tr *ngFor="let data of mock|keys">
+                                            <th>{{data.key}}</th>
+                                            <td>{{data.value}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="ui-g-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Test Response</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="ui-g">
+                                                        <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
+                                                            {{resp.key}}
+                                                        </div>
+                                                    </div>      
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="ui-g-12">
+                                    Chapter 1
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
                                         </div>
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
                                         </div>
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
                                         </div>
                                     </div>
-                                </p-header>
-                                <div class="ui-g">
-                                    <div class="ui-g-1"></div>
-                                    <div class="ui-g-11">
-                                        <div class="ui-g" *ngFor="let mock of data.value|keys" >
-                                            <div class="ui-g-5 window">{{mock.key}}</div>
-                                            <div class="ui-g-5 data">{{mock.value}}</div>
+                                    Chapter 2
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 3
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 4
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 5
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 6
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div> 
+                                    Chapter 7
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 8
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 9
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
+                                        </div>
+                                    </div>
+                                    Chapter 10
+                                   <div class="progress">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%">50%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:24%">24%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:26%">26%
                                         </div>
                                     </div>
                                 </div>
-
-                            </p-accordionTab>
-                        </p-accordion>
-                    </div>
-                    <div class="ui-g-6" *ngIf="showMock">
-                        <div class="ui-g">
-                            <div class="ui-g-9">
-                                Chapter 1
-                                <p-progressBar value="34"></p-progressBar><br>
-                                Chapter 2
-                                <p-progressBar value="44"></p-progressBar><br>
-                                Chapter 3
-                                <p-progressBar value="56"></p-progressBar><br>
-                                Chapter 4
-                                <p-progressBar value="34"></p-progressBar><br>
-                                Chapter 5
-                                <p-progressBar value="12"></p-progressBar><br>
-                                Chapter 6
-                                <p-progressBar value="56"></p-progressBar><br>
-                                Chapter 7
-                                <p-progressBar value="64"></p-progressBar><br>
-                                Chapter 8
-                                <p-progressBar value="23"></p-progressBar><br>
-                                Chapter 9
-                                <p-progressBar value="67"></p-progressBar><br>
-                                Chapter 10
-                                <p-progressBar value="88"></p-progressBar><br>
                             </div>
-                        </div>
+                        </p-panel>
                     </div>
                 </div>
             </p-tabPanel>
@@ -223,47 +430,60 @@
             <p-tabPanel header="Demo Test">
                 <div class="ui-g">
                     <div class="ui-g-6">
-                        <p-accordion (onOpen)="demoResult()" (onClose)="showDemo=false" >
-                            <p-accordionTab *ngFor="let data of detailedResult['Demo Test']|keys">
-                                <p-header>
-                                    <div class="padtop">{{data.key}}</div>
-                                    <div class="progress">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
-                                        </div>
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
-                                        </div>
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
-                                        </div>
+                        <p-panel header="Result">
+                            <div class="rightsample"><p-checkbox [(ngModel)]="showMarkDemo" binary="true" label="include 'Mark for Review' in result"></p-checkbox></div>
+                            <div class="right" *ngFor="let data of detailedResult['Demo Test']|keys">
+                                <div class="padtop">{{data.key}}</div>
+                                <div *ngIf="showMarkDemo" class="progress hover" (click)="demoResult(data.key)">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:35%">35%
                                     </div>
-                                </p-header>
-                                <div class="ui-g">
-                                    <div class="ui-g-1"></div>
-                                    <div class="ui-g-11">
-                                        <div class="ui-g" *ngFor="let data of demo|keys">
-                                            <div class="ui-g-5 window">{{data.key}}</div>
-                                            <div class="ui-g-5 data">{{data.value}}</div>
-                                        </div>
-                                        <h3 class="text-center">Demo Test 1</h3>
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" style="width:40%">40%
+                                    </div>
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:25%">25%
                                     </div>
                                 </div>
-                            </p-accordionTab>
-                        </p-accordion>
+                                <div *ngIf="!showMarkDemo" class="progress hover" (click)="demoResult(data.key)">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" style="width:58%">58%
+                                    </div>
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width:42%">42%
+                                    </div>
+                                </div>
+                            </div>
+                        </p-panel>
                     </div>
                     <div class="ui-g-6" *ngIf="showDemo">
-                        <div class="ui-g">
-                            <div class="ui-g-9 panel panel-success">
-                                <div class="panel-heading">Correct Answers</div>
-                                <div class="panel-body">1, 3, 4, 5, 6, 7, 8</div>
+                            <p-panel header="Result Analysis >> {{currentDemo}}">
+                            <div class="ui-g">
+                                <div class="ui-g-12 container">
+                                    <table class="table table-hover table-bordered">
+                                        <tr *ngFor="let data of demo|keys">
+                                            <th>{{data.key}}</th>
+                                            <td>{{data.value}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="ui-g-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Test Response</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="ui-g">
+                                                        <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
+                                                            {{resp.key}}
+                                                        </div>
+                                                    </div>      
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <div class=" ui-g-9 panel panel-danger">
-                                <div class="panel-heading">Wrong Answers</div>
-                                <div class="panel-body">2, 9, 10, 11</div>
-                            </div>
-                            <div class="ui-g-9 panel panel-warning">
-                                <div class="panel-heading">Marked for review</div>
-                                <div class="panel-body">12, 13, 14, 15 </div>
-                            </div>
-                        </div>
+                        </p-panel>
                     </div>
                 </div>
             </p-tabPanel>

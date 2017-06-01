@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/primeng';
 import { AccountMainComponent } from './main.component';
 import { SubjectService } from '../../services/subject.service';
+import { MasterHttpService } from '../../services/masterhttp.service';
 
 @Component({
     selector: 'app-menu',
@@ -20,10 +21,14 @@ export class AppMenuComponent implements OnInit {
 
     model: MenuItem[];
 
+    //temporary
+    temporaryModel: MenuItem;
+
     constructor(
         @Inject(forwardRef(() => AccountMainComponent))
         public app:AccountMainComponent,
-        private subjectSet: SubjectService 
+        private subjectSet: SubjectService,
+        private masterhttp: MasterHttpService
         )
         {
 
@@ -208,6 +213,11 @@ export class AppMenuComponent implements OnInit {
                 this.model.push(this.menuTabs[j])
             }
         })
+
+        //temporary
+        this.temporaryModel = []
+        
+
         }           
 
     }    

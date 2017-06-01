@@ -1,8 +1,8 @@
 <p-growl [value]="errorMessage" life="4000"></p-growl>
 <p-growl [value]="successMessage" life="4000"></p-growl>
  <!--ENTER OTP-->
-<p-dialog header="Mobile Verification" [(visible)]="otpDialog" modal="true" responsive="true" width="280" height="auto"> 
-    <div class="ui-g" id="otpDialog">
+<p-dialog header="Mobile Number Verification" [(visible)]="otpDialog" modal="true" responsive="true" [width]="400" [height]="300"> 
+    <!--<div class="ui-g" id="otpDialog">
         Please enter OTP sent on {{mobile}}
         <div class="ui-g-12" class="otpfield"><input pInput type="number" [(ngModel)]="otp" /></div>
         <div class="ui-g" class="btngrp">
@@ -10,6 +10,20 @@
             <div class="ui-g-6"><button pButton class="ui-button-success" label="Resend"></button></div>
         </div>
         <div class="ui-g-12" *ngIf="errorSection">Incorrect OTP. Please try again</div>
+    </div>-->
+    <div class="ui-g text-center">
+        <div class="ui-g-12">
+            <h4>Enter Mobile Number For Verification</h4>
+            <input name="number" placeholder="Mobile Number" #number="ngModel" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="dummyMobile" pInputText type="number"><button (click)="dummySend()" [disabled]="number.errors||dummyMobile==null||dummyMobile==''" id="otpbtn" pButton class="ui-button-info withinput" label="Send OTP"></button>
+        </div>
+        <div class="ui-g-12" *ngIf="dummyOtpSection">
+            <h5>Enter OTP send on {{dummyMobile}} </h5>
+            <input pInputText placeholder="Enter OTP" [(ngModel)]="dummyOtp"/><button class="ui-button-info withinput" pButton label="Resend"></button><br>
+            <br><button pButton (click)="dummyVerify()" class="ui-button-success" label="Verify"></button>
+        </div>
+        <div class="ui-g-12" *ngIf="dummyIncorrectOtp">
+            <h5 style="color:#DC4E42"><i class="fa fa-times"></i> Incorrect OTP. Please try again</h5><br>
+        </div>
     </div>
 </p-dialog>
 
@@ -68,7 +82,7 @@
         <div class="form">  
             <h2>Create an account</h2>
             <div class="ui-g">
-                <div class="ui-g-6"> <!--FirstName Validator -->
+                <div class="ui-g-6 ui-sm-12"> <!--FirstName Validator -->
                     <div class="ui-message ui-messages-error" [hidden]="firstname.untouched" *ngIf="firstname.errors && firstname.errors.pattern">
                         &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Invalid Firstname
                     </div>  
@@ -76,7 +90,7 @@
                         #firstname="ngModel"  [(ngModel)]="userRegCreds.firstname" pInputText placeholder="Firstname"
                         pattern="^[a-zA-Z]+"/>
                 </div>
-                <div class="ui-g-6"> <!--LastName Validator -->
+                <div class="ui-g-6 ui-sm-12"> <!--LastName Validator -->
                     <div class="ui-message ui-messages-error" [hidden]="lastname.untouched" *ngIf="lastname.errors && lastname.errors.pattern">
                         &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Invalid Lastname
                     </div>
@@ -84,7 +98,7 @@
                         #lastname="ngModel"  [(ngModel)]="userRegCreds.lastname" pInputText placeholder="Lastname"
                         pattern="^[a-zA-Z]+"/>
                 </div>
-                <div class="ui-g-6"> <!--Email Validators -->
+                <div class="ui-g-6 ui-sm-12"> <!--Email Validators -->
                     <div class="ui-message ui-messages-error" [hidden]="regEmail.untouched" *ngIf="regEmail.errors && regEmail.errors.pattern">
                     &nbsp;<i class="fa fa-exclamation"></i>&nbsp; Invalid Email Id
                     </div>
@@ -92,29 +106,24 @@
                         #regEmail="ngModel" [(ngModel)]="userRegCreds.email"  pInputText placeholder="Email"
                         pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$"/>
                 </div>
-                <div class="ui-g-6"> <!--Password validator-->
+                <div class="ui-g-6 ui-sm-12"> <!--Password validator-->
                     <input type="password"  name="regPassword" pPassword weakLabel="Min 6 Characters" promptLabel="Min 6 Characters and a number" strongLabel="Great" mediumLabel="OK" 
                         indicator="false" #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password"
                         pattern="^[^\s]{6,}"/>
                 </div>
-                <div class="ui-g-12">
-                    <h5 *ngIf="otpUnverified" style="color:#DC4E42">You have to verify your mobile number for registration</h5>
-                    <h5 *ngIf="!otpUnverified" style="color:#2BBF61"><i class="fa fa-check"></i>Mobile number verified!. Please register</h5>    
+                <div class="ui-g-6 ui-sm-12">
+                    <p-dropdown scrollHeight="100px" [options]="dummyClass" [(ngModel)]="dummySelectedClass"></p-dropdown>
                 </div>
-                <div class="ui-g-6"><!--Mobile number Validator-->
-                    <input type="number"  name="regNumber" [disabled]="!otpUnverified"
-                        #regNumber="ngModel" [(ngModel)]="mobile" placeholder="Mobile Number"
-                        pattern="^[7-9]{1}[0-9]{9}"/>
-                </div>
-                <div class="ui-g-3"><!--OTP -->
-                    <span id="otpbtn"><button pButton class="ui-button-info" label="Send OTP" iconPos="right" [disabled]="!otpUnverified || regNumber.errors || mobile==null" (click)="otpDialog=true"></button></span>
-                </div>
-
-                <div class="ui-g-12">
-                    <button style="background-color:#2BBF61" pButton (click)="signUp()" [disabled]="regNumber.errors || regEmail.errors || firstname.errors 
+                <div class="ui-g-6 ui-sm-12">
+                    <button id="reg" type="button" pButton label="Register" [disabled]="regEmail.errors || firstname.errors 
                     || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' 
-                    || userRegCreds.email=='' || mobile==null || otpUnverified" type="submit" label="Register"></button>
+                    || userRegCreds.email==''|| dummySelectedClass==''||dummySelectedClass==null" (click)="dummyRegister()" ></button>
                 </div>
+                <!--<div class="ui-g-12 ui-sm-12">
+                    <button style="background-color:#2BBF61" pButton (click)="signUp()" [disabled]="regEmail.errors || firstname.errors 
+                    || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' 
+                    || userRegCreds.email==''" type="submit" label="Register"></button>
+                </div>-->
             </div>
         </div>
       </div>

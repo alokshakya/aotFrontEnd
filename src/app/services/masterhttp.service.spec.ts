@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { EventService } from './event.service';
+import { MasterHttpService } from './masterhttp.service';
 
-describe('EventService', () => {
+describe('MasterHttpService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [EventService]
+      providers: [MasterHttpService]
     });
   });
 
-  it('should ...', inject([EventService], (service: EventService) => {
+  it('should ...', inject([MasterHttpService], (service: MasterHttpService) => {
     expect(service).toBeTruthy();
   }));
 });
