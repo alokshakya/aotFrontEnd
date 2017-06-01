@@ -3,7 +3,7 @@
     <p-panel header="Subscribe">
       <div style="text-align:center">
         <h1>No Test Available</h1><br>
-        <button id="subscribe" pButton type="text" class="ui-button-warning" label="Subscribe Now"></button>
+        <button id="subscribe" pButton type="text" (click)="redirect()" class="ui-button-warning" label="Subscribe Now"></button>
       </div>
     </p-panel>
   </div>
@@ -32,10 +32,10 @@
   </div>
 
   <div class="ui-g-6 ui-sm-12">
-    <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
-      <div id="mocktable">
+    <p-panel><p-header>Mock Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
+      <div class="ui-g">
         <p-dataTable [value]="mockTestTableData">
-          <p-column *ngFor="let head of mockTestTableHeader" [header]="head.header" [field]="head.field" ></p-column>
+            <p-column *ngFor="let head of mockTestTableHeader" [header]="head.header" [field]="head.field" ></p-column>
         </p-dataTable>
       </div>
     </p-panel>
@@ -43,11 +43,9 @@
 
   <div class="ui-g-6 ui-sm-12">
     <p-panel header="Syllabus">
-      <p><strong>Some guidelines and rules goes here...........</strong>Ipsum is simply dummy text of the printing and typesetting industry.
-         Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and 
-         scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 
-         remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      <div class="ui-g">
+          <p-tree selectionMode="single" [value]="dummyTree"></p-tree>
+      </div>
     </p-panel>
 
   </div>

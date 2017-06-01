@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
+import {TreeModule,TreeNode} from 'primeng/primeng';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,8 +21,8 @@ export class MocktestComponent implements OnInit {
 
     examPattern: SelectItem[];
 
-
-  constructor() {
+    dummyTree:TreeNode[];
+  constructor(private router:Router) {
 
       this.mockTestTableData =[ 
                             {"Test":"Mock Test 1", "Slot 1":"95 Percentile", "Slot 2":"NA" },
@@ -43,22 +45,211 @@ export class MocktestComponent implements OnInit {
       this.examPattern.push({label:"Exam Pattern 1", value:"null"})
       this.examPattern.push({label:"Exam Pattern 2", value:"null"})
       this.examPattern.push({label:"Exam Pattern 3", value:"null"})
+
+
+            this.dummyTree =  [
+        {
+            "label": "Chapter 1",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 2",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 3",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 4",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 5",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 6",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 7",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 8",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 9",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 10",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    }]
+
+
+   }
+
+   redirect(){
+       this.router.navigate(['account/accountsettings'])
    }
 
   ngOnInit() {this.mockTestData = {
-            labels: ['Remaining','Completed','Generated'],
+            labels: ['Completed','Remaining'],
             datasets: [
                 {
-                    data: [50, 150, 200],
+                    data: [1,3],
                     backgroundColor: [
-                        "#D9534F",
                         "#5CB85C",
-                        "#F0AD4E"
+                        "#D9534F",
+                        
                     ],
                     hoverBackgroundColor: [
-                        "#D9534F",
                         "#5CB85C",
-                        "#F0AD4E"
+                        "#D9534F",
+                        
                     ]
                 }]    
             };

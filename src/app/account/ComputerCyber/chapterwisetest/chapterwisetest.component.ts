@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
+import { Router } from '@angular/router';
 import { SubjectService } from '../../../services/subject.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class ChapterwisetestComponent implements OnInit {
   chapterwiseTestDetails:any;
 
 
-  constructor(private sub:SubjectService) {
+  constructor(private sub:SubjectService, private router:Router) {
       this.cname = ['Chapter 1', 'Chapter 2', 'Chapter 3', 'Chapter 4', 'Chapter 5', 'Chapter 6', 'Chapter 7', 'Chapter 8', 'Chapter 9', 'Chapter 10']
       this.topicNames = ["Topic 1 CC", "Topic 2 CC", "Topic 3 CC", "Topic 4 CC", "Topic 5 CC" ]
 
@@ -112,6 +113,10 @@ export class ChapterwisetestComponent implements OnInit {
           "Test 4":"Resume",
         },
         }
+    }
+
+    redirect(){
+      this.router.navigate(['account/accountsettings'])
     }
 
   ngOnInit() {

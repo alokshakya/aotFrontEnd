@@ -33,9 +33,9 @@
 
   <div class="ui-g-6 ui-sm-12">
     <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
-      <div id="sampletestpanel" class="ui-g">
-        <div class="ui-g-12" *ngFor="let test of testData|keys">
-          {{test.key}}<button type="submit" pButton ngClass="ui-button-warning" label="{{test.value}}"></button><br><br>
+      <div class="ui-g textcenter">
+        <div class="ui-g-12 sample" *ngFor="let test of testData|keys">
+          <span class="test">{{test.key}}</span><button type="submit" class="ui-button-success" pButton [ngClass]="{'ui-button-warning':test.value=='Resume', 'ui-button-danger':test.value=='Start'}" label="{{test.value}}"></button><i title="Retake {{test.key}}" *ngIf="!(test.value=='Start'||test.value=='Resume')" class="fa fa-refresh fa-lg"></i>
         </div>
       </div>
     </p-panel>
@@ -45,13 +45,7 @@
     <p-panel><p-header>Syllabus</p-header>
       <div class="ui-g">
         <div class=ui-g-6 ui-sm-12>
-        <p-accordion>
-          <p-accordionTab *ngFor="let i of chapterNames" header={{i}}>
-            <ul>
-              <li *ngFor="let topic of topics">{{topic}}
-            </ul>
-          </p-accordionTab>
-        </p-accordion>
+            <p-tree selectionMode="single" [value]="dummyTree"></p-tree>
         </div>
       </div>
     </p-panel>
