@@ -49,8 +49,11 @@ export class ProfileComponent implements OnInit {
   oldPassword:string;
 
   classList:SelectItem[];
-  exam:SelectItem[];
 
+  exam:SelectItem[] = [];
+  city:SelectItem[] = [];
+  state:SelectItem[] = [];
+  country:SelectItem[] =[];
 
   growlmsg: Message[] = [];
 
@@ -62,8 +65,32 @@ export class ProfileComponent implements OnInit {
     private update: UpdateService,
     private confirmservice: ConfirmationService 
     ){
+      this.exam.push({label:"Select Exam",value:"null"},{label:"SOF", value:"SOF"},{label:"ASSET", value:"ASSET"},{label:"NTSE", value:"NTSE"},{label:"SILVERZONE", value:"SILVERZONE"}, {label:"UCO", value:"UCO"})
+
+      this.city.push({label:"Select City",value:"null"},{label:"Ghaziabad",value:"Ghaziabad"},{label:"Delhi", value:"Delhi"}, {label:"Gurgaon", value:"Gurgaon"}, {label:"Bombay", value:"Bombay"},{label:"Kolkata", value:"Kolkata"},)
+ 
+      this.state.push({label:"Select State",value:"null"},{label:"Uttar Pradesh", value:"Uttar Pradesh"}, {label:"West Bengal", value:"West Bengal"}, {label:"Maharashtra", value:"Maharashtra"}, {label:"Haryana", value:"Haryana"})
+      
+      this.country.push({label:"Select Country",value:"null"},{label:"India", value:"India"}, {label:"Sri Lanka", value:"Sri Lanka"}, {label:"Indonesia", value:"Indonesia"}, {label:"Nepal", value:"Nepal"})
+
       this.dummyBasicInfo = {
-        name:"Gaurav Pant", 
+        firstname: "Gaurav",
+        lastname: "Pant", 
+        email: "gpantbiz@gmail.com", 
+        address: "123 pqr", 
+        mobile: 986957827, 
+        class: "V", 
+        dob:"06/14/1996", 
+        state:"Uttar Pradesh", 
+        city:"Ghaziabad", 
+        gender:"Male",
+        country:"India",
+        pincode:201011,
+    }
+
+    this.dummyEditBasicInfo = {
+        firstname: "Gaurav",
+        lastname: "Pant", 
         email:"gpantbiz@gmail.com", 
         address:"123 pqr", 
         mobile: 986957827, 
@@ -81,13 +108,28 @@ export class ProfileComponent implements OnInit {
       schoolname:"St Thomas School",
       contactperson:"Dave",
       email:"dap@stschool.com",
-      landline:"0120-354345",
+      landline:3543542,
       address:"pqr xyz, abc",
       state:"Uttar Pradesh",
       city:"Ghaziabad",
+      country:"India",
       pincode:"21012",
       mobile:9324567322
     } 
+
+    this.dummyEditSchoolInfo = {code:"OBU232",
+      schoolname:"St Thomas School",
+      contactperson:"Dave",
+      email:"dap@stschool.com",
+      landline:3543452,
+      address:"pqr xyz, abc",
+      state:"Uttar Pradesh",
+      city:"Ghaziabad",
+      country:"India",
+      pincode:"21012",
+      mobile:9324567322}
+
+
     this.date = new Date();
     this.maxDate = new Date();
     this.maxDate.setFullYear(2013,0,1); 

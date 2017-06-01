@@ -1,23 +1,19 @@
-<p-confirmDialog header="Save Changes" closeOnEscape="false" closable="false" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-confirmDialog header="Save Changes" closeOnEscape="false" closable="false" icon="fa fa-question-circle" #cd width="425">
+    <p-footer>
+        <button type="button" pButton class="ui-button-danger" icon="fa-close" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton class="ui-button-success" icon="fa-check" label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>
 
 <div class="ui-g">
       <p-growl [(value)]="growlmsg"></p-growl>
     <div class="ui-g-12">
         <p-tabView (onChange)="onChange()">
-            <p-tabPanel header="Profile Picture" leftIcon="fa-picture-o">
-                <div class="container long">
-                    <div class="row">
-                        <div class="col-md-5"><img class="img-responsive img-circle" src="../../../assets/layout/images/Profile_picture.png"></div>
-                        <div class="col-md-4"><button pButton type="submit" label="Change" class="ui-button-info"></button></div>
-                    </div>
-                </div>
-            </p-tabPanel>
-
             <p-tabPanel header="Basic Info" leftIcon="fa-user">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails" *ngIf="!editBasic">{{dummyBasicInfo?.name}}</span><input pInputText *ngIf="editBasic" type="text"><input pInputText *ngIf="editBasic" type="text"></p>
+                            <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails" *ngIf="!editBasic">{{dummyBasicInfo?.firstname}} {{dummyBasicInfo?.lastname}}</span><input pInputText *ngIf="editBasic" type="text" [(ngModel)]="dummyEditBasicInfo.firstname" ><input [(ngModel)]="dummyEditBasicInfo.lastname" pInputText *ngIf="editBasic" type="text"></p>
                         </div>
                         <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">&nbsp;&nbsp;{{dummyBasicInfo?.email}}</span></p>
@@ -35,7 +31,7 @@
                         </div>
 
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4><p><span *ngIf="!editBasic" class="userdetails">{{dummyBasicInfo?.mobile}}</span><input pInputText maxlength="10" *ngIf="editBasic" type="number"></p>
+                            <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4><p><span *ngIf="!editBasic" class="userdetails">{{dummyBasicInfo?.mobile}}</span><input [(ngModel)]="dummyEditBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"></p>
                         </div>
                     </div>
 
@@ -55,28 +51,14 @@
                         <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{dummyBasicInfo?.address}}, {{dummyBasicInfo?.city}}, {{dummyBasicInfo?.state}}, {{dummyBasicInfo?.country}}, &nbsp;{{dummyBasicInfo?.pincode}}</span></p>
                             <div class="address" *ngIf="editBasic">
-                            <input type="text" pInputText placeholder="Address line 1"><br>
-                            <input type="text" pInputText placeholder="Address line 2"><br>
-                            <div class="select"><select>
-                                <option value="state">Select State</option>
-                                <option value="state">Haryana</option>
-                                <option value="state">Uttar Pradesh</option>
-                                <option value="state">Madhya Pradesh</option>
-                            </select></div>
-                            <div class="select"><select>
-                                <option value="state">Select City</option>
-                                <option value="state">Gurgaon</option>
-                                <option value="state">Ghaziabad</option>
-                                <option value="state">Bhopal</option>
-                            </select></div>
-                            <div class="select"><select>
-                                <option value="state">Select Country</option>
-                                <option value="state">India</option>
-                                <option value="state">Indonesia</option>
-                                <option value="state">Pakistan</option>
-                            </select></div>
-                            <input type="number" pInputText maxlength="6" placeholder="Pincode">
-                        </div>
+                            <input pInputText type="text" placeholder="Address line 1"><br>
+                            <input pInputText type="text" placeholder="Address line 2"><br>
+                            <div class="select"><p-dropdown  [options]="state" [(ngModel)]="dummyEditBasicInfo.state"></p-dropdown></div>
+                            <div class="select"><p-dropdown  [options]="city" [(ngModel)]="dummyEditBasicInfo.city"></p-dropdown></div>
+                            <div class="select"><p-dropdown  [options]="country" [(ngModel)]="dummyEditBasicInfo.country"></p-dropdown></div>
+                            <input  type="number" pInputText maxlength="6" placeholder="Pincode">
+                            </div>  
+                        
                         </div>
                     </div>
                 </div>
@@ -86,10 +68,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-building"></i> School Code </h4><p><span *ngIf="!editSchool" class="userdetails"> {{dummySchoolInfo?.code}}</span><input pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-building"></i> School Code </h4><p><span *ngIf="!editSchool" class="userdetails"> {{dummySchoolInfo?.code}}</span> &nbsp;<input [(ngModel)]="dummyEditSchoolInfo.code" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-user"></i> Contact Person</h4><p><span *ngIf="!editSchool" class="userdetails"> &nbsp;{{dummySchoolInfo?.contactperson}}</span><input pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-user"></i> Contact Person</h4><p><span *ngIf="!editSchool" class="userdetails"> &nbsp;{{dummySchoolInfo?.contactperson}}</span> &nbsp;<input [(ngModel)]="dummyEditSchoolInfo.contactperson" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
                         <div class="col-md-4">
                             <button type="button" *ngIf="!editSchool" pButton class="ui-button-info" label="Edit" (click)="editSchool=true"></button>
@@ -100,49 +82,34 @@
 
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-building"></i> School Name </h4><p><span *ngIf="!editSchool" class="userdetails"> {{dummySchoolInfo?.schoolname}}</span><input pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-building"></i> School Name </h4><p><span *ngIf="!editSchool" class="userdetails"> {{dummySchoolInfo?.schoolname}}</span> &nbsp;<input [(ngModel)]="dummyEditSchoolInfo.schoolname" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
 
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-envelope-o"></i> Email</h4><p><span *ngIf="!editSchool" class="userdetails">&nbsp; {{dummySchoolInfo?.email}}</span><input pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-envelope-o"></i> Email</h4><p><span *ngIf="!editSchool" class="userdetails">&nbsp; {{dummySchoolInfo?.email}}</span> &nbsp; <input [(ngModel)]="dummyEditSchoolInfo.email" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails" *ngIf="!editSchool">  &nbsp;{{dummySchoolInfo?.address}}, {{dummySchoolInfo?.city}}, {{dummySchoolInfo?.state}} {{dummySchoolInfo?.country}},  &nbsp;{{dummySchoolInfo?.pincode}}</span></p>
+                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails" *ngIf="!editSchool">  &nbsp;{{dummySchoolInfo?.address}}, {{dummySchoolInfo?.city}}, {{dummySchoolInfo?.state}}, <br> &nbsp;{{dummySchoolInfo?.country}}, {{dummySchoolInfo?.pincode}}</span></p>
                             <div class="address" *ngIf="editSchool">
                             <input pInputText type="text" placeholder="Address line 1"><br>
                             <input pInputText type="text" placeholder="Address line 2"><br>
-                            <div class="select"><select>
-                                <option value="state">Select Country</option>
-                                <option value="state">India</option>
-                                <option value="state">Indonesia</option>
-                                <option value="state">Pakistan</option>
-                            </select></div>
-                            <div class="select"><select >
-                                <option value="state">Select State</option>
-                                <option value="state">Haryana</option>
-                                <option value="state">Uttar Pradesh</option>
-                                <option value="state">Madhya Pradesh</option>
-                            </select></div>
-                            <div class="select"><select >
-                                <option value="state">Select City</option>
-                                <option value="state">Gurgaon</option>
-                                <option value="state">Ghaziabad</option>
-                                <option value="state">Bhopal</option>
-                            </select></div>
+                            <div class="select"><p-dropdown styleClass="dropdown" [options]="state" [(ngModel)]="dummyEditSchoolInfo.state"></p-dropdown></div>
+                            <div class="select"><p-dropdown [options]="city" [(ngModel)]="dummyEditSchoolInfo.city"></p-dropdown></div>
+                            <div class="select"><p-dropdown [options]="country" [(ngModel)]="dummyEditSchoolInfo.country"></p-dropdown></div>
                             <input  type="number" pInputText maxlength="6" placeholder="Pincode">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-phone"></i> Landline</h4><p><span *ngIf="!editSchool" class="userdetails">&nbsp;0120-2883322</span><input *ngIf="editSchool" pInputText maxlength="5" type="number"><input *ngIf="editSchool" maxlength="7" type="number"></p>
+                                    <h4><i class="fa fa-phone"></i> Landline</h4><p><span *ngIf="!editSchool" class="userdetails">&nbsp;{{dummySchoolInfo?.landline}}</span> &nbsp;<input *ngIf="editSchool" [(ngModel)]="dummyEditSchoolInfo.landline" pInputText maxlength="7" type="number"></p>
                                 </div>
                                 <div class="col-md-12"></div>
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-mobile"></i> Mobile</h4><p><span *ngIf="!editSchool" class="userdetails">9893892898{{school}}</span><input *ngIf="editSchool" pInputText type="number" maxlength="10"></p>
+                                    <h4><i class="fa fa-mobile"></i> Mobile</h4><p><span *ngIf="!editSchool" class="userdetails">{{dummySchoolInfo?.mobile}}</span><input *ngIf="editSchool" [(ngModel)]="dummyEditSchoolInfo.mobile" pInputText type="number" maxlength="10"></p>
                                 </div>
                             </div>
                         </div>
@@ -153,10 +120,11 @@
             <p-tabPanel header="Change Password" leftIcon="fa-key">
                 <div class="container long">
                     <div class="row">
-                        <div class="col-md-8 userinfo">
+                        <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-key"></i> Old Password</h4>
-                            <input class="password" *ngIf="showPassword" pInputText type="password" [(ngModel)]="oldPassword">
+                            <input class="xpassword" *ngIf="showPassword" pInputText type="password" [(ngModel)]="oldPassword">
                         </div>
+                        <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <button type="button" *ngIf="!showPassword" pButton class="ui-button-info" label="Edit" (click)="showPassword=true"></button>
                             <button type="button" *ngIf="showPassword" pButton class="ui-button-success" label="Save" (click)="changePassword();showPassword=false"></button>
@@ -165,17 +133,19 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12 userinfo">
+                        <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-key"></i> New Password</h4>
                             <input class="xpassword" pInputText #password="ngModel" *ngIf="showPassword" pPassword promptLabel="Atleast 6 characters" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}"/>
                         </div>
+                        <div class="col-md-4"></div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12 userinfo">
+                        <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-key"></i> Confirm Password</h4>
                             <input class="xpassword" *ngIf="showPassword" pInputText type="password" [(ngModel)]="confirmNewPassword">
                         </div>
+                        <div class="col-md-4"></div>
                     </div>
                 </div>
             </p-tabPanel>
@@ -187,14 +157,8 @@
                             <div class="row">
                                 <div class="col-md-12 userinfo column">
                                     <h4><i class="fa fa-calculator"></i> Exam</h4><span  class="userdetails1" *ngIf="!editTestimony">ASSET</span>
-                                    <div class="userdetails1" *ngIf="editTestimony"><select>
-                                        <option value="EHF">EHF</option>
-                                        <option value="SILVERZONE">SILVERZONE</option>
-                                        <option value="BIOM">BIOM</option>
-                                        <option value="IAIS">IAIS</option>
-                                        <option value="ASSET">ASSET</option>
-                                        <option value="UCO">UCO</option>
-                                    </select>
+                                    <div class="userdetails1" *ngIf="editTestimony">
+                                        <p-dropdown [options]="exam" [(ngModel)]="selectedExam"></p-dropdown>
                                     </div>                            
                                 </div>
                                 <div class="col-md-12 userinfo column">
@@ -209,9 +173,10 @@
                             <textarea pInputTextarea [disabled]="!editTestimony" [(ngModel)]="testimonial" maxlength="280" placeholder="Enter message here...."></textarea><br><br>
                             <p-checkbox *ngIf="editTestimony" name="groupname" value="val1" label="I declare that the information provided here is true." [(ngModel)]="dec"></p-checkbox>
                             <div class="padtop btnsection">
-                            <button type="button" *ngIf="!editTestimony" pButton label="Edit" (click)="editTestimony=true" class="ui-button-info"></button>
+                            <!--<button type="button" *ngIf="!editTestimony" pButton label="Edit" (click)="editTestimony=true" class="ui-button-info"></button>
                             <button type="button" *ngIf="editTestimony" pButton class="ui-button-success" label="Submit" (click)="submitTestimonial()"></button>
-                            <button type="button" *ngIf="editTestimony" pButton class="ui-button-danger" label="Cancel" (click)="cancelTestimonial()"></button>
+                            <button type="button" *ngIf="editTestimony" pButton class="ui-button-danger" label="Cancel" (click)="cancelTestimonial()"></button>-->
+                            <button pButton class="ui-button-info" label="Add"></button>
                             </div>
                         </div>
                     </div>

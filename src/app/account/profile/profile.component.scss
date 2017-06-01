@@ -1,7 +1,6 @@
 .container{
     padding-top:16px;
     width: auto;
-    overflow-y: auto;
 }
 
 .long{
@@ -21,7 +20,7 @@
 }
 
 .xpassword{
-    margin-left:2.6%;
+    margin-left:25px;
 }
 
 .userinfo p{
@@ -40,6 +39,7 @@
 
 .userdetails1{
     margin-left:4%;
+    color:#3664dc;
 }   
 
 .address{
@@ -48,6 +48,7 @@
 
 .select{
     margin-left:7%;
+    margin-bottom: 2.5px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -96,3 +97,8 @@ textarea{
     length:300px;
     margin-left:7%;
 }
+
+input{
+    width:80%;
+}
+
