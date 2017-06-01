@@ -1,9 +1,14 @@
-<p-confirmDialog header="Go to dashboard" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+<p-confirmDialog header="Go to dashboard" icon="fa fa-question-circle" width="425" #cd>
+    <p-footer>
+        <button type="button" pButton class="ui-button-danger" icon="fa-close" label="No" (click)="cd.reject()"></button>
+        <button type="button" pButton class="ui-button-success" icon="fa-check" label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
+</p-confirmDialog>
 <p-dialog header="Intsructions" [(visible)]="help" responsive="true" (onHide)="start()">
     <h2>IMPORTANT INSTRUCTIONS</h2>
 </p-dialog>
 
-<div class="ui-g body">
+<div class="ui-g">
     <div class="ui-g-12">
         <div class="ui-g">
             <div class="ui-g-2 dark logo">
@@ -11,18 +16,18 @@
             </div>
             <div class="ui-g-10 head">
                 <div class="ui-g">
-                    <span >Demo Test</span>
-                    <span>{{subject}}</span>
-                    <span>class</span>
-                    <span><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span>
+                    <span id="test">Demo Test</span>
+                    <span id="sub">{{subject}}</span>
+                    <span id="class">VII</span>
+                    <span id="timer"><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span>
                     <div class="bar"><p-progressBar [value]="counter"></p-progressBar></div>
                     <span>{{counter/10}}/{{totalQuestions}} Attempted</span>
                     <span><i class="fa fa-user"></i> Gaurav Pant</span>
                 </div>
             </div>
         </div>
-        <div class="ui-g dark">
-            <div class="ui-g-1 minwidth">
+        <div class="ui-g">
+            <div class="ui-g-1 dark minwidth">
                 <div class="ui-g-12"></div>
                 <div class="ui-g-4"></div>
                 <div class="ui-g-4">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
@@ -31,8 +36,8 @@
                 <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
                 <div class="ui-g-12 fill"></div>
             </div>
-            <div class="ui-g-9 light center">
-                <div class="ui-g" *ngIf="questionWindow" #window>
+            <div class="ui-g-10 light center">
+                <div class="ui-g" *ngIf="questionWindow">
                     <div class="ui-g-12"><span class="statement">{{questionNumber}}{{selectedQuestion?.Question}}</span>
                         <div class="image"><img src="../../../../../assets/layout/images/q2.jpg"></div>
                         <hr>
@@ -69,6 +74,7 @@
                                     <div>
                                         <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br><br></span>
                                         <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br><br></span>
+                                        <br *ngIf="correct"><br *ngIf="correct">
                                         <span class="correct" *ngIf="!correct">Correct Answer: {{selectedQuestion?.CorrectAnswer}}<br><br></span>
                                     </div>
                                     <img src="../../../../../assets/layout/images/q2.jpg">
@@ -82,9 +88,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="ui-g dark footer">
-            <span style="color:white">Copyright &copy; 2017 OlympiadBox. All Rights Reserved.</span>
         </div>
     </div>
 </div>

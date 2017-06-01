@@ -307,7 +307,7 @@ export class TakedemotestComponent implements OnInit {
 
   quit(){
      this.confirmservice.confirm({
-            message: 'Are you sure that you want to quit?',
+            message: 'Are you sure you want to quit ?',
             accept: () => {
                 this.router.navigate(['account/dashboard']);
 
