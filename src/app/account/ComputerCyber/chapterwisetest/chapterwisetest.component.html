@@ -36,7 +36,8 @@
         <p-panel><p-header>Chapterwise Test & Syllabus<button id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button></p-header>
             <div class="ui-g">
               <div class="ui-md-6 ui-sm-12 ui-lg-12">
-                <span *ngFor="let chapter of chapterNames" ><p-radioButton name="groupname" label={{chapter}} ></p-radioButton><br><br></span>
+                <!--<span *ngFor="let chapter of chapterNames" ><p-radioButton name="groupname" label={{chapter}} ></p-radioButton><br><br></span>-->
+                          <p-tree selectionMode="single" [value]="dummyTree"></p-tree>
               </div>
             </div>
         </p-panel>

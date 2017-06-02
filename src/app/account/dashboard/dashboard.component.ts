@@ -6,6 +6,7 @@ import { Response } from '@angular/http';
 import { NotificationService } from '../../services/notification.service';
 import { SubjectService } from '../../services/subject.service';
 import { SharedService } from '../../services/shared.service';
+import { MasterHttpService } from '../../services/masterhttp.service'
 
 
 @Component({
@@ -32,14 +33,17 @@ export class DashboardComponent implements OnInit{
     received=false;
     subscribedSubjects:any;
 
+    dummySubjects:any;
+
     constructor(
         private router: Router, 
         private notification: NotificationService,
         private sub: SubjectService,
+        private masterhttp: MasterHttpService,
         ) {
         
         this.testSummary = {
-                                "Computers": {
+                                "Computer/Cyber": {
                                     "Chapterwise Test": {
                                         "completed": 34,
                                         "generated": 44,
@@ -157,7 +161,7 @@ export class DashboardComponent implements OnInit{
         }
 
         this.resultSummary = {
-                                "Computers": {
+                                "Computer/Cyber": {
                                     "Chapterwise Test": {
                                         "right": 34,
                                         "review": 44,
@@ -292,14 +296,38 @@ export class DashboardComponent implements OnInit{
 
         }
 
-        this.subscribedSubjects = {"Computers":true, "Science":true, "Mathematics":false, "General Knowledge":true, 
+        this.subscribedSubjects = {"Computer/Cyber":true, "Science":true, "Mathematics":false, "General Knowledge":true, 
                                     "English":false, "Reasoning":false}
 
     }
 
     ngOnInit(){
-        this.sessionToken = localStorage.getItem('session_token');
-        this.isLogin(this.sessionToken) 
+        // this.sessionToken = localStorage.getItem('session_token');
+        // this.isLogin(this.sessionToken) 
+
+        //temporary
+        this.testimonials = []
+        this.masterhttp.getTestimonials()
+        .subscribe((data) => {
+            for (let i in data['testimonials']['records']){
+                this.testimonials.push(data['testimonials']['records'][i][1])
+            }
+        })
+
+        this.noticeBoard = []
+        this.masterhttp.getNotice()
+        .subscribe((data) => {
+            for(let i in data['notice_board']['records']){
+                this.noticeBoard.push(data['notice_board']['records'][i])
+            }
+        })
+        this.dummySubjects = []
+        this.masterhttp.getSubjects()
+        .subscribe((data)=>{
+            for (let i in data['subjects']['records']){
+                this.dummySubjects.push(data['subjects']['records'][i][1])
+            }
+        })
     }
                         
     startTest(){

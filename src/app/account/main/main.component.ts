@@ -90,15 +90,14 @@ export class AccountMainComponent implements AfterViewInit {
         if (this.email.length>25){
             this.shownEmail = this.email.slice(0,26) + '...'
         }
-        this.sessionToken = localStorage.getItem('session_token');
-        // this.isLogin(this.sessionToken);
-        this.getUserInfo()
+        // this.sessionToken = localStorage.getItem('session_token');
+        // // this.isLogin(this.sessionToken);
+        // this.getUserInfo()
 
         //temporary
         this.masterhttp.getUserInfo()
         .subscribe((data: Response) =>{
             this.temporaryData = data;
-            console.log(this.temporaryData['firstname']);
         })
 
         this.masterhttp.getClass()

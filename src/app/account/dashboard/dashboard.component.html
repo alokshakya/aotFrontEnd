@@ -4,13 +4,13 @@
         <div class="ui-g-12">  <!--SUBJECTS PANEL-->
             <p-panel header="Subject Summary">
                 <div class="ui-g">
-                    <div class="ui-g-4 ui-sm-12 sub" *ngFor="let sub of subjectSummary" id="{{sub | lowercase | cssId }}" >
+                    <div class="ui-g-4 ui-sm-12 sub" *ngFor="let sub of dummySubjects" id="{{sub | lowercase | cssId }}" >
                         <i class="icon-science icon-4x" *ngIf="sub=='Science'"></i>
                         <i class="icon-reasoning icon-4x" *ngIf="sub=='Reasoning'"></i>
                         <i class="icon-gk icon-4x" *ngIf="sub=='General Knowledge'"></i>
                         <i class="icon-english icon-4x" *ngIf="sub=='English'"></i>
                         <i class="icon-maths icon-4x" *ngIf="sub=='Mathematics'"></i>
-                        <i class="icon-cyber icon-4x" *ngIf="sub=='Computers'"></i> 
+                        <i class="icon-cyber icon-4x" *ngIf="sub=='Computer/Cyber'"></i> 
                         <p>{{sub|uppercase}}</p>
                         <button pButton class="ui-button-success" (click)="redirect('demo')" class="ui-button-success" label="Demo"></button>
                         <button *ngIf="!subscribedSubjects[sub]" pButton class="ui-button-warning" [ngClass] ="{'ui-button-danger':sub=='Science'||sub=='English'}" (click)="redirect('chapter')" label="Subscribe"></button>
@@ -105,13 +105,24 @@
     </div>
 
     <div class="ui-g-4 ui-sm-12">
-        <div class="ui-g-12">
+        <!--<div class="ui-g-12">
             <p-panel header="Notice Board">
             <div id="notice">
                 <div class="noticebox" *ngFor = "let item of noticeBoard; let i=index">
                     <h3>Notice {{i+1}}</h3>
                     <p>{{item.date_published}}</p>
                     <p>{{item.news}}<p>
+                </div>
+            </div>
+            </p-panel>
+        </div>-->
+        <div class="ui-g-12">
+            <p-panel header="Notice Board">
+            <div id="notice">
+                <div class="noticebox" *ngFor = "let item of noticeBoard; let i=index">
+                    <h3>Notice {{i+1}}</h3>
+                    <p>{{item[2]}}</p>
+                    <p>{{item[1]}}<p>
                 </div>
             </div>
             </p-panel>
@@ -123,7 +134,7 @@
                         <div class="ui-g">
                             <div class="ui-g-7"><img class="testimonialimg"></div>
                             <div class="ui-g-5"></div>
-                            <div class="ui-g-12">{{item.text}}</div>
+                            <div class="ui-g-12">{{item}}</div>
                         </div>
                     </div>
                 </div>

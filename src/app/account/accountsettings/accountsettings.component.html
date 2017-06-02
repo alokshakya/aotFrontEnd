@@ -13,8 +13,8 @@
         <p-panel header="Subscribe Now"><br>
             <div class="ui-g">
               <div class="ui-g-3 ui-sm-12">
-                <div *ngFor="let sub of subjects;let i=index">
-                  <p-checkbox name="package" [(ngModel)]="selectedPackage" value="{{sub}}" label="{{sub|uppercase}} - &#8377; {{subjectsPrice[i]}}"></p-checkbox>
+                <div *ngFor="let sub of dummySubjects;let i=index">
+                  <p-checkbox name="package" [(ngModel)]="selectedPackage" value="{{sub}}" label="{{sub|uppercase}} - &#8377; {{dummyPrice[i]}}"></p-checkbox>
                   <br><br>
                 </div>
               </div>

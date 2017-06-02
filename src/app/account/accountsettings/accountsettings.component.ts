@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router }from '@angular/router';
 import { Response } from '@angular/http';
 import { SubjectService } from '../../services/subject.service';
+import { MasterHttpService } from '../../services/masterhttp.service';
 
 @Component({
   selector: 'app-accountsettings',
@@ -16,10 +17,14 @@ export class AccountsettingsComponent implements OnInit {
     subjects:Array<string>;
     coupon:string;
     test:Array<string>;
+
+    dummySubjects:Array<string>;
+    dummyPrice:Array<string>;
     
     constructor(
         private _router:Router,
-        private price: SubjectService) {
+        private price: SubjectService,
+        private masterhttp: MasterHttpService) {
 
             this.selectedPackage = [];
 
@@ -42,20 +47,39 @@ export class AccountsettingsComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.subjectsPrice = []
-        this.price.getSubjectPrice(1).subscribe((data: Response) => {
-            data = data['resource'];
-            for(let i in data){
-                this.subjectsPrice.push(data[i]['amount']);
+        // this.subjectsPrice = []
+        // this.price.getSubjectPrice(1).subscribe((data: Response) => {
+        //     data = data['resource'];
+        //     for(let i in data){
+        //         this.subjectsPrice.push(data[i]['amount']);
+        //     }
+        // })
+        // this.subjects = [];
+        // this.price.getSubjectSet(1).subscribe((data: Response) => {
+        //     data = data['resource']
+        //     for(let i in data){
+        //         this.subjects.push(data[i]['subjects_by_subject_id']['name'])
+        //     }
+        // })
+
+        //temporary
+        this.dummyPrice = []
+        this.masterhttp.getFee()
+        .subscribe((data: Response) => {
+            for (let i in data['fee']['records']){
+            this.dummyPrice.push(data['fee']['records'][i][2])
             }
         })
-        this.subjects = [];
-        this.price.getSubjectSet(1).subscribe((data: Response) => {
-            data = data['resource']
-            for(let i in data){
-                this.subjects.push(data[i]['subjects_by_subject_id']['name'])
+
+        this.dummySubjects=[]
+        this.masterhttp.getSubjects()
+        .subscribe((data: Response) =>{
+             for (let i in data['subjects']['records']){
+            this.dummySubjects.push(data['subjects']['records'][i][1])
             }
         })
+
+
     }
 
     pay(){

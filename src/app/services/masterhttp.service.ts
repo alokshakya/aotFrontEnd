@@ -20,4 +20,22 @@ export class MasterHttpService {
       resp.json());
   }
 
+  getTestimonials(){
+    return this.http.get('http://scripts.olympiadbox.com/services/api/api.php/testimonials')
+    .map((response: Response) => 
+      response.json())
+  }
+
+  getNotice(){
+    return this.http.get('http://scripts.olympiadbox.com/services/api/api.php/notice_board')
+    .map((response: Response) => response.json())
+  }
+
+  getFee(){
+    return this.http.get('http://scripts.olympiadbox.com/services/api/api.php/fee')
+    .map((response: Response) => response.json())
+  }
+
+  
+
 }

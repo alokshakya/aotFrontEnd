@@ -10,7 +10,7 @@ import { MasterHttpService } from '../../services/masterhttp.service';
 @Component({
     selector: 'app-menu',
     template: `
-        <ul app-submenu [item]="model" root="true" class="layout-menu clearfix" [reset]="reset" visible="true"></ul>
+        <ul app-submenu [item]="temporaryModel" root="true" class="layout-menu clearfix" [reset]="reset" visible="true"></ul>
     `
 })
 export class AppMenuComponent implements OnInit {
@@ -22,7 +22,7 @@ export class AppMenuComponent implements OnInit {
     model: MenuItem[];
 
     //temporary
-    temporaryModel: MenuItem;
+    temporaryModel: MenuItem[];
 
     constructor(
         @Inject(forwardRef(() => AccountMainComponent))
@@ -39,27 +39,27 @@ export class AppMenuComponent implements OnInit {
                             items: [{
                                         label: 'Demo Test',
                                         icon: 'fa fa-circle-o',
-                                        routerLink: ['computer/demotest']
+                                        routerLink: ['computers/demotest']
                                     },
                                     {
                                         label: 'Chapterwise Test',
                                         icon: 'fa fa-circle-o',
-                                        routerLink: ['computer/chapterwisetest']
+                                        routerLink: ['computers/chapterwisetest']
                                     },
                                     {
                                         label: 'Sample Test',
                                         icon: 'fa fa-circle-o',
-                                        routerLink: ['computer/sampletest']
+                                        routerLink: ['computers/sampletest']
                                     },
                                     {
                                         label: 'Mock Test',
                                         icon: 'fa fa-circle-o',
-                                        routerLink: ['computer/mocktest']
+                                        routerLink: ['computers/mocktest']
                                     },
                                     {
                                         label: 'Result',
                                         icon: 'fa fa-calculator',
-                                        routerLink: ['computer/result']
+                                        routerLink: ['computers/result']
                                     }
                                     ]},
                         {label: '',icon: 'icon-science',
@@ -201,21 +201,32 @@ export class AppMenuComponent implements OnInit {
     }
     
     ngOnInit() {
-        this.model = []
-        this.subjectSet.getSubjectSet(1).subscribe((data:Response) =>{
-            data = data['resource'];
-            var k = 2;
-            for(let i in data){
-                this.menuTabs[k]['label'] = data[i]['subjects_by_subject_id']['name'];
-                k++;
-            }
-            for (let j in this.menuTabs){
-                this.model.push(this.menuTabs[j])
-            }
-        })
+        // this.model = []
+        // this.subjectSet.getSubjectSet(1).subscribe((data:Response) =>{
+        //     data = data['resource'];
+        //     var k = 2;
+        //     for(let i in data){
+        //         this.menuTabs[k]['label'] = data[i]['subjects_by_subject_id']['name'];
+        //         k++;
+        //     }
+        //     for (let j in this.menuTabs){
+        //         this.model.push(this.menuTabs[j])
+        //     }
+        // })
 
         //temporary
-        this.temporaryModel = []
+        this.temporaryModel = [];
+        this.masterhttp.getSubjects().subscribe((data: Response) => {
+            var l = 2;
+            for(let i in data['subjects']['records']){
+                this.menuTabs[l]['label'] = data['subjects']['records'][i][1];
+                l++;
+            }
+
+            for (let m in this.menuTabs){
+                this.temporaryModel.push(this.menuTabs[m])
+            }
+        })
         
 
         }           

@@ -3,6 +3,7 @@ import { SelectItem } from 'primeng/primeng';
 import { Response } from '@angular/http';
 import { SubjectService } from '../../../services/subject.service';
 import {TreeModule,TreeNode} from 'primeng/primeng';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class SampletestComponent implements OnInit {
 
   chapterNames:Array<string>;
 
-  constructor(private subject: SubjectService) { 
+  constructor(private subject: SubjectService, private router: Router) { 
       this.testData = {
           "Sample Test 1": "35/50",
           "Sample Test 2": "Start",
@@ -248,6 +249,10 @@ export class SampletestComponent implements OnInit {
           }
       })
 
+  }
+
+  redirect(){
+      this.router.navigate(['account/accountsettings'])
   }
 
 }

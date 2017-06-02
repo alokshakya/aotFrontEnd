@@ -6,6 +6,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { UserinfoService } from '../../services/userinfo.service';
 import { SubjectService } from '../../services/subject.service';
 import { UpdateService } from '../../services/update.service';
+import { MasterHttpService } from '../../services/masterhttp.service';
 
 @Component({
   selector: 'app-profile',
@@ -63,7 +64,8 @@ export class ProfileComponent implements OnInit {
     private httpService: UserinfoService,
     private classService: SubjectService,
     private update: UpdateService,
-    private confirmservice: ConfirmationService 
+    private confirmservice: ConfirmationService,
+    private masterhttp: MasterHttpService 
     ){
       this.exam.push({label:"Select Exam",value:"null"},{label:"SOF", value:"SOF"},{label:"ASSET", value:"ASSET"},{label:"NTSE", value:"NTSE"},{label:"SILVERZONE", value:"SILVERZONE"}, {label:"UCO", value:"UCO"})
 
@@ -138,26 +140,42 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit() {
-    this.httpService.getUserInfo('gpantbiz@gmail.com')
-    .subscribe((data: Response)=>{
-      data = data['resource'][0];
-      this.userBasicInfo = data;
-    });
+    // this.httpService.getUserInfo('gpantbiz@gmail.com')
+    // .subscribe((data: Response)=>{
+    //   data = data['resource'][0];
+    //   this.userBasicInfo = data;
+    // });
 
-    this.httpService.getAcademicInfo(2)
+    // this.httpService.getAcademicInfo(2)
+    // .subscribe((data: Response) =>{
+    //   this.class = data['class_by_class_id']['abbreviation'];
+    //   this.school = data['school_by_school_id']['name'];
+    // });
+
+    // this.classList=[];
+    // this.classService.getClasses()
+    // .subscribe((data: Response) => {
+    //   data = data['resource'];
+    //   for(let i in data){
+    //     this.classList.push({label:data[i]['abbreviation'], value:data[i]['abbreviation']})
+    //   }
+    // })
+
+    //temporary
+    this.masterhttp.getUserInfo()
     .subscribe((data: Response) =>{
-      this.class = data['class_by_class_id']['abbreviation'];
-      this.school = data['school_by_school_id']['name'];
-    });
+      this.dummyBasicInfo['firstname'] = data['firstname']
+      this.dummyBasicInfo['lastname'] = data['lastname']
+      this.dummyBasicInfo['email'] = data['email']
+      this.dummyBasicInfo['address'] = data['address']
+      this.dummyBasicInfo['country'] = data['country']
+      this.dummyBasicInfo['state'] = data['state']
+      this.dummyBasicInfo['mobile'] = data['mobile']
+      this.dummyBasicInfo['pincode'] = data['pincode']
+      this.dummyBasicInfo['gender'] = data['gender']
+      this.dummyBasicInfo['birthday'] = data['firstname']
+    } )
 
-    this.classList=[];
-    this.classService.getClasses()
-    .subscribe((data: Response) => {
-      data = data['resource'];
-      for(let i in data){
-        this.classList.push({label:data[i]['abbreviation'], value:data[i]['abbreviation']})
-      }
-    })
   }
 
 //for basic info

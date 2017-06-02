@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { SubjectService } from '../../../services/subject.service';
+import {TreeModule,TreeNode} from 'primeng/primeng';
+
 
 @Component({
   selector: 'app-chapterwisetest',
@@ -28,11 +30,193 @@ export class ChapterwisetestComponent implements OnInit {
 
   chapterwiseTestDetails:any;
 
+  dummyTree: TreeNode[];
+
 
   constructor(private sub:SubjectService, private router:Router) {
       this.cname = ['Chapter 1', 'Chapter 2', 'Chapter 3', 'Chapter 4', 'Chapter 5', 'Chapter 6', 'Chapter 7', 'Chapter 8', 'Chapter 9', 'Chapter 10']
       this.topicNames = ["Topic 1 CC", "Topic 2 CC", "Topic 3 CC", "Topic 4 CC", "Topic 5 CC" ]
-
+            this.dummyTree =  [
+        {
+            "label": "Chapter 1",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 2",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 3",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 4",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 5",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 6",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 7",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 8",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 9",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    },
+    {
+            "label": "Chapter 10",
+            "children": [{
+                    "label": "Topic 1"
+                   },
+                {
+                    "label": "Topic 2"
+                },
+                                {
+                    "label": "Topic 3"
+                },
+                                {
+                    "label": "Topic 4"
+                },
+                                {
+                    "label": "Topic 5"
+                },]     
+    }]
       this.chapterwiseTestDetails = {
         "Chapter 1":
         {
