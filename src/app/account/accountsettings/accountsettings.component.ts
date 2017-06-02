@@ -10,7 +10,6 @@ import { MasterHttpService } from '../../services/masterhttp.service';
   styleUrls: ['./accountsettings.component.scss']
 })
 export class AccountsettingsComponent implements OnInit {
-    subscriptionTableData: any;
     subscriptionTableHeaders: any;
     subjectsPrice:any;
     selectedPackage:Array<string>;
@@ -20,6 +19,10 @@ export class AccountsettingsComponent implements OnInit {
 
     dummySubjects:Array<string>;
     dummyPrice:Array<string>;
+
+    subPriceTable:any;
+    subscriptionTableData: any;
+    selectAll:boolean;
     
     constructor(
         private _router:Router,
@@ -27,6 +30,16 @@ export class AccountsettingsComponent implements OnInit {
         private masterhttp: MasterHttpService) {
 
             this.selectedPackage = [];
+
+
+
+            this.subPriceTable = [
+                                    {"Subject":"Computer/Cyber","Price":500},
+                                    {"Subject":"Science","Price":500},
+                                    {"Subject":"Mathematics","Price":500},
+                                    {"Subject":"General Knowledge","Price":500},
+                                    {"Subject":"English","Price":500},
+                                    {"Subject":"Reasoning","Price":500}]
 
             this.subscriptionTableData = [
                 {"Order ID":"OB26DF", "Subject":"Science", "Subscription Date":"23 March 2017", "Valid Till":"23 September 2017", "Download Invoice":"Invoice .pdf"},
@@ -37,13 +50,13 @@ export class AccountsettingsComponent implements OnInit {
                 {"Order ID":"OBHT45", "Subject":"Computer/Cyber", "Subscription Date":"05 June 2017", "Valid Till":"05 January 2018", "Download Invoice":"Invoice .pdf"},
             ];
         
-            this.subscriptionTableHeaders =  [
-                {field: 'Order ID', header: 'Order ID'},
-                {field: 'Subject', header: 'Subject'},
-                {field: 'Subscription Date', header: 'Subscription Date'},
-                {field: 'Valid Till', header: 'Valid Till'},
-                {field: "Download Invoice", header: "Download Invoice"}
-            ]
+            // this.subscriptionTableHeaders =  [
+            //     {field: 'Order ID', header: 'Order ID'},
+            //     {field: 'Subject', header: 'Subject'},
+            //     {field: 'Subscription Date', header: 'Subscription Date'},
+            //     {field: 'Valid Till', header: 'Valid Till'},
+            //     {field: "Download Invoice", header: "Download Invoice"}
+            // ]
     }
 
     ngOnInit(){
@@ -79,11 +92,18 @@ export class AccountsettingsComponent implements OnInit {
             }
         })
 
+        this.loadSubPriceTable()
+    }
 
+    loadSubPriceTable(){
+        console.log(this.dummyPrice['0'])
+            
     }
 
     pay(){
         alert('Selected Packages: ' + this.selectedPackage)
     }
 }
+
+
 
