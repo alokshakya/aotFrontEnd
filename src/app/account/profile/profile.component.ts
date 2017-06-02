@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import  { Response } from '@angular/http';
 import { SelectItem } from 'primeng/primeng';
 import {Message} from 'primeng/primeng';
@@ -8,16 +8,17 @@ import { SubjectService } from '../../services/subject.service';
 import { UpdateService } from '../../services/update.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
 
+
 @Component({
   selector: 'app-profile',
-  templateUrl: './test.profile.component.html',
+  templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
 
-  @Output() emit: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   maxDate: Date;
+  rating:number = 2;
 
   editBasic:boolean;
   editSchool:boolean;
@@ -76,33 +77,33 @@ export class ProfileComponent implements OnInit {
       this.country.push({label:"Select Country",value:"null"},{label:"India", value:"India"}, {label:"Sri Lanka", value:"Sri Lanka"}, {label:"Indonesia", value:"Indonesia"}, {label:"Nepal", value:"Nepal"})
 
       this.dummyBasicInfo = {
-        firstname: "Gaurav",
-        lastname: "Pant", 
-        email: "gpantbiz@gmail.com", 
-        address: "123 pqr", 
-        mobile: 986957827, 
+        firstname: "",
+        lastname: "", 
+        email: "", 
+        address: "", 
+        mobile: "", 
         class: "V", 
-        dob:"06/14/1996", 
-        state:"Uttar Pradesh", 
-        city:"Ghaziabad", 
-        gender:"Male",
-        country:"India",
-        pincode:201011,
+        dob:"11/03/1998", 
+        state:"", 
+        city:"", 
+        gender:"",
+        country:"",
+        pincode:"",
     }
 
     this.dummyEditBasicInfo = {
-        firstname: "Gaurav",
-        lastname: "Pant", 
-        email:"gpantbiz@gmail.com", 
-        address:"123 pqr", 
-        mobile: 986957827, 
+        firstname: "",
+        lastname: "", 
+        email:"", 
+        address:"", 
+        mobile: "", 
         class:"V", 
-        dob:"06/14/1996", 
-        state:"Uttar Pradesh", 
-        city:"Ghaziabad", 
-        gender:"Male",
-        country:"India",
-        pincode:201011,
+        dob:"11/03/1998", 
+        state:"", 
+        city:"", 
+        gender:"",
+        country:"",
+        pincode:"",
     }
 
     this.dummySchoolInfo = {
@@ -187,7 +188,6 @@ export class ProfileComponent implements OnInit {
     });
     
     //this.update.updateStudent(2,this.newClass)
-    this.emit.next(true);
     this.editBasic = false;
   }
 
