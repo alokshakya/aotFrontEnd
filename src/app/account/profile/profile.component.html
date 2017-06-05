@@ -5,6 +5,28 @@
     </p-footer>
 </p-confirmDialog>
 
+<p-dialog header="Mobile Number Verification" [(visible)]="otpDialog" modal="true" responsive="true" [width]="400" [height]="300"> 
+    <!--<div class="ui-g" id="otpDialog">
+        Please enter OTP sent on {{mobile}}
+        <div class="ui-g-12" class="otpfield"><input pInput type="number" [(ngModel)]="otp" /></div>
+        <div class="ui-g" class="btngrp">
+            <div class="ui-g-6"><button pButton class="ui-button-info" label="Verify" (click)="verify()"></button></div>     
+            <div class="ui-g-6"><button pButton class="ui-button-success" label="Resend"></button></div>
+        </div>
+        <div class="ui-g-12" *ngIf="errorSection">Incorrect OTP. Please try again</div>
+    </div>-->
+    <div class="ui-g text-center">
+        <div class="ui-g-12" *ngIf="otpDialog">
+            <h5>Enter OTP sent on {{dummyEditBasicInfo?.mobile}} </h5>
+            <input class="short" pInputText placeholder="Enter OTP" [(ngModel)]="dummyOtp"/><button class="ui-button-info withinput" pButton label="Resend"></button><br>
+            <br><button pButton (click)="dummyVerify()" class="ui-button-success" label="Verify"></button>
+        </div>
+        <div class="ui-g-12" *ngIf="dummyIncorrectOtp">
+            <h5 style="color:#DC4E42"><i class="fa fa-times"></i> Incorrect OTP. Please try again</h5><br>
+        </div>
+    </div>
+</p-dialog>
+
 <div class="ui-g">
       <p-growl [(value)]="growlmsg"></p-growl>
     <div class="ui-g-12">
@@ -31,7 +53,7 @@
                         </div>
 
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4><p><span *ngIf="!editBasic" class="userdetails">{{dummyBasicInfo?.mobile}}</span><input [(ngModel)]="dummyEditBasicInfo.mobile" class="longinput" pInputText maxlength="10" *ngIf="editBasic" type="number"></p>
+                            <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4><p><span *ngIf="!editBasic" class="userdetails">{{dummyBasicInfo?.mobile}}</span> <input class="longinput" [(ngModel)]="dummyEditBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><br> <button *ngIf="editBasic" (click)="otpDialog=true" pButton class="ui-button-warning" label="Verify"></button> </p>
                         </div>
                     </div>
 
@@ -68,10 +90,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-building"></i> School Code </h4><p><span *ngIf="!editSchool" class="userdetails"> {{dummySchoolInfo?.code}}</span> &nbsp;<input [(ngModel)]="dummyEditSchoolInfo.code" pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-building"></i> School Code </h4><p><span *ngIf="!editSchool" class="userdetails"> {{dummySchoolInfo?.code}}</span> &nbsp;<input class="longinput" [(ngModel)]="dummyEditSchoolInfo.code" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-user"></i> Contact Person</h4><p><span *ngIf="!editSchool" class="userdetails"> &nbsp;{{dummySchoolInfo?.contactperson}}</span> &nbsp;<input [(ngModel)]="dummyEditSchoolInfo.contactperson" pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-user"></i> Contact Person</h4><p><span *ngIf="!editSchool" class="userdetails"> &nbsp;{{dummySchoolInfo?.contactperson}}</span> &nbsp;<input class="longinput" [(ngModel)]="dummyEditSchoolInfo.contactperson" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
                         <div class="col-md-4">
                             <button type="button" *ngIf="!editSchool" pButton class="ui-button-info" label="Edit" (click)="editSchool=true"></button>
@@ -82,11 +104,11 @@
 
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-building"></i> School Name </h4><p><span *ngIf="!editSchool" class="userdetails"> {{dummySchoolInfo?.schoolname}}</span> &nbsp;<input [(ngModel)]="dummyEditSchoolInfo.schoolname" pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-building"></i> School Name </h4><p><span *ngIf="!editSchool" class="userdetails"> {{dummySchoolInfo?.schoolname}}</span> &nbsp;<input class="longinput" [(ngModel)]="dummyEditSchoolInfo.schoolname" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
 
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-envelope-o"></i> Email</h4><p><span *ngIf="!editSchool" class="userdetails">&nbsp; {{dummySchoolInfo?.email}}</span> &nbsp; <input [(ngModel)]="dummyEditSchoolInfo.email" pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-envelope-o"></i> Email</h4><p><span *ngIf="!editSchool" class="userdetails">&nbsp; {{dummySchoolInfo?.email}}</span> &nbsp; <input class="longinput" [(ngModel)]="dummyEditSchoolInfo.email" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
                     </div>
 
@@ -105,11 +127,11 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-phone"></i> Landline</h4><p><span *ngIf="!editSchool" class="userdetails">&nbsp;{{dummySchoolInfo?.landline}}</span> &nbsp;<input *ngIf="editSchool" [(ngModel)]="dummyEditSchoolInfo.landline" pInputText maxlength="7" type="number"></p>
+                                    <h4><i class="fa fa-phone"></i> Landline</h4><p><span *ngIf="!editSchool" class="userdetails">&nbsp;{{dummySchoolInfo?.landline}}</span> &nbsp;<input class="longinput" *ngIf="editSchool" [(ngModel)]="dummyEditSchoolInfo.landline" pInputText maxlength="7" type="number"></p>
                                 </div>
                                 <div class="col-md-12"></div>
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-mobile"></i> Mobile</h4><p><span *ngIf="!editSchool" class="userdetails">{{dummySchoolInfo?.mobile}}</span><input *ngIf="editSchool" [(ngModel)]="dummyEditSchoolInfo.mobile" pInputText type="number" maxlength="10"></p>
+                                    <h4><i class="fa fa-mobile"></i> Mobile</h4><p><span *ngIf="!editSchool" class="userdetails">{{dummySchoolInfo?.mobile}}</span><input class="longinput" *ngIf="editSchool" [(ngModel)]="dummyEditSchoolInfo.mobile" pInputText type="number" maxlength="10"></p>
                                 </div>
                             </div>
                         </div>
@@ -194,8 +216,8 @@
                                 <div class="col-md-5">
                                   <br>
                                   <p class="guidelines">Posting Guidelines</p>
-                                    <span class="point"><i class="fa fa-check-square"></i>Be Polite.</span><br>
-                                    <span class="point"><i class="fa fa-check-square"></i>Never Abuse.</span>
+                                    <span class="point"><i class="fa fa-check-square fa-lg"></i>Be Polite.</span><br>
+                                    <span class="point"><i class="fa fa-check-square fa-lg"></i>Never Abuse.</span>
                                 </div>
                               </div>
                             </p-panel>

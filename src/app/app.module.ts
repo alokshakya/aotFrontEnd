@@ -1,9 +1,10 @@
-import {NgModule}      from '@angular/core';
+import {AppRoutes} from './app.routes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpModule}    from '@angular/http';
-import {BrowserModule} from '@angular/platform-browser';
 import {LocationStrategy,HashLocationStrategy} from '@angular/common';
-import {AppRoutes} from './app.routes';
+import {NgModule}      from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
 import {AccordionModule} from 'primeng/primeng';
@@ -77,6 +78,7 @@ import {AppTopBar}  from './account/apptopbar/app.topbar.component';
 import {AppFooter}  from './account/appfooter/app.footer.component';
 import {InlineProfileComponent}  from './account/appProfile/app.profile.component';
 
+
 //Added Components
 import { AccountMainComponent } from "./account/main/main.component";
 import { DashboardComponent } from './account/dashboard/dashboard.component';
@@ -99,7 +101,11 @@ import { UserinfoService } from './services/userinfo.service';
 import { UpdateService } from './services/update.service';
 import { SharedService } from './services/shared.service';
 import { MasterHttpService } from './services/masterhttp.service';
+import { DataService } from './services/data.service';
 
+//Moment
+// import * as moment from 'moment';
+// import { MomentModule } from 'angular2-moment';
 
 //pipes
 import { KeysPipe } from './pipes/keys.pipe';
@@ -109,6 +115,7 @@ import { CssIdPipe } from './pipes/css-id.pipe';
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule, //new
         FormsModule,
         AppRoutes,
         HttpModule,
@@ -174,7 +181,9 @@ import { CssIdPipe } from './pipes/css-id.pipe';
         ToolbarModule,
         TooltipModule,
         TreeModule,
-        TreeTableModule
+        TreeTableModule,
+        //MomentModule //Moment
+        
     ],
     declarations: [
         AppComponent,
@@ -206,7 +215,8 @@ import { CssIdPipe } from './pipes/css-id.pipe';
         UpdateService, 
         ConfirmationService, 
         SharedService, 
-        MasterHttpService
+        MasterHttpService,
+        DataService
     ],
     bootstrap:[AppComponent]
 })

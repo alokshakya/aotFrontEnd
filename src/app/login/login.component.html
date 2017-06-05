@@ -17,7 +17,7 @@
             <input name="number" placeholder="Mobile Number" #number="ngModel" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="dummyMobile" pInputText type="number"><button (click)="dummySend()" [disabled]="number.errors||dummyMobile==null||dummyMobile==''" id="otpbtn" pButton class="ui-button-info withinput" label="Send OTP"></button>
         </div>
         <div class="ui-g-12" *ngIf="dummyOtpSection">
-            <h5>Enter OTP send on {{dummyMobile}} </h5>
+            <h5>Enter OTP sent on {{dummyMobile}} </h5>
             <input pInputText placeholder="Enter OTP" [(ngModel)]="dummyOtp"/><button class="ui-button-info withinput" pButton label="Resend"></button><br>
             <br><button pButton (click)="dummyVerify()" class="ui-button-success" label="Verify"></button>
         </div>

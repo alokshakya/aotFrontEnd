@@ -35,7 +35,19 @@
     <p-panel><p-header>Mock Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
       <div class="ui-g">
         <p-dataTable [value]="mockTestTableData">
-            <p-column *ngFor="let head of mockTestTableHeader" [header]="head.header" [field]="head.field" ></p-column>
+            <p-column header="Test Number" field="Test"></p-column>
+            <p-column header="Slot 1" field="Slot 1">
+              <ng-template pTemplate="body">
+                <div class="text-center">
+                  <button pButton label="40/50" class="ui-button-warning"></button>
+                </div>
+              </ng-template>
+            </p-column>
+            <p-column header="Slot 2" field="Slot 2">
+              <ng-template pTemplate="body">
+                <p-checkbox [(ngModel)]="date" label="Date, Time"></p-checkbox>
+              </ng-template>
+            </p-column>
         </p-dataTable>
       </div>
     </p-panel>
@@ -44,7 +56,19 @@
   <div class="ui-g-6 ui-sm-12">
     <p-panel header="Syllabus">
       <div class="ui-g">
-          <p-tree selectionMode="single" [value]="dummyTree"></p-tree>
+          <!--<p-tree selectionMode="single" [value]="dummyTree"></p-tree>-->
+          <p-accordion (onOpen)="tabOpen($event)" (onClose)="tabClose($event)">
+              <div class="ui-g">
+                <div class="ui-g-12">
+                  <p-accordionTab  *ngFor="let data of chapterNames; let i=index">
+                    <p-header><i class="fa fa-plus-circle" *ngIf="currentTab!=i"></i><i class="fa fa-minus-circle" *ngIf="currentTab==i"></i><span class="chapter">{{data}}</span></p-header>
+                      <ul>
+                        <li *ngFor="let topic of topics">{{topic}}</li> 
+                      </ul>
+                  </p-accordionTab>
+                </div>
+              </div>
+          </p-accordion>
       </div>
     </p-panel>
 

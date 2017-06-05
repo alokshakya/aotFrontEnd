@@ -301,7 +301,6 @@ export class TakedemotestComponent implements OnInit {
   }
 
   subscribed(sub){
-      console.log(sub)
       return true;
   }
 

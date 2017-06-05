@@ -35,7 +35,6 @@ export class SharedService {
       this.httpService.post(constants.DREAMFACTORY_INSTANCE_URL + 'api/v2/user/session', loginCreds, {headers: this.queryHeader})
       .map((resp:Response) => resp.json())
       .subscribe((data)=>{
-        console.log(data);
         this.sessionToken = data['session_token']
         return true
       }, (error)=>{

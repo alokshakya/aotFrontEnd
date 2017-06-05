@@ -1,7 +1,11 @@
-<p-dialog header="Edit Profile Picture" [(visible)]="changeImg">
+<p-dialog header="Edit Profile Picture" [height]="300" [width]="500" [(visible)]="changeImg">
     <div class="ui-g">
         <div class="ui-g-12">
-            <p-fileUpload name="profileImage[]" url="http://localhost:3000/upload" accept="image/*" previewWidth="200" maxFileSize="3000000"></p-fileUpload>
+            <p-fileUpload name="profileImage[]" url="http://localhost:3000/upload" accept="image/*" previewWidth="200" maxFileSize="3000000">
+                <ng-template pTemplate="content">
+                    
+                </ng-template>
+            </p-fileUpload>
         </div>
     </div>
 </p-dialog>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserinfoService } from '../../services/userinfo.service';
 import { NotificationService } from '../../services/notification.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
+import { DataService } from '../../services/data.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 
@@ -73,6 +74,8 @@ export class AccountMainComponent implements AfterViewInit {
     temporaryData:any;
     temporaryClass:string;
 
+    userEvent:any
+
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
@@ -83,10 +86,12 @@ export class AccountMainComponent implements AfterViewInit {
         private http: UserinfoService, 
         private notification: NotificationService,
         private masterhttp: MasterHttpService,
+        private dataservice: DataService,
         )
         {}
 
     ngOnInit() {
+
         if (this.email.length>25){
             this.shownEmail = this.email.slice(0,26) + '...'
         }
@@ -128,7 +133,6 @@ export class AccountMainComponent implements AfterViewInit {
     }  
 
     change(changed:boolean){
-        console.log(changed);
     }    
 
     ngAfterViewInit() {

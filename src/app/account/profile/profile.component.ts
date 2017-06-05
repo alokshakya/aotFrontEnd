@@ -16,10 +16,15 @@ import { MasterHttpService } from '../../services/masterhttp.service';
 })
 export class ProfileComponent implements OnInit {
 
+  //otp 
+  otpDialog:boolean;
+  dummyOtpSection:boolean;
+  dummyIncorrectOtp:boolean;
+  actualOTP=123456;
+  dummyOtp:number;
 
   maxDate: Date;
   rating:number = 2;
-
   editBasic:boolean;
   editSchool:boolean;
   editTestimony:boolean;
@@ -35,23 +40,23 @@ export class ProfileComponent implements OnInit {
   dummySchoolInfo:any;
   dummyEditSchoolInfo:any;
 
-  dec:Array<string>;
-  selectedExam:string;
   class:string;
   newClass:string;
+  
   school:string;
   newSchool:string;
+  
+  dec:Array<string>;
+  selectedExam:string;
   testimonial:string;
   rollNumber:string;
 
-  stroredPwd = 'qwe123'
-
+  storedPwd = 'qwe123'
   newPassword:string;
   confirmNewPassword:string;
   oldPassword:string;
 
   classList:SelectItem[];
-
   exam:SelectItem[] = [];
   city:SelectItem[] = [];
   state:SelectItem[] = [];
@@ -61,6 +66,7 @@ export class ProfileComponent implements OnInit {
 
   date:Date;
   test:any;
+  
   constructor(
     private httpService: UserinfoService,
     private classService: SubjectService,
@@ -202,10 +208,6 @@ export class ProfileComponent implements OnInit {
     this.editBasic = true;
   }
 
-  dummyCancel(){
-
-  }
-
   dummySave(){
     this.dummyBasicInfo = this.dummyEditBasicInfo
   }
@@ -235,7 +237,7 @@ export class ProfileComponent implements OnInit {
   }
 
   changePassword(){
-    if(this.stroredPwd!=this.oldPassword){
+    if(this.storedPwd!=this.oldPassword){
         this.growlmsg.push({severity:'error', summary:'Incorrect Old Password', detail:'Please try again'});
 
     }else if(this.confirmNewPassword!=this.newPassword){
@@ -245,7 +247,16 @@ export class ProfileComponent implements OnInit {
     else{    this.growlmsg.push({severity:'success', summary:"Password Changed", detail:''});}
   }
 
+  dummyVerify(){
+    if(this.actualOTP==this.dummyOtp){
+      this.otpDialog = false;
+      console.log(true)
+    }
+    this.dummyIncorrectOtp = true;
 
+  }
+
+  //tab change event
   onChange(){
     if (this.editBasic){
       this.confirmservice.confirm({

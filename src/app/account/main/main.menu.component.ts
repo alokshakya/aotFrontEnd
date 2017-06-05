@@ -28,7 +28,7 @@ export class AppMenuComponent implements OnInit {
         @Inject(forwardRef(() => AccountMainComponent))
         public app:AccountMainComponent,
         private subjectSet: SubjectService,
-        private masterhttp: MasterHttpService
+        private masterhttp: MasterHttpService,
         )
         {
 
@@ -66,135 +66,135 @@ export class AppMenuComponent implements OnInit {
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['science/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['science/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['science/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['science/mocktest']
                                 },
                                 {
                                     label: 'Result',
                                     icon: 'fa fa-calculator',
-                                    routerLink: ['/']
+                                    routerLink: ['science/result']
                                 },
                             ]}, 
                         {label: '',icon: 'icon-maths',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['mathematics/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['mathematics/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['mathematics/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['mathematics/mocktest']
                                 },
                                 {
                                     label: 'Result',
                                     icon: 'fa fa-calculator',
-                                    routerLink: ['/']
+                                    routerLink: ['mathematics/result']
                                 },
                             ]},
                         {label: '',icon: 'icon-gk',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['gk/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['gk/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['gk/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['gk/mocktest']
                                 },
                                 {
                                     label: 'Result',
                                     icon: 'fa fa-calculator',
-                                    routerLink: ['/']
+                                    routerLink: ['gk/result']
                                 },
                             ]},
                         {label: '',icon: 'icon-english',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['english/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['english/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['english/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['english/mocktest']
                                 },
                                 {
                                     label: 'Result',
                                     icon: 'fa fa-calculaor',
-                                    routerLink: ['/']
+                                    routerLink: ['english/result']
                                 },
                             ]},
                         {label: '',icon: 'icon-reasoning',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['reasoning/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['reasoning/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['reasoning/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
                                     icon: 'fa fa-circle-o',
-                                    routerLink: ['/']
+                                    routerLink: ['reasoning/mocktest']
                                 },
                                 {
                                     label: 'Result',
                                     icon: 'fa fa-calculator',
-                                    routerLink: ['/']
+                                    routerLink: ['reasoning/result']
                                 }
                             ]}
                        ]
@@ -237,7 +237,7 @@ export class AppMenuComponent implements OnInit {
 @Component({
     selector: '[app-submenu]',
     template: `
-        <template ngFor let-child let-i="index" [ngForOf]="(root ? item : item.items)">
+        <ng-template ngFor let-child let-i="index" [ngForOf]="(root ? item : item.items)">
             <li [ngClass]="{'active-menuitem': isActive(i)}" *ngIf="child.visible === false ? false : true">
                 <a [href]="child.url||'#'" (click)="itemClick($event,child,i)" *ngIf="!child.routerLink" [attr.tabindex]="!visible ? '-1' : null">
                     <i [ngClass]="child.icon"></i>
@@ -252,7 +252,7 @@ export class AppMenuComponent implements OnInit {
                 </a>
                 <ul app-submenu [item]="child" *ngIf="child.items" [@children]="isActive(i) ? 'visible' : 'hidden'" [visible]="isActive(i)" [reset]="reset"></ul>
             </li>
-        </template>
+        </ng-template>
     `,
     animations: [
         trigger('children', [

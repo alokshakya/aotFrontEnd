@@ -96,7 +96,6 @@ export class AccountsettingsComponent implements OnInit {
     }
 
     loadSubPriceTable(){
-        console.log(this.dummyPrice['0'])
             
     }
 

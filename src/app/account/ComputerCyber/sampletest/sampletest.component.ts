@@ -27,6 +27,8 @@ export class SampletestComponent implements OnInit {
 
   chapterNames:Array<string>;
 
+    currentTab:number;
+
   constructor(private subject: SubjectService, private router: Router) { 
       this.testData = {
           "Sample Test 1": "35/50",
@@ -47,7 +49,9 @@ export class SampletestComponent implements OnInit {
       this.examPattern.push({label:"Exam Pattern 2", value:"null"})
       this.examPattern.push({label:"Exam Pattern 3", value:"null"})
 
-      this.topics = ["Topic 1 CC", "Topic 2 CC", "Topic 3 CC", "Topic 4 CC", "Topic 5 CC" ]
+      this.topics = ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5" ]
+
+      this.chapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10" ]
 
       
         this.dummyTree =  [
@@ -234,7 +238,6 @@ export class SampletestComponent implements OnInit {
   }
 
   ngOnInit(){
-      this.chapterNames = []
       this.sampleTestData = {
           labels: ['Completed','Remaining'],
           datasets: [{
@@ -242,17 +245,27 @@ export class SampletestComponent implements OnInit {
               backgroundColor: ["#5CB85C", "#D9534F"],
               hoverBackgroundColor: ["#5CB85C", "#D9534F"]
             }]};
-      this.subject.getChapters(1).subscribe((data: Response) =>{
-          data = data['resource'];
-          for(let i in data){
-              this.chapterNames.push(data[i]['name']);
-          }
-      })
+    //   this.chapterNames = []
+    //   this.subject.getChapters(1).subscribe((data: Response) =>{
+    //       data = data['resource'];
+    //       for(let i in data){
+    //           this.chapterNames.push(data[i]['name']);
+    //       }
+    //   })
 
   }
 
   redirect(){
       this.router.navigate(['account/accountsettings'])
+  }
+
+  
+  tabOpen(e){
+    this.currentTab = e.index;
+  }
+
+  tabClose(e){
+      this.currentTab = null;
   }
 
 }

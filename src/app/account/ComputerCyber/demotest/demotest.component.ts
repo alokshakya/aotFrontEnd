@@ -14,6 +14,7 @@ export class DemotestComponent implements OnInit {
 
   demoTestData:any;
 
+  currentTab:number;
   topicNames:Array<string>;
 
   chapterNames:Array<string>;
@@ -25,8 +26,8 @@ export class DemotestComponent implements OnInit {
   constructor(
       private router: Router,
       private subjectSet: SubjectService ){
-          this.topicNames = ["Topic 1 CC", "Topic 2 CC", "Topic 3 CC", "Topic 4 CC", "Topic 5 CC" ]
-          this.dummyChapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 1", ]
+          this.topicNames = ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5" ]
+          this.dummyChapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10", ]
 
             this.dummyTree =  [
         {
@@ -228,5 +229,14 @@ export class DemotestComponent implements OnInit {
               this.chapterNames.push(data[i]['name'])
         }
     })
-    }
+}
+
+  tabOpen(e){
+    this.currentTab = e.index;
+  }
+
+  tabClose(e){
+      this.currentTab = null;
+  }
+
 }

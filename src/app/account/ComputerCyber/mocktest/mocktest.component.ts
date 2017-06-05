@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 import {TreeModule,TreeNode} from 'primeng/primeng';
+import * as moment from 'moment';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-mocktest',
@@ -22,7 +22,19 @@ export class MocktestComponent implements OnInit {
     examPattern: SelectItem[];
 
     dummyTree:TreeNode[];
+
+    topics:Array<string>;
+    chapterNames:Array<string>;
+    currentTab:number;
+    date=[];
   constructor(private router:Router) {
+
+      
+      this.topics = ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5" ]
+
+      this.chapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10" ]
+
+      
 
       this.mockTestTableData =[ 
                             {"Test":"Mock Test 1", "Slot 1":"95 Percentile", "Slot 2":"NA" },
@@ -46,6 +58,7 @@ export class MocktestComponent implements OnInit {
       this.examPattern.push({label:"Exam Pattern 2", value:"null"})
       this.examPattern.push({label:"Exam Pattern 3", value:"null"})
 
+        //this.startDate = moment().startOf('month').format('YYYY-MM-DD');
 
             this.dummyTree =  [
         {
@@ -254,5 +267,15 @@ export class MocktestComponent implements OnInit {
                 }]    
             };
   }
+  
+  
+  tabOpen(e){
+    this.currentTab = e.index;
+  }
+
+  tabClose(e){
+      this.currentTab = null;
+  }
+
 
 }

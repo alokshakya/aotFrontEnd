@@ -14,7 +14,7 @@
             <div class="ui-g-2 dark logo">
                 <img src="../../../../assets/layout/images/Olympiadbox-logo.png" width="75px" height="75px">
             </div>
-            <div class="ui-g-10 head">
+            <div class="ui-g-10 head fullwidth">
                 <div class="ui-g">
                     <span id="test">Demo Test</span>
                     <span id="sub">{{subject}}</span>
@@ -36,7 +36,7 @@
                 <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
                 <div class="ui-g-12 fill"></div>
             </div>
-            <div class="ui-g-10 light center">
+            <div class="ui-g-10 light center fullwidth">
                 <div class="ui-g" *ngIf="questionWindow">
                     <div class="ui-g-12"><span class="statement">{{questionNumber}}{{selectedQuestion?.Question}}</span>
                         <div class="image"><img src="../../../../../assets/layout/images/q2.jpg"></div>

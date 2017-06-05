@@ -555,7 +555,8 @@ body {
     border-bottom: 1px solid transparent; }
     body .ui-rating a:focus {
       outline: 0 none;
-      border-bottom: 1px solid #00acac; }
+      /*border-bottom: 1px solid #00acac; }*/
+    }
   body .ui-rating .fa {
     font-size: 20px;
     height: 20px;
@@ -872,7 +873,7 @@ body .ui-accordion .ui-accordion-header {
   /*background-color: lightslategrey;*/
   background: transparent;
   padding: 0;
-  color: #ffffff;
+  color: transparent; /*changed from ffff*/
   font-size: 14px;
   -moz-transition: background-color 0.3s;
   -o-transition: background-color 0.3s;
@@ -882,9 +883,9 @@ body .ui-accordion .ui-accordion-header {
     /*background-color: #444d56; }*/
     background:transparent;}
   body .ui-accordion .ui-accordion-header.ui-state-active {
-    /*background-color: #00acac;*/
-    background: transparent;
-    color: #ffffff;   /*added new chevron*/
+    background-color: #00acac;
+    /*background: transparent;*/
+    color: black;   /*added new chevron*/
     border: none;}
     body .ui-accordion .ui-accordion-header.ui-state-active a {
       /*color: #ffffff; }*/
@@ -900,7 +901,8 @@ body .ui-accordion .ui-accordion-header {
     text-indent: 0px !important;
     text-align: center; }
     body .ui-accordion .ui-accordion-header .fa-caret-right:before {
-      content: ""; }
+      content: "";
+      color: black; }
   body .ui-accordion .ui-accordion-header .fa-caret-down {
     background: none !important;
     display: inline-block;
