@@ -223,6 +223,7 @@ export class DemotestComponent implements OnInit {
           labels: ['Remaining'],
           datasets: [ {data: [1], backgroundColor: ["#D9534F"], hoverBackgroundColor: ["#D9534F"]} ]
         };
+        
       this.subjectSet.getChapters(1).subscribe((data: Response) => {
           data = data['resource'];
           for(let i in data){
