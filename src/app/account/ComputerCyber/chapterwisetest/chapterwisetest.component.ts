@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { SubjectService } from '../../../services/subject.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
 import {TreeModule,TreeNode} from 'primeng/primeng';
+import { Message } from 'primeng/primeng';
+import  { MessagesModule } from 'primeng/primeng'
 
 
 @Component({
@@ -38,8 +40,11 @@ export class ChapterwisetestComponent implements OnInit {
   dummyChapters:any;
   dummyTopics:any;
 
+  generateMsg: Message [] = [];
+
   currentTab:number;
   closedTab:number;
+  
 
   constructor(private sub:SubjectService, private router:Router, private masterhttp : MasterHttpService) {
       this.cname = ['Chapter 1', 'Chapter 2', 'Chapter 3', 'Chapter 4', 'Chapter 5', 'Chapter 6', 'Chapter 7', 'Chapter 8', 'Chapter 9', 'Chapter 10']
@@ -235,9 +240,8 @@ export class ChapterwisetestComponent implements OnInit {
                                 "label": "Topic 5"
                         },]     
                         }
-                        ]
-
-
+    ]
+      
       this.chapterwiseTestDetails = {
         "Chapter 1":
         {
@@ -366,11 +370,13 @@ export class ChapterwisetestComponent implements OnInit {
     }
 
     tabOpen(e){
-        this.currentTab=e.index
+        this.generateMsg = []
+        this.selectedChapter = this.cname[e.index]
+        this.generateMsg.push({severity:'info', summary:'Instructions:', detail:'Click "Generate" to create Chapter '+ this.selectedChapter + ' test.'});
     }
     
     tabClose(e){
-        this.currentTab=null;
+        this.generateMsg.shift();
     }
   }
 
