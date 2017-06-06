@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 import { Response } from '@angular/http';
 import { SubjectService } from '../../../services/subject.service';
+import { MasterHttpService } from '../../../services/masterhttp.service';
 import {TreeModule,TreeNode} from 'primeng/primeng';
 import { Router } from '@angular/router';
 
@@ -27,9 +28,16 @@ export class SampletestComponent implements OnInit {
 
   chapterNames:Array<string>;
 
-    currentTab:number;
+  currentTab:number;
 
-  constructor(private subject: SubjectService, private router: Router) { 
+  //temporary
+  dummyChapters:Array<any>;
+  dummyTopics:Array<any>;
+
+  constructor(private subject: SubjectService,
+   private router: Router,
+   private masterhttp: MasterHttpService) {
+
       this.testData = {
           "Sample Test 1": "35/50",
           "Sample Test 2": "Start",
@@ -69,6 +77,16 @@ export class SampletestComponent implements OnInit {
     //           this.chapterNames.push(data[i]['name']);
     //       }
     //   })
+
+    //temporary
+    this.dummyChapters=[]
+    this.masterhttp.getChapters()
+    .subscribe(data=>{
+      data = data['chapters']['records'];
+      for(let i in data){
+        this.dummyChapters.push(data[i][1])
+      }
+    })
 
   }
 

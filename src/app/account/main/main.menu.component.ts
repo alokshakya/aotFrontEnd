@@ -198,8 +198,9 @@ export class AppMenuComponent implements OnInit {
                                 }
                             ]}
                        ]
-    }
-    
+        }
+        
+        
     ngOnInit() {
         // this.model = []
         // this.subjectSet.getSubjectSet(1).subscribe((data:Response) =>{
@@ -229,7 +230,7 @@ export class AppMenuComponent implements OnInit {
         })
         
 
-        }           
+    }           
 
     }    
  

@@ -66,11 +66,13 @@ export class AccountMainComponent implements AfterViewInit {
 
     resetMenu: boolean;
     
-    personalDetails:any; //will be used in child components
+//will be used in child components
+    personalDetails:any; 
     academicDetails:any;
     sessionToken:string;
     userInfoId:string;
 
+//scripts.olympiadbox.com/services
     temporaryData:any;
     temporaryClass:string;
 
@@ -99,7 +101,7 @@ export class AccountMainComponent implements AfterViewInit {
         // // this.isLogin(this.sessionToken);
         // this.getUserInfo()
 
-        //temporary
+        //temporary service
         this.masterhttp.getUserInfo()
         .subscribe((data: Response) =>{
             this.temporaryData = data;

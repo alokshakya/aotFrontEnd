@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SubjectService } from '../../../services/subject.service';
+import { MasterHttpService } from '../../../services/masterhttp.service';
 import { Response } from '@angular/http';
 import {TreeModule,TreeNode} from 'primeng/primeng';
 
@@ -22,194 +23,17 @@ export class DemotestComponent implements OnInit {
   dummyChapterNames:Array<string>;
 
   dummyTree:TreeNode[];
+
+  //temporary
+  dummyTopics:Array<string>;
+  dummyChapters:Array<string>;
   
   constructor(
       private router: Router,
-      private subjectSet: SubjectService ){
+      private subjectSet: SubjectService,
+      private masterhttp: MasterHttpService ){
           this.topicNames = ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5" ]
           this.dummyChapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10", ]
-
-            this.dummyTree =  [
-        {
-            "label": "Chapter 1",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    },
-    {
-            "label": "Chapter 2",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    },
-    {
-            "label": "Chapter 3",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    },
-    {
-            "label": "Chapter 4",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    },
-    {
-            "label": "Chapter 5",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    },
-    {
-            "label": "Chapter 6",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    },
-    {
-            "label": "Chapter 7",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    },
-    {
-            "label": "Chapter 8",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    },
-    {
-            "label": "Chapter 9",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    },
-    {
-            "label": "Chapter 10",
-            "children": [{
-                    "label": "Topic 1"
-                   },
-                {
-                    "label": "Topic 2"
-                },
-                                {
-                    "label": "Topic 3"
-                },
-                                {
-                    "label": "Topic 4"
-                },
-                                {
-                    "label": "Topic 5"
-                },]     
-    }]
 }
 
 
@@ -218,18 +42,41 @@ export class DemotestComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.chapterNames = [];
       this.demoTestData = {
           labels: ['Remaining'],
           datasets: [ {data: [1], backgroundColor: ["#D9534F"], hoverBackgroundColor: ["#D9534F"]} ]
         };
         
-      this.subjectSet.getChapters(1).subscribe((data: Response) => {
-          data = data['resource'];
-          for(let i in data){
-              this.chapterNames.push(data[i]['name'])
+    //   this.chapterNames = [];
+    //   this.subjectSet.getChapters(1).subscribe((data: Response) => {
+    //       data = data['resource'];
+    //       for(let i in data){
+    //           this.chapterNames.push(data[i]['name'])
+    //     }
+    // })
+
+    //temporary
+    this.dummyChapters = []
+    this.masterhttp.getChapters()
+    .subscribe(data=>{
+        data = data['chapters']['records'];
+        for(let i in data){
+        this.dummyChapters.push(data[i][1])
         }
     })
+
+    this.dummyTopics = [];
+    this.masterhttp.getTopics()
+    .subscribe(data => {
+        data = data['topics']['records']
+        for(let i in data){
+            this.dummyTopics.push(data[i][1])
+            console.log(this.dummyTopics)
+        } 
+    })
+        
+
+
 }
 
   tabOpen(e){

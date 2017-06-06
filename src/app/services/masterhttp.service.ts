@@ -9,11 +9,13 @@ export class MasterHttpService {
   constructor(private http: Http, private dataservice: DataService) {}
 
   getUserInfo(){
-    return this.http.get(this.url).map((response: Response) => response.json());
+    return this.http.get(this.url)
+    .map((response: Response) => response.json());
   }
 
   getClass(){
-    return this.http.get('http://scripts.olympiadbox.com/services/api/api.php/class/1').map((response: Response) => response.json());}
+    return this.http.get('http://scripts.olympiadbox.com/services/api/api.php/class/1')
+    .map((response: Response) => response.json());}
 
   getSubjects(){
     return this.http.get('http://scripts.olympiadbox.com/services/api/api.php/subjects')

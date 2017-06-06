@@ -17,21 +17,24 @@ export class AccountsettingsComponent implements OnInit {
     coupon:string;
     test:Array<string>;
 
-    dummySubjects:Array<string>;
-    dummyPrice:Array<string>;
-
     subPriceTable:any;
     subscriptionTableData: any;
     selectAll:boolean;
+
+
+    //temporary
+    col:Array<any>;
+    dummySubjects:Array<string>;
+    dummyPrice:Array<number>;
     
     constructor(
         private _router:Router,
         private price: SubjectService,
-        private masterhttp: MasterHttpService) {
-
+        private masterhttp: MasterHttpService) 
+        {
             this.selectedPackage = [];
 
-
+            this.col=[{"header":"Subject","field":"Subject"},{"header":"Price","field":"Price"}]
 
             this.subPriceTable = [
                                     {"Subject":"Computer/Cyber","Price":500},
@@ -39,7 +42,8 @@ export class AccountsettingsComponent implements OnInit {
                                     {"Subject":"Mathematics","Price":500},
                                     {"Subject":"General Knowledge","Price":500},
                                     {"Subject":"English","Price":500},
-                                    {"Subject":"Reasoning","Price":500}]
+                                    {"Subject":"Reasoning","Price":500}
+                                    ]
 
             this.subscriptionTableData = [
                 {"Order ID":"OB26DF", "Subject":"Science", "Subscription Date":"23 March 2017", "Valid Till":"23 September 2017", "Download Invoice":"Invoice .pdf"},
@@ -78,29 +82,26 @@ export class AccountsettingsComponent implements OnInit {
         //temporary
         this.dummyPrice = []
         this.masterhttp.getFee()
-        .subscribe((data: Response) => {
-            for (let i in data['fee']['records']){
-            this.dummyPrice.push(data['fee']['records'][i][2])
-            }
-        })
+        .subscribe((data) => {
+            data = data['fee']['records'];
+            var a = [];
+            for (let i in data){
+            this.subPriceTable.push({"Subject":"Enn","Price":data[i][2]});
+            }        
+            console.log(this.subPriceTable)            
+    })
 
         this.dummySubjects=[]
         this.masterhttp.getSubjects()
-        .subscribe((data: Response) =>{
+        .subscribe((data) =>{
              for (let i in data['subjects']['records']){
             this.dummySubjects.push(data['subjects']['records'][i][1])
             }
         })
-
-        this.loadSubPriceTable()
     }
 
-    loadSubPriceTable(){
-            
-    }
 
     pay(){
-        alert('Selected Packages: ' + this.selectedPackage)
     }
 }
 
