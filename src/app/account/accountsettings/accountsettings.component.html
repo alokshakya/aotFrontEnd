@@ -11,7 +11,7 @@
           <p-column field="Download Invoice" header="Invoice">
             <ng-template pTemplate="body">
               <div class="text-center">
-                <i class="fa fa-file-pdf-o fa-lg"></i>
+                <i style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>
               </div>
             </ng-template>
           </p-column>
@@ -22,14 +22,13 @@
     <div class="ui-g-12">
         <p-panel header="Subscribe Now"><br>
             <div class="ui-g">
-              
               <div class="ui-g-12 ui-sm-12">
                 <!--<div *ngFor="let sub of dummySubjects;let i=index">
                   <p-checkbox name="package" [(ngModel)]="selectedPackage" value="{{sub}}" label="{{sub|uppercase}} - &#8377; {{dummyPrice[i]}}"></p-checkbox>
                   <br><br>
                 </div>-->
-                <p-dataTable [value]="subPriceTable" dataKey="Price" [(selection)]="selectedPackage">
-                  <p-column [style]="{'width':'47px'}" selectionMode="multiple"></p-column>
+                <p-dataTable [value]="subPriceTable" dataKey="Subject" [(selection)]="selectedPackage">
+                  <p-column [style]="{'width':'5.3%','padding-left':'1.5%'}" selectionMode="multiple"></p-column>
                   <p-column header="Subject" field="Subject"></p-column>
                   <p-column header="Price" field="Price"></p-column>
                 </p-dataTable>
