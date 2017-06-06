@@ -29,19 +29,21 @@
     padding-left:20%;
 }
 
-i:hover {
-    cursor:pointer;
-}
-
-
-ul{
-    list-style: none;
-}
-
-li{
-    margin-bottom:10px;
-}
 
 .chapter{
     font-size: 17px;
+}
+
+.leftpad{
+    padding-left: 5%;
+}
+
+.rightgap{
+    width:70px;
+    margin-right: 4px;
+}
+
+.long{
+    display: inline-block;
+    width:111px;
 }

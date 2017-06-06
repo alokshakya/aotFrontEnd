@@ -885,11 +885,11 @@ body .ui-accordion .ui-accordion-header {
   body .ui-accordion .ui-accordion-header.ui-state-active {
     background-color: #00acac;
     /*background: transparent;*/
-    color: black;   /*added new chevron*/
+    color: #2d353c;   /*added new chevron*/
     border: none;}
     body .ui-accordion .ui-accordion-header.ui-state-active a {
       /*color: #ffffff; }*/
-      color:black;}
+      color:#2d353c;}
   body .ui-accordion .ui-accordion-header .fa-caret-right {
     background: none !important;
     display: inline-block;
@@ -902,7 +902,7 @@ body .ui-accordion .ui-accordion-header {
     text-align: center; }
     body .ui-accordion .ui-accordion-header .fa-caret-right:before {
       content: "";
-      color: black; }
+      color: #2d353c; }
   body .ui-accordion .ui-accordion-header .fa-caret-down {
     background: none !important;
     display: inline-block;

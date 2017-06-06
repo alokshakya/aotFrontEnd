@@ -38,22 +38,22 @@ export class AppMenuComponent implements OnInit {
                         {label: '',icon: 'icon-cyber',
                             items: [{
                                         label: 'Demo Test',
-                                        icon: 'fa fa-circle-o',
+                                        icon: 'fa fa-circle',
                                         routerLink: ['computers/demotest']
                                     },
                                     {
                                         label: 'Chapterwise Test',
-                                        icon: 'fa fa-circle-o',
+                                        icon: 'fa fa-circle',
                                         routerLink: ['computers/chapterwisetest']
                                     },
                                     {
                                         label: 'Sample Test',
-                                        icon: 'fa fa-circle-o',
+                                        icon: 'fa fa-circle',
                                         routerLink: ['computers/sampletest']
                                     },
                                     {
                                         label: 'Mock Test',
-                                        icon: 'fa fa-circle-o',
+                                        icon: 'fa fa-circle',
                                         routerLink: ['computers/mocktest']
                                     },
                                     {
@@ -65,22 +65,22 @@ export class AppMenuComponent implements OnInit {
                         {label: '',icon: 'icon-science',
                             items: [{
                                     label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['science/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['science/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['science/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['science/mocktest']
                                 },
                                 {
@@ -92,22 +92,22 @@ export class AppMenuComponent implements OnInit {
                         {label: '',icon: 'icon-maths',
                             items: [{
                                     label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['mathematics/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['mathematics/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['mathematics/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['mathematics/mocktest']
                                 },
                                 {
@@ -119,22 +119,22 @@ export class AppMenuComponent implements OnInit {
                         {label: '',icon: 'icon-gk',
                             items: [{
                                     label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['gk/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['gk/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['gk/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['gk/mocktest']
                                 },
                                 {
@@ -146,22 +146,22 @@ export class AppMenuComponent implements OnInit {
                         {label: '',icon: 'icon-english',
                             items: [{
                                     label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['english/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['english/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['english/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['english/mocktest']
                                 },
                                 {
@@ -173,22 +173,22 @@ export class AppMenuComponent implements OnInit {
                         {label: '',icon: 'icon-reasoning',
                             items: [{
                                     label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['reasoning/demotest']
                                 },
                                 {
                                     label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['reasoning/chapterwisetest']
                                 },
                                 {
                                     label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['reasoning/sampletest']
                                 },
                                 {
                                     label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
+                                    icon: 'fa fa-circle',
                                     routerLink: ['reasoning/mocktest']
                                 },
                                 {

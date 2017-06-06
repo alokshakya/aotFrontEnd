@@ -32,10 +32,10 @@
   </div>
 
   <div class="ui-g-6 ui-sm-12">
-    <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
-      <div class="ui-g textcenter">
-        <div class="ui-g-12 sample" *ngFor="let test of testData|keys">
-          <span class="test">{{test.key}}</span><button type="submit" class="ui-button-success" pButton [ngClass]="{'ui-button-warning':test.value=='Resume', 'ui-button-danger':test.value=='Start'}" label="{{test.value}}"></button><i title="Retake {{test.key}}" *ngIf="!(test.value=='Start'||test.value=='Resume')" class="fa fa-refresh fa-lg"></i>
+    <p-panel><p-header>Sample Test<p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown></p-header>
+      <div class="ui-g">
+        <div class="ui-g-6" *ngFor="let test of testData|keys">
+          <span class="long">{{test.key}}</span><button type="submit" class="ui-button-success rightgap" pButton [ngClass]="{'ui-button-warning':test.value=='Resume', 'ui-button-danger':test.value=='Start'}" label="{{test.value}}"></button><button pButton type="button" style="width:40px;" icon="fa fa-refresh fa-spin fa-fw" *ngIf="!(test.value=='Start'||test.value=='Resume')"></button>
         </div>
       </div>
     </p-panel>
@@ -43,23 +43,21 @@
 
   <div class="ui-g-6 ui-sm-12">
     <p-panel><p-header>Syllabus</p-header>
-      <div class="ui-g">
-        <div class=ui-g-6 ui-sm-12>
             <!--<p-tree selectionMode="single" [value]="dummyTree"></p-tree>-->
             <p-accordion (onOpen)="tabOpen($event)" (onClose)="tabClose($event)">
               <div class="ui-g">
                 <div class="ui-g-12">
-                  <p-accordionTab  *ngFor="let data of chapterNames; let i=index">
-                    <p-header><i class="fa fa-plus-circle" *ngIf="currentTab!=i"></i><i class="fa fa-minus-circle" *ngIf="currentTab==i"></i><span class="chapter">{{data}}</span></p-header>
-                      <ul>
-                        <li *ngFor="let topic of topics">{{topic}}</li> 
-                      </ul>
+                  <p-accordionTab  *ngFor="let data of chapterNames">
+                    <p-header><span class="chapter"> {{data}} </span> </p-header>
+                    <div class="ui-g">
+                      <div class="ui-g-12"  *ngFor="let test of topics">
+                        <span class="leftpad">{{test}}<br></span>
+                      </div>
+                    </div>
                   </p-accordionTab>
                 </div>
               </div>
           </p-accordion>
-        </div>
-      </div>
     </p-panel>
 
   </div>
