@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
   newSchool:string;
   
   dec:Array<string>;
-  selectedExam:string;
+
   testimonial:string;
   rollNumber:string;
 
@@ -56,11 +56,14 @@ export class ProfileComponent implements OnInit {
   confirmNewPassword:string;
   oldPassword:string;
 
-  classList:SelectItem[];
+  classList:SelectItem[]=[];
   exam:SelectItem[] = [];
   city:SelectItem[] = [];
   state:SelectItem[] = [];
   country:SelectItem[] =[];
+
+  selectedExam:string;
+  selectedClass:string;
 
   growlmsg: Message[] = [];
 
@@ -74,13 +77,28 @@ export class ProfileComponent implements OnInit {
     private confirmservice: ConfirmationService,
     private masterhttp: MasterHttpService 
     ){
-      this.exam.push({label:"Select Exam",value:"null"},{label:"SOF", value:"SOF"},{label:"ASSET", value:"ASSET"},{label:"NTSE", value:"NTSE"},{label:"SILVERZONE", value:"SILVERZONE"}, {label:"UCO", value:"UCO"})
+      this.exam.push({label:"Select Exam",value:"null"},{label:"NCO 2016-17 - Level 2", value:"NCO-16-17"},
+      {label:"NSO-16-17 - Level 2", value:"NSO-16-17"},{label:"IMO 2016-17 - Level 2", value:"NTSE"},
+      {label:"IMO 2016-17 - Level 2", value:"IMO 2016-17 - Level 2"},
+      {label:"ISKO 2016", value:"ISKO 2016"},
+      {label:"NCO 2016", value:"NCO 2016"},
+      {label:"NCO 2016 - Level 1", value:"NCO 2016 - Level 1"},
+      {label:"NSO 2016 - Level 1", value:"NSO 2016 - Level 1"},
+      {label:"IMO 2016 - Level 1", value:"IMO 2016 - Level 1"},
+      {label:"IEO 2016 - Level 1", value:"IEO 2016 - Level 1"},
+      {label:"IIO 2016 - Level 1", value:"IIO 2016 - Level 1"},
+      {label:"IOM 2016 - Level 1", value:"IOM 2016 - Level 1"},      
+      {label:"IOS 2016 - Level 1", value:"IOS 2016 - Level 1"},
+      {label:"IOEL 2016 - Level 1", value:"IOEL 2016 - Level 1"}, 
+      )
 
       this.city.push({label:"Select City",value:"null"},{label:"Ghaziabad",value:"Ghaziabad"},{label:"Delhi", value:"Delhi"}, {label:"Gurgaon", value:"Gurgaon"}, {label:"Bombay", value:"Bombay"},{label:"Kolkata", value:"Kolkata"},)
  
       this.state.push({label:"Select State",value:"null"},{label:"Uttar Pradesh", value:"Uttar Pradesh"}, {label:"West Bengal", value:"West Bengal"}, {label:"Maharashtra", value:"Maharashtra"}, {label:"Haryana", value:"Haryana"})
       
       this.country.push({label:"Select Country",value:"null"},{label:"India", value:"India"}, {label:"Sri Lanka", value:"Sri Lanka"}, {label:"Indonesia", value:"Indonesia"}, {label:"Nepal", value:"Nepal"})
+
+      this.classList.push({label: "Select Class", value:null}, {label: "I", value:"I"}, {label: "II", value:"II"},{label: "III", value:"III"},{label: "IV", value:"IV"},{label: "V", value:"V"},{label: "VI", value:"VI"},{label: "VII", value:"VII"},{label: "VIII", value:"VIII"},       )
 
       this.dummyBasicInfo = {
         firstname: "",

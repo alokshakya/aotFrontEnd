@@ -52,8 +52,9 @@
                             <h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails"> &nbsp; {{dummyBasicInfo?.class}}</span>
                         </div>
 
-                        <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4><p><span *ngIf="!editBasic" class="userdetails">{{dummyBasicInfo?.mobile}}</span> <input class="longinput" [(ngModel)]="dummyEditBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><br> <button *ngIf="editBasic" (click)="otpDialog=true" pButton class="ui-button-warning" label="Verify"></button> </p>
+                        <div class="col-md-6 userinfo">
+                            <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4>
+                            <p><span *ngIf="!editBasic" class="userdetails withbtn">{{dummyBasicInfo?.mobile}}</span><input class="withbtn" [(ngModel)]="dummyEditBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><button *ngIf="editBasic" (click)="otpDialog=true" pButton class="ui-button-warning" label="Verify"></button> </p>
                         </div>
                     </div>
 
@@ -172,7 +173,7 @@
                 </div>
             </p-tabPanel>
 
-            <p-tabPanel header="Add Testimonial" leftIcon="fa-plus">
+            <p-tabPanel header="Add Testimonial" leftIcon="fa-pencil">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
@@ -225,6 +226,38 @@
                     </div>
                 </div>
             </p-tabPanel>
+
+            <p-tabPanel header="Add Achievements" leftIcon="fa-plus">
+                <p-panel header="Tell us about your Achievement">
+                    <div class="ui-g">
+                        <div class="ui-g-4">
+                            <label>Class*</label><p-dropdown [options]="classList" [style]="{'width':'50%'}" [(ngModel)]="selectedClass"></p-dropdown><br><br>
+                            <label>Exam City*</label><input class="achieve" type="text" pInputText placeholder="Exam City">
+                        </div>
+                        <div class="ui-g-4">
+                            <label>Exam*</label><p-dropdown [options]="exam" [style]="{'width':'50%'}" [(ngModel)]="selectedExam"></p-dropdown><br><br>
+                            <label>Exam Roll No.*</label><input class="achieve" type="text" pInputText placeholder="Roll number">
+                        </div>
+                        <div class="ui-g-4">
+                            <p class="guidelines">Submission Guidelines</p>
+                            <span class="point"><i class="fa fa-check-square fa-lg"></i>Be Polite.</span><br>
+                            <span class="point"><i class="fa fa-check-square fa-lg"></i>Never Abuse.</span>
+                        </div>
+                        <div class="ui-g-12"><hr></div>
+                        <div class="ui-g-4 message">
+                            <textarea pInputTextarea [(ngModel)]="testimonial" maxlength="280" placeholder="Enter message here...."></textarea><br><br>
+                        </div>
+                        <div class="ui-g-8">
+                            <p-checkbox  name="declaration" value="dec1" [(ngModel)]="dec"></p-checkbox>I, parent of the above mentioned kid confirm that the information provided here is true.<br><br>
+                            <p-checkbox  name="declaration" value="dec2" [(ngModel)]="dec"></p-checkbox>I allow OlympiadBox to display the photograph and comment to online and offline media.<br><br>
+                            <div class="text-center">
+                                <button pButton class="ui-button-success" label="Add Achievement"></button><button pButton class="ui-button-danger" label="Not Now"></button>
+                            </div>
+                        </div>
+                    </div>
+                </p-panel>
+            </p-tabPanel>
+
         </p-tabView>
     </div>
 </div>
