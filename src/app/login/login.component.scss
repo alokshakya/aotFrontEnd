@@ -6,7 +6,7 @@
     font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100%;
+  min-height: 100%;
 }
 
 
@@ -100,7 +100,7 @@
   display: block;
   width: 100%;
   border: 1px solid #d9d9d9;
-  margin: 0 0 20px;
+  margin: 0 0 4px;
   padding: 10px 15px;
   box-sizing: border-box;
   font-weight: 400;
@@ -147,7 +147,8 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   margin: 0 auto;
-  height: 400px;
+  min-height: 450px;
+  max-height:auto;
 }
 
 .register .toggle {
@@ -192,4 +193,35 @@ input[type=number]::-webkit-outer-spin-button {
 
 .withinput{
   margin-left: 2%;
+}
+
+.verify{
+  text-align: left;
+  padding-left: 10%;
+}
+
+.verify input{
+  width:200px;
+  height:32px;
+}
+
+.success{
+  color:#2BBF61;
+  text-align: center;
+}
+
+.error{
+  margin-top: 0px;
+  color: #F44336;
+}
+
+.text-center p{
+  height:1px;
+}
+
+
+.fill{
+  text-align: right;
+  background: #2D353C;
+  color: white;
 }

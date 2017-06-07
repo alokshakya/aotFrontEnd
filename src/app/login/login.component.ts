@@ -35,6 +35,14 @@ export class LoginComponent implements OnInit {
   
   loginRegToggle:boolean = false; //login-register toggle
 
+  //ng-template
+  click:boolean;
+  passwordError:boolean;
+  mobileVerified:boolean;
+  emailVerified:boolean;
+
+  confirmPassword:string;
+
   userLoginCreds:any={"email":"", "password":""};
   userRegCreds:any={"firstname":"","lastname":"", "email":"","password":""};
   mobile:number;
@@ -43,6 +51,7 @@ export class LoginComponent implements OnInit {
   successMessage: Message[] = [];
 
   actualOTP:number = 123456;
+  actualCode:string = 'ABCDEF'
   otp:number;
   otpDialog:boolean;  //otp verify dialogbox
   errorSection:boolean = false; //invalid otp entered
@@ -57,8 +66,9 @@ export class LoginComponent implements OnInit {
   dummySelectedClass:string;
   dummyMobile:number;
   dummyOtpSection:boolean;
-  dummyOtp:number;
   dummyIncorrectOtp:boolean;
+  dummyOtp:number;
+  dummyCode:string;
 
   
   constructor(
@@ -129,23 +139,44 @@ export class LoginComponent implements OnInit {
 
   //temporary
   dummyRegister(){
-    this.otpDialog = true;
+    if(this.userRegCreds['password']!=this.confirmPassword){
+      this.passwordError=true;
+    }else{
+      this.successMessage=[];
+      this.successMessage.push({severity:'info', summary:'Verify mobile and email', detail:''})
+      this.click = true;}
+
   }
 
-  dummySend(){
-    this.dummyOtpSection = true;
-  }
-
-  dummyVerify(){
+  dummyMobileVerify(){
     if(this.actualOTP==this.dummyOtp){
-      this.otpDialog = false;
-      this.successMessage.push({severity:'success', summary:'Mobile Verified', detail:'Please Login'})
-      this.loginRegToggle = false;
+      this.mobileVerified=true;
+      this.check();
+    }else{
+      this.errorMessage=[];
+      this.errorMessage.push({severity:'error', summary:'Incorrect OTP', detail:'Please try again'})
     }
-    this.dummyIncorrectOtp = false;
-    this.dummyOtpSection = false;
-
   }
+
+  dummyEmailVerify(){
+    if(this.dummyCode==this.actualCode){
+      this.emailVerified=true; 
+      this.check();
+    }else{
+      this.errorMessage=[];
+      this.errorMessage.push({severity:'error', summary:'Incorrect Verification Code', detail:'Please try again'})
+    }
+  }
+
+    check(){
+    if(this.mobileVerified&&this.emailVerified){
+      this.successMessage=[]
+      this.successMessage.push({severity:'success', summary:'Registration Successful', detail:'Please login'})
+      this.loginRegToggle=false;
+      this.click=false;
+    }
+  }
+
 
   
 }
