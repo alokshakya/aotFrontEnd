@@ -13,6 +13,8 @@ export class MocktestComponent implements OnInit {
 
     subscribed="true";
 
+    date:number = Date.now();
+
     mockTestTableData:any;
 
     mockTestTableHeader:any;
@@ -26,7 +28,6 @@ export class MocktestComponent implements OnInit {
     topics:Array<string>;
     chapterNames:Array<string>;
     currentTab:number;
-    date=[];
   constructor(private router:Router) {
 
       
@@ -53,7 +54,7 @@ export class MocktestComponent implements OnInit {
 
 
       this.examPattern = [];
-      this.examPattern.push({label:"Select Exam Pattern", value:"null"})
+      this.examPattern.push({label:"SOF", value:"null"})
       this.examPattern.push({label:"Exam Pattern 1", value:"null"})
       this.examPattern.push({label:"Exam Pattern 2", value:"null"})
       this.examPattern.push({label:"Exam Pattern 3", value:"null"})

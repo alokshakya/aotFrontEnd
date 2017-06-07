@@ -32,11 +32,11 @@
   </div>
 
   <div class="ui-g-6 ui-sm-12">
-    <p-panel><p-header>Mock Test<p-dropdown id="dropdown" [options]="examPattern"></p-dropdown></p-header>
+    <p-panel><p-header>Mock Test<p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown></p-header>
       <div class="ui-g">
-        <p-dataTable [value]="mockTestTableData">
-            <p-column header="Test Number" field="Test"></p-column>
-            <p-column header="Slot 1" field="Slot 1">
+        <p-dataTable [value]="mockTestTableData" [responsive]="true">
+            <p-column [style]="{'width':'150px'}" header="Test Number" field="Test"></p-column>
+            <p-column [style]="{'width':'100px'}" header="Slot 1" field="Slot 1">
               <ng-template pTemplate="body">
                 <div class="text-center">
                   <button pButton label="40/50" class="ui-button-warning"></button>
@@ -45,7 +45,7 @@
             </p-column>
             <p-column header="Slot 2" field="Slot 2">
               <ng-template pTemplate="body">
-                <p-checkbox [(ngModel)]="date" label="Date, Time"></p-checkbox>
+                <p-checkbox label="{{date|date}} - {{date|date:'shortTime'}}"></p-checkbox>
               </ng-template>
             </p-column>
         </p-dataTable>
