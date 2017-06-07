@@ -52,7 +52,7 @@ export class SampletestComponent implements OnInit {
         }
 
       this.examPattern = [];
-      this.examPattern.push({label:"Select Exam Pattern", value:"null"})
+      this.examPattern.push({label:"SOF", value:"null"},{label:"SELECT EXAM", value:"null"},)
 
       this.topics = ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5" ]
 
@@ -85,6 +85,16 @@ export class SampletestComponent implements OnInit {
       data = data['chapters']['records'];
       for(let i in data){
         this.dummyChapters.push(data[i][1])
+      }
+    })
+    
+    //temporary
+    this.dummyTopics = [];
+    this.masterhttp.getTopics()
+    .subscribe(data=>{
+      data = data['topics']['records'];
+      for(let i in data){
+        this.dummyTopics.push(data[i][1])
       }
     })
 
