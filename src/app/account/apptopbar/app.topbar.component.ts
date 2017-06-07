@@ -27,6 +27,7 @@ export class AppTopBar implements OnInit {
         var a = event['url'];
         this.currentPage = a.split('/');
         this.currentPage.shift();
+        this.currentPage.shift();
         })
     }
 
