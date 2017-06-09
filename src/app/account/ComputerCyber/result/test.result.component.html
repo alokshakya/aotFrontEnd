@@ -83,6 +83,11 @@
                                                         <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
                                                             {{resp.key}}
                                                         </div>
+                                                    </div>
+                                                    <div class="ui-g">
+                                                       <div class="ui-g-12 nopad">Correct<label class="chip correct"></label></div>
+                                                       <div class="ui-g-12 nopad">Marked For Review<label class="chip mark"></label></div>
+                                                       <div class="ui-g-12 nopad">Wrong<label class="chip wrong"></label></div>                                                       
                                                     </div>      
                                                 </td>
                                             </tr>
@@ -123,7 +128,6 @@
                             </p-accordionTab>
                         </p-accordion>-->
                         <p-panel header="Result">
-                            <p-dropdown [options]="organisation" [(ngModel)]="selectedOrg"></p-dropdown>
                             <div class="rightsample"><p-checkbox [(ngModel)]="showMarkSample" binary="true" label="include 'Mark for Review' in result"></p-checkbox></div>
                             <div class="right" *ngFor="let data of detailedResult['Sample Test']|keys">
                                 <div class="padtop">{{data.key}}</div>
@@ -169,7 +173,12 @@
                                                         <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
                                                             {{resp.key}}
                                                         </div>
-                                                    </div>      
+                                                    </div>  
+                                                    <div class="ui-g">
+                                                       <div class="ui-g-12 nopad">Correct<label class="chip correct"></label></div>
+                                                       <div class="ui-g-12 nopad">Marked For Review<label class="chip mark"></label></div>
+                                                       <div class="ui-g-12 nopad">Wrong<label class="chip wrong"></label></div>                                                       
+                                                    </div>     
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -277,8 +286,8 @@
                 <div class="ui-g">
                     <div class="ui-g-6">
                         <p-panel header="Result">
-                            <div style="width:200px;"><p-dropdown [options]="organisation" [(ngModel)]="selectedOrg"></p-dropdown></div>
-                            <div class="rightsample"><p-checkbox [(ngModel)]="showMarkMock" binary="true" label="include 'Mark for Review' in result"></p-checkbox></div>
+                            <div class="rightsample">
+                                <p-checkbox [(ngModel)]="showMarkMock" binary="true" label="include 'Mark for Review' in result"></p-checkbox></div>
                             <div class="right" *ngFor="let data of detailedResult['Mock Test']|keys">
                                 <div class="padtop">{{data.key}}</div>
                                 <div *ngIf="showMarkMock" class="progress hover" (click)="mockResult(data.key)">
@@ -323,7 +332,12 @@
                                                         <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
                                                             {{resp.key}}
                                                         </div>
-                                                    </div>      
+                                                    </div>  
+                                                    <div class="ui-g">
+                                                       <div class="ui-g-12 nopad">Correct<label class="chip correct"></label></div>
+                                                       <div class="ui-g-12 nopad">Marked For Review<label class="chip mark"></label></div>
+                                                       <div class="ui-g-12 nopad">Wrong<label class="chip wrong"></label></div>                                                       
+                                                    </div>     
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -476,7 +490,12 @@
                                                         <div class="ui-g-1 a" *ngFor="let resp of testResponse['test1']|keys"  [ngClass]="{'correct':resp.value=='correct', 'wrong':resp.value=='wrong', 'mark':resp.value=='mark'}" >
                                                             {{resp.key}}
                                                         </div>
-                                                    </div>      
+                                                    </div>  
+                                                    <div class="ui-g">
+                                                       <div class="ui-g-12 nopad">Correct<label class="chip correct"></label></div>
+                                                       <div class="ui-g-12 nopad">Marked For Review<label class="chip mark"></label></div>
+                                                       <div class="ui-g-12 nopad">Wrong<label class="chip wrong"></label></div>                                                       
+                                                    </div>     
                                                 </td>
                                             </tr>
                                         </tbody>

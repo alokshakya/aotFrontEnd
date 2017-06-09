@@ -1,10 +1,7 @@
-<p-dialog header="Edit Profile Picture" [height]="300" [width]="500" [(visible)]="changeImg">
+<p-dialog header="Change Profile Picture" [height]="200" [width]="500" [(visible)]="changeImg">
     <div class="ui-g">
         <div class="ui-g-12">
             <p-fileUpload name="profileImage[]" url="http://localhost:3000/upload" accept="image/*" previewWidth="200" maxFileSize="3000000">
-                <ng-template pTemplate="content">
-                    
-                </ng-template>
             </p-fileUpload>
         </div>
     </div>
@@ -29,8 +26,8 @@
                     <div class="wrapper">
                         <h5>{{temporaryData?.firstname}} {{temporaryData?.lastname}} </h5>
                         <h5>Class {{temporaryClass}}</h5>
-                        <h5 title="{{email}}"> {{temporaryData?.email}}</h5>
-                        <i title="Edit profile" class="fa fa-edit" (click)="changeImg=true"></i>
+                        <h5 pTooltip="{{temporaryData?.email}}"> {{temporaryData?.email}}</h5>
+                        <i pTooltip="Change Profile Picture" tooltipPosition="top" class="fa fa-edit" (click)="changeImg=true"></i>
                     </div>
                 </div>
                 <hr>

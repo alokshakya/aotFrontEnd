@@ -1,7 +1,5 @@
 import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
-import { UserinfoService } from '../../services/userinfo.service';
-import { NotificationService } from '../../services/notification.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
 import { DataService } from '../../services/data.service';
 import { Response } from '@angular/http';
@@ -85,8 +83,6 @@ export class AccountMainComponent implements AfterViewInit {
     constructor(
         public renderer: Renderer, 
         private router: Router, 
-        private http: UserinfoService, 
-        private notification: NotificationService,
         private masterhttp: MasterHttpService,
         private dataservice: DataService,
         )
@@ -114,24 +110,25 @@ export class AccountMainComponent implements AfterViewInit {
 
     }
 
-    getUserInfo(){
-         this.http.getUserInfo(this.email).subscribe((response: Response)=>{
-                this.personalDetails = response['resource'][0];
-                this.email = this.personalDetails.email
-                this.studentName = this.personalDetails.firstname + ' ' + this.personalDetails.lastname;
-                this.userInfoId = this.personalDetails.user_info_id;
-            });
-        this.http.getAcademicInfo(this.userInfoId).subscribe((response: Response) =>{
-            this.academicDetails  = response;
-            this.class =  this.academicDetails.class_by_class_id.abbreviation;
-        }),(error)=>{
-        }          
-    }
+    // getUserInfo(){
+    //      this.http.getUserInfo(this.email).subscribe((response: Response)=>{
+    //             this.personalDetails = response['resource'][0];
+    //             this.email = this.personalDetails.email
+    //             this.studentName = this.personalDetails.firstname + ' ' + this.personalDetails.lastname;
+    //             this.userInfoId = this.personalDetails.user_info_id;
+    //         });
+    //     this.http.getAcademicInfo(this.userInfoId).subscribe((response: Response) =>{
+    //         this.academicDetails  = response;
+    //         this.class =  this.academicDetails.class_by_class_id.abbreviation;
+    //     }),(error)=>{
+    //     }          
+    // }
 
     isLogin(token){
         if (token==null||token==''){
             this.router.navigate(['login'])
-        }else{ this.getUserInfo()}
+        }
+        // else { this.getUserInfo()}
     }  
 
     change(changed:boolean){

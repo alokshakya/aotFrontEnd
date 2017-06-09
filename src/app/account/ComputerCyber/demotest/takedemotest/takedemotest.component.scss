@@ -5,7 +5,7 @@
 
 
 .logo{
-    width:160px;
+    width:125px;
     background-color: #2D353C;
     text-align: center;
 }
@@ -128,7 +128,7 @@ i:hover{
 }
 
 .minwidth{
-    width:160px;
+    width:125px;
 }
 
 .image{
@@ -150,12 +150,17 @@ i:hover{
 
 .center{
     padding-left:5%;
-    overflow-y: scroll;
-    height:550px;
+    height:auto;
+    width: 1200px;
 }
 
 .fullwidth{
-    width:88%;
+    width: 1190px;
+}
+
+#longbtn{
+    margin-top:2%;
+    width: 123px;
 }
 
 

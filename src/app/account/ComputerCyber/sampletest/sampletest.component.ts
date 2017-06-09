@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 import { Response } from '@angular/http';
-import { SubjectService } from '../../../services/subject.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
 import {TreeModule,TreeNode} from 'primeng/primeng';
 import { Router } from '@angular/router';
@@ -14,27 +13,18 @@ import { Router } from '@angular/router';
 })
 export class SampletestComponent implements OnInit {
 
+  subscribed=false;
   examPattern: SelectItem[];
 
   testData:any;
 
-  sampleTestData:any;
+  sampleTestData:any; //for chart
 
-  subscribed=true;
-
-  topics:Array<string>;
-
-  dummyTree:TreeNode[]
-
-  chapterNames:Array<string>;
-
-  currentTab:number;
-
-  //temporary
+  //temporary service
   dummyChapters:Array<any>;
   dummyTopics:Array<any>;
 
-  constructor(private subject: SubjectService,
+  constructor(
    private router: Router,
    private masterhttp: MasterHttpService) {
 
@@ -53,16 +43,11 @@ export class SampletestComponent implements OnInit {
 
       this.examPattern = [];
       this.examPattern.push({label:"SOF", value:"null"},{label:"SELECT EXAM", value:"null"},)
-
-      this.topics = ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5" ]
-
-      this.chapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10" ]
-
-      
         
   }
 
   ngOnInit(){
+    //for chart
       this.sampleTestData = {
           labels: ['Completed','Remaining'],
           datasets: [{
@@ -78,7 +63,7 @@ export class SampletestComponent implements OnInit {
     //       }
     //   })
 
-    //temporary
+    //temporary service used
     this.dummyChapters=[]
     this.masterhttp.getChapters()
     .subscribe(data=>{
@@ -88,7 +73,7 @@ export class SampletestComponent implements OnInit {
       }
     })
     
-    //temporary
+    //temporary service used
     this.dummyTopics = [];
     this.masterhttp.getTopics()
     .subscribe(data=>{
@@ -102,15 +87,6 @@ export class SampletestComponent implements OnInit {
 
   redirect(){
       this.router.navigate(['account/accountsettings'])
-  }
-
-  
-  tabOpen(e){
-    this.currentTab = e.index;
-  }
-
-  tabClose(e){
-      this.currentTab = null;
   }
 
 }

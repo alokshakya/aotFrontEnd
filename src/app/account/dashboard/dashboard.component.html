@@ -3,7 +3,7 @@
         <div class="ui-g">
         <div class="ui-g-12">  <!--SUBJECTS PANEL-->
             <p-panel header="Subject Summary">
-                <div class="ui-g">
+                <div class="ui-g center">
                     <div class="ui-g-4 ui-sm-12 sub" *ngFor="let sub of dummySubjects" id="{{sub | lowercase | cssId }}" >
                         <i class="icon-science icon-4x" *ngIf="sub=='Science'"></i>
                         <i class="icon-reasoning icon-4x" *ngIf="sub=='Reasoning'"></i>
@@ -43,8 +43,8 @@
                             </div>
                             <div class="ui-g-12">
                                 <div class="ui-g">
-                                    <div class="ui-g-3"></div>
-                                    <div class="ui-g-9 ui-fluid">
+                                    <div class="ui-g-3 sui-sm-12"></div>
+                                    <div class="ui-g-9 ui-sm-12">
                                         <span class="comp">Completed</span>
                                         <span class="gen">Generated</span>
                                         <span class="inc">Remaining</span>
@@ -67,10 +67,10 @@
                         <div class="ui-g" [ngClass]="{'hidden':!subscribedSubjects[item.key] }">
                             <div class="ui-g-12">
                                 <div class="ui-g">
-                                    <div class="ui-g-3">
+                                    <div class="ui-g-3 ui-sm-12">
                                         <span class="testsubject" *ngFor="let sub of item.value|keys">{{sub.key}}<br><br></span>
                                     </div>
-                                    <div class="ui-g-8">
+                                    <div class="ui-g-8 ui-sm-12">
                                         <div class="progress hover" title="Go to {{item.key}} result" *ngFor="let data of item.value|keys" (click)="redirectToResult(item.key)" >
                                             <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.right+'%'}">{{data.value.right}}%
                                             </div>
@@ -84,8 +84,8 @@
                             </div>
                             <div class="ui-g-12">
                                 <div class="ui-g">
-                                    <div class="ui-g-3"></div>
-                                    <div class="ui-g-9 ui-fluid">
+                                    <div class="ui-g-3 ui-sm-12"></div>
+                                    <div class="ui-g-9 ui-sm-12">
                                         <span class="cor">Correct</span>
                                         <span class="mark">Review</span>
                                         <span class="inc">Wrong</span>

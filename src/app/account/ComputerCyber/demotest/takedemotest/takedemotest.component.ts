@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 import { ConfirmationService } from 'primeng/primeng';
-import { SubjectService } from '../../../../services/subject.service'
 
 @Component({
   selector: 'app-takedemotest',
@@ -51,7 +50,6 @@ export class TakedemotestComponent implements OnInit {
 
   constructor(
       private router: Router,
-      private demotest: SubjectService,
       private confirmservice: ConfirmationService)
       
       {
@@ -66,9 +64,10 @@ export class TakedemotestComponent implements OnInit {
       this.hintDisplay = false;
       this.response = {};
       this.questionStatus = {};
+      
       this.questionsPool = {
                           "Question1": {
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -76,7 +75,7 @@ export class TakedemotestComponent implements OnInit {
                                 "D": "3*10^6 m/s"
                             },
                             "CorrectAnswer": "A" ,
-                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8 m/s",
+                            "Explaination": "DISPLAY HINT",
                             "image": "asd"
                           },
                           "Question2": {
@@ -93,7 +92,7 @@ export class TakedemotestComponent implements OnInit {
                           },
                           "Question3": {
                           
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -106,7 +105,7 @@ export class TakedemotestComponent implements OnInit {
                           
                           },
                           "Question4": {
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -118,7 +117,7 @@ export class TakedemotestComponent implements OnInit {
                             "image": "asd"
                           },
                           "Question5": {
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -130,7 +129,7 @@ export class TakedemotestComponent implements OnInit {
                             "image": "asd"
                           },
                           "Question6": {
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -142,7 +141,7 @@ export class TakedemotestComponent implements OnInit {
                             "image": "asd"
                           },
                           "Question7": {
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -154,7 +153,7 @@ export class TakedemotestComponent implements OnInit {
                             "image": "asd"
                           },
                           "Question8": {
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -166,7 +165,7 @@ export class TakedemotestComponent implements OnInit {
                             "image": "asd"
                           },
                           "Question9": {
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -178,7 +177,7 @@ export class TakedemotestComponent implements OnInit {
                             "image": "asd"
                           },
                           "Question10": {
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -190,7 +189,7 @@ export class TakedemotestComponent implements OnInit {
                             "image": "asd"
                           },
                           "Question11": {
-                            "Question": "What is the speed of light",
+                            "Question": "QUESTION STATEMENT--",
                             "Options": {
                                 "A": "3*10^8 m/s",
                                 "B": "3*10^8 km/h",
@@ -201,6 +200,56 @@ export class TakedemotestComponent implements OnInit {
                             "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8",
                             "image": "asd"
                           },
+                          "Question12": {
+                            "Question": "QUESTION STATEMENT--",
+                            "Options": {
+                                "A": "3*10^8 m/s",
+                                "B": "3*10^8 km/h",
+                                "C": "3*10^6 m/s",
+                                "D": "3*10^6 m/s"
+                            },
+                            "CorrectAnswer": "A" ,
+                            "Explaination": "Speed of light (C) remains constant everywhere i.e 3*10^8",
+                            "image": "asd"
+                          },"Question13":"",
+                          "Question14":"",
+                          "Question15":"",
+                          "Question16":"",
+                          "Question17":"",
+                          "Question18":"",
+                          "Question19":"",
+                          "Question20":"",
+                          "Question21":"",
+                          "Question22":"",
+                          "Question23":"",
+                          "Question24":"",
+                          "Question25":"",
+                          "Question26":"",
+                          "Question27":"",
+                          "Question28":"",
+                          "Question29":"",
+                          "Question30":"",
+                          "Question31":"",
+                          "Question32":"",
+                          "Question33":"",
+                          "Question34":"",
+                          "Question35":"",
+                          "Question36":"",
+                          "Question37":"",
+                          "Question38":"",
+                          "Question39":"",
+                          "Question40":"",
+                          "Question41":"",
+                          "Question42":"",
+                          "Question43":"",
+                          "Question44":"",
+                          "Question45":"",
+                          "Question46":"",
+                          "Question47":"",
+                          "Question48":"",
+                          "Question49":"",
+                          "Question50":"",
+
       }
 
       this.totalQuestions = Object.keys(this.questionsPool).length;
@@ -209,29 +258,30 @@ export class TakedemotestComponent implements OnInit {
   ngOnInit(){
       this.sessionToken = localStorage.getItem('session_token');
       this.isLogin(this.sessionToken)
+      this.startTest();
 }
 
-  getQuestions(){
-      this.sessionToken = localStorage.getItem('session_token')
-      this.demotest.getQuestionsSet()
-      .subscribe((data: Response) => {
-          data = data['resource'];
-          let k = 1
-          for(let i in data){
-              this.questionsPool['Question'+k]['Question'] = data[i]['questions_by_question_id']['question']
-              k=k+1;
-            }
-        })
-        this.help = true;
-        this.startTest();
+//   getQuestions(){
+//       this.sessionToken = localStorage.getItem('session_token')
+//       this.demotest.getQuestionsSet()
+//       .subscribe((data: Response) => {
+//           data = data['resource'];
+//           let k = 1
+//           for(let i in data){
+//               this.questionsPool['Question'+k]['Question'] = data[i]['questions_by_question_id']['question']
+//               k=k+1;
+//             }
+//         })
+//         this.help = true;
+//         this.startTest();
 
-  }
+//   }
   
   isLogin(token){
     //   if (token == null||token==''){
     //       this.router.navigate(['login']); 
     //   }else{ this.getQuestions() }
-    this.getQuestions();
+    // this.getQuestions();
   }
      
 

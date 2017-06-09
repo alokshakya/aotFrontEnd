@@ -1,79 +1,71 @@
 import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
 import  { Response } from '@angular/http';
 import { SelectItem } from 'primeng/primeng';
-import {Message} from 'primeng/primeng';
+import { Message } from 'primeng/primeng';
 import { ConfirmationService } from 'primeng/primeng';
-import { UserinfoService } from '../../services/userinfo.service';
-import { SubjectService } from '../../services/subject.service';
-import { UpdateService } from '../../services/update.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
 
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
+  templateUrl: './test.profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
 
-  //otp 
+  //otp verification
   otpDialog:boolean;
   dummyOtpSection:boolean;
   dummyIncorrectOtp:boolean;
   actualOTP=123456;
   dummyOtp:number;
 
-  maxDate: Date;
-  rating:number = 2;
+  //basic info tab
   editBasic:boolean;
-  editSchool:boolean;
-  editTestimony:boolean;
-
-  showPassword:boolean;
-
-  userBasicInfo:any;
-  newBasicInfo:any;
-
   dummyBasicInfo:any;
   dummyEditBasicInfo:any;
+  city:SelectItem[] = [];
+  state:SelectItem[] = [];
+  country:SelectItem[] =[];
+  maxDate: Date;
+  //userBasicInfo:any;
+  //newBasicInfo:any;
 
+  //school info tab
+  editSchool:boolean;
   dummySchoolInfo:any;
   dummyEditSchoolInfo:any;
-
-  class:string;
-  newClass:string;
-  
   school:string;
   newSchool:string;
-  
-  dec:Array<string>;
 
-  testimonial:string;
-  rollNumber:string;
-
+  //change password tab
+  editPassword:boolean;
   storedPwd = 'qwe123'
   newPassword:string;
   confirmNewPassword:string;
   oldPassword:string;
 
+  //add testimonial tab
+  testimonial:string;
+  rating:number = 2;
+
+  //add achievement tab
   classList:SelectItem[]=[];
-  exam:SelectItem[] = [];
-  city:SelectItem[] = [];
-  state:SelectItem[] = [];
-  country:SelectItem[] =[];
-
-  selectedExam:string;
   selectedClass:string;
+  exam:SelectItem[] = [];
+  selectedExam:string;
+  rollNumber:string;
+  dec:Array<string>;
 
+  //misc
   growlmsg: Message[] = [];
-
   date:Date;
   test:any;
   
   constructor(
-    private httpService: UserinfoService,
-    private classService: SubjectService,
-    private update: UpdateService,
+  //  private httpService: UserinfoService,
+   // private classService: SubjectService,
+   // private update: UpdateService,
     private confirmservice: ConfirmationService,
     private masterhttp: MasterHttpService 
     ){
@@ -204,21 +196,21 @@ export class ProfileComponent implements OnInit {
   }
 
 //for basic info
-  save(){
-    this.userBasicInfo = this.newBasicInfo;
+  // save(){
+  //   this.userBasicInfo = this.newBasicInfo;
     
-    this.update.updateUserInfo(this.newBasicInfo)
-    .subscribe((data: Response) => {
-    });
+  //   this.update.updateUserInfo(this.newBasicInfo)
+  //   .subscribe((data: Response) => {
+  //   });
     
-    //this.update.updateStudent(2,this.newClass)
-    this.editBasic = false;
-  }
+  //   this.update.updateStudent(2,this.newClass)
+  //   this.editBasic = false;
+  // }
 
-  edit(){
-    this.editBasic = true;
-    this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
-  }
+  // edit(){
+  //   this.editBasic = true;
+  //   this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
+  // }
 
   dummyEdit(){
     this.dummyEditBasicInfo = JSON.parse(JSON.stringify(this.dummyBasicInfo))
@@ -231,40 +223,32 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  cancel(){
-    this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
-    this.newClass = this.class;
-    this.newSchool = this.school;
-    this.editBasic = false;
-  }
+  // cancel(){
+  //   this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
+  //   this.newClass = this.class;
+  //   this.newSchool = this.school;
+  //   this.editBasic = false;
+  // }
 
   //testimonial submit
-  submit(){
-    this.update.postTestimonial(this.testimonial)
-    .subscribe((data: Response) =>{
-    })
-  }
-
-  submitTestimonial(){
-    this.editTestimony = false;
-  }
-
-  cancelTestimonial(){
-    this.testimonial = "Enter Message here...."
-    this.editTestimony = false;
-  }
+  // submit(){
+  //   this.update.postTestimonial(this.testimonial)
+  //   .subscribe((data: Response) =>{
+  //   })
+  // }
 
   changePassword(){
     if(this.storedPwd!=this.oldPassword){
         this.growlmsg.push({severity:'error', summary:'Incorrect Old Password', detail:'Please try again'});
 
     }else if(this.confirmNewPassword!=this.newPassword){
-    this.growlmsg.push({severity:'error', summary:"new password and confirm password doesn't match", detail:''});
+    this.growlmsg.push({severity:'error', summary:"Password doesn't match", detail:'Please try again'});
 
     }
-    else{    this.growlmsg.push({severity:'success', summary:"Password Changed", detail:''});}
+    else{    this.growlmsg.push({severity:'success', summary:"Password Changed", detail:'Please try again'});}
   }
 
+  //otp verification
   dummyVerify(){
     if(this.actualOTP==this.dummyOtp){
       this.otpDialog = false;
@@ -299,25 +283,14 @@ export class ProfileComponent implements OnInit {
         }
       })
     }
-        else if(this.editTestimony){
-      this.confirmservice.confirm({
-        message: 'Save changes in Testimonial ?',
-        accept:() => {
-          this.editTestimony = false;
-        },
-        reject:() => {
-          this.editTestimony = false;
-        }
-      })
-    }
-    else if(this.showPassword){
+    else if(this.editPassword){
       this.confirmservice.confirm({
         message: 'Save changes ?',
         accept:() => {
-          this.showPassword = false;
+          this.editPassword = false;
         },
         reject:() => {
-          this.showPassword = false;
+          this.editPassword = false;
         }
       })
     }

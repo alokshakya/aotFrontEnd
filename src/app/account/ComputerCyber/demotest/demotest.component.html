@@ -25,16 +25,21 @@
   <div class="ui-g-6 ui-sm-12">
     <p-panel header="Syllabus">
       <div class="ui-g">
-        <div class=ui-g-6>
-            <p-accordion>
-              <p-accordionTab *ngFor = "let chapter of dummyChapterNames" header={{chapter}}>
-                <div class="ui-g">
-                  <div class="ui-g-6 ui-sm-12">
-                    <span *ngFor="let topic of topicNames">{{topic}}<br><br></span>
-                  </div>
+        <div class=ui-g-12>
+          <p-accordion>
+              <div class="ui-g">
+                <div class="ui-g-12">
+                  <p-accordionTab  *ngFor="let data of dummyChapters">
+                    <p-header><span class="chapter"> {{data}} </span> </p-header>
+                    <div class="ui-g">
+                      <div class="ui-g-12"  *ngFor="let test of dummyTopics">
+                        <span class="leftpad">{{test}}<br></span>
+                      </div>
+                    </div>
+                  </p-accordionTab>
                 </div>
-              </p-accordionTab>
-            </p-accordion>
+              </div>
+          </p-accordion>
         </div>
       </div>
     </p-panel>

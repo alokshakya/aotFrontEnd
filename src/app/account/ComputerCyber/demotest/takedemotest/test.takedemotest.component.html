@@ -4,8 +4,9 @@
         <button type="button" pButton class="ui-button-success" icon="fa-check" label="Yes" (click)="cd.accept()"></button>
     </p-footer>
 </p-confirmDialog>
-<p-dialog header="Intsructions" [(visible)]="help" responsive="true" (onHide)="start()">
+<p-dialog header="Intsructions" [closable]="false" (onHide)="startTest()" [(visible)]="help" [responsive]="true">
     <h2>IMPORTANT INSTRUCTIONS</h2>
+    <div class="text-center"><button (click)="startTest()" pButton class="ui-button-success" label="start"></button></div>
 </p-dialog>
 
 <div class="ui-g">
@@ -29,7 +30,6 @@
         <div class="ui-g">
             <div class="ui-g-1 dark minwidth">
                 <div class="ui-g-12"></div>
-                <div class="ui-g-4"></div>
                 <div class="ui-g-4">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
                 <div class="ui-g-4"> &nbsp; <i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
                 <div class="ui-g-12"></div>
@@ -38,9 +38,19 @@
             </div>
             <div class="ui-g-10 light center fullwidth">
                 <div class="ui-g" *ngIf="questionWindow">
-                    <div class="ui-g-12"><span class="statement">{{questionNumber}}{{selectedQuestion?.Question}}</span>
+                    <div class="ui-g-10"><span class="statement">{{questionNumber}}{{selectedQuestion?.Question}}</span>
                         <div class="image"><img src="../../../../../assets/layout/images/q2.jpg"></div>
                         <hr>
+                    </div>
+                    <div class="ui-g-2">
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <button type="button" [disabled]="validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button>
+                                <button id="longbtn" class="ui-button-info" type="button" pButton label="Validate" [disabled]="answer==null||validated()" (click)="validate()"></button>
+                            </div>
+                            <div class="ui-g-12">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="ui-g-12">
@@ -62,12 +72,6 @@
                     
                     <div class="ui-g-12">
                         <div class="ui-g">
-                            <div class="ui-g-12 btngrp">
-                                <button type="button" pButton label="Previous" class="ui-button-success" (click)="previous()"></button>
-                                <button type="button" [disabled]="validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button>
-                                <button type="button" pButton label="Validate" [disabled]="answer==null||validated()" (click)="validate()"></button>
-                                <button type="button" pButton label="Next" class="ui-button-success" (click)="next()"></button>
-                            </div>
                             <div class="ui-g-12" *ngIf="hintDisplay"><hr>
                             <div class="ui-g">
                                 <div class="ui-g-6">

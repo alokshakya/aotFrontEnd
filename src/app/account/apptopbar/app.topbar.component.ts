@@ -2,7 +2,6 @@ import {Component,  OnInit, Inject, forwardRef} from '@angular/core';
 import {AccountMainComponent} from '../main/main.component';
 import 'rxjs/Rx'; 
 import { Router } from '@angular/router';
-import { SharedService } from '../../services/shared.service';
 
 @Component({
     selector: 'app-topbar',
@@ -12,8 +11,7 @@ export class AppTopBar implements OnInit {
 
     currentPage:Array<string>;
     constructor(@Inject(forwardRef(() => AccountMainComponent))  public app:AccountMainComponent,
-    private router:Router,
-    private sharedService: SharedService) { }
+    private router:Router,) { }
 
 
     logout(){

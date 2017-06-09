@@ -954,7 +954,7 @@ export class ResultComponent implements OnInit {
   }
   ngOnInit(){
 	this.organisation=[];
-	this.organisation.push({label:'Select Organisation', value:'null'},{label:'Organisation 1', value:'Organisation 1'},{label:'Organisation 2', value:'Organisation 2'}, {label:'Organisation 3', value:'Organisation 3'},)
+	this.organisation.push({label:'Select Organisation', value:'null'})
   }
 
 }

@@ -3,7 +3,7 @@
     <div class="ui-g-12">
       <p-panel header="Subscription Details">
         <br><br>
-        <p-dataTable [value]="subscriptionTableData">
+        <p-dataTable [responsive]="true" [value]="subscriptionTableData">
           <p-column field="Order ID" header="Order ID"></p-column>
           <p-column field="Subject" header="Subject"></p-column>
           <p-column field="Subscription Date" header="Subscription Date"></p-column>
@@ -22,26 +22,19 @@
     <div class="ui-g-12">
         <p-panel header="Subscribe Now"><br>
             <div class="ui-g">
-              {{dummyPrice}}
               <div class="ui-g-12 ui-sm-12">
-                <!--<div *ngFor="let sub of dummySubjects;let i=index">
-                  <p-checkbox name="package" [(ngModel)]="selectedPackage" value="{{sub}}" label="{{sub|uppercase}} - &#8377; {{dummyPrice[i]}}"></p-checkbox>
-                  <br><br>
-                </div>-->
-                <p-dataTable [value]="subPriceTable" dataKey="Subject" [(selection)]="selectedPackage">
+                <p-dataTable [value]="subPriceTable" dataKey="Subject" [responsive]="true" [(selection)]="selectedPackage">
                   <p-column [style]="{'width':'5.3%','padding-left':'1.5%'}" selectionMode="multiple"></p-column>
                   <p-column *ngFor="let i of col" header="{{i.header}}" field="{{i.field}}"></p-column>
                 </p-dataTable> 
               </div>
-              <!--<div class="ui-g-6">
-              </div>-->
             </div>
             <br><br>
           
           <span id="coupontext"><strong>Enter Coupon/School Code*</strong></span><input size="40" type="text" [(ngModel)]="coupon" pInputText/>
           <button id="applybutton" type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button><br><br>
           
-          <div id="paybutton"><button type="button" class="ui-button-success" [disabled]="selectedPackage==''" pButton label="Pay Now"></button></div><br>
+          <div id="paybutton"><button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==''" pButton label="Pay Now"></button></div><br>
         </p-panel>   
       </div>
     </div>

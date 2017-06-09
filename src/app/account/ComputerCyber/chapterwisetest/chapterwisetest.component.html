@@ -1,6 +1,6 @@
  <div class="fluid">
   <div class="ui-g">
-    <div class="ui-g-12">
+    <div class="ui-g-12" *ngIf="subscribed">
       <p-panel header="Subscribe">
         <div id="subscribepanel">
           <h1>No Test Available</h1><br>
@@ -33,28 +33,12 @@
     </div>
 
     <div class="ui-g-6 ui-sm-12 ui-lg-6">
-        <p-panel><p-header>Chapterwise Test & Syllabus<span class="toright"></span><button [disabled]="selectedChapter==null||selectedChapter==''" id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button></p-header>
-            <!--<div class="ui-g">
-              <div class="ui-md-6 ui-sm-12 ui-lg-12">
-                <p-tree selectionMode="single" [value]="dummyTree" [(selection)]="selectedChapter">
-                </p-tree>
-                <div *ngFor="let i of chapterwiseTestDetails|keys; let k=index" class="toggle">
-                  <div class="withradio"> 
-                    <p-radioButton name="chapter" [(ngModel)]="selectedChapter" value="{{i.key}}"></p-radioButton>
-                    <a data-toggle="collapse" [href]="'#'+k">{{i.key}}</a>
-                  </div>
-                  <div id="{{k}}" class="collapse">
-                    <ul>
-                      <li *ngFor="let topic of topicNames">{{topic}}</li>
-                    </ul>
-                  </div>
-                </div>
-
-
-              </div>
-            </div>-->
-            
-             <p-accordion (onOpen)="tabOpen($event)" (onClose)="tabClose($event)">
+        <p-panel>
+          <p-header>
+            Chapterwise Test & Syllabus<span class="toright"></span>
+            <button [disabled]="selectedChapter==null||selectedChapter==''" (click)="generate()" id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button>
+            </p-header>
+             <p-accordion (onOpen)="tabOpen($event)">
               <div class="ui-g">
                 <div class="ui-g-12">
                   <p-accordionTab  *ngFor="let data of dummyChapters">
@@ -71,6 +55,7 @@
             <p-growl [(value)]="generateMsg" ></p-growl>
         </p-panel>
     </div>
+            
 
     <div class="ui-g-6">
        <p-panel header="Generated">
@@ -82,7 +67,7 @@
                     <div class="ui-g">
                       <div class="ui-g-12"  *ngFor="let test of data.value|keys">
                         <span class="leftpad">{{test.key}}</span>
-                        <span class="low"><button label="{{test.value}}" [ngClass]="{'ui-button-success':test.value!='Resume'||test.value!='Start', 'ui-button-danger':test.value=='Start', 'ui-button-warning':test.value=='Resume'}" type="button" pButton></button><button pButton type="button" style="width:40px;" icon="fa fa-refresh fa-spin fa-fw" *ngIf=" !(test.value=='Start'|| test.value=='Resume') "></button></span>
+                        <span class="low"><button label="{{test.value}}" [ngClass]="{'ui-button-success':test.value!='Resume'||test.value!='Start', 'ui-button-danger':test.value=='Start', 'ui-button-warning':test.value=='Resume'}" type="button" pButton></button><button pButton type="button" style="width:40px;" pTooltip="Retake {{test.key}}" tooltipPosition="right" icon="fa fa-refresh fa-spin fa-fw" *ngIf=" !(test.value=='Start'|| test.value=='Resume') "></button></span>
                       </div>
                     </div>
                   </p-accordionTab>

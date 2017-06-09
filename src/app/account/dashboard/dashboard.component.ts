@@ -3,10 +3,8 @@ import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 
-import { NotificationService } from '../../services/notification.service';
-import { SubjectService } from '../../services/subject.service';
-import { SharedService } from '../../services/shared.service';
-import { MasterHttpService } from '../../services/masterhttp.service'
+import { MasterHttpService } from '../../services/masterhttp.service';
+import { DataService } from '../../services/data.service';
 
 
 @Component({
@@ -37,10 +35,10 @@ export class DashboardComponent implements OnInit{
 
     constructor(
         private router: Router, 
-        private notification: NotificationService,
-        private sub: SubjectService,
         private masterhttp: MasterHttpService,
+        private dataservice:DataService
         ) {
+            
         
         this.testSummary = {
                                 "Computer/Cyber": {
@@ -305,6 +303,8 @@ export class DashboardComponent implements OnInit{
         // this.sessionToken = localStorage.getItem('session_token');
         // this.isLogin(this.sessionToken) 
 
+        this.masterhttp.getInfo();
+
         //temporary
         this.testimonials = []
         this.masterhttp.getTestimonials()
@@ -340,40 +340,40 @@ export class DashboardComponent implements OnInit{
         }else {this.router.navigate(['account/accountsettings'])}
     }
 
-    getData(){
-        //retreive notice data
-        this.noticeBoard = [];
-        this.notification.getNotices().subscribe((data: Response)=>{
-            for(let i in data['resource']){
-                this.noticeBoard.push(data['resource'][i]);
-            }
-        });
-        //retreive testimonials
-        this.testimonials = [];
-        this.notification.getTestimonials().subscribe((data: Response)=>{
-            for(let i in data['resource']){
-                this.testimonials.push(data['resource'][i]);
-            }
-        });
+    // getData(){
+    //     //retreive notice data
+    //     this.noticeBoard = [];
+    //     this.notification.getNotices().subscribe((data: Response)=>{
+    //         for(let i in data['resource']){
+    //             this.noticeBoard.push(data['resource'][i]);
+    //         }
+    //     });
+    //     //retreive testimonials
+    //     this.testimonials = [];
+    //     this.notification.getTestimonials().subscribe((data: Response)=>{
+    //         for(let i in data['resource']){
+    //             this.testimonials.push(data['resource'][i]);
+    //         }
+    //     });
 
-        this.sub.getSubjectSet(1).subscribe((data: Response) => {
-            data = data['resource']
-            this.subjectSummary =[];
-            for(let i in data){
-                this.subjectSummary.push(data[i]['subjects_by_subject_id']['name']);
-            }
-            this.received=true;
-        }),
-        (error)=>{
-        }
-    } 
+    //     this.sub.getSubjectSet(1).subscribe((data: Response) => {
+    //         data = data['resource']
+    //         this.subjectSummary =[];
+    //         for(let i in data){
+    //             this.subjectSummary.push(data[i]['subjects_by_subject_id']['name']);
+    //         }
+    //         this.received=true;
+    //     }),
+    //     (error)=>{
+    //     }
+    // } 
 
     isLogin(token){
         // if(token==null||token==''){
         //     this.router.navigate(['login'])
         // }else{ 
         //     this.getData(); }
-        this.getData();
+        // this.getData();
     } 
 
     redirectToTest(i,j){

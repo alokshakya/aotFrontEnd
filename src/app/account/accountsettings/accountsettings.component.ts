@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }from '@angular/router';
 import { Response } from '@angular/http';
-import { SubjectService } from '../../services/subject.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
 
 @Component({
@@ -10,26 +9,27 @@ import { MasterHttpService } from '../../services/masterhttp.service';
   styleUrls: ['./accountsettings.component.scss']
 })
 export class AccountsettingsComponent implements OnInit {
+
+    //subscription details panel
+    subscriptionTableData: any;
     subscriptionTableHeaders: any;
+    
+    //subscribe now panel
+    selectAll:boolean;
     subjectsPrice:any;
     selectedPackage:Array<string>;
     subjects:Array<string>;
     coupon:string;
-    test:Array<string>;
-
     subPriceTable:any;
-    subscriptionTableData: any;
-    selectAll:boolean;
 
 
     //temporary
-    col:Array<any>;
+    col:Array<any>;  //header for datatable
     dummySubjects:Array<string>;
     dummyPrice:Array<number>;
     
     constructor(
         private _router:Router,
-        private price: SubjectService,
         private masterhttp: MasterHttpService) 
         {
             this.selectedPackage = [];
@@ -54,13 +54,6 @@ export class AccountsettingsComponent implements OnInit {
                 {"Order ID":"OBHT45", "Subject":"Computer/Cyber", "Subscription Date":"05 June 2017", "Valid Till":"05 January 2018", "Download Invoice":"Invoice .pdf"},
             ];
         
-            // this.subscriptionTableHeaders =  [
-            //     {field: 'Order ID', header: 'Order ID'},
-            //     {field: 'Subject', header: 'Subject'},
-            //     {field: 'Subscription Date', header: 'Subscription Date'},
-            //     {field: 'Valid Till', header: 'Valid Till'},
-            //     {field: "Download Invoice", header: "Download Invoice"}
-            // ]
     }
 
     ngOnInit(){
@@ -79,7 +72,7 @@ export class AccountsettingsComponent implements OnInit {
         //     }
         // })
 
-        //temporary
+        //temporary service used
         this.dummyPrice = []
         this.masterhttp.getFee()
         .subscribe((data) => {
@@ -88,9 +81,9 @@ export class AccountsettingsComponent implements OnInit {
             for (let i in data){
             this.subPriceTable.push({"Subject":"Enn","Price":data[i][2]});
             }        
-            console.log(this.subPriceTable)            
     })
 
+        //temporary service used
         this.dummySubjects=[]
         this.masterhttp.getSubjects()
         .subscribe((data) =>{
@@ -100,8 +93,9 @@ export class AccountsettingsComponent implements OnInit {
         })
     }
 
-
     pay(){
+        for(let i in this.selectedPackage)
+        console.log(this.selectedPackage[i]["Subject"])
     }
 }
 

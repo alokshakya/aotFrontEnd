@@ -4,7 +4,6 @@ import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/primeng';
 import { AccountMainComponent } from './main.component';
-import { SubjectService } from '../../services/subject.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
 
 @Component({
@@ -27,7 +26,6 @@ export class AppMenuComponent implements OnInit {
     constructor(
         @Inject(forwardRef(() => AccountMainComponent))
         public app:AccountMainComponent,
-        private subjectSet: SubjectService,
         private masterhttp: MasterHttpService,
         )
         {

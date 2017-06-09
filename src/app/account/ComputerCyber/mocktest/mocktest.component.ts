@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
-import {TreeModule,TreeNode} from 'primeng/primeng';
+import { MasterHttpService } from '../../../services/masterhttp.service'
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 
@@ -11,89 +11,67 @@ import { Router } from '@angular/router';
 })
 export class MocktestComponent implements OnInit {
 
-    subscribed="true";
+    subscribed=false;
 
     date:number = Date.now();
 
     mockTestTableData:any;
 
-    mockTestTableHeader:any;
-
-    mockTestData:any;
+    mockTestData:any;  //for chart
 
     examPattern: SelectItem[];
 
-    dummyTree:TreeNode[];
+    //temporary
+    dummyChapters:Array<string>;
+    dummyTopics:Array<string>;
 
-    topics:Array<string>;
-    chapterNames:Array<string>;
-    currentTab:number;
-  constructor(private router:Router) {
-
-      
-      this.topics = ["Topic 1", "Topic 2", "Topic 3", "Topic 4", "Topic 5" ]
-
-      this.chapterNames = ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5", "Chapter 6", "Chapter 7", "Chapter 8", "Chapter 9", "Chapter 10" ]
-
-      
-
-      this.mockTestTableData =[ 
-                            {"Test":"Mock Test 1", "Slot 1":"95 Percentile", "Slot 2":"NA" },
-                            {"Test":"Mock Test 2", "Slot 1":"DATE&TIME", "Slot 2":"DATE&TIME" },
-                            {"Test":"Mock Test 3", "Slot 1":"DATE&TIME", "Slot 2":"DATE&TIME" }
-                            ];
-
-     this.mockTestTableHeader = [
-                                {header:"Test", field:"Test"},
-                                {header:"Slot 1", field:"Slot 1"},
-                                {header:"Slot 2", field:"Slot 2"},                                
-                                 ]
-
-    
-
-
-
-      this.examPattern = [];
-      this.examPattern.push({label:"SOF", value:"null"})
-      this.examPattern.push({label:"Exam Pattern 1", value:"null"})
-      this.examPattern.push({label:"Exam Pattern 2", value:"null"})
-      this.examPattern.push({label:"Exam Pattern 3", value:"null"})
-
-        //this.startDate = moment().startOf('month').format('YYYY-MM-DD');
-
+  constructor(
+      private router:Router,
+      private masterhttp: MasterHttpService)
+      {
+          this.mockTestTableData =[ 
+              {"Test":"Mock Test 1", "Slot 1":"95 Percentile", "Slot 2":"NA" },
+              {"Test":"Mock Test 2", "Slot 1":"DATE&TIME", "Slot 2":"DATE&TIME" },
+              {"Test":"Mock Test 3", "Slot 1":"DATE&TIME", "Slot 2":"DATE&TIME" }
+              ];
+              
+          this.examPattern = [];
+          this.examPattern.push({label:"SOF", value:"null"})
    }
 
    redirect(){
        this.router.navigate(['account/accountsettings'])
    }
 
-  ngOnInit() {this.mockTestData = {
+  ngOnInit() {
+      //for chart
+      this.mockTestData = {
             labels: ['Completed','Remaining'],
-            datasets: [
-                {
-                    data: [1,3],
-                    backgroundColor: [
-                        "#5CB85C",
-                        "#D9534F",
-                        
-                    ],
-                    hoverBackgroundColor: [
-                        "#5CB85C",
-                        "#D9534F",
-                        
-                    ]
-                }]    
-            };
+            datasets: [{data: [1,2],backgroundColor: ["#5CB85C","#D9534F"],hoverBackgroundColor: ["#5CB85C","#D9534F",]}]    
+        };
+
+        //used temporary service
+      this.dummyChapters=[]
+      this.masterhttp.getChapters()
+      .subscribe(data=>{
+          data = data['chapters']['records'];
+          for(let i in data){
+              this.dummyChapters.push(data[i][1])
+          }
+
+        //used temporary service
+      this.dummyTopics=[];
+      this.masterhttp.getTopics()
+      .subscribe(data=>{
+          data = data['topics']['records'];
+          for(let i in data){
+              this.dummyTopics.push(data[i][1])
+          }
+      })
+      })    
+
+    
   }
   
-  
-  tabOpen(e){
-    this.currentTab = e.index;
-  }
-
-  tabClose(e){
-      this.currentTab = null;
-  }
-
 
 }

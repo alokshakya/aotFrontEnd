@@ -95,11 +95,6 @@ import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemo
 //services
 import { ConfirmationService } from 'primeng/primeng';
 import { LoginRegisterService } from './services/loginRegister.service';
-import { NotificationService } from './services/notification.service';
-import { SubjectService } from './services/subject.service';
-import { UserinfoService } from './services/userinfo.service';
-import { UpdateService } from './services/update.service';
-import { SharedService } from './services/shared.service';
 import { MasterHttpService } from './services/masterhttp.service';
 import { DataService } from './services/data.service';
 
@@ -208,14 +203,9 @@ import { CssIdPipe } from './pipes/css-id.pipe';
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        LoginRegisterService, 
-        UserinfoService, 
-        NotificationService, 
-        SubjectService, 
-        UpdateService, 
-        ConfirmationService, 
-        SharedService, 
+        LoginRegisterService,  
         MasterHttpService,
+        ConfirmationService,
         DataService
     ],
     bootstrap:[AppComponent]
