@@ -33,80 +33,62 @@ import {SelectItem} from 'primeng/primeng';
 
 export class LoginComponent implements OnInit {
   
-  loginRegToggle:boolean = false; //login-register toggle
+  loginRegToggle:boolean; 
 
-  //ng-template
-  click:boolean;
-  passwordError:boolean;
-  mobileVerified:boolean;
-  emailVerified:boolean;
+  //login section
+  userLoginCreds:any;
 
-  confirmPassword:string;
+  //login-subsection  forgot password
+  loginForgotToggle:boolean;
+  mode:Array<string>;
+  registeredEmail:string;
+  verifyForgotToggle:boolean;
+  dummyPassword:string;
+  dummyConfirmPassword:string;
 
-  userLoginCreds:any={"email":"", "password":""};
-  userRegCreds:any={"firstname":"","lastname":"", "email":"","password":""};
-  mobile:number;
-
-  errorMessage: Message[] = [];
-  successMessage: Message[] = [];
-
-  actualOTP:number = 123456;
-  actualCode:string = 'ABCDEF'
-  otp:number;
-  otpDialog:boolean;  //otp verify dialogbox
-  errorSection:boolean = false; //invalid otp entered
-  otpverified:Message[] = [];
-
-  otpUnverified:boolean=true;
-
-  token:string;
-  
-  //temporary
-  dummyClass:SelectItem[]=[];
+  //register section
+  userRegCreds:any;
+  dummyClass:SelectItem[];
   dummySelectedClass:string;
   dummyMobile:number;
-  dummyOtpSection:boolean;
-  dummyIncorrectOtp:boolean;
-  dummyOtp:number;
-  dummyCode:string;
+  confirmPassword:string;
 
+  
+  //register subsection  mobile verify
+  regVerifyToggle:boolean;
+  actualOTP:number;
+  dummyOtp:number;
+  mobileVerified:boolean;
+
+  //register subsection  email verify
+  actualCode:string;
+  dummyCode:string;
+  emailVerified:boolean;
+
+  //misc
+  message: Message[];
+  token:string;
   
   constructor(
     private httpService: LoginRegisterService, 
     private router: Router) {}
 
   ngOnInit(){
-    this.otpUnverified=true;
-    var token = localStorage.getItem('session_token') 
-    if(token=='' || token==null){
-      this.router.navigate(['login']);
-    }
 
+    this.reset();
+
+
+    this.userLoginCreds = {"email":"", "password":""};
+    this.userRegCreds = {"firstname":"","lastname":"", "email":"","password":""};    
+    this.actualCode = "ABCDEF"
+    this.actualOTP = 123456;
     //temporary
+    this.dummyClass=[]
     this.dummyClass.push({label:"Select Class", value:null}, {label:"I", value:"I"}, 
     {label:"II", value:"II"}, {label:"III", value:"III"}, {label:"IV", value:"IV"}, {label:"V", value:"V"},
     {label:"VI", value:"VI"}, {label:"VII", value:"VII"}, {label:"VIII", value:"VIII"})
   }
   
-  
-  hide(){
-    this.errorSection=false;
-  }
-
-  verify(){
-    if(this.otp==this.actualOTP){
-      this.otpDialog=false;
-      this.otpUnverified=false;
-      this.errorSection=false;
-      this.otp=null;
-      this.successMessage.push({severity:'success', summary:'Mobile Verified', detail:'You can change your number from User Profile'});
-    }
-    else{
-    this.errorSection=true;
-    this.otpUnverified=true;
-    this.otp=null;
-    }
-  }
 
   signIn() {
     localStorage.setItem('session_token','');
@@ -117,8 +99,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['account/dashboard']);}, 
       
       (error) => {
-            this.errorMessage = [];
-            this.errorMessage.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
+            this.message = [];
+            this.message.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
             }
     );
   }
@@ -126,55 +108,88 @@ export class LoginComponent implements OnInit {
   signUp() {
     this.httpService.register(this.userRegCreds)
     .subscribe((data) => {
-      this.successMessage=[];
-      this.successMessage.push({severity:'success', summary:'Registration Successful', detail:'Please Login'});
+      this.message=[];
+      this.message.push({severity:'success', summary:'Registration Successful', detail:'Please Login'});
       this.loginRegToggle = !this.loginRegToggle;},
 
       (error) => {
-              this.errorMessage=[];
-              this.errorMessage.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
+              this.message=[];
+              this.message.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
             }
     );
   }
 
   //temporary
+
+
+
+  forgotPassword(){
+  this.loginForgotToggle = true;
+  this.emailVerified = false;
+  this.mobileVerified = false;
+  }
+
   dummyRegister(){
-    if(this.userRegCreds['password']!=this.confirmPassword){
-      this.passwordError=true;
-    }else{
-      this.successMessage=[];
-      this.successMessage.push({severity:'info', summary:'Verify mobile and email', detail:''})
-      this.click = true;}
+      this.message=[];
+      this.message.push({severity:'info', summary:'Verify mobile and email', detail:''})
+      this.regVerifyToggle = true;
 
   }
 
   dummyMobileVerify(){
     if(this.actualOTP==this.dummyOtp){
+      var a = this.mode.indexOf('email')
+      this.mode[a]=null;
       this.mobileVerified=true;
       this.check();
     }else{
-      this.errorMessage=[];
-      this.errorMessage.push({severity:'error', summary:'Incorrect OTP', detail:'Please try again'})
+      this.message=[];
+      this.message.push({severity:'error', summary:'Incorrect OTP', detail:'Please try again'})
     }
   }
 
   dummyEmailVerify(){
     if(this.dummyCode==this.actualCode){
+      var a = this.mode.indexOf('mobile')
+      this.mode[a]=null;
       this.emailVerified=true; 
       this.check();
     }else{
-      this.errorMessage=[];
-      this.errorMessage.push({severity:'error', summary:'Incorrect Verification Code', detail:'Please try again'})
+      this.message=[];
+      this.message.push({severity:'error', summary:'Incorrect Verification Code', detail:'Please try again'})
     }
   }
 
     check(){
     if(this.mobileVerified&&this.emailVerified){
-      this.successMessage=[]
-      this.successMessage.push({severity:'success', summary:'Registration Successful', detail:'Please login'})
+      this.message=[]
+      this.message.push({severity:'success', summary:'Registration Successful', detail:'Please login'})
       this.loginRegToggle=false;
-      this.click=false;
+      this.regVerifyToggle=false;
     }
+  }
+  
+  reset(){
+      this.dummyOtp=null;
+      this.dummyMobile=null;
+      this.dummySelectedClass=null;
+      this.confirmPassword=null;
+      this.confirmPassword=null;
+      this.dummyPassword=null;
+      this.dummyConfirmPassword=null;
+      this.loginForgotToggle=false;
+      this.regVerifyToggle=false;
+      this.mobileVerified=false;
+      this.emailVerified=false;
+      this.verifyForgotToggle=false;
+      this.registeredEmail=null;
+      this.mode = [];
+  }
+
+  changePassword(){
+    this.message = [];
+    this.message.push({severity:"success",summary:"Password Changed",detail:"Please Login"})
+    this.reset();
   }
 
 

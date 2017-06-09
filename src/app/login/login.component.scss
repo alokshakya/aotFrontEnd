@@ -134,8 +134,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .footer{
+  position:fixed;
+  bottom:0;
+  padding-left:76%;
   background-color: #2D353C;
-  float: right;
   color: white;
 }
 
@@ -198,6 +200,7 @@ input[type=number]::-webkit-outer-spin-button {
 .verify{
   text-align: left;
   padding-left: 10%;
+  height: auto;
 }
 
 .verify input{
@@ -207,21 +210,35 @@ input[type=number]::-webkit-outer-spin-button {
 
 .success{
   color:#2BBF61;
-  text-align: center;
+  text-align: left;
 }
 
 .error{
+  text-align: left;
   margin-top: 0px;
   color: #F44336;
 }
 
-.text-center p{
-  height:1px;
+.aligned{
+  padding-left: 20px;
 }
 
+.empty{
+  height: 85px;
+}
 
-.fill{
-  text-align: right;
-  background: #2D353C;
-  color: white;
+#lostpassword a:hover{
+  cursor: pointer;
+  color: red;
+  text-decoration: none;
+}
+
+#gap{
+ margin-right: 8%;
+}
+
+#med1, #med2{
+  width:95%;
+  height:22%;
+  margin-bottom:4px;
 }
