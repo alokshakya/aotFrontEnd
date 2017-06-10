@@ -259,7 +259,7 @@ export class TakedemotestComponent implements OnInit {
               var a = localStorage.getItem('session_token')
          if(a=='testuser'){
            console.log(a)
-             this.router.navigate(['account/dashboard']);
+             this.router.navigate(['demotest']);
          }
          else{ console.log("no")
             this.router.navigate(['login'])
