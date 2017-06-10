@@ -91,18 +91,25 @@ export class LoginComponent implements OnInit {
   
 
   signIn() {
-    localStorage.setItem('session_token','');
-    this.httpService.login(this.userLoginCreds)
-    .subscribe((data) => {
-      this.token = data.json().session_token;
-      localStorage.setItem('session_token', data.json().session_token);
-      this.router.navigate(['account/dashboard']);}, 
+    // localStorage.setItem('session_token','');
+    // this.httpService.login(this.userLoginCreds)
+    // .subscribe((data) => {
+    //   this.token = data.json().session_token;
+    //   localStorage.setItem('session_token', data.json().session_token);
+    //   this.router.navigate(['account/dashboard']);}, 
       
-      (error) => {
-            this.message = [];
-            this.message.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
-            }
-    );
+    //   (error) => {
+    //         this.message = [];
+    //         this.message.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'});
+    //         }
+    // );
+    if((this.userLoginCreds['email']=='test@olympiadbox.com')&&(this.userLoginCreds['password']=='test123')){
+      this.router.navigate(['account/dashboard'])
+    }else{
+      this.message=[]
+      this.message.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'})
+    }
+
   }
 
   signUp() {
