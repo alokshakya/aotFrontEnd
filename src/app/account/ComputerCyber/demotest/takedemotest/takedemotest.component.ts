@@ -256,9 +256,17 @@ export class TakedemotestComponent implements OnInit {
     }
   
   ngOnInit(){
-      this.sessionToken = localStorage.getItem('session_token');
-      this.isLogin(this.sessionToken)
-      this.startTest();
+              var a = localStorage.getItem('session_token')
+         if(a=='testuser'){
+           console.log(a)
+             this.router.navigate(['account/dashboard']);
+         }
+         else{ console.log("no")
+            this.router.navigate(['login'])
+            }
+    //   this.sessionToken = localStorage.getItem('session_token');
+    //   this.isLogin(this.sessionToken)
+       this.startTest();
 }
 
 //   getQuestions(){

@@ -89,10 +89,17 @@ export class AccountMainComponent implements AfterViewInit {
         {}
 
     ngOnInit() {
-
-        if (this.email.length>25){
-            this.shownEmail = this.email.slice(0,26) + '...'
-        }
+        var a = localStorage.getItem('session_token')
+         if(a=='testuser'){
+           console.log(a)
+             this.router.navigate(['account/dashboard']);
+         }
+         else{ console.log("no")
+            this.router.navigate(['login'])
+            }
+        // if (this.email.length>25){
+        //     this.shownEmail = this.email.slice(0,26) + '...'
+        // }
         // this.sessionToken = localStorage.getItem('session_token');
         // // this.isLogin(this.sessionToken);
         // this.getUserInfo()
