@@ -91,12 +91,13 @@ import { ResultComponent } from './account/ComputerCyber/result/result.component
 import { ProfileComponent } from './account/profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemotest/takedemotest.component';
+import { LoaderComponent } from './account/loader/loader.component';
 
 //services
 import { ConfirmationService } from 'primeng/primeng';
 import { LoginRegisterService } from './services/loginRegister.service';
 import { MasterHttpService } from './services/masterhttp.service';
-import { DataService } from './services/data.service';
+import { PersonalInfo,SubjectInfo,Result } from './services/data.service'; 
 
 //Moment
 // import * as moment from 'moment';
@@ -105,6 +106,7 @@ import { DataService } from './services/data.service';
 //pipes
 import { KeysPipe } from './pipes/keys.pipe';
 import { CssIdPipe } from './pipes/css-id.pipe';
+import { OverlayComponent } from './account/loader/overlay/overlay.component';
 
 
 @NgModule({
@@ -200,13 +202,15 @@ import { CssIdPipe } from './pipes/css-id.pipe';
         TakedemotestComponent,
         KeysPipe,
         CssIdPipe,
+        LoaderComponent,
+        OverlayComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         LoginRegisterService,  
         MasterHttpService,
         ConfirmationService,
-        DataService
+        PersonalInfo,SubjectInfo,Result
     ],
     bootstrap:[AppComponent]
 })

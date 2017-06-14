@@ -1,19 +1,16 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response } from '@angular/http';
-import { DataService } from './data.service';
+import { PersonalInfo, SubjectInfo } from './data.service';
 
 @Injectable()
 export class MasterHttpService {
 
   baseUrl = 'http://scripts.olympiadbox.com/services/api/api.php';
-  
-
-  data: DataService;
-
   constructor(
-    private http: Http, 
-    private dataservice: DataService) {
-    }
+    private http: Http,
+    private personalInfo: PersonalInfo,
+    private subjectInfo: SubjectInfo)
+    {}
 
   getUserInfo(){
     return this.http.get(this.baseUrl+'/user_info/2')
@@ -58,11 +55,24 @@ export class MasterHttpService {
   
 
   //data implementation
-  getInfo(){
-    // this.http.get(this.url).map((resp: Response) =>resp.json())
-    // .subscribe((data) =>{
-    //   this.data.userInfo = data;
-//    })
-  return true;
+  getPersonalInfo(){
+    this.http.get(this.baseUrl+'/user_info/2').map((resp: Response) =>resp.json())
+    .subscribe((data) =>{
+      this.personalInfo.setInfo(data);
+   })
   }
+
+  getSyllabus(){
+    this.http.get(this.baseUrl+'/chapters').map((resp: Response) => resp.json())
+    .subscribe((data) =>{
+      this.subjectInfo.setComputerChapters(data['chapters']['records']);
+    })
+
+    this.http.get(this.baseUrl+'/topics').map((resp: Response) => resp.json())
+    .subscribe((data) => {
+      this.subjectInfo.setComputerTopics(data['topics']['records']);
+    })
+  }
+
+
 }
