@@ -11,11 +11,13 @@ import { MocktestComponent } from './ComputerCyber/mocktest/mocktest.component';
 import { ResultComponent } from './ComputerCyber/result/result.component';
 import { TakedemotestComponent } from './ComputerCyber/demotest/takedemotest/takedemotest.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LoadoutComponent } from './loadout/loadout.component'
 
 
 export const AccountRoutes: Routes = [
   { path : '', redirectTo : '/login', pathMatch : 'full'},
-  { path: 'demotest', component: TakedemotestComponent}, 
+  { path: 'demotest', component: TakedemotestComponent},
+  { path: 'loadout', component: LoadoutComponent},    
   { path : 'account', component : AccountMainComponent,
   children : [
     { path: '' , redirectTo: 'dashboard', pathMatch: 'full'},

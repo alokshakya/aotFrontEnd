@@ -18,28 +18,11 @@ export class AppComponent implements AfterViewInit {
 
    
     constructor(private _router: Router) {}
-
-     ngOnInit() {
-        
-       /* var token = localStorage.getItem('session_token');
-
-        if (token == '') {
-            this._router.navigate(['login']);
-        }
-        else {
-            this._router.navigate(['account']);
-        }*/
-      
-      }
-
-    ngAfterViewInit() {
-      
-    }
-
     
+    ngOnInit() {}
 
-    ngOnDestroy() {
-       
-    }
+    ngAfterViewInit() {}
+
+    ngOnDestroy() {}
 
 }

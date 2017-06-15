@@ -1,5 +1,5 @@
 import {AppRoutes} from './app.routes';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 import {HttpModule}    from '@angular/http';
@@ -71,7 +71,7 @@ import {TooltipModule} from 'primeng/primeng';
 import {TreeModule} from 'primeng/primeng';
 import {TreeTableModule} from 'primeng/primeng';
 
-//Default Components
+//Default theme Components
 import {AppComponent}  from './app.component';
 import {AppMenuComponent,AppSubMenu}  from './account/main/main.menu.component';
 import {AppTopBar}  from './account/apptopbar/app.topbar.component';
@@ -97,7 +97,7 @@ import { LoaderComponent } from './account/loader/loader.component';
 import { ConfirmationService } from 'primeng/primeng';
 import { LoginRegisterService } from './services/loginRegister.service';
 import { MasterHttpService } from './services/masterhttp.service';
-import { PersonalInfo,SubjectInfo,Result } from './services/data.service'; 
+import { PersonalInfo,SubjectInfo,Result,Misc } from './services/data.service'; 
 
 //Moment
 // import * as moment from 'moment';
@@ -107,6 +107,7 @@ import { PersonalInfo,SubjectInfo,Result } from './services/data.service';
 import { KeysPipe } from './pipes/keys.pipe';
 import { CssIdPipe } from './pipes/css-id.pipe';
 import { OverlayComponent } from './account/loader/overlay/overlay.component';
+import { LoadoutComponent } from './account/loadout/loadout.component';
 
 
 @NgModule({
@@ -204,13 +205,14 @@ import { OverlayComponent } from './account/loader/overlay/overlay.component';
         CssIdPipe,
         LoaderComponent,
         OverlayComponent,
+        LoadoutComponent,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         LoginRegisterService,  
         MasterHttpService,
         ConfirmationService,
-        PersonalInfo,SubjectInfo,Result
+        PersonalInfo,SubjectInfo,Result,Misc
     ],
     bootstrap:[AppComponent]
 })

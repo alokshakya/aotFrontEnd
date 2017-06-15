@@ -105,7 +105,7 @@ export class LoginComponent implements OnInit {
     // );
     if((this.userLoginCreds['email']=='test@olympiadbox.com')&&(this.userLoginCreds['password']=='test123')){
       localStorage.setItem('session_token','testuser')
-      this.router.navigate(['account/dashboard'])
+      this.router.navigate(['loadout'])
     }else{
       this.message=[]
       this.message.push({severity:'error', summary:'Invalid Credentials', detail:'Sign Up with OlympiadBox'})
