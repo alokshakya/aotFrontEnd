@@ -1,7 +1,6 @@
 import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
-import { MasterHttpService } from '../../services/masterhttp.service';
-import { DataService } from '../../services/data.service';
+import { PersonalInfo } from '../../services/data.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 
@@ -23,10 +22,6 @@ export class AccountMainComponent implements AfterViewInit {
     
 
     //student info to be displayed above menubar
-    studentName: string;
-    class: string;
-    email = "emailidlengthisgreaterthan25characters@gmail.com";
-    shownEmail = "emailidlengthisgreaterthan25characters@gmail.com";
     
     changeImg:boolean;
 
@@ -64,40 +59,30 @@ export class AccountMainComponent implements AfterViewInit {
 
     resetMenu: boolean;
     
-//will be used in child components
-    personalDetails:any; 
-    academicDetails:any;
-    sessionToken:string;
-    userInfoId:string;
-
-//scripts.olympiadbox.com/services
-    temporaryData:any;
-    temporaryClass:string;
-
     userEvent:any
 
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
 
+    loader:boolean;
     constructor(
         public renderer: Renderer, 
         private router: Router, 
-        private masterhttp: MasterHttpService,
-        private dataservice: DataService,
+        private personalInfo: PersonalInfo 
         )
         {}
 
     ngOnInit() {
-        var a = localStorage.getItem('session_token')
+        let a = localStorage.getItem('session_token')
          if(a=='testuser'){
-           console.log(a)
              this.router.navigate(['account/dashboard']);
-         }
-         else{ console.log("no")
-            this.router.navigate(['login'])
-            }
-        // if (this.email.length>25){
+         }else{this.router.navigate(['login'])}
+        
+        // this.masterhttp.getPersonalInfo();
+        // this.masterhttp.getSyllabus();
+
+        // if (this.personalInfo.email.length>25){
         //     this.shownEmail = this.email.slice(0,26) + '...'
         // }
         // this.sessionToken = localStorage.getItem('session_token');
@@ -105,15 +90,13 @@ export class AccountMainComponent implements AfterViewInit {
         // this.getUserInfo()
 
         //temporary service
-        this.masterhttp.getUserInfo()
-        .subscribe((data: Response) =>{
-            this.temporaryData = data;
-        })
 
-        this.masterhttp.getClass()
-        .subscribe((data: Response) =>{
-            this.temporaryClass = data['abbreviation'];
-        })
+        // this.masterhttp.getClass()
+        // .subscribe((data: Response) =>{
+        //     this.temporaryClass = data['abbreviation'];
+        //     this.loader = true;
+            
+        // })
 
     }
 

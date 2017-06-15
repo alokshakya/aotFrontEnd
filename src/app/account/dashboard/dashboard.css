@@ -168,3 +168,11 @@
 .hover:hover{
     cursor: pointer;
 }
+
+.subloader{
+    padding-left: 43%;
+}
+
+.noticeloader, .testimonialloader{
+    padding-left: 37%;
+}

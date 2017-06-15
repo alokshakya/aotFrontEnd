@@ -3,12 +3,13 @@ import  { Response } from '@angular/http';
 import { SelectItem } from 'primeng/primeng';
 import { Message } from 'primeng/primeng';
 import { ConfirmationService } from 'primeng/primeng';
-import { MasterHttpService } from '../../services/masterhttp.service';
+import { PersonalInfo,Misc } from '../../services/data.service';
+
 
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './test.profile.component.html',
+  templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
@@ -22,7 +23,6 @@ export class ProfileComponent implements OnInit {
 
   //basic info tab
   editBasic:boolean;
-  dummyBasicInfo:any;
   dummyEditBasicInfo:any;
   city:SelectItem[] = [];
   state:SelectItem[] = [];
@@ -46,8 +46,11 @@ export class ProfileComponent implements OnInit {
   oldPassword:string;
 
   //add testimonial tab
+  editTestimonial:boolean
   testimonial:string;
+  index:number;
   rating:number = 2;
+  currentTestimonial:string;
 
   //add achievement tab
   classList:SelectItem[]=[];
@@ -63,49 +66,71 @@ export class ProfileComponent implements OnInit {
   test:any;
   
   constructor(
-  //  private httpService: UserinfoService,
-   // private classService: SubjectService,
-   // private update: UpdateService,
+    //  private httpService: UserinfoService,
+    // private classService: SubjectService,
+    // private update: UpdateService,
     private confirmservice: ConfirmationService,
-    private masterhttp: MasterHttpService 
-    ){
-      this.exam.push({label:"Select Exam",value:"null"},{label:"NCO 2016-17 - Level 2", value:"NCO-16-17"},
-      {label:"NSO-16-17 - Level 2", value:"NSO-16-17"},{label:"IMO 2016-17 - Level 2", value:"NTSE"},
-      {label:"IMO 2016-17 - Level 2", value:"IMO 2016-17 - Level 2"},
-      {label:"ISKO 2016", value:"ISKO 2016"},
-      {label:"NCO 2016", value:"NCO 2016"},
-      {label:"NCO 2016 - Level 1", value:"NCO 2016 - Level 1"},
-      {label:"NSO 2016 - Level 1", value:"NSO 2016 - Level 1"},
-      {label:"IMO 2016 - Level 1", value:"IMO 2016 - Level 1"},
-      {label:"IEO 2016 - Level 1", value:"IEO 2016 - Level 1"},
-      {label:"IIO 2016 - Level 1", value:"IIO 2016 - Level 1"},
-      {label:"IOM 2016 - Level 1", value:"IOM 2016 - Level 1"},      
-      {label:"IOS 2016 - Level 1", value:"IOS 2016 - Level 1"},
-      {label:"IOEL 2016 - Level 1", value:"IOEL 2016 - Level 1"}, 
-      )
+    private personalInfo:PersonalInfo,
+    private misc: Misc
+    ){}  
 
-      this.city.push({label:"Select City",value:"null"},{label:"Ghaziabad",value:"Ghaziabad"},{label:"Delhi", value:"Delhi"}, {label:"Gurgaon", value:"Gurgaon"}, {label:"Bombay", value:"Bombay"},{label:"Kolkata", value:"Kolkata"},)
- 
-      this.state.push({label:"Select State",value:"null"},{label:"Uttar Pradesh", value:"Uttar Pradesh"}, {label:"West Bengal", value:"West Bengal"}, {label:"Maharashtra", value:"Maharashtra"}, {label:"Haryana", value:"Haryana"})
-      
-      this.country.push({label:"Select Country",value:"null"},{label:"India", value:"India"}, {label:"Sri Lanka", value:"Sri Lanka"}, {label:"Indonesia", value:"Indonesia"}, {label:"Nepal", value:"Nepal"})
 
-      this.classList.push({label: "Select Class", value:null}, {label: "I", value:"I"}, {label: "II", value:"II"},{label: "III", value:"III"},{label: "IV", value:"IV"},{label: "V", value:"V"},{label: "VI", value:"VI"},{label: "VII", value:"VII"},{label: "VIII", value:"VIII"},       )
+  ngOnInit() {
+    this.dec = [];
 
-      this.dummyBasicInfo = {
-        firstname: "",
-        lastname: "", 
-        email: "", 
-        address: "", 
-        mobile: "", 
-        class: "V", 
-        dob:"11/03/1998", 
-        state:"", 
-        city:"", 
-        gender:"",
-        country:"",
-        pincode:"",
-    }
+    this.exam.push(
+        {label:"Select Exam",value:"null"},{label:"NCO 2016-17 - Level 2", value:"NCO-16-17"},
+        {label:"NSO-16-17 - Level 2", value:"NSO-16-17"},{label:"IMO 2016-17 - Level 2", value:"NTSE"},
+        {label:"IMO 2016-17 - Level 2", value:"IMO 2016-17 - Level 2"},
+        {label:"ISKO 2016", value:"ISKO 2016"},
+        {label:"NCO 2016", value:"NCO 2016"},
+        {label:"NCO 2016 - Level 1", value:"NCO 2016 - Level 1"},
+        {label:"NSO 2016 - Level 1", value:"NSO 2016 - Level 1"},
+        {label:"IMO 2016 - Level 1", value:"IMO 2016 - Level 1"},
+        {label:"IEO 2016 - Level 1", value:"IEO 2016 - Level 1"},
+        {label:"IIO 2016 - Level 1", value:"IIO 2016 - Level 1"},
+        {label:"IOM 2016 - Level 1", value:"IOM 2016 - Level 1"},      
+        {label:"IOS 2016 - Level 1", value:"IOS 2016 - Level 1"},
+        {label:"IOEL 2016 - Level 1", value:"IOEL 2016 - Level 1"}, 
+    )
+
+    this.city.push(
+      {label:"Select City",value:"null"},
+      {label:"Ghaziabad",value:"Ghaziabad"},
+      {label:"Delhi", value:"Delhi"}, 
+      {label:"Gurgaon", value:"Gurgaon"}, 
+      {label:"Bombay", value:"Bombay"},
+      {label:"Kolkata", value:"Kolkata"},
+    )
+
+    this.state.push(
+      {label:"Select State",value:"null"},
+      {label:"Uttar Pradesh", value:"Uttar Pradesh"}, 
+      {label:"West Bengal", value:"West Bengal"}, 
+      {label:"Maharashtra", value:"Maharashtra"}, 
+      {label:"Haryana", value:"Haryana"}
+    )
+    
+    this.country.push(
+      {label:"Select Country",value:"null"},
+      {label:"India", value:"India"},
+      {label:"Sri Lanka", value:"Sri Lanka"},
+      {label:"Indonesia", value:"Indonesia"},
+      {label:"Nepal", value:"Nepal"}
+    )
+
+    this.classList.push(
+      {label: "Select Class", value:null},
+      {label: "I", value:"I"},
+      {label: "II", value:"II"},
+      {label: "III", value:"III"},
+      {label: "IV", value:"IV"},
+      {label: "V", value:"V"},
+      {label: "VI", value:"VI"},
+      {label: "VII", value:"VII"},
+      {label: "VIII", value:"VIII"},
+    )
+
 
     this.dummyEditBasicInfo = {
         firstname: "",
@@ -136,7 +161,8 @@ export class ProfileComponent implements OnInit {
       mobile:9324567322
     } 
 
-    this.dummyEditSchoolInfo = {code:"OBU232",
+    this.dummyEditSchoolInfo = {
+      code:"OBU232",
       schoolname:"St Thomas School",
       contactperson:"Dave",
       email:"dap@stschool.com",
@@ -146,17 +172,14 @@ export class ProfileComponent implements OnInit {
       city:"Ghaziabad",
       country:"India",
       pincode:"21012",
-      mobile:9324567322}
-
+      mobile:9324567322
+    }
 
     this.date = new Date();
     this.maxDate = new Date();
     this.maxDate.setFullYear(2013,0,1); 
     this.date.setFullYear(1998,5,14);
-      }  
-
-
-  ngOnInit() {
+     
     // this.httpService.getUserInfo('gpantbiz@gmail.com')
     // .subscribe((data: Response)=>{
     //   data = data['resource'][0];
@@ -178,20 +201,20 @@ export class ProfileComponent implements OnInit {
     //   }
     // })
 
-    //temporary
-    this.masterhttp.getUserInfo()
-    .subscribe((data: Response) =>{
-      this.dummyBasicInfo['firstname'] = data['firstname']
-      this.dummyBasicInfo['lastname'] = data['lastname']
-      this.dummyBasicInfo['email'] = data['email']
-      this.dummyBasicInfo['address'] = data['address']
-      this.dummyBasicInfo['country'] = data['country']
-      this.dummyBasicInfo['state'] = data['state']
-      this.dummyBasicInfo['mobile'] = data['mobile']
-      this.dummyBasicInfo['pincode'] = data['pincode']
-      this.dummyBasicInfo['gender'] = data['gender']
-      this.dummyBasicInfo['birthday'] = data['firstname']
-    } )
+    // //temporary
+    // this.masterhttp.getUserInfo()
+    // .subscribe((data: Response) =>{
+    //   this.dummyBasicInfo['firstname'] = data['firstname']
+    //   this.dummyBasicInfo['lastname'] = data['lastname']
+    //   this.dummyBasicInfo['email'] = data['email']
+    //   this.dummyBasicInfo['address'] = data['address']
+    //   this.dummyBasicInfo['country'] = data['country']
+    //   this.dummyBasicInfo['state'] = data['state']
+    //   this.dummyBasicInfo['mobile'] = data['mobile']
+    //   this.dummyBasicInfo['pincode'] = data['pincode']
+    //   this.dummyBasicInfo['gender'] = data['gender']
+    //   this.dummyBasicInfo['birthday'] = data['firstname']
+    // } )
 
   }
 
@@ -212,15 +235,15 @@ export class ProfileComponent implements OnInit {
   //   this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
   // }
 
-  dummyEdit(){
-    this.dummyEditBasicInfo = JSON.parse(JSON.stringify(this.dummyBasicInfo))
+  editBasicInfo(){
+    // this.dummyEditBasicInfo = JSON.parse(JSON.stringify(this.dummyBasicInfo))
     // this.elem.nativeElement.focus();
     this.editBasic = true;
   }
 
-  dummySave(){
-    this.dummyBasicInfo = this.dummyEditBasicInfo
-  }
+  // dummySave(){
+  //   this.dummyBasicInfo = this.dummyEditBasicInfo
+  // }
 
 
   // cancel(){
@@ -252,10 +275,25 @@ export class ProfileComponent implements OnInit {
   dummyVerify(){
     if(this.actualOTP==this.dummyOtp){
       this.otpDialog = false;
-      console.log(true)
     }
     this.dummyIncorrectOtp = true;
 
+  }
+
+  edit(a){
+    this.index = a
+    this.currentTestimonial = this.misc.userTestimonial[a];
+    this.editTestimonial = true;
+  }
+
+  saveTestimonial(){
+    this.misc.userTestimonial[this.index] = this.currentTestimonial;
+    this.editTestimonial = false;
+  }
+
+  cancel(){
+    this.currentTestimonial = this.misc.userTestimonial[this.index];
+    this.editTestimonial = false;
   }
 
   //tab change event
@@ -294,6 +332,7 @@ export class ProfileComponent implements OnInit {
         }
       })
     }
+  
   }
 
 

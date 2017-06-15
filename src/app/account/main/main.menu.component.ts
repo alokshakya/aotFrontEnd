@@ -4,12 +4,14 @@ import { Response } from '@angular/http';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/primeng';
 import { AccountMainComponent } from './main.component';
-import { MasterHttpService } from '../../services/masterhttp.service';
 
 @Component({
     selector: 'app-menu',
-    template: `
-        <ul app-submenu [item]="temporaryModel" root="true" class="layout-menu clearfix" [reset]="reset" visible="true"></ul>
+    styleUrls: ['./main.component.scss'],
+    template: `<div>
+        <app-overlay></app-overlay>
+    </div>
+        <ul app-submenu [item]="model" root="true" class="layout-menu clearfix" [reset]="reset" visible="true"></ul>
     `
 })
 export class AppMenuComponent implements OnInit {
@@ -21,19 +23,17 @@ export class AppMenuComponent implements OnInit {
     model: MenuItem[];
 
     //temporary
-    temporaryModel: MenuItem[];
 
     constructor(
         @Inject(forwardRef(() => AccountMainComponent))
         public app:AccountMainComponent,
-        private masterhttp: MasterHttpService,
         )
         {
 
-        this.menuTabs =[
+        this.model =[
                         {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['dashboard']},
                         {label: 'Account Settings',icon: 'fa fa-pencil-square-o',routerLink: ['accountsettings']},
-                        {label: '',icon: 'icon-cyber',
+                        {label: 'Computer/Cyber',icon: 'icon-cyber',
                             items: [{
                                         label: 'Demo Test',
                                         icon: 'fa fa-circle-o',
@@ -60,7 +60,7 @@ export class AppMenuComponent implements OnInit {
                                         routerLink: ['computers/result']
                                     }
                                     ]},
-                        {label: '',icon: 'icon-science',
+                        {label: 'Science',icon: 'icon-science',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -87,7 +87,7 @@ export class AppMenuComponent implements OnInit {
                                     routerLink: ['science/result']
                                 },
                             ]}, 
-                        {label: '',icon: 'icon-maths',
+                        {label: 'Mathematics',icon: 'icon-maths',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -114,7 +114,7 @@ export class AppMenuComponent implements OnInit {
                                     routerLink: ['mathematics/result']
                                 },
                             ]},
-                        {label: '',icon: 'icon-gk',
+                        {label: 'General Knowledge',icon: 'icon-gk',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -141,7 +141,7 @@ export class AppMenuComponent implements OnInit {
                                     routerLink: ['gk/result']
                                 },
                             ]},
-                        {label: '',icon: 'icon-english',
+                        {label: 'English',icon: 'icon-english',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -168,7 +168,7 @@ export class AppMenuComponent implements OnInit {
                                     routerLink: ['english/result']
                                 },
                             ]},
-                        {label: '',icon: 'icon-reasoning',
+                        {label: 'Reasoning',icon: 'icon-reasoning',
                             items: [{
                                     label: 'Demo Test',
                                     icon: 'fa fa-circle-o',
@@ -214,18 +214,18 @@ export class AppMenuComponent implements OnInit {
         // })
 
         //temporary
-        this.temporaryModel = [];
-        this.masterhttp.getSubjects().subscribe((data: Response) => {
-            var l = 2;
-            for(let i in data['subjects']['records']){
-                this.menuTabs[l]['label'] = data['subjects']['records'][i][1];
-                l++;
-            }
+        // this.temporaryModel = [];
+        // this.masterhttp.getSubjects().subscribe((data: Response) => {
+        //     var l = 2;
+        //     for(let i in data['subjects']['records']){
+        //         this.menuTabs[l]['label'] = data['subjects']['records'][i][1];
+        //         l++;
+        //     }
 
-            for (let m in this.menuTabs){
-                this.temporaryModel.push(this.menuTabs[m])
-            }
-        })
+        //     for (let m in this.menuTabs){
+        //         this.temporaryModel.push(this.menuTabs[m])
+        //     }
+        // })
         
 
     }           

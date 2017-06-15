@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class PersonalInfo{
+
     userInfo:any;
     
     firstname:string;
@@ -32,6 +33,7 @@ export class PersonalInfo{
         this.dob = data.birthday;
         this.mobile = data.mobile;
         this.address = data.address;
+        this.gender = data.gender;
     }
 
 }
@@ -40,14 +42,22 @@ export class PersonalInfo{
 @Injectable()
 export class SubjectInfo{
 
+    subjectList:Array<string>;
+
     computerSyllabus:Array<string>;
     computerTopics:Array<string>;
 
     subscribedSubjects = {"Computer/Cyber":true, "Science":false, "Mathematics":true, "English":true, "General Knowledge":false,"Reasoning":true}
     attemptedDemo = {"Computer/Cyber":true, "Science":true, "Mathematics":true, "English":false, "General Knowledge":false,"Reasoning":true}
 
-    
     constructor(){}
+
+    setSubjects(data){
+        this.subjectList = []
+        for(let i in data){
+            this.subjectList.push(data[i][1])
+        }
+    }
 
     setComputerChapters(data){
         this.computerSyllabus = []
@@ -63,11 +73,47 @@ export class SubjectInfo{
         }
     }
 
+
 }
 
+@Injectable()
+export class Misc{
+
+    testimonial:Array<any>;
+    notice:Array<any>;
+    fee:Array<any>;
+
+    userTestimonial = [
+                        "Lorem 11111111 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+                        "Lorem 22222222 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+                        "Lorem 33333333 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
+                    ]
+
+    setTestimonial(data){
+        this.testimonial = [];
+        for (let i in data){
+            this.testimonial.push(data[i][1])
+        }
+    }
+
+    setNotice(data){
+        this.notice = [];
+        for(let i in data){
+            this.notice.push(data[i])
+        }
+    }
+
+    setFee(data){
+        this.fee = [];
+        for(let i in data){
+            this.fee.push(data[i][2])
+        }
+    }
+
+
+}
 
 @Injectable()
-
 export class Result{
 
     testSummary = {
@@ -325,15 +371,7 @@ export class Result{
     }
 
     chapterwiseTestDetails = {
-              "Chapter 1":
-              {
-                  "Test 1":"13/15",
-                  "Test 2":"11/15", 
-                  "Test 3":"Start", 
-                  "Test 4":"Start", 
-                  "Test 5":"14/15"
-                },
-              "Chapter 2":
+              "chapter 2 CC":
               {
                   "Test 1":"10/15",
                   "Test 2":"9/15", 
@@ -341,31 +379,7 @@ export class Result{
                   "Test 4":"13/15", 
                   "Test 5":"Resume"
                 },
-              "Chapter 3":
-              {
-                  "Test 1":"13/15",
-                  "Test 2":"11/15", 
-                  "Test 3":"Start", 
-                  "Test 4":"Start", 
-                  "Test 5":"Resume"
-                },
-              "Chapter 4":
-              {
-                  "Test 1":"13/15",
-                  "Test 2":"11/15", 
-                  "Test 3":"Resume", 
-                  "Test 4":"Start", 
-                  "Test 5":"Start"
-                },
-              "Chapter 5":
-              {
-                  "Test 1":"10/15",
-                  "Test 2":"9/15", 
-                  "Test 3":"Start", 
-                  "Test 4":"13/15", 
-                  "Test 5":"Resume"
-                },
-              "Chapter 6":
+              "chapter 6 CC":
               {
                   "Test 1":"13/15",
                   "Test 2":"11/15", 
@@ -373,15 +387,7 @@ export class Result{
                   "Test 4":"Start", 
                   "Test 5":"10/15"
                 },
-              "Chapter 7":
-              {
-                  "Test 1":"10/15",
-                  "Test 2" :"9/15", 
-                  "Test 3":"Start", 
-                  "Test 4":"13/15", 
-                  "Test 5":"Start"
-                },
-              "Chapter 8":
+              "chapter 8 CC":
               {
                   "Test 1":"Start", 
                   "Test 2":"13/15",
@@ -389,21 +395,12 @@ export class Result{
                   "Test 4":"Start",
                   "Test 5":"Resume"
                 },
-              "Chapter 9":
-              {
-                  "Test 1":"13/15",
-                  "Test 2":"11/15", 
-                  "Test 3":"Start", 
-                  "Test 4":"Start", 
-                  "Test 5":"Resume"
-                },
-              "Chapter 10":
-              {
-                  "Test 1":"04/15",
-                  "Test 2":"15/15", 
-                  "Test 3":"Start", 
-                  "Test 4":"Resume",
-                  "Test 5":"Resume"
-                },
     }
+
+    generatedTest = ["chapter 2 CC", "chapter 8 CC", "chapter 6 CC",];
+    generatedTestData = [
+                        ["Chapter 2 CC", "04/15","Start","11/15","Resume","14/15"],
+                        ["Chapter 6 CC", "04/15","Start","11/15","Resume","14/15"],
+                        ["Chapter 8 CC", "04/15","Start","11/15","Resume","14/15"],
+                        ]
 }

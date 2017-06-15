@@ -94,14 +94,14 @@
                 <h2>Verification</h2>
             </div>
             <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='mobile'||mode[1]=='mobile'">
-                <h5>Enter OTP sent on mobile</h5>
+                <h5>Enter OTP sent on <strong>mobile</strong></h5>
                 <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="dummyOtp"></p-inputMask>
                 <button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="dummyMobileVerify()" label="Verify"></button>&nbsp;<button pButton [disabled]="mobileVerified" class="ui-button-info" label="Resend"></button>
                 <p class="success" *ngIf="mobileVerified">You can change your password below</p>
             </div>
             <div class="ui-g-12 text-center" *ngIf="(mode[0]=='mobile'||mode[1]=='mobile')&&(mode[0]=='email'||mode[1]=='email')"><h4>OR</h4></div>
             <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='email'||mode[1]=='email'">
-                <h5>Enter CODE sent on {{registeredEmail}} </h5>
+                <h5>Enter CODE sent on <strong>{{registeredEmail}}</strong></h5>
                 <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" placeholder="Enter Security Code" mask="aaa-aaa" [disabled]="emailVerified" [(ngModel)]="dummyCode"></p-inputMask>
                 <button pButton [disabled]="emailVerified" class="ui-button-success" (click)="dummyEmailVerify()" label="Verify"></button>&nbsp;<button [disabled]="emailVerified" pButton class="ui-button-info" label="Resend"></button>
                 <p class="success" *ngIf="emailVerified">You can change your password below</p>

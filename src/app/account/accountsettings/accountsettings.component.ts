@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router }from '@angular/router';
 import { Response } from '@angular/http';
-import { MasterHttpService } from '../../services/masterhttp.service';
+import { SubjectInfo, Misc } from '../../services/data.service';
 
 @Component({
   selector: 'app-accountsettings',
@@ -30,7 +30,8 @@ export class AccountsettingsComponent implements OnInit {
     
     constructor(
         private _router:Router,
-        private masterhttp: MasterHttpService) 
+        private subjectInfo: SubjectInfo,
+        private misc: Misc) 
         {
             this.selectedPackage = [];
 
@@ -73,24 +74,24 @@ export class AccountsettingsComponent implements OnInit {
         // })
 
         //temporary service used
-        this.dummyPrice = []
-        this.masterhttp.getFee()
-        .subscribe((data) => {
-            data = data['fee']['records'];
-            var a = [];
-            for (let i in data){
-            this.subPriceTable.push({"Subject":"Enn","Price":data[i][2]});
-            }        
-    })
+    //     this.dummyPrice = []
+    //     this.masterhttp.getFee()
+    //     .subscribe((data) => {
+    //         data = data['fee']['records'];
+    //         let a = [];
+    //         for (let i in data){
+    //         this.subPriceTable.push({"Subject":"Enn","Price":data[i][2]});
+    //         }        
+    // })
 
-        //temporary service used
-        this.dummySubjects=[]
-        this.masterhttp.getSubjects()
-        .subscribe((data) =>{
-             for (let i in data['subjects']['records']){
-            this.dummySubjects.push(data['subjects']['records'][i][1])
-            }
-        })
+    //     //temporary service used
+    //     this.dummySubjects=[]
+    //     this.masterhttp.getSubjects()
+    //     .subscribe((data) =>{
+    //          for (let i in data['subjects']['records']){
+    //         this.dummySubjects.push(data['subjects']['records'][i][1])
+    //         }
+    //     })
     }
 
     pay(){

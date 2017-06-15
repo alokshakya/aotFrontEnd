@@ -1,7 +1,7 @@
-import {Component,  OnInit, Inject, forwardRef} from '@angular/core';
-import {AccountMainComponent} from '../main/main.component';
-import 'rxjs/Rx'; 
+import { Component,  OnInit, Inject, forwardRef } from '@angular/core';
+import { AccountMainComponent } from '../main/main.component';
 import { Router } from '@angular/router';
+import { PersonalInfo } from '../../services/data.service'
 
 @Component({
     selector: 'app-topbar',
@@ -11,7 +11,8 @@ export class AppTopBar implements OnInit {
 
     currentPage:Array<string>;
     constructor(@Inject(forwardRef(() => AccountMainComponent))  public app:AccountMainComponent,
-    private router:Router,) { }
+    private router:Router,
+    private personalInfo:PersonalInfo) { }
 
 
     logout(){
@@ -22,7 +23,7 @@ export class AppTopBar implements OnInit {
 
     ngOnInit(){
         this.router.events.subscribe(event =>{
-        var a = event['url'];
+        let a = event['url'];
         this.currentPage = a.split('/');
         this.currentPage.shift();
         this.currentPage.shift();
