@@ -256,12 +256,11 @@ export class TakedemotestComponent implements OnInit {
     }
   
   ngOnInit(){
-              var a = localStorage.getItem('session_token')
+              let a = localStorage.getItem('session_token')
          if(a=='testuser'){
-           console.log(a)
              this.router.navigate(['demotest']);
          }
-         else{ console.log("no")
+         else{ 
             this.router.navigate(['login'])
             }
     //   this.sessionToken = localStorage.getItem('session_token');
@@ -322,19 +321,19 @@ export class TakedemotestComponent implements OnInit {
     }
     
   next(){
-      var b = this.clickListener;
-      var a = 'Question'+(b+1);
+      let b = this.clickListener;
+      let a = 'Question'+(b+1);
       this.displayQuestion(a,b+1);
     }
 
   previous(){
-      var b = parseInt(this.clickListener)-1 
-      var a = 'Question'+(b-1);
+      let b = parseInt(this.clickListener)-1 
+      let a = 'Question'+(b-1);
       this.displayQuestion(a, b)
   }
 
   mark(){
-    var q = this.clickListener;
+    let q = this.clickListener;
     this.questionStatus[q]='Marked';
   }
 

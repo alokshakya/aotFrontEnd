@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 import { Response } from '@angular/http';
-import { MasterHttpService } from '../../../services/masterhttp.service';
 import {TreeModule,TreeNode} from 'primeng/primeng';
 import { Router } from '@angular/router';
+import { SubjectInfo } from '../../../services/data.service';
 
 
 @Component({
@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 })
 export class SampletestComponent implements OnInit {
 
-  subscribed=false;
   examPattern: SelectItem[];
 
   testData:any;
@@ -26,7 +25,7 @@ export class SampletestComponent implements OnInit {
 
   constructor(
    private router: Router,
-   private masterhttp: MasterHttpService) {
+   private subjectInfo: SubjectInfo) {
 
       this.testData = {
           "Sample Test 1": "35/50",
@@ -64,24 +63,24 @@ export class SampletestComponent implements OnInit {
     //   })
 
     //temporary service used
-    this.dummyChapters=[]
-    this.masterhttp.getChapters()
-    .subscribe(data=>{
-      data = data['chapters']['records'];
-      for(let i in data){
-        this.dummyChapters.push(data[i][1])
-      }
-    })
+    // this.dummyChapters=[]
+    // this.masterhttp.getChapters()
+    // .subscribe(data=>{
+    //   data = data['chapters']['records'];
+    //   for(let i in data){
+    //     this.dummyChapters.push(data[i][1])
+    //   }
+    // })
     
-    //temporary service used
-    this.dummyTopics = [];
-    this.masterhttp.getTopics()
-    .subscribe(data=>{
-      data = data['topics']['records'];
-      for(let i in data){
-        this.dummyTopics.push(data[i][1])
-      }
-    })
+    // //temporary service used
+    // this.dummyTopics = [];
+    // this.masterhttp.getTopics()
+    // .subscribe(data=>{
+    //   data = data['topics']['records'];
+    //   for(let i in data){
+    //     this.dummyTopics.push(data[i][1])
+    //   }
+    // })
 
   }
 

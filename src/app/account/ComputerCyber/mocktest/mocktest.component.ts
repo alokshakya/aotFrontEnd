@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
-import { MasterHttpService } from '../../../services/masterhttp.service'
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import { SubjectInfo } from '../../../services/data.service'
 
 @Component({
   selector: 'app-mocktest',
@@ -10,8 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./mocktest.component.scss']
 })
 export class MocktestComponent implements OnInit {
-
-    subscribed=false;
 
     date:number = Date.now();
 
@@ -21,13 +19,10 @@ export class MocktestComponent implements OnInit {
 
     examPattern: SelectItem[];
 
-    //temporary
-    dummyChapters:Array<string>;
-    dummyTopics:Array<string>;
 
   constructor(
       private router:Router,
-      private masterhttp: MasterHttpService)
+      private subjectInfo: SubjectInfo)
       {
           this.mockTestTableData =[ 
               {"Test":"Mock Test 1", "Slot 1":"95 Percentile", "Slot 2":"NA" },
@@ -50,25 +45,25 @@ export class MocktestComponent implements OnInit {
             datasets: [{data: [1,2],backgroundColor: ["#5CB85C","#D9534F"],hoverBackgroundColor: ["#5CB85C","#D9534F",]}]    
         };
 
-        //used temporary service
-      this.dummyChapters=[]
-      this.masterhttp.getChapters()
-      .subscribe(data=>{
-          data = data['chapters']['records'];
-          for(let i in data){
-              this.dummyChapters.push(data[i][1])
-          }
+    //     //used temporary service
+    //   this.dummyChapters=[]
+    //   this.masterhttp.getChapters()
+    //   .subscribe(data=>{
+    //       data = data['chapters']['records'];
+    //       for(let i in data){
+    //           this.dummyChapters.push(data[i][1])
+    //       }
 
-        //used temporary service
-      this.dummyTopics=[];
-      this.masterhttp.getTopics()
-      .subscribe(data=>{
-          data = data['topics']['records'];
-          for(let i in data){
-              this.dummyTopics.push(data[i][1])
-          }
-      })
-      })    
+    //     //used temporary service
+    //   this.dummyTopics=[];
+    //   this.masterhttp.getTopics()
+    //   .subscribe(data=>{
+    //       data = data['topics']['records'];
+    //       for(let i in data){
+    //           this.dummyTopics.push(data[i][1])
+    //       }
+    //   })
+    //   })    
 
     
   }

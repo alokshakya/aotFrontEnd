@@ -29,11 +29,11 @@
           <p-accordion>
               <div class="ui-g">
                 <div class="ui-g-12">
-                  <p-accordionTab  *ngFor="let data of dummyChapters">
+                  <p-accordionTab  *ngFor="let data of subjectInfo.computerSyllabus">
                     <p-header><span class="chapter"> {{data}} </span> </p-header>
                     <div class="ui-g">
-                      <div class="ui-g-12"  *ngFor="let test of dummyTopics">
-                        <span class="leftpad">{{test}}<br></span>
+                      <div class="ui-g-12"  *ngFor="let topic of subjectInfo.computerTopics">
+                        <span class="leftpad">{{topic}}<br></span>
                       </div>
                     </div>
                   </p-accordionTab>
@@ -44,7 +44,7 @@
       </div>
     </p-panel>
   </div>
-  <div class="ui-g-6 ui-sm-12">
+  <div class="ui-g-6 ui-sm-12" *ngIf="!subjectInfo.attemptedDemo['Computer/Cyber']">
     <p-panel header="Demo Test">
       <div id="demotest">
         <button pButton type="button" (click)="takedemotest()" label="TAKE DEMO TEST" class="ui-button-info"></button>

@@ -1,5 +1,5 @@
 <div class="ui-g">
-  <div class="ui-g-12">
+  <div class="ui-g-12" *ngIf="!subjectInfo.subscribedSubjects['Computer/Cyber']">
     <p-panel header="Subscribe">
       <div style="text-align:center">
         <h1>No Test Available</h1><br>
@@ -32,7 +32,7 @@
   </div>
 
   <div class="ui-g-6 ui-sm-12">
-    <p-panel><p-header>Mock Test<p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown></p-header>
+    <p-panel><p-header><span class="rightmargin">Mock Test</span><p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown></p-header>
       <div class="ui-g">
         <p-dataTable [value]="mockTestTableData" [responsive]="true">
             <p-column [style]="{'width':'150px'}" header="Test Number" field="Test"></p-column>
@@ -60,10 +60,10 @@
           <p-accordion>
               <div class="ui-g">
                 <div class="ui-g-12">
-                  <p-accordionTab  *ngFor="let data of dummyChapters">
+                  <p-accordionTab  *ngFor="let data of subjectInfo.computerSyllabus">
                       <p-header><span class="chapter"> {{data}} </span> </p-header>
                       <div class="ui-g">
-                          <div class="ui-g-12"  *ngFor="let topic of dummyTopics">
+                          <div class="ui-g-12"  *ngFor="let topic of subjectInfo.computerTopics">
                             <span class="leftpad">{{topic}}<br></span>
                           </div>
                       </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MasterHttpService } from '../../../services/masterhttp.service';
 import { Response } from '@angular/http';
 import {TreeModule,TreeNode} from 'primeng/primeng';
+import { SubjectInfo } from '../../../services/data.service';
 
 
 @Component({
@@ -22,7 +22,7 @@ export class DemotestComponent implements OnInit {
   
   constructor(
       private router: Router,
-      private masterhttp: MasterHttpService ){}
+      private subjectInfo: SubjectInfo ){}
 
 
   takedemotest(){
@@ -30,11 +30,16 @@ export class DemotestComponent implements OnInit {
   }
 
   ngOnInit() {
+
       this.demoTestData = {
           labels: ['Remaining'],
           datasets: [ {data: [1], backgroundColor: ["#D9534F"], hoverBackgroundColor: ["#D9534F"]} ]
         };
         
+      if(this.subjectInfo.attemptedDemo['Computer/Cyber']){
+          this.demoTestData['labels']=['Completed'];
+          this.demoTestData['datasets']=[{data:[1], backgroundColor:['#5CB85C'], hoverBackgroundColor: ["#5CB85C"]}]
+      }
     //   this.chapterNames = [];
     //   this.subjectSet.getChapters(1).subscribe((data: Response) => {
     //       data = data['resource'];
@@ -44,22 +49,22 @@ export class DemotestComponent implements OnInit {
     // })
 
     //temporary service used
-    this.dummyChapters = []
-    this.masterhttp.getChapters()
-    .subscribe(data=>{
-        data = data['chapters']['records'];
-        for(let i in data){
-        this.dummyChapters.push(data[i][1])
-        }
-    })
+    // this.dummyChapters = []
+    // this.masterhttp.getChapters()
+    // .subscribe(data=>{
+    //     data = data['chapters']['records'];
+    //     for(let i in data){
+    //     this.dummyChapters.push(data[i][1])
+    //     }
+    // })
 
-    this.dummyTopics = [];
-    this.masterhttp.getTopics()
-    .subscribe(data => {
-        data = data['topics']['records']
-        for(let i in data){
-            this.dummyTopics.push(data[i][1])
-            console.log(this.dummyTopics)} 
-    })}
-
+    // this.dummyTopics = [];
+    // this.masterhttp.getTopics()
+    // .subscribe(data => {
+    //     data = data['topics']['records']
+    //     for(let i in data){
+    //         this.dummyTopics.push(data[i][1])
+    //     }
+    // })
+  }
 }
