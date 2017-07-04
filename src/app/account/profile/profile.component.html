@@ -37,10 +37,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails" *ngIf="!editBasic">{{personalInfo.firstname}} {{personalInfo.lastname}}</span><input pInputText placeholder="{{personalInfo.firstname}}" *ngIf="editBasic" type="text" [(ngModel)]="dummyEditBasicInfo.firstname" ><input [(ngModel)]="dummyEditBasicInfo.lastname" placeholder="{{personalInfo.lastname}}" pInputText *ngIf="editBasic" type="text"></p>
+                            <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails" *ngIf="!editBasic">{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.last}}</span><input pInputText placeholder="{{personalInfo.firstname}}" *ngIf="editBasic" type="text" [(ngModel)]="dummyEditBasicInfo.firstname" ><input [(ngModel)]="dummyEditBasicInfo.lastname" placeholder="{{personalInfo.lastname}}" pInputText *ngIf="editBasic" type="text"></p>
                         </div>
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">&nbsp;&nbsp;{{personalInfo.email}}</span></p>
+                            <h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">&nbsp;&nbsp;{{personalInfo.userInfo.email}}</span></p>
                         </div>
                         <div class="col-md-4">
                             <button type="button" *ngIf="!editBasic" pButton class="ui-button-info" label="Edit" (click)="editBasicInfo()"></button>
@@ -51,12 +51,12 @@
 
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails"> &nbsp; {{dummyEditBasicInfo.class}}</span>
+                            <h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails"> &nbsp; {{personalInfo.classInfo.abbreviation}}</span>
                         </div>
 
                         <div class="col-md-6 userinfo">
                             <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4>
-                            <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.mobile}}</span><input class="withbtn" [(ngModel)]="personalInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><button *ngIf="editBasic" (click)="otpDialog=true" pButton class="ui-button-warning" label="Verify"></button> </p>
+                            <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span><input class="withbtn" [(ngModel)]="personalInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><button *ngIf="editBasic" (click)="otpDialog=true" pButton class="ui-button-warning" label="Verify"></button> </p>
                         </div>
                     </div>
 
@@ -64,17 +64,17 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12 column userinfo">
-                                  <h4><i class="fa fa-calendar"></i> Date Of Birth</h4><p><span class="userdetails" *ngIf="!editBasic" > &nbsp;{{personalInfo.dob}}</span> &nbsp; <p-calendar [(ngModel)]="date" dateFormat="dd/mm/yy" [maxDate]="maxDate" [yearNavigator]="true" yearRange="1998:2012" [monthNavigator]="true" *ngIf="editBasic"></p-calendar></p>
+                                  <h4><i class="fa fa-calendar"></i> Date Of Birth</h4><p><span class="userdetails" *ngIf="!editBasic" > &nbsp;{{personalInfo.userInfo.birthdate}}</span> &nbsp; <p-calendar [(ngModel)]="date" dateFormat="dd/mm/yy" [maxDate]="maxDate" [yearNavigator]="true" yearRange="1998:2012" [monthNavigator]="true" *ngIf="editBasic"></p-calendar></p>
                                 </div>
                                 <div class="col-md-12"></div>
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-male"></i> Gender</h4><p><span class="userdetails">{{personalInfo.gender}}</span></p>
+                                    <h4><i class="fa fa-male"></i> Gender</h4><p><span class="userdetails">{{personalInfo.userInfo.gender}}</span></p>
                                 </div>
                                 
                             </div>
                         </div>
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.address}}, {{personalInfo.city}}<br>&nbsp;{{personalInfo.state}}, {{personalInfo.country}}, &nbsp;{{personalInfo.pincode}}</span></p>
+                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo.address}}, {{personalInfo.userInfo.city}}<br>&nbsp;{{personalInfo.userInfo.state}}, {{personalInfo.userInfo.country}}, &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
                             <div class="address" *ngIf="editBasic">
                             <input pInputText type="text" placeholder="Address line 1"><br>
                             <input pInputText type="text" placeholder="Address line 2"><br>
@@ -143,8 +143,8 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-4">
                             <button type="button" *ngIf="!editPassword" pButton class="ui-button-info" label="Edit" (click)="editPassword=true"></button>
-                            <button type="button" *ngIf="editPassword" pButton class="ui-button-success" label="Save" (click)="changePassword();editPassword=false"></button>
-                            <button type="button" *ngIf="editPassword" pButton class="ui-button-danger" label="Cancel" (click)="editPassword=false"></button>
+                            <button type="button" *ngIf="editPassword" pButton class="ui-button-success" label="Save" (click)="changePassword()"></button>
+                            <button type="button" *ngIf="editPassword" pButton class="ui-button-danger" label="Cancel" (click)="cancelPassword()"></button>
                         </div>
                     </div>
 
@@ -190,7 +190,7 @@
                                 <div class="col-md-7 col-sm-12">
                                   <br>
                                   <textarea pInputTextarea [(ngModel)]="testimonial" placeholder="Enter Testimonial Here..."></textarea><br>
-                                  <button pButton label="Add Testimonial" class="ui-button-success"></button><button pButton label="Not Now" class="ui-button-danger"></button>
+                                  <button pButton label="Add Testimonial" (click)="addTestimonial()" class="ui-button-success"></button><button pButton label="Not Now" (click)="cancelTestimonial()" class="ui-button-danger"></button>
                                 </div>
                                 <div class="col-md-5 col-sm-12">
                                   <br>
@@ -208,28 +208,28 @@
             <p-tabPanel header="Add Achievements" leftIcon="fa-plus">
                 <p-panel header="Tell us about your Achievement">
                     <div class="ui-g">
-                        <div class="ui-g-4 col-sm-12">
+                        <div class="ui-g-4 ui-sm-12">
                             <label>Class*</label><p-dropdown [options]="classList" [style]="{'width':'50%'}" [(ngModel)]="selectedClass"></p-dropdown><br><br>
                             <label>Exam City*</label><input class="achieve" type="text" pInputText placeholder="Exam City">
                         </div>
-                        <div class="ui-g-4 col-sm-12">
+                        <div class="ui-g-4 ui-sm-12">
                             <label>Exam*</label><p-dropdown [options]="exam" [style]="{'width':'50%'}" [(ngModel)]="selectedExam"></p-dropdown><br><br>
                             <label>Exam Roll No.*</label><input class="achieve" type="text" pInputText placeholder="Roll number">
                         </div>
-                        <div class="ui-g-4 col-sm-12">
+                        <div class="ui-g-4 ui-sm-12">
                             <p class="guidelines">Submission Guidelines</p>
                             <span class="point"><i class="fa fa-check-square fa-lg"></i>Be Polite.</span><br>
                             <span class="point"><i class="fa fa-check-square fa-lg"></i>Never Abuse.</span>
                         </div>
                         <div class="ui-g-12"><hr></div>
-                        <div class="ui-g-4 col-sm-12 message">
-                            <textarea pInputTextarea [(ngModel)]="testimonial" maxlength="280" placeholder="Enter message here...."></textarea><br><br>
+                        <div class="ui-g-4 ui-sm-12 message">
+                            <textarea pInputTextarea [(ngModel)]="achievement" maxlength="280" placeholder="Enter message here...."></textarea><br><br>
                         </div>
-                        <div class="ui-g-8 col-sm-12">
+                        <div class="ui-g-8 ui-sm-12">
                             <p-checkbox  name="declaration" value="dec1" [(ngModel)]="dec"></p-checkbox>I, parent of the above mentioned kid confirm that the information provided here is true.<br><br>
                             <p-checkbox  name="declaration" value="dec2" [(ngModel)]="dec"></p-checkbox>I allow OlympiadBox to display the photograph and comment to online and offline media.<br><br>
                             <div class="text-center">
-                                <button pButton class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null" label="Add Achievement"></button><button pButton class="ui-button-danger" label="Not Now"></button>
+                                <button pButton class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null" label="Add Achievement" (click)="addAchievement()"></button><button pButton class="ui-button-danger" (click)="cancelAchievement()" label="Not Now"></button>
                             </div>
                         </div>
                     </div>

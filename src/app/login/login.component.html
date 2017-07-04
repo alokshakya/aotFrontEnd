@@ -38,7 +38,7 @@
 
           <!--Email Validator-->
           <input type="text"  name="email"
-            #email="ngModel" [(ngModel)]="userLoginCreds.email"  pInputText placeholder="Username"
+            #email="ngModel" [(ngModel)]="userLoginCreds.username"  pInputText placeholder="Username"
             pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required/>
           <div class="text-center">
               <p class="error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">Please Enter Valid Email Id</p>
@@ -77,12 +77,12 @@
             </div>
             <div class="ui-g-12 ui-sm-12 verify">
                 <h5>Send OTP on </h5>
-                <p-checkbox id="gap" value="mobile" [disabled]="forgot.errors" [(ngModel)]="mode" label="Mobile"></p-checkbox>
-                <p-checkbox value="email" [disabled]="forgot.errors" [(ngModel)]="mode" label="Email"></p-checkbox><br> 
+                <p-checkbox id="gap" value="verify_mobile" [disabled]="forgot.errors" [(ngModel)]="mode" label="Mobile"></p-checkbox>
+                <p-checkbox value="verify_email" [disabled]="forgot.errors" [(ngModel)]="mode" label="Email"></p-checkbox><br> 
                 <br>              
             </div>
             <div class="ui-g-12 ui-sm-12 text-center">
-                <button [disabled]="forgot.errors||mode==''||mode==null" (click)="verifyForgotToggle=true;" type="button" pButton label="Submit" class="ui-button-success"></button> 
+                <button [disabled]="forgot.errors||mode==''||mode==null" (click)="sendOtp('selective')" type="button" pButton label="Submit" class="ui-button-success"></button> 
                 <br>
             </div>
             <div class="ui-g-12 empty"></div>
@@ -93,26 +93,26 @@
                 <br>
                 <h2>Verification</h2>
             </div>
-            <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='mobile'||mode[1]=='mobile'">
-                <h5>Enter OTP sent on <strong>mobile</strong></h5>
-                <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="dummyOtp"></p-inputMask>
-                <button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="dummyMobileVerify()" label="Verify"></button>&nbsp;<button pButton [disabled]="mobileVerified" class="ui-button-info" label="Resend"></button>
+            <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='verify_mobile'||mode[1]=='verify_mobile'">
+                <h5>Enter OTP sent on <strong>{{registeredMobile}}</strong></h5>
+                <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="mobileOtp"></p-inputMask>
+                <button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="verifyOtp('verify_mobile',true)" label="Verify"></button>&nbsp;<button pButton [disabled]="mobileVerified" (click)="sendOtp('verify_mobile', true)" class="ui-button-info" label="Resend"></button>
                 <p class="success" *ngIf="mobileVerified">You can change your password below</p>
             </div>
-            <div class="ui-g-12 text-center" *ngIf="(mode[0]=='mobile'||mode[1]=='mobile')&&(mode[0]=='email'||mode[1]=='email')"><h4>OR</h4></div>
-            <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='email'||mode[1]=='email'">
+            <div class="ui-g-12 text-center" *ngIf="(mode[0]=='verify_mobile'||mode[1]=='verify_mobile')&&(mode[0]=='verify_email'||mode[1]=='verify_email')"><h4>OR</h4></div>
+            <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='verify_email'||mode[1]=='verify_email'">
                 <h5>Enter CODE sent on <strong>{{registeredEmail}}</strong></h5>
-                <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" placeholder="Enter Security Code" mask="aaa-aaa" [disabled]="emailVerified" [(ngModel)]="dummyCode"></p-inputMask>
-                <button pButton [disabled]="emailVerified" class="ui-button-success" (click)="dummyEmailVerify()" label="Verify"></button>&nbsp;<button [disabled]="emailVerified" pButton class="ui-button-info" label="Resend"></button>
+                <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" placeholder="Enter Security Code" mask="999-999" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
+                <button pButton [disabled]="emailVerified" class="ui-button-success" (click)="verifyOtp('verify_email',true)" label="Verify"></button>&nbsp;<button [disabled]="emailVerified" (click)="sendOtp('verify_email', true)" pButton class="ui-button-info" label="Resend"></button>
                 <p class="success" *ngIf="emailVerified">You can change your password below</p>
             </div>
             <div class="ui-g-12 empty" *ngIf="!(emailVerified||mobileVerified)"></div>
             <div class="ui-g-12 text-center aligned" *ngIf="emailVerified||mobileVerified">
-                <input pPassword promptLabel="Atleast 6 characters" #newpassword=ngModel type="password" name="newpassword" id="med1" [(ngModel)]="dummyPassword" placeholder="Enter New Password"
+                <input pPassword promptLabel="Atleast 6 characters" #newpassword=ngModel type="password" name="newpassword" id="med1" [(ngModel)]="passwordObj.new_password" placeholder="Enter New Password"
                  pattern="^[^\s]{6,}"><br>
-                <input pInputText id="med2" type="password" [(ngModel)]="dummyConfirmPassword" placeholder="Confirm Password">
-                <p [hidden]="newpassword.untouched"  *ngIf="dummyPassword!=dummyConfirmPassword" class="error">Password doesn't match</p><br>
-                <button pButton type="button" [disabled]="newpassword.errors||dummyPassword!=dummyConfirmPassword" label="Save" (click)="changePassword()" class="ui-button-success"></button>                
+                <input pInputText id="med2" type="password" [(ngModel)]="dummyPassword" placeholder="Confirm Password">
+                <p [hidden]="newpassword.untouched"  *ngIf="passwordObj.new_password!=dummyPassword" class="error">Password doesn't match</p><br>
+                <button pButton type="button" [disabled]="newpassword.errors||passwordObj.new_password!=dummyPassword" label="Save" (click)="changePassword()" class="ui-button-success"></button>                
             </div>
         </div>
 
@@ -147,7 +147,7 @@
                     </p>
                 </div>
                 <div class="ui-g-6 ui-sm-6"> <!--Mobile Validator -->
-                    <input name="number" placeholder="Mobile Number" #number="ngModel" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="dummyMobile" pInputText type="number">
+                    <input name="number" placeholder="Mobile Number" #number="ngModel" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="userRegCreds.mobile" pInputText type="number">
                     <p class="error" [hidden]="number.untouched" *ngIf="number.errors && number.errors.pattern">
                     Invalid Mobile Number
                     </p>
@@ -163,16 +163,16 @@
                     <p [hidden]="regPassword.untouched"  *ngIf="confirmPassword!=userRegCreds.password" class="error">Password doesn't match</p>
                 </div>
                 <div class="ui-g-6 ui-sm-6">
-                    <p-dropdown scrollHeight="120px" [style]="{'width':'195px'}" [options]="dummyClass" [(ngModel)]="dummySelectedClass"></p-dropdown>
+                    <p-dropdown scrollHeight="120px" [style]="{'width':'195px'}" [options]="dummyClass" [(ngModel)]="userRegCreds.class"></p-dropdown>
                 </div>
                 <div class="ui-g-6 ui-sm-12">
                     <button id="reg" type="button" pButton label="Register" [disabled]="regEmail.errors || firstname.errors 
                     || lastname.errors || regPassword.errors || number.errors 
-                    || dummyMobile==''||dummyMobile==null ||userRegCreds.password==''
+                    || userRegCreds.mobile==''||userRegCreds.mobile==null ||userRegCreds.password==''
                     || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''
-                    || dummySelectedClass==''||dummySelectedClass==null || userRegCreds.password==''
+                    || userRegCreds.class==''||userRegCreds.class==null || userRegCreds.password==''
                     || confirmPassword=='' || confirmPassword!=userRegCreds.password" 
-                    (click)="dummyRegister()" ></button>
+                    (click)="signUp()" ></button>
                 </div>
                     
                 <!--<div class="ui-g-12 ui-sm-12">
@@ -192,20 +192,20 @@
             </div>
             <div class="ui-g verify">
                 <div class="ui-g-6 ui-sm-12">
-                    Enter OTP sent on {{dummyMobile}}<br>
-                    <p-inputMask slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="dummyOtp"></p-inputMask>
+                    Enter OTP sent on {{userRegCreds.mobile}}<br>
+                    <p-inputMask slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="mobileOtp"></p-inputMask>
                     <p class="success" *ngIf="mobileVerified">Mobile number verified.</p>
                 </div>
                 <div class="ui-g-6 ui-sm-12">
-                    <br><button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="dummyMobileVerify()" label="Verify"></button>&nbsp;<button pButton [disabled]="mobileVerified" class="ui-button-info" label="Resend"></button>
+                    <br><button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="verifyOtp('verify_mobile')" label="Verify"></button>&nbsp;<button pButton [disabled]="mobileVerified" (click)="sendOtp('verify_mobile')" class="ui-button-info" label="Resend"></button>
                 </div>
                 <div class="ui-g-6 ui-sm-12">
                     Enter CODE sent on {{userRegCreds.email}}<br>
-                    <p-inputMask slotChar=" " unmask="true" placeholder="Enter Security Code" mask="aaa-aaa" [disabled]="emailVerified" [(ngModel)]="dummyCode"></p-inputMask>
+                    <p-inputMask slotChar=" " unmask="true" placeholder="Enter Security Code" mask="999-999" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
                     <p class="success" *ngIf="emailVerified">Email address verified</p>
                 </div>
                 <div class="ui-g-6 ui-sm-12">
-                    <br><button pButton [disabled]="emailVerified" class="ui-button-success" (click)="dummyEmailVerify()" label="Verify"></button>&nbsp;<button [disabled]="emailVerified" pButton class="ui-button-info" label="Resend"></button>
+                    <br><button pButton [disabled]="emailVerified" class="ui-button-success" (click)="verifyOtp('verify_email')" label="Verify"></button>&nbsp;<button [disabled]="emailVerified" (click)="sendOtp('verify_email')" pButton class="ui-button-info" label="Resend"></button>
                 </div>
             </div>
         </div>

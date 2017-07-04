@@ -6,6 +6,11 @@ import { Observable } from 'rxjs';
 export class PersonalInfo{
 
     userInfo:any;
+
+    userInfoId:string;
+    classInfo:any;
+    studentInfo:any;
+    schoolInfo:any;
     
     firstname:string;
     lastname:string;
@@ -22,8 +27,12 @@ export class PersonalInfo{
     constructor() {}
 
     setInfo(data){
-        this.userInfo = data;
+        this.userInfo = data['user_info'];
+        this.classInfo = data['class_info'];
+        this.studentInfo = data['student_info'];
+        this.schoolInfo = data['school_info'];
         this.email = data.email;
+        this.userInfoId = data['user_info_id'];
         this.lastname = data.lastname;
         this.firstname = data.firstname;
         this.state = data.state;
@@ -34,6 +43,12 @@ export class PersonalInfo{
         this.mobile = data.mobile;
         this.address = data.address;
         this.gender = data.gender;
+        // console.log(this.userInfo);
+        // console.log(this.classInfo);
+        // console.log(this.schoolInfo);
+        // console.log(this.studentInfo);
+
+
     }
 
 }
@@ -48,7 +63,7 @@ export class SubjectInfo{
     computerTopics:Array<string>;
 
     subscribedSubjects = {"Computer/Cyber":true, "Science":false, "Mathematics":true, "English":true, "General Knowledge":false,"Reasoning":true}
-    attemptedDemo = {"Computer/Cyber":true, "Science":true, "Mathematics":true, "English":false, "General Knowledge":false,"Reasoning":true}
+    attemptedDemo = {"Computer/Cyber":false, "Science":true, "Mathematics":true, "English":false, "General Knowledge":false,"Reasoning":true}
 
     constructor(){}
 
@@ -79,6 +94,8 @@ export class SubjectInfo{
 @Injectable()
 export class Misc{
 
+    token:string;
+
     testimonial:Array<any>;
     notice:Array<any>;
     fee:Array<any>;
@@ -88,6 +105,9 @@ export class Misc{
                         "Lorem 22222222 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
                         "Lorem 33333333 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
                     ]
+    setToken(token){
+        this.token = token;
+    }
 
     setTestimonial(data){
         this.testimonial = [];
@@ -132,8 +152,8 @@ export class Result{
                                     "notcompleted": 26
                                 },
                                 "Demo Test":{
-                                    "completed":100,
-                                    "notcompleted":0,
+                                    "completed":0,
+                                    "notcompleted":100,
                                 }
                             },
                             "Science": {

@@ -1,22 +1,67 @@
+
 import { Injectable, EventEmitter } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { PersonalInfo, SubjectInfo, Misc } from './data.service';
 import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import * as constants from '../../config/constants';
 
 @Injectable()
 export class MasterHttpService {
 
-  baseUrl = 'http://scripts.olympiadbox.com/services/api/api.php';
+  token:string;
   updated = 0;
+  queryHeaders;
+  baseUrl = 'http://scripts.olympiadbox.com/services/api/api.php';    
   constructor(
     private http: Http,
     private router: Router,
     private personalInfo: PersonalInfo,
     private subjectInfo: SubjectInfo,
     private misc: Misc)
-    {}
+    {
+      this.queryHeaders = new Headers();
+      this.queryHeaders.append('Content-Type', 'application/json');
+      this.queryHeaders.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
 
+    }
+
+  sendOtp(requestBody){
+  return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/otp/generate',requestBody ,{headers:this.queryHeaders})
+  .map((resp: Response) => resp.json())          
+      //response status conditions
+  }
+
+  verifyOtp(requestBody){
+    return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/otp/verify',requestBody, {headers:this.queryHeaders})
+    .map((resp: Response)=>resp.json());
+  }
+
+  updatePassword(requestBody){
+    return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/updatepassword', requestBody, {headers:this.queryHeaders})
+    .map((resp: Response)=>resp.json());
+  }  
+
+  forgotPassword(requestBody){
+    return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/forgotpassword', requestBody, {headers:this.queryHeaders})
+    .map((resp: Response)=>resp.json());
+  }
+
+  addTestimonial(requestBody){
+    return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/testimonial', requestBody, {headers:this.queryHeaders})
+    .map((resp:Response)=>resp.json())
+  }
+
+  addAchievement(requestBody){
+    return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/achievement', requestBody, {headers:this.queryHeaders})
+    .map((resp:Response)=>resp.json())
+  }
+
+  logout(requestBody){
+    return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/logout', requestBody, {headers:this.queryHeaders})
+    .map((resp:Response)=>resp.json())
+  }
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   dataRetreived(){
     if(this.updated==7){
       this.router.navigate(['account'])
@@ -25,9 +70,11 @@ export class MasterHttpService {
 
   //data service implementation
   getPersonalInfo(){
-    this.http.get(this.baseUrl+'/user_info/2').map((resp: Response) =>resp.json())
+    this.queryHeaders.append('session_token', this.misc.token);
+    this.http.get(constants.OLYMPIADBOX_INSTANCE_URL+ '/user/profile', {headers:this.queryHeaders})
     .subscribe((data) =>{
-      this.personalInfo.setInfo(data);
+      const object = JSON.parse(data['_body']);
+      this.personalInfo.setInfo(object[0]);
       this.updated++;
       this.dataRetreived();
    })

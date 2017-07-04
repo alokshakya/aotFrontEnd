@@ -2,7 +2,8 @@ import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} 
 import { Router } from '@angular/router';
 import { PersonalInfo } from '../../services/data.service';
 import { Response } from '@angular/http';
-import { Observable } from 'rxjs/Rx'
+import { Observable } from 'rxjs/Rx';
+import { Misc } from '../../services/data.service';
 
 
 enum MenuOrientation {
@@ -61,6 +62,11 @@ export class AccountMainComponent implements AfterViewInit {
     
     userEvent:any
 
+    //profile data
+    shownEmail:string;
+    email:string;
+    class:string;
+    name:string;
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
@@ -69,57 +75,29 @@ export class AccountMainComponent implements AfterViewInit {
     constructor(
         public renderer: Renderer, 
         private router: Router, 
-        private personalInfo: PersonalInfo 
+        private personalInfo: PersonalInfo,
+        private misc:Misc, 
         )
         {}
 
     ngOnInit() {
-        let a = localStorage.getItem('session_token')
-         if(a=='testuser'){
-             this.router.navigate(['account/dashboard']);
-         }else{this.router.navigate(['login'])}
+        if(this.misc.token==null||this.misc.token==''){
+            this.router.navigate(['login']);
+        }else{
+            // this.shownEmail = this.personalInfo.email;
+            this.name = this.personalInfo.userInfo.firstname+' '+this.personalInfo.userInfo.lastname;
+            this.email = this.personalInfo.userInfo.email;
+            this.shownEmail = this.email;
+            this.class = this.personalInfo.classInfo.abbreviation;
+            if(this.email.length>24){
+                this.shownEmail = this.email.slice(24,);
+            }
+        }
+
         
-        // this.masterhttp.getPersonalInfo();
-        // this.masterhttp.getSyllabus();
-
-        // if (this.personalInfo.email.length>25){
-        //     this.shownEmail = this.email.slice(0,26) + '...'
-        // }
-        // this.sessionToken = localStorage.getItem('session_token');
-        // // this.isLogin(this.sessionToken);
-        // this.getUserInfo()
-
-        //temporary service
-
-        // this.masterhttp.getClass()
-        // .subscribe((data: Response) =>{
-        //     this.temporaryClass = data['abbreviation'];
-        //     this.loader = true;
-            
-        // })
 
     }
-
-    // getUserInfo(){
-    //      this.http.getUserInfo(this.email).subscribe((response: Response)=>{
-    //             this.personalDetails = response['resource'][0];
-    //             this.email = this.personalDetails.email
-    //             this.studentName = this.personalDetails.firstname + ' ' + this.personalDetails.lastname;
-    //             this.userInfoId = this.personalDetails.user_info_id;
-    //         });
-    //     this.http.getAcademicInfo(this.userInfoId).subscribe((response: Response) =>{
-    //         this.academicDetails  = response;
-    //         this.class =  this.academicDetails.class_by_class_id.abbreviation;
-    //     }),(error)=>{
-    //     }          
-    // }
-
-    isLogin(token){
-        if (token==null||token==''){
-            this.router.navigate(['login'])
-        }
-        // else { this.getUserInfo()}
-    }  
+  
 
     change(changed:boolean){
     }    

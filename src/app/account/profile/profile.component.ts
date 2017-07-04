@@ -4,6 +4,8 @@ import { SelectItem } from 'primeng/primeng';
 import { Message } from 'primeng/primeng';
 import { ConfirmationService } from 'primeng/primeng';
 import { PersonalInfo,Misc } from '../../services/data.service';
+import { MasterHttpService } from '../../services/masterhttp.service';
+
 
 
 
@@ -20,6 +22,7 @@ export class ProfileComponent implements OnInit {
   dummyIncorrectOtp:boolean;
   actualOTP=123456;
   dummyOtp:number;
+
 
   //basic info tab
   editBasic:boolean;
@@ -65,17 +68,24 @@ export class ProfileComponent implements OnInit {
   date:Date;
   test:any;
   
+  userInfo:any;
+  classInfo:any;
+  schoolInfo:any;
+  studentInfo:any;
+  achievement;
   constructor(
     //  private httpService: UserinfoService,
     // private classService: SubjectService,
     // private update: UpdateService,
     private confirmservice: ConfirmationService,
     private personalInfo:PersonalInfo,
-    private misc: Misc
+    private misc: Misc,
+    private masterhtttp: MasterHttpService
     ){}  
-
-
   ngOnInit() {
+    if(this.personalInfo.schoolInfo!=null){
+      this.schoolInfo = this.personalInfo.schoolInfo;
+    }
     this.dec = [];
 
     this.exam.push(
@@ -261,14 +271,66 @@ export class ProfileComponent implements OnInit {
   // }
 
   changePassword(){
-    if(this.storedPwd!=this.oldPassword){
-        this.growlmsg.push({severity:'error', summary:'Incorrect Old Password', detail:'Please try again'});
-
-    }else if(this.confirmNewPassword!=this.newPassword){
+    let requestbody = {'old_password':this.oldPassword,'new_password':this.confirmNewPassword,'user_info_id':this.personalInfo.userInfo['user_info_id']}
+    if(this.confirmNewPassword!=this.newPassword){
     this.growlmsg.push({severity:'error', summary:"Password doesn't match", detail:'Please try again'});
-
     }
-    else{    this.growlmsg.push({severity:'success', summary:"Password Changed", detail:'Please try again'});}
+    else{
+      this.masterhtttp.updatePassword(requestbody)
+      .subscribe((data:Response) =>{
+        if(data['status']==200){
+          this.cancelPassword();
+          this.growlmsg = [];
+          this.growlmsg.push({severity:'success', summary:"Success", detail:'Password Updated'});
+        }else {
+          this.growlmsg = [];
+          this.growlmsg.push({severity:'error', summary:"Incorrect Old Password", detail:'Please try again'});
+        }
+        console.log(data);
+        console.log(requestbody);
+      })
+    }
+        //this.growlmsg.push({severity:'success', summary:"Password Changed", detail:'Please try again'});}
+  }
+
+
+  cancelPassword(){
+    this.newPassword = null;
+    this.confirmNewPassword = null;
+    this.oldPassword = null;
+    this.editPassword = false
+  }
+
+  addTestimonial(){
+    let requestBody = {'text':this.testimonial, 'student_id':this.personalInfo.studentInfo['student_id']}
+    this.masterhtttp.addTestimonial(requestBody)
+    .subscribe((data:Response)=>{
+      if(data['status']==200){
+        this.growlmsg = [];
+        this.growlmsg.push({severity:'success', summary:"Success", detail:'Testimonial Added'})
+      }
+    })
+  }
+
+  cancelTestimonial(){
+    this.testimonial = "Enter Your Testimonial Here..."
+  }
+
+  addAchievement(){
+    let requestBody = {'text':this.achievement, 'student_id':this.personalInfo.studentInfo['student_id']}
+    this.masterhtttp.addAchievement(requestBody)
+    .subscribe((data: Response)=>{
+      console.log(data);
+      if(data['status']==200){
+        this.growlmsg = [];
+        this.growlmsg.push({severity:'success', summary:"Success", detail:'Achievement Added'})
+      }
+    })
+  }
+
+  cancelAchievement(){
+    this.achievement = 'Enter Your Message Here...'
+    this.dec = [];
   }
 
   //otp verification
@@ -295,6 +357,8 @@ export class ProfileComponent implements OnInit {
     this.currentTestimonial = this.misc.userTestimonial[this.index];
     this.editTestimonial = false;
   }
+
+
 
   //tab change event
   onChange(){

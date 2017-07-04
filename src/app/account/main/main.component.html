@@ -28,9 +28,9 @@
                 </div>
                 <div style="padding-left:20px;color:white">
                     <div class="wrapper"><!--*ngIf="loader"-->
-                        <h5>{{personalInfo.firstname}} {{personalInfo.lastname}} </h5>
-                        <h5>Class V</h5>
-                        <h5 pTooltip="{{personalInfo.email}}" tooltipPosition="bottom">{{personalInfo.email}}</h5>
+                        <h5>{{name}}</h5>
+                        <h5>Class {{class}}</h5>
+                        <h5 pTooltip="{{email}}" tooltipPosition="bottom">{{shownEmail}}</h5>
                         <i pTooltip="Change Profile Picture" tooltipPosition="bottom" class="fa fa-edit" (click)="changeImg=true"></i>
                     </div>
                 </div>

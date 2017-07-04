@@ -1,7 +1,9 @@
 import { Component,  OnInit, Inject, forwardRef } from '@angular/core';
 import { AccountMainComponent } from '../main/main.component';
 import { Router } from '@angular/router';
-import { PersonalInfo } from '../../services/data.service'
+import { PersonalInfo,Misc } from '../../services/data.service';
+import { MasterHttpService } from '../../services/masterhttp.service'
+
 
 @Component({
     selector: 'app-topbar',
@@ -12,13 +14,20 @@ export class AppTopBar implements OnInit {
     currentPage:Array<string>;
     constructor(@Inject(forwardRef(() => AccountMainComponent))  public app:AccountMainComponent,
     private router:Router,
-    private personalInfo:PersonalInfo) { }
+    private misc:Misc,
+    private personalInfo:PersonalInfo,
+    private masterhttp:MasterHttpService) { }
 
 
     logout(){
-        localStorage.setItem('session_token','');
-        this.router.navigate(['/login']);
-
+        let userInfoId = this.personalInfo.userInfo['user_info_id']
+        this.masterhttp.logout(userInfoId)
+        .subscribe((data:Response)=>{
+            if (data['status']==200){
+                this.misc.setToken(null);
+                this.router.navigate(['login']);
+            }
+        })
     };
 
     ngOnInit(){
