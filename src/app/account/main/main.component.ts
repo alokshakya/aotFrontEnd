@@ -1,6 +1,7 @@
 import {Component,AfterViewInit,OnInit,ElementRef,Renderer,ViewChild,OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
 import { PersonalInfo } from '../../services/data.service';
+import { MasterHttpService } from '../../services/masterhttp.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Misc } from '../../services/data.service';
@@ -76,26 +77,20 @@ export class AccountMainComponent implements AfterViewInit {
         public renderer: Renderer, 
         private router: Router, 
         private personalInfo: PersonalInfo,
-        private misc:Misc, 
+        private misc:Misc,
+        private masterhttp: MasterHttpService
         )
         {}
 
     ngOnInit() {
-        if(this.misc.token==null||this.misc.token==''){
-            this.router.navigate(['login']);
-        }else{
-            // this.shownEmail = this.personalInfo.email;
-            this.name = this.personalInfo.userInfo.firstname+' '+this.personalInfo.userInfo.lastname;
-            this.email = this.personalInfo.userInfo.email;
-            this.shownEmail = this.email;
-            this.class = this.personalInfo.classInfo.abbreviation;
-            if(this.email.length>24){
-                this.shownEmail = this.email.slice(24,);
-            }
+        this.masterhttp.checkToken();
+        this.name = this.personalInfo.userInfo.firstname+' '+this.personalInfo.userInfo.lastname;
+        this.email = this.personalInfo.userInfo.email;
+        this.shownEmail = this.email;
+        this.class = this.personalInfo.classInfo.abbreviation;
+        if(this.email.length>24){
+            this.shownEmail = this.email.slice(24,);
         }
-
-        
-
     }
   
 

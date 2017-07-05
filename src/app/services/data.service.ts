@@ -6,23 +6,13 @@ import { Observable } from 'rxjs';
 export class PersonalInfo{
 
     userInfo:any;
-
-    userInfoId:string;
     classInfo:any;
     studentInfo:any;
-    schoolInfo:any;
+    schoolInfo = {'name':null, 'contact_person':null, 'contact_mobile':null};
+    couponCode:string;
+
+    dummySchoolInfo = {'school_id':null};
     
-    firstname:string;
-    lastname:string;
-    email:string;
-    dob:string;
-    address:string;
-    city:string;
-    state:string;
-    country:string;
-    pincode:number;
-    gender:string;
-    mobile:number;
 
     constructor() {}
 
@@ -30,26 +20,23 @@ export class PersonalInfo{
         this.userInfo = data['user_info'];
         this.classInfo = data['class_info'];
         this.studentInfo = data['student_info'];
-        this.schoolInfo = data['school_info'];
-        this.email = data.email;
-        this.userInfoId = data['user_info_id'];
-        this.lastname = data.lastname;
-        this.firstname = data.firstname;
-        this.state = data.state;
-        this.city = data.city;
-        this.country = data.country;
-        this.pincode = data.pincode;
-        this.dob = data.birthday;
-        this.mobile = data.mobile;
-        this.address = data.address;
-        this.gender = data.gender;
-        // console.log(this.userInfo);
-        // console.log(this.classInfo);
-        // console.log(this.schoolInfo);
-        // console.log(this.studentInfo);
-
-
+        if(data['school_info']!=null){
+            for(let key in data['school_info']){
+                this.schoolInfo[key] = data['school_info'][key];
+                this.dummySchoolInfo[key] = data['school_info'][key];
+            }
+        }
     }
+
+    setSchoolInfo(data){
+        for(let key in data['school_info']){
+            this.schoolInfo[key] = data['school_info'][key];
+        }
+        for(let key in data['complete_school_info']){
+            this.schoolInfo[key] = data['complete_school_info'][key]
+        }
+    }
+
 
 }
 
@@ -93,9 +80,6 @@ export class SubjectInfo{
 
 @Injectable()
 export class Misc{
-
-    token:string;
-
     testimonial:Array<any>;
     notice:Array<any>;
     fee:Array<any>;
@@ -105,10 +89,7 @@ export class Misc{
                         "Lorem 22222222 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
                         "Lorem 33333333 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
                     ]
-    setToken(token){
-        this.token = token;
-    }
-
+    
     setTestimonial(data){
         this.testimonial = [];
         for (let i in data){

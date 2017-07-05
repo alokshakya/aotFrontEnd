@@ -24,7 +24,8 @@ export class AppTopBar implements OnInit {
         this.masterhttp.logout(userInfoId)
         .subscribe((data:Response)=>{
             if (data['status']==200){
-                this.misc.setToken(null);
+                console.log(data)
+                this.masterhttp.setToken(null);
                 this.router.navigate(['login']);
             }
         })

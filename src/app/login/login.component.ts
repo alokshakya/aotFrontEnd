@@ -84,9 +84,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(){
 
-    //this.reset();
-
-
     this.userLoginCreds = {"username":"", "password":""};
     this.userRegCreds = {"firstname":"","lastname":"", "email":"","password":"","class":"","mobile":""};
     this.passwordObj = {"new_password":"","email":""};    
@@ -148,6 +145,7 @@ export class LoginComponent implements OnInit {
       wrapper['email'] = this.registeredEmail;
     }
     wrapper[mode] = true;
+    
     let x;
     if(mode=='verify_email'){
       x='Email';
@@ -184,7 +182,7 @@ export class LoginComponent implements OnInit {
   }
 
   setToken(token){
-    this.misc.setToken(token);
+    this.masterhttp.setToken(token);
     this.router.navigate(['loadout']);
   }
 
@@ -213,21 +211,8 @@ export class LoginComponent implements OnInit {
         this.message=[];
         this.message.push({severity:'info', summary:'Email Already Exists', detail:'Please Login'});
       }
-    }
-    )
+    })
   }
-      // this.message=[];
-      // this.message.push({severity:'success', summary:'Registration Successful', detail:'Please Login'});
-      // this.loginRegToggle = !this.loginRegToggle;},
-
-      // (error) => {
-      //         this.message=[];
-      //         this.message.push({severity:'info', summary:'Email Already Exists', detail:'Try Again'});
-  //           }
-  //   );
-  // }
-
-  //temporary
 
   //called when clicked on forgot password
   forgotPassword(){
@@ -236,48 +221,8 @@ export class LoginComponent implements OnInit {
     this.mobileVerified = false;
   }
 
-  // sendOtp(){
-  //   let requestBody:any;
-  //   this.mode.forEach(element => {
-      
-  //   });
-  //   this.masterhttp.sendOtp(requestBody);
-  //   this.verifyForgotToggle=true;
-  // }
-
-  dummyRegister(){
-      this.message=[];
-      this.message.push({severity:'info', summary:'Verify mobile and email', detail:''})
-      this.regVerifyToggle = true;
-
-  }
-
-  // dummyMobileVerify(){
-  //   if(this.actualOTP==this.dummyOtp){
-  //     var a = this.mode.indexOf('email')
-  //     this.mode[a]=null;
-  //     this.mobileVerified=true;
-  //     this.check();
-  //   }else{
-  //     this.message=[];
-  //     this.message.push({severity:'error', summary:'Incorrect OTP', detail:'Please try again'})
-  //   }
-  // }
-
-  // dummyEmailVerify(){
-  //   if(this.dummyCode==this.actualCode){
-  //     var a = this.mode.indexOf('mobile')
-  //     this.mode[a]=null;
-  //     this.emailVerified=true; 
-  //     this.check();
-  //   }else{
-  //     this.message=[];
-  //     this.message.push({severity:'error', summary:'Incorrect Verification Code', detail:'Please try again'})
-  //   }
-  // }
-
-    //use to toggle loginRegister after successful registration
-    check(){
+    //used to toggle loginRegister after successful registration
+  check(){
     if(this.mobileVerified && this.emailVerified){
       this.message=[]
       this.message.push({severity:'success', summary:'Registration Successful', detail:'Please login'})
@@ -286,14 +231,8 @@ export class LoginComponent implements OnInit {
     }
   }
   
+  //reset flags
   reset(){
-      //this.dummyOtp=null;
-      // this.dummyMobile=null;
-      // this.dummySelectedClass=null;
-      // this.confirmPassword=null;
-      // this.confirmPassword=null;
-      // this.dummyPassword=null;
-      // this.dummyConfirmPassword=null;
       this.loginForgotToggle=false;
       this.regVerifyToggle=false;
       this.mobileVerified=false;
@@ -307,7 +246,7 @@ export class LoginComponent implements OnInit {
       this.mode = [];
   }
 
-//submit new password
+  //submit new password
   changePassword(){
     this.passwordObj['new_password'] = this.dummyPassword;
     this.passwordObj['email'] = this.registeredEmail;
@@ -323,7 +262,6 @@ export class LoginComponent implements OnInit {
         this.message.push({severity:"error",summary:"Unable To Change Password",detail:"Please Try Again"})
       }
     })
-    // 
   }
 
 

@@ -26,7 +26,8 @@ export class ProfileComponent implements OnInit {
 
   //basic info tab
   editBasic:boolean;
-  dummyEditBasicInfo:any;
+  dummyBasicInfo:any;
+  schoolId:number;
   city:SelectItem[] = [];
   state:SelectItem[] = [];
   country:SelectItem[] =[];
@@ -68,10 +69,7 @@ export class ProfileComponent implements OnInit {
   date:Date;
   test:any;
   
-  userInfo:any;
-  classInfo:any;
-  schoolInfo:any;
-  studentInfo:any;
+  couponCode:string;
   achievement;
   constructor(
     //  private httpService: UserinfoService,
@@ -82,10 +80,9 @@ export class ProfileComponent implements OnInit {
     private misc: Misc,
     private masterhtttp: MasterHttpService
     ){}  
+
+
   ngOnInit() {
-    if(this.personalInfo.schoolInfo!=null){
-      this.schoolInfo = this.personalInfo.schoolInfo;
-    }
     this.dec = [];
 
     this.exam.push(
@@ -140,22 +137,6 @@ export class ProfileComponent implements OnInit {
       {label: "VII", value:"VII"},
       {label: "VIII", value:"VIII"},
     )
-
-
-    this.dummyEditBasicInfo = {
-        firstname: "",
-        lastname: "", 
-        email:"", 
-        address:"", 
-        mobile: "", 
-        class:"V", 
-        dob:"11/03/1998", 
-        state:"", 
-        city:"", 
-        gender:"",
-        country:"",
-        pincode:"",
-    }
 
     this.dummySchoolInfo = {
       code:"OBU232",
@@ -246,9 +227,77 @@ export class ProfileComponent implements OnInit {
   // }
 
   editBasicInfo(){
-    // this.dummyEditBasicInfo = JSON.parse(JSON.stringify(this.dummyBasicInfo))
-    // this.elem.nativeElement.focus();
+    this.dummyBasicInfo = JSON.parse(JSON.stringify(this.personalInfo.userInfo));
     this.editBasic = true;
+  }
+
+  cancelBasicInfo(){
+    this.dummyBasicInfo = JSON.parse(JSON.stringify(this.personalInfo.userInfo));
+    this.editBasic = false;
+  }
+
+  saveBasicInfo(){
+    let wrapper = {
+      'firstname':this.dummyBasicInfo['firstname'],
+      'lastname':this.dummyBasicInfo['lastname'],
+      'country':this.dummyBasicInfo['country'],
+      'address':this.dummyBasicInfo['address'],
+      'state':this.dummyBasicInfo['state'],
+      'city':this.dummyBasicInfo['city'],
+      'birthdate':this.dummyBasicInfo['birthdate'],
+      'pincode':this.dummyBasicInfo['pincode'],
+      'mobile':this.dummyBasicInfo['mobile'],
+      'school_id':this.schoolId
+      }
+    this.masterhtttp.updateProfile(wrapper)
+    .subscribe((data: Response)=>{
+       if(data['status']==200){
+         this.personalInfo.userInfo = this.dummyBasicInfo;
+         this.editBasic = false;
+         this.growlmsg = [];
+         this.growlmsg.push({severity:'success',summary:'Success',detail:'Profile Updated'})
+       }
+    })
+  }
+
+  editSchoolInfo(){
+    this.couponCode = this.personalInfo.couponCode;
+    this.editSchool = true;
+  }
+
+  cancelSchoolInfo(){
+    this.couponCode = this.personalInfo.couponCode;
+    if(this.personalInfo.schoolInfo==null){
+      this.personalInfo.schoolInfo = JSON.parse(JSON.stringify(this.personalInfo.dummySchoolInfo));
+    }
+    this.editSchool = false;
+  }
+
+  updateSchool(){
+    let wrapper = {'school_id':this.personalInfo.schoolInfo['school_id']}
+    this.masterhtttp.updateProfile(wrapper)
+    .subscribe((data:Response)=>{
+      console.log(data);
+    })
+  }
+
+  saveSchoolInfo(){
+    this.personalInfo.couponCode = this.couponCode;
+    let wrapper = {'coupon_code':this.personalInfo.couponCode}
+    this.masterhtttp.getSchool(wrapper)
+    .subscribe((data:Response)=>{
+      if(data['status']==200){
+        this.personalInfo.setSchoolInfo(data['message'])
+        this.updateSchool();
+        this.growlmsg = [];
+        this.growlmsg.push({severity:'success',summary:'Success',detail:'School Info Saved'})
+        this.editSchool = false;
+        console.log(this.personalInfo.schoolInfo)
+      }else {
+        this.growlmsg = [];
+        this.growlmsg.push({severity:'error',summary:'Invalid Coupon Code',detail:'Try Again With A Different Coupon Code'})
+      }
+    })
   }
 
   // dummySave(){
@@ -286,8 +335,6 @@ export class ProfileComponent implements OnInit {
           this.growlmsg = [];
           this.growlmsg.push({severity:'error', summary:"Incorrect Old Password", detail:'Please try again'});
         }
-        console.log(data);
-        console.log(requestbody);
       })
     }
         //this.growlmsg.push({severity:'success', summary:"Password Changed", detail:'Please try again'});}

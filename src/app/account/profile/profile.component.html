@@ -19,7 +19,7 @@
 <p-dialog header="Mobile Number Verification" [(visible)]="otpDialog" modal="true" responsive="true" [width]="400" [height]="300"> 
     <div class="ui-g text-center">
         <div class="ui-g-12" *ngIf="otpDialog">
-            <h5>Enter OTP sent on {{dummyEditBasicInfo?.mobile}} </h5>
+            <h5>Enter OTP sent on {{dummyBasicInfo?.mobile}} </h5>
             <input class="short" pInputText placeholder="Enter OTP" [(ngModel)]="dummyOtp"/><button class="ui-button-info withinput" pButton label="Resend"></button><br>
             <br><button pButton (click)="dummyVerify()" class="ui-button-success" label="Verify"></button>
         </div>
@@ -37,15 +37,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails" *ngIf="!editBasic">{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.last}}</span><input pInputText placeholder="{{personalInfo.firstname}}" *ngIf="editBasic" type="text" [(ngModel)]="dummyEditBasicInfo.firstname" ><input [(ngModel)]="dummyEditBasicInfo.lastname" placeholder="{{personalInfo.lastname}}" pInputText *ngIf="editBasic" type="text"></p>
+                            <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails" *ngIf="!editBasic">{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</span><input pInputText placeholder="{{dummyBasicInfo.firstname}}" *ngIf="editBasic" type="text" [(ngModel)]="dummyBasicInfo.firstname" ><input [(ngModel)]="dummyBasicInfo.lastname" placeholder="{{dummyBasicInfo.lastname}}" pInputText *ngIf="editBasic" type="text"></p>
                         </div>
                         <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">&nbsp;&nbsp;{{personalInfo.userInfo.email}}</span></p>
                         </div>
                         <div class="col-md-4">
                             <button type="button" *ngIf="!editBasic" pButton class="ui-button-info" label="Edit" (click)="editBasicInfo()"></button>
-                            <button type="button" *ngIf="editBasic" pButton class="ui-button-success" label="Save" (click)="editBasic=false"></button>
-                            <button type="button" *ngIf="editBasic" pButton class="ui-button-danger" label="Cancel" (click)="editBasic=false"></button>
+                            <button type="button" *ngIf="editBasic" pButton class="ui-button-success" label="Save" (click)="saveBasicInfo()"></button>
+                            <button type="button" *ngIf="editBasic" pButton class="ui-button-danger" label="Cancel" (click)="cancelBasicInfo()"></button>
                         </div>
                     </div>
 
@@ -56,7 +56,7 @@
 
                         <div class="col-md-6 userinfo">
                             <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4>
-                            <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span><input class="withbtn" [(ngModel)]="personalInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><button *ngIf="editBasic" (click)="otpDialog=true" pButton class="ui-button-warning" label="Verify"></button> </p>
+                            <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span><input class="withbtn" [(ngModel)]="dummyBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><button *ngIf="editBasic" (click)="otpDialog=true" pButton class="ui-button-warning" label="Verify"></button> </p>
                         </div>
                     </div>
 
@@ -76,12 +76,11 @@
                         <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo.address}}, {{personalInfo.userInfo.city}}<br>&nbsp;{{personalInfo.userInfo.state}}, {{personalInfo.userInfo.country}}, &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
                             <div class="address" *ngIf="editBasic">
-                            <input pInputText type="text" placeholder="Address line 1"><br>
-                            <input pInputText type="text" placeholder="Address line 2"><br>
-                            <div class="select"><p-dropdown  [options]="state" [(ngModel)]="dummyEditBasicInfo.state"></p-dropdown></div>
-                            <div class="select"><p-dropdown  [options]="city" [(ngModel)]="dummyEditBasicInfo.city"></p-dropdown></div>
-                            <div class="select"><p-dropdown  [options]="country" [(ngModel)]="dummyEditBasicInfo.country"></p-dropdown></div>
-                            <input  type="number" pInputText maxlength="6" placeholder="Pincode">
+                            <input pInputText type="text" [(ngModel)]="dummyBasicInfo.address"><br>
+                            <div class="select"><p-dropdown  [options]="state" [(ngModel)]="dummyBasicInfo.state"></p-dropdown></div>
+                            <div class="select"><p-dropdown  [options]="city" [(ngModel)]="dummyBasicInfo.city"></p-dropdown></div>
+                            <div class="select"><p-dropdown  [options]="country" [(ngModel)]="dummyBasicInfo.country"></p-dropdown></div>
+                            <input  type="number" pInputText maxlength="6" [(ngModel)]="dummyBasicInfo.pincode">
                             </div>  
                         
                         </div>
@@ -93,39 +92,39 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-sticky-note-o"></i> School Code </h4><p><span *ngIf="!editSchool" class="userdetails schoolcode"> {{dummySchoolInfo?.code}}</span> &nbsp;<input class="longinput" [(ngModel)]="dummyEditSchoolInfo.code" pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-sticky-note-o"></i> School Code </h4><p><span *ngIf="!editSchool" class="userdetails schoolcode"> {{personalInfo.couponCode}}</span> &nbsp;<input class="longinput" [(ngModel)]="couponCode" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-user"></i> Contact Person</h4><p><span class="userdetails"> &nbsp;{{dummySchoolInfo?.contactperson}}</span> &nbsp;</p>
+                            <h4><i class="fa fa-user"></i> Contact Person</h4><p><span class="userdetails"> &nbsp;{{personalInfo.schoolInfo['contact_person']}}</span> &nbsp;</p>
                         </div>
                         <div class="col-md-4">
-                            <button type="button" *ngIf="!editSchool" pButton class="ui-button-info" label="Edit" (click)="editSchool=true"></button>
-                            <button type="button" *ngIf="editSchool" pButton class="ui-button-success" label="Save" (click)="editSchool=false"></button>
-                            <button type="button" *ngIf="editSchool" pButton class="ui-button-danger" label="Cancel" (click)="editSchool=false"></button>
+                            <button type="button" *ngIf="!editSchool" pButton class="ui-button-info" label="Edit" (click)="editSchoolInfo()"></button>
+                            <button type="button" *ngIf="editSchool" pButton class="ui-button-success" label="Save" [disabled]="couponCode==''||couponCode==null" (click)="saveSchoolInfo()"></button>
+                            <button type="button" *ngIf="editSchool" pButton class="ui-button-danger" label="Cancel" (click)="cancelSchoolInfo()"></button>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-university"></i> School Name </h4><p><span class="userdetails schoolname"> {{dummySchoolInfo?.schoolname}}</span></p>
+                            <h4><i class="fa fa-university"></i> School Name </h4><p><span class="userdetails schoolname"> {{personalInfo.schoolInfo['name']}}</span></p>
                         </div>
 
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-envelope-o"></i> Email</h4><p><span class="userdetails">&nbsp; {{dummySchoolInfo?.email}}</span></p>                        </div>
+                            <h4><i class="fa fa-envelope-o"></i> Email</h4><p><span class="userdetails">&nbsp; {{personalInfo.schoolInfo['email']}}</span></p>                        </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails">  &nbsp;{{dummySchoolInfo?.address}}, {{dummySchoolInfo?.city}}, {{dummySchoolInfo?.state}}, <br> &nbsp;{{dummySchoolInfo?.country}}, {{dummySchoolInfo?.pincode}}</span></p>
+                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails">  &nbsp;{{personalInfo.schoolInfo.address}}, {{personalInfo.schoolInfo.city}}, {{personalInfo.schoolInfo.state}}, <br> &nbsp;{{personalInfo.schoolInfo.country}}, {{personalInfo.schoolInfo.pincode}}</span></p>
                         </div>
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-phone"></i> Landline</h4><p><span class="userdetails">&nbsp;{{dummySchoolInfo?.landline}}</span></p>
+                                    <h4><i class="fa fa-phone"></i> Landline</h4><p><span class="userdetails">&nbsp;{{personalInfo.schoolInfo.landline}}</span></p>
                                 </div>
                                 <div class="col-md-12"></div>
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-mobile"></i> Mobile</h4><p><span class="userdetails">{{dummySchoolInfo?.mobile}}</span></p>
+                                    <h4><i class="fa fa-mobile"></i> Mobile</h4><p><span class="userdetails">{{personalInfo.schoolInfo['contact_mobile']}}</span></p>
                                 </div>
                             </div>
                         </div>

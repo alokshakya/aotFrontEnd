@@ -23,8 +23,20 @@ export class MasterHttpService {
       this.queryHeaders = new Headers();
       this.queryHeaders.append('Content-Type', 'application/json');
       this.queryHeaders.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
-
     }
+
+  checkToken(){
+    if(this.token==null){
+      this.router.navigate(['login']);
+    }
+  }
+
+  setToken(token){
+    this.token = token;
+    this.queryHeaders.append('session_token',token);
+    this.updated++;
+    this.dataRetreived();
+  }
 
   sendOtp(requestBody){
   return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/otp/generate',requestBody ,{headers:this.queryHeaders})
@@ -61,22 +73,34 @@ export class MasterHttpService {
     return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/logout', requestBody, {headers:this.queryHeaders})
     .map((resp:Response)=>resp.json())
   }
+
+  updateProfile(requestBody){
+    return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/update', requestBody, {headers:this.queryHeaders})
+    .map((resp:Response) => resp.json())
+
+  }
+
+  getSchool(couponeCode){
+    return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/school', couponeCode, {headers:this.queryHeaders})
+    .map((resp:Response)=>resp.json())
+  }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   dataRetreived(){
-    if(this.updated==7){
+    if(this.updated==8){
       this.router.navigate(['account'])
     }
   }
 
   //data service implementation
   getPersonalInfo(){
-    this.queryHeaders.append('session_token', this.misc.token);
     this.http.get(constants.OLYMPIADBOX_INSTANCE_URL+ '/user/profile', {headers:this.queryHeaders})
+    .map((resp:Response)=>resp.json())
     .subscribe((data) =>{
-      const object = JSON.parse(data['_body']);
-      this.personalInfo.setInfo(object[0]);
-      this.updated++;
-      this.dataRetreived();
+      if(data['status']==200){
+        this.personalInfo.setInfo(data['message'][0]);
+        this.updated++;
+        this.dataRetreived();
+      }else console.log(data);
    })
   }
 

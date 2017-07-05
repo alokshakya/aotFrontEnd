@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 import { ConfirmationService } from 'primeng/primeng';
+import { MasterHttpService } from '../../../../services/masterhttp.service'
 
 @Component({
   selector: 'app-takedemotest',
@@ -50,7 +51,8 @@ export class TakedemotestComponent implements OnInit {
 
   constructor(
       private router: Router,
-      private confirmservice: ConfirmationService)
+      private confirmservice: ConfirmationService,
+      private masterhttp: MasterHttpService)
       
       {
       this.counter = 0;
@@ -256,13 +258,7 @@ export class TakedemotestComponent implements OnInit {
     }
   
   ngOnInit(){
-              let a = localStorage.getItem('session_token')
-         if(a=='testuser'){
-             this.router.navigate(['demotest']);
-         }
-         else{ 
-            this.router.navigate(['login'])
-            }
+    this.masterhttp.checkToken();
     //   this.sessionToken = localStorage.getItem('session_token');
     //   this.isLogin(this.sessionToken)
        this.startTest();
