@@ -260,6 +260,20 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  verifyMobile(){
+    let wrapper = {'email':this.personalInfo.userInfo['email'], 'verify_mobile':true, 'verify_email':false}
+    this.masterhtttp.sendOtp(wrapper)
+    .subscribe((data)=>{
+      if(data['status']==200){
+        this.otpDialog = true;
+        console.log(data);
+      }
+      else console.log(data);
+    })
+  }
+
+
+
   editSchoolInfo(){
     this.couponCode = this.personalInfo.couponCode;
     this.editSchool = true;

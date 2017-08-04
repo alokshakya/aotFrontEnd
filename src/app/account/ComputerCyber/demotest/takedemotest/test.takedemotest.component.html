@@ -8,7 +8,7 @@
     <h2>IMPORTANT INSTRUCTIONS</h2>
     <div class="text-center"><button (click)="startTest()" pButton class="ui-button-success" label="start"></button></div>
 </p-dialog>
-
+ 
 <div class="ui-g">
     <div class="ui-g-12">
         <div class="ui-g">
@@ -17,13 +17,13 @@
             </div>
             <div class="ui-g-10 head fullwidth">
                 <div class="ui-g">
-                    <span id="test">Demo Test</span>
+                    <span id="test">{{chapterwiseTest.attemptDetails['name']}}</span>
                     <span id="sub">{{subject}}</span>
-                    <span id="class">VII</span>
+                    <span id="class">Class {{personalInfo.classInfo['abbreviation']}}</span>
                     <span id="timer"><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span>
                     <div class="bar"><p-progressBar [value]="counter"></p-progressBar></div>
-                    <span>{{counter/10}}/{{totalQuestions}} Attempted</span>
-                    <span><i class="fa fa-user"></i> Gaurav Pant</span>
+                    <span>{{counter/10}}/{{chapterwiseTest.attemptDetails['total_no_questions']}} Attempted</span>
+                    <span><i class="fa fa-user"></i> {{personalInfo.userInfo['firstname']}} {{personalInfo.userInfo['lastname']}}</span>
                 </div>
             </div>
         </div>
@@ -33,7 +33,8 @@
                 <div class="ui-g-4">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
                 <div class="ui-g-4"> &nbsp; <i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
                 <div class="ui-g-12"></div>
-                <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
+                <!-- <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div> -->
+                <div class="ui-g-4" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div>
                 <div class="ui-g-12 fill"></div>
             </div>
             <div class="ui-g-10 light center fullwidth">

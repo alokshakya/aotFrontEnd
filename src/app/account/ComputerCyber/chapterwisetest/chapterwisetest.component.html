@@ -36,16 +36,16 @@
         <p-panel>
           <p-header>
             Chapterwise Test & Syllabus<span class="toright"></span>
-            <button [disabled]="selectedChapter==null||selectedChapter==''" (click)="generate()" id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button>
+            <button [disabled]=generatedFlag (click)="generate()" id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button>
             </p-header>
              <p-accordion (onOpen)="tabOpen($event)" (onClose)="tabClose($event)">
               <div class="ui-g">
                 <div class="ui-g-12">
-                  <p-accordionTab  *ngFor="let data of subjectInfo.computerSyllabus">
-                    <p-header><span class="chapter">{{data}}</span></p-header>
+                  <p-accordionTab  *ngFor="let data of subjectInfo.computerChapters['chapters']">
+                    <p-header><span class="chapter">{{data.name}}</span></p-header>
                     <div class="ui-g">
-                      <div class="ui-g-12"  *ngFor="let topic of subjectInfo.computerTopics">
-                        <span class="leftpad">{{topic}}<br></span>
+                      <div class="ui-g-12"  *ngFor="let topic of data['topics']">
+                        <span class="leftpad">{{topic.name}}<br></span>
                       </div>
                     </div>
                   </p-accordionTab>
@@ -83,12 +83,13 @@
             <p-accordion>
               <div class="ui-g">
                 <div class="ui-g-12">
-                  <p-accordionTab  *ngFor="let data of result.generatedTest">
-                    <p-header><span class="chapter">{{data}}</span></p-header>
+                  <p-accordionTab  *ngFor="let data of generatedChapters">
+                    <p-header><span class="chapter">{{data.name}}</span></p-header>
                     <div class="ui-g">
-                      <div class="ui-g-12"  *ngFor="let test of result.chapterwiseTestDetails[data]|keys">
-                        <span class="leftpad">{{test.key}}</span>
-                        <span class="low"><button label="{{test.value}}" [ngClass]="{'ui-button-success':test.value!='Resume'||test.value!='Start', 'ui-button-danger':test.value=='Start', 'ui-button-warning':test.value=='Resume'}" type="button" pButton></button><button pButton type="button" style="width:40px;" pTooltip="Retake {{test.key}}" tooltipPosition="right" icon="fa fa-refresh fa-spin fa-fw" *ngIf=" !(test.value=='Start'|| test.value=='Resume') "></button></span>
+                      <div class="ui-g-12"  *ngFor="let test of data['tests']">
+                        <span class="leftpad">{{test.name}}</span>
+                        <!-- <span class="low"><button label="{{test.value}}" [ngClass]="{'ui-button-success':test.value!='Resume'||test.value!='Start', 'ui-button-danger':test.value=='Start', 'ui-button-warning':test.value=='Resume'}" type="button" pButton></button><button pButton type="button" style="width:40px;" pTooltip="Retake {{test.key}}" tooltipPosition="right" icon="fa fa-refresh fa-spin fa-fw" *ngIf=" !(test.value=='Start'|| test.value=='Resume') "></button></span> -->
+                        <span class="low"><button class="ui-button-danger" (click)="startTest(test.id,data.id)" label="Start" type="button" pButton></button></span>
                       </div>
                     </div>
                   </p-accordionTab>

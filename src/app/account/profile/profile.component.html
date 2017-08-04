@@ -56,7 +56,7 @@
 
                         <div class="col-md-6 userinfo">
                             <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4>
-                            <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span><input class="withbtn" [(ngModel)]="dummyBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><button *ngIf="editBasic" (click)="otpDialog=true" pButton class="ui-button-warning" label="Verify"></button> </p>
+                            <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span><input class="withbtn" [(ngModel)]="dummyBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><button *ngIf="editBasic" (click)="verifyMobile()" pButton class="ui-button-warning" label="Verify"></button> </p>
                         </div>
                     </div>
 

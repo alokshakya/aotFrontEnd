@@ -49,15 +49,58 @@ export class SubjectInfo{
     computerSyllabus:Array<string>;
     computerTopics:Array<string>;
 
+    computerChapters:Array<any>;
+    englishChapters:Array<any>;
+    reasoningChapters:Array<any>;
+    scienceChapters:Array<any>;
+    gkChapters:Array<any>;
+    mathChapters:Array<any>;
+
     subscribedSubjects = {"Computer/Cyber":true, "Science":false, "Mathematics":true, "English":true, "General Knowledge":false,"Reasoning":true}
     attemptedDemo = {"Computer/Cyber":false, "Science":true, "Mathematics":true, "English":false, "General Knowledge":false,"Reasoning":true}
 
     constructor(){}
 
-    setSubjects(data){
-        this.subjectList = []
+    // setSubjects(data){
+    //     this.subjectList = []
+    //     for(let i in data){
+    //         this.subjectList.push(data[i][1])
+    //     }
+    // }
+
+    setSyllabus(data){
+        this.subjectList = [];
         for(let i in data){
-            this.subjectList.push(data[i][1])
+            this.subjectList.push(data[i]['name']);
+            switch (data[i]['name']) {
+                case "Computers":
+                    this.computerChapters = data[i];
+                    break;
+                
+                case "Science":
+                    this.scienceChapters = data[i];
+                    break;
+
+
+                case "Mathematics":
+                    this.mathChapters = data[i];
+                    break;
+
+
+                case "English":
+                    this.englishChapters = data[i];
+                    break;
+
+                case "Reasoning":
+                    this.reasoningChapters = data[i];
+                    break;
+
+
+                case "General Knowledge":
+                    this.gkChapters = data[i];
+                    break;
+            }
+
         }
     }
 
@@ -79,10 +122,81 @@ export class SubjectInfo{
 }
 
 @Injectable()
+export class chapterwiseTest{
+    testDetails:any;
+    computers:any;
+    reasoning:any;
+    math:any;
+    gk:any;
+    science:any;
+    english:any;
+
+    qaSet:any;
+    testHistory:any;
+    attemptDetails:any;
+
+    setTestDetails(data){
+        for(let i in data['generated']['subjects']){
+            switch (data['generated']['subjects'][i]['name']){
+                case "Computers":
+                    this.computers = data['generated']['subjects'][i]; 
+                    break;
+
+                case "Science":
+                    this.science = data['generated']['subjects'][i]; 
+                    break;
+
+                case "General Knowledge":
+                    this.gk = data['generated']['subjects'][i]; 
+                    break;
+
+                case "Mathematics":
+                    this.math = data['generated']['subjects'][i]; 
+                    break;
+
+                case "English":
+                    this.english = data['generated']['subjects'][i]; 
+                    break;
+
+                case "Reasoning":
+                    this.reasoning = data['generated']['subjects'][i]; 
+                    break;
+            }
+        }
+    }
+
+    setQuesAnswerSet(data){
+        this.qaSet = data['attempt']['question_answer_set']
+        if(data.hasOwnProperty('test_history')){
+            this.testHistory = data['test_history'];
+        }
+        this.attemptDetails = {
+            'test_id':data['attempt']['id'],
+            'name':data['attempt']['name'],
+            'chapter_id':data['attempt']['chapter_id'],
+            'total_no_questions':data['attempt']['total_no_question'],
+            'total_marks':data['attempt']['total_marks'],
+            'last_question':data['attempt']['last_question'],
+            'students_test_id':data['attempt']['students_test_id'],
+        }
+
+        console.log(this.attemptDetails);
+    }
+
+
+
+    beginTest(data){
+
+    }
+}
+
+@Injectable()
 export class Misc{
     testimonial:Array<any>;
     notice:Array<any>;
     fee:Array<any>;
+    syllabus:Array<any>;
+    testDetails:any;
 
     userTestimonial = [
                         "Lorem 11111111 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
@@ -109,6 +223,10 @@ export class Misc{
         for(let i in data){
             this.fee.push(data[i][2])
         }
+    }
+
+    setTestDetails(data){
+        this.testDetails = data;
     }
 
 

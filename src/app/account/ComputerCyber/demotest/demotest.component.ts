@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import {TreeModule,TreeNode} from 'primeng/primeng';
-import { SubjectInfo } from '../../../services/data.service';
+import { SubjectInfo,Misc } from '../../../services/data.service';
 
 
 @Component({
@@ -19,10 +19,13 @@ export class DemotestComponent implements OnInit {
   //temporary
   dummyTopics:Array<string>;
   dummyChapters:Array<string>;
+
+  syllabus:any;
   
   constructor(
       private router: Router,
-      private subjectInfo: SubjectInfo ){}
+      private subjectInfo: SubjectInfo,
+      private misc: Misc ){}
 
 
   takedemotest(){
@@ -30,6 +33,9 @@ export class DemotestComponent implements OnInit {
   }
 
   ngOnInit() {
+
+      // this.syllabus = this.misc.syllabus['class']['subjects'][0];
+      // console.log(this.syllabus);
 
       this.demoTestData = {
           labels: ['Remaining'],

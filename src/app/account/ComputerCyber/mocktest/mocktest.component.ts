@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
-import { SubjectInfo } from '../../../services/data.service'
+import { SubjectInfo,Misc } from '../../../services/data.service'
 
 @Component({
   selector: 'app-mocktest',
@@ -22,7 +22,8 @@ export class MocktestComponent implements OnInit {
 
   constructor(
       private router:Router,
-      private subjectInfo: SubjectInfo)
+      private subjectInfo: SubjectInfo,
+      private misc: Misc)
       {
           this.mockTestTableData =[ 
               {"Test":"Mock Test 1", "Slot 1":"95 Percentile", "Slot 2":"NA" },

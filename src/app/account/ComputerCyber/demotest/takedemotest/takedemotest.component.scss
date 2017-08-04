@@ -21,12 +21,32 @@
 }
 
 .bar{
+    display: inline-block;
     padding-top:15px;
     width:70px;
-    margin-right:1%;
+    
+}
+
+.padtop{
+    margin: 7px 0 0 0;
+}
+
+.big{
+    width:9.55%;
+    font-size:inherit;
+}
+
+.small{
+    width:8.5%;
+    font-size:inherit;
+}
+
+.lesswidth{
+    width:13%;
 }
 
 #sub{
+    display: inline-block;
     height:30px;
     padding-top:4px;
     margin-top: 10px;
@@ -38,7 +58,28 @@
     
 }
 
+#bar{
+    display: inline-block;
+    width:auto;
+    ;
+}
+
+#count{
+    
+}
+
+#user{
+    
+}
+
+#test{
+    margin-left:3%;
+    
+}
+
 #class{
+    display: inline-block;
+    
     height:30px;
     padding-top:4px;
     margin-top: 10px;
@@ -50,6 +91,8 @@
 }
 
 #timer{
+    display: inline-block;
+    
     height:30px;
     margin-top:10px;
     margin-bottom: 10px;
@@ -111,24 +154,23 @@
     color:#DC4E42;
 }
 
-i:hover{
-    cursor: pointer;
+.zeropad{
+    padding: 0 0 0 0;
 }
+
 
 .head{
     background-color: #2D353C;
     color: white;
-    height:70px;
-    
-}
-
-.head span{
-    padding-top: 15px;
-    margin-right:50px;
+    padding-top:2px;
+    height:95%;
 }
 
 .minwidth{
-    width:125px;
+    width:9%;
+    padding: 2% 0 0 0;
+    margin-top:-0.28%;
+    height:180%
 }
 
 .image{
@@ -155,7 +197,7 @@ i:hover{
 }
 
 .fullwidth{
-    width: 1190px;
+    width: 1392px;
 }
 
 #longbtn{
@@ -163,9 +205,58 @@ i:hover{
     width: 123px;
 }
 
+.buttonTop{
+    display:inline-block;
+    width:43%;
+    height: 50%;
+    border-radius:50%;
+    padding-top:0px;
+    text-align: center;
+    font-size:186%;
+}
+
+.m{
+   background-color: #DA5451; 
+}
+.v{
+   background-color: #5BB85D; 
+}
+.n{
+    background-color: #2196F5;
+}
+
+#a,#b,#c,#d{
+    display: inline-block;
+    color:white;
+    text-align:center;
+    width:  22px;
+    height: 21px;
+    border-radius: 20%;
+    
+}
+
+#a{
+    background-color: #5DB75D;
+}
+
+#b{
+    background-color: #347AB6;
+}
+
+#c{
+    background-color: #71C9E1;
+}
+
+#d{
+    background-color: #EEAE4C;
+}
 
 
-
-
+.box{
+    border: 1px solid black;
+    margin-top:3%;
+    margin-left:-4%;
+    padding: 1% 1% 1% 1%;
+}
 
 

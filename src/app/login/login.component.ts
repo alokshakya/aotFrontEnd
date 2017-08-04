@@ -83,12 +83,9 @@ export class LoginComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit(){
-
     this.userLoginCreds = {"username":"", "password":""};
     this.userRegCreds = {"firstname":"","lastname":"", "email":"","password":"","class":"","mobile":""};
     this.passwordObj = {"new_password":"","email":""};    
-    this.actualCode = "ABCDEF";
-    this.actualOTP = 123456;
     //temporary
     this.dummyClass=[]
     this.dummyClass.push({label:"Select Class", value:null}, {label:"I", value:"I"}, 
@@ -162,27 +159,36 @@ export class LoginComponent implements OnInit {
         case 721:
           this.message = [];
           this.message.push({severity:'error', summary:'Incorrect OTP', detail:'Please Try Again'});
-          break
+          break;
 
         case 200:
           this.message = [];
           this.message.push({severity:'success', summary:'Success', detail:x+' Verified'});
           if(x=='Mobile'){
             this.mobileVerified = true;
-            if(!forgot){this.check()}
-            this.mode[this.mode.indexOf('verify_email')] = null;
+            if(!forgot){
+              this.check();}
+            else {
+              this.mode[this.mode.indexOf('verify_email')] = null;
+            }
           }
           if(x=='Email'){
             this.emailVerified = true;
             if(!forgot){this.check()}
-            this.mode[this.mode.indexOf('verify_mobile')] = null;
+            else this.mode[this.mode.indexOf('verify_mobile')] = null;
           }
+          break;
+
+        default: 
+          console.log(data);
+          break;
       }
     });
   }
 
   setToken(token){
     this.masterhttp.setToken(token);
+    localStorage.setItem('session_token',token);
     this.router.navigate(['loadout']);
   }
 

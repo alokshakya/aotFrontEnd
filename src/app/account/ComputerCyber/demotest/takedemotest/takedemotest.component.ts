@@ -3,11 +3,13 @@ import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 import { ConfirmationService } from 'primeng/primeng';
-import { MasterHttpService } from '../../../../services/masterhttp.service'
+import { MasterHttpService } from '../../../../services/masterhttp.service';
+import { SubjectInfo, chapterwiseTest, PersonalInfo } from '../../../../services/data.service'
+
 
 @Component({
   selector: 'app-takedemotest',
-  templateUrl: './test.takedemotest.component.html',
+  templateUrl: './takedemotest.component.html',
   styleUrls: ['./takedemotest.component.scss']
 })
 export class TakedemotestComponent implements OnInit {
@@ -36,7 +38,7 @@ export class TakedemotestComponent implements OnInit {
 
     selectedQuestion:any;
     
-    answer:Array<string>;
+    answer:string;
     
     response:any;
     
@@ -47,12 +49,19 @@ export class TakedemotestComponent implements OnInit {
     totalQuestions:number;
     
     correct:boolean;
-    sessionToken:string
+    sessionToken:string;
+    wrapper:any;
+    totalQues:number;
+    correctAnswer:number;
+    attemptedQues:number = 0;
 
   constructor(
       private router: Router,
       private confirmservice: ConfirmationService,
-      private masterhttp: MasterHttpService)
+      private masterhttp: MasterHttpService,
+      private subjectInfo: SubjectInfo,
+      private personalInfo:PersonalInfo,
+      private chapterwiseTest: chapterwiseTest)
       
       {
       this.counter = 0;
@@ -66,6 +75,7 @@ export class TakedemotestComponent implements OnInit {
       this.hintDisplay = false;
       this.response = {};
       this.questionStatus = {};
+
       
       this.questionsPool = {
                           "Question1": {
@@ -262,7 +272,10 @@ export class TakedemotestComponent implements OnInit {
     //   this.sessionToken = localStorage.getItem('session_token');
     //   this.isLogin(this.sessionToken)
        this.startTest();
-}
+       this.displayQuestion(0);
+       this.wrapper = {'student_test_id':this.chapterwiseTest.attemptDetails['students_test_id'],}
+       this.totalQues = this.chapterwiseTest.qaSet.length;
+  }
 
 //   getQuestions(){
 //       this.sessionToken = localStorage.getItem('session_token')
@@ -293,16 +306,21 @@ export class TakedemotestComponent implements OnInit {
   }
   
   
-  displayQuestion(questionDisplayed,questionNumber){  //questionDisplayed: KEY 
+  displayQuestion(index){  //questionDisplayed: KEY 
       this.answer = null;
-      this.selectedQuestion = this.questionsPool[questionDisplayed];
-      this.questionNumber = "Q" + questionNumber + ". ";
-      this.questionWindow = true;
+      // this.selectedQuestion = this.questionsPool[questionDisplayed];
+      // this.questionNumber = "Q" + questionNumber + ". ";
+      // this.questionWindow = true;
       this.hintDisplay = false;
-      this.clickListener = questionNumber;
+      this.clickListener = index;
+      this.selectedQuestion = this.chapterwiseTest.qaSet[index];
+      console.log(this.selectedQuestion);
     }
 
-  validate(){
+  radio(){
+  }
+
+  validateds(){
       this.response[this.questionNumber]=this.answer[0];
       this.hintDisplay=true;
       this.counter+= Math.ceil(100/11);
@@ -315,23 +333,97 @@ export class TakedemotestComponent implements OnInit {
             this.questionStatus[this.clickListener] = "Wrong";
         }
     }
-    
-  next(){
-      let b = this.clickListener;
-      let a = 'Question'+(b+1);
-      this.displayQuestion(a,b+1);
-    }
 
-  previous(){
-      let b = parseInt(this.clickListener)-1 
-      let a = 'Question'+(b-1);
-      this.displayQuestion(a, b)
+  validate(){
+    for(let i in this.selectedQuestion['answers']){
+      if(this.selectedQuestion['answers'][i]['id'] == this.selectedQuestion['correct_answer_id']){
+        this.correctAnswer = this.selectedQuestion['answers'];
+      }
+    }
+    this.attemptedQues += 1;
+    this.counter = Math.ceil(this.attemptedQues*100/this.totalQues);
+
+
+    this.wrapper['mark_for_review']="0";
+    this.wrapper['question_id'] = this.selectedQuestion['id'];
+    this.wrapper['correct_answer'] = this.selectedQuestion['correct_answer_id'];
+    this.wrapper['attempted_answer'] = this.selectedQuestion['answers'][this.answer]['id'];
+    this.masterhttp.nextQuestion(this.wrapper).subscribe((data)=>{
+      if(data['status']==200){
+      }
+    })
+    this.hintDisplay = true;
+    // this.counter+=Math.ceil(100/this.totalQues);
+    if(this.selectedQuestion['correct_answer_id'] == this.selectedQuestion['answers'][this.answer]['id']){
+      this.questionStatus[this.clickListener] = "Correct";
+      this.correct=true;
+
+    }
+    else{
+      this.questionStatus[this.clickListener] = "Wrong";
+    }
   }
+
+
+  markForReview(){
+    this.attemptedQues += 1;
+    this.counter = Math.ceil(this.attemptedQues*100/this.totalQues);
+    this.wrapper['mark_for_review']="1";
+    this.wrapper['question_id'] = this.selectedQuestion['id'];
+    this.wrapper['correct_answer'] = this.selectedQuestion['correct_answer_id'];
+    this.wrapper['attempted_answer'] = "null";
+    console.log(this.wrapper);
+    this.masterhttp.nextQuestion(this.wrapper).subscribe((data)=>{
+      if(data['status']==200){
+        this.updateView();
+      }else console.log(data);
+    })
+  }
+
+  nextQuestion(){
+    if(this.answer==null){
+      if(parseInt(this.clickListener) == this.totalQues-1){
+      this.displayQuestion(0);
+      }
+      else{
+        this.displayQuestion(parseInt(this.clickListener)+1)
+      }
+    }
+    else{
+     if(parseInt(this.clickListener) == this.totalQues-1){
+      this.validate();
+      this.displayQuestion(0);
+      }
+      else{
+        this.validate();
+        this.displayQuestion(parseInt(this.clickListener)+1)
+      } 
+    }
+  }
+
+    
+  // next(){
+  //     let b = this.clickListener;
+  //     let a = 'Question'+(b+1);
+  //     this.displayQuestion(a,b+1);
+  //   }
+
+  // previous(){
+  //     let b = parseInt(this.clickListener)-1 
+  //     let a = 'Question'+(b-1);
+  //     this.displayQuestion(a, b)
+  // }
 
   mark(){
     let q = this.clickListener;
     this.questionStatus[q]='Marked';
   }
+
+  updateView(){
+    let q = this.clickListener;
+    this.questionStatus[q]='Marked';
+  }
+
 
   startTest(){
       if(this.start==false){
@@ -343,12 +435,15 @@ export class TakedemotestComponent implements OnInit {
               if(this.min==60){this.min=0;this.hour+=1;}
               if(this.hour==24){this.hour=0;}
             });
-            this.displayQuestion('Question1',1);
+            // this.displayQuestion('Question1',1);
         }
-    }  
+    }
+  
+
+
 
   validated(){
-      if(this.questionStatus[this.clickListener]=="Correct"||this.questionStatus[this.clickListener]=="Wrong"){
+      if(this.questionStatus[this.clickListener]=="Correct"||this.questionStatus[this.clickListener]=="Wrong"||this.questionStatus[this.clickListener]=="Marked"){
           return true
       }
   }
