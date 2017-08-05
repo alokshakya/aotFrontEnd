@@ -16,10 +16,9 @@ export class LoginRegisterService {
     private misc: Misc
     ) {
     this.queryHeaders = new Headers()
-
-    //this.queryHeaders.append('Content-Type', 'application/json');
-//    this.queryHeaders.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
-    //this.options = new RequestOptions({ headers: this.queryHeaders })
+    this.queryHeaders.append('Content-Type', 'application/json');
+    this.queryHeaders.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
+    this.options = new RequestOptions({ headers: this.queryHeaders })
    }
 
   login(loginCreds){ 

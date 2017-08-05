@@ -24,11 +24,11 @@ export class LoadoutComponent implements OnInit {
       this.http.checkToken();
       this.http.getPersonalInfo();
       this.http.getSyllabus();  
-      this.http.getTestimonials();
       this.http.getNotices();
       // this.http.getSubjects();
       this.http.getFee();
       this.http.getTestDetails();
+      this.http.getTestimonials();
   }
 
   ngOnDestroy(){

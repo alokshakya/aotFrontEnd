@@ -192,7 +192,7 @@ export class chapterwiseTest{
 
 @Injectable()
 export class Misc{
-    testimonial:Array<any>;
+    testimonial:any;
     notice:Array<any>;
     fee:Array<any>;
     syllabus:Array<any>;
@@ -205,10 +205,7 @@ export class Misc{
                     ]
     
     setTestimonial(data){
-        this.testimonial = [];
-        for (let i in data){
-            this.testimonial.push(data[i][1])
-        }
+        this.testimonial = data;
     }
 
     setNotice(data){

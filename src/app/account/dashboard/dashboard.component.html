@@ -123,26 +123,23 @@
         </div>-->
         <div class="ui-g-12">
             <p-panel header="Notice Board">
-            <div id="notice"><!--*ngIf="noticeLoader"-->
-                <div class="noticebox" *ngFor = "let item of misc.notice; let i=index">
+            <div id="notice">
+                <div class='noticebox' *ngFor = "let item of misc.notice; let i = index ">
                     <h3>Notice {{i+1}}</h3>
-                    <p>{{item[2]}}</p>
-                    <p>{{item[1]}}<p>
+                    <p>{{item['date_published']}}</p>
+                    <p>{{item['news']}}</p>
                 </div>
             </div>
-            <!--<div *ngIf="!noticeLoader" class="noticeloader">
-                    <app-loader></app-loader>
-                </div>-->
             </p-panel>
         </div>
         <div class="ui-g-12">
             <p-panel header="Testimonials">
                 <div id="testimonials"> <!-- *ngIf="testimonialLoader">-->
-                    <div class="testbox" *ngFor = "let item of misc.testimonial">
+                    <div class="testbox" *ngFor = "let i of misc.testimonial">
                         <div class="ui-g">
                             <div class="ui-g-7"><img class="testimonialimg"></div>
                             <div class="ui-g-5"></div>
-                            <div class="ui-g-12">{{item}}</div>
+                            <div class="ui-g-12">{{i['text']}}</div>
                         </div>
                     </div>
                 </div>

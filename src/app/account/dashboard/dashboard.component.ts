@@ -40,9 +40,7 @@ export class DashboardComponent implements OnInit{
 
     }
 
-    ngOnInit(){
-        // console.log(this.subjectInfo.subjectList);
-    }
+    ngOnInit(){}
                         
     startTest(){
         this.router.navigate(['account/computers/sampletest'])

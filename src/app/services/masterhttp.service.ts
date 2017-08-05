@@ -157,18 +157,18 @@ export class MasterHttpService {
   // }
 
   getTestimonials(){
-    this.http.get(this.baseUrl+'/testimonials').map((resp) => resp.json())
+    this.http.get(constants.OLYMPIADBOX_INSTANCE_URL+'/common/tablerecords/testimonial', {headers:this.queryHeaders}).map((resp:Response)=>resp.json())
     .subscribe((data) => {
-      this.misc.setTestimonial(data['testimonials']['records']);
+      this.misc.setTestimonial(data['message']);
       this.updated++;
       this.dataRetreived()
     })
   }
 
   getNotices(){
-    this.http.get(this.baseUrl+'/notice_board').map((resp: Response)=> resp.json())
+    this.http.get(constants.OLYMPIADBOX_INSTANCE_URL+'/common/tablerecords/notice_board', {headers:this.queryHeaders}).map((resp: Response)=> resp.json())
     .subscribe((data) => {
-      this.misc.setNotice(data['notice_board']['records']);
+      this.misc.setNotice(data['message']);
       this.updated++;
       this.dataRetreived();
     })
@@ -184,12 +184,12 @@ export class MasterHttpService {
   // }
 
   getFee(){
-    this.http.get(this.baseUrl+'/fee').map((resp:Response) => resp.json())
-    .subscribe((data) =>{
-      this.misc.setFee(data['fee']['records']);
+    // this.http.get(this.baseUrl+'/fee').map((resp:Response) => resp.json())
+    // .subscribe((data) =>{
+    //   this.misc.setFee(data['fee']['records']);
       this.updated++;
       this.dataRetreived();
-    })
+    // })
   }
 
 

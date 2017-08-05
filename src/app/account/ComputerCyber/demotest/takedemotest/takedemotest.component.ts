@@ -363,12 +363,14 @@ export class TakedemotestComponent implements OnInit {
     else{
       this.questionStatus[this.clickListener] = "Wrong";
     }
+    this.answer = null;
   }
 
 
   markForReview(){
     this.attemptedQues += 1;
     this.counter = Math.ceil(this.attemptedQues*100/this.totalQues);
+    
     this.wrapper['mark_for_review']="1";
     this.wrapper['question_id'] = this.selectedQuestion['id'];
     this.wrapper['correct_answer'] = this.selectedQuestion['correct_answer_id'];
