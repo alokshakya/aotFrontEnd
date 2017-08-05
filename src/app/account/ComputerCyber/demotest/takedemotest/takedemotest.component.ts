@@ -337,12 +337,13 @@ export class TakedemotestComponent implements OnInit {
   validate(){
     for(let i in this.selectedQuestion['answers']){
       if(this.selectedQuestion['answers'][i]['id'] == this.selectedQuestion['correct_answer_id']){
-        this.correctAnswer = this.selectedQuestion['answers'];
+        this.correctAnswer = this.selectedQuestion['answers'][i];
       }
     }
     this.attemptedQues += 1;
     this.counter = Math.ceil(this.attemptedQues*100/this.totalQues);
 
+    console.log(this.correctAnswer);
 
     this.wrapper['mark_for_review']="0";
     this.wrapper['question_id'] = this.selectedQuestion['id'];
@@ -378,6 +379,7 @@ export class TakedemotestComponent implements OnInit {
         this.updateView();
       }else console.log(data);
     })
+    this.answer = null;
   }
 
   nextQuestion(){

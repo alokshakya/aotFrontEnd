@@ -4,7 +4,7 @@
         <button type="button" pButton class="ui-button-danger" icon="fa-close" label="No" (click)="cd.reject()"></button>
     </p-footer>
 </p-confirmDialog>
-<p-dialog header="Intsructions" [closable]="false" (onHide)="startTest()" [(visible)]="help" [responsive]="true">
+<p-dialog header="Intsructions" [closable]="false" [(visible)]="help" [responsive]="true">
     <h2>IMPORTANT INSTRUCTIONS</h2>
     <div class="text-center"><button (click)="startTest()" pButton class="ui-button-success" label="start"></button></div>
 </p-dialog>
@@ -93,13 +93,13 @@
                                             <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br><br></span>
                                             <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br><br></span>
                                             <br *ngIf="correct"><br *ngIf="correct">
-                                            <span class="correct" *ngIf="!correct">Correct Answer: <!-- {{correctAnswer['answer']}} --> <br><br></span>
+                                            <span class="correct" *ngIf="!correct">Correct Answer: {{correctAnswer['answer']}} <br><br></span>
                                         </div>
-                                        <!-- <img src="{{correctAnswer['image']['image_path']}}"> -->
+                                        <img src="{{correctAnswer['image']['image_path']}}">
                                     </div>
                                     <div class="ui-g-6">
-                                        <i class="fa fa-lightbulb-o fa-lg"></i> &nbsp; Hint: <!-- {{selectedQuestion['hint']['name']}} --><br><br><span><br><br></span>
-                                        <!-- <img  src="{{selectedQuestion['hint']['image']['image_path']}}"> -->
+                                        <i class="fa fa-lightbulb-o fa-lg"></i> &nbsp; Hint: {{selectedQuestion['hint']['name']}}<br><br><span><br><br></span>
+                                        <img  src="{{selectedQuestion['hint']['image']['image_path']}}">
                                     </div>
                                 </div>
                             </div>
@@ -129,5 +129,5 @@
             </div> -->
         </div>
     </div>
-    <div class="ui-g-12 foot">Copyright OlympiadBox. All Rights Reserved</div>
+    <div class="ui-g-12 foot">Copyright &copy; OlympiadBox. All Rights Reserved</div>
 </div>

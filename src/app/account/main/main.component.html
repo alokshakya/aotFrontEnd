@@ -30,7 +30,7 @@
                     <div class="wrapper"><!--*ngIf="loader"-->
                         <h5>{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</h5>
                         <h5>Class {{personalInfo.classInfo.abbreviation}}</h5>
-                        <h5 pTooltip="{{personalInfo.userInfo.email}}" tooltipPosition="bottom">{{personalInfo.userInfo.email}}</h5>
+                        <h5 pTooltip="{{shownEmail}}" tooltipPosition="bottom">{{personalInfo.userInfo.email}}</h5>
                         <i pTooltip="Change Profile Picture" tooltipPosition="bottom" class="fa fa-edit" (click)="changeImg=true"></i>
                     </div>
                 </div>

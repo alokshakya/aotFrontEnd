@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit{
     }
 
     ngOnInit(){
-        console.log(this.subjectInfo.subjectList);
+        // console.log(this.subjectInfo.subjectList);
     }
                         
     startTest(){

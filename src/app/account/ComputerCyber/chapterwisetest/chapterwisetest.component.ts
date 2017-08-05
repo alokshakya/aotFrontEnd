@@ -45,7 +45,7 @@ export class ChapterwisetestComponent implements OnInit {
     ngOnInit(){
       this.chapterwiseTestData = {
         labels: ['Remaining','Completed','Generated'],
-            datasets:[{data: [10, 10, 40],
+            datasets:[{data: [30, 10, 40],
             backgroundColor: ["#D9534F","#5CB85C","#F0AD4E"],
             hoverBackgroundColor: ["#D9534F","#5CB85C","#F0AD4E"]
         }]
