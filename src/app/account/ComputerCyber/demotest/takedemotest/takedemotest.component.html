@@ -27,13 +27,13 @@
                 <div class="ui-g-1" class="buttonTop n" (click)="nextQuestion()"></div> -->
 
                 <div class="ui-g-1 text-center big">
-                    <button md-mini-fab [disabled]="validated()" (click)="markForReview()">M</button><br>Mark For Review
+                    <button md-mini-fab id="m" [disabled]="validated()" (click)="markForReview()">M</button><br>Mark For Review
                 </div>
                 <div class="ui-g-1 text-center small">
-                    <button md-mini-fab [disabled]="answer==null||validated()" (click)="validate()">V</button><br>Validate
+                    <button md-mini-fab id="v" [disabled]="answer==null||validated()" (click)="validate()">V</button><br>Validate
                 </div>
                 <div class="ui-g-1 text-center small">
-                    <button md-mini-fab (click)="nextQuestion()"><i class="fa fa-chevron-right"></i></button><br>Next Question
+                    <button md-mini-fab id="n" (click)="nextQuestion()"><i class="fa fa-chevron-right"></i></button><br>Next Question
                 </div>
         </div> 
     </div>
@@ -129,4 +129,5 @@
             </div> -->
         </div>
     </div>
+    <div class="ui-g-12 foot">Copyright OlympiadBox. All Rights Reserved</div>
 </div>

@@ -173,6 +173,15 @@
     height:180%
 }
 
+.foot{
+    background-color:#2D353C;
+    text-align: right;
+    height:12%;
+    color:white;
+    padding-top:1%;
+    padding-right:2%
+}
+
 .image{
     text-align: center;
     padding-top:4%;
@@ -215,14 +224,18 @@
     font-size:186%;
 }
 
-.m{
+#m{
    background-color: #DA5451; 
 }
-.v{
+#v{
    background-color: #5BB85D; 
 }
-.n{
+#n{
     background-color: #2196F5;
+}
+
+#m, #v, #n{
+    font-size:171%;
 }
 
 #a,#b,#c,#d{
