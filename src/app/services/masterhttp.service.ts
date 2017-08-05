@@ -23,8 +23,9 @@ export class MasterHttpService {
 
   checkToken(){
     if(this.token!=localStorage.getItem('session_token')){
-      this.router.navigate(['login']);
+      return false;
     }
+    else return true;
   }
 
   dataRetreived(){

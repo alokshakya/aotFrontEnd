@@ -83,13 +83,15 @@ export class AccountMainComponent implements AfterViewInit {
         {}
 
     ngOnInit() {
-        this.masterhttp.checkToken();
-        this.email = this.personalInfo.userInfo.email;
-        this.shownEmail = this.email;
-        this.class = this.personalInfo.classInfo.abbreviation;
-        if(this.email.length>24){
-            this.shownEmail = this.email.slice(24,);
-        }
+        if(this.masterhttp.checkToken()){
+            this.email = this.personalInfo.userInfo.email;
+            this.shownEmail = this.email;
+            this.class = this.personalInfo.classInfo.abbreviation;
+            if(this.email.length>24){
+                this.shownEmail = this.email.slice(24,);
+            }
+        } else this.router.navigate(['login']);
+        
     }
   
 

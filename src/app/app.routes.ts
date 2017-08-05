@@ -9,6 +9,7 @@ import { AccountMainComponent } from "./account/main/main.component";
 
 export const routes: Routes = [
     ...AccountRoutes,
+    { path: '**', redirectTo:'login', pathMatch:'full'},
     { path: 'login', component: LoginComponent },
     {path : 'account', component : AccountMainComponent},
 

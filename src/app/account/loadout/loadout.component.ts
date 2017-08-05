@@ -21,14 +21,16 @@ export class LoadoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.http.checkToken();
+    if(this.http.checkToken()){
       this.http.getPersonalInfo();
       this.http.getSyllabus();  
       this.http.getNotices();
       // this.http.getSubjects();
       this.http.getFee();
       this.http.getTestDetails();
-      this.http.getTestimonials();
+      this.http.getTestimonials(); 
+    }
+    else this.router.navigate(['login']);
   }
 
   ngOnDestroy(){

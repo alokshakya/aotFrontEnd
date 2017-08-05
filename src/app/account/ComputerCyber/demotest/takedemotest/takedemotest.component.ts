@@ -268,13 +268,12 @@ export class TakedemotestComponent implements OnInit {
     }
   
   ngOnInit(){
-    this.masterhttp.checkToken();
-    //   this.sessionToken = localStorage.getItem('session_token');
-    //   this.isLogin(this.sessionToken)
-       this.startTest();
-       this.displayQuestion(0);
-       this.wrapper = {'student_test_id':this.chapterwiseTest.attemptDetails['students_test_id'],}
-       this.totalQues = this.chapterwiseTest.qaSet.length;
+    if(this.masterhttp.checkToken()){
+      this.startTest();
+      this.displayQuestion(0);
+      this.wrapper = {'student_test_id':this.chapterwiseTest.attemptDetails['students_test_id'],}
+      this.totalQues = this.chapterwiseTest.qaSet.length;
+    }
   }
 
 //   getQuestions(){

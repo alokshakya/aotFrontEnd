@@ -17,6 +17,7 @@ import { LoadoutComponent } from './loadout/loadout.component'
 export const AccountRoutes: Routes = [
   { path : '', redirectTo : '/login', pathMatch : 'full'},
   { path: 'demotest', component: TakedemotestComponent},
+  // { path: '**', redirectTo: '/loadout', pathMatch:'full'},
   { path: 'loadout', component: LoadoutComponent},    
   { path : 'account', component : AccountMainComponent,
   children : [
