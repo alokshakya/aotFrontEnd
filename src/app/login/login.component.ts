@@ -119,6 +119,7 @@ export class LoginComponent implements OnInit {
     }
     this.masterhttp.sendOtp(wrapper)
     .subscribe((data: Response) =>{
+      console.log(data);
       switch (data['status']) {
         
         case 200:
