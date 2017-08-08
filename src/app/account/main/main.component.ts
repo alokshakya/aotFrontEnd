@@ -75,10 +75,10 @@ export class AccountMainComponent implements AfterViewInit {
     loader:boolean;
     constructor(
         public renderer: Renderer, 
-        private router: Router, 
-        private personalInfo: PersonalInfo,
-        private misc:Misc,
-        private masterhttp: MasterHttpService
+        public router: Router, 
+        public personalInfo: PersonalInfo,
+        public misc:Misc,
+        public masterhttp: MasterHttpService
         )
         {}
 

@@ -12,8 +12,8 @@ export class LoginRegisterService {
   options;
   
   constructor(
-    private http: Http,
-    private misc: Misc
+    public http: Http,
+    public misc: Misc
     ) {
     this.queryHeaders = new Headers()
     this.queryHeaders.append('Content-Type', 'application/json');

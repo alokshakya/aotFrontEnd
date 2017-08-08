@@ -231,7 +231,7 @@ export class Misc{
 
 @Injectable()
 export class Result{
-
+   
     testSummary = {
                             "Computer/Cyber": {
                                 "Chapterwise Test": {

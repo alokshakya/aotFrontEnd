@@ -64,7 +64,7 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12 column userinfo">
-                                  <h4><i class="fa fa-calendar"></i> Date Of Birth</h4><p><span class="userdetails" *ngIf="!editBasic" > &nbsp;{{personalInfo.userInfo.birthdate}}</span> &nbsp; <p-calendar [(ngModel)]="date" dateFormat="dd/mm/yy" [maxDate]="maxDate" [yearNavigator]="true" yearRange="1998:2012" [monthNavigator]="true" *ngIf="editBasic"></p-calendar></p>
+                                  <h4><i class="fa fa-calendar"></i> Date Of Birth</h4><p><span class="userdetails" *ngIf="!editBasic" > &nbsp;{{personalInfo.userInfo['birthdate']}}</span> &nbsp; <p-calendar [(ngModel)]="date" dateFormat="dd/mm/yy" [maxDate]="maxDate" [yearNavigator]="true" yearRange="1998:2012" [monthNavigator]="true" *ngIf="editBasic"></p-calendar></p>
                                 </div>
                                 <div class="col-md-12"></div>
                                 <div class="col-md-12 column userinfo">
@@ -92,7 +92,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-sticky-note-o"></i> School Code </h4><p><span *ngIf="!editSchool" class="userdetails schoolcode"> {{personalInfo.couponCode}}</span> &nbsp;<input class="longinput" [(ngModel)]="couponCode" pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-sticky-note-o"></i> School Code </h4><p><span *ngIf="!editSchool" class="userdetails schoolcode"> {{personalInfo['couponCode']}}</span> &nbsp;<input class="longinput" [(ngModel)]="couponCode" pInputText *ngIf="editSchool" type="text"></p>
                         </div>
                         <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-user"></i> Contact Person</h4><p><span class="userdetails"> &nbsp;{{personalInfo.schoolInfo['contact_person']}}</span> &nbsp;</p>
@@ -115,12 +115,12 @@
 
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails">  &nbsp;{{personalInfo.schoolInfo.address}}, {{personalInfo.schoolInfo.city}}, {{personalInfo.schoolInfo.state}}, <br> &nbsp;{{personalInfo.schoolInfo.country}}, {{personalInfo.schoolInfo.pincode}}</span></p>
+                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails">  &nbsp;{{personalInfo.schoolInfo['address']}}, {{personalInfo.schoolInfo['city']}}, {{personalInfo.schoolInfo['state']}}, <br> &nbsp;{{personalInfo.schoolInfo['country']}}, {{personalInfo.schoolInfo['pincode']}}</span></p>
                         </div>
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-phone"></i> Landline</h4><p><span class="userdetails">&nbsp;{{personalInfo.schoolInfo.landline}}</span></p>
+                                    <h4><i class="fa fa-phone"></i> Landline</h4><p><span class="userdetails">&nbsp;{{personalInfo.schoolInfo['landline']}}</span></p>
                                 </div>
                                 <div class="col-md-12"></div>
                                 <div class="col-md-12 column userinfo">

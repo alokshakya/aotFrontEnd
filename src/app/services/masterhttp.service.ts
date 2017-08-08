@@ -13,13 +13,17 @@ export class MasterHttpService {
   queryHeaders;
   baseUrl = 'http://scripts.olympiadbox.com/services/api/api.php';    
   constructor(
-    private http: Http,
-    private router: Router,
-    private personalInfo: PersonalInfo,
-    private subjectInfo: SubjectInfo,
-    private misc: Misc,
-    private chapterwiseTest: chapterwiseTest)
-    {}
+    public http: Http,
+    public router: Router,
+    public personalInfo: PersonalInfo,
+    public subjectInfo: SubjectInfo,
+    public misc: Misc,
+    public chapterwiseTest: chapterwiseTest)
+    {
+      this.queryHeaders = new Headers();
+      this.queryHeaders.append('Content-Type', 'application/json');
+      this.queryHeaders.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
+    }
 
   checkToken(){
     if(this.token!=localStorage.getItem('session_token')){
@@ -47,7 +51,7 @@ export class MasterHttpService {
 
   sendOtp(requestBody){
   return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/otp/generate',requestBody ,{headers:this.queryHeaders})
-  .map((resp: Response) => resp.json())          
+  .map((resp: Response) => resp.json())
       //response status conditions
   }
 

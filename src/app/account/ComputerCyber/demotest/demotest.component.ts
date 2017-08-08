@@ -23,9 +23,9 @@ export class DemotestComponent implements OnInit {
   syllabus:any;
   
   constructor(
-      private router: Router,
-      private subjectInfo: SubjectInfo,
-      private misc: Misc ){}
+      public router: Router,
+      public subjectInfo: SubjectInfo,
+      public misc: Misc ){}
 
 
   takedemotest(){

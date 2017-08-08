@@ -21,9 +21,9 @@ export class MocktestComponent implements OnInit {
 
 
   constructor(
-      private router:Router,
-      private subjectInfo: SubjectInfo,
-      private misc: Misc)
+      public router:Router,
+      public subjectInfo: SubjectInfo,
+      public misc: Misc)
       {
           this.mockTestTableData =[ 
               {"Test":"Mock Test 1", "Slot 1":"95 Percentile", "Slot 2":"NA" },

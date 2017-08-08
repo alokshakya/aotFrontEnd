@@ -76,11 +76,11 @@ export class LoginComponent implements OnInit {
   token:string;
   
   constructor(
-    private httpService: LoginRegisterService,
-    private masterhttp: MasterHttpService,
-    private misc: Misc,
-    private personalInfo: PersonalInfo, 
-    private router: Router) {}
+    public httpService: LoginRegisterService,
+    public masterhttp: MasterHttpService,
+    public misc: Misc,
+    public personalInfo: PersonalInfo, 
+    public router: Router) {}
 
   ngOnInit(){
     this.userLoginCreds = {"username":"", "password":""};
@@ -119,7 +119,6 @@ export class LoginComponent implements OnInit {
     }
     this.masterhttp.sendOtp(wrapper)
     .subscribe((data: Response) =>{
-      console.log(data);
       switch (data['status']) {
         
         case 200:

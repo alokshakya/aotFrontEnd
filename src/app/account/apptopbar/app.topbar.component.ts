@@ -13,10 +13,10 @@ export class AppTopBar implements OnInit {
 
     currentPage:Array<string>;
     constructor(@Inject(forwardRef(() => AccountMainComponent))  public app:AccountMainComponent,
-    private router:Router,
-    private misc:Misc,
-    private personalInfo:PersonalInfo,
-    private masterhttp:MasterHttpService) { }
+    public router:Router,
+    public misc:Misc,
+    public personalInfo:PersonalInfo,
+    public masterhttp:MasterHttpService) { }
 
 
     logout(){

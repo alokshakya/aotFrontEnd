@@ -29,9 +29,9 @@ export class AccountsettingsComponent implements OnInit {
     dummyPrice:Array<number>;
     
     constructor(
-        private _router:Router,
-        private subjectInfo: SubjectInfo,
-        private misc: Misc) 
+        public _router:Router,
+        public subjectInfo: SubjectInfo,
+        public misc: Misc) 
         {
             this.selectedPackage = [];
 

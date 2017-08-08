@@ -56,12 +56,12 @@ export class TakedemotestComponent implements OnInit {
     attemptedQues:number = 0;
 
   constructor(
-      private router: Router,
-      private confirmservice: ConfirmationService,
-      private masterhttp: MasterHttpService,
-      private subjectInfo: SubjectInfo,
-      private personalInfo:PersonalInfo,
-      private chapterwiseTest: chapterwiseTest)
+      public router: Router,
+      public confirmservice: ConfirmationService,
+      public masterhttp: MasterHttpService,
+      public subjectInfo: SubjectInfo,
+      public personalInfo:PersonalInfo,
+      public chapterwiseTest: chapterwiseTest)
       
       {
       this.counter = 0;

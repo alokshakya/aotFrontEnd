@@ -29,15 +29,18 @@ export class DashboardComponent implements OnInit{
     subscribedSubjects:any;
 
     dummySubjects:any;
-
+    testSummary;
+    resultSummary;
     constructor(
-        private router: Router, 
-        private subjectInfo: SubjectInfo,
-        private result: Result,
-        private misc: Misc
+        public router: Router, 
+        public subjectInfo: SubjectInfo,
+        public result: Result,
+        public misc: Misc
         ) {
-            
 
+        this.testSummary = this.result.testSummary;
+        this.resultSummary = this.result.testSummary;
+            
     }
 
     ngOnInit(){}

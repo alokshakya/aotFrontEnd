@@ -75,10 +75,10 @@ export class ProfileComponent implements OnInit {
     //  private httpService: UserinfoService,
     // private classService: SubjectService,
     // private update: UpdateService,
-    private confirmservice: ConfirmationService,
-    private personalInfo:PersonalInfo,
-    private misc: Misc,
-    private masterhtttp: MasterHttpService
+    public confirmservice: ConfirmationService,
+    public personalInfo:PersonalInfo,
+    public misc: Misc,
+    public masterhtttp: MasterHttpService
     ){}  
 
 

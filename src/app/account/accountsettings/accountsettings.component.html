@@ -34,7 +34,7 @@
           <span id="coupontext"><strong>Enter Coupon/School Code*</strong></span><input size="40" type="text" [(ngModel)]="coupon" pInputText/>
           <button id="applybutton" type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button><br><br>
           
-          <div id="paybutton"><button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==''" pButton label="Pay Now"></button></div><br>
+          <div id="paybutton"><button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==null" pButton label="Pay Now"></button></div><br>
         </p-panel>   
       </div>
     </div>

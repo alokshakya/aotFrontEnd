@@ -29,13 +29,13 @@ export class ChapterwisetestComponent implements OnInit {
 
 
   constructor(
-      private router:Router, 
-      private subjectInfo: SubjectInfo,
-      private result: Result,
-      private misc: Misc,
-      private chapterwiseTest: chapterwiseTest,
-      private personalInfo: PersonalInfo,
-      private masterhttp: MasterHttpService)
+      public router:Router, 
+      public subjectInfo: SubjectInfo,
+      public result: Result,
+      public misc: Misc,
+      public chapterwiseTest: chapterwiseTest,
+      public personalInfo: PersonalInfo,
+      public masterhttp: MasterHttpService)
       {}
 
     redirect(){
@@ -102,12 +102,14 @@ export class ChapterwisetestComponent implements OnInit {
     }
 
     updatePanel(){
+      this.generateMsg = []
       this.masterhttp.getTestDetails();
-      this.generatedPanel();
+      setTimeout(()=>{
+        this.generatedPanel();
+      },2000);
     }
 
     generate(){
-          console.log(this.chapterwiseTest.computers);
       this.masterhttp.generateTest(this.wrapper)
       .subscribe((data)=>{
         if(data['status']==200){

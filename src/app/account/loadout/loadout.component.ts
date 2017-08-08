@@ -13,11 +13,11 @@ export class LoadoutComponent implements OnInit {
   loaderActive:boolean
 
   constructor(
-    private http: MasterHttpService,
-    private personalInfo: PersonalInfo,
-    private SubjectInfo: SubjectInfo,
-    private misc:Misc,
-    private router: Router
+    public http: MasterHttpService,
+    public personalInfo: PersonalInfo,
+    public SubjectInfo: SubjectInfo,
+    public misc:Misc,
+    public router: Router
   ) { }
 
   ngOnInit() {

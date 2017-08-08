@@ -25,7 +25,7 @@ export class SampletestComponent implements OnInit {
 
   constructor(
    private router: Router,
-   private subjectInfo: SubjectInfo) {
+   public subjectInfo: SubjectInfo) {
 
       this.testData = {
           "Sample Test 1": "35/50",
