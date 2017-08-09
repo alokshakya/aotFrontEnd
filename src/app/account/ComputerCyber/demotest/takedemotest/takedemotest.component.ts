@@ -268,12 +268,10 @@ export class TakedemotestComponent implements OnInit {
     }
   
   ngOnInit(){
-    if(this.masterhttp.checkToken()){
       this.startTest();
       this.displayQuestion(0);
       this.wrapper = {'student_test_id':this.chapterwiseTest.attemptDetails['students_test_id'],}
       this.totalQues = this.chapterwiseTest.qaSet.length;
-    }
   }
 
 //   getQuestions(){

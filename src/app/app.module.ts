@@ -101,6 +101,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { LoginRegisterService } from './services/loginRegister.service';
 import { MasterHttpService } from './services/masterhttp.service';
 import { PersonalInfo,SubjectInfo,Result,Misc,chapterwiseTest } from './services/data.service'; 
+import { AccountGuard } from './account/account.guard';
 
 //Moment
 // import * as moment from 'moment';
@@ -216,7 +217,7 @@ import { LoadoutComponent } from './account/loadout/loadout.component';
         LoginRegisterService,  
         MasterHttpService,
         ConfirmationService,
-        PersonalInfo,SubjectInfo,Result,Misc,chapterwiseTest
+        PersonalInfo,SubjectInfo,Result,Misc,chapterwiseTest, AccountGuard
     ],
     bootstrap:[AppComponent]
 })

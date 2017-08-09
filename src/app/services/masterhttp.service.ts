@@ -166,7 +166,7 @@ export class MasterHttpService {
     .subscribe((data) => {
       this.misc.setTestimonial(data['message']);
       this.updated++;
-      this.dataRetreived()
+      this.dataRetreived();
     })
   }
 

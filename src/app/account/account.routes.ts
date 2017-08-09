@@ -13,12 +13,13 @@ import { TakedemotestComponent } from './ComputerCyber/demotest/takedemotest/tak
 import { ProfileComponent } from './profile/profile.component';
 import { LoadoutComponent } from './loadout/loadout.component'
 
+import { AccountGuard } from './account.guard';
 
 export const AccountRoutes: Routes = [
   { path : '', redirectTo : '/login', pathMatch : 'full'},
-  { path: 'demotest', component: TakedemotestComponent},
+  { path: 'demotest', component: TakedemotestComponent, canActivate:[AccountGuard]},
   // { path: '**', redirectTo: '/loadout', pathMatch:'full'},
-  { path: 'loadout', component: LoadoutComponent},    
+  { path: 'loadout', component: LoadoutComponent, canActivate:[AccountGuard]},    
   { path : 'account', component : AccountMainComponent,
   children : [
     { path: '' , redirectTo: 'dashboard', pathMatch: 'full'},
@@ -30,7 +31,8 @@ export const AccountRoutes: Routes = [
     { path: 'computers/mocktest', component: MocktestComponent },
     { path: 'computers/result', component: ResultComponent },
     { path: 'profile' , component: ProfileComponent }
-    ]
+    ],
+    canActivate:[AccountGuard]
   }
 ];
 

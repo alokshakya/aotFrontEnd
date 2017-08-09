@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MasterHttpService } from '../../services/masterhttp.service';
 import { PersonalInfo, SubjectInfo, Misc } from '../../services/data.service';
@@ -21,21 +21,16 @@ export class LoadoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.http.checkToken()){
-      this.http.getPersonalInfo();
-      this.http.getSyllabus();  
-      this.http.getNotices();
-      // this.http.getSubjects();
-      this.http.getFee();
-      this.http.getTestDetails();
-      this.http.getTestimonials(); 
-    }
-    else this.router.navigate(['login']);
+    this.http.getPersonalInfo();
+    this.http.getSyllabus();  
+    this.http.getNotices();
+    this.http.getFee();
+    this.http.getTestDetails();
+    this.http.getTestimonials(); 
   }
 
   ngOnDestroy(){
     this.http.updated = 0;
-    // this.misc.setToken(null);
   }
 
   }
