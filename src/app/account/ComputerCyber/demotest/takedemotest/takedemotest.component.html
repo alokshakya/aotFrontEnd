@@ -6,53 +6,58 @@
 </p-confirmDialog>
 <p-dialog header="Intsructions" [closable]="false" [(visible)]="help" [responsive]="true">
     <h2>IMPORTANT INSTRUCTIONS</h2>
-    <div class="text-center"><button (click)="startTest()" pButton class="ui-button-success" label="start"></button></div>
+    <div class="text-center">
+        <button (click)="startTest()" pButton class="ui-button-success" label="start"></button>
+    </div>
 </p-dialog>
- 
 <div class="ui-g">
     <div class="ui-g-12">
         <div class="ui-g head">
             <div class="ui-g-1 ui-sm-2 img"><img src="../../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65"></div>
-                <div class="ui-g-2 ui-sm-9 test padtop lesswidth"><span id="test">{{chapterwiseTest.attemptDetails['name']}}</span></div>
-                <div class="ui-g-1 ui-sm-4 subject zeropad"><span id="sub">{{subject}}</span></div>
-                <div class="ui-g-1 ui-sm-4 class zeropad text-center"><span  id="class">Class {{personalInfo.classInfo['abbreviation']}}</span></div>
-                <div class="ui-g-1 ui-sm-4 timer zeropad"><span id="timer"><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span></div>
-                <div class="ui-g-1 ui-sm-4 bar padtop"><span><p-progressBar [value]="counter"></p-progressBar></span></div>
-                <div class="ui-g-1 ui-sm-4 count padtop"><span id="count">{{attemptedQues}}/{{totalQues}} Attempted</span></div>
-                <div class="ui-g-1 ui-sm-4 person padtop"><span  id="user"><i class="fa fa-user"></i> {{personalInfo.userInfo['firstname']}} {{personalInfo.userInfo['lastname']}}</span></div>
-<!--                 <div class="ui-g-1 text-center"><label class="buttonTop m" (click)="markForReview()">M</label><br>Mark For Review</div>
+            <div class="ui-g-2 ui-sm-9 test padtop lesswidth"><span id="test">{{chapterwiseTest.attemptDetails['name']}}</span></div>
+            <div class="ui-g-1 ui-sm-4 subject zeropad"><span id="sub">{{subject}}</span></div>
+            <div class="ui-g-1 ui-sm-4 class zeropad text-center"><span id="class">Class {{personalInfo.classInfo['abbreviation']}}</span></div>
+            <div class="ui-g-1 ui-sm-4 timer zeropad"><span id="timer"><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span></div>
+            <div class="ui-g-1 ui-sm-4 bar padtop"><span><p-progressBar [value]="counter"></p-progressBar></span></div>
+            <div class="ui-g-1 ui-sm-4 count padtop"><span id="count">{{attemptedQues}}/{{totalQues}} Attempted</span></div>
+            <div class="ui-g-1 ui-sm-4 person padtop"><span id="user"><i class="fa fa-user"></i> {{personalInfo.userInfo['firstname']}} {{personalInfo.userInfo['lastname']}}</span></div>
+            <!--                 <div class="ui-g-1 text-center"><label class="buttonTop m" (click)="markForReview()">M</label><br>Mark For Review</div>
                 <div class="ui-g-1 text-center"><label class="buttonTop v" (click)="validate()">V</label><br>Validate</div>
                 <div class="ui-g-1 text-center"><label class="buttonTop n" (click)="nextQuestion()"><i class="fa fa-chevron-right"></i></label><br>Next Question</div> -->
-<!--                 <div class="ui-g-1" class="buttonTop v" (click)="validate()"> V </div>
+            <!--                 <div class="ui-g-1" class="buttonTop v" (click)="validate()"> V </div>
                 <div class="ui-g-1" class="buttonTop n" (click)="nextQuestion()"></div> -->
-
-                <div class="ui-g-1 ui-sm-4 m text-center big">
-                    <button md-mini-fab id="m" [disabled]="validated()" (click)="markForReview()">M</button><br>Mark For Review
-                </div>
-                <div class="ui-g-1 ui-sm-4 v text-center small">
-                    <button md-mini-fab id="v" [disabled]="answer==null||validated()" (click)="validate()">V</button><br>Validate
-                </div>
-                <div class="ui-g-1 ui-sm-4 n text-center small">
-                    <button md-mini-fab id="n" (click)="nextQuestion()"><i class="fa fa-chevron-right"></i></button><br>Next Question
-                </div>
-        </div> 
-    </div>
-        <div class="ui-g">
-            <div class="ui-g-1 ui-sm-1 dark minwidth">
-                <div class="ui-g-12"></div>
-                <div class="ui-g-4 ui-sm-6 icons">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
-                <div class="ui-g-4 ui-sm-6 icons"> &nbsp; <i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
-                <div class="ui-g-12"></div>
-                <!-- <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div> -->
-                <div class="ui-g-4 ui-sm-6" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n, 'qnumbermark':questionStatus[n]=='Marked', 'qnumbercorrect':questionStatus[n]=='Correct', 'qnumberwrong':questionStatus[n]=='Wrong'}">{{n+1}}</div></div>
-                <div class="ui-g-12 fill"></div>
+            <div class="ui-g-1 ui-sm-4 m text-center big">
+                <button md-mini-fab id="m" [disabled]="validated()" (click)="markForReview()">M</button>
+                <br>Mark For Review
             </div>
-            <div class="ui-g-10 ui-sm-10 light center">
-                <div class="ui-g">
-                    <div class="ui-g-12 box"><span class="statement">Q{{clickListener+1}}. {{selectedQuestion['question']}}</span>
-                        <div *ngIf="!selectedQuestion['image']['image_path']==null" class="image"><img src="{{selectedQuestion['image']['image_path']}}"></div>
-                    </div>
-                    <!-- <div class="ui-g-2">
+            <div class="ui-g-1 ui-sm-4 v text-center small">
+                <button md-mini-fab id="v" [disabled]="answer==null||validated()" (click)="validate()">V</button>
+                <br>Validate
+            </div>
+            <div class="ui-g-1 ui-sm-4 n text-center small">
+                <button md-mini-fab id="n" (click)="nextQuestion()"><i class="fa fa-chevron-right"></i></button>
+                <br>Next Question
+            </div>
+        </div>
+    </div>
+    <div class="ui-g">
+        <div class="ui-g-1 ui-sm-1 dark minwidth">
+            <div class="ui-g-12"></div>
+            <div class="ui-g-4 ui-sm-6 icons">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
+            <div class="ui-g-4 ui-sm-6 icons"> &nbsp; <i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
+            <div class="ui-g-12"></div>
+            <!-- <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div> -->
+            <div class="ui-g-4 ui-sm-6" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
+                <div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n, 'qnumbermark':questionStatus[n]=='Marked', 'qnumbercorrect':questionStatus[n]=='Correct', 'qnumberwrong':questionStatus[n]=='Wrong'}">{{n+1}}</div>
+            </div>
+            <div class="ui-g-12 fill"></div>
+        </div>
+        <div class="ui-g-10 ui-sm-10 light center">
+            <div class="ui-g">
+                <div class="ui-g-12 box"><span class="statement">Q{{clickListener+1}}. {{selectedQuestion['question']}}</span>
+                    <div *ngIf="!selectedQuestion['image']['image_path']==null" class="image"><img src="{{selectedQuestion['image']['image_path']}}"></div>
+                </div>
+                <!-- <div class="ui-g-2">
                         <div class="ui-g">
                             <div class="ui-g-12">
                                 <button type="button" [disabled]="validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button>
@@ -62,50 +67,56 @@
                             </div>
                         </div>
                     </div> -->
-
-                    <div class="ui-g-12 box">
-                        <div class="ui-g">
-                            <div class="ui-g-6 ui-sm-12">
-                                <span id="a">A</span><p-radioButton [disabled]="validated()" name="ques" value="0" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['0']['answer']}}
-                                <div class="image" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
-                                    <img src="{{selectedQuestion['answers']['0']['image']['image_path']}}">
-                                </div>
-                            </div>
-                            <div class="ui-g-6 ui-sm-12">
-                                <span id="b">B</span><p-radioButton [disabled]="validated()" name="ques" value="1" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['1']['answer']}}
-                                <div class="image"*ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
-                                    <img src="{{selectedQuestion['answers']['1']['image']['image_path']}}">
-                                </div>
-                            </div>
-                            <div class="ui-g-6 ui-sm-12">
-                            <span id="c">C</span><p-radioButton [disabled]="validated()" name="ques" value="2" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['2']['answer']}}
-                                <div class="image" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null"><img src="{{selectedQuestion['answers']['2']['image']['image_path']}}"></div>
-                            </div>
-                            <div class="ui-g-6 ui-sm-12">
-                            <span id="d">D</span><p-radioButton [disabled]="validated()" name="ques" value="3" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['3']['answer']}}
-                                <div class="image" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null"><img src="{{selectedQuestion['answers']['1']['image']['image_path']}}"></div>
+                <div class="ui-g-12 box">
+                    <div class="ui-g">
+                        <div class="ui-g-6 ui-sm-12">
+                            <span id="a">A</span>
+                            <p-radioButton [disabled]="validated()" name="ques" value="0" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['0']['answer']}}
+                            <div class="image" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
+                                <img src="{{selectedQuestion['answers']['0']['image']['image_path']}}">
                             </div>
                         </div>
-                        <div class="ui-g-12" *ngIf="hintDisplay"><hr>
-                                <div class="ui-g">
-                                    <div class="ui-g-6">
-                                        <div>
-                                            <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br><br></span>
-                                            <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br><br></span>
-                                            <br *ngIf="correct"><br *ngIf="correct">
-                                            <span class="correct" *ngIf="!correct">Correct Answer: {{correctAnswer['answer']}} <br><br></span>
-                                        </div>
-                                        <img src="{{correctAnswer['image']['image_path']}}">
-                                    </div>
-                                    <div class="ui-g-6">
-                                        <i class="fa fa-lightbulb-o fa-lg"></i> &nbsp; Hint: {{selectedQuestion['hint']['name']}}<br><br><span><br><br></span>
-                                        <img  src="{{selectedQuestion['hint']['image']['image_path']}}">
-                                    </div>
-                                </div>
+                        <div class="ui-g-6 ui-sm-12">
+                            <span id="b">B</span>
+                            <p-radioButton [disabled]="validated()" name="ques" value="1" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['1']['answer']}}
+                            <div class="image" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
+                                <img src="{{selectedQuestion['answers']['1']['image']['image_path']}}">
                             </div>
+                        </div>
+                        <div class="ui-g-6 ui-sm-12">
+                            <span id="c">C</span>
+                            <p-radioButton [disabled]="validated()" name="ques" value="2" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['2']['answer']}}
+                            <div class="image" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null"><img src="{{selectedQuestion['answers']['2']['image']['image_path']}}"></div>
+                        </div>
+                        <div class="ui-g-6 ui-sm-12">
+                            <span id="d">D</span>
+                            <p-radioButton [disabled]="validated()" name="ques" value="3" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['3']['answer']}}
+                            <div class="image" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null"><img src="{{selectedQuestion['answers']['1']['image']['image_path']}}"></div>
+                        </div>
                     </div>
-                    
-                    <!-- <div class="ui-g-12">
+                    <div class="ui-g-12" *ngIf="hintDisplay">
+                        <hr>
+                        <div class="ui-g">
+                            <div class="ui-g-6">
+                                <div>
+                                    <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br><br></span>
+                                    <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br><br></span>
+                                    <br *ngIf="correct">
+                                    <br *ngIf="correct">
+                                    <span class="correct" *ngIf="!correct">Correct Answer: {{correctAnswer['answer']}} <br><br></span>
+                                </div>
+                                <img src="{{correctAnswer['image']['image_path']}}">
+                            </div>
+                            <div class="ui-g-6">
+                                <i class="fa fa-lightbulb-o fa-lg"></i> &nbsp; Hint: {{selectedQuestion['hint']['name']}}
+                                <br>
+                                <br><span><br><br></span>
+                                <img src="{{selectedQuestion['hint']['image']['image_path']}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="ui-g-12">
                         <div class="ui-g">
                             <div class="ui-g-12" *ngIf="hintDisplay"><hr>
                                 <div class="ui-g">
@@ -127,7 +138,7 @@
                     </div>
                 </div>
             </div> -->
+            </div>
         </div>
+        <div class="ui-g-12 foot">Copyright &copy; OlympiadBox. All Rights Reserved</div>
     </div>
-    <div class="ui-g-12 foot">Copyright &copy; OlympiadBox. All Rights Reserved</div>
-</div>

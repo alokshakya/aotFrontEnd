@@ -1,68 +1,62 @@
 <p-growl [value]="message" life="4000"></p-growl>
-
 <div class="container">
-
-    <div class="logo"><!--Olympiadbox logo-->
+    <div class="logo">
+        <!--Olympiadbox logo-->
         <a href="http://olympiadbox.com"><img src="../../assets/layout/images/Olympiadbox-logo.png" id="oblogo" height="100px" width="100px"></a>
     </div>
-
     <div class=" module form-module" *ngIf="!loginRegToggle" [@fadeInOut]>
-      <div class="toggle" pTooltip=" Register" (click)="loginRegToggle=!loginRegToggle">
-          <i class="fa fa-user-plus fa-lg" ></i>
-      </div>
-      
-      <!--LOGIN BOX-->
-      <div *ngIf="!loginForgotToggle; then login else forgot"></div>
+        <div class="toggle" pTooltip=" Register" (click)="loginRegToggle=!loginRegToggle">
+            <i class="fa fa-user-plus fa-lg"></i>
+        </div>
+        <!--LOGIN BOX-->
+        <div *ngIf="!loginForgotToggle; then login else forgot"></div>
     </div>
-
-      <!--Registration Box-->
+    <!--Registration Box-->
     <div class="form-module register" style="border-color:#2BBF61" *ngIf="loginRegToggle" [@fadeInOut]>
-        <div class="toggle" style="background-color:#2BBF61" pTooltip=" Login" (click)="loginRegToggle=!loginRegToggle;reset()" >
-            <i class="fa fa-sign-in fa-lg" ></i>
+        <div class="toggle" style="background-color:#2BBF61" pTooltip=" Login" (click)="loginRegToggle=!loginRegToggle;reset()">
+            <i class="fa fa-sign-in fa-lg"></i>
         </div>
         <div *ngIf="!regVerifyToggle; then reg else verify"></div>
     </div>
     <div class="ui-g fill">
-        <div class="ui-g-12 ui-sm-12 footer">  
+        <div class="ui-g-12 ui-sm-12 footer">
             Copyright &copy; Olympiadbox. All rights reserved
         </div>
     </div>
-
-     <ng-template #login>
+    <ng-template #login>
         <div class="form">
-          <div class="text-center">
-            <h2>Login to your account</h2>
-          </div>
-
-        <form #formCtrl="ngForm" novalidate> 
-
-          <!--Email Validator-->
-          <input type="text"  name="email"
-            #email="ngModel" [(ngModel)]="userLoginCreds.username"  pInputText placeholder="Username"
-            pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required/>
-          <div class="text-center">
-              <p class="error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">Please Enter Valid Email Id</p>
-          </div>
-          <br>
-          <input type="password"  name="password"
-            #password="ngModel" [(ngModel)]="userLoginCreds.password" pInputText placeholder="Password" 
-            pattern="^[^\s]{6,}" required/>
-          <br>
-          <button id="lobtn" pButton (click)="signIn()" [disabled]="password.errors||email.errors||userLoginCreds.password==''" type="submit" label="Login"></button><br><br>
-          
-          <span id="lostpassword"><a (click)="forgotPassword()">Forgot Password?</a></span>
-
-        </form>
-        <div class="ui-g" id="optional">
-            <div class="ui-g-5"><hr></div>
-            <div class="ui-g-2"><h4>OR</h4></div>
-            <div class="ui-g-5"><hr></div>
-            <button id="google" [disabled]="true" pButton type="button" icon="fa-google" label="Login with Google"></button><br>
-            <button id="facebook" [disabled]="true" pButton type="button" icon="fa-facebook" label="Login with Facebook"></button>
+            <div class="text-center">
+                <h2>Login to your account</h2>
+            </div>
+            <form #formCtrl="ngForm" novalidate>
+                <!--Email Validator-->
+                <input type="text" name="email" #email="ngModel" [(ngModel)]="userLoginCreds.username" pInputText placeholder="Username" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required/>
+                <div class="text-center">
+                    <p class="error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">Please Enter Valid Email Id</p>
+                </div>
+                <br>
+                <input type="password" name="password" #password="ngModel" [(ngModel)]="userLoginCreds.password" pInputText placeholder="Password" pattern="^[^\s]{6,}" required/>
+                <br>
+                <button id="lobtn" pButton (click)="signIn()" [disabled]="password.errors||email.errors||userLoginCreds.password==''" type="submit" label="Login"></button>
+                <br>
+                <br>
+                <span id="lostpassword"><a (click)="forgotPassword()">Forgot Password?</a></span>
+            </form>
+            <div class="ui-g" id="optional">
+                <div class="ui-g-5">
+                    <hr>
+                </div>
+                <div class="ui-g-2">
+                    <h4>OR</h4></div>
+                <div class="ui-g-5">
+                    <hr>
+                </div>
+                <button id="google" [disabled]="true" pButton type="button" icon="fa-google" label="Login with Google"></button>
+                <br>
+                <button id="facebook" [disabled]="true" pButton type="button" icon="fa-facebook" label="Login with Facebook"></button>
+            </div>
         </div>
-      </div>
     </ng-template>
-
     <ng-template #forgot>
         <div class="ui-g" *ngIf="!verifyForgotToggle">
             <div class="ui-g-12 text-center">
@@ -71,23 +65,22 @@
             </div>
             <div class="ui-g-12 ui-sm-12 verify">
                 <h5>Please Enter Registered Email Address</h5>
-                <input  #forgot="ngModel" [(ngModel)]="registeredEmail"  pInputText placeholder="Email Address"
-                pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required>   
-                <p class="error" [hidden]="forgot.untouched" *ngIf="forgot.errors && forgot.errors.pattern">Invalid Email Address</p>                             
+                <input #forgot="ngModel" [(ngModel)]="registeredEmail" pInputText placeholder="Email Address" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required>
+                <p class="error" [hidden]="forgot.untouched" *ngIf="forgot.errors && forgot.errors.pattern">Invalid Email Address</p>
             </div>
             <div class="ui-g-12 ui-sm-12 verify">
                 <h5>Send OTP on </h5>
                 <p-checkbox id="gap" value="verify_mobile" [disabled]="forgot.errors" [(ngModel)]="mode" label="Mobile"></p-checkbox>
-                <p-checkbox value="verify_email" [disabled]="forgot.errors" [(ngModel)]="mode" label="Email"></p-checkbox><br> 
-                <br>              
+                <p-checkbox value="verify_email" [disabled]="forgot.errors" [(ngModel)]="mode" label="Email"></p-checkbox>
+                <br>
+                <br>
             </div>
             <div class="ui-g-12 ui-sm-12 text-center">
-                <button [disabled]="forgot.errors||mode==''||mode==null" (click)="sendOtp('selective')" type="button" pButton label="Submit" class="ui-button-success"></button> 
+                <button [disabled]="forgot.errors||mode==''||mode==null" (click)="sendOtp('selective')" type="button" pButton label="Submit" class="ui-button-success"></button>
                 <br>
             </div>
             <div class="ui-g-12 empty"></div>
         </div>
-
         <div class="ui-g" *ngIf="verifyForgotToggle">
             <div class="ui-g-12 text-center">
                 <br>
@@ -96,71 +89,70 @@
             <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='verify_mobile'||mode[1]=='verify_mobile'">
                 <h5>Enter OTP sent on <strong>{{registeredMobile}}</strong></h5>
                 <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="mobileOtp"></p-inputMask>
-                <button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="verifyOtp('verify_mobile',true)" label="Verify"></button>&nbsp;<button pButton [disabled]="mobileVerified" (click)="sendOtp('verify_mobile', true)" class="ui-button-info" label="Resend"></button>
+                <button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="verifyOtp('verify_mobile',true)" label="Verify"></button>&nbsp;
+                <button pButton [disabled]="mobileVerified" (click)="sendOtp('verify_mobile', true)" class="ui-button-info" label="Resend"></button>
                 <p class="success" *ngIf="mobileVerified">You can change your password below</p>
             </div>
-            <div class="ui-g-12 text-center" *ngIf="(mode[0]=='verify_mobile'||mode[1]=='verify_mobile')&&(mode[0]=='verify_email'||mode[1]=='verify_email')"><h4>OR</h4></div>
+            <div class="ui-g-12 text-center" *ngIf="(mode[0]=='verify_mobile'||mode[1]=='verify_mobile')&&(mode[0]=='verify_email'||mode[1]=='verify_email')">
+                <h4>OR</h4></div>
             <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='verify_email'||mode[1]=='verify_email'">
                 <h5>Enter CODE sent on <strong>{{registeredEmail}}</strong></h5>
                 <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" placeholder="Enter Security Code" mask="999-999" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
-                <button pButton [disabled]="emailVerified" class="ui-button-success" (click)="verifyOtp('verify_email',true)" label="Verify"></button>&nbsp;<button [disabled]="emailVerified" (click)="sendOtp('verify_email', true)" pButton class="ui-button-info" label="Resend"></button>
+                <button pButton [disabled]="emailVerified" class="ui-button-success" (click)="verifyOtp('verify_email',true)" label="Verify"></button>&nbsp;
+                <button [disabled]="emailVerified" (click)="sendOtp('verify_email', true)" pButton class="ui-button-info" label="Resend"></button>
                 <p class="success" *ngIf="emailVerified">You can change your password below</p>
             </div>
             <div class="ui-g-12 empty" *ngIf="!(emailVerified||mobileVerified)"></div>
             <div class="ui-g-12 text-center aligned" *ngIf="emailVerified||mobileVerified">
-                <input pPassword promptLabel="Atleast 6 characters" #newpassword=ngModel type="password" name="newpassword" id="med1" [(ngModel)]="passwordObj.new_password" placeholder="Enter New Password"
-                 pattern="^[^\s]{6,}"><br>
+                <input pPassword promptLabel="Atleast 6 characters" #newpassword=ngModel type="password" name="newpassword" id="med1" [(ngModel)]="passwordObj.new_password" placeholder="Enter New Password" pattern="^[^\s]{6,}">
+                <br>
                 <input pInputText id="med2" type="password" [(ngModel)]="dummyPassword" placeholder="Confirm Password">
-                <p [hidden]="newpassword.untouched"  *ngIf="passwordObj.new_password!=dummyPassword" class="error">Password doesn't match</p><br>
-                <button pButton type="button" [disabled]="newpassword.errors||passwordObj.new_password!=dummyPassword" label="Save" (click)="changePassword()" class="ui-button-success"></button>                
+                <p [hidden]="newpassword.untouched" *ngIf="passwordObj.new_password!=dummyPassword" class="error">Password doesn't match</p>
+                <br>
+                <button pButton type="button" [disabled]="newpassword.errors||passwordObj.new_password!=dummyPassword" label="Save" (click)="changePassword()" class="ui-button-success"></button>
             </div>
         </div>
-
     </ng-template>
-
     <ng-template #reg>
-        <div class="form">  
+        <div class="form">
             <h2>Create an account</h2>
             <div class="ui-g">
-                <div class="ui-g-6 ui-sm-6"> <!--FirstName Validator -->
-                    <input type="text" name="firstname"
-                        #firstname="ngModel"  [(ngModel)]="userRegCreds.firstname" pInputText placeholder="Firstname"
-                        pattern="^[a-zA-Z]+"/>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--FirstName Validator -->
+                    <input type="text" name="firstname" #firstname="ngModel" [(ngModel)]="userRegCreds.firstname" pInputText placeholder="Firstname" pattern="^[a-zA-Z]+" />
                     <p class="error" [hidden]="firstname.untouched" *ngIf="firstname.errors && firstname.errors.pattern">
                         Invalid Firstname
-                    </p>  
+                    </p>
                 </div>
-                <div class="ui-g-6 ui-sm-6"> <!--LastName Validator -->
-                    <input type="text" name="lastname"
-                        #lastname="ngModel"  [(ngModel)]="userRegCreds.lastname" pInputText placeholder="Lastname"
-                        pattern="^[a-zA-Z]+"/>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--LastName Validator -->
+                    <input type="text" name="lastname" #lastname="ngModel" [(ngModel)]="userRegCreds.lastname" pInputText placeholder="Lastname" pattern="^[a-zA-Z]+" />
                     <p class="error" [hidden]="lastname.untouched" *ngIf="lastname.errors && lastname.errors.pattern">
                         Invalid Lastname
                     </p>
                 </div>
-                <div class="ui-g-6 ui-sm-6"> <!--Email Validators -->
-                    <input type="text"  name="regEmail"
-                        #regEmail="ngModel" [(ngModel)]="userRegCreds.email"  pInputText placeholder="Email"
-                        pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$"/>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--Email Validators -->
+                    <input type="text" name="regEmail" #regEmail="ngModel" [(ngModel)]="userRegCreds.email" pInputText placeholder="Email" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" />
                     <p class="error" [hidden]="regEmail.untouched" *ngIf="regEmail.errors && regEmail.errors.pattern">
-                    Invalid Email Id
+                        Invalid Email Id
                     </p>
                 </div>
-                <div class="ui-g-6 ui-sm-6"> <!--Mobile Validator -->
+                <div class="ui-g-6 ui-sm-6">
+                    <!--Mobile Validator -->
                     <input name="number" placeholder="Mobile Number" #number="ngModel" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="userRegCreds.mobile" pInputText type="number">
                     <p class="error" [hidden]="number.untouched" *ngIf="number.errors && number.errors.pattern">
-                    Invalid Mobile Number
+                        Invalid Mobile Number
                     </p>
                 </div>
-                <div class="ui-g-6 ui-sm-6"> <!--Password validator-->
-                    <input type="password"  name="regPassword" pPassword [feedback]="true" promptLabel="Atleast 6 Characters" 
-                        indicator="false" #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password"
-                        pattern="^[^\s]{6,}"/>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--Password validator-->
+                    <input type="password" name="regPassword" pPassword [feedback]="true" promptLabel="Atleast 6 Characters" indicator="false" #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password" pattern="^[^\s]{6,}" />
                 </div>
-                <div class="ui-g-6 ui-sm-6"> <!--Password validator(confirm password)--> 
-                    <input type="password"  name="regPassword" #regPassword="ngModel" [(ngModel)]="confirmPassword" placeholder="Confirm Password"
-                        pattern="^[^\s]{6,}"/>
-                    <p [hidden]="regPassword.untouched"  *ngIf="confirmPassword!=userRegCreds.password" class="error">Password doesn't match</p>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--Password validator(confirm password)-->
+                    <input type="password" name="regPassword" #regPassword="ngModel" [(ngModel)]="confirmPassword" placeholder="Confirm Password" pattern="^[^\s]{6,}" />
+                    <p [hidden]="regPassword.untouched" *ngIf="confirmPassword!=userRegCreds.password" class="error">Password doesn't match</p>
                 </div>
                 <div class="ui-g-6 ui-sm-6">
                     <p-dropdown scrollHeight="120px" [style]="{'width':'195px'}" [options]="dummyClass" [(ngModel)]="userRegCreds.class"></p-dropdown>
@@ -171,10 +163,8 @@
                     || userRegCreds.mobile==''||userRegCreds.mobile==null ||userRegCreds.password==''
                     || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''
                     || userRegCreds.class==''||userRegCreds.class==null || userRegCreds.password==''
-                    || confirmPassword=='' || confirmPassword!=userRegCreds.password" 
-                    (click)="signUp()" ></button>
+                    || confirmPassword=='' || confirmPassword!=userRegCreds.password" (click)="signUp()"></button>
                 </div>
-                    
                 <!--<div class="ui-g-12 ui-sm-12">
                     <button style="background-color:#2BBF61" pButton (click)="signUp()" [disabled]="regEmail.errors || firstname.errors 
                     || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' 
@@ -183,7 +173,6 @@
             </div>
         </div>
     </ng-template>
-
     <ng-template #verify>
         <div class="ui-g">
             <div class="ui-g-12 text-center">
@@ -192,26 +181,28 @@
             </div>
             <div class="ui-g verify">
                 <div class="ui-g-6 ui-sm-12">
-                    Enter OTP sent on {{userRegCreds.mobile}}<br>
+                    Enter OTP sent on {{userRegCreds.mobile}}
+                    <br>
                     <p-inputMask slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="mobileOtp"></p-inputMask>
                     <p class="success" *ngIf="mobileVerified">Mobile number verified.</p>
                 </div>
                 <div class="ui-g-6 ui-sm-12">
-                    <br><button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="verifyOtp('verify_mobile')" label="Verify"></button>&nbsp;<button pButton [disabled]="mobileVerified" (click)="sendOtp('verify_mobile')" class="ui-button-info" label="Resend"></button>
+                    <br>
+                    <button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="verifyOtp('verify_mobile')" label="Verify"></button>&nbsp;
+                    <button pButton [disabled]="mobileVerified" (click)="sendOtp('verify_mobile')" class="ui-button-info" label="Resend"></button>
                 </div>
                 <div class="ui-g-6 ui-sm-12">
-                    Enter CODE sent on {{userRegCreds.email}}<br>
+                    Enter CODE sent on {{userRegCreds.email}}
+                    <br>
                     <p-inputMask slotChar=" " unmask="true" placeholder="Enter Security Code" mask="999-999" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
                     <p class="success" *ngIf="emailVerified">Email address verified</p>
                 </div>
                 <div class="ui-g-6 ui-sm-12">
-                    <br><button pButton [disabled]="emailVerified" class="ui-button-success" (click)="verifyOtp('verify_email')" label="Verify"></button>&nbsp;<button [disabled]="emailVerified" (click)="sendOtp('verify_email')" pButton class="ui-button-info" label="Resend"></button>
+                    <br>
+                    <button pButton [disabled]="emailVerified" class="ui-button-success" (click)="verifyOtp('verify_email')" label="Verify"></button>&nbsp;
+                    <button [disabled]="emailVerified" (click)="sendOtp('verify_email')" pButton class="ui-button-info" label="Resend"></button>
                 </div>
             </div>
         </div>
     </ng-template>
-
 </div>
-
-      
-

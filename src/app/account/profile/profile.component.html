@@ -4,43 +4,50 @@
         <button type="button" pButton class="ui-button-success" icon="fa-check" label="Yes" (click)="cd.accept()"></button>
     </p-footer>
 </p-confirmDialog>
-
 <p-dialog [(visible)]="editTestimonial" modal="true" header="Edit Testimonial">
     <div class="ui-g">
         <div class="ui-g-12 text-center">
             <textarea pInputTextarea [(ngModel)]="currentTestimonial"></textarea>
         </div>
         <div class="ui-g-12 text-center">
-            <button type="button" class="ui-button-success" (click)="saveTestimonial()" pButton label="Save"></button><button (click)="cancel()" type="button" pButton class="ui-button-danger" label="Cancel"></button>
+            <button type="button" class="ui-button-success" (click)="saveTestimonial()" pButton label="Save"></button>
+            <button (click)="cancel()" type="button" pButton class="ui-button-danger" label="Cancel"></button>
         </div>
     </div>
 </p-dialog>
-
-<p-dialog header="Mobile Number Verification" [(visible)]="otpDialog" modal="true" responsive="true" [width]="400" [height]="300"> 
+<p-dialog header="Mobile Number Verification" [(visible)]="otpDialog" modal="true" responsive="true" [width]="400" [height]="300">
     <div class="ui-g text-center">
         <div class="ui-g-12" *ngIf="otpDialog">
             <h5>Enter OTP sent on {{dummyBasicInfo?.mobile}} </h5>
-            <input class="short" pInputText placeholder="Enter OTP" [(ngModel)]="dummyOtp"/><button class="ui-button-info withinput" pButton label="Resend"></button><br>
-            <br><button pButton (click)="dummyVerify()" class="ui-button-success" label="Verify"></button>
+            <input class="short" pInputText placeholder="Enter OTP" [(ngModel)]="dummyOtp" />
+            <button class="ui-button-info withinput" pButton label="Resend"></button>
+            <br>
+            <br>
+            <button pButton (click)="dummyVerify()" class="ui-button-success" label="Verify"></button>
         </div>
         <div class="ui-g-12" *ngIf="dummyIncorrectOtp">
-            <h5 style="color:#DC4E42"><i class="fa fa-times"></i> Incorrect OTP. Please try again</h5><br>
+            <h5 style="color:#DC4E42"><i class="fa fa-times"></i> Incorrect OTP. Please try again</h5>
+            <br>
         </div>
     </div>
 </p-dialog>
-
 <div class="ui-g">
-      <p-growl [(value)]="growlmsg"></p-growl>
+    <p-growl [(value)]="growlmsg"></p-growl>
     <div class="ui-g-12">
         <p-tabView (onChange)="onChange()">
             <p-tabPanel header="Basic Info" leftIcon="fa-user">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-user"></i> Name</h4><p><span class="userdetails" *ngIf="!editBasic">{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</span><input pInputText placeholder="{{dummyBasicInfo.firstname}}" *ngIf="editBasic" type="text" [(ngModel)]="dummyBasicInfo.firstname" ><input [(ngModel)]="dummyBasicInfo.lastname" placeholder="{{dummyBasicInfo.lastname}}" pInputText *ngIf="editBasic" type="text"></p>
+                            <h4><i class="fa fa-user"></i> Name</h4>
+                            <p><span class="userdetails" *ngIf="!editBasic">{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</span>
+                                <input pInputText placeholder="{{dummyBasicInfo.firstname}}" *ngIf="editBasic" type="text" [(ngModel)]="dummyBasicInfo.firstname">
+                                <input [(ngModel)]="dummyBasicInfo.lastname" placeholder="{{dummyBasicInfo.lastname}}" pInputText *ngIf="editBasic" type="text">
+                            </p>
                         </div>
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-envelope"></i> Email</h4><p><span class="userdetails">&nbsp;&nbsp;{{personalInfo.userInfo.email}}</span></p>
+                            <h4><i class="fa fa-envelope"></i> Email</h4>
+                            <p><span class="userdetails">&nbsp;&nbsp;{{personalInfo.userInfo.email}}</span></p>
                         </div>
                         <div class="col-md-4">
                             <button type="button" *ngIf="!editBasic" pButton class="ui-button-info" label="Edit" (click)="editBasicInfo()"></button>
@@ -48,54 +55,68 @@
                             <button type="button" *ngIf="editBasic" pButton class="ui-button-danger" label="Cancel" (click)="cancelBasicInfo()"></button>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-th-large"></i> Class</h4><p><span class="userdetails"> &nbsp; {{personalInfo.classInfo.abbreviation}}</span>
+                            <h4><i class="fa fa-th-large"></i> Class</h4>
+                            <p><span class="userdetails"> &nbsp; {{personalInfo.classInfo.abbreviation}}</span>
                         </div>
-
                         <div class="col-md-6 userinfo">
                             <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4>
-                            <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span><input class="withbtn" [(ngModel)]="dummyBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number"><button *ngIf="editBasic" (click)="verifyMobile()" pButton class="ui-button-warning" label="Verify"></button> </p>
+                            <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span>
+                                <input class="withbtn" [(ngModel)]="dummyBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number">
+                                <button *ngIf="editBasic" (click)="verifyMobile()" pButton class="ui-button-warning" label="Verify"></button>
+                            </p>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12 column userinfo">
-                                  <h4><i class="fa fa-calendar"></i> Date Of Birth</h4><p><span class="userdetails" *ngIf="!editBasic" > &nbsp;{{personalInfo.userInfo['birthdate']}}</span> &nbsp; <p-calendar [(ngModel)]="date" dateFormat="dd/mm/yy" [maxDate]="maxDate" [yearNavigator]="true" yearRange="1998:2012" [monthNavigator]="true" *ngIf="editBasic"></p-calendar></p>
+                                    <h4><i class="fa fa-calendar"></i> Date Of Birth</h4>
+                                    <p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo['birthdate']}}</span> &nbsp;
+                                        <p-calendar [(ngModel)]="date" dateFormat="dd/mm/yy" [maxDate]="maxDate" [yearNavigator]="true" yearRange="1998:2012" [monthNavigator]="true" *ngIf="editBasic"></p-calendar>
+                                    </p>
                                 </div>
                                 <div class="col-md-12"></div>
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-male"></i> Gender</h4><p><span class="userdetails">{{personalInfo.userInfo.gender}}</span></p>
+                                    <h4><i class="fa fa-male"></i> Gender</h4>
+                                    <p><span class="userdetails">{{personalInfo.userInfo.gender}}</span></p>
                                 </div>
-                                
                             </div>
                         </div>
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo.address}}, {{personalInfo.userInfo.city}}<br>&nbsp;{{personalInfo.userInfo.state}}, {{personalInfo.userInfo.country}}, &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
+                            <h4><i class="fa fa-home"></i> Address</h4>
+                            <p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo.address}}, {{personalInfo.userInfo.city}}<br>&nbsp;{{personalInfo.userInfo.state}}, {{personalInfo.userInfo.country}}, &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
                             <div class="address" *ngIf="editBasic">
-                            <input pInputText type="text" [(ngModel)]="dummyBasicInfo.address"><br>
-                            <div class="select"><p-dropdown  [options]="state" [(ngModel)]="dummyBasicInfo.state"></p-dropdown></div>
-                            <div class="select"><p-dropdown  [options]="city" [(ngModel)]="dummyBasicInfo.city"></p-dropdown></div>
-                            <div class="select"><p-dropdown  [options]="country" [(ngModel)]="dummyBasicInfo.country"></p-dropdown></div>
-                            <input  type="number" pInputText maxlength="6" [(ngModel)]="dummyBasicInfo.pincode">
-                            </div>  
-                        
+                                <input pInputText type="text" [(ngModel)]="dummyBasicInfo.address">
+                                <br>
+                                <div class="select">
+                                    <p-dropdown [options]="state" [(ngModel)]="dummyBasicInfo.state"></p-dropdown>
+                                </div>
+                                <div class="select">
+                                    <p-dropdown [options]="city" [(ngModel)]="dummyBasicInfo.city"></p-dropdown>
+                                </div>
+                                <div class="select">
+                                    <p-dropdown [options]="country" [(ngModel)]="dummyBasicInfo.country"></p-dropdown>
+                                </div>
+                                <input type="number" pInputText maxlength="6" [(ngModel)]="dummyBasicInfo.pincode">
+                            </div>
                         </div>
                     </div>
                 </div>
             </p-tabPanel>
-
             <p-tabPanel header="School Info" leftIcon="fa-graduation-cap">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-sticky-note-o"></i> School Code </h4><p><span *ngIf="!editSchool" class="userdetails schoolcode"> {{personalInfo['couponCode']}}</span> &nbsp;<input class="longinput" [(ngModel)]="couponCode" pInputText *ngIf="editSchool" type="text"></p>
+                            <h4><i class="fa fa-sticky-note-o"></i> School Code </h4>
+                            <p><span *ngIf="!editSchool" class="userdetails schoolcode"> {{personalInfo['couponCode']}}</span> &nbsp;
+                                <input class="longinput" [(ngModel)]="couponCode" pInputText *ngIf="editSchool" type="text">
+                            </p>
                         </div>
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-user"></i> Contact Person</h4><p><span class="userdetails"> &nbsp;{{personalInfo.schoolInfo['contact_person']}}</span> &nbsp;</p>
+                            <h4><i class="fa fa-user"></i> Contact Person</h4>
+                            <p><span class="userdetails"> &nbsp;{{personalInfo.schoolInfo['contact_person']}}</span> &nbsp;</p>
                         </div>
                         <div class="col-md-4">
                             <button type="button" *ngIf="!editSchool" pButton class="ui-button-info" label="Edit" (click)="editSchoolInfo()"></button>
@@ -103,35 +124,37 @@
                             <button type="button" *ngIf="editSchool" pButton class="ui-button-danger" label="Cancel" (click)="cancelSchoolInfo()"></button>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-university"></i> School Name </h4><p><span class="userdetails schoolname"> {{personalInfo.schoolInfo['name']}}</span></p>
+                            <h4><i class="fa fa-university"></i> School Name </h4>
+                            <p><span class="userdetails schoolname"> {{personalInfo.schoolInfo['name']}}</span></p>
                         </div>
-
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-envelope-o"></i> Email</h4><p><span class="userdetails">&nbsp; {{personalInfo.schoolInfo['email']}}</span></p>                        </div>
+                            <h4><i class="fa fa-envelope-o"></i> Email</h4>
+                            <p><span class="userdetails">&nbsp; {{personalInfo.schoolInfo['email']}}</span></p>
+                        </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4 userinfo">
-                            <h4><i class="fa fa-home"></i> Address</h4><p><span class="userdetails">  &nbsp;{{personalInfo.schoolInfo['address']}}, {{personalInfo.schoolInfo['city']}}, {{personalInfo.schoolInfo['state']}}, <br> &nbsp;{{personalInfo.schoolInfo['country']}}, {{personalInfo.schoolInfo['pincode']}}</span></p>
+                            <h4><i class="fa fa-home"></i> Address</h4>
+                            <p><span class="userdetails">  &nbsp;{{personalInfo.schoolInfo['address']}}, {{personalInfo.schoolInfo['city']}}, {{personalInfo.schoolInfo['state']}}, <br> &nbsp;{{personalInfo.schoolInfo['country']}}, {{personalInfo.schoolInfo['pincode']}}</span></p>
                         </div>
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-phone"></i> Landline</h4><p><span class="userdetails">&nbsp;{{personalInfo.schoolInfo['landline']}}</span></p>
+                                    <h4><i class="fa fa-phone"></i> Landline</h4>
+                                    <p><span class="userdetails">&nbsp;{{personalInfo.schoolInfo['landline']}}</span></p>
                                 </div>
                                 <div class="col-md-12"></div>
                                 <div class="col-md-12 column userinfo">
-                                    <h4><i class="fa fa-mobile"></i> Mobile</h4><p><span class="userdetails">{{personalInfo.schoolInfo['contact_mobile']}}</span></p>
+                                    <h4><i class="fa fa-mobile"></i> Mobile</h4>
+                                    <p><span class="userdetails">{{personalInfo.schoolInfo['contact_mobile']}}</span></p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </p-tabPanel>
-
             <p-tabPanel header="Change Password" leftIcon="fa-key">
                 <div class="container long">
                     <div class="row">
@@ -146,15 +169,13 @@
                             <button type="button" *ngIf="editPassword" pButton class="ui-button-danger" label="Cancel" (click)="cancelPassword()"></button>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-key"></i> New Password</h4>
-                            <input class="xpassword" pInputText #password="ngModel" *ngIf="editPassword" pPassword promptLabel="Atleast 6 characters" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}"/>
+                            <input class="xpassword" pInputText #password="ngModel" *ngIf="editPassword" pPassword promptLabel="Atleast 6 characters" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}" />
                         </div>
                         <div class="col-md-4"></div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-4 userinfo">
                             <h4><i class="fa fa-key"></i> Confirm Password</h4>
@@ -164,77 +185,94 @@
                     </div>
                 </div>
             </p-tabPanel>
-
             <p-tabPanel header="Add Testimonial" leftIcon="fa-pencil">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
                             <p-panel header="Previous Testimonials">
-                              
-                              <div class="row" *ngFor="let text of misc.userTestimonial;let i = index">
-                                <br>
-                                <div class="col-md-10">
-                                  <p>{{text}}</p>
+                                <div class="row" *ngFor="let text of misc.userTestimonial;let i = index">
+                                    <br>
+                                    <div class="col-md-10">
+                                        <p>{{text}}</p>
+                                    </div>
+                                    <div class="col-md-2"><i pTooltip="Edit" (click)="edit(i)" class="fa fa-pencil clickable"></i></div>
                                 </div>
-                                <div class="col-md-2"><i pTooltip="Edit" (click)="edit(i)" class="fa fa-pencil clickable"></i></div>
-                              </div>
-                              <hr>
-                                  <h4>Rate OlympiadBox</h4>
-                                  <p-rating [cancel]="false" [(ngModel)]="rating"></p-rating>
+                                <hr>
+                                <h4>Rate OlympiadBox</h4>
+                                <p-rating [cancel]="false" [(ngModel)]="rating"></p-rating>
                             </p-panel>
                         </div>
                         <div class="col-md-8 col-sm-12">
                             <p-panel header="Post New Testimonial">
-                              <div class="row">
-                                <div class="col-md-7 col-sm-12">
-                                  <br>
-                                  <textarea pInputTextarea [(ngModel)]="testimonial" placeholder="Enter Testimonial Here..."></textarea><br>
-                                  <button pButton label="Add Testimonial" (click)="addTestimonial()" class="ui-button-success"></button><button pButton label="Not Now" (click)="cancelTestimonial()" class="ui-button-danger"></button>
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-12">
+                                        <br>
+                                        <textarea pInputTextarea [(ngModel)]="testimonial" placeholder="Enter Testimonial Here..."></textarea>
+                                        <br>
+                                        <button pButton label="Add Testimonial" (click)="addTestimonial()" class="ui-button-success"></button>
+                                        <button pButton label="Not Now" (click)="cancelTestimonial()" class="ui-button-danger"></button>
+                                    </div>
+                                    <div class="col-md-5 col-sm-12">
+                                        <br>
+                                        <p class="guidelines">Posting Guidelines</p>
+                                        <span class="point"><i class="fa fa-check-square fa-lg"></i>Be Polite.</span>
+                                        <br>
+                                        <span class="point"><i class="fa fa-check-square fa-lg"></i>Never Abuse.</span>
+                                    </div>
                                 </div>
-                                <div class="col-md-5 col-sm-12">
-                                  <br>
-                                  <p class="guidelines">Posting Guidelines</p>
-                                    <span class="point"><i class="fa fa-check-square fa-lg"></i>Be Polite.</span><br>
-                                    <span class="point"><i class="fa fa-check-square fa-lg"></i>Never Abuse.</span>
-                                </div>
-                              </div>
                             </p-panel>
                         </div>
                     </div>
                 </div>
             </p-tabPanel>
-
             <p-tabPanel header="Add Achievements" leftIcon="fa-plus">
                 <p-panel header="Tell us about your Achievement">
                     <div class="ui-g">
                         <div class="ui-g-4 ui-sm-12">
-                            <label>Class*</label><p-dropdown [options]="classList" [style]="{'width':'50%'}" [(ngModel)]="selectedClass"></p-dropdown><br><br>
-                            <label>Exam City*</label><input class="achieve" type="text" pInputText placeholder="Exam City">
+                            <label>Class*</label>
+                            <p-dropdown [options]="classList" [style]="{'width':'50%'}" [(ngModel)]="selectedClass"></p-dropdown>
+                            <br>
+                            <br>
+                            <label>Exam City*</label>
+                            <input class="achieve" type="text" pInputText placeholder="Exam City">
                         </div>
                         <div class="ui-g-4 ui-sm-12">
-                            <label>Exam*</label><p-dropdown [options]="exam" [style]="{'width':'50%'}" [(ngModel)]="selectedExam"></p-dropdown><br><br>
-                            <label>Exam Roll No.*</label><input class="achieve" type="text" pInputText placeholder="Roll number">
+                            <label>Exam*</label>
+                            <p-dropdown [options]="exam" [style]="{'width':'50%'}" [(ngModel)]="selectedExam"></p-dropdown>
+                            <br>
+                            <br>
+                            <label>Exam Roll No.*</label>
+                            <input class="achieve" type="text" pInputText placeholder="Roll number">
                         </div>
                         <div class="ui-g-4 ui-sm-12">
                             <p class="guidelines">Submission Guidelines</p>
-                            <span class="point"><i class="fa fa-check-square fa-lg"></i>Be Polite.</span><br>
+                            <span class="point"><i class="fa fa-check-square fa-lg"></i>Be Polite.</span>
+                            <br>
                             <span class="point"><i class="fa fa-check-square fa-lg"></i>Never Abuse.</span>
                         </div>
-                        <div class="ui-g-12"><hr></div>
+                        <div class="ui-g-12">
+                            <hr>
+                        </div>
                         <div class="ui-g-4 ui-sm-12 message">
-                            <textarea pInputTextarea [(ngModel)]="achievement" maxlength="280" placeholder="Enter message here...."></textarea><br><br>
+                            <textarea pInputTextarea [(ngModel)]="achievement" maxlength="280" placeholder="Enter message here...."></textarea>
+                            <br>
+                            <br>
                         </div>
                         <div class="ui-g-8 ui-sm-12">
-                            <p-checkbox  name="declaration" value="dec1" [(ngModel)]="dec"></p-checkbox>I, parent of the above mentioned kid confirm that the information provided here is true.<br><br>
-                            <p-checkbox  name="declaration" value="dec2" [(ngModel)]="dec"></p-checkbox>I allow OlympiadBox to display the photograph and comment to online and offline media.<br><br>
+                            <p-checkbox name="declaration" value="dec1" [(ngModel)]="dec"></p-checkbox>I, parent of the above mentioned kid confirm that the information provided here is true.
+                            <br>
+                            <br>
+                            <p-checkbox name="declaration" value="dec2" [(ngModel)]="dec"></p-checkbox>I allow OlympiadBox to display the photograph and comment to online and offline media.
+                            <br>
+                            <br>
                             <div class="text-center">
-                                <button pButton class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null" label="Add Achievement" (click)="addAchievement()"></button><button pButton class="ui-button-danger" (click)="cancelAchievement()" label="Not Now"></button>
+                                <button pButton class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null" label="Add Achievement" (click)="addAchievement()"></button>
+                                <button pButton class="ui-button-danger" (click)="cancelAchievement()" label="Not Now"></button>
                             </div>
                         </div>
                     </div>
                 </p-panel>
             </p-tabPanel>
-
         </p-tabView>
     </div>
 </div>

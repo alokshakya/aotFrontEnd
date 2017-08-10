@@ -1,14 +1,14 @@
-#intro{
+#intro {
     height: 250px;
     overflow-x: hidden;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
-#inlinebutton{
-    border:transparent;
+#inlinebutton {
+    border: transparent;
     background-color: #1D8ECD;
     text-align: center;
-    float: right;   
+    float: right;
 }
 
 #testdetailspanel {
@@ -19,40 +19,40 @@
     text-align: center;
 }
 
-.container{
+.container {
     padding-left: 5%;
     padding-top: 2%;
 }
 
-.testnumber{
+.testnumber {
     padding-left: 5%;
 }
 
-.testnumber button{
+.testnumber button {
     margin-bottom: 2%;
 }
 
-.chapter{
+.chapter {
     font-size: 17px;
     font-weight: normal;
 }
 
-.leftpad{
+.leftpad {
     padding-left: 5%;
     margin-right: 2%;
 }
 
-.low button{
-    width:70px;
-    margin-right:4px;
+.low button {
+    width: 70px;
+    margin-right: 4px;
 }
 
-i:hover{
+i:hover {
     cursor: pointer;
-    color:brown;
+    color: brown;
 }
 
-.toright{
+.toright {
     padding-left: 25%;
 }
 
@@ -61,19 +61,22 @@ i:hover{
 
 
 
-.toggle{
+.toggle {
     margin-bottom: 2%;
 }
 
-.withradio a:link, a:visited, a:hover, a:active{
+.withradio a:link,
+a:visited,
+a:hover,
+a:active {
     color: inherit;
     font-size: 17px;
 }
 
-.withradio a:visited{
+.withradio a:visited {
     text-decoration: none;
 }
 
-.withradio a{
-    margin-left:3%;
+.withradio a {
+    margin-left: 3%;
 }

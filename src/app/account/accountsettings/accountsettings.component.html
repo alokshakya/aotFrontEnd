@@ -1,41 +1,48 @@
 <div class="fluid">
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <p-panel header="Subscription Details">
-        <br><br>
-        <p-dataTable [responsive]="true" [value]="subscriptionTableData">
-          <p-column field="Order ID" header="Order ID"></p-column>
-          <p-column field="Subject" header="Subject"></p-column>
-          <p-column field="Subscription Date" header="Subscription Date"></p-column>
-          <p-column field="Valid Till" header="Valid Till"></p-column>
-          <p-column field="Download Invoice" header="Invoice">
-            <ng-template pTemplate="body">
-              <div class="text-center">
-                <i style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>
-              </div>
-            </ng-template>
-          </p-column>
-        </p-dataTable><br>
-      </p-panel>
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <p-panel header="Subscription Details">
+                <br>
+                <br>
+                <p-dataTable [responsive]="true" [value]="subscriptionTableData">
+                    <p-column field="Order ID" header="Order ID"></p-column>
+                    <p-column field="Subject" header="Subject"></p-column>
+                    <p-column field="Subscription Date" header="Subscription Date"></p-column>
+                    <p-column field="Valid Till" header="Valid Till"></p-column>
+                    <p-column field="Download Invoice" header="Invoice">
+                        <ng-template pTemplate="body">
+                            <div class="text-center">
+                                <i style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>
+                            </div>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+                <br>
+            </p-panel>
+        </div>
+        <div class="ui-g-12">
+            <p-panel header="Subscribe Now">
+                <br>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-sm-12">
+                        <p-dataTable [value]="subPriceTable" dataKey="Subject" [responsive]="true" [(selection)]="selectedPackage">
+                            <p-column [style]="{'width':'5.3%','padding-left':'1.5%'}" selectionMode="multiple"></p-column>
+                            <p-column *ngFor="let i of col" header="{{i.header}}" field="{{i.field}}"></p-column>
+                        </p-dataTable>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <span id="coupontext"><strong>Enter Coupon/School Code*</strong></span>
+                <input size="40" type="text" [(ngModel)]="coupon" pInputText/>
+                <button id="applybutton" type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
+                <br>
+                <br>
+                <div id="paybutton">
+                    <button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==null" pButton label="Pay Now"></button>
+                </div>
+                <br>
+            </p-panel>
+        </div>
     </div>
-
-    <div class="ui-g-12">
-        <p-panel header="Subscribe Now"><br>
-            <div class="ui-g">
-              <div class="ui-g-12 ui-sm-12">
-                <p-dataTable [value]="subPriceTable" dataKey="Subject" [responsive]="true" [(selection)]="selectedPackage">
-                  <p-column [style]="{'width':'5.3%','padding-left':'1.5%'}" selectionMode="multiple"></p-column>
-                  <p-column *ngFor="let i of col" header="{{i.header}}" field="{{i.field}}"></p-column>
-                </p-dataTable> 
-              </div>
-            </div>
-            <br><br>
-          
-          <span id="coupontext"><strong>Enter Coupon/School Code*</strong></span><input size="40" type="text" [(ngModel)]="coupon" pInputText/>
-          <button id="applybutton" type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button><br><br>
-          
-          <div id="paybutton"><button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==null" pButton label="Pay Now"></button></div><br>
-        </p-panel>   
-      </div>
-    </div>
-  </div>
+</div>
