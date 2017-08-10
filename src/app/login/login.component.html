@@ -23,7 +23,7 @@
         <div *ngIf="!regVerifyToggle; then reg else verify"></div>
     </div>
     <div class="ui-g fill">
-        <div class="ui-g-12 footer">  
+        <div class="ui-g-12 ui-sm-12 footer">  
             Copyright &copy; Olympiadbox. All rights reserved
         </div>
     </div>
@@ -48,7 +48,7 @@
             #password="ngModel" [(ngModel)]="userLoginCreds.password" pInputText placeholder="Password" 
             pattern="^[^\s]{6,}" required/>
           <br>
-          <button pButton (click)="signIn()" [disabled]="password.errors||email.errors||userLoginCreds.password==''" type="submit" label="Login"></button><br><br>
+          <button id="lobtn" pButton (click)="signIn()" [disabled]="password.errors||email.errors||userLoginCreds.password==''" type="submit" label="Login"></button><br><br>
           
           <span id="lostpassword"><a (click)="forgotPassword()">Forgot Password?</a></span>
 

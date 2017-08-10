@@ -26,7 +26,8 @@ export class LoadoutComponent implements OnInit {
     this.http.getNotices();
     this.http.getFee();
     this.http.getTestDetails();
-    this.http.getTestimonials(); 
+    this.http.getTestimonials();
+    this.http.getResult(); 
   }
 
   ngOnDestroy(){

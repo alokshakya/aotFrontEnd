@@ -242,3 +242,9 @@ input[type=number]::-webkit-outer-spin-button {
   height:22%;
   margin-bottom:4px;
 }
+
+@media only screen and (max-width: 420px) {
+    .register{height:auto;}
+    .footer{padding-left:0;}
+    #logbtn{width:20px;}
+}

@@ -123,7 +123,14 @@ export class ChapterwisetestComponent implements OnInit {
         "student_id":this.personalInfo.studentInfo['student_id'],
         "chapter_id":chapterId,
         "test_id":testId}
-      this.masterhttp.beginTest(wrapper)
+      this.masterhttp.beginTest(wrapper);
+    }
+
+    checkGeneratedTest(){
+      if(this.chapterwiseTest.qaSet.length == 15){
+        return true;
+      }
+      return false;
     }
 
 

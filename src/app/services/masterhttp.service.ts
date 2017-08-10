@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { PersonalInfo, SubjectInfo, chapterwiseTest,Misc } from './data.service';
+import { PersonalInfo, SubjectInfo, Result,chapterwiseTest,Misc } from './data.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import * as constants from '../../config/constants';
@@ -18,7 +18,8 @@ export class MasterHttpService {
     public personalInfo: PersonalInfo,
     public subjectInfo: SubjectInfo,
     public misc: Misc,
-    public chapterwiseTest: chapterwiseTest)
+    public chapterwiseTest: chapterwiseTest,
+    public result: Result)
     {
       this.queryHeaders = new Headers();
       this.queryHeaders.append('Content-Type', 'application/json');
@@ -33,7 +34,7 @@ export class MasterHttpService {
   }
 
   dataRetreived(){
-    if(this.updated==7){
+    if(this.updated==8){
       this.router.navigate(['account'])
     }
   }
@@ -142,8 +143,9 @@ export class MasterHttpService {
 //-----------------------------------------------------------------------------------------------
   setQuestions(data){
     this.chapterwiseTest.setQuesAnswerSet(data);
-    this.router.navigate(['demotest']);
+    this.router.navigate(['test']);
   }
+
   beginTest(requestBody){
     return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/test/attempt', requestBody, {headers:this.queryHeaders}).map((resp: Response) => resp.json())
     .subscribe((data)=>{
@@ -187,6 +189,14 @@ export class MasterHttpService {
   //     this.dataRetreived();
   //   })
   // }
+
+  getResult(){
+    this.result.setResultSummary();
+    this.result.setTestSummary();
+    this.updated++;
+    this.dataRetreived();
+  }
+
 
   getFee(){
     // this.http.get(this.baseUrl+'/fee').map((resp:Response) => resp.json())

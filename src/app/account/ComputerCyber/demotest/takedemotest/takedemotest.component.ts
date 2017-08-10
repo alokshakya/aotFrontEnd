@@ -311,7 +311,6 @@ export class TakedemotestComponent implements OnInit {
       this.hintDisplay = false;
       this.clickListener = index;
       this.selectedQuestion = this.chapterwiseTest.qaSet[index];
-      console.log(this.selectedQuestion);
     }
 
   radio(){
@@ -340,7 +339,6 @@ export class TakedemotestComponent implements OnInit {
     this.attemptedQues += 1;
     this.counter = Math.ceil(this.attemptedQues*100/this.totalQues);
 
-    console.log(this.correctAnswer);
 
     this.wrapper['mark_for_review']="0";
     this.wrapper['question_id'] = this.selectedQuestion['id'];
@@ -350,7 +348,6 @@ export class TakedemotestComponent implements OnInit {
       if(data['status']==200){
       }
     })
-    this.hintDisplay = true;
     // this.counter+=Math.ceil(100/this.totalQues);
     if(this.selectedQuestion['correct_answer_id'] == this.selectedQuestion['answers'][this.answer]['id']){
       this.questionStatus[this.clickListener] = "Correct";
@@ -358,8 +355,10 @@ export class TakedemotestComponent implements OnInit {
 
     }
     else{
+      this.correct=false;
       this.questionStatus[this.clickListener] = "Wrong";
     }
+    this.hintDisplay = true;
     this.answer = null;
   }
 
@@ -372,11 +371,10 @@ export class TakedemotestComponent implements OnInit {
     this.wrapper['question_id'] = this.selectedQuestion['id'];
     this.wrapper['correct_answer'] = this.selectedQuestion['correct_answer_id'];
     this.wrapper['attempted_answer'] = "null";
-    console.log(this.wrapper);
     this.masterhttp.nextQuestion(this.wrapper).subscribe((data)=>{
       if(data['status']==200){
         this.updateView();
-      }else console.log(data);
+      }
     })
     this.answer = null;
   }

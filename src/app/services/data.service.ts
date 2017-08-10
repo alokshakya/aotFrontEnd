@@ -180,7 +180,6 @@ export class chapterwiseTest{
             'students_test_id':data['attempt']['students_test_id'],
         }
 
-        console.log(this.attemptDetails);
     }
 
 
@@ -231,8 +230,15 @@ export class Misc{
 
 @Injectable()
 export class Result{
-   
-    testSummary = {
+    resultSummary:any;
+    testSummary:any;
+    setTestSummary(){
+        this.testSummary = this.testSummary1;
+    }
+    setResultSummary(){
+        this.resultSummary = this.testSummary1;
+    }
+    testSummary1 = {
                             "Computer/Cyber": {
                                 "Chapterwise Test": {
                                     "completed": 34,
@@ -350,7 +356,7 @@ export class Result{
                             }
     }
 
-    resultSummary = {
+    resultSummary1 = {
                             "Computer/Cyber": {
                                 "Chapterwise Test": {
                                     "right": 34,

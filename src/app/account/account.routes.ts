@@ -16,8 +16,8 @@ import { LoadoutComponent } from './loadout/loadout.component'
 import { AccountGuard } from './account.guard';
 
 export const AccountRoutes: Routes = [
-  { path : '', redirectTo : '/login', pathMatch : 'full'},
-  { path: 'demotest', component: TakedemotestComponent, canActivate:[AccountGuard]},
+  { path : '', redirectTo : 'login', pathMatch : 'full'},
+  { path: 'test', component: TakedemotestComponent, canActivate:[AccountGuard]},
   // { path: '**', redirectTo: '/loadout', pathMatch:'full'},
   { path: 'loadout', component: LoadoutComponent, canActivate:[AccountGuard]},    
   { path : 'account', component : AccountMainComponent,

@@ -22,8 +22,8 @@
 
 .bar{
     display: inline-block;
-    padding-top:15px;
-    width:70px;
+    padding-top:8px;
+    width:124px;
     
 }
 
@@ -268,9 +268,29 @@
 
 .box{
     border: 1px solid black;
-    margin-top:3%;
+    margin-top:1%;
     margin-left:-4%;
     padding: 1% 1% 1% 1%;
 }
 
 
+@media only screen and (max-width: 420px) {
+    .img{width:2%;}
+    .test{width:73%;margin-left:21%}
+    .subject{width:40%;margin-left:4%}
+    .class{width:24%;margin-left:-3%}
+    .timer{width:31%;}
+    .bar{width:26%;margin-left:2%;}
+    .count{width:37%;padding-top:2%;}
+    .person{width:35%;padding-top:2%;}
+
+    .m{width:35%;}
+    .small{width:28.5%;}
+    .head{height:100%;}
+
+    .minwidth{width:25%;padding:0 0 0 0 ;}
+
+    .center{width:74%;padding:3px 0 0 3px;}
+    .box{padding: 0 0 0 0;margin: 0 0 11px 5px;}
+
+}
