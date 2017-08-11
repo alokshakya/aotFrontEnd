@@ -6,23 +6,23 @@ import { DebugElement } from '@angular/core';
 import { ChapterwisetestComponent } from './chapterwisetest.component';
 
 describe('ChapterwisetestComponent', () => {
-  let component: ChapterwisetestComponent;
-  let fixture: ComponentFixture<ChapterwisetestComponent>;
+    let component: ChapterwisetestComponent;
+    let fixture: ComponentFixture<ChapterwisetestComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ChapterwisetestComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ChapterwisetestComponent]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ChapterwisetestComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ChapterwisetestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

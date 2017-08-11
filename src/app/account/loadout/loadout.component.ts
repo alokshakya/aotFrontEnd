@@ -4,35 +4,35 @@ import { MasterHttpService } from '../../services/masterhttp.service';
 import { PersonalInfo, SubjectInfo, Misc } from '../../services/data.service';
 
 @Component({
-  selector: 'app-loadout',
-  templateUrl: './loadout.component.html',
-  styleUrls: ['./loadout.component.scss']
+    selector: 'app-loadout',
+    templateUrl: './loadout.component.html',
+    styleUrls: ['./loadout.component.scss']
 })
 export class LoadoutComponent implements OnInit {
 
-  loaderActive:boolean
+    loaderActive: boolean
 
-  constructor(
-    public http: MasterHttpService,
-    public personalInfo: PersonalInfo,
-    public SubjectInfo: SubjectInfo,
-    public misc:Misc,
-    public router: Router
-  ) { }
+    constructor(
+        public http: MasterHttpService,
+        public personalInfo: PersonalInfo,
+        public SubjectInfo: SubjectInfo,
+        public misc: Misc,
+        public router: Router
+    ) { }
 
-  ngOnInit() {
-    this.http.getPersonalInfo();
-    this.http.getSyllabus();  
-    this.http.getNotices();
-    this.http.getFee();
-    this.http.getTestDetails();
-    this.http.getTestimonials();
-    this.http.getResult(); 
-  }
+    ngOnInit() {
+        this.http.getPersonalInfo();
+        this.http.getSyllabus();
+        this.http.getNotices();
+        this.http.getFee();
+        this.http.getTestDetails();
+        this.http.getTestimonials();
+        this.http.getResult();
+    }
 
-  ngOnDestroy(){
-    this.http.updated = 0;
-  }
+    ngOnDestroy() {
+        this.http.updated = 0;
+    }
 
-  }
+}
 

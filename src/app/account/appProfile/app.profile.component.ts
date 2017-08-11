@@ -1,12 +1,12 @@
-import {Component,Input,OnInit,EventEmitter,ViewChild,trigger,state,transition,style,animate,Inject,forwardRef} from '@angular/core';
-import {Location} from '@angular/common';
-import {Router} from '@angular/router';
-import {MenuItem} from 'primeng/primeng';
-import {AccountMainComponent} from '../main/main.component';
+import { Component, Input, OnInit, EventEmitter, ViewChild, trigger, state, transition, style, animate, Inject, forwardRef } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/primeng';
+import { AccountMainComponent } from '../main/main.component';
 
 @Component({
     selector: 'inline-profile',
-    templateUrl:'./app.profile.component.html',
+    templateUrl: './app.profile.component.html',
     animations: [
         trigger('menu', [
             state('hidden', style({

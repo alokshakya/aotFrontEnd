@@ -1,5 +1,5 @@
-import {Component,Inject,forwardRef} from '@angular/core';
-import {AccountMainComponent} from '../main/main.component';
+import { Component, Inject, forwardRef } from '@angular/core';
+import { AccountMainComponent } from '../main/main.component';
 
 @Component({
     selector: 'app-footer',

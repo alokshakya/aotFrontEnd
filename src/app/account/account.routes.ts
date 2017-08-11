@@ -16,28 +16,28 @@ import { LoadoutComponent } from './loadout/loadout.component'
 import { AccountGuard } from './account.guard';
 
 export const AccountRoutes: Routes = [
-  { path : '', redirectTo : 'login', pathMatch : 'full'},
-  { path: 'test', component: TakedemotestComponent, canActivate:[AccountGuard]},
-  // { path: '**', redirectTo: '/loadout', pathMatch:'full'},
-  { path: 'loadout', component: LoadoutComponent, canActivate:[AccountGuard]},    
-  { path : 'account', component : AccountMainComponent,
-  children : [
-    { path: '' , redirectTo: 'dashboard', pathMatch: 'full'},
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'accountsettings', component: AccountsettingsComponent },
-    { path: 'computers/demotest', component: DemotestComponent },
-    { path: 'computers/chapterwisetest', component: ChapterwisetestComponent },           
-    { path: 'computers/sampletest', component: SampletestComponent },
-    { path: 'computers/mocktest', component: MocktestComponent },
-    { path: 'computers/result', component: ResultComponent },
-    { path: 'profile' , component: ProfileComponent }
-    ],
-    canActivate:[AccountGuard]
-  }
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'test', component: TakedemotestComponent, canActivate: [AccountGuard] },
+    // { path: '**', redirectTo: '/loadout', pathMatch:'full'},
+    { path: 'loadout', component: LoadoutComponent, canActivate: [AccountGuard] },
+    {
+        path: 'account', component: AccountMainComponent,
+        children: [
+            { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+            { path: 'dashboard', component: DashboardComponent },
+            { path: 'accountsettings', component: AccountsettingsComponent },
+            { path: 'computers/demotest', component: DemotestComponent },
+            { path: 'computers/chapterwisetest', component: ChapterwisetestComponent },
+            { path: 'computers/sampletest', component: SampletestComponent },
+            { path: 'computers/mocktest', component: MocktestComponent },
+            { path: 'computers/result', component: ResultComponent },
+            { path: 'profile', component: ProfileComponent }
+        ],
+        canActivate: [AccountGuard]
+    }
 ];
 
 
 
 
 
-   

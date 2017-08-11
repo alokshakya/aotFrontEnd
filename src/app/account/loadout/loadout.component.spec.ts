@@ -6,23 +6,23 @@ import { DebugElement } from '@angular/core';
 import { LoadoutComponent } from './loadout.component';
 
 describe('LoadoutComponent', () => {
-  let component: LoadoutComponent;
-  let fixture: ComponentFixture<LoadoutComponent>;
+    let component: LoadoutComponent;
+    let fixture: ComponentFixture<LoadoutComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LoadoutComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [LoadoutComponent]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoadoutComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(LoadoutComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

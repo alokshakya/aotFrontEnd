@@ -1,85 +1,85 @@
-import {AppRoutes} from './app.routes';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {BrowserModule} from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
-import {HttpModule}    from '@angular/http';
-import {LocationStrategy,HashLocationStrategy} from '@angular/common';
-import {NgModule}      from '@angular/core';
+import { AppRoutes } from './app.routes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { NgModule } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
-import {MdButtonModule} from '@angular/material';
+import { MdButtonModule } from '@angular/material';
 
 
-import {AccordionModule} from 'primeng/primeng';
-import {AutoCompleteModule} from 'primeng/primeng';
-import {BreadcrumbModule} from 'primeng/primeng';
-import {ButtonModule} from 'primeng/primeng';
-import {CalendarModule} from 'primeng/primeng';
-import {CarouselModule} from 'primeng/primeng';
-import {ChartModule} from 'primeng/primeng';
-import {CheckboxModule} from 'primeng/primeng';
-import {ChipsModule} from 'primeng/primeng';
-import {CodeHighlighterModule} from 'primeng/primeng';
-import {ConfirmDialogModule} from 'primeng/primeng';
-import {SharedModule} from 'primeng/primeng';
-import {ContextMenuModule} from 'primeng/primeng';
-import {DataGridModule} from 'primeng/primeng';
-import {DataListModule} from 'primeng/primeng';
-import {DataScrollerModule} from 'primeng/primeng';
-import {DataTableModule} from 'primeng/primeng';
-import {DialogModule} from 'primeng/primeng';
-import {DragDropModule} from 'primeng/primeng';
-import {DropdownModule} from 'primeng/primeng';
-import {EditorModule} from 'primeng/primeng';
-import {FieldsetModule} from 'primeng/primeng';
-import {FileUploadModule} from 'primeng/primeng';
-import {GalleriaModule} from 'primeng/primeng';
-import {GMapModule} from 'primeng/primeng';
-import {GrowlModule} from 'primeng/primeng';
-import {InputMaskModule} from 'primeng/primeng';
-import {InputSwitchModule} from 'primeng/primeng';
-import {InputTextModule} from 'primeng/primeng';
-import {InputTextareaModule} from 'primeng/primeng';
-import {LightboxModule} from 'primeng/primeng';
-import {ListboxModule} from 'primeng/primeng';
-import {MegaMenuModule} from 'primeng/primeng';
-import {MenuModule} from 'primeng/primeng';
-import {MenubarModule} from 'primeng/primeng';
-import {MessagesModule} from 'primeng/primeng';
-import {MultiSelectModule} from 'primeng/primeng';
-import {OrderListModule} from 'primeng/primeng';
-import {OverlayPanelModule} from 'primeng/primeng';
-import {PaginatorModule} from 'primeng/primeng';
-import {PanelModule} from 'primeng/primeng';
-import {PanelMenuModule} from 'primeng/primeng';
-import {PasswordModule} from 'primeng/primeng';
-import {PickListModule} from 'primeng/primeng';
-import {ProgressBarModule} from 'primeng/primeng';
-import {RadioButtonModule} from 'primeng/primeng';
-import {RatingModule} from 'primeng/primeng';
-import {ScheduleModule} from 'primeng/primeng';
-import {SelectButtonModule} from 'primeng/primeng';
-import {SlideMenuModule} from 'primeng/primeng';
-import {SliderModule} from 'primeng/primeng';
-import {SpinnerModule} from 'primeng/primeng';
-import {SplitButtonModule} from 'primeng/primeng';
-import {StepsModule} from 'primeng/primeng';
-import {TabMenuModule} from 'primeng/primeng';
-import {TabViewModule} from 'primeng/primeng';
-import {TerminalModule} from 'primeng/primeng';
-import {TieredMenuModule} from 'primeng/primeng';
-import {ToggleButtonModule} from 'primeng/primeng';
-import {ToolbarModule} from 'primeng/primeng';
-import {TooltipModule} from 'primeng/primeng';
-import {TreeModule} from 'primeng/primeng';
-import {TreeTableModule} from 'primeng/primeng';
+import { AccordionModule } from 'primeng/primeng';
+import { AutoCompleteModule } from 'primeng/primeng';
+import { BreadcrumbModule } from 'primeng/primeng';
+import { ButtonModule } from 'primeng/primeng';
+import { CalendarModule } from 'primeng/primeng';
+import { CarouselModule } from 'primeng/primeng';
+import { ChartModule } from 'primeng/primeng';
+import { CheckboxModule } from 'primeng/primeng';
+import { ChipsModule } from 'primeng/primeng';
+import { CodeHighlighterModule } from 'primeng/primeng';
+import { ConfirmDialogModule } from 'primeng/primeng';
+import { SharedModule } from 'primeng/primeng';
+import { ContextMenuModule } from 'primeng/primeng';
+import { DataGridModule } from 'primeng/primeng';
+import { DataListModule } from 'primeng/primeng';
+import { DataScrollerModule } from 'primeng/primeng';
+import { DataTableModule } from 'primeng/primeng';
+import { DialogModule } from 'primeng/primeng';
+import { DragDropModule } from 'primeng/primeng';
+import { DropdownModule } from 'primeng/primeng';
+import { EditorModule } from 'primeng/primeng';
+import { FieldsetModule } from 'primeng/primeng';
+import { FileUploadModule } from 'primeng/primeng';
+import { GalleriaModule } from 'primeng/primeng';
+import { GMapModule } from 'primeng/primeng';
+import { GrowlModule } from 'primeng/primeng';
+import { InputMaskModule } from 'primeng/primeng';
+import { InputSwitchModule } from 'primeng/primeng';
+import { InputTextModule } from 'primeng/primeng';
+import { InputTextareaModule } from 'primeng/primeng';
+import { LightboxModule } from 'primeng/primeng';
+import { ListboxModule } from 'primeng/primeng';
+import { MegaMenuModule } from 'primeng/primeng';
+import { MenuModule } from 'primeng/primeng';
+import { MenubarModule } from 'primeng/primeng';
+import { MessagesModule } from 'primeng/primeng';
+import { MultiSelectModule } from 'primeng/primeng';
+import { OrderListModule } from 'primeng/primeng';
+import { OverlayPanelModule } from 'primeng/primeng';
+import { PaginatorModule } from 'primeng/primeng';
+import { PanelModule } from 'primeng/primeng';
+import { PanelMenuModule } from 'primeng/primeng';
+import { PasswordModule } from 'primeng/primeng';
+import { PickListModule } from 'primeng/primeng';
+import { ProgressBarModule } from 'primeng/primeng';
+import { RadioButtonModule } from 'primeng/primeng';
+import { RatingModule } from 'primeng/primeng';
+import { ScheduleModule } from 'primeng/primeng';
+import { SelectButtonModule } from 'primeng/primeng';
+import { SlideMenuModule } from 'primeng/primeng';
+import { SliderModule } from 'primeng/primeng';
+import { SpinnerModule } from 'primeng/primeng';
+import { SplitButtonModule } from 'primeng/primeng';
+import { StepsModule } from 'primeng/primeng';
+import { TabMenuModule } from 'primeng/primeng';
+import { TabViewModule } from 'primeng/primeng';
+import { TerminalModule } from 'primeng/primeng';
+import { TieredMenuModule } from 'primeng/primeng';
+import { ToggleButtonModule } from 'primeng/primeng';
+import { ToolbarModule } from 'primeng/primeng';
+import { TooltipModule } from 'primeng/primeng';
+import { TreeModule } from 'primeng/primeng';
+import { TreeTableModule } from 'primeng/primeng';
 
 //Default theme Components
-import {AppComponent}  from './app.component';
-import {AppMenuComponent,AppSubMenu}  from './account/main/main.menu.component';
-import {AppTopBar}  from './account/apptopbar/app.topbar.component';
-import {AppFooter}  from './account/appfooter/app.footer.component';
-import {InlineProfileComponent}  from './account/appProfile/app.profile.component';
+import { AppComponent } from './app.component';
+import { AppMenuComponent, AppSubMenu } from './account/main/main.menu.component';
+import { AppTopBar } from './account/apptopbar/app.topbar.component';
+import { AppFooter } from './account/appfooter/app.footer.component';
+import { InlineProfileComponent } from './account/appProfile/app.profile.component';
 
 
 //Added Components
@@ -100,7 +100,7 @@ import { LoaderComponent } from './account/loader/loader.component';
 import { ConfirmationService } from 'primeng/primeng';
 import { LoginRegisterService } from './services/loginRegister.service';
 import { MasterHttpService } from './services/masterhttp.service';
-import { PersonalInfo,SubjectInfo,Result,Misc,chapterwiseTest } from './services/data.service'; 
+import { PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest } from './services/data.service';
 import { AccountGuard } from './account/account.guard';
 
 //Moment
@@ -186,7 +186,7 @@ import { LoadoutComponent } from './account/loadout/loadout.component';
         MdButtonModule,
         TreeTableModule,
         //MomentModule //Moment
-        
+
     ],
     declarations: [
         AppComponent,
@@ -213,12 +213,12 @@ import { LoadoutComponent } from './account/loadout/loadout.component';
         LoadoutComponent,
     ],
     providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy},
-        LoginRegisterService,  
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        LoginRegisterService,
         MasterHttpService,
         ConfirmationService,
-        PersonalInfo,SubjectInfo,Result,Misc,chapterwiseTest, AccountGuard
+        PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest, AccountGuard
     ],
-    bootstrap:[AppComponent]
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

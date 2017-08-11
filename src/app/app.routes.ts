@@ -9,11 +9,11 @@ import { AccountGuard } from './account/account.guard';
 
 export const routes: Routes = [
     ...AccountRoutes,
-    { path: '**', redirectTo:'login', pathMatch:'full' },
-    { path: '', redirectTo:'login', pathMatch:'full' },
+    { path: '**', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
 
     { path: 'login', component: LoginComponent },
-    {path : 'account', component : AccountMainComponent, canActivate : [AccountGuard]},
-    ];
+    { path: 'account', component: AccountMainComponent, canActivate: [AccountGuard] },
+];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);

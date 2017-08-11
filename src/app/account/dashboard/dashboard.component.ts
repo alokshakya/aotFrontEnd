@@ -11,58 +11,58 @@ import { SubjectInfo, Result, Misc } from '../../services/data.service';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.css']
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
 
 
-    subjectSummary:any;
-    subjectLoader:boolean;
+    subjectSummary: any;
+    subjectLoader: boolean;
 
-    noticeBoard:any;
-    noticeLoader:boolean;
-    
-    testimonials:any;
-    testimonialLoader:boolean;
+    noticeBoard: any;
+    noticeLoader: boolean;
 
-    sessionToken:string;
+    testimonials: any;
+    testimonialLoader: boolean;
 
-    received=false;
-    subscribedSubjects:any;
+    sessionToken: string;
 
-    dummySubjects:any;
+    received = false;
+    subscribedSubjects: any;
+
+    dummySubjects: any;
     testSummary;
     resultSummary;
     constructor(
-        public router: Router, 
+        public router: Router,
         public subjectInfo: SubjectInfo,
         public result: Result,
         public misc: Misc
-        ) {
+    ) {
 
         this.testSummary = this.result.testSummary;
         this.resultSummary = this.result.testSummary;
-            
+
     }
 
-    ngOnInit(){}
-                        
-    startTest(){
+    ngOnInit() { }
+
+    startTest() {
         this.router.navigate(['account/computers/sampletest'])
     }
 
-    redirect(destination){
-        if(destination=='demo'){
+    redirect(destination) {
+        if (destination == 'demo') {
             this.router.navigate(['account/computers/demotest']);
-        }else {this.router.navigate(['account/accountsettings'])}
+        } else { this.router.navigate(['account/accountsettings']) }
     }
-    
-    redirectToTest(i,j){
+
+    redirectToTest(i, j) {
         // let a = i.toLowerCase()
         let b = j.toLowerCase().replace(/\s/g, "");
         // this.router.navigate(['account/'+a+'/'+b]);
-        this.router.navigate(['account/computers/'+b])
+        this.router.navigate(['account/computers/' + b])
     }
 
-    redirectToResult(i){
+    redirectToResult(i) {
         let a = i.toLowerCase();
         this.router.navigate(['account/computers/result'])
     }

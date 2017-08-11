@@ -4,8 +4,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { KeysPipe } from './keys.pipe';
 
 describe('CustompipePipe', () => {
-  it('create an instance', () => {
-    const pipe = new KeysPipe();
-    expect(pipe).toBeTruthy();
-  });
+    it('create an instance', () => {
+        const pipe = new KeysPipe();
+        expect(pipe).toBeTruthy();
+    });
 });

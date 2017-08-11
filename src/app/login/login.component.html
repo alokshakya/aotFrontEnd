@@ -35,7 +35,7 @@
                     <p class="error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">Please Enter Valid Email Id</p>
                 </div>
                 <br>
-                <input type="password" name="password" #password="ngModel" [(ngModel)]="userLoginCreds.password" pInputText placeholder="Password" pattern="^[^\s]{6,}" required/>
+                <input type="password" name="password" #password="ngModel" [(ngModel)]="userLoginCreds.password" pInputText placeholder="Password" pattern="^[^\s]{1,}" required/>
                 <br>
                 <button id="lobtn" pButton (click)="signIn()" [disabled]="password.errors||email.errors||userLoginCreds.password==''" type="submit" label="Login"></button>
                 <br>
@@ -96,7 +96,7 @@
             <div class="ui-g-12 text-center" *ngIf="(mode[0]=='verify_mobile'||mode[1]=='verify_mobile')&&(mode[0]=='verify_email'||mode[1]=='verify_email')">
                 <h4>OR</h4></div>
             <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='verify_email'||mode[1]=='verify_email'">
-                <h5>Enter CODE sent on <strong>{{registeredEmail}}</strong></h5>
+                <h5>Enter OTP sent on <strong>{{registeredEmail}}</strong></h5>
                 <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" placeholder="Enter Security Code" mask="999-999" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
                 <button pButton [disabled]="emailVerified" class="ui-button-success" (click)="verifyOtp('verify_email',true)" label="Verify"></button>&nbsp;
                 <button [disabled]="emailVerified" (click)="sendOtp('verify_email', true)" pButton class="ui-button-info" label="Resend"></button>
@@ -158,16 +158,16 @@
                     <p-dropdown scrollHeight="120px" [style]="{'width':'195px'}" [options]="dummyClass" [(ngModel)]="userRegCreds.class"></p-dropdown>
                 </div>
                 <div class="ui-g-6 ui-sm-12">
-                    <button id="reg" type="button" pButton label="Register" [disabled]="regEmail.errors || firstname.errors 
-                    || lastname.errors || regPassword.errors || number.errors 
+                    <button id="reg" type="button" pButton label="Register" [disabled]="regEmail.errors || firstname.errors
+                    || lastname.errors || regPassword.errors || number.errors
                     || userRegCreds.mobile==''||userRegCreds.mobile==null ||userRegCreds.password==''
                     || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''
                     || userRegCreds.class==''||userRegCreds.class==null || userRegCreds.password==''
                     || confirmPassword=='' || confirmPassword!=userRegCreds.password" (click)="signUp()"></button>
                 </div>
                 <!--<div class="ui-g-12 ui-sm-12">
-                    <button style="background-color:#2BBF61" pButton (click)="signUp()" [disabled]="regEmail.errors || firstname.errors 
-                    || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname=='' 
+                    <button style="background-color:#2BBF61" pButton (click)="signUp()" [disabled]="regEmail.errors || firstname.errors
+                    || lastname.errors || regPassword.errors || userRegCreds.password=='' || userRegCreds.firstname=='' || userRegCreds.lastname==''
                     || userRegCreds.email==''" type="submit" label="Register"></button>
                 </div>-->
             </div>
@@ -192,7 +192,7 @@
                     <button pButton [disabled]="mobileVerified" (click)="sendOtp('verify_mobile')" class="ui-button-info" label="Resend"></button>
                 </div>
                 <div class="ui-g-6 ui-sm-12">
-                    Enter CODE sent on {{userRegCreds.email}}
+                    Enter OTP sent on {{userRegCreds.email}}
                     <br>
                     <p-inputMask slotChar=" " unmask="true" placeholder="Enter Security Code" mask="999-999" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
                     <p class="success" *ngIf="emailVerified">Email address verified</p>

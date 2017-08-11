@@ -1,4 +1,4 @@
-import { Component,Input,OnInit,EventEmitter,ViewChild,trigger,state,transition,style,animate,Inject,forwardRef } from '@angular/core';
+import { Component, Input, OnInit, EventEmitter, ViewChild, trigger, state, transition, style, animate, Inject, forwardRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class AppMenuComponent implements OnInit {
 
     @Input() reset: boolean;
 
-    menuTabs:any;
+    menuTabs: any;
 
     model: MenuItem[];
 
@@ -26,179 +26,190 @@ export class AppMenuComponent implements OnInit {
 
     constructor(
         @Inject(forwardRef(() => AccountMainComponent))
-        public app:AccountMainComponent,
-        )
-        {
+        public app: AccountMainComponent,
+    ) {
 
-        this.model =[
-                        {label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['dashboard']},
-                        {label: 'Account Settings',icon: 'fa fa-pencil-square-o',routerLink: ['accountsettings']},
-                        {label: 'Computers',icon: 'icon-cyber',
-                            items: [{
-                                        label: 'Demo Test',
-                                        icon: 'fa fa-circle-o',
-                                        routerLink: ['computers/demotest']
-                                    },
-                                    {
-                                        label: 'Chapterwise Test',
-                                        icon: 'fa fa-circle-o',
-                                        routerLink: ['computers/chapterwisetest']
-                                    },
-                                    {
-                                        label: 'Sample Test',
-                                        icon: 'fa fa-circle-o',
-                                        routerLink: ['computers/sampletest']
-                                    },
-                                    {
-                                        label: 'Mock Test',
-                                        icon: 'fa fa-circle-o',
-                                        routerLink: ['computers/mocktest']
-                                    },
-                                    {
-                                        label: 'Result',
-                                        icon: 'fa fa-circle-o',
-                                        routerLink: ['computers/result']
-                                    }
-                                    ]},
-                        {label: 'Science',icon: 'icon-science',
-                            items: [{
-                                    label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['science/demotest']
-                                },
-                                {
-                                    label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['science/chapterwisetest']
-                                },
-                                {
-                                    label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['science/sampletest']
-                                },
-                                {
-                                    label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['science/mocktest']
-                                },
-                                {
-                                    label: 'Result',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['science/result']
-                                },
-                            ]}, 
-                        {label: 'Mathematics',icon: 'icon-maths',
-                            items: [{
-                                    label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['mathematics/demotest']
-                                },
-                                {
-                                    label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['mathematics/chapterwisetest']
-                                },
-                                {
-                                    label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['mathematics/sampletest']
-                                },
-                                {
-                                    label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['mathematics/mocktest']
-                                },
-                                {
-                                    label: 'Result',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['mathematics/result']
-                                },
-                            ]},
-                        {label: 'General Knowledge',icon: 'icon-gk',
-                            items: [{
-                                    label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['gk/demotest']
-                                },
-                                {
-                                    label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['gk/chapterwisetest']
-                                },
-                                {
-                                    label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['gk/sampletest']
-                                },
-                                {
-                                    label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['gk/mocktest']
-                                },
-                                {
-                                    label: 'Result',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['gk/result']
-                                },
-                            ]},
-                        {label: 'English',icon: 'icon-english',
-                            items: [{
-                                    label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['english/demotest']
-                                },
-                                {
-                                    label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['english/chapterwisetest']
-                                },
-                                {
-                                    label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['english/sampletest']
-                                },
-                                {
-                                    label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['english/mocktest']
-                                },
-                                {
-                                    label: 'Result',
-                                    icon: 'fa fa-calculaor',
-                                    routerLink: ['english/result']
-                                },
-                            ]},
-                        {label: 'Reasoning',icon: 'icon-reasoning',
-                            items: [{
-                                    label: 'Demo Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['reasoning/demotest']
-                                },
-                                {
-                                    label: 'Chapterwise Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['reasoning/chapterwisetest']
-                                },
-                                {
-                                    label: 'Sample Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['reasoning/sampletest']
-                                },
-                                {
-                                    label: 'Mock Test',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['reasoning/mocktest']
-                                },
-                                {
-                                    label: 'Result',
-                                    icon: 'fa fa-circle-o',
-                                    routerLink: ['reasoning/result']
-                                }
-                            ]}
-                       ]
-        }
-        
-        
+        this.model = [
+            { label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['dashboard'] },
+            { label: 'Account Settings', icon: 'fa fa-pencil-square-o', routerLink: ['accountsettings'] },
+            {
+                label: 'Computers', icon: 'icon-cyber',
+                items: [{
+                    label: 'Demo Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['computers/demotest']
+                },
+                {
+                    label: 'Chapterwise Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['computers/chapterwisetest']
+                },
+                {
+                    label: 'Sample Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['computers/sampletest']
+                },
+                {
+                    label: 'Mock Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['computers/mocktest']
+                },
+                {
+                    label: 'Result',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['computers/result']
+                }
+                ]
+            },
+            {
+                label: 'Science', icon: 'icon-science',
+                items: [{
+                    label: 'Demo Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['science/demotest']
+                },
+                {
+                    label: 'Chapterwise Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['science/chapterwisetest']
+                },
+                {
+                    label: 'Sample Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['science/sampletest']
+                },
+                {
+                    label: 'Mock Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['science/mocktest']
+                },
+                {
+                    label: 'Result',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['science/result']
+                },
+                ]
+            },
+            {
+                label: 'Mathematics', icon: 'icon-maths',
+                items: [{
+                    label: 'Demo Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['mathematics/demotest']
+                },
+                {
+                    label: 'Chapterwise Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['mathematics/chapterwisetest']
+                },
+                {
+                    label: 'Sample Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['mathematics/sampletest']
+                },
+                {
+                    label: 'Mock Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['mathematics/mocktest']
+                },
+                {
+                    label: 'Result',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['mathematics/result']
+                },
+                ]
+            },
+            {
+                label: 'General Knowledge', icon: 'icon-gk',
+                items: [{
+                    label: 'Demo Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['gk/demotest']
+                },
+                {
+                    label: 'Chapterwise Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['gk/chapterwisetest']
+                },
+                {
+                    label: 'Sample Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['gk/sampletest']
+                },
+                {
+                    label: 'Mock Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['gk/mocktest']
+                },
+                {
+                    label: 'Result',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['gk/result']
+                },
+                ]
+            },
+            {
+                label: 'English', icon: 'icon-english',
+                items: [{
+                    label: 'Demo Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['english/demotest']
+                },
+                {
+                    label: 'Chapterwise Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['english/chapterwisetest']
+                },
+                {
+                    label: 'Sample Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['english/sampletest']
+                },
+                {
+                    label: 'Mock Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['english/mocktest']
+                },
+                {
+                    label: 'Result',
+                    icon: 'fa fa-calculaor',
+                    routerLink: ['english/result']
+                },
+                ]
+            },
+            {
+                label: 'Reasoning', icon: 'icon-reasoning',
+                items: [{
+                    label: 'Demo Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['reasoning/demotest']
+                },
+                {
+                    label: 'Chapterwise Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['reasoning/chapterwisetest']
+                },
+                {
+                    label: 'Sample Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['reasoning/sampletest']
+                },
+                {
+                    label: 'Mock Test',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['reasoning/mocktest']
+                },
+                {
+                    label: 'Result',
+                    icon: 'fa fa-circle-o',
+                    routerLink: ['reasoning/result']
+                }
+                ]
+            }
+        ]
+    }
+
+
     ngOnInit() {
         // this.model = []
         // this.subjectSet.getSubjectSet(1).subscribe((data:Response) =>{
@@ -226,12 +237,12 @@ export class AppMenuComponent implements OnInit {
         //         this.temporaryModel.push(this.menuTabs[m])
         //     }
         // })
-        
 
-    }           
 
-    }    
- 
+    }
+
+}
+
 
 @Component({
     selector: '[app-submenu]',
@@ -269,52 +280,52 @@ export class AppMenuComponent implements OnInit {
 export class AppSubMenu {
 
     @Input() item: MenuItem;
-    
+
     @Input() root: boolean;
-    
+
     @Input() visible: boolean;
 
     _reset: boolean;
-        
+
     activeIndex: number;
 
-    constructor(@Inject(forwardRef(() => AccountMainComponent)) public app:AccountMainComponent, public router: Router, public location: Location) {}
-        
+    constructor( @Inject(forwardRef(() => AccountMainComponent)) public app: AccountMainComponent, public router: Router, public location: Location) { }
+
     itemClick(event: Event, item: MenuItem, index: number) {
         //avoid processing disabled items
-        if(item.disabled) {
+        if (item.disabled) {
             event.preventDefault();
             return true;
         }
-        
+
         //activate current item and deactivate active sibling if any
         this.activeIndex = (this.activeIndex === index) ? null : index;
-                
+
         //execute command
-        if(item.command) {
+        if (item.command) {
             item.command({
-               originalEvent: event,
+                originalEvent: event,
                 item: item
             });
         }
 
         //prevent hash change
-        if(item.items || (!item.url && !item.routerLink)) {
+        if (item.items || (!item.url && !item.routerLink)) {
             event.preventDefault();
         }
-        
+
         //hide menu
-        if(!item.items) {
-            if(this.app.isHorizontal())
+        if (!item.items) {
+            if (this.app.isHorizontal())
                 this.app.resetMenu = true;
             else
                 this.app.resetMenu = false;
-                
+
             this.app.overlayMenuActive = false;
             this.app.staticMenuMobileActive = false;
         }
     }
-    
+
     isActive(index: number): boolean {
         return this.activeIndex === index;
     }
@@ -323,10 +334,10 @@ export class AppSubMenu {
         return this._reset;
     }
 
-    set reset(val:boolean) {
+    set reset(val: boolean) {
         this._reset = val;
 
-        if(this._reset && this.app.isHorizontal()) {
+        if (this._reset && this.app.isHorizontal()) {
             this.activeIndex = null;
         }
     }

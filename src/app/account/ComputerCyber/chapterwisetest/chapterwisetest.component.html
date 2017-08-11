@@ -80,7 +80,7 @@
                                     <div class="ui-g-12 ui-sm-12" *ngFor="let test of data['tests']">
                                         <span class="leftpad">{{test?.name}}</span>
                                         <!-- <span class="low"><button label="{{test.value}}" [ngClass]="{'ui-button-success':test.value!='Resume'||test.value!='Start', 'ui-button-danger':test.value=='Start', 'ui-button-warning':test.value=='Resume'}" type="button" pButton></button><button pButton type="button" style="width:40px;" pTooltip="Retake {{test.key}}" tooltipPosition="right" icon="fa fa-refresh fa-spin fa-fw" *ngIf=" !(test.value=='Start'|| test.value=='Resume') "></button></span> -->
-                                        <span class="low"><button *ngIf="chapterwiseTest.testHistory==null" class="ui-button-danger" (click)="startTest(test.id,data.id)" label="Start" type="button" pButton></button></span>
+                                        <span class="low"><button class="ui-button-danger" (click)="startTest(test.id,data.id)" label="Start" type="button" pButton></button></span>
                                     </div>
                                 </div>
                             </p-accordionTab>
