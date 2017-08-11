@@ -148,7 +148,7 @@ export class TakedemotestComponent implements OnInit {
             this.correct = false;
             this.questionStatus[this.clickListener] = "Wrong";
         }
-        this.hintDisplay;
+        this.hintDisplay = true;
     }
 
 
