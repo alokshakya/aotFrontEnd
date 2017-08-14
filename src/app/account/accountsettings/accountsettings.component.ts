@@ -57,6 +57,7 @@ export class AccountsettingsComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.misc.setCurrentRoute("Account Settings");
         // this.subjectsPrice = []
         // this.price.getSubjectPrice(1).subscribe((data: Response) => {
         //     data = data['resource'];

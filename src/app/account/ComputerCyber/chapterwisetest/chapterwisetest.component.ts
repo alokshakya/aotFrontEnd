@@ -43,6 +43,7 @@ export class ChapterwisetestComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.misc.setCurrentRoute("Computers/Chapterwise Test");
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{

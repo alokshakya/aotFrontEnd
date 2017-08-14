@@ -33,6 +33,7 @@ export class DemotestComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.misc.setCurrentRoute("Computers/Demo Test");
 
         // this.syllabus = this.misc.syllabus['class']['subjects'][0];
         // console.log(this.syllabus);

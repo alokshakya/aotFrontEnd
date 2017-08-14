@@ -56,7 +56,10 @@
             </li>
         </ul>
         <ul>
-            <span style="font-size:17px;">Student &nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i></span>&nbsp;&nbsp;<span style="font-size:17px;" *ngFor="let url of currentPage">{{url|titlecase}} &nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i> &nbsp;</span>
+            <!-- <span style="font-size:17px;">Student &nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i></span>&nbsp;&nbsp;<span style="font-size:17px;" *ngFor="let url of currentPage">{{url|titlecase}} &nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i> &nbsp;</span> -->
+            <span style="font-size:100%">
+                 Account <i class="fa fa-angle-double-right" aria-hidden="true"></i> {{currentComponent}}
+            </span>
         </ul>
     </div>
 </div>

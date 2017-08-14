@@ -43,7 +43,9 @@ export class DashboardComponent implements OnInit {
 
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.misc.setCurrentRoute("Dashboard");
+    }
 
     startTest() {
         this.router.navigate(['account/computers/sampletest'])

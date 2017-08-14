@@ -219,6 +219,11 @@ export class Misc {
     syllabus: Array<any>;
     testDetails: any;
     login:boolean;
+    currentRoute: EventEmitter<string> = new EventEmitter();
+
+    setCurrentRoute(component){
+        this.currentRoute.emit(component);
+    }
 
     userTestimonial = [
         "Lorem 11111111 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
@@ -259,6 +264,7 @@ export class Misc {
 export class Result {
     resultSummary: any;
     testSummary: any;
+
     setTestSummary() {
         this.testSummary = this.testSummary1;
     }

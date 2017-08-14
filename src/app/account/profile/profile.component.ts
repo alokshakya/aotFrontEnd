@@ -83,6 +83,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
 
     ngOnInit() {
+        this.misc.setCurrentRoute("Profile");
         this.dec = [];
         this.exam.push(
             { label: "Select Exam", value: "null" }, { label: "NCO 2016-17 - Level 2", value: "NCO-16-17" },

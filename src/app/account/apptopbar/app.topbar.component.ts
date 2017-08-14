@@ -2,7 +2,8 @@ import { Component, OnInit, Inject, forwardRef } from '@angular/core';
 import { AccountMainComponent } from '../main/main.component';
 import { Router } from '@angular/router';
 import { PersonalInfo, Misc } from '../../services/data.service';
-import { MasterHttpService } from '../../services/masterhttp.service'
+import { MasterHttpService } from '../../services/masterhttp.service';
+import { Observable } from 'rxjs/Rx';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class AppTopBar implements OnInit {
         public personalInfo: PersonalInfo,
         public masterhttp: MasterHttpService) { }
 
+    currentComponent:string;
 
     logout() {
         let userInfoId = this.personalInfo.userInfo['user_info_id']
@@ -30,7 +32,15 @@ export class AppTopBar implements OnInit {
             })
     };
 
+    activeComponent(){
+        this.misc.currentRoute.subscribe((data)=>{
+            this.currentComponent = data;
+        })
+    }
+
     ngOnInit() {
+        this.activeComponent();
+
         this.router.events.subscribe(event => {
             let a = event['url'];
             this.currentPage = a.split('/');

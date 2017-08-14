@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UIChart, SelectItem } from 'primeng/primeng'
+import { UIChart, SelectItem } from 'primeng/primeng';
+import { Misc } from '../../../services/data.service';
 
 @Component({
     selector: 'app-result',
@@ -39,7 +40,7 @@ export class ResultComponent implements OnInit {
     currentDemo: string;
 
 
-    constructor() {
+    constructor(public misc:Misc) {
 
         this.detailedResult = {
             "Chapterwise Test": {
@@ -953,6 +954,8 @@ export class ResultComponent implements OnInit {
     showPanel(e) {
     }
     ngOnInit() {
+        this.misc.setCurrentRoute("Computers/Result");
+
         this.organisation = [];
         this.organisation.push({ label: 'Select Organisation', value: 'null' })
     }

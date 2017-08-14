@@ -39,6 +39,8 @@ export class MocktestComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.misc.setCurrentRoute("Computers/Mock Test");
+
         //for chart
         this.mockTestData = {
             labels: ['Completed', 'Remaining'],

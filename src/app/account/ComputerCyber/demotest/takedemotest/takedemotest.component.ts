@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 import { ConfirmationService } from 'primeng/primeng';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
-import { SubjectInfo, chapterwiseTest, PersonalInfo } from '../../../../services/data.service';
+import { SubjectInfo, Misc, chapterwiseTest, PersonalInfo } from '../../../../services/data.service';
 import { ComponentCanDeactivate } from '../../../account.guard';
 
 @Component({
@@ -62,7 +62,8 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         public masterhttp: MasterHttpService,
         public subjectInfo: SubjectInfo,
         public personalInfo: PersonalInfo,
-        public chapterwiseTest: chapterwiseTest) {
+        public chapterwiseTest: chapterwiseTest,
+        public misc:Misc ) {
         this.counter = 0;
         this.clickListener = '';
         this.test = "Demo Test"

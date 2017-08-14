@@ -3,7 +3,7 @@ import { SelectItem } from 'primeng/primeng';
 import { Response } from '@angular/http';
 import { TreeModule, TreeNode } from 'primeng/primeng';
 import { Router } from '@angular/router';
-import { SubjectInfo } from '../../../services/data.service';
+import { SubjectInfo, Misc } from '../../../services/data.service';
 
 
 @Component({
@@ -25,6 +25,7 @@ export class SampletestComponent implements OnInit {
 
     constructor(
         private router: Router,
+        private misc: Misc,
         public subjectInfo: SubjectInfo) {
 
         this.testData = {
@@ -46,6 +47,8 @@ export class SampletestComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.misc.setCurrentRoute("Computers/Sample Test");
+
         //for chart
         this.sampleTestData = {
             labels: ['Completed', 'Remaining'],
