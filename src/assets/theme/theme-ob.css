@@ -678,7 +678,8 @@ body {
     body .ui-datepicker:not(.ui-state-disabled) table td:not(.ui-state-disabled) a:not(.ui-state-active):not(.ui-state-highlight):hover {
       background-color: #f0f3f5; }
     body .ui-datepicker .ui-datepicker-header {
-      padding: 0.5em 1em;
+      /* padding: 0.5em 1em; */
+      padding: 0.5em 0;
       -moz-border-radius: 0;
       -webkit-border-radius: 0;
       border-radius: 0; }

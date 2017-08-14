@@ -132,6 +132,8 @@ export class ChapterwisetestComponent implements OnInit {
             "chapter_id": chapterId,
             "test_id": testId
         }
+        this.chapterwiseTest.activateTestRoute();
+        this.chapterwiseTest.setSubject('Computers');
         this.masterhttp.beginTest(wrapper);
     }
 

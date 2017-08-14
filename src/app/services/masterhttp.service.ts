@@ -87,7 +87,6 @@ export class MasterHttpService {
     updateProfile(requestBody) {
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/user/update', requestBody, { headers: this.queryHeaders })
             .map((resp: Response) => resp.json())
-
     }
 
     getSchool(couponeCode) {
@@ -205,5 +204,9 @@ export class MasterHttpService {
         // })
     }
 
-
+    getUserTestimonials(studentId){
+        return this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/relatedtable/testimonial/user_testimonial_set/testimonial_id/student_id/'+studentId, {headers: this.queryHeaders})
+        .map((resp: Response)=>resp.json())
+        .subscribe((data)=>this.personalInfo.setUserTestimonials(data['message']))
+    }
 }

@@ -4,16 +4,26 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class PersonalInfo {
+    userInfoEvent: EventEmitter<boolean> = new EventEmitter();
+    schoolEvent: EventEmitter<boolean> = new EventEmitter();
     userInfo: any;
     classInfo: any;
     studentInfo: any;
     schoolInfo = { 'name': null, 'contact_person': null, 'contact_mobile': null };
     couponCode: string;
+    userTestimonials:any;
 
     dummySchoolInfo = { 'school_id': null };
 
+    getUserTestimonials():Observable<any>{
+        return this.userTestimonials;
+    }
 
     constructor() { }
+
+    setUserTestimonials(data){
+        this.userTestimonials = data;
+    }
 
     setInfo(data) {
         this.userInfo = data['user_info'];
@@ -25,6 +35,7 @@ export class PersonalInfo {
                 this.dummySchoolInfo[key] = data['school_info'][key];
             }
         }
+        this.userInfoEvent.emit(true);
     }
 
     setSchoolInfo(data) {
@@ -34,6 +45,7 @@ export class PersonalInfo {
         for (let key in data['complete_school_info']) {
             this.schoolInfo[key] = data['complete_school_info'][key]
         }
+        this.schoolEvent.emit(true);
     }
 
 
@@ -123,6 +135,7 @@ export class SubjectInfo {
 @Injectable()
 export class chapterwiseTest {
     testDetails: any;
+    subject:string;
     computers: any;
     reasoning: any;
     math: any;
@@ -133,6 +146,15 @@ export class chapterwiseTest {
     qaSet: any;
     testHistory: any;
     attemptDetails: any;
+    activateRoute:boolean;
+
+    setSubject(subject){
+        this.subject = subject; 
+    }
+
+    activateTestRoute(){
+        this.activateRoute = true;
+    }
 
     setTestDetails(data) {
         for (let i in data['generated']['subjects']) {
@@ -196,12 +218,17 @@ export class Misc {
     fee: Array<any>;
     syllabus: Array<any>;
     testDetails: any;
+    login:boolean;
 
     userTestimonial = [
         "Lorem 11111111 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
         "Lorem 22222222 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
         "Lorem 33333333 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
     ]
+
+    logIn(){
+        this.login = true;
+    }
 
     setTestimonial(data) {
         this.testimonial = data;

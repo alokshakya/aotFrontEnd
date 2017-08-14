@@ -4,15 +4,15 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx'
 import { ConfirmationService } from 'primeng/primeng';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
-import { SubjectInfo, chapterwiseTest, PersonalInfo } from '../../../../services/data.service'
-
+import { SubjectInfo, chapterwiseTest, PersonalInfo } from '../../../../services/data.service';
+import { ComponentCanDeactivate } from '../../../account.guard';
 
 @Component({
     selector: 'app-takedemotest',
     templateUrl: './takedemotest.component.html',
     styleUrls: ['./takedemotest.component.scss']
 })
-export class TakedemotestComponent implements OnInit {
+export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
 
     //header  
     test: string;
@@ -54,6 +54,7 @@ export class TakedemotestComponent implements OnInit {
     totalQues: number;
     correctAnswer: number;
     attemptedQues: number = 0;
+    stopFlag:boolean;
 
     constructor(
         public router: Router,
@@ -98,13 +99,25 @@ export class TakedemotestComponent implements OnInit {
 
     //   }
     displayQuestion(index) {  //questionDisplayed: KEY 
-        this.answer = null;
-        this.hintDisplay = false;
         // this.selectedQuestion = this.questionsPool[questionDisplayed];
         // this.questionNumber = "Q" + questionNumber + ". ";
         // this.questionWindow = true;
         this.clickListener = index;
         this.selectedQuestion = this.chapterwiseTest.qaSet[index];
+        this.answer = null;
+        this.hintDisplay = false;
+        this.setCorrectAnswer();
+        this.showHint();
+        console.log(this.correctAnswer);
+    }
+
+    setCorrectAnswer(){
+        for (let i in this.selectedQuestion['answers']) {
+            if (this.selectedQuestion['answers'][i]['id'] == this.selectedQuestion['correct_answer_id']) {
+                this.correctAnswer = this.selectedQuestion['answers'][i];
+                break;
+            }
+        }
     }
 
     validateds() {
@@ -122,12 +135,6 @@ export class TakedemotestComponent implements OnInit {
     }
 
     validate() {
-        for (let i in this.selectedQuestion['answers']) {
-            if (this.selectedQuestion['answers'][i]['id'] == this.selectedQuestion['correct_answer_id']) {
-                this.correctAnswer = this.selectedQuestion['answers'][i];
-            }
-        }
-        
         this.wrapper['mark_for_review'] = "0";
         this.wrapper['question_id'] = this.selectedQuestion['id'];
         this.wrapper['correct_answer'] = this.selectedQuestion['correct_answer_id'];
@@ -166,6 +173,7 @@ export class TakedemotestComponent implements OnInit {
             }
         })
         this.answer = null;
+        this.correctAnswer = null;
     }
 
     nextQuestion() {
@@ -173,24 +181,6 @@ export class TakedemotestComponent implements OnInit {
             this.displayQuestion(0);
         }
         else this.displayQuestion(this.clickListener+1);
-        // if (this.answer == null) {
-        //     if (parseInt(this.clickListener) == this.totalQues - 1) {
-        //         this.displayQuestion(0);
-        //     }
-        //     else {
-        //         this.displayQuestion(this.clickListener + 1)
-        //     }
-        // }
-        // else {
-        //     if (parseInt(this.clickListener) == this.totalQues - 1) {
-        //         this.validate();
-        //         this.displayQuestion(0);
-        //     }
-        //     else {
-        //         this.validate();
-        //         this.displayQuestion(this.clickListener + 1)
-        //     }
-        // }
     }
 
     showHint(){
@@ -201,26 +191,13 @@ export class TakedemotestComponent implements OnInit {
             else if(this.questionStatus[this.clickListener]=="Correct"){
                 this.correct = true;
                 this.hintDisplay = true;  
-            } else {
+            }
+            else if(this.questionStatus[this.clickListener]=="Wrong"){
                 this.correct = false;
                 this.hintDisplay = true;
             }
         }
-        else this.hintDisplay = false;
     }
-
-
-    // next(){
-    //     let b = this.clickListener;
-    //     let a = 'Question'+(b+1);
-    //     this.displayQuestion(a,b+1);
-    //   }
-
-    // previous(){
-    //     let b = parseInt(this.clickListener)-1 
-    //     let a = 'Question'+(b-1);
-    //     this.displayQuestion(a, b)
-    // }
 
     mark() {
         let q = this.clickListener;
@@ -243,17 +220,14 @@ export class TakedemotestComponent implements OnInit {
                 if (this.min == 60) { this.min = 0; this.hour += 1; }
                 if (this.hour == 24) { this.hour = 0; }
             });
-            // this.displayQuestion('Question1',1);
         }
     }
 
-
-
-
     validated() {
         if (this.questionStatus[this.clickListener] == "Correct" || this.questionStatus[this.clickListener] == "Wrong" || this.questionStatus[this.clickListener] == "Marked") {
-            return true
+            return true;
         }
+        return false;
     }
 
     subscribed(sub) {
@@ -261,15 +235,29 @@ export class TakedemotestComponent implements OnInit {
     }
 
     quit() {
+        this.stopFlag = true;
         this.confirmservice.confirm({
             message: 'Are you sure you want to quit ?',
             accept: () => {
-                this.router.navigate(['account/dashboard']);
-
+                this.router.navigate(['account']);
+            },
+            reject: () =>{
+                this.stopFlag = false;
             }
         });
     }
 
+    canDeactivate():Observable<boolean> | boolean{
+        if(this.stopFlag){
+            return true;
+        }
+        return false;
+    }
+
+    ngOnDestroy(){
+        this.stopFlag = false;
+        this.chapterwiseTest.activateRoute = false;
+    }
 
 }
 

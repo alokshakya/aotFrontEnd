@@ -164,3 +164,15 @@ label {
 .clickable:hover {
     cursor: pointer;
 }
+
+.rad {
+    font: inherit;
+    text-align: left;
+    margin: 0 0 3% 1% ;
+    padding: 0 0 0 0 ;
+}
+
+.box{
+    overflow-y: auto;
+    height: 20%; 
+}

@@ -44,7 +44,7 @@
     <div class="ui-g-6 ui-sm-12">
         <p-panel header="Demo Test">
             <div id="demotest">
-                <button pButton type="button" *ngIf="!subjectInfo.attemptedDemo['Computer/Cyber']" (click)="takedemotest()" label="Start" class="ui-button-danger"></button>
+                <button pButton [disabled]="true" type="button" *ngIf="!subjectInfo.attemptedDemo['Computer/Cyber']" (click)="takedemotest()" label="Start" class="ui-button-danger"></button>
                 <button pButton type="button" *ngIf="subjectInfo.attemptedDemo['Computer/Cyber']" (click)="takedemotest()" label="23/50" class="ui-button-success"></button>
             </div>
         </p-panel>

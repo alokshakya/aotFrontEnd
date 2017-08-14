@@ -1,20 +1,19 @@
-import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy,Output, ViewChild, ElementRef } from '@angular/core';
 import { Response } from '@angular/http';
 import { SelectItem } from 'primeng/primeng';
 import { Message } from 'primeng/primeng';
 import { ConfirmationService } from 'primeng/primeng';
 import { PersonalInfo, Misc } from '../../services/data.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
-
-
-
+import { ComponentCanDeactivate } from '../account.guard';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     //otp verification
     otpDialog: boolean;
@@ -68,6 +67,7 @@ export class ProfileComponent implements OnInit {
     growlmsg: Message[] = [];
     date: Date;
     test: any;
+    deactivate: boolean;
 
     couponCode: string;
     achievement;
@@ -84,7 +84,6 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit() {
         this.dec = [];
-
         this.exam.push(
             { label: "Select Exam", value: "null" }, { label: "NCO 2016-17 - Level 2", value: "NCO-16-17" },
             { label: "NSO-16-17 - Level 2", value: "NSO-16-17" }, { label: "IMO 2016-17 - Level 2", value: "NTSE" },
@@ -166,65 +165,11 @@ export class ProfileComponent implements OnInit {
             mobile: 9324567322
         }
 
-        this.date = new Date();
+        // this.date = new Date();
         this.maxDate = new Date();
         this.maxDate.setFullYear(2013, 0, 1);
-        this.date.setFullYear(1998, 5, 14);
-
-        // this.httpService.getUserInfo('gpantbiz@gmail.com')
-        // .subscribe((data: Response)=>{
-        //   data = data['resource'][0];
-        //   this.userBasicInfo = data;
-        // });
-
-        // this.httpService.getAcademicInfo(2)
-        // .subscribe((data: Response) =>{
-        //   this.class = data['class_by_class_id']['abbreviation'];
-        //   this.school = data['school_by_school_id']['name'];
-        // });
-
-        // this.classList=[];
-        // this.classService.getClasses()
-        // .subscribe((data: Response) => {
-        //   data = data['resource'];
-        //   for(let i in data){
-        //     this.classList.push({label:data[i]['abbreviation'], value:data[i]['abbreviation']})
-        //   }
-        // })
-
-        // //temporary
-        // this.masterhttp.getUserInfo()
-        // .subscribe((data: Response) =>{
-        //   this.dummyBasicInfo['firstname'] = data['firstname']
-        //   this.dummyBasicInfo['lastname'] = data['lastname']
-        //   this.dummyBasicInfo['email'] = data['email']
-        //   this.dummyBasicInfo['address'] = data['address']
-        //   this.dummyBasicInfo['country'] = data['country']
-        //   this.dummyBasicInfo['state'] = data['state']
-        //   this.dummyBasicInfo['mobile'] = data['mobile']
-        //   this.dummyBasicInfo['pincode'] = data['pincode']
-        //   this.dummyBasicInfo['gender'] = data['gender']
-        //   this.dummyBasicInfo['birthday'] = data['firstname']
-        // } )
-
+        // this.date.setFullYear(1998, 5, 14);
     }
-
-    //for basic info
-    // save(){
-    //   this.userBasicInfo = this.newBasicInfo;
-
-    //   this.update.updateUserInfo(this.newBasicInfo)
-    //   .subscribe((data: Response) => {
-    //   });
-
-    //   this.update.updateStudent(2,this.newClass)
-    //   this.editBasic = false;
-    // }
-
-    // edit(){
-    //   this.editBasic = true;
-    //   this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
-    // }
 
     editBasicInfo() {
         this.dummyBasicInfo = JSON.parse(JSON.stringify(this.personalInfo.userInfo));
@@ -247,7 +192,8 @@ export class ProfileComponent implements OnInit {
             'birthdate': this.dummyBasicInfo['birthdate'],
             'pincode': this.dummyBasicInfo['pincode'],
             'mobile': this.dummyBasicInfo['mobile'],
-            'school_id': this.schoolId
+            'gender': this.dummyBasicInfo['gender'], 
+            'school_id': this.personalInfo.studentInfo['school_id']
         }
         this.masterhtttp.updateProfile(wrapper)
             .subscribe((data: Response) => {
@@ -266,72 +212,51 @@ export class ProfileComponent implements OnInit {
             .subscribe((data) => {
                 if (data['status'] == 200) {
                     this.otpDialog = true;
-                    console.log(data);
                 }
-                else console.log(data);
             })
     }
 
 
 
     editSchoolInfo() {
-        this.couponCode = this.personalInfo.couponCode;
+        this.couponCode = this.personalInfo.schoolInfo['coupon_code'];
         this.editSchool = true;
     }
 
     cancelSchoolInfo() {
-        this.couponCode = this.personalInfo.couponCode;
-        if (this.personalInfo.schoolInfo == null) {
-            this.personalInfo.schoolInfo = JSON.parse(JSON.stringify(this.personalInfo.dummySchoolInfo));
-        }
+        this.couponCode = this.personalInfo.schoolInfo['coupon_code'];
+        // if (this.personalInfo.schoolInfo == null) {
+        //     this.personalInfo.schoolInfo = JSON.parse(JSON.stringify(this.personalInfo.dummySchoolInfo));
+        // }
         this.editSchool = false;
     }
 
     updateSchool() {
-        let wrapper = { 'school_id': this.personalInfo.schoolInfo['school_id'] }
-        this.masterhtttp.updateProfile(wrapper)
-            .subscribe((data: Response) => {
-                console.log(data);
-            })
+            let wrapper = {'school_id':this.personalInfo.schoolInfo['school_id']};
+            this.masterhtttp.updateProfile(wrapper).subscribe((data)=>{
+                if(data['status'] == 200){
+                    this.masterhtttp.getPersonalInfo();
+                }
+            });
     }
 
     saveSchoolInfo() {
-        this.personalInfo.couponCode = this.couponCode;
-        let wrapper = { 'coupon_code': this.personalInfo.couponCode }
+        let wrapper = { 'coupon_code': this.couponCode }
         this.masterhtttp.getSchool(wrapper)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
                     this.personalInfo.setSchoolInfo(data['message'])
-                    this.updateSchool();
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'success', summary: 'Success', detail: 'School Info Saved' })
                     this.editSchool = false;
-                    console.log(this.personalInfo.schoolInfo)
                 } else {
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'error', summary: 'Invalid Coupon Code', detail: 'Try Again With A Different Coupon Code' })
                 }
+
+                this.updateSchool();
             })
     }
-
-    // dummySave(){
-    //   this.dummyBasicInfo = this.dummyEditBasicInfo
-    // }
-
-
-    // cancel(){
-    //   this.newBasicInfo = JSON.parse(JSON.stringify(this.userBasicInfo));
-    //   this.newClass = this.class;
-    //   this.newSchool = this.school;
-    //   this.editBasic = false;
-    // }
-
-    //testimonial submit
-    // submit(){
-    //   this.update.postTestimonial(this.testimonial)
-    //   .subscribe((data: Response) =>{
-    //   })
-    // }
 
     changePassword() {
         let requestbody = { 'old_password': this.oldPassword, 'new_password': this.confirmNewPassword, 'user_info_id': this.personalInfo.userInfo['user_info_id'] }
@@ -367,8 +292,14 @@ export class ProfileComponent implements OnInit {
         this.masterhtttp.addTestimonial(requestBody)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
+                    this.masterhtttp.getUserTestimonials(this.personalInfo.studentInfo['student_id']);
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'success', summary: "Success", detail: 'Testimonial Added' })
+                    this.testimonial = null;
+                }
+                else {
+                    this.growlmsg = [];
+                    this.growlmsg.push({severity: 'error', summary: 'Limt Reached', detail: 'You Cannot Add More Than 3 Testimonials'})
                 }
             })
     }
@@ -381,8 +312,8 @@ export class ProfileComponent implements OnInit {
         let requestBody = { 'text': this.achievement, 'student_id': this.personalInfo.studentInfo['student_id'] }
         this.masterhtttp.addAchievement(requestBody)
             .subscribe((data: Response) => {
-                console.log(data);
                 if (data['status'] == 200) {
+                    this.achievement = null;
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'success', summary: "Success", detail: 'Achievement Added' })
                 }
@@ -390,7 +321,7 @@ export class ProfileComponent implements OnInit {
     }
 
     cancelAchievement() {
-        this.achievement = 'Enter Your Message Here...'
+        this.achievement = null;
         this.dec = [];
     }
 
@@ -457,8 +388,28 @@ export class ProfileComponent implements OnInit {
                 }
             })
         }
-
     }
 
+    quit(){
+        if(this.editBasic||this.editPassword||this.editTestimonial||this.editSchool){
+            this.confirmservice.confirm({
+            message: 'Please save changes before leaving',
+            accept: () => {return false},
+            reject: () => {return false}
+            })            
+        }
+        else return true;
+    }
+    
+    canDeactivate():Observable<boolean> | boolean{
+        return this.quit();
+    }
+
+    ngOnDestroy(){
+        this.editBasic = false;
+        this.editSchool = false;
+        this.editPassword = false;
+        this.editTestimonial = false;
+    }
 
 }

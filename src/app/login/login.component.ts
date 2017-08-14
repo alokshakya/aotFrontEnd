@@ -202,7 +202,8 @@ export class LoginComponent implements OnInit {
                     this.message = [];
                     this.message.push({ severity: 'error', summary: 'Invalid Credentials', detail: 'Sign Up with OlympiadBox' });
                 }
-            })
+            },
+            err=>console.log(err))
     }
 
     signUp() {

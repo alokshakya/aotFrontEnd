@@ -27,7 +27,13 @@ export class LoadoutComponent implements OnInit {
         this.http.getFee();
         this.http.getTestDetails();
         this.http.getTestimonials();
+        this.personalInfo.userInfoEvent.subscribe((data)=>{
+            if(data){
+                this.http.getUserTestimonials(this.personalInfo.studentInfo['student_id']);
+            }
+        })
         this.http.getResult();
+        this.misc.logIn();
     }
 
     ngOnDestroy() {
