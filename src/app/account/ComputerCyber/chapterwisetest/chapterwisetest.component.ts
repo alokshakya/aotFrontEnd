@@ -135,7 +135,17 @@ export class ChapterwisetestComponent implements OnInit {
         }
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('Computers');
-        this.masterhttp.beginTest(wrapper);
+        this.masterhttp.beginTest(wrapper)
+        .subscribe((data) => {
+                if (data['status'] == 200){
+                    this.chapterwiseTest.setQuesAnswerSet(data['message']);
+                    this.router.navigate(['test']);
+                }else{
+                    this.generateMsg = [];
+                    this.generateMsg.push({ severity: 'info', summary: 'Could Not Start Test', detail: 'Please Try Again'});
+                }
+
+            });
     }
 
     checkGeneratedTest() {

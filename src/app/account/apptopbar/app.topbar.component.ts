@@ -22,10 +22,12 @@ export class AppTopBar implements OnInit {
     currentComponent:string;
 
     logout() {
-        let userInfoId = this.personalInfo.userInfo['user_info_id']
-        this.masterhttp.logout(userInfoId)
+        let wrapper = {'user_info_id':this.personalInfo.userInfo['user_info_id']};
+        // console.log(wrapper);
+        this.masterhttp.logout(wrapper)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
+                    console.log(data);
                     this.masterhttp.setToken(null);
                     this.router.navigate(['login']);
                 }

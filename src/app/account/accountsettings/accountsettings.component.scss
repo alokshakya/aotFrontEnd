@@ -14,3 +14,7 @@
 i:hover {
     cursor: pointer;
 }
+
+@media only screen and (max-width: 420px){
+	#code{width:80%;}
+}

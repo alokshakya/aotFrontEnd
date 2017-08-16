@@ -80,8 +80,8 @@ export class MasterHttpService {
     }
 
     logout(requestBody) {
-        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/user/logout', requestBody, { headers: this.queryHeaders })
-            .map((resp: Response) => resp.json())
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/user/logout', requestBody, {headers:this.queryHeaders})
+            .map((resp:Response)=> resp.json())
     }
 
     updateProfile(requestBody) {
@@ -144,11 +144,12 @@ export class MasterHttpService {
     }
 
     beginTest(requestBody) {
-        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/test/attempt', requestBody, { headers: this.queryHeaders }).map((resp: Response) => resp.json())
-            .subscribe((data) => {
-                if (data['status'] == 200)
-                    this.setQuestions(data['message'])
-            })
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/test/attempt', requestBody, { headers: this.queryHeaders })
+        .map((resp: Response) => resp.json())
+            // .subscribe((data) => {
+            //     if (data['status'] == 200)
+            //         this.setQuestions(data['message'])
+            // })
     }
     //-------------------------------------------------------------------------------------------------
 

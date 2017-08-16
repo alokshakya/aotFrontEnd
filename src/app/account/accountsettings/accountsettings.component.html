@@ -30,18 +30,29 @@
                             <p-column *ngFor="let i of col" header="{{i.header}}" field="{{i.field}}"></p-column>
                         </p-dataTable>
                     </div>
+                    <div class="ui-g-12 ui-sm-12">
+                        <div class="ui-g">
+                            <div class="ui-g-12 ui-sm-12">
+                                <label>Enter Coupon/School Code* &nbsp; <input type="text" [(ngModel)]="coupon" pInputText> &nbsp; <button type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
+                                </label>
+                            </div>
+                            <div class="ui-g-12 text-center ui-sm-12">
+                                 <button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==null" pButton label="Pay Now"></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <br>
+                <!-- <br>
                 <br>
                 <span id="coupontext"><strong>Enter Coupon/School Code*</strong></span>
                 <input size="40" type="text" [(ngModel)]="coupon" pInputText/>
                 <button id="applybutton" type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
                 <br>
-                <br>
-                <div id="paybutton">
+                <br> -->
+<!--                 <div id="paybutton">
                     <button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==null" pButton label="Pay Now"></button>
                 </div>
-                <br>
+                <br> -->
             </p-panel>
         </div>
     </div>

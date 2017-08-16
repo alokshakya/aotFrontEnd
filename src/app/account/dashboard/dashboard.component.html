@@ -36,10 +36,10 @@
                                 <div class="ui-g-12">
                                     <div class="ui-g">
                                         <div class="ui-g-3 ui-sm-12">
-                                            <span class="testsubject" *ngFor="let sub of item.value|keys">{{sub.key}}<br><br></span>
+                                            <span class="testsubject submob" *ngFor="let sub of item.value|keys">{{sub.key}}<br><br></span>
                                         </div>
                                         <div class="ui-g-8 ui-sm-12">
-                                            <div class="progress hover" pTooltip="Go to {{data.key}}" *ngFor="let data of item.value|keys" (click)="redirectToTest(item.key,data.key)">
+                                            <div class="progress hover progmob" pTooltip="Go to {{data.key}}" *ngFor="let data of item.value|keys" (click)="redirectToTest(item.key,data.key)">
                                                 <div class="progress-bar progress-bar-success" role="progressbar" [ngStyle]="{'width':data.value.completed+'%'}"> {{data.value.completed}}%
                                                 </div>
                                                 <div class="progress-bar progress-bar-warning" role="progressbar" [ngStyle]="{'width':data.value.generated+'%'}">{{data.value.generated}}%
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="ui-g-12">
                                     <div class="ui-g">
-                                        <div class="ui-g-3 sui-sm-12"></div>
+                                        <div class="ui-g-3 ui-sm-12"></div>
                                         <div class="ui-g-9 ui-sm-12">
                                             <span class="comp">Completed</span>
                                             <span class="gen">Generated</span>
