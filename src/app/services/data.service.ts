@@ -219,7 +219,7 @@ export class Misc {
     syllabus: Array<any>;
     testDetails: any;
     login:boolean;
-    currentRoute: EventEmitter<string> = new EventEmitter();
+    currentRoute: EventEmitter<[string]> = new EventEmitter();
 
     setCurrentRoute(component){
         this.currentRoute.emit(component);

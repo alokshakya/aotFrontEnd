@@ -954,7 +954,7 @@ export class ResultComponent implements OnInit {
     showPanel(e) {
     }
     ngOnInit() {
-        this.misc.setCurrentRoute("Computers/Result");
+        this.misc.setCurrentRoute(["Computers","Result"]);
 
         this.organisation = [];
         this.organisation.push({ label: 'Select Organisation', value: 'null' })

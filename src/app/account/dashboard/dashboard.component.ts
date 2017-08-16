@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute("Dashboard");
+        this.misc.setCurrentRoute(["Dashboard"]);
     }
 
     startTest() {

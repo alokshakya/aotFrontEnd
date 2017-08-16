@@ -8,7 +8,6 @@ import { MessagesModule } from 'primeng/primeng';
 import { SubjectInfo, PersonalInfo, Result, Misc, chapterwiseTest } from '../../../services/data.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
 
-
 @Component({
     selector: 'app-chapterwisetest',
     templateUrl: './chapterwisetest.component.html',
@@ -27,7 +26,6 @@ export class ChapterwisetestComponent implements OnInit {
     generatedChapters;
     generatedChapterIds;
 
-
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
@@ -43,7 +41,7 @@ export class ChapterwisetestComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute("Computers/Chapterwise Test");
+        this.misc.setCurrentRoute(["Computers","Chapterwise Test"]);
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{

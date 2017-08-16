@@ -83,7 +83,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
 
     ngOnInit() {
-        this.misc.setCurrentRoute("Profile");
+        this.misc.setCurrentRoute(["Profile"]);
         this.dec = [];
         this.exam.push(
             { label: "Select Exam", value: "null" }, { label: "NCO 2016-17 - Level 2", value: "NCO-16-17" },
@@ -102,7 +102,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         )
 
         this.city.push(
-            { label: "Select City", value: "null" },
+            { label: "Select City", value: null},
             { label: "Ghaziabad", value: "Ghaziabad" },
             { label: "Delhi", value: "Delhi" },
             { label: "Gurgaon", value: "Gurgaon" },
@@ -111,7 +111,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         )
 
         this.state.push(
-            { label: "Select State", value: "null" },
+            { label: "Select State", value: null},
             { label: "Uttar Pradesh", value: "Uttar Pradesh" },
             { label: "West Bengal", value: "West Bengal" },
             { label: "Maharashtra", value: "Maharashtra" },
@@ -119,7 +119,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         )
 
         this.country.push(
-            { label: "Select Country", value: "null" },
+            { label: "Select Country", value:null },
             { label: "India", value: "India" },
             { label: "Sri Lanka", value: "Sri Lanka" },
             { label: "Indonesia", value: "Indonesia" },
@@ -262,7 +262,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     changePassword() {
         let requestbody = { 'old_password': this.oldPassword, 'new_password': this.confirmNewPassword, 'user_info_id': this.personalInfo.userInfo['user_info_id'] }
         if (this.confirmNewPassword != this.newPassword) {
-            this.growlmsg.push({ severity: 'error', summary: "Password doesn't match", detail: 'Please try again' });
+            this.growlmsg.push({ severity: 'error', summary: "New Password doesn't match", detail: 'Please try again' });
         }
         else {
             this.masterhtttp.updatePassword(requestbody)

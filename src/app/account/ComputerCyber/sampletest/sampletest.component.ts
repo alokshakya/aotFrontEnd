@@ -47,7 +47,7 @@ export class SampletestComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute("Computers/Sample Test");
+        this.misc.setCurrentRoute(["Computers","Sample Test"]);
 
         //for chart
         this.sampleTestData = {
