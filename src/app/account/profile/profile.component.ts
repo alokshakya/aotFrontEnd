@@ -254,8 +254,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'error', summary: 'Invalid Coupon Code', detail: 'Try Again With A Different Coupon Code' })
                 }
-
-                this.updateSchool();
+                this.updateSchool();     
             })
     }
 

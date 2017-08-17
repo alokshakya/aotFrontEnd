@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, OnInit, ElementRef, Renderer, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component, AfterViewInit, OnInit, ElementRef, Renderer, ViewChild, OnDestroy } from '@angular/core';
 import { PersonalInfo } from '../../services/data.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
 import { Response } from '@angular/http';
@@ -78,7 +78,7 @@ export class AccountMainComponent implements AfterViewInit {
         public router: Router,
         public personalInfo: PersonalInfo,
         public misc: Misc,
-        public masterhttp: MasterHttpService
+        public masterhttp: MasterHttpService,
     )
     { }
 
@@ -217,6 +217,7 @@ export class AccountMainComponent implements AfterViewInit {
             this.documentClickListener();
         }
         jQuery(this.layoutMenuScroller).nanoScroller({ flash: true });
+        console.log(this.router.url);
     }
 
 }

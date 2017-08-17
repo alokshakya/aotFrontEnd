@@ -83,7 +83,7 @@ export class ChapterwisetestComponent implements OnInit {
         }
         else {
             this.generateMsg = []
-            this.generateMsg.push({ severity: 'danger', summary: 'Instruction', detail: this.subjectInfo.computerChapters['chapters'][e.index]['name'] + ' Test Is Already Generated' });
+            this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: this.subjectInfo.computerChapters['chapters'][e.index]['name'] + ' Test Is Already Generated' });
         }
     }
 
@@ -121,6 +121,10 @@ export class ChapterwisetestComponent implements OnInit {
             .subscribe((data) => {
                 if (data['status'] == 200) {
                     this.updatePanel();
+                    this.generatedFlag = false;
+                }else{
+                    this.generateMsg=[];
+                    this.generateMsg.push({ severity: 'info', summary: 'Could Not Generate Test', detail: 'Please Try Again'});
                 }
             })
     }
@@ -143,6 +147,10 @@ export class ChapterwisetestComponent implements OnInit {
                     this.generateMsg.push({ severity: 'info', summary: 'Could Not Start Test', detail: 'Please Try Again'});
                 }
 
+            },
+            err => {
+                    this.generateMsg = [];
+                    this.generateMsg.push({ severity: 'info', summary: 'Could Not Start Test', detail: 'Please Try Again'});
             });
     }
 

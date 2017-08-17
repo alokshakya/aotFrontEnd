@@ -12,7 +12,7 @@
                     <p-column field="Download Invoice" header="Invoice">
                         <ng-template pTemplate="body">
                             <div class="text-center">
-                                <i style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>
+                                <i pTooltip="Download Invoice" tooltipPosition="left" style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>
                             </div>
                         </ng-template>
                     </p-column>
@@ -33,11 +33,13 @@
                     <div class="ui-g-12 ui-sm-12">
                         <div class="ui-g">
                             <div class="ui-g-12 ui-sm-12">
-                                <label>Enter Coupon/School Code* &nbsp; <input type="text" [(ngModel)]="coupon" pInputText> &nbsp; <button type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
+                                <label>Enter Coupon/School Code* &nbsp;
+                                    <input type="text" [(ngModel)]="coupon" pInputText> &nbsp;
+                                    <button type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
                                 </label>
                             </div>
                             <div class="ui-g-12 text-center ui-sm-12">
-                                 <button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==null" pButton label="Pay Now"></button>
+                                <button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage[0]==null" pButton label="Pay Now"></button>
                             </div>
                         </div>
                     </div>
@@ -49,7 +51,7 @@
                 <button id="applybutton" type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
                 <br>
                 <br> -->
-<!--                 <div id="paybutton">
+                <!--                 <div id="paybutton">
                     <button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==null" pButton label="Pay Now"></button>
                 </div>
                 <br> -->

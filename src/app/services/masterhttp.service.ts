@@ -9,6 +9,7 @@ import * as constants from '../../config/constants';
 export class MasterHttpService {
     token: string;
     updated = 0;
+    loginEvent: EventEmitter<number>;
     queryHeaders;
     baseUrl = 'http://scripts.olympiadbox.com/services/api/api.php';
     constructor(
@@ -27,8 +28,9 @@ export class MasterHttpService {
     checkToken() {
         if (this.token != localStorage.getItem('session_token')) {
             return false;
-        }
-        else return true;
+        }else {
+            return true
+        };
     }
 
     dataRetreived() {
@@ -51,7 +53,7 @@ export class MasterHttpService {
     sendOtp(requestBody) {
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/otp/generate', requestBody, { headers: this.queryHeaders })
             .map((resp: Response) => resp.json())
-        //response status conditions
+        // response status conditions
     }
 
     verifyOtp(requestBody) {
@@ -104,9 +106,9 @@ export class MasterHttpService {
             .map((resp: Response) => resp.json())
     }
 
-    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    //data service implementation
+    // data service implementation
     getPersonalInfo() {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/user/profile', { headers: this.queryHeaders })
             .map((resp: Response) => resp.json())
@@ -136,7 +138,7 @@ export class MasterHttpService {
                 this.dataRetreived();
             })
     }
-    //-----------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------
     setQuestions(data) {
         this.chapterwiseTest.setQuesAnswerSet(data);
         console.log(this.chapterwiseTest.qaSet);
@@ -151,7 +153,7 @@ export class MasterHttpService {
             //         this.setQuestions(data['message'])
             // })
     }
-    //-------------------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------------------
 
     // this.http.get(this.baseUrl+'/topics').map((resp: Response) => resp.json())
     // .subscribe((data) => {

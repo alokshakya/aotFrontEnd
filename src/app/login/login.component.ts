@@ -117,6 +117,8 @@ export class LoginComponent implements OnInit {
                 wrapper[mode] = true;
             }
         }
+        this.emailVerified = false;
+        this.mobileVerified = false;
         this.masterhttp.sendOtp(wrapper)
             .subscribe((data: Response) => {
                 switch (data['status']) {
@@ -181,13 +183,15 @@ export class LoginComponent implements OnInit {
                         break;
 
                     default:
-                        console.log(data);
+                        this.message = [];
+                        this.message.push({ severity: 'error', summary: 'Incorrect OTP', detail: 'Could Not Verify Otp' });
                         break;
                 }
             });
     }
 
     setToken(token) {
+        localStorage.setItem('session_token',token);
         this.masterhttp.setToken(token);
         localStorage.setItem('session_token', token);
         this.router.navigate(['loadout']);
@@ -213,7 +217,7 @@ export class LoginComponent implements OnInit {
                     const wrapper = [{ 'email': this.userRegCreds['email'], 'verify_mobile': true, 'verify_email': true }]
                     this.sendOtp('both');
                     this.message = [];
-                    this.message.push({ severity: 'info', summary: 'Verify mobile and email', detail: '' })
+                    this.message.push({ severity: 'info', summary: 'Otp Verification', detail: 'Please Verify Your Mobile and Email' })
                     this.regVerifyToggle = true;
                 } else {
                     this.message = [];
@@ -241,17 +245,33 @@ export class LoginComponent implements OnInit {
 
     //reset flags
     reset() {
+        // login
+        this.userLoginCreds['email']=null;
+        this.userLoginCreds['password']=null;        
+        
+        // register
+        this.userRegCreds['email']=null;
+        this.userRegCreds['firstname']=null;
+        this.userRegCreds['mobile']=null;
+        this.userRegCreds['lastname']=null;
+        this.userRegCreds['class']=null;
+        this.userRegCreds['password']=null;
+        this.confirmPassword = null;
+
+        // forgot password
+        this.registeredEmail = null;
+        this.mode = [];
+        this.mobileOtp = null;
+        this.emailOtp = null;
+        this.passwordObj['new_password'] = null;
+        this.dummyPassword = null;
+
+        // verify
         this.loginForgotToggle = false;
         this.regVerifyToggle = false;
         this.mobileVerified = false;
         this.emailVerified = false;
         this.verifyForgotToggle = false;
-        this.registeredEmail = null;
-        this.passwordObj['new_password'] = null;
-        this.registeredEmail = null;
-        this.emailOtp = null;
-        this.mobileOtp = null;
-        this.mode = [];
     }
 
     //submit new password

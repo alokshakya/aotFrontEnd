@@ -172,13 +172,18 @@ label {
     padding: 0 0 0 0 ;
 }
 
-.box{
-    overflow-y: auto;
-    height: 20%; 
+.height{
+    height:20%;
 }
 
 @media only screen and (max-width: 420px) {
     .text textarea{width:100%;}
     .point,.guidelines {margin-left: 16%;}
     .message textarea{width:100%;}
+}
+
+.fixed{
+    height:161px;
+    overflow-x: hidden;
+    overflow-y: scroll; 
 }

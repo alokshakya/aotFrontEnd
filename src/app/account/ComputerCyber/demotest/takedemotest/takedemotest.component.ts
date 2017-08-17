@@ -150,13 +150,12 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         if (this.selectedQuestion['correct_answer_id'] == this.selectedQuestion['answers'][this.answer]['id']) {
             this.questionStatus[this.clickListener] = "Correct";
             this.correct = true;
-
         }
         else {
             this.correct = false;
             this.questionStatus[this.clickListener] = "Wrong";
         }
-        this.hintDisplay = true;
+        this.showHint();
     }
 
 
