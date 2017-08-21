@@ -786,7 +786,10 @@ body {
     -webkit-transition: background-color 0.3s;
     transition: background-color 0.3s; }
   .layout-wrapper .topbar .topbar-right {
-    padding: 15px 20px 15px 270px; }
+    /* padding: 15px 20px 15px 270px; */
+    padding: 15px 20px 0px 270px;
+
+     }
     .layout-wrapper .topbar .topbar-right #menu-button {
       display: inline-block;
       vertical-align: middle;

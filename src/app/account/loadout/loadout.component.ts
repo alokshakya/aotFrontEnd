@@ -35,12 +35,10 @@ export class LoadoutComponent implements OnInit {
         })
         this.http.getResult();
         this.misc.logIn();
-        console.log(this.http.updated);        
     }
 
     ngOnDestroy() {
         this.http.updated = 0;
-        console.log(this.http.updated);
     }
 
 }

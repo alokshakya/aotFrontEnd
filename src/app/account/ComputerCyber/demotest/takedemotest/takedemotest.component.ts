@@ -55,6 +55,10 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     correctAnswer: number;
     attemptedQues: number = 0;
     stopFlag:boolean;
+    history:boolean;
+    attemptHistory:any;
+
+    lastQuestion:number;
 
     constructor(
         public router: Router,
@@ -78,38 +82,43 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     ngOnInit() {
+        this.setResponse();
         this.startTest();
-        this.displayQuestion(0);
+        this.displayQuestion(this.lastQuestion);
         this.wrapper = { 'student_test_id': this.chapterwiseTest.attemptDetails['students_test_id'], }
         this.totalQues = this.chapterwiseTest.qaSet.length;
+        this.masterhttp.getTestDetails();
     }
 
-    //   getQuestions(){
-    //       this.sessionToken = localStorage.getItem('session_token')
-    //       this.demotest.getQuestionsSet()
-    //       .subscribe((data: Response) => {
-    //           data = data['resource'];
-    //           let k = 1
-    //           for(let i in data){
-    //               this.questionsPool['Question'+k]['Question'] = data[i]['questions_by_question_id']['question']
-    //               k=k+1;
-    //             }
-    //         })
-    //         this.help = true;
-    //         this.startTest();
-
-    //   }
-    displayQuestion(index) {  //questionDisplayed: KEY 
-        // this.selectedQuestion = this.questionsPool[questionDisplayed];
-        // this.questionNumber = "Q" + questionNumber + ". ";
-        // this.questionWindow = true;
+    displayQuestion(index) {
         this.clickListener = index;
         this.selectedQuestion = this.chapterwiseTest.qaSet[index];
         this.answer = null;
         this.hintDisplay = false;
+        this.history = false;
         this.setCorrectAnswer();
         this.showHint();
-        console.log(this.correctAnswer);
+    }
+
+    setResponse(){
+        for (let i in this.chapterwiseTest.qaSet){
+            if(this.chapterwiseTest.qaSet[i]['id']==this.chapterwiseTest.attemptDetails['last_question']){
+                this.lastQuestion = parseInt(i);
+            }
+            switch (this.chapterwiseTest.qaSet[i]['state']) {
+            case "correct":
+                this.questionStatus[i] = "Correct";
+                break;
+            
+            case "wrong":
+                this.questionStatus[i] = "Wrong";
+                break;
+
+            case "marked":
+                this.questionStatus[i] = "Marked"
+                break;
+            }
+        }
     }
 
     setCorrectAnswer(){
@@ -136,6 +145,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     validate() {
+        this.response[this.clickListener] = this.selectedQuestion['answers'][this.answer];
         this.wrapper['mark_for_review'] = "0";
         this.wrapper['question_id'] = this.selectedQuestion['id'];
         this.wrapper['correct_answer'] = this.selectedQuestion['correct_answer_id'];

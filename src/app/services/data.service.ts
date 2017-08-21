@@ -201,7 +201,6 @@ export class chapterwiseTest {
             'last_question': data['attempt']['last_question'],
             'students_test_id': data['attempt']['students_test_id'],
         }
-
     }
 
 

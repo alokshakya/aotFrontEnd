@@ -336,7 +336,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     edit(a) {
         this.index = a
-        this.currentTestimonial = this.misc.userTestimonial[a];
+        this.currentTestimonial = this.personalInfo.userTestimonials[a]['text'];
         this.editTestimonial = true;
     }
 

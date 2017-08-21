@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
     //misc
     message: Message[];
     token: string;
-
+    spinner:boolean;
     constructor(
         public httpService: LoginRegisterService,
         public masterhttp: MasterHttpService,
@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
 
 
     sendOtp(mode, resend = false) {
+        this.spinner = true;
         let wrapper = { email: this.userRegCreds['email'], verify_mobile: false, verify_email: false };
         if (resend) {
             wrapper['email'] = this.registeredEmail;
@@ -121,6 +122,7 @@ export class LoginComponent implements OnInit {
         this.mobileVerified = false;
         this.masterhttp.sendOtp(wrapper)
             .subscribe((data: Response) => {
+                this.spinner = false;
                 switch (data['status']) {
 
                     case 200:

@@ -27,11 +27,11 @@
             <!--                 <div class="ui-g-1" class="buttonTop v" (click)="validate()"> V </div>
                 <div class="ui-g-1" class="buttonTop n" (click)="nextQuestion()"></div> -->
             <div class="ui-g-1 ui-sm-4 m text-center big">
-                <button md-mini-fab id="m" [disabled]="validated()" (click)="markForReview()">M</button>
+                <button md-mini-fab id="m" [disabled]="validated()||this.selectedQuestion['state']!='unattempted'" (click)="markForReview()">M</button>
                 <br>Mark For Review
             </div>
             <div class="ui-g-1 ui-sm-4 v text-center small">
-                <button md-mini-fab id="v" [disabled]="answer==null||validated()" (click)="validate()">V</button>
+                <button md-mini-fab id="v" [disabled]="answer==null||validated()||this.selectedQuestion['state']!='unattempted'" (click)="validate()">V</button>
                 <br>Validate
             </div>
             <div class="ui-g-1 ui-sm-4 n text-center small">
@@ -47,9 +47,9 @@
             <div class="ui-g-4 ui-sm-6 icons"> &nbsp; <i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
             <div class="ui-g-12"></div>
             <!-- <div class="ui-g-4" *ngFor="let number of questionsPool|keys;let n = index" (click)="displayQuestion(number.key,n+1)"><div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n+1, 'qnumbermark':questionStatus[n+1]=='Marked', 'qnumbercorrect':questionStatus[n+1]=='Correct', 'qnumberwrong':questionStatus[n+1]=='Wrong'}">{{n+1}}</div></div> -->
-            <div class="ui-g-4 ui-sm-6" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
-                <div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n, 'qnumbermark':questionStatus[n]=='Marked', 'qnumbercorrect':questionStatus[n]=='Correct', 'qnumberwrong':questionStatus[n]=='Wrong'}">{{n+1}}</div>
-            </div>
+                <div class="ui-g-4 ui-sm-6" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
+                    <div class="qnumber" [ngClass]="{'qnumberclick':clickListener==n, 'qnumbermark':questionStatus[n]=='Marked'||chapterwiseTest.qaSet[n]['state']=='marked', 'qnumbercorrect':questionStatus[n]=='Correct'||chapterwiseTest.qaSet[n]['state']=='correct', 'qnumberwrong':questionStatus[n]=='Wrong'||chapterwiseTest.qaSet[n]['state']=='wrong'}">{{n+1}}</div>
+                </div>
             <div class="ui-g-12 fill"></div>
         </div>
         <div class="ui-g-10 ui-sm-10 light center">

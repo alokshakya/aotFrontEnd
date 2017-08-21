@@ -217,7 +217,6 @@ export class AccountMainComponent implements AfterViewInit {
             this.documentClickListener();
         }
         jQuery(this.layoutMenuScroller).nanoScroller({ flash: true });
-        console.log(this.router.url);
     }
 
 }

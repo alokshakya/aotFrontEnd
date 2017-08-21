@@ -76,7 +76,7 @@
                 <br>
             </div>
             <div class="ui-g-12 ui-sm-12 text-center">
-                <button [disabled]="forgot.errors||mode==''||mode==null" (click)="sendOtp('selective')" type="button" pButton label="Submit" class="ui-button-success"></button>
+                <button [disabled]="forgot.errors||mode==''||mode==null||spinner" (click)="sendOtp('selective')" type="button" pButton label="Submit" class="ui-button-success"></button> <i *ngIf="spinner" class="fa fa-circle-o-notch fa-lg fa-spin fa-forward"></i>
                 <br>
             </div>
             <div class="ui-g-12 empty"></div>
