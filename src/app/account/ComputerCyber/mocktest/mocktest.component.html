@@ -1,5 +1,5 @@
 <div class="ui-g">
-    <div class="ui-g-12" *ngIf="!subjectInfo.subscribedSubjects['Computer/Cyber']">
+    <div class="ui-g-12" *ngIf="!subjectInfo.subscribedSubjects['Computer-Cyber']">
         <p-panel header="Subscribe">
             <div style="text-align:center">
                 <h1>No Test Available</h1>
@@ -61,7 +61,7 @@
                                     <p-header><span class="chapter"> {{data.name}} </span> </p-header>
                                     <div class="ui-g">
                                         <div class="ui-g-12" *ngFor="let topic of data['topics']">
-                                            <span class="leftpad">{{topic.name}}<br></span>
+                                            <span class="">{{topic.name}}<br></span>
                                         </div>
                                     </div>
                                 </p-accordionTab>

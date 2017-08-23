@@ -10,7 +10,6 @@ import { SelectItem } from 'primeng/primeng';
 
 
 
-
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -75,6 +74,11 @@ export class LoginComponent implements OnInit {
     message: Message[];
     token: string;
     spinner:boolean;
+    spinner2:boolean;
+    spinner3:boolean;
+    wrapper:any;
+    disappear:boolean;
+
     constructor(
         public httpService: LoginRegisterService,
         public masterhttp: MasterHttpService,
@@ -83,6 +87,7 @@ export class LoginComponent implements OnInit {
         public router: Router) { }
 
     ngOnInit() {
+        this.wrapper = { 'email':null,'verify_mobile':false,'verify_email':false };
         this.userLoginCreds = { "username": "", "password": "" };
         this.userRegCreds = { "firstname": "", "lastname": "", "email": "", "password": "", "class": "", "mobile": "" };
         this.passwordObj = { "new_password": "", "email": "" };
@@ -93,103 +98,281 @@ export class LoginComponent implements OnInit {
             { label: "VI", value: "VI" }, { label: "VII", value: "VII" }, { label: "VIII", value: "VIII" })
     }
 
+    setWrapper(resend=false, mode=null){
+        if(mode=='selective'&&!resend){
+            this.wrapper['email'] = this.registeredEmail;
+            if(this.mode.indexOf('verify_email') > -1){
+                this.wrapper['verify_email'] = true;
+                this.spinner2 = true;
+            }
+            if(this.mode.indexOf('verify_mobile') > -1){
+                this.wrapper['verify_mobile'] = true;
+                this.spinner = true;
 
-    sendOtp(mode, resend = false) {
-        this.spinner = true;
-        let wrapper = { email: this.userRegCreds['email'], verify_mobile: false, verify_email: false };
-        if (resend) {
-            wrapper['email'] = this.registeredEmail;
-            wrapper[mode] = true;
-        }
-        else {
-            if (mode == 'both') {
-                wrapper = { email: this.userRegCreds['email'], verify_mobile: true, verify_email: true };
-            }
-            else if (mode == 'selective') {
-                wrapper['email'] = this.registeredEmail;
-                if (this.mode.indexOf('verify_email') > -1) {
-                    wrapper['verify_email'] = true;
-                }
-                if (this.mode.indexOf('verify_mobile') > -1) {
-                    wrapper['verify_mobile'] = true;
-                }
-            }
-            else {
-                wrapper[mode] = true;
             }
         }
-        this.emailVerified = false;
-        this.mobileVerified = false;
-        this.masterhttp.sendOtp(wrapper)
+        else if(mode=='forgotMobile'&&resend){
+            this.wrapper['email'] = this.registeredEmail;
+            this.wrapper['verify_mobile'] = true;
+            this.wrapper['verify_email'] = false;
+            this.spinner = true;
+        }
+
+        else if(mode=='forgotEmail'&&resend){
+            this.wrapper['email'] = this.registeredEmail;
+            this.wrapper['verify_mobile'] = false;
+            this.wrapper['verify_email'] = true;
+            this.spinner2 = true;
+        }
+
+        else if(mode=='mobile'&&resend){
+            this.wrapper['email'] = this.userRegCreds['email'];
+            this.wrapper['verify_mobile'] = true;
+            this.wrapper['verify_email'] = false;
+            this.spinner = true;
+        }
+
+        else if(mode=='email'&&resend){
+            this.wrapper['email'] = this.userRegCreds['email'];
+            this.wrapper['verify_mobile'] = false;
+            this.wrapper['verify_email'] = true;
+            this.spinner2 = true;
+        }
+    }
+
+    generateResponse(data){
+        if(this.wrapper['email']==this.registeredEmail&&!this.verifyForgotToggle){
+            this.checkConditions(data);
+            this.verifyForgotToggle = true;
+            this.message = [];
+            this.message.push({severity:'success', summary:'Reset Password', detail:'Please Verify To Reset Password'})
+        }
+        else if(this.wrapper['email']==this.registeredEmail&&this.verifyForgotToggle){
+            this.checkConditions(data);
+            // this.message = [];
+            // this.message.push({severity:'success', summary:'Reset Password', detail:'Please Verify To Reset Password'})
+        }
+        else if(this.wrapper['email']==this.userRegCreds['email']&&!this.regVerifyToggle){
+            this.checkConditions(data);
+            this.regVerifyToggle = true;
+            this.message = [];
+            this.message.push({severity:'success', summary:'Registration Successful', detail:'Please Verify Your Email and Mobile'})
+        }
+        else if(this.wrapper['email']==this.userRegCreds['email']&&this.regVerifyToggle){
+            this.checkConditions(data);
+            // this.message = [];
+            // this.message.push({severity:'success', summary:'OTP SENT', detail:'Please Verify Otp'})
+        }
+        this.wrapper = { 'email':null,'verify_mobile':false,'verify_email':false };
+    }
+
+    checkConditions(data){
+        if(data['mobile']!=null && data['email']!=null){
+            this.registeredMobile = data['mobile'];
+            this.spinner2 = false;
+            this.spinner = false;
+        }
+        if(data['mobile']==null && data['email']!=null){
+            this.spinner2 = false;
+        }
+        if(data['mobile']!=null && data['email']==null){
+            this.registeredMobile = data['mobile'];
+            this.spinner = false;
+        }
+    }
+
+
+    sendOtp() {
+        this.masterhttp.sendOtp(this.wrapper)
             .subscribe((data: Response) => {
-                this.spinner = false;
-                switch (data['status']) {
-
-                    case 200:
-                        this.registeredMobile = data['message']['mobile'];
-                        this.verifyForgotToggle = true;
-
-                        //for login_forgetPassword
-                        break;
-
-                    default:
-                        this.message = [];
-                        this.message.push({ severity: 'error', summary: 'Email Does Not Exist', detail: 'Please Try Again With Different Email Id' });
-                        break;
+                if(data['status']==200){
+                    this.generateResponse(data['message']);
                 }
+                else {
+                    this.message = [];
+                    this.message.push({severity:'error', summary:'Email Does Not Exists', detail:'Please Try Again With Different Email Address'})
+                    this.spinner = false;
+                    this.spinner2 = false;
+                }
+            },
+            err=>{
+                this.spinner = false;
+                this.spinner2 = false
+                this.message = [];
+                this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
+                // this.spinner = false;
+                // this.spinner2 = false;
             });
+        
+
+        // if(mode=='verify_email'){
+        //     this.spinner2 = true;
+        // }
+        // if(mode=='verify_mobile'){
+        //     this.spinner = true;
+        // }
+        // if (resend) {
+        //     wrapper['email'] = this.registeredEmail;
+        //     wrapper[mode] = true;
+        // }
+        // else {
+        //     if (mode == 'both') {
+        //         wrapper = { email: this.userRegCreds['email'], verify_mobile: true, verify_email: true };
+        //     }
+        //     else if (mode == 'selective') {
+        //         wrapper['email'] = this.registeredEmail;
+        //         if (this.mode.indexOf('verify_email') > -1) {
+        //             wrapper['verify_email'] = true;
+        //             this.spinner2 = true;
+        //         }
+        //         if (this.mode.indexOf('verify_mobile') > -1) {
+        //             wrapper['verify_mobile'] = true;
+        //             this.spinner = true;
+        //         }
+        //     }
+        //     else {
+        //         wrapper[mode] = true;
+        //     }
+        // }
+        // // this.emailVerified = false;
+        // // this.mobileVerified = false;
+        // this.masterhttp.sendOtp(wrapper)
+        //     .subscribe((data: Response) => {
+        //         this.spinner = false;
+        //         this.spinner2 = false
+        //         switch (data['status']) {
+
+        //             case 200:
+        //                 this.registeredMobile = data['message']['mobile'];
+        //                 this.verifyForgotToggle = true;
+
+        //                 //for login_forgetPassword
+        //                 break;
+
+        //             default:
+        //                 this.message = [];
+        //                 this.message.push({ severity: 'error', summary: 'Email Does Not Exist', detail: 'Please Try Again With Different Email Id' });
+        //                 break;
+        //         }
+        //     },
+        //     err=>{
+        //         this.message = [];
+        //         this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
+        //         this.spinner = false;
+        //         this.spinner2 = false;
+        //     });
+    }
+
+    verifyResponse(wrapper){
+        if(this.verifyForgotToggle||this.regVerifyToggle){
+            if(wrapper['verify_mobile']){
+                this.mobileVerified = true;
+                this.message = [];
+                this.message.push({severity:'success', summary:'Success', detail:'Mobile Verified Successfully'});
+            }
+            if(wrapper['verify_email']){
+                this.message = [];
+                this.message.push({severity:'success', summary:'Success', detail:'Email Verified Successfully'});
+                this.emailVerified = true;
+            }
+        }
+        if(this.regVerifyToggle){
+            this.check();
+        }
+        this.spinner = false;
+        this.spinner2 = false;
+        this.disappear = true;
     }
 
     verifyOtp(mode, forgot = false) {
-        let wrapper = { email: this.userRegCreds['email'], otp: null, verify_email: false, verify_mobile: false };
-        if (forgot) {
-            wrapper['email'] = this.registeredEmail;
-        }
-        wrapper[mode] = true;
-
-        let x;
-        if (mode == 'verify_email') {
-            x = 'Email';
+        let wrapper = {'otp':null, 'email':this.wrapper['email'], 'verify_mobile':this.wrapper['verify_mobile'], 'verify_email':this.wrapper['verify_email']}
+        if(wrapper['verify_email']){
             wrapper['otp'] = this.emailOtp;
         }
-        if (mode == 'verify_mobile') {
-            x = 'Mobile';
+        if(wrapper['verify_mobile']){
             wrapper['otp'] = this.mobileOtp;
         }
         this.masterhttp.verifyOtp(wrapper)
-            .subscribe((data: Response) => {
-                switch (data['status']) {
+        .subscribe((data)=>{
+            if(data['status']==200){
+                this.verifyResponse(wrapper);
+            }else if(data['status']==721){
+                this.spinner = false;
+                this.spinner2 = false;
+                this.message = [];
+                this.message.push({severity:'error', summary:'Incorrect Otp', detail:'Please Try Again'})
+            }
+            else{
+                this.spinner = false;
+                this.spinner2 = false;
+                this.message = [];
+                this.message.push({severity:'error', summary:'Server Error', detail:'Please Try Again'})
+            }
+        }, err=>{
+                this.spinner = false;
+                this.spinner2 = false;
+                this.message = [];
+                this.message.push({severity:'error', summary:'Server Error', detail:'Please Try Again'})
+        })
 
-                    case 721:
-                        this.message = [];
-                        this.message.push({ severity: 'error', summary: 'Incorrect OTP', detail: 'Please Try Again' });
-                        break;
+        // if (forgot) {
+        //     wrapper['email'] = this.registeredEmail;
+        // }
+        // wrapper[mode] = true;
 
-                    case 200:
-                        this.message = [];
-                        this.message.push({ severity: 'success', summary: 'Success', detail: x + ' Verified' });
-                        if (x == 'Mobile') {
-                            this.mobileVerified = true;
-                            if (!forgot) {
-                                this.check();
-                            }
-                            else {
-                                this.mode[this.mode.indexOf('verify_email')] = null;
-                            }
-                        }
-                        if (x == 'Email') {
-                            this.emailVerified = true;
-                            if (!forgot) { this.check() }
-                            else this.mode[this.mode.indexOf('verify_mobile')] = null;
-                        }
-                        break;
+        // let x;
+        // if (mode == 'verify_email') {
+        //     x = 'Email';
+        //     wrapper['otp'] = this.emailOtp;
+        //     this.spinner2 = true
+        // }
+        // if (mode == 'verify_mobile') {
+        //     x = 'Mobile';
+        //     wrapper['otp'] = this.mobileOtp;
+        //     this.spinner = true;
+        // }
+        // this.masterhttp.verifyOtp(wrapper)
+        //     .subscribe((data: Response) => {
+        //         switch (data['status']) {
 
-                    default:
-                        this.message = [];
-                        this.message.push({ severity: 'error', summary: 'Incorrect OTP', detail: 'Could Not Verify Otp' });
-                        break;
-                }
-            });
+        //             case 721:
+        //                 this.message = [];
+        //                 this.message.push({ severity: 'error', summary: 'Incorrect OTP', detail: 'Please Try Again' });
+        //                 break;
+
+        //             case 200:
+        //                 this.message = [];
+        //                 this.message.push({ severity: 'success', summary: 'Success', detail: x + ' Verified' });
+        //                 if (x == 'Mobile') {
+        //                     this.mobileVerified = true;
+        //                     if (!forgot) {
+        //                         this.check();
+        //                     }
+        //                     else {
+        //                         this.mode[this.mode.indexOf('verify_email')] = null;
+        //                     }
+        //                 }
+        //                 if (x == 'Email') {
+        //                     this.emailVerified = true;
+        //                     if (!forgot) { this.check() }
+        //                     else this.mode[this.mode.indexOf('verify_mobile')] = null;
+        //                 }
+        //                 break;
+
+        //             default:
+        //                 this.message = [];
+        //                 this.message.push({ severity: 'error', summary: 'Incorrect OTP', detail: 'Could Not Verify Otp' });
+        //                 break;
+        //         }
+        //         this.spinner = false;
+        //         this.spinner2 = false;
+        //     },
+        //     err=>{
+        //         this.message = [];
+        //         this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
+        //         this.spinner = false;
+        //         this.spinner2 = false;
+        //     });
     }
 
     setToken(token) {
@@ -209,23 +392,50 @@ export class LoginComponent implements OnInit {
                     this.message.push({ severity: 'error', summary: 'Invalid Credentials', detail: 'Sign Up with OlympiadBox' });
                 }
             },
-            err=>console.log(err))
+            err=>{
+                this.message = [];
+                this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
+            })
     }
 
     signUp() {
+        this.spinner = true;
+        this.emailVerified = false;
+        this.mobileVerified = false;
+        this.wrapper = {'email':this.userRegCreds['email'],'verify_email':true,'verify_mobile':true}
         this.httpService.register(this.userRegCreds)
             .subscribe((data) => {
-                if (data['status'] == 200) {
-                    const wrapper = [{ 'email': this.userRegCreds['email'], 'verify_mobile': true, 'verify_email': true }]
-                    this.sendOtp('both');
-                    this.message = [];
-                    this.message.push({ severity: 'info', summary: 'Otp Verification', detail: 'Please Verify Your Mobile and Email' })
-                    this.regVerifyToggle = true;
-                } else {
+                if(data['status']==200){
+                    this.sendOtp();
+                }
+                else{
+                    this.spinner = false;
                     this.message = [];
                     this.message.push({ severity: 'info', summary: 'Email Already Exists', detail: 'Please Login' });
                 }
-            })
+            //     if (data['status'] == 200) {
+            //         const wrapper = [{ 'email': this.userRegCreds['email'], 'verify_mobile': true, 'verify_email': true }]
+            //         this.sendOtp('both');
+            //         this.message = [];
+            //         this.message.push({ severity: 'info', summary: 'Otp Verification', detail: 'Please Verify Your Mobile and Email' });
+            //         this.spinner = false;
+            //         this.regVerifyToggle = true;
+            //     } else {
+            //         this.spinner = false;
+            //         this.message = [];
+            //         this.message.push({ severity: 'info', summary: 'Email Already Exists', detail: 'Please Login' });
+            //     }
+            // },
+            // err=>{
+            //     this.message = [];
+            //     this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
+            //     this.spinner = false;
+            }, err => {
+                this.message = [];
+                this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
+                this.spinner = false;
+                }
+            )
     }
 
     //called when clicked on forgot password
@@ -267,6 +477,7 @@ export class LoginComponent implements OnInit {
         this.emailOtp = null;
         this.passwordObj['new_password'] = null;
         this.dummyPassword = null;
+        this.wrapper = { 'email':null,'verify_mobile':false,'verify_email':false };
 
         // verify
         this.loginForgotToggle = false;
@@ -274,10 +485,15 @@ export class LoginComponent implements OnInit {
         this.mobileVerified = false;
         this.emailVerified = false;
         this.verifyForgotToggle = false;
+
+        this.spinner = false;
+        this.spinner2 = false;
+        this.disappear = false;
     }
 
     //submit new password
     changePassword() {
+        this.spinner3 = true;
         this.passwordObj['new_password'] = this.dummyPassword;
         this.passwordObj['email'] = this.registeredEmail;
         this.masterhttp.forgotPassword(this.passwordObj)
@@ -291,6 +507,13 @@ export class LoginComponent implements OnInit {
                     this.message = [];
                     this.message.push({ severity: "error", summary: "Unable To Change Password", detail: "Please Try Again" });
                 }
+                this.spinner3 = false;
+            }, 
+
+            err=>{
+                this.spinner3 = false;
+                this.message = [];
+                this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
             });
     }
 

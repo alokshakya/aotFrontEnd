@@ -91,7 +91,6 @@ export class AccountMainComponent implements AfterViewInit {
         }
     }
 
-
     change(changed: boolean) {
     }
 
@@ -217,6 +216,7 @@ export class AccountMainComponent implements AfterViewInit {
             this.documentClickListener();
         }
         jQuery(this.layoutMenuScroller).nanoScroller({ flash: true });
+        this.masterhttp.updated = 0;
     }
 
 }

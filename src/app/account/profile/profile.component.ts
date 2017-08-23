@@ -68,6 +68,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     date: Date;
     test: any;
     deactivate: boolean;
+    spinner:boolean;
 
     couponCode: string;
     achievement;
@@ -84,6 +85,8 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     ngOnInit() {
         this.misc.setCurrentRoute(["Profile"]);
+        this.misc.setLocalRoute('account/profile');
+
         this.dec = [];
         this.exam.push(
             { label: "Select Exam", value: "null" }, { label: "NCO 2016-17 - Level 2", value: "NCO-16-17" },
@@ -183,6 +186,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     saveBasicInfo() {
+        // this.spinner = true;
         let wrapper = {
             'firstname': this.dummyBasicInfo['firstname'],
             'lastname': this.dummyBasicInfo['lastname'],
@@ -203,7 +207,17 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.editBasic = false;
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'success', summary: 'Success', detail: 'Profile Updated' })
+                    this.spinner = false;
                 }
+                else{
+                    this.growlmsg = [];
+                    this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating Profile' })
+                }
+            }, 
+            err=>{
+                this.spinner = false;
+                this.growlmsg = [];
+                this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating Profile' })
             })
     }
 
@@ -242,7 +256,8 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     saveSchoolInfo() {
-        let wrapper = { 'coupon_code': this.couponCode }
+        let wrapper = { 'coupon_code': this.couponCode };
+        // this.spinner = true;
         this.masterhtttp.getSchool(wrapper)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
@@ -254,12 +269,19 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'error', summary: 'Invalid Coupon Code', detail: 'Try Again With A Different Coupon Code' })
                 }
-                this.updateSchool();     
+                this.updateSchool();
+                this.spinner = false;  
+            },
+            err=>{
+                this.spinner = false;
+                this.growlmsg = [];
+                this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating School Info' })
             })
     }
 
     changePassword() {
         let requestbody = { 'old_password': this.oldPassword, 'new_password': this.confirmNewPassword, 'user_info_id': this.personalInfo.userInfo['user_info_id'] }
+        // this.spinner = true;
         if (this.confirmNewPassword != this.newPassword) {
             this.growlmsg.push({ severity: 'error', summary: "New Password doesn't match", detail: 'Please try again' });
         }
@@ -274,6 +296,12 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                         this.growlmsg = [];
                         this.growlmsg.push({ severity: 'error', summary: "Incorrect Old Password", detail: 'Please try again' });
                     }
+                    this.spinner = false;
+                },
+                err=>{
+                    this.spinner = false;
+                    this.growlmsg = [];
+                    this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating Password' })
                 })
         }
         //this.growlmsg.push({severity:'success', summary:"Password Changed", detail:'Please try again'});}
@@ -289,6 +317,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     addTestimonial() {
         let requestBody = { 'text': this.testimonial, 'student_id': this.personalInfo.studentInfo['student_id'] }
+        // this.spinner = true;
         this.masterhtttp.addTestimonial(requestBody)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
@@ -301,6 +330,12 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.growlmsg = [];
                     this.growlmsg.push({severity: 'error', summary: 'Limt Reached', detail: 'You Cannot Add More Than 3 Testimonials'})
                 }
+                this.spinner = false;
+            },
+            err=>{
+                this.spinner = false;
+                this.growlmsg = [];
+                this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Adding Testimonial' })
             })
     }
 
@@ -317,6 +352,10 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'success', summary: "Success", detail: 'Achievement Added' })
                 }
+            },
+            err=>{
+                this.growlmsg = [];
+                this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Adding Achievement' })
             })
     }
 

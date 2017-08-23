@@ -35,7 +35,11 @@ export class MasterHttpService {
 
     dataRetreived() {
         if (this.updated == 8) {
-            this.router.navigate(['account'])
+            let previousRoute = sessionStorage.getItem('route')
+            if(previousRoute!=null){
+                this.router.navigate([previousRoute]);
+            }
+            else this.router.navigate(['account'])
         }
     }
 
@@ -141,7 +145,6 @@ export class MasterHttpService {
     // -----------------------------------------------------------------------------------------------
     setQuestions(data) {
         this.chapterwiseTest.setQuesAnswerSet(data);
-        console.log(this.chapterwiseTest.qaSet);
         this.router.navigate(['test']);
     }
 

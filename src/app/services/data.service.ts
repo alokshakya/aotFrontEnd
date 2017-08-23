@@ -67,8 +67,8 @@ export class SubjectInfo {
     gkChapters: Array<any>;
     mathChapters: Array<any>;
 
-    subscribedSubjects = { "Computer/Cyber": true, "Science": false, "Mathematics": true, "English": true, "General Knowledge": false, "Reasoning": true }
-    attemptedDemo = { "Computer/Cyber": false, "Science": true, "Mathematics": true, "English": false, "General Knowledge": false, "Reasoning": true }
+    subscribedSubjects = { "Computer-Cyber": true, "Science": false, "Mathematics": true, "English": true, "General-Knowledge": false, "Reasoning": true }
+    attemptedDemo = { "Computer-Cyber": false, "Science": true, "Mathematics": true, "English": false, "General-Knowledge": false, "Reasoning": true }
 
     constructor() { }
 
@@ -84,7 +84,7 @@ export class SubjectInfo {
         for (let i in data) {
             this.subjectList.push(data[i]['name']);
             switch (data[i]['name']) {
-                case "Computers":
+                case "Computer-Cyber":
                     this.computerChapters = data[i];
                     break;
 
@@ -107,7 +107,7 @@ export class SubjectInfo {
                     break;
 
 
-                case "General Knowledge":
+                case "General-Knowledge":
                     this.gkChapters = data[i];
                     break;
             }
@@ -159,7 +159,7 @@ export class chapterwiseTest {
     setTestDetails(data) {
         for (let i in data['generated']['subjects']) {
             switch (data['generated']['subjects'][i]['name']) {
-                case "Computers":
+                case "Computer-Cyber":
                     this.computers = data['generated']['subjects'][i];
                     break;
 
@@ -167,7 +167,7 @@ export class chapterwiseTest {
                     this.science = data['generated']['subjects'][i];
                     break;
 
-                case "General Knowledge":
+                case "General-Knowledge":
                     this.gk = data['generated']['subjects'][i];
                     break;
 
@@ -224,6 +224,11 @@ export class Misc {
         this.currentRoute.emit(component);
     }
 
+    
+    setLocalRoute(route){
+        sessionStorage.setItem('route',route);
+    }
+
     userTestimonial = [
         "Lorem 11111111 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
         "Lorem 22222222 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
@@ -271,7 +276,7 @@ export class Result {
         this.resultSummary = this.testSummary1;
     }
     testSummary1 = {
-        "Computer/Cyber": {
+        "Computer-Cyber": {
             "Chapterwise Test": {
                 "completed": 34,
                 "generated": 44,
@@ -389,7 +394,7 @@ export class Result {
     }
 
     resultSummary1 = {
-        "Computer/Cyber": {
+        "Computer-Cyber": {
             "Chapterwise Test": {
                 "right": 34,
                 "review": 44,

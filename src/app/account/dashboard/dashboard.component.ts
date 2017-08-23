@@ -44,7 +44,9 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.misc.setLocalRoute('account/dashboard');
         this.misc.setCurrentRoute(["Dashboard"]);
+        sessionStorage.setItem('route','account/dashboard');
     }
 
     startTest() {

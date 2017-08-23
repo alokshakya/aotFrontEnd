@@ -33,7 +33,7 @@ export class AppMenuComponent implements OnInit {
             { label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['dashboard'] },
             { label: 'Account Settings', icon: 'fa fa-pencil-square-o', routerLink: ['accountsettings'] },
             {
-                label: 'Computers', icon: 'icon-cyber',
+                label: 'Computer-Cyber', icon: 'icon-cyber',
                 items: [{
                     label: 'Demo Test',
                     icon: 'fa fa-circle-o',
@@ -120,7 +120,7 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'General Knowledge', icon: 'icon-gk',
+                label: 'General-Knowledge', icon: 'icon-gk',
                 items: [{
                     label: 'Demo Test',
                     icon: 'fa fa-circle-o',

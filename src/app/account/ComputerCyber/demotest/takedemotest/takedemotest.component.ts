@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
+import {Message} from 'primeng/primeng';
 import { Observable } from 'rxjs/Rx'
 import { ConfirmationService } from 'primeng/primeng';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
@@ -59,6 +60,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     attemptHistory:any;
 
     lastQuestion:number;
+    errMsg:Message[];
 
     constructor(
         public router: Router,
@@ -101,6 +103,9 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     setResponse(){
+        if(this.chapterwiseTest.attemptDetails['last_question']==0){
+            this.lastQuestion = 0;
+        }
         for (let i in this.chapterwiseTest.qaSet){
             if(this.chapterwiseTest.qaSet[i]['id']==this.chapterwiseTest.attemptDetails['last_question']){
                 this.lastQuestion = parseInt(i);
@@ -151,21 +156,29 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         this.wrapper['correct_answer'] = this.selectedQuestion['correct_answer_id'];
         this.wrapper['attempted_answer'] = this.selectedQuestion['answers'][this.answer]['id'];
         this.masterhttp.nextQuestion(this.wrapper).subscribe((data) => {
-            if (data['status'] == 200) {
+            if (data['status'] == 200) {       
+                this.attemptedQues += 1;
+                this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
+                // this.counter+=Math.ceil(100/this.totalQues);
+                if (this.selectedQuestion['correct_answer_id'] == this.selectedQuestion['answers'][this.answer]['id']) {
+                    this.questionStatus[this.clickListener] = "Correct";
+                    this.correct = true;
+                }
+                else {
+                    this.correct = false;
+                    this.questionStatus[this.clickListener] = "Wrong";
+                }
+                this.showHint();
             }
-        })
-        this.attemptedQues += 1;
-        this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
-        // this.counter+=Math.ceil(100/this.totalQues);
-        if (this.selectedQuestion['correct_answer_id'] == this.selectedQuestion['answers'][this.answer]['id']) {
-            this.questionStatus[this.clickListener] = "Correct";
-            this.correct = true;
-        }
-        else {
-            this.correct = false;
-            this.questionStatus[this.clickListener] = "Wrong";
-        }
-        this.showHint();
+            else{
+                this.errMsg = [];
+                this.errMsg.push({severity:'error',summary:'Error',detail:'Error While Saving Response'});
+            }
+        },
+        err=>{
+                this.errMsg = [];
+                this.errMsg.push({severity:'error',summary:'Error',detail:'Error While Saving Response'});
+            })
     }
 
 
@@ -180,10 +193,19 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
                 this.attemptedQues += 1;
                 this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
                 this.updateView();
+                this.answer = null;
+                this.correctAnswer = null;
             }
-        })
-        this.answer = null;
-        this.correctAnswer = null;
+            else{
+                this.errMsg = [];
+                this.errMsg.push({severity:'error',summary:'Error',detail:'Error While Saving Response'});
+            } 
+            },
+            err=>{
+                this.errMsg = [];
+                this.errMsg.push({severity:'error',summary:'Error',detail:'Error While Saving Response'});
+            }
+        )
     }
 
     nextQuestion() {
@@ -249,7 +271,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         this.confirmservice.confirm({
             message: 'Are you sure you want to quit ?',
             accept: () => {
-                this.router.navigate(['account']);
+                this.router.navigate([sessionStorage['route']]);
             },
             reject: () =>{
                 this.stopFlag = false;
@@ -270,9 +292,4 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     }
 
 }
-
-
-
-
-
 

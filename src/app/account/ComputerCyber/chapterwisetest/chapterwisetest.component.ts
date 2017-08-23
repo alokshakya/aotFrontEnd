@@ -26,6 +26,9 @@ export class ChapterwisetestComponent implements OnInit {
     generatedChapters;
     generatedChapterIds;
 
+    spinner:boolean;
+    spinner2:string;
+
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
@@ -41,7 +44,9 @@ export class ChapterwisetestComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Computers","Chapterwise Test"]);
+        this.misc.setCurrentRoute(["Computer-Cyber","Chapterwise Test"]);
+        this.misc.setLocalRoute('account/computers/chapterwisetest');
+
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{
@@ -109,6 +114,7 @@ export class ChapterwisetestComponent implements OnInit {
                 this.generatedPanel();
                 this.generatedFlag = false;
                 this.selectedChapter = null;
+                this.spinner = false;
             }
         })
         // setTimeout(() => {
@@ -117,6 +123,7 @@ export class ChapterwisetestComponent implements OnInit {
     }
 
     generate() {
+        this.spinner = true;
         this.masterhttp.generateTest(this.wrapper)
             .subscribe((data) => {
                 if (data['status'] == 200) {
@@ -125,20 +132,28 @@ export class ChapterwisetestComponent implements OnInit {
                 }else{
                     this.generateMsg=[];
                     this.generateMsg.push({ severity: 'info', summary: 'Could Not Generate Test', detail: 'Please Try Again'});
+                    this.spinner = false;
                 }
+            },
+            err => {
+                    this.generateMsg=[];
+                    this.generateMsg.push({ severity: 'info', summary: 'Could Not Generate Test', detail: 'Please Try Again'});
+                    this.spinner = false;
             })
     }
 
     startTest(testId, chapterId) {
+        this.spinner2 = testId;
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
             "chapter_id": chapterId,
             "test_id": testId
         }
         this.chapterwiseTest.activateTestRoute();
-        this.chapterwiseTest.setSubject('Computers');
+        this.chapterwiseTest.setSubject('Computer-Cyber');
         this.masterhttp.beginTest(wrapper)
         .subscribe((data) => {
+                console.log(data);
                 if (data['status'] == 200){
                     this.chapterwiseTest.setQuesAnswerSet(data['message']);
                     this.router.navigate(['test']);
@@ -146,11 +161,13 @@ export class ChapterwisetestComponent implements OnInit {
                     this.generateMsg = [];
                     this.generateMsg.push({ severity: 'info', summary: 'Could Not Start Test', detail: 'Please Try Again'});
                 }
+                this.spinner2 = null;
 
             },
             err => {
                     this.generateMsg = [];
                     this.generateMsg.push({ severity: 'info', summary: 'Could Not Start Test', detail: 'Please Try Again'});
+                    this.spinner2 = null;
             });
     }
 

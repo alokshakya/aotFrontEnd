@@ -1,7 +1,7 @@
 <p-dialog header="Change Profile Picture" responsive="true" [(visible)]="changeImg">
     <div class="ui-g">
         <div class="ui-g-12">
-            <p-fileUpload [showCancelButton]="false" name="profileImage[]" url="images.olympiadbox.com" accept="image/*" previewWidth="200" maxFileSize="3000000">
+            <p-fileUpload invalidFileTypeMessageSummary = "{0}: Invalid file type," [showCancelButton]="false" name="profileImage[]" url="images.olympiadbox.com" accept="image/*" previewWidth="200" maxFileSize="3000000">
             </p-fileUpload>
         </div>
     </div>

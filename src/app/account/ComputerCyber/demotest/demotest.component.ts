@@ -33,7 +33,10 @@ export class DemotestComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Computers","Demo Test"]);
+        console.log(this.subjectInfo.computerChapters['chapters']);
+        this.misc.setCurrentRoute(["Computer-Cyber","Demo Test"]);
+        this.misc.setLocalRoute('account/computers/demotest');
+
 
         // this.syllabus = this.misc.syllabus['class']['subjects'][0];
         // console.log(this.syllabus);

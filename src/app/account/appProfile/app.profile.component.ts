@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/primeng';
 import { AccountMainComponent } from '../main/main.component';
 
+import { PersonalInfo } from '../../services/data.service';
+
 @Component({
     selector: 'inline-profile',
     templateUrl: './app.profile.component.html',
@@ -22,6 +24,7 @@ import { AccountMainComponent } from '../main/main.component';
 })
 export class InlineProfileComponent {
 
+    constructor(public personalInfo:PersonalInfo){}
     active: boolean;
 
     onClick(event) {

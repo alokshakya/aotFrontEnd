@@ -35,7 +35,7 @@
     <div class="ui-g-12">
         <p-tabView>
             <p-tabPanel header="Basic Info" [disabled]="editSchool||editPassword||editTestimonial" leftIcon="fa-user">
-                <div class="container">
+                <div class="container" *ngIf="!spinner">
                     <div class="row">
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-user"></i> Name</h4>
@@ -109,9 +109,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="container" *ngIf="spinner">
+                </div>
             </p-tabPanel>
             <p-tabPanel header="School Info" leftIcon="fa-graduation-cap" [disabled]="editBasic||editPassword||editTestimonial">
-                <div class="container">
+                <div class="container" *ngIf="!spinner">
                     <div class="row">
                         <div class="col-md-4 userinfo col-xs-12">
                             <h4><i class="fa fa-sticky-note-o"></i> School Code </h4>
@@ -159,9 +161,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="container" *ngIf="spinner"></div>
             </p-tabPanel>
             <p-tabPanel header="Change Password" [disabled]="editSchool||editBasic||editTestimonial" leftIcon="fa-key">
-                <div class="container long">
+                <div class="container long" *ngIf="!spinner">
                     <div class="row">
                         <div class="col-md-4 userinfo col-xs-9">
                             <h4><i class="fa fa-key"></i> Old Password</h4>
@@ -189,6 +192,7 @@
                         <div class="col-md-4 col-xs-12"></div>
                     </div>
                 </div>
+                <div class="container" *ngIf="spinner"></div>
             </p-tabPanel>
             <p-tabPanel header="Add Testimonial" [disabled]="editSchool||editBasic||editPassword" leftIcon="fa-pencil">
                 <div class="container box">

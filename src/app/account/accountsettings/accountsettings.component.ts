@@ -37,10 +37,10 @@ export class AccountsettingsComponent implements OnInit {
         this.col = [{ "header": "Subject", "field": "Subject" }, { "header": "Price", "field": "Price" }]
 
         this.subPriceTable = [
-            { "Subject": "Computers", "Price": 500 },
+            { "Subject": "Computer-Cyber", "Price": 500 },
             { "Subject": "Science", "Price": 500 },
             { "Subject": "Mathematics", "Price": 500 },
-            { "Subject": "General Knowledge", "Price": 500 },
+            { "Subject": "General-Knowledge", "Price": 500 },
             { "Subject": "English", "Price": 500 },
             { "Subject": "Reasoning", "Price": 500 }
         ]
@@ -50,14 +50,16 @@ export class AccountsettingsComponent implements OnInit {
             { "Order ID": "OBTDZ2", "Subject": "Mathematics", "Subscription Date": "05 June 2017", "Valid Till": "05 December 2017", "Download Invoice": "Invoice .pdf" },
             { "Order ID": "OBDJJ4", "Subject": "English", "Subscription Date": "05 June 2017", "Valid Till": "05 January 2018", "Download Invoice": "Invoice .pdf" },
             { "Order ID": "OBSKD3", "Subject": "Reasoning", "Subscription Date": "05 March 2017", "Valid Till": "05 January 2018", "Download Invoice": "Invoice .pdf" },
-            { "Order ID": "OBKG33", "Subject": "General Knowledge", "Subscription Date": "05 April 2017", "Valid Till": "05 January 2018", "Download Invoice": "Invoice .pdf" },
-            { "Order ID": "OBHT45", "Subject": "Computers", "Subscription Date": "05 June 2017", "Valid Till": "05 January 2018", "Download Invoice": "Invoice .pdf" },
+            { "Order ID": "OBKG33", "Subject": "General-Knowledge", "Subscription Date": "05 April 2017", "Valid Till": "05 January 2018", "Download Invoice": "Invoice .pdf" },
+            { "Order ID": "OBHT45", "Subject": "Computer-Cyber", "Subscription Date": "05 June 2017", "Valid Till": "05 January 2018", "Download Invoice": "Invoice .pdf" },
         ];
 
     }
 
     ngOnInit() {
         this.misc.setCurrentRoute(["Account Settings"]);
+        this.misc.setLocalRoute('account/accountsettings');
+
         // this.subjectsPrice = []
         // this.price.getSubjectPrice(1).subscribe((data: Response) => {
         //     data = data['resource'];

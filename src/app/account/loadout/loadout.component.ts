@@ -21,6 +21,7 @@ export class LoadoutComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.http.updated = 0;
         this.http.setToken(localStorage.getItem('session_token'));
         this.http.getPersonalInfo();
         this.http.getSyllabus();
