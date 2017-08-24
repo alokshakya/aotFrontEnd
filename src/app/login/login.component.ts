@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit {
         public router: Router) { }
 
     ngOnInit() {
+        this.loggedInCheck();
         this.wrapper = { 'email':null,'verify_mobile':false,'verify_email':false };
         this.userLoginCreds = { "username": "", "password": "" };
         this.userRegCreds = { "firstname": "", "lastname": "", "email": "", "password": "", "class": "", "mobile": "" };
@@ -95,7 +96,18 @@ export class LoginComponent implements OnInit {
         this.dummyClass = []
         this.dummyClass.push({ label: "Select Class", value: null }, { label: "I", value: "I" },
             { label: "II", value: "II" }, { label: "III", value: "III" }, { label: "IV", value: "IV" }, { label: "V", value: "V" },
-            { label: "VI", value: "VI" }, { label: "VII", value: "VII" }, { label: "VIII", value: "VIII" })
+            { label: "VI", value: "VI" }, { label: "VII", value: "VII" }, { label: "VIII", value: "VIII" }, { label: "IX", value: "IX" }, { label: "X", value: "X" })
+    }
+
+    loggedInCheck(){
+        let token = localStorage.getItem('session_token');
+        let previousRoute = sessionStorage.getItem('route');
+        if(token!=null){
+            this.masterhttp.setToken(token);
+            if(previousRoute!=null){
+                this.router.navigate([previousRoute]);
+            }
+        }
     }
 
     setWrapper(resend=false, mode=null){

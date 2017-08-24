@@ -33,6 +33,10 @@ export class MasterHttpService {
         };
     }
 
+    httpError(){
+        this.router.navigate(['login']);
+    }
+
     dataRetreived() {
         if (this.updated == 8) {
             let previousRoute = sessionStorage.getItem('route')
@@ -122,7 +126,9 @@ export class MasterHttpService {
                     this.updated++;
                     this.dataRetreived();
                 }
-            })
+                else{this.httpError()};
+            },
+            err=>{this.httpError()})
     }
 
     getSyllabus() {
