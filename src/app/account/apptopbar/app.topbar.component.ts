@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PersonalInfo, Misc } from '../../services/data.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
 import { Observable } from 'rxjs/Rx';
+import * as handle from '../../services/data.service';
 
 
 @Component({
@@ -28,8 +29,8 @@ export class AppTopBar implements OnInit {
         this.masterhttp.logout(wrapper)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
-                    localStorage.removeItem('session_token')
-                    this.router.navigate(['login']);
+                    localStorage.removeItem('session_token');
+                    sessionStorage.removeItem('route');
                 }
             })
     };

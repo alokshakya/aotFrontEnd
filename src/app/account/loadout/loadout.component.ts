@@ -26,7 +26,6 @@ export class LoadoutComponent implements OnInit {
         this.http.getPersonalInfo();
         this.http.getSyllabus();
         this.http.getNotices();
-        this.http.getFee();
         this.http.getTestDetails();
         this.http.getTestimonials();
         this.personalInfo.userInfoEvent.subscribe((data)=>{

@@ -97,6 +97,8 @@ export class LoginComponent implements OnInit {
         this.dummyClass.push({ label: "Select Class", value: null }, { label: "I", value: "I" },
             { label: "II", value: "II" }, { label: "III", value: "III" }, { label: "IV", value: "IV" }, { label: "V", value: "V" },
             { label: "VI", value: "VI" }, { label: "VII", value: "VII" }, { label: "VIII", value: "VIII" }, { label: "IX", value: "IX" }, { label: "X", value: "X" })
+        this.reset();
+    
     }
 
     loggedInCheck(){
@@ -153,7 +155,7 @@ export class LoginComponent implements OnInit {
     }
 
     generateResponse(data){
-        if(this.wrapper['email']==this.registeredEmail&&!this.verifyForgotToggle){
+        if(!this.loginRegToggle&&!this.verifyForgotToggle){
             this.checkConditions(data);
             this.verifyForgotToggle = true;
             this.message = [];
@@ -161,19 +163,15 @@ export class LoginComponent implements OnInit {
         }
         else if(this.wrapper['email']==this.registeredEmail&&this.verifyForgotToggle){
             this.checkConditions(data);
-            // this.message = [];
-            // this.message.push({severity:'success', summary:'Reset Password', detail:'Please Verify To Reset Password'})
         }
-        else if(this.wrapper['email']==this.userRegCreds['email']&&!this.regVerifyToggle){
+        else if(this.loginRegToggle&&!this.regVerifyToggle){
             this.checkConditions(data);
             this.regVerifyToggle = true;
             this.message = [];
             this.message.push({severity:'success', summary:'Registration Successful', detail:'Please Verify Your Email and Mobile'})
         }
-        else if(this.wrapper['email']==this.userRegCreds['email']&&this.regVerifyToggle){
+        else if(this.loginRegToggle&&this.regVerifyToggle){
             this.checkConditions(data);
-            // this.message = [];
-            // this.message.push({severity:'success', summary:'OTP SENT', detail:'Please Verify Otp'})
         }
         this.wrapper = { 'email':null,'verify_mobile':false,'verify_email':false };
     }
@@ -195,8 +193,10 @@ export class LoginComponent implements OnInit {
 
 
     sendOtp() {
+        console.log(this.wrapper);
         this.masterhttp.sendOtp(this.wrapper)
             .subscribe((data: Response) => {
+                console.log(data['message']);
                 if(data['status']==200){
                     this.generateResponse(data['message']);
                 }
@@ -212,67 +212,7 @@ export class LoginComponent implements OnInit {
                 this.spinner2 = false
                 this.message = [];
                 this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
-                // this.spinner = false;
-                // this.spinner2 = false;
             });
-        
-
-        // if(mode=='verify_email'){
-        //     this.spinner2 = true;
-        // }
-        // if(mode=='verify_mobile'){
-        //     this.spinner = true;
-        // }
-        // if (resend) {
-        //     wrapper['email'] = this.registeredEmail;
-        //     wrapper[mode] = true;
-        // }
-        // else {
-        //     if (mode == 'both') {
-        //         wrapper = { email: this.userRegCreds['email'], verify_mobile: true, verify_email: true };
-        //     }
-        //     else if (mode == 'selective') {
-        //         wrapper['email'] = this.registeredEmail;
-        //         if (this.mode.indexOf('verify_email') > -1) {
-        //             wrapper['verify_email'] = true;
-        //             this.spinner2 = true;
-        //         }
-        //         if (this.mode.indexOf('verify_mobile') > -1) {
-        //             wrapper['verify_mobile'] = true;
-        //             this.spinner = true;
-        //         }
-        //     }
-        //     else {
-        //         wrapper[mode] = true;
-        //     }
-        // }
-        // // this.emailVerified = false;
-        // // this.mobileVerified = false;
-        // this.masterhttp.sendOtp(wrapper)
-        //     .subscribe((data: Response) => {
-        //         this.spinner = false;
-        //         this.spinner2 = false
-        //         switch (data['status']) {
-
-        //             case 200:
-        //                 this.registeredMobile = data['message']['mobile'];
-        //                 this.verifyForgotToggle = true;
-
-        //                 //for login_forgetPassword
-        //                 break;
-
-        //             default:
-        //                 this.message = [];
-        //                 this.message.push({ severity: 'error', summary: 'Email Does Not Exist', detail: 'Please Try Again With Different Email Id' });
-        //                 break;
-        //         }
-        //     },
-        //     err=>{
-        //         this.message = [];
-        //         this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
-        //         this.spinner = false;
-        //         this.spinner2 = false;
-        //     });
     }
 
     verifyResponse(wrapper){
@@ -291,6 +231,7 @@ export class LoginComponent implements OnInit {
         if(this.regVerifyToggle){
             this.check();
         }
+
         this.spinner = false;
         this.spinner2 = false;
         this.disappear = true;
@@ -326,71 +267,11 @@ export class LoginComponent implements OnInit {
                 this.message = [];
                 this.message.push({severity:'error', summary:'Server Error', detail:'Please Try Again'})
         })
-
-        // if (forgot) {
-        //     wrapper['email'] = this.registeredEmail;
-        // }
-        // wrapper[mode] = true;
-
-        // let x;
-        // if (mode == 'verify_email') {
-        //     x = 'Email';
-        //     wrapper['otp'] = this.emailOtp;
-        //     this.spinner2 = true
-        // }
-        // if (mode == 'verify_mobile') {
-        //     x = 'Mobile';
-        //     wrapper['otp'] = this.mobileOtp;
-        //     this.spinner = true;
-        // }
-        // this.masterhttp.verifyOtp(wrapper)
-        //     .subscribe((data: Response) => {
-        //         switch (data['status']) {
-
-        //             case 721:
-        //                 this.message = [];
-        //                 this.message.push({ severity: 'error', summary: 'Incorrect OTP', detail: 'Please Try Again' });
-        //                 break;
-
-        //             case 200:
-        //                 this.message = [];
-        //                 this.message.push({ severity: 'success', summary: 'Success', detail: x + ' Verified' });
-        //                 if (x == 'Mobile') {
-        //                     this.mobileVerified = true;
-        //                     if (!forgot) {
-        //                         this.check();
-        //                     }
-        //                     else {
-        //                         this.mode[this.mode.indexOf('verify_email')] = null;
-        //                     }
-        //                 }
-        //                 if (x == 'Email') {
-        //                     this.emailVerified = true;
-        //                     if (!forgot) { this.check() }
-        //                     else this.mode[this.mode.indexOf('verify_mobile')] = null;
-        //                 }
-        //                 break;
-
-        //             default:
-        //                 this.message = [];
-        //                 this.message.push({ severity: 'error', summary: 'Incorrect OTP', detail: 'Could Not Verify Otp' });
-        //                 break;
-        //         }
-        //         this.spinner = false;
-        //         this.spinner2 = false;
-        //     },
-        //     err=>{
-        //         this.message = [];
-        //         this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
-        //         this.spinner = false;
-        //         this.spinner2 = false;
-        //     });
     }
 
     setToken(token) {
         localStorage.setItem('session_token',token);
         this.masterhttp.setToken(token);
-        localStorage.setItem('session_token', token);
         this.router.navigate(['loadout']);
     }
 
@@ -411,6 +292,7 @@ export class LoginComponent implements OnInit {
     }
 
     signUp() {
+        this.loginForgotToggle = false;
         this.spinner = true;
         this.emailVerified = false;
         this.mobileVerified = false;
@@ -425,23 +307,6 @@ export class LoginComponent implements OnInit {
                     this.message = [];
                     this.message.push({ severity: 'info', summary: 'Email Already Exists', detail: 'Please Login' });
                 }
-            //     if (data['status'] == 200) {
-            //         const wrapper = [{ 'email': this.userRegCreds['email'], 'verify_mobile': true, 'verify_email': true }]
-            //         this.sendOtp('both');
-            //         this.message = [];
-            //         this.message.push({ severity: 'info', summary: 'Otp Verification', detail: 'Please Verify Your Mobile and Email' });
-            //         this.spinner = false;
-            //         this.regVerifyToggle = true;
-            //     } else {
-            //         this.spinner = false;
-            //         this.message = [];
-            //         this.message.push({ severity: 'info', summary: 'Email Already Exists', detail: 'Please Login' });
-            //     }
-            // },
-            // err=>{
-            //     this.message = [];
-            //     this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
-            //     this.spinner = false;
             }, err => {
                 this.message = [];
                 this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
@@ -452,9 +317,10 @@ export class LoginComponent implements OnInit {
 
     //called when clicked on forgot password
     forgotPassword() {
+        this.reset();
+        this.regVerifyToggle = false;
         this.loginForgotToggle = true;
-        this.emailVerified = false;
-        this.mobileVerified = false;
+
     }
 
     //used to toggle loginRegister after successful registration
@@ -462,16 +328,18 @@ export class LoginComponent implements OnInit {
         if (this.mobileVerified && this.emailVerified) {
             this.message = []
             this.message.push({ severity: 'success', summary: 'Registration Successful', detail: 'Please login' })
+            this.reset();
+            this.clearFlags();
             this.loginRegToggle = false;
-            this.regVerifyToggle = false;
         }
     }
 
-    //reset flags
+
     reset() {
+        this.disappear = false;
         // login
         this.userLoginCreds['email']=null;
-        this.userLoginCreds['password']=null;        
+        this.userLoginCreds['password']=null;     
         
         // register
         this.userRegCreds['email']=null;
@@ -490,17 +358,15 @@ export class LoginComponent implements OnInit {
         this.passwordObj['new_password'] = null;
         this.dummyPassword = null;
         this.wrapper = { 'email':null,'verify_mobile':false,'verify_email':false };
+    }
 
-        // verify
-        this.loginForgotToggle = false;
+    clearFlags(){
         this.regVerifyToggle = false;
-        this.mobileVerified = false;
-        this.emailVerified = false;
+        this.loginForgotToggle = false;
         this.verifyForgotToggle = false;
-
-        this.spinner = false;
-        this.spinner2 = false;
         this.disappear = false;
+        this.emailVerified = false;
+        this.mobileVerified = false;
     }
 
     //submit new password
@@ -514,6 +380,8 @@ export class LoginComponent implements OnInit {
                     this.message = [];
                     this.message.push({ severity: "success", summary: "Password Changed", detail: "Please Login" })
                     this.reset();
+                    this.clearFlags();
+                    this.loginRegToggle = false;
                 }
                 else {
                     this.message = [];
@@ -527,6 +395,11 @@ export class LoginComponent implements OnInit {
                 this.message = [];
                 this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
             });
+    }
+
+    ngOnDestroy(){
+        this.reset();
+        this.clearFlags();
     }
 
 }

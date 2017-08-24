@@ -5,7 +5,7 @@
         <a href="http://olympiadbox.com"><img src="../../assets/layout/images/Olympiadbox-logo.png" id="oblogo" height="100px" width="100px"></a>
     </div>
     <div class=" module form-module" *ngIf="!loginRegToggle" [@fadeInOut]>
-        <div class="toggle" pTooltip=" Register" (click)="loginRegToggle=!loginRegToggle">
+        <div class="toggle" pTooltip=" Register" (click)="loginRegToggle=!loginRegToggle;reset();clearFlags()">
             <i class="fa fa-user-plus fa-lg"></i>
         </div>
         <!--LOGIN BOX-->
@@ -13,7 +13,7 @@
     </div>
     <!--Registration Box-->
     <div class="form-module register" style="border-color:#2BBF61" *ngIf="loginRegToggle" [@fadeInOut]>
-        <div class="toggle" style="background-color:#2BBF61" pTooltip=" Login" (click)="loginRegToggle=!loginRegToggle;reset()">
+        <div class="toggle" style="background-color:#2BBF61" pTooltip=" Login" (click)="loginRegToggle=!loginRegToggle;reset();clearFlags()">
             <i class="fa fa-sign-in fa-lg"></i>
         </div>
         <div *ngIf="!regVerifyToggle; then reg else verify"></div>
@@ -86,27 +86,25 @@
                 <br>
                 <h2 *ngIf="!disappear">Verification</h2>
                 <h2 *ngIf="disappear">Reset Password</h2>
-
             </div>
             <!-- <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='verify_mobile'||mode[1]=='verify_mobile'"> -->
             <div class="ui-g-12 ui-sm-12 aligned" *ngIf="(mode[0]=='verify_mobile'||mode[1]=='verify_mobile')&&!disappear">
-
                 <h5>Enter OTP sent on <strong>{{registeredMobile}}</strong></h5>
                 <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="mobileOtp"></p-inputMask>
-                <button pButton class="ui-button-success" [disabled]="mobileVerified" (click)="setWrapper(true,'forgotMobile');verifyOtp()" label="Verify"></button>&nbsp;
+                <button pButton class="ui-button-success" [disabled]="mobileVerified||mobileOtp==null" (click)="setWrapper(true,'forgotMobile');verifyOtp()" label="Verify"></button>&nbsp;
                 <button pButton [disabled]="mobileVerified||spinner" (click)="setWrapper(true,'forgotMobile');sendOtp()" class="ui-button-info" label="Resend"></button>
                 <i style="margin-left:45%;margin-top:7%;" *ngIf="spinner" class="fa fa-circle-o-notch fa-lg fa-spin fa-forward"></i>
                 <p class="success" *ngIf="mobileVerified">You can change your password below</p>
             </div>
             <!-- <div class="ui-g-12 text-center" *ngIf="(mode[0]=='verify_mobile'||mode[1]=='verify_mobile')&&(mode[0]=='verify_email'||mode[1]=='verify_email')">
                 <h4>OR</h4></div> -->
-                <div class="ui-g-12 text-center" *ngIf="(mode[0]=='verify_mobile'||mode[1]=='verify_mobile')&&(mode[0]=='verify_email'||mode[1]=='verify_email')&&!disappear"><h4>OR</h4></div>
+            <div class="ui-g-12 text-center" *ngIf="(mode[0]=='verify_mobile'||mode[1]=='verify_mobile')&&(mode[0]=='verify_email'||mode[1]=='verify_email')&&!disappear">
+                <h4>OR</h4></div>
             <!-- <div class="ui-g-12 ui-sm-12 aligned" *ngIf="mode[0]=='verify_email'||mode[1]=='verify_email'"> -->
             <div class="ui-g-12 ui-sm-12 aligned" *ngIf="(mode[0]=='verify_email'||mode[1]=='verify_email')&&!disappear">
-
                 <h5>Enter OTP sent on <strong>{{registeredEmail}}</strong></h5>
                 <p-inputMask [style]="{'width':'150px'}" slotChar=" " unmask="true" placeholder="Enter OTP" mask="999-999" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
-                <button pButton [disabled]="emailVerified" class="ui-button-success" (click)="setWrapper(true,'forgotEmail');verifyOtp()" label="Verify"></button>&nbsp;
+                <button pButton [disabled]="emailVerified||emailOtp==null" class="ui-button-success" (click)="setWrapper(true,'forgotEmail');verifyOtp()" label="Verify"></button>&nbsp;
                 <button [disabled]="emailVerified||spinner2" (click)="setWrapper(true,'forgotEmail');sendOtp()" pButton class="ui-button-info" label="Resend"></button>
                 <i style="margin-left:45%;margin-top:7%;" *ngIf="spinner2" class="fa fa-circle-o-notch fa-lg fa-spin fa-forward"></i>
                 <p class="success" *ngIf="emailVerified">You can change your password below</p>
@@ -119,7 +117,6 @@
                 <p [hidden]="newpassword.untouched" *ngIf="passwordObj.new_password!=dummyPassword" class="error">Password doesn't match</p>
                 <br>
                 <button pButton type="button" [disabled]="newpassword.errors||passwordObj.new_password!=dummyPassword||spinner3" label="Save" (click)="changePassword()" class="ui-button-success"></button> &nbsp; <i *ngIf="spinner3" class="fa fa-circle-o-notch fa-spin fa-forward"></i>
-
             </div>
         </div>
     </ng-template>

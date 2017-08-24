@@ -38,7 +38,8 @@ export class MasterHttpService {
     }
 
     dataRetreived() {
-        if (this.updated == 8) {
+        this.updated++;
+        if (this.updated == 7) {
             let previousRoute = sessionStorage.getItem('route')
             if(previousRoute!=null){
                 this.router.navigate([previousRoute]);
@@ -49,12 +50,10 @@ export class MasterHttpService {
 
     setToken(token) {
         this.token = token;
-        localStorage.setItem('session_token', token);
         this.queryHeaders = new Headers();
         this.queryHeaders.append('Content-Type', 'application/json');
         this.queryHeaders.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
         this.queryHeaders.append('session_token', localStorage.getItem('session_token'));
-        this.updated++;
         this.dataRetreived();
     }
 
@@ -123,7 +122,6 @@ export class MasterHttpService {
             .subscribe((data) => {
                 if (data['status'] == 200) {
                     this.personalInfo.setInfo(data['message'][0]);
-                    this.updated++;
                     this.dataRetreived();
                 }
                 else{this.httpError()};
@@ -135,7 +133,6 @@ export class MasterHttpService {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/classdata/topics', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
                 this.subjectInfo.setSyllabus(data['class']['subjects']);
-                this.updated++;
                 this.dataRetreived();
             })
     }
@@ -144,7 +141,6 @@ export class MasterHttpService {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/test/details', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
                 this.chapterwiseTest.setTestDetails(data['message']);
-                this.updated++;
                 this.dataRetreived();
             })
     }
@@ -157,26 +153,14 @@ export class MasterHttpService {
     beginTest(requestBody) {
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/test/attempt', requestBody, { headers: this.queryHeaders })
         .map((resp: Response) => resp.json())
-            // .subscribe((data) => {
-            //     if (data['status'] == 200)
-            //         this.setQuestions(data['message'])
-            // })
     }
     // -------------------------------------------------------------------------------------------------
 
-    // this.http.get(this.baseUrl+'/topics').map((resp: Response) => resp.json())
-    // .subscribe((data) => {
-    //   this.subjectInfo.setComputerTopics(data['topics']['records']);
-    //   this.updated++;
-    //   this.dataRetreived();
-    // })
-    // }
 
     getTestimonials() {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/tablerecords/testimonial', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
                 this.misc.setTestimonial(data['message']);
-                this.updated++;
                 this.dataRetreived();
             })
     }
@@ -185,35 +169,14 @@ export class MasterHttpService {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/tablerecords/notice_board', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
                 this.misc.setNotice(data['message']);
-                this.updated++;
                 this.dataRetreived();
             })
     }
 
-    // getSubjects(){
-    //   this.http.get(this.baseUrl+'/subjects').map((resp) => resp.json())
-    //   .subscribe((data) =>{
-    //     this.subjectInfo.setSubjects(data['subjects']['records']);
-    //     this.updated++;
-    //     this.dataRetreived();
-    //   })
-    // }
-
     getResult() {
         this.result.setResultSummary();
         this.result.setTestSummary();
-        this.updated++;
         this.dataRetreived();
-    }
-
-
-    getFee() {
-        // this.http.get(this.baseUrl+'/fee').map((resp:Response) => resp.json())
-        // .subscribe((data) =>{
-        //   this.misc.setFee(data['fee']['records']);
-        this.updated++;
-        this.dataRetreived();
-        // })
     }
 
     getUserTestimonials(studentId){
