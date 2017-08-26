@@ -83,11 +83,11 @@ export const AccountRoutes: Routes = [
             { path: 'math/mocktest', component: MocktestMathComponent },
             { path: 'math/result', component: ResultMathComponent },
 
-            { path: 'gk/demotest', component: DemotestMathComponent },
-            { path: 'gk/chapterwisetest', component: ChapterwisetestMathComponent },
-            { path: 'gk/sampletest', component: SampletestMathComponent },
-            { path: 'gk/mocktest', component: MocktestMathComponent },
-            { path: 'gk/result', component: ResultMathComponent },
+            { path: 'gk/demotest', component: DemotestGkComponent },
+            { path: 'gk/chapterwisetest', component: ChapterwisetestGkComponent },
+            { path: 'gk/sampletest', component: SampletestGkComponent },
+            { path: 'gk/mocktest', component: MocktestGkComponent },
+            { path: 'gk/result', component: ResultGkComponent },
 
             { path: 'reasoning/demotest', component: DemotestReasoningComponent },
             { path: 'reasoning/chapterwisetest', component: ChapterwisetestReasoningComponent },
