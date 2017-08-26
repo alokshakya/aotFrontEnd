@@ -95,27 +95,27 @@ export class AppMenuComponent implements OnInit {
                 items: [{
                     label: 'Demo Test',
                     icon: 'fa fa-circle-o',
-                    routerLink: ['mathematics/demotest']
+                    routerLink: ['math/demotest']
                 },
                 {
                     label: 'Chapterwise Test',
                     icon: 'fa fa-circle-o',
-                    routerLink: ['mathematics/chapterwisetest']
+                    routerLink: ['math/chapterwisetest']
                 },
                 {
                     label: 'Sample Test',
                     icon: 'fa fa-circle-o',
-                    routerLink: ['mathematics/sampletest']
+                    routerLink: ['math/sampletest']
                 },
                 {
                     label: 'Mock Test',
                     icon: 'fa fa-circle-o',
-                    routerLink: ['mathematics/mocktest']
+                    routerLink: ['math/mocktest']
                 },
                 {
                     label: 'Result',
                     icon: 'fa fa-circle-o',
-                    routerLink: ['mathematics/result']
+                    routerLink: ['math/result']
                 },
                 ]
             },
@@ -172,7 +172,7 @@ export class AppMenuComponent implements OnInit {
                 },
                 {
                     label: 'Result',
-                    icon: 'fa fa-calculaor',
+                    icon: 'fa fa-circle-o',
                     routerLink: ['english/result']
                 },
                 ]

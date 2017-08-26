@@ -113,6 +113,37 @@ import { CssIdPipe } from './pipes/css-id.pipe';
 import { OverlayComponent } from './account/loader/overlay/overlay.component';
 import { LoadoutComponent } from './account/loadout/loadout.component';
 
+import { DemotestEnglishComponent } from './account/english/demotest-english/demotest-english.component';
+import { ChapterwisetestEnglishComponent } from './account/english/chapterwisetest-english/chapterwisetest-english.component';
+import { SampletestEnglishComponent } from './account/english/sampletest-english/sampletest-english.component';
+import { MocktestEnglishComponent } from './account/english/mocktest-english/mocktest-english.component';
+import { ResultEnglishComponent } from './account/english/result-english/result-english.component';
+
+
+import { ChapterwisetestScienceComponent } from './account/science/chapterwisetest-science/chapterwisetest-science.component';
+import { DemotestScienceComponent } from './account/science/demotest-science/demotest-science.component';
+import { MocktestScienceComponent } from './account/science/mocktest-science/mocktest-science.component';
+import { SampletestScienceComponent } from './account/science/sampletest-science/sampletest-science.component';
+import { ResultScienceComponent } from './account/science/result-science/result-science.component';
+
+import { ChapterwisetestMathComponent } from './account/mathematics/chapterwisetest-math/chapterwisetest-math.component';
+import { DemotestMathComponent } from './account/mathematics/demotest-math/demotest-math.component';
+import { MocktestMathComponent } from './account/mathematics/mocktest-math/mocktest-math.component';
+import { ResultMathComponent } from './account/mathematics/result-math/result-math.component';
+import { SampletestMathComponent } from './account/mathematics/sampletest-math/sampletest-math.component';
+
+import { ChapterwisetestGkComponent } from './account/gk/chapterwisetest-gk/chapterwisetest-gk.component';
+import { SampletestGkComponent } from './account/gk/sampletest-gk/sampletest-gk.component';
+import { MocktestGkComponent } from './account/gk/mocktest-gk/mocktest-gk.component';
+import { DemotestGkComponent } from './account/gk/demotest-gk/demotest-gk.component';
+import { ResultGkComponent } from './account/gk/result-gk/result-gk.component';
+
+
+import { ChapterwisetestReasoningComponent } from './account/reasoning/chapterwisetest-reasoning/chapterwisetest-reasoning.component';
+import { SampletestReasoningComponent } from './account/reasoning/sampletest-reasoning/sampletest-reasoning.component';
+import { DemotestReasoningComponent } from './account/reasoning/demotest-reasoning/demotest-reasoning.component';
+import { MocktestReasoningComponent } from './account/reasoning/mocktest-reasoning/mocktest-reasoning.component';
+import { ResultReasoningComponent } from './account/reasoning/result-reasoning/result-reasoning.component';
 
 @NgModule({
     imports: [
@@ -211,6 +242,31 @@ import { LoadoutComponent } from './account/loadout/loadout.component';
         LoaderComponent,
         OverlayComponent,
         LoadoutComponent,
+        DemotestEnglishComponent,
+        ChapterwisetestEnglishComponent,
+        SampletestEnglishComponent,
+        MocktestEnglishComponent,
+        ResultEnglishComponent,
+        ChapterwisetestScienceComponent,
+        DemotestScienceComponent,
+        MocktestScienceComponent,
+        SampletestScienceComponent,
+        ResultScienceComponent,
+        ChapterwisetestMathComponent,
+        DemotestMathComponent,
+        MocktestMathComponent,
+        ResultMathComponent,
+        SampletestMathComponent,
+        ChapterwisetestGkComponent,
+        SampletestGkComponent,
+        MocktestGkComponent,
+        DemotestGkComponent,
+        ResultGkComponent,
+        ChapterwisetestReasoningComponent,
+        SampletestReasoningComponent,
+        DemotestReasoningComponent,
+        MocktestReasoningComponent,
+        ResultReasoningComponent,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

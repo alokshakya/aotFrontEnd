@@ -104,9 +104,9 @@ export class MasterHttpService {
     }
 
     generateTest(requestbody) {
-        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/test/generate', requestbody, { headers: this.queryHeaders })
+            return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/test/generate', requestbody, { headers: this.queryHeaders })
             .map((resp: Response) => resp.json())
-    }
+        }
 
     nextQuestion(requestBody) {
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/test/nextquestion', requestBody, { headers: this.queryHeaders })

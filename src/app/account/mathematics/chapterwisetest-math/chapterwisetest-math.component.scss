@@ -1,0 +1,87 @@
+#intro {
+    height: 250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.spin1{
+    margin-left: 63%;
+}
+
+
+#inlinebutton {
+    border: transparent;
+    background-color: #1D8ECD;
+    text-align: center;
+    float: right;
+}
+
+#testdetailspanel {
+    text-align: center
+}
+
+#subscribepanel {
+    text-align: center;
+}
+
+.container {
+    padding-left: 5%;
+    padding-top: 2%;
+}
+
+.testnumber {
+    padding-left: 5%;
+}
+
+.testnumber button {
+    margin-bottom: 2%;
+}
+
+.chapter {
+    font-size: 17px;
+    font-weight: normal;
+}
+
+.leftpad {
+    padding-left: 5%;
+    margin-right: 2%;
+}
+
+.low button {
+    width: 70px;
+    margin-right: 4px;
+}
+
+i:hover {
+    cursor: pointer;
+    color: brown;
+}
+
+.toright {
+    padding-left: 25%;
+}
+
+
+
+
+
+
+.toggle {
+    margin-bottom: 2%;
+}
+
+.withradio a:link,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    font-size: 17px;
+}
+
+.withradio a:visited {
+    text-decoration: none;
+}
+
+.withradio a {
+    margin-left: 3%;
+}

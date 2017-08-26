@@ -7,14 +7,12 @@ import { MessagesModule } from 'primeng/primeng';
 
 import { SubjectInfo, PersonalInfo, Result, Misc, chapterwiseTest } from '../../../services/data.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
-
 @Component({
-    selector: 'app-chapterwisetest',
-    templateUrl: './chapterwisetest.component.html',
-    styleUrls: ['./chapterwisetest.component.scss']
+  selector: 'app-chapterwisetest-science',
+  templateUrl: './chapterwisetest-science.component.html',
+  styleUrls: ['./chapterwisetest-science.component.scss']
 })
-export class ChapterwisetestComponent implements OnInit {
-
+export class ChapterwisetestScienceComponent implements OnInit {
     subscribed = false;
     selectedChapter: string;
     generateMsg: Message[] = [];
@@ -44,8 +42,8 @@ export class ChapterwisetestComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Computer-Cyber","Chapterwise Test"]);
-        this.misc.setLocalRoute('account/computers/chapterwisetest');
+        this.misc.setCurrentRoute(["Science","Chapterwise Test"]);
+        this.misc.setLocalRoute('account/science/chapterwisetest');
 
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
@@ -68,33 +66,33 @@ export class ChapterwisetestComponent implements OnInit {
     generatedPanel() {
         this.generatedChapters = [];
         this.generatedChapterIds = [];
-        for (let i in this.chapterwiseTest.computers['chapters']) {
-            if (this.chapterwiseTest.computers['chapters'][i].hasOwnProperty('tests')) {
-                this.generatedChapters.push(this.chapterwiseTest.computers['chapters'][i]);
-                this.generatedChapterIds.push(this.chapterwiseTest.computers['chapters'][i]['id'])
+        for (let i in this.chapterwiseTest.science['chapters']) {
+            if (this.chapterwiseTest.science['chapters'][i].hasOwnProperty('tests')) {
+                this.generatedChapters.push(this.chapterwiseTest.science['chapters'][i]);
+                this.generatedChapterIds.push(this.chapterwiseTest.science['chapters'][i]['id'])
             }
         }
     }
 
     tabOpen(e) {
         if (this.check(e)) {
-            this.selectedChapter = this.subjectInfo.computerChapters['chapters'][e.index]['id'];
+            this.selectedChapter = this.subjectInfo.scienceChapters['chapters'][e.index]['id'];
             this.wrapper['chapter_id'] = this.selectedChapter;
-            this.wrapper['topic_id'] = this.subjectInfo.computerChapters['chapters'][0]['topics'][0]['id'];
+            this.wrapper['topic_id'] = this.subjectInfo.scienceChapters['chapters'][0]['topics'][0]['id'];
 
             this.generatedFlag = false;
             this.generateMsg = []
-            this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.computerChapters['chapters'][e.index]['name'] + ' Test' });
+            this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.scienceChapters['chapters'][e.index]['name'] + ' Test' });
         }
         else {
             this.generateMsg = []
-            this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: this.subjectInfo.computerChapters['chapters'][e.index]['name'] + ' Test Is Already Generated' });
+            this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: this.subjectInfo.scienceChapters['chapters'][e.index]['name'] + ' Test Is Already Generated' });
         }
     }
 
 
     check(e) {
-        if (this.generatedChapterIds.indexOf(this.subjectInfo.computerChapters['chapters'][e.index]['id']) == -1) {
+        if (this.generatedChapterIds.indexOf(this.subjectInfo.scienceChapters['chapters'][e.index]['id']) == -1) {
             return true;
         }
         return false;
@@ -150,9 +148,10 @@ export class ChapterwisetestComponent implements OnInit {
             "test_id": testId
         }
         this.chapterwiseTest.activateTestRoute();
-        this.chapterwiseTest.setSubject('Computer-Cyber');
+        this.chapterwiseTest.setSubject('Science');
         this.masterhttp.beginTest(wrapper)
         .subscribe((data) => {
+                console.log(data);
                 if (data['status'] == 200){
                     this.chapterwiseTest.setQuesAnswerSet(data['message']);
                     this.router.navigate(['test']);
@@ -177,5 +176,3 @@ export class ChapterwisetestComponent implements OnInit {
         return false;
     }
 }
-
-

@@ -67,8 +67,8 @@ export class SubjectInfo {
     gkChapters: Array<any>;
     mathChapters: Array<any>;
 
-    subscribedSubjects = { "Computer-Cyber": true, "Science": false, "Mathematics": true, "English": true, "General-Knowledge": false, "Reasoning": true }
-    attemptedDemo = { "Computer-Cyber": false, "Science": true, "Mathematics": true, "English": false, "General-Knowledge": false, "Reasoning": true }
+    subscribedSubjects = { "Computer-Cyber": true, "Science": true, "Mathematics": true, "English": true, "General-Knowledge": true, "Reasoning": true }
+    attemptedDemo = { "Computer-Cyber": false, "Science": false, "Mathematics": false, "English": false, "General-Knowledge": false, "Reasoning": false }
 
     constructor() { }
 
