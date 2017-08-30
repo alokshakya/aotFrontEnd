@@ -53,22 +53,127 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['account/computers/sampletest'])
     }
 
-    redirect(destination) {
-        if (destination == 'demo') {
-            this.router.navigate(['account/computers/demotest']);
-        } else { this.router.navigate(['account/accountsettings']) }
+    redirect(sub,destination) {
+        console.log(sub);
+        console.log(destination);
+        if(destination=='settings'){
+            this.router.navigate(['account/accountsettings'])
+        }
+        else if(destination=='demo'){
+            switch (sub) {
+                case "Computer-Cyber":
+                    this.router.navigate(['account/computers/demotest'])
+                    break;
+
+                case "General-Knowledge":
+                    this.router.navigate(['account/gk/demotest'])
+                    break;
+                
+                case "Science":
+                    this.router.navigate(['account/science/demotest'])
+                    break;
+
+                case "English":
+                    this.router.navigate(['account/english/demotest'])
+                    break;
+
+                case "Reasoning":
+                    this.router.navigate(['account/reasoning/demotest'])
+                    break;
+
+                case "Mathematics":
+                    this.router.navigate(['account/math/demotest'])
+                    break;
+            }
+        }
+        else if(destination=='sample'){
+            switch (sub) {
+                case "Computer-Cyber":
+                    this.router.navigate(['account/computers/sampletest'])
+                    break;
+
+                case "General-Knowledge":
+                    this.router.navigate(['account/gk/sampletest'])
+                    break;
+                
+                case "Science":
+                    this.router.navigate(['account/science/sampletest'])
+                    break;
+
+                case "English":
+                    this.router.navigate(['account/english/sampletest'])
+                    break;
+
+                case "Reasoning":
+                    this.router.navigate(['account/reasoning/sampletest'])
+                    break;
+
+                case "Mathematics":
+                    this.router.navigate(['account/math/sampletest'])
+                    break;
+            }
+        }
     }
 
     redirectToTest(i, j) {
         // let a = i.toLowerCase()
         let b = j.toLowerCase().replace(/\s/g, "");
         // this.router.navigate(['account/'+a+'/'+b]);
-        this.router.navigate(['account/computers/' + b])
+        switch (i) {
+            case "Computer-Cyber":
+                this.router.navigate(['account/computers/' + b])
+                break;
+            
+            case "Science":
+                this.router.navigate(['account/science/' + b])
+                break;
+            
+            case "English":
+                this.router.navigate(['account/english/' + b])
+                break;
+            
+            case "General-Knowledge":
+                this.router.navigate(['account/gk/' + b])
+                break;
+            
+            case "Reasoning":
+                this.router.navigate(['account/reasoning/' + b])
+                break;
+            
+            case "Mathematics":
+                this.router.navigate(['account/math/' + b])
+                break;
+            
+        }
     }
 
     redirectToResult(i) {
-        let a = i.toLowerCase();
-        this.router.navigate(['account/computers/result'])
+        switch (i) {
+            case "Computer-Cyber":
+                this.router.navigate(['account/computers/result'])
+                break;
+            
+            case "Science":
+                this.router.navigate(['account/science/result'])
+                break;
+            
+            case "English":
+                this.router.navigate(['account/english/result'])
+                break;
+            
+            case "General-Knowledge":
+                this.router.navigate(['account/gk/result'])
+                break;
+            
+            case "Reasoning":
+                this.router.navigate(['account/reasoning/result'])
+                break;
+            
+            case "Mathematics":
+                this.router.navigate(['account/math/result'])
+                break;
+            
+        }
     }
 
 }

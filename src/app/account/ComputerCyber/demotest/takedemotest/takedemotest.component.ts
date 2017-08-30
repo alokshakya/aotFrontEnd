@@ -7,6 +7,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
 import { SubjectInfo, Misc, chapterwiseTest, PersonalInfo } from '../../../../services/data.service';
 import { ComponentCanDeactivate } from '../../../account.guard';
+// import * as constants from '../../../../../config/constants'
 
 @Component({
     selector: 'app-takedemotest',
@@ -61,6 +62,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
 
     lastQuestion:number;
     errMsg:Message[];
+    imageUrl:string
 
     constructor(
         public router: Router,
@@ -81,6 +83,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         this.hintDisplay = false;
         this.response = {};
         this.questionStatus = {};
+        this.imageUrl = 'https://s3.ap-south-1.amazonaws.com/olympiadbox/oa-images/Data';
     }
 
     ngOnInit() {

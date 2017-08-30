@@ -10,6 +10,7 @@
         <button (click)="startTest()" pButton class="ui-button-success" label="start"></button>
     </div> -->
 </p-dialog>
+<p-growl [(value)]="errMsg"></p-growl>
 <div class="ui-g">
     <div class="ui-g-12 fixed">
         <div class="ui-g head">
@@ -55,10 +56,8 @@
         <div class="ui-g-10 ui-sm-10 light center">
             <div class="ui-g">
                 <div class="ui-g-12 box"><span class="statement">Q{{clickListener+1}}. {{selectedQuestion['question']}}</span>
-                <div class="image">
-                    <!-- <div *ngIf="!selectedQuestion['image']['image_path']==null" class="image"> -->
-                        <!-- <img src="{{selectedQuestion['image']['image_path']}}"> -->
-                        <img src="../../../../../assets/layout/images/q1.jpg">
+                    <div *ngIf="selectedQuestion['image']['image_path']!=null" class="image">
+                        <img src="{{imageUrl}}{{selectedQuestion['image']['image_path']}}{{selectedQuestion['image']['file_name']}}">
                     </div>
                 </div>
                 <!-- <div class="ui-g-2">
@@ -76,41 +75,31 @@
                         <div class="ui-g-6 ui-sm-12">
                             <span id="a">A</span>
                             <p-radioButton [disabled]="validated()" name="ques" value="0" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['0']['answer']}}
-                            <div class="image">
-                            <!-- <div class="image" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null"> -->
-                                <!-- <img src="{{selectedQuestion['answers']['0']['image']['image_path']}}"> -->
-                                <img src="../../../../../assets/layout/images/q2.jpg">
-
+                            <div class="image" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
+                                <img src="{{imageUrl}}{{selectedQuestion['answers'][0]['image']['image_path']}}{{selectedQuestion['answers'][0]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="b">B</span>
                             <p-radioButton [disabled]="validated()" name="ques" value="1" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['1']['answer']}}
-                            <div class="image">
-                            <!-- <div class="image" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null"> -->
-                                <!-- <img src="{{selectedQuestion['answers']['1']['image']['image_path']}}"> -->
-                                <img src="../../../../../assets/layout/images/q3.jpg">
-
+                            <div class="image" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
+                                <img src="{{imageUrl}}{{selectedQuestion['answers'][1]['image']['image_path']}}{{selectedQuestion['answers'][1]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="c">C</span>
                             <p-radioButton [disabled]="validated()" name="ques" value="2" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['2']['answer']}}
-                            <div class="image">
-                            <!-- <div class="image" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null"> -->
-                                <!-- <img src="{{selectedQuestion['answers']['2']['image']['image_path']}}"> -->
-                        <img src="../../../../../assets/layout/images/q4.jpg">
+                            <div class="image" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null">
+                                <img src="{{imageUrl}}{{selectedQuestion['answers'][2]['image']['image_path']}}{{selectedQuestion['answers'][2]['image']['file_name']}}">
 
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="d">D</span>
                             <p-radioButton [disabled]="validated()" name="ques" value="3" [(ngModel)]="answer"></p-radioButton>{{selectedQuestion['answers']['3']['answer']}}
-                            <div class="image">
-                            <!-- <div class="image" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null"> -->
-                        <img src="../../../../../assets/layout/images/q5.jpg">
+                            <div class="image" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null">
+                                <img src="{{imageUrl}}{{selectedQuestion['answers'][3]['image']['image_path']}}{{selectedQuestion['answers'][3]['image']['file_name']}}">
 
-                                <!-- <img src="{{selectedQuestion['answers']['1']['image']['image_path']}}"> -->
                             </div>
                         </div>
                     </div>
@@ -125,20 +114,14 @@
                                     <br *ngIf="correct">
                                     <span class="correct">Correct Answer: {{correctAnswer['answer']}} <br><br></span>
                                 </div>
-                                <div class="valimg">
-                                <!-- <div class="hintimg" *ngIf="correctAnswer['image']['image_path']!=null"> -->
-                                    <!-- <img  src="{{correctAnswer['image']['image_path']}}"> -->
-                        <img src="../../../../../assets/layout/images/q1.jpg">
-
+                                <div class="hintimg" *ngIf="correctAnswer['image']['image_path']!=null">
+                                    <img  src="{{imageUrl}}{{correctAnswer['image']['image_path']}}{{correctAnswer['image']['file_name']}}">
                                 </div>
                             </div>
                             <div class="ui-g-6">
                                 <i class="fa fa-lightbulb-o fa-lg" style="color:yellow"></i> &nbsp; Hint: {{selectedQuestion['hint']['name']}}
-                                <div class="hintimg">
-                                <!-- <div class="valimg" *ngIf="selectedQuestion['hint']['image']['file_name']!=null">  -->
-                                    <!-- <img src="{{selectedQuestion['hint']['image']['image_path']}}"> -->
-                        <img src="../../../../../assets/layout/images/q3.jpg">
-
+                                <div class="valimg" *ngIf="selectedQuestion['hint']['image']['file_name']!=null"> 
+                                    <img src="{{imageUrl}}{{selectedQuestion['hint']['image']['image_path']}}{{selectedQuestion['hint']['image']['file_name']}}">
                                 </div>
                             </div>
                         </div>
