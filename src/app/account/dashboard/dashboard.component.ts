@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { SubjectInfo, Result, Misc } from '../../services/data.service';
 
-
+declare var MathJax:any;
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -145,6 +145,9 @@ export class DashboardComponent implements OnInit {
                 break;
             
         }
+    }
+    ngAfterViewInit(){
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     }
 
     redirectToResult(i) {

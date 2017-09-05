@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import {Message} from 'primeng/primeng';
@@ -9,6 +9,7 @@ import { SubjectInfo, Misc, chapterwiseTest, PersonalInfo } from '../../../../se
 import { ComponentCanDeactivate } from '../../../account.guard';
 // import * as constants from '../../../../../config/constants'
 
+declare var MathJax:any;
 @Component({
     selector: 'app-takedemotest',
     templateUrl: './takedemotest.component.html',
@@ -33,7 +34,6 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     clickListener: string;
 
     questionNumber: string;
-
     questionWindow: boolean;
 
     questionsPool: any;
@@ -135,20 +135,6 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
                 this.correctAnswer = this.selectedQuestion['answers'][i];
                 break;
             }
-        }
-    }
-
-    validateds() {
-        this.response[this.questionNumber] = this.answer[0];
-        this.hintDisplay = true;
-        this.counter += Math.ceil(100 / 11);
-        if (this.answer[0] == this.selectedQuestion["CorrectAnswer"]) {
-            this.correct = true;
-            this.questionStatus[this.clickListener] = "Correct";
-        }
-        else {
-            this.correct = false;
-            this.questionStatus[this.clickListener] = "Wrong";
         }
     }
 

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { MdButtonModule } from '@angular/material';
 
-
+// import { MathJax } from 'mathjax';
 import { AccordionModule } from 'primeng/primeng';
 import { AutoCompleteModule } from 'primeng/primeng';
 import { BreadcrumbModule } from 'primeng/primeng';
@@ -145,6 +145,7 @@ import { DemotestReasoningComponent } from './account/reasoning/demotest-reasoni
 import { MocktestReasoningComponent } from './account/reasoning/mocktest-reasoning/mocktest-reasoning.component';
 import { ResultReasoningComponent } from './account/reasoning/result-reasoning/result-reasoning.component';
 
+import {MathJaxDirective} from './directives/mathjax.directive';
 @NgModule({
     imports: [
         BrowserModule,
@@ -267,6 +268,7 @@ import { ResultReasoningComponent } from './account/reasoning/result-reasoning/r
         DemotestReasoningComponent,
         MocktestReasoningComponent,
         ResultReasoningComponent,
+        MathJaxDirective
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
