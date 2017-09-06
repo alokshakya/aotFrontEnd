@@ -73,9 +73,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     couponCode: string;
     achievement;
     constructor(
-        //  private httpService: UserinfoService,
-        // private classService: SubjectService,
-        // private update: UpdateService,
         public confirmservice: ConfirmationService,
         public personalInfo: PersonalInfo,
         public misc: Misc,
@@ -186,7 +183,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     saveBasicInfo() {
-        // this.spinner = true;
         let wrapper = {
             'firstname': this.dummyBasicInfo['firstname'],
             'lastname': this.dummyBasicInfo['lastname'],
@@ -207,7 +203,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.editBasic = false;
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'success', summary: 'Success', detail: 'Profile Updated' })
-                    this.spinner = false;
                 }
                 else{
                     this.growlmsg = [];
@@ -215,7 +210,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                 }
             }, 
             err=>{
-                this.spinner = false;
                 this.growlmsg = [];
                 this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating Profile' })
             })
@@ -257,7 +251,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     saveSchoolInfo() {
         let wrapper = { 'coupon_code': this.couponCode };
-        // this.spinner = true;
         this.masterhtttp.getSchool(wrapper)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
@@ -270,10 +263,8 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.growlmsg.push({ severity: 'error', summary: 'Invalid Coupon Code', detail: 'Try Again With A Different Coupon Code' })
                 }
                 this.updateSchool();
-                this.spinner = false;  
             },
             err=>{
-                this.spinner = false;
                 this.growlmsg = [];
                 this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating School Info' })
             })
@@ -281,7 +272,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     changePassword() {
         let requestbody = { 'old_password': this.oldPassword, 'new_password': this.confirmNewPassword, 'user_info_id': this.personalInfo.userInfo['user_info_id'] }
-        // this.spinner = true;
         if (this.confirmNewPassword != this.newPassword) {
             this.growlmsg.push({ severity: 'error', summary: "New Password doesn't match", detail: 'Please try again' });
         }
@@ -296,10 +286,8 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                         this.growlmsg = [];
                         this.growlmsg.push({ severity: 'error', summary: "Incorrect Old Password", detail: 'Please try again' });
                     }
-                    this.spinner = false;
                 },
                 err=>{
-                    this.spinner = false;
                     this.growlmsg = [];
                     this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating Password' })
                 })
@@ -317,7 +305,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     addTestimonial() {
         let requestBody = { 'text': this.testimonial, 'student_id': this.personalInfo.studentInfo['student_id'] }
-        // this.spinner = true;
         this.masterhtttp.addTestimonial(requestBody)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
@@ -330,10 +317,8 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.growlmsg = [];
                     this.growlmsg.push({severity: 'error', summary: 'Limt Reached', detail: 'You Cannot Add More Than 3 Testimonials'})
                 }
-                this.spinner = false;
             },
             err=>{
-                this.spinner = false;
                 this.growlmsg = [];
                 this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Adding Testimonial' })
             })
@@ -364,13 +349,35 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         this.dec = [];
     }
 
-    //otp verification
-    dummyVerify() {
-        if (this.actualOTP == this.dummyOtp) {
-            this.otpDialog = false;
-        }
-        this.dummyIncorrectOtp = true;
+    updateMobile(){
+        let wrapper = {mobile:this.dummyBasicInfo['mobile']};
+        this.masterhtttp.updateProfile(wrapper).subscribe((data)=>{
+            if(data['status']==200){
+                this.growlmsg=[];
+                this.growlmsg.push({severity:'success',summary:'Success',detail:'Mobile Updated Successfully'});
+                this.otpDialog = false;
+            }
+            else this.errFunc();
+        }, err=>{this.errFunc();})
 
+    }
+
+
+    dummyVerify() {
+    //otp verification
+        this.spinner = true;
+        let wrapper = {verify_mobile:true,verify_email:false,otp:this.dummyOtp, email:this.personalInfo.userInfo['email']};
+        this.masterhtttp.verifyOtp(wrapper).subscribe((data)=>{
+            if(data['status']==200){
+                this.updateMobile();
+                this.spinner = false;
+            }
+            else if(data['status']==721){
+                this.growlmsg = [];
+                this.growlmsg.push({severity:'error',summary:'Incorrect OTP',detail:'Please Try Again'})
+                this.spinner = false;
+            }
+        },err=> {this.errFunc();this.spinner=false})
     }
 
     edit(a) {
@@ -438,6 +445,38 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             })            
         }
         else return true;
+    }
+
+    checkMobile(){
+        let pattern = new RegExp("^[7-9]{1}[0-9]{9}$");
+        let mobile = this.dummyBasicInfo['mobile'];
+        if(!pattern.test(mobile)){
+            return true;
+        }
+        return false;
+    }
+
+    errFunc(){
+        this.growlmsg = [];
+        this.growlmsg.push({severity:'error',summary:'Error', detail:'Please Try Again'})
+    }
+
+    verify(){
+        //send otp to new mobile number 
+        this.spinner = true;
+        let wrapper = {verify_mobile:true,verify_email:false,email:this.personalInfo.userInfo['email']}
+        wrapper['mobile'] = this.dummyBasicInfo['mobile'].toString();
+        this.masterhtttp.sendOtp(wrapper).subscribe((data)=>{
+            if(data['status']==200){
+                this.otpDialog = true;
+                this.spinner = false;
+            }
+            else {this.spinner = false;this.errFunc()};
+        }, err=>{
+            this.errFunc();
+            this.spinner = false;
+
+        })
     }
     
     canDeactivate():Observable<boolean> | boolean{

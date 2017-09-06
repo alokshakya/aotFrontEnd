@@ -14,19 +14,14 @@
         </div>
     </div>
 </p-dialog>
-<p-dialog header="Mobile Number Verification" [(visible)]="otpDialog" modal="true" responsive="true" [width]="400" [height]="300">
+<p-dialog header="Mobile Number Verification" [(visible)]="otpDialog" modal="true" responsive="true">
     <div class="ui-g text-center">
         <div class="ui-g-12" *ngIf="otpDialog">
             <h5>Enter OTP sent on {{dummyBasicInfo?.mobile}} </h5>
-            <input class="short" pInputText placeholder="Enter OTP" [(ngModel)]="dummyOtp" />
-            <button class="ui-button-info withinput" pButton label="Resend"></button>
-            <br>
-            <br>
-            <button pButton (click)="dummyVerify()" class="ui-button-success" label="Verify"></button>
-        </div>
-        <div class="ui-g-12" *ngIf="dummyIncorrectOtp">
-            <h5 style="color:#DC4E42"><i class="fa fa-times"></i> Incorrect OTP. Please try again</h5>
-            <br>
+            <p-inputMask slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP"[(ngModel)]="dummyOtp"></p-inputMask>
+            <button class="ui-button-info withinput" pButton (click)="verify()" [disabled]="spinner&&otpDialog" label="Resend"></button>
+            <button pButton (click)="dummyVerify()" [disabled]="spinner&&otpDialog||dummyOtp==null" class="ui-button-success" label="Verify"></button><br>
+            <span class="leftPad"><i *ngIf="spinner&&otpDialog" class="fa fa-circle-o-notch fa-spin fa-forward fa-lg"></i></span>
         </div>
     </div>
 </p-dialog>
@@ -35,7 +30,7 @@
     <div class="ui-g-12">
         <p-tabView>
             <p-tabPanel header="Basic Info" [disabled]="editSchool||editPassword||editTestimonial" leftIcon="fa-user">
-                <div class="container" *ngIf="!spinner">
+                <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-user"></i> Name</h4>
@@ -62,8 +57,9 @@
                         <div class="col-md-6 col-xs-12 userinfo">
                             <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4>
                             <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span>
-                                <input class="withbtn" [(ngModel)]="dummyBasicInfo.mobile" pInputText maxlength="10" *ngIf="editBasic" type="number">
-                                <button *ngIf="editBasic" [disabled]="true" (click)="verifyMobile()" pButton class="ui-button-warning" label="Verify"></button>
+                                <input class="withbtn" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="dummyBasicInfo.mobile" pInputText   *ngIf="editBasic" type="number">
+                                <button *ngIf="editBasic" pButton [disabled]="checkMobile()||(spinner&&!otpDialog)" (click)="verify()" class="ui-button-warning" label="Verify"></button>
+                                <i *ngIf="spinner&&!otpDialog" class="fa fa-circle-o-notch fa-spin fa-forward fa-lg"></i>
                             </p>
                         </div>
                     </div>

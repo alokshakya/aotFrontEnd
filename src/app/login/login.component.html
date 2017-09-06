@@ -37,12 +37,13 @@
                 <br>
                 <input type="password" name="password" #password="ngModel" [(ngModel)]="userLoginCreds.password" pInputText placeholder="Password" pattern="^[^\s]{1,}" required/>
                 <br>
-                <button class="ui-button-info" pButton (click)="signIn()" [disabled]="password.errors||email.errors||userLoginCreds.password==''" type="submit" label="Login"></button>
+                <button *ngIf="!spinner" class="ui-button-info" pButton (click)="signIn()" [disabled]="password.errors||email.errors||userLoginCreds.password==''" type="submit" label="Login"></button>
+                <button *ngIf="spinner" class="ui-button-info" pButton (click)="signIn()" [disabled]="false" icon="fa fa-lg fa-circle-o-notch fa-spin fa-forward" type="submit"></button>
                 <br>
                 <br>
                 <span id="lostpassword"><a (click)="forgotPassword()">Forgot Password?</a></span>
             </form>
-            <div class="ui-g" id="optional">
+            <div *ngIf="false" class="ui-g" id="optional">
                 <div class="ui-g-5">
                     <hr>
                 </div>
