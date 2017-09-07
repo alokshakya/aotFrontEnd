@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ElementRef, Renderer, ViewChild } from '@angu
 import { Router } from '@angular/router';
 import { MasterHttpService } from './services/masterhttp.service';
 import { JwtHelper } from 'angular2-jwt';
-import { AuthHttp, AuthConfig } from 'angular2-jwt';
+// import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 
 enum MenuOrientation {
@@ -37,7 +37,7 @@ export class AppComponent implements AfterViewInit {
             }
             else this.router.navigate(['login']);
         }
-            else this.router.navigate(['login']);
+        else this.router.navigate(['login']);
 
     }
 
