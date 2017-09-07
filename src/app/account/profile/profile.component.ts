@@ -371,6 +371,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             if(data['status']==200){
                 this.updateMobile();
                 this.spinner = false;
+                this.personalInfo.userInfo['mobile'] = this.dummyBasicInfo['mobile'];
             }
             else if(data['status']==721){
                 this.growlmsg = [];

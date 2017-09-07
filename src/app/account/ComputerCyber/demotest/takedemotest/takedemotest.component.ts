@@ -83,7 +83,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         this.hintDisplay = false;
         this.response = {};
         this.questionStatus = {};
-        this.imageUrl = 'https://s3.ap-south-1.amazonaws.com/olympiadbox/oa-images/Data';
+        this.imageUrl = 'https://s3.ap-south-1.amazonaws.com/olympiadbox';
     }
 
     ngOnInit() {
