@@ -149,10 +149,9 @@ export class ChapterwisetestGkComponent implements OnInit {
             "test_id": testId
         }
         this.chapterwiseTest.activateTestRoute();
-        this.chapterwiseTest.setSubject('gk');
+        this.chapterwiseTest.setSubject('General Knowledge');
         this.masterhttp.beginTest(wrapper)
         .subscribe((data) => {
-                console.log(data);
                 if (data['status'] == 200){
                     this.chapterwiseTest.setQuesAnswerSet(data['message']);
                     this.router.navigate(['test']);

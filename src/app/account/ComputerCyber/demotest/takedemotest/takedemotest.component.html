@@ -74,28 +74,33 @@
                     <div class="ui-g">
                         <div class="ui-g-6 ui-sm-12">
                             <span id="a">A</span>
-                            <p-radioButton [MathJax]="selectedQuestion['answers'][0]['answer']" [disabled]="validated()" name="ques" value="0" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="validated()" name="ques" value="0" [(ngModel)]="answer"></p-radioButton><span [MathJax]="selectedQuestion['answers'][0]['answer']"></span>
                             <div class="image" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][0]['image']['image_path']}}{{selectedQuestion['answers'][0]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="b">B</span>
-                            <p-radioButton [MathJax]="selectedQuestion['answers'][1]['answer']" [disabled]="validated()" name="ques" value="1" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="validated()" name="ques" value="1" [(ngModel)]="answer"></p-radioButton>
+                            <span [MathJax]="selectedQuestion['answers'][1]['answer']"></span>
                             <div class="image" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][1]['image']['image_path']}}{{selectedQuestion['answers'][1]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="c">C</span>
-                            <p-radioButton [MathJax]="selectedQuestion['answers'][2]['answer']" [disabled]="validated()" name="ques" value="2" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="validated()" name="ques" value="2" [(ngModel)]="answer"></p-radioButton>
+                            <span [MathJax]="selectedQuestion['answers'][2]['answer']"></span>
+
                             <div class="image" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][2]['image']['image_path']}}{{selectedQuestion['answers'][2]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="d">D</span>
-                            <p-radioButton [MathJax]="selectedQuestion['answers'][3]['answer']" [disabled]="validated()" name="ques" value="3" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="validated()" name="ques" value="3" [(ngModel)]="answer"></p-radioButton>
+                            <span [MathJax]="selectedQuestion['answers'][3]['answer']"></span>
+
                             <div class="image" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][3]['image']['image_path']}}{{selectedQuestion['answers'][3]['image']['file_name']}}">
                             </div>
