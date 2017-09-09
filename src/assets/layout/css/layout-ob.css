@@ -946,7 +946,8 @@ body {
     .layout-wrapper .layout-main .route-bar .fa {
       margin-right: 2px; }
   .layout-wrapper .layout-main .layout-main-content {
-    padding: 15px; }
+    padding: 15px; 
+    padding-right: 0px;}
 .layout-wrapper .layout-mask {
   display: none; }
 .layout-wrapper .layout-menu {
@@ -1244,7 +1245,9 @@ body {
   .layout-wrapper.menu-layout-static .layout-menu-container {
     margin-left: 0; }
   .layout-wrapper.menu-layout-static .layout-main {
-    margin-left: 250px; }
+    margin-left: 250px;
+    padding-bottom: 0px;
+    overflow-y: hidden; }
   .layout-wrapper.menu-layout-static.layout-menu-static-inactive .topbar .topbar-right #menu-button i {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);

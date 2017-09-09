@@ -1,14 +1,12 @@
 <div class="ui-g">
-    <div class="overlay">
-    </div>
-    <div class="ui-g-8 ui-sm-12">
+    <div class="ui-g-8 ui-sm-12 ui-md-8">
         <div class="ui-g">
             <div class="ui-g-12">
                 <!--SUBJECTS PANEL-->
                 <p-panel header="Subject Summary">
                     <div class="ui-g center">
                         <!--*ngIf="subjectLoader">-->
-                        <div class="ui-g-4 ui-sm-12 sub" *ngFor="let sub of subjectInfo.subjectList" id="{{sub | lowercase | cssId }}">
+                        <div class="ui-g-4 sub" *ngFor="let sub of subjectInfo.subjectList" id="{{sub | lowercase | cssId }}">
                             <i class="icon-science icon-4x" *ngIf="sub=='Science'"></i>
                             <i class="icon-reasoning icon-4x" *ngIf="sub=='Reasoning'"></i>
                             <i class="icon-gk icon-4x" *ngIf="sub=='General-Knowledge'"></i>
@@ -31,7 +29,7 @@
                 <!--TEST SUMMARY PANEL-->
                 <p-panel header="Test Summary">
                     <p-tabView id="tab head">
-                        <p-tabPanel lazy="true" *ngFor="let item of result.testSummary1|keys" header="{{item.key}}">
+                        <p-tabPanel *ngFor="let item of result?.testSummary1|keys" header="{{item.key}}">
                             <div class="ui-g" *ngIf="subjectInfo.subscribedSubjects[item.key]">
                                 <div class="ui-g-12">
                                     <div class="ui-g">
@@ -77,7 +75,7 @@
                 <!--RESULT SUMMARY PANEL-->
                 <p-panel header="Result Summary">
                     <p-tabView id="tab head">
-                        <p-tabPanel lazy="true" style="border:none" *ngFor="let item of result.resultSummary1|keys" header="{{item.key}}">
+                        <p-tabPanel style="border:none" *ngFor="let item of result?.resultSummary1|keys" header="{{item.key}}">
                             <div class="ui-g" *ngIf="subjectInfo.subscribedSubjects[item.key]">
                                 <div class="ui-g-12">
                                     <div class="ui-g">
@@ -122,17 +120,6 @@
         </div>
     </div>
     <div class="ui-g-4 ui-sm-12">
-        <!--<div class="ui-g-12">
-            <p-panel header="Notice Board">
-            <div id="notice">
-                <div class="noticebox" *ngFor = "let item of noticeBoard; let i=index">
-                    <h3>Notice {{i+1}}</h3>
-                    <p>{{item.date_published}}</p>
-                    <p>{{item.news}}<p>
-                </div>
-            </div>
-            </p-panel>
-        </div>-->
         <div class="ui-g-12">
             <p-panel header="Notice Board">
                 <div id="notice">
@@ -147,7 +134,6 @@
         <div class="ui-g-12">
             <p-panel header="Testimonials">
                 <div id="testimonials">
-                    <!-- *ngIf="testimonialLoader">-->
                     <div class="testbox" *ngFor="let i of misc.testimonial">
                         <div class="ui-g">
                             <div class="ui-g-7"><img class="testimonialimg"></div>
@@ -156,9 +142,6 @@
                         </div>
                     </div>
                 </div>
-                <!--<div *ngIf="!testimonialLoader" class="testimonialloader">
-                    <app-loader></app-loader>
-                </div>-->
             </p-panel>
         </div>
     </div>

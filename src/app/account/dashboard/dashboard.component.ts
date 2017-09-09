@@ -54,8 +54,6 @@ export class DashboardComponent implements OnInit {
     }
 
     redirect(sub,destination) {
-        console.log(sub);
-        console.log(destination);
         if(destination=='settings'){
             this.router.navigate(['account/accountsettings'])
         }

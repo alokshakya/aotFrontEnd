@@ -193,10 +193,8 @@ export class LoginComponent implements OnInit {
 
 
     sendOtp() {
-        console.log(this.wrapper);
         this.masterhttp.sendOtp(this.wrapper)
             .subscribe((data: Response) => {
-                console.log(data['message']);
                 if(data['status']==200){
                     this.generateResponse(data['message']);
                 }

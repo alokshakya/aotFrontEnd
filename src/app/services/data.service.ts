@@ -67,7 +67,8 @@ export class SubjectInfo {
     gkChapters: Array<any>;
     mathChapters: Array<any>;
 
-    subscribedSubjects = { "Computer-Cyber": true, "Science": true, "Mathematics": true, "English": true, "General-Knowledge": true, "Reasoning": true }
+    subscribedSubjects = { "Computer-Cyber": true, "Science": true, "Mathematics": true,
+     "English": true, "General-Knowledge": true, "Reasoning": true }
     attemptedDemo = { "Computer-Cyber": false, "Science": false, "Mathematics": false, "English": false, "General-Knowledge": false, "Reasoning": false }
 
     constructor() { }
@@ -333,7 +334,7 @@ export class Result {
                 "notcompleted": 100,
             }
         },
-        "General Knowledge": {
+        "General-Knowledge": {
             "Chapterwise Test": {
                 "completed": 48,
                 "generated": 20,
@@ -460,7 +461,7 @@ export class Result {
                 "wrong": 0
             }
         },
-        "General Knowledge": {
+        "General-Knowledge": {
             "Chapterwise Test": {
                 "right": 48,
                 "review": 20,

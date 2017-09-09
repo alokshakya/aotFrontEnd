@@ -46,11 +46,10 @@ export class ChapterwisetestComponent implements OnInit {
     ngOnInit() {
         this.misc.setCurrentRoute(["Computer-Cyber","Chapterwise Test"]);
         this.misc.setLocalRoute('account/computers/chapterwisetest');
-
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{
-                data: [30, 10, 40],
+                data: [0, 0, 0],
                 backgroundColor: ["#D9534F", "#5CB85C", "#F0AD4E"],
                 hoverBackgroundColor: ["#D9534F", "#5CB85C", "#F0AD4E"]
             }]
@@ -61,8 +60,29 @@ export class ChapterwisetestComponent implements OnInit {
             'class_id': this.personalInfo.studentInfo['class_id'],
             'topic_id': null
         }
-
         this.generatedPanel();
+    }
+
+    makeGraph(){
+        let chapters = 0;
+        let remaining = 0;
+        let generated = 0;
+        let array = this.chapterwiseTest.computers['chapters'];
+        for(let i in array){
+            chapters++;
+            if(array[i].hasOwnProperty('tests')){
+                generated = generated + 5;
+            }
+        }
+        remaining = chapters*5-generated;
+        this.chapterwiseTestData = {
+            labels: ['Remaining', 'Completed', 'Generated'],
+            datasets: [{
+                data: [remaining, 0, generated],
+                backgroundColor: ["#D9534F", "#5CB85C", "#F0AD4E"],
+                hoverBackgroundColor: ["#D9534F", "#5CB85C", "#F0AD4E"]
+            }]
+        };
     }
 
     generatedPanel() {
@@ -74,6 +94,7 @@ export class ChapterwisetestComponent implements OnInit {
                 this.generatedChapterIds.push(this.chapterwiseTest.computers['chapters'][i]['id'])
             }
         }
+        this.makeGraph();
     }
 
     tabOpen(e) {
@@ -117,9 +138,6 @@ export class ChapterwisetestComponent implements OnInit {
                 this.spinner = false;
             }
         })
-        // setTimeout(() => {
-        //     this.generatedPanel();
-        // }, 2000);
     }
 
     generate() {
@@ -127,6 +145,8 @@ export class ChapterwisetestComponent implements OnInit {
         this.masterhttp.generateTest(this.wrapper)
             .subscribe((data) => {
                 if (data['status'] == 200) {
+                    this.chapterwiseTestData['datasets'][0]['data'][2] = this.chapterwiseTestData['datasets'][0]['data'][2]+5;
+                    this.chapterwiseTestData['datasets'][0]['data'][0] = this.chapterwiseTestData['datasets'][0]['data'][0]-5;
                     this.updatePanel();
                     this.generatedFlag = false;
                 }else{

@@ -49,7 +49,7 @@ export class ChapterwisetestEnglishComponent implements OnInit {
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{
-                data: [30, 10, 40],
+                data: [0, 0, 0],
                 backgroundColor: ["#D9534F", "#5CB85C", "#F0AD4E"],
                 hoverBackgroundColor: ["#D9534F", "#5CB85C", "#F0AD4E"]
             }]
@@ -64,6 +64,28 @@ export class ChapterwisetestEnglishComponent implements OnInit {
         this.generatedPanel();
     }
 
+    makeGraph(){
+        let chapters = 0;
+        let remaining = 0;
+        let generated = 0;
+        let array = this.chapterwiseTest.english['chapters'];
+        for(let i in array){
+            chapters++;
+            if(array[i].hasOwnProperty('tests')){
+                generated = generated + 5;
+            }
+        }
+        remaining = chapters*5-generated;
+        this.chapterwiseTestData = {
+            labels: ['Remaining', 'Completed', 'Generated'],
+            datasets: [{
+                data: [remaining, 0, generated],
+                backgroundColor: ["#D9534F", "#5CB85C", "#F0AD4E"],
+                hoverBackgroundColor: ["#D9534F", "#5CB85C", "#F0AD4E"]
+            }]
+        };
+    }
+
     generatedPanel() {
         this.generatedChapters = [];
         this.generatedChapterIds = [];
@@ -73,6 +95,7 @@ export class ChapterwisetestEnglishComponent implements OnInit {
                 this.generatedChapterIds.push(this.chapterwiseTest.english['chapters'][i]['id'])
             }
         }
+        this.makeGraph();
     }
 
     tabOpen(e) {
@@ -115,9 +138,6 @@ export class ChapterwisetestEnglishComponent implements OnInit {
                 this.spinner = false;
             }
         })
-        // setTimeout(() => {
-        //     this.generatedPanel();
-        // }, 2000);
     }
 
     generate() {
@@ -126,6 +146,8 @@ export class ChapterwisetestEnglishComponent implements OnInit {
         this.masterhttp.generateTest(this.wrapper)
             .subscribe((data) => {
                 if (data['status'] == 200) {
+                    this.chapterwiseTestData['datasets'][0]['data'][2] = this.chapterwiseTestData['datasets'][0]['data'][2]+5;
+                    this.chapterwiseTestData['datasets'][0]['data'][0] = this.chapterwiseTestData['datasets'][0]['data'][0]-5;
                     this.updatePanel();
                     this.generatedFlag = false;
                 }else{

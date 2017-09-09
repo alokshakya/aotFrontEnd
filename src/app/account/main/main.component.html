@@ -13,22 +13,16 @@
         'layout-menu-static-inactive': staticMenuDesktopInactive,
         'layout-menu-static-active': staticMenuMobileActive}">
     <app-topbar></app-topbar>
-    <div>
-        <app-overlay></app-overlay>
-    </div>
     <div class="layout-menu-container" (click)="onMenuClick($event)">
         <div #layoutMenuScroller class="nano">
             <div class="nano-content menu-scroll-content">
-                <!--<div *ngIf="!loader" class="menuloader"><app-loader></app-loader></div>-->
                 <div class="ui-g">
                     <div class="ui-g-12 ui-g-nopad">
-                        <!-- *ngIf="loader"-->
                         <img class="img-responsive" src="../../assets/layout/images/Profile_picture.png">
                     </div>
                 </div>
                 <div style="padding-left:20px;color:white">
                     <div class="wrapper">
-                        <!--*ngIf="loader"-->
                         <h5>{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</h5>
                         <h5>Class {{personalInfo.classInfo.abbreviation}}</h5>
                         <h5 pTooltip="{{shownEmail}}" tooltipPosition="bottom">{{personalInfo.userInfo.email}}</h5>
@@ -43,7 +37,9 @@
     </div>
     <div class="layout-main">
         <div class="layout-main-content">
-            <router-outlet></router-outlet>
+            <div class="main-content-view">
+                <router-outlet></router-outlet>
+            </div>
             <app-footer></app-footer>
         </div>
     </div>

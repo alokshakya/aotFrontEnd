@@ -110,7 +110,6 @@ import { AccountGuard, TestAccountGuard, TestDeactivate } from './account/accoun
 //pipes
 import { KeysPipe } from './pipes/keys.pipe';
 import { CssIdPipe } from './pipes/css-id.pipe';
-import { OverlayComponent } from './account/loader/overlay/overlay.component';
 import { LoadoutComponent } from './account/loadout/loadout.component';
 
 import { DemotestEnglishComponent } from './account/english/demotest-english/demotest-english.component';
@@ -241,7 +240,6 @@ import {MathJaxDirective} from './directives/mathjax.directive';
         KeysPipe,
         CssIdPipe,
         LoaderComponent,
-        OverlayComponent,
         LoadoutComponent,
         DemotestEnglishComponent,
         ChapterwisetestEnglishComponent,

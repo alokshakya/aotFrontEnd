@@ -8,11 +8,7 @@ import { AccountMainComponent } from './main.component';
 @Component({
     selector: 'app-menu',
     styleUrls: ['./main.component.scss'],
-    template: `<div>
-        <app-overlay></app-overlay>
-    </div>
-        <ul app-submenu [item]="model" root="true" class="layout-menu clearfix" [reset]="reset" visible="true"></ul>
-    `
+    template: `<ul app-submenu [item]="model" root="true" class="layout-menu clearfix" [reset]="reset" visible="true"></ul>`
 })
 export class AppMenuComponent implements OnInit {
 

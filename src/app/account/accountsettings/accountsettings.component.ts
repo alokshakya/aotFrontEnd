@@ -97,8 +97,6 @@ export class AccountsettingsComponent implements OnInit {
     }
 
     pay() {
-        for (let i in this.selectedPackage)
-            console.log(this.selectedPackage[i]["Subject"])
     }
 }
 
