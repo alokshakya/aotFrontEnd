@@ -94,7 +94,6 @@ import { ResultComponent } from './account/ComputerCyber/result/result.component
 import { ProfileComponent } from './account/profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemotest/takedemotest.component';
-import { LoaderComponent } from './account/loader/loader.component';
 
 //services
 import { ConfirmationService } from 'primeng/primeng';
@@ -239,7 +238,6 @@ import {MathJaxDirective} from './directives/mathjax.directive';
         TakedemotestComponent,
         KeysPipe,
         CssIdPipe,
-        LoaderComponent,
         LoadoutComponent,
         DemotestEnglishComponent,
         ChapterwisetestEnglishComponent,
