@@ -230,12 +230,6 @@ export class Misc {
         sessionStorage.setItem('route',route);
     }
 
-    userTestimonial = [
-        "Lorem 11111111 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
-        "Lorem 22222222 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
-        "Lorem 33333333 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
-    ]
-
     logIn(){
         this.login = true;
     }
@@ -267,16 +261,7 @@ export class Misc {
 
 @Injectable()
 export class Result {
-    resultSummary: any;
-    testSummary: any;
-
-    setTestSummary() {
-        this.testSummary = this.testSummary1;
-    }
-    setResultSummary() {
-        this.resultSummary = this.testSummary1;
-    }
-    testSummary1 = {
+    testSummary = {
         "Computer-Cyber": {
             "Chapterwise Test": {
                 "completed": 34,
@@ -394,7 +379,7 @@ export class Result {
         }
     }
 
-    resultSummary1 = {
+    resultSummary = {
         "Computer-Cyber": {
             "Chapterwise Test": {
                 "right": 34,
@@ -529,38 +514,4 @@ export class Result {
         }
 
     }
-
-    chapterwiseTestDetails = {
-        "chapter 2 CC":
-        {
-            "Test 1": "10/15",
-            "Test 2": "9/15",
-            "Test 3": "Start",
-            "Test 4": "13/15",
-            "Test 5": "Resume"
-        },
-        "chapter 6 CC":
-        {
-            "Test 1": "13/15",
-            "Test 2": "11/15",
-            "Test 3": "Start",
-            "Test 4": "Start",
-            "Test 5": "10/15"
-        },
-        "chapter 8 CC":
-        {
-            "Test 1": "Start",
-            "Test 2": "13/15",
-            "Test 3": "11/15",
-            "Test 4": "Start",
-            "Test 5": "Resume"
-        },
-    }
-
-    generatedTest = ["chapter 2 CC", "chapter 8 CC", "chapter 6 CC",];
-    generatedTestData = [
-        ["Chapter 2 CC", "04/15", "Start", "11/15", "Resume", "14/15"],
-        ["Chapter 6 CC", "04/15", "Start", "11/15", "Resume", "14/15"],
-        ["Chapter 8 CC", "04/15", "Start", "11/15", "Resume", "14/15"],
-    ]
 }

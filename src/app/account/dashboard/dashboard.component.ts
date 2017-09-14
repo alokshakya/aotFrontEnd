@@ -36,12 +36,7 @@ export class DashboardComponent implements OnInit {
         public subjectInfo: SubjectInfo,
         public result: Result,
         public misc: Misc
-    ) {
-
-        this.testSummary = this.result.testSummary;
-        this.resultSummary = this.result.testSummary;
-
-    }
+    ) {}
 
     ngOnInit() {
         this.misc.setLocalRoute('account/dashboard');

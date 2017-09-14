@@ -40,7 +40,7 @@ export class MasterHttpService {
 
     dataRetreived() {
         this.updated++;
-        if (this.updated == 7) {
+        if (this.updated == 6) {
             let previousRoute = sessionStorage.getItem('route')
             if(previousRoute!=null){
                 this.router.navigate([previousRoute]);
@@ -61,7 +61,6 @@ export class MasterHttpService {
     sendOtp(requestBody) {
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/otp/generate', requestBody, { headers: this.queryHeaders })
             .map((resp: Response) => resp.json())
-        // response status conditions
     }
 
     verifyOtp(requestBody) {
@@ -195,12 +194,6 @@ export class MasterHttpService {
             err=>{
                 this.httpError();
             })
-    }
-
-    getResult() {
-        this.result.setResultSummary();
-        this.result.setTestSummary();
-        this.dataRetreived();
     }
 
     getUserTestimonials(studentId){

@@ -89,13 +89,14 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     ngOnInit() {
+        this.counter = 0;
         this.totalQues = this.chapterwiseTest.qaSet.length;
         this.setResponse();
+        this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
         this.startTest();
         this.displayQuestion(this.lastQuestion);
         this.wrapper = { 'student_test_id': this.chapterwiseTest.attemptDetails['students_test_id'], }
         this.masterhttp.getTestDetails();
-        this.counter = 0;
     }
 
     displayQuestion(index) {
@@ -135,7 +136,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         }
     }
 
-    ngAfterViewInit(){
+    ngOnChanges(){
         this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
     }
 

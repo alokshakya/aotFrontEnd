@@ -35,7 +35,6 @@ export class LoadoutComponent implements OnInit {
                 this.http.getUserTestimonials(this.personalInfo.studentInfo['student_id']);
             }
         })
-        this.http.getResult();
         this.misc.logIn();
     }
 

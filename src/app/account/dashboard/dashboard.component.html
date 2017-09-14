@@ -29,7 +29,7 @@
                 <!--TEST SUMMARY PANEL-->
                 <p-panel header="Test Summary">
                     <p-tabView id="tab head">
-                        <p-tabPanel *ngFor="let item of result?.testSummary1|keys" header="{{item.key}}">
+                        <p-tabPanel *ngFor="let item of result.testSummary|keys" header="{{item.key}}">
                             <div class="ui-g" *ngIf="subjectInfo.subscribedSubjects[item.key]">
                                 <div class="ui-g-12">
                                     <div class="ui-g">
@@ -75,7 +75,7 @@
                 <!--RESULT SUMMARY PANEL-->
                 <p-panel header="Result Summary">
                     <p-tabView id="tab head">
-                        <p-tabPanel style="border:none" *ngFor="let item of result?.resultSummary1|keys" header="{{item.key}}">
+                        <p-tabPanel style="border:none" *ngFor="let item of result.resultSummary|keys" header="{{item.key}}">
                             <div class="ui-g" *ngIf="subjectInfo.subscribedSubjects[item.key]">
                                 <div class="ui-g-12">
                                     <div class="ui-g">
