@@ -14,7 +14,7 @@
 <div class="ui-g">
     <div class="ui-g-12 fixed">
         <div class="ui-g head">
-            <div class="ui-g-1 ui-sm-2 img"><img class="img-responsive" src="../../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65"></div>
+            <div class="ui-g-1 ui-sm-2 img"><img src="../../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65"></div>
             <div class="ui-g-2 ui-sm-9 test padtop lesswidth"><span id="test">{{chapterwiseTest.attemptDetails['name']}}</span></div>
             <div class="ui-g-1 ui-sm-4 class zeropad text-center"><span id="class">Class {{personalInfo.classInfo['abbreviation']}}</span></div>
             <div class="ui-g-1 ui-sm-4 subject zeropad"><span id="sub">{{chapterwiseTest.subject}}</span></div>
@@ -29,11 +29,16 @@
             <!--                 <div class="ui-g-1" class="buttonTop v" (click)="validate()"> V </div>
                 <div class="ui-g-1" class="buttonTop n" (click)="nextQuestion()"></div> -->
             <div class="ui-g-1 ui-sm-4 m text-center big">
-                <button md-mini-fab id="m" [disabled]="validated()||this.selectedQuestion['state']!='unattempted'" (click)="markForReview()">M</button>
+                <button md-mini-fab *ngIf="!spinner2" id="m" [disabled]="validated()||this.selectedQuestion['state']!='unattempted'" (click)="markForReview()">M</button>
+
+                <button md-mini-fab *ngIf="spinner2" id="m"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
+
                 <br>Mark For Review
             </div>
             <div class="ui-g-1 ui-sm-4 v text-center small">
-                <button md-mini-fab id="v" [disabled]="answer==null||validated()||this.selectedQuestion['state']!='unattempted'" (click)="validate()">V</button>
+                <button *ngIf="!spinner" md-mini-fab id="v" [disabled]="answer==null||validated()||this.selectedQuestion['state']!='unattempted'" (click)="validate()">V</button>
+                
+                <button md-mini-fab *ngIf="spinner" id="v"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
                 <br>Validate
             </div>
             <div class="ui-g-1 ui-sm-4 n text-center small">
@@ -58,7 +63,7 @@
             <div class="ui-g">
                 <div class="ui-g-12 box"><span class="statement">Q{{clickListener+1}}. </span><span [MathJax]="selectedQuestion['question']" class="statement"></span>
                     <div *ngIf="selectedQuestion['image']['image_path']!=null" class="image">
-                        <img class="img-responsive"src="{{imageUrl}}{{selectedQuestion['image']['image_path']}}{{selectedQuestion['image']['file_name']}}">
+                        <img src="{{imageUrl}}{{selectedQuestion['image']['image_path']}}{{selectedQuestion['image']['file_name']}}">
                     </div>
                 </div>
                 <!-- <div class="ui-g-2">
@@ -77,7 +82,7 @@
                             <span id="a">A</span>
                             <p-radioButton [disabled]="validated()" name="ques" value="0" [(ngModel)]="answer"></p-radioButton><span [MathJax]="selectedQuestion['answers'][0]['answer']"></span>
                             <div class="image" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
-                                <img class="img-responsive"src="{{imageUrl}}{{selectedQuestion['answers'][0]['image']['image_path']}}{{selectedQuestion['answers'][0]['image']['file_name']}}">
+                                <img src="{{imageUrl}}{{selectedQuestion['answers'][0]['image']['image_path']}}{{selectedQuestion['answers'][0]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
@@ -85,7 +90,7 @@
                             <p-radioButton [disabled]="validated()" name="ques" value="1" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][1]['answer']"></span>
                             <div class="image" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
-                                <img class="img-responsive"src="{{imageUrl}}{{selectedQuestion['answers'][1]['image']['image_path']}}{{selectedQuestion['answers'][1]['image']['file_name']}}">
+                                <img src="{{imageUrl}}{{selectedQuestion['answers'][1]['image']['image_path']}}{{selectedQuestion['answers'][1]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
@@ -94,7 +99,7 @@
                             <span [MathJax]="selectedQuestion['answers'][2]['answer']"></span>
 
                             <div class="image" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null">
-                                <img class="img-responsive"src="{{imageUrl}}{{selectedQuestion['answers'][2]['image']['image_path']}}{{selectedQuestion['answers'][2]['image']['file_name']}}">
+                                <img src="{{imageUrl}}{{selectedQuestion['answers'][2]['image']['image_path']}}{{selectedQuestion['answers'][2]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
@@ -103,7 +108,7 @@
                             <span [MathJax]="selectedQuestion['answers'][3]['answer']"></span>
 
                             <div class="image" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null">
-                                <img class="img-responsive"src="{{imageUrl}}{{selectedQuestion['answers'][3]['image']['image_path']}}{{selectedQuestion['answers'][3]['image']['file_name']}}">
+                                <img src="{{imageUrl}}{{selectedQuestion['answers'][3]['image']['image_path']}}{{selectedQuestion['answers'][3]['image']['file_name']}}">
                             </div>
                         </div>
                     </div>
@@ -119,13 +124,13 @@
                                     <span class="correct">Correct Answer: {{correctAnswer['answer']}} <br><br></span>
                                 </div>
                                 <div class="hintimg" *ngIf="correctAnswer['image']['image_path']!=null">
-                                    <img class="img-responsive"src="{{imageUrl}}{{correctAnswer['image']['image_path']}}{{correctAnswer['image']['file_name']}}">
+                                    <img src="{{imageUrl}}{{correctAnswer['image']['image_path']}}{{correctAnswer['image']['file_name']}}">
                                 </div>
                             </div>
                             <div class="ui-g-6">
                                 <i class="fa fa-lightbulb-o fa-lg" style="color:#EEA236"></i> &nbsp; Hint: {{selectedQuestion['hint']['name']}}
                                 <div class="valimg" *ngIf="selectedQuestion['hint']['image']['file_name']!=null">
-                                    <img class="img-responsive"src="{{imageUrl}}{{selectedQuestion['hint']['image']['image_path']}}{{selectedQuestion['hint']['image']['file_name']}}">
+                                    <img src="{{imageUrl}}{{selectedQuestion['hint']['image']['image_path']}}{{selectedQuestion['hint']['image']['file_name']}}">
                                 </div>
                             </div>
                         </div>
@@ -142,11 +147,11 @@
                                             <br *ngIf="correct"><br *ngIf="correct">
                                             <span class="correct" *ngIf="!correct">Correct Answer: {{correctAnswer['answer']}} <br><br></span>
                                         </div>
-                                        <img class="img-responsive"src="{{correctAnswer['image']['image_path']}}">
+                                        <img src="{{correctAnswer['image']['image_path']}}">
                                     </div>
                                     <div class="ui-g-6">
                                         <i class="fa fa-lightbulb-o fa-lg"></i> &nbsp; Hint: {{selectedQuestion['hint']['name']}}<br><br><span><br><br></span>
-                                        <img class="img-responsive" src="{{selectedQuestion['hint']['image']['image_path']}}">
+                                        <img src="{{selectedQuestion['hint']['image']['image_path']}}">
                                     </div>
                                 </div>
                             </div>

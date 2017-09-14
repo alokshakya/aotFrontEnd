@@ -10,6 +10,7 @@ export class MasterHttpService {
     token: string;
     updated = 0;
     loginEvent: EventEmitter<number>;
+    errorEvent:EventEmitter<boolean> = new EventEmitter();
     queryHeaders;
     baseUrl = 'http://scripts.olympiadbox.com/services/api/api.php';
     constructor(
@@ -34,7 +35,7 @@ export class MasterHttpService {
     }
 
     httpError(){
-        this.router.navigate(['login']);
+        this.errorEvent.emit(true);
     }
 
     dataRetreived() {
@@ -124,7 +125,9 @@ export class MasterHttpService {
                     this.personalInfo.setInfo(data['message'][0]);
                     this.dataRetreived();
                 }
-                else{this.httpError()};
+                else{
+                    this.httpError();
+                }
             },
             err=>{this.httpError()})
     }
@@ -132,16 +135,34 @@ export class MasterHttpService {
     getSyllabus() {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/classdata/topics', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
-                this.subjectInfo.setSyllabus(data['class']['subjects']);
-                this.dataRetreived();
+                if(data.hasOwnProperty('status')){
+                    if(data['status']==719){
+                        this.httpError();
+                    }
+                }
+                else{
+                    this.subjectInfo.setSyllabus(data['class']['subjects']);
+                    this.dataRetreived();
+                }
+            },
+            err=>{
+                this.httpError();
             })
     }
 
     getTestDetails() {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/test/details', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
-                this.chapterwiseTest.setTestDetails(data['message']);
-                this.dataRetreived();
+                if(data['status']==723){
+                    this.httpError();
+                }
+                else{
+                    this.chapterwiseTest.setTestDetails(data['message']);
+                    this.dataRetreived();
+                }
+            },
+            err=>{
+                this.httpError();
             })
     }
     // -----------------------------------------------------------------------------------------------
@@ -170,6 +191,9 @@ export class MasterHttpService {
             .subscribe((data) => {
                 this.misc.setNotice(data['message']);
                 this.dataRetreived();
+            },
+            err=>{
+                this.httpError();
             })
     }
 
@@ -182,6 +206,9 @@ export class MasterHttpService {
     getUserTestimonials(studentId){
         return this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/relatedtable/testimonial/user_testimonial_set/testimonial_id/student_id/'+studentId, {headers: this.queryHeaders})
         .map((resp: Response)=>resp.json())
-        .subscribe((data)=>this.personalInfo.setUserTestimonials(data['message']))
+        .subscribe((data)=>this.personalInfo.setUserTestimonials(data['message']),
+            err=>{
+                this.httpError();
+            })
     }
 }

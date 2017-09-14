@@ -64,11 +64,12 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     dec: Array<string>;
 
     //misc
-    growlmsg: Message[] = [];
+    growlmsg: Message[];
     date: Date;
     test: any;
     deactivate: boolean;
     spinner:boolean;
+    spinner2:boolean;
 
     couponCode: string;
     achievement;
@@ -183,6 +184,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     saveBasicInfo() {
+        this.spinner = true;
         let wrapper = {
             'firstname': this.dummyBasicInfo['firstname'],
             'lastname': this.dummyBasicInfo['lastname'],
@@ -201,31 +203,16 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                 if (data['status'] == 200) {
                     this.personalInfo.userInfo = this.dummyBasicInfo;
                     this.editBasic = false;
-                    this.growlmsg = [];
-                    this.growlmsg.push({ severity: 'success', summary: 'Success', detail: 'Profile Updated' })
+                    this.generateMsg('success','Success','Profile Updated Successfully');
                 }
                 else{
-                    this.growlmsg = [];
-                    this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating Profile' })
+                    this.generateMsg('error','Could Not Update Profile','Please Try Again');
                 }
             }, 
             err=>{
-                this.growlmsg = [];
-                this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating Profile' })
+                this.generateMsg('error','Server Error', 'Please Try Again');
             })
     }
-
-    verifyMobile() {
-        let wrapper = { 'email': this.personalInfo.userInfo['email'], 'verify_mobile': true, 'verify_email': false }
-        this.masterhtttp.sendOtp(wrapper)
-            .subscribe((data) => {
-                if (data['status'] == 200) {
-                    this.otpDialog = true;
-                }
-            })
-    }
-
-
 
     editSchoolInfo() {
         this.couponCode = this.personalInfo.schoolInfo['coupon_code'];
@@ -250,49 +237,45 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     saveSchoolInfo() {
+        this.spinner=true;
         let wrapper = { 'coupon_code': this.couponCode };
         this.masterhtttp.getSchool(wrapper)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
                     this.personalInfo.setSchoolInfo(data['message'])
-                    this.growlmsg = [];
-                    this.growlmsg.push({ severity: 'success', summary: 'Success', detail: 'School Info Saved' })
+                    this.generateMsg('success','Success','School Info Saved');
                     this.editSchool = false;
                 } else {
-                    this.growlmsg = [];
-                    this.growlmsg.push({ severity: 'error', summary: 'Invalid Coupon Code', detail: 'Try Again With A Different Coupon Code' })
+                    this.generateMsg('info','Invalid Coupon Code','Please Try Again');
                 }
                 this.updateSchool();
+                this.spinner = false;
             },
             err=>{
-                this.growlmsg = [];
-                this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating School Info' })
+                this.generateMsg('error','Server Error','Please Try Again');
             })
     }
 
     changePassword() {
+        this.spinner = true;
         let requestbody = { 'old_password': this.oldPassword, 'new_password': this.confirmNewPassword, 'user_info_id': this.personalInfo.userInfo['user_info_id'] }
         if (this.confirmNewPassword != this.newPassword) {
-            this.growlmsg.push({ severity: 'error', summary: "New Password doesn't match", detail: 'Please try again' });
+            this.generateMsg('error','New Password doesn\'t match','Please try again');
         }
         else {
             this.masterhtttp.updatePassword(requestbody)
                 .subscribe((data: Response) => {
                     if (data['status'] == 200) {
                         this.cancelPassword();
-                        this.growlmsg = [];
-                        this.growlmsg.push({ severity: 'success', summary: "Success", detail: 'Password Updated' });
+                        this.generateMsg('success','Success','Password Updated Successfully')
                     } else {
-                        this.growlmsg = [];
-                        this.growlmsg.push({ severity: 'error', summary: "Incorrect Old Password", detail: 'Please try again' });
+                        this.generateMsg('info','Incorrect Old Password','Please Try Again');
                     }
                 },
                 err=>{
-                    this.growlmsg = [];
-                    this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Updating Password' })
+                    this.generateMsg('error','Server Error','Please Try Again');
                 })
         }
-        //this.growlmsg.push({severity:'success', summary:"Password Changed", detail:'Please try again'});}
     }
 
 
@@ -304,23 +287,24 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     addTestimonial() {
+        this.spinner = true;
         let requestBody = { 'text': this.testimonial, 'student_id': this.personalInfo.studentInfo['student_id'] }
         this.masterhtttp.addTestimonial(requestBody)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
                     this.masterhtttp.getUserTestimonials(this.personalInfo.studentInfo['student_id']);
-                    this.growlmsg = [];
-                    this.growlmsg.push({ severity: 'success', summary: "Success", detail: 'Testimonial Added' })
+                    this.generateMsg('success','Success','Testimonial Added Successfully');
                     this.testimonial = null;
                 }
-                else {
-                    this.growlmsg = [];
-                    this.growlmsg.push({severity: 'error', summary: 'Limt Reached', detail: 'You Cannot Add More Than 3 Testimonials'})
+                else if(data['status'] == 713){
+                    this.generateMsg('warning','Limit Reached','You Cannot Add More Than 3 Testimonials');
+                }
+                else{
+                    this.generateMsg('error','Unable To Add Testimonial','Please Try Again')
                 }
             },
             err=>{
-                this.growlmsg = [];
-                this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Adding Testimonial' })
+                this.generateMsg('error','Server Error','Please Try Again');
             })
     }
 
@@ -329,18 +313,20 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     addAchievement() {
+        this.spinner = true;
         let requestBody = { 'text': this.achievement, 'student_id': this.personalInfo.studentInfo['student_id'] }
         this.masterhtttp.addAchievement(requestBody)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
                     this.achievement = null;
-                    this.growlmsg = [];
-                    this.growlmsg.push({ severity: 'success', summary: "Success", detail: 'Achievement Added' })
+                    this.generateMsg('success','Success','Achievement Added Successfully')
+                }
+                else{
+                    this.generateMsg('error','Error','Unable To Add Testimonial');
                 }
             },
             err=>{
-                this.growlmsg = [];
-                this.growlmsg.push({ severity: 'error', summary: 'Error', detail: 'Error While Adding Achievement' })
+                this.generateMsg('error','Server Error','Please');
             })
     }
 
@@ -353,12 +339,16 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         let wrapper = {mobile:this.dummyBasicInfo['mobile']};
         this.masterhtttp.updateProfile(wrapper).subscribe((data)=>{
             if(data['status']==200){
-                this.growlmsg=[];
-                this.growlmsg.push({severity:'success',summary:'Success',detail:'Mobile Updated Successfully'});
+                this.generateMsg('success','Success','Mobile Number Updated Successfully');
                 this.otpDialog = false;
             }
-            else this.errFunc();
-        }, err=>{this.errFunc();})
+            else {
+                this.generateMsg('error','Server Error','Please Try Again');
+            }
+        }, err=>{
+                this.generateMsg('error','Server Error','Please Try Again');
+
+        })
 
     }
 
@@ -374,11 +364,13 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                 this.personalInfo.userInfo['mobile'] = this.dummyBasicInfo['mobile'];
             }
             else if(data['status']==721){
-                this.growlmsg = [];
-                this.growlmsg.push({severity:'error',summary:'Incorrect OTP',detail:'Please Try Again'})
                 this.spinner = false;
+                this.generateMsg('error','Incorrect Otp','Please Try Again');
             }
-        },err=> {this.errFunc();this.spinner=false})
+        },err=>{
+            this.spinner = false;
+            this.generateMsg('error','Incorrect Otp','Please Try Again');
+        })
     }
 
     edit(a) {
@@ -457,25 +449,29 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         return false;
     }
 
-    errFunc(){
+    generateMsg(sev,sum,det){
         this.growlmsg = [];
-        this.growlmsg.push({severity:'error',summary:'Error', detail:'Please Try Again'})
+        this.growlmsg.push({severity:sev,summary:sum, detail:det});
+        this.spinner = false;
     }
 
     verify(){
         //send otp to new mobile number 
-        this.spinner = true;
+        this.spinner2 = true;
         let wrapper = {verify_mobile:true,verify_email:false,email:this.personalInfo.userInfo['email']}
         wrapper['mobile'] = this.dummyBasicInfo['mobile'].toString();
         this.masterhtttp.sendOtp(wrapper).subscribe((data)=>{
             if(data['status']==200){
                 this.otpDialog = true;
-                this.spinner = false;
+                this.spinner2 = false;
             }
-            else {this.spinner = false;this.errFunc()};
+            else{
+                this.spinner2 = false;
+                this.generateMsg('error','Server Error','Please Try Again');
+            }
         }, err=>{
-            this.errFunc();
-            this.spinner = false;
+            this.spinner2 = false;
+            this.generateMsg('error','Server Error','Please Try Again')
 
         })
     }

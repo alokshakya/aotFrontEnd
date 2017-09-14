@@ -62,7 +62,9 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
 
     lastQuestion:number;
     errMsg:Message[];
-    imageUrl:string
+    imageUrl:string;
+    spinner:boolean;
+    spinner2:boolean;
 
     constructor(
         public router: Router,
@@ -87,12 +89,13 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     ngOnInit() {
+        this.totalQues = this.chapterwiseTest.qaSet.length;
         this.setResponse();
         this.startTest();
         this.displayQuestion(this.lastQuestion);
         this.wrapper = { 'student_test_id': this.chapterwiseTest.attemptDetails['students_test_id'], }
-        this.totalQues = this.chapterwiseTest.qaSet.length;
         this.masterhttp.getTestDetails();
+        this.counter = 0;
     }
 
     displayQuestion(index) {
@@ -116,17 +119,24 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
             switch (this.chapterwiseTest.qaSet[i]['state']) {
             case "correct":
                 this.questionStatus[i] = "Correct";
+                this.attemptedQues++;
                 break;
             
             case "wrong":
                 this.questionStatus[i] = "Wrong";
+                this.attemptedQues++;
                 break;
 
             case "marked":
                 this.questionStatus[i] = "Marked"
+                this.attemptedQues++;
                 break;
             }
         }
+    }
+
+    ngAfterViewInit(){
+        this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
     }
 
     setCorrectAnswer(){
@@ -139,6 +149,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     validate() {
+        this.spinner = true;
         this.response[this.clickListener] = this.selectedQuestion['answers'][this.answer];
         this.wrapper['mark_for_review'] = "0";
         this.wrapper['question_id'] = this.selectedQuestion['id'];
@@ -158,20 +169,24 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
                     this.questionStatus[this.clickListener] = "Wrong";
                 }
                 this.showHint();
+                this.spinner = false;
             }
             else{
                 this.errMsg = [];
-                this.errMsg.push({severity:'error',summary:'Error',detail:'Error While Saving Response'});
+                this.errMsg.push({severity:'error',summary:'Error While Saving Response',detail:'Please Try Again'});
+                this.spinner = false;
             }
         },
         err=>{
                 this.errMsg = [];
-                this.errMsg.push({severity:'error',summary:'Error',detail:'Error While Saving Response'});
+                this.errMsg.push({severity:'error',summary:'Server Error',detail:'Please Try Again'});
+                this.spinner = false;
             })
     }
 
 
     markForReview() {
+        this.spinner2 = true;
         this.wrapper['mark_for_review'] = "1";
         this.wrapper['question_id'] = this.selectedQuestion['id'];
         this.wrapper['correct_answer'] = this.selectedQuestion['correct_answer_id'];
@@ -184,15 +199,18 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
                 this.updateView();
                 this.answer = null;
                 this.correctAnswer = null;
+                this.spinner2 = false;
             }
             else{
                 this.errMsg = [];
-                this.errMsg.push({severity:'error',summary:'Error',detail:'Error While Saving Response'});
+                this.errMsg.push({severity:'error',summary:'Error While Saving Response',detail:'Please Try Again'});
+                this.spinner2 = false;
             } 
             },
             err=>{
                 this.errMsg = [];
-                this.errMsg.push({severity:'error',summary:'Error',detail:'Error While Saving Response'});
+                this.errMsg.push({severity:'error',summary:'Server Error',detail:'Please Try Again'});
+                this.spinner2 = false;
             }
         )
     }

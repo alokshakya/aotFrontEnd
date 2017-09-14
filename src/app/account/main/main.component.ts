@@ -6,7 +6,6 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Misc } from '../../services/data.service';
 
-
 enum MenuOrientation {
     STATIC,
     OVERLAY,
@@ -61,7 +60,7 @@ export class AccountMainComponent implements AfterViewInit {
 
     resetMenu: boolean;
 
-    userEvent: any
+    userEvent: any;
 
     //profile data
     shownEmail: string;
@@ -89,9 +88,6 @@ export class AccountMainComponent implements AfterViewInit {
         if (this.email.length > 24) {
             this.shownEmail = this.email.slice(24, );
         }
-    }
-
-    change(changed: boolean) {
     }
 
     ngAfterViewInit() {

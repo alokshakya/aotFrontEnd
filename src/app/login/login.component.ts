@@ -79,6 +79,8 @@ export class LoginComponent implements OnInit {
     wrapper:any;
     disappear:boolean;
 
+    modeStr:string;
+
     constructor(
         public httpService: LoginRegisterService,
         public masterhttp: MasterHttpService,
@@ -109,6 +111,26 @@ export class LoginComponent implements OnInit {
             if(previousRoute!=null){
                 this.router.navigate([previousRoute]);
             }
+        }
+    }
+
+    spinnerCondition(value){
+        switch (value) {
+            case "forgotResendMobile":
+                this.modeStr = value;
+                break;
+
+            case "forgotResendEmail":
+                this.modeStr = value;
+                break;
+            
+            case "forgotVerifyMobile":
+                this.modeStr = value;
+                break;
+
+            case "forgotVerifyEmail":
+                this.modeStr = value;
+                break;
         }
     }
 
@@ -197,12 +219,14 @@ export class LoginComponent implements OnInit {
             .subscribe((data: Response) => {
                 if(data['status']==200){
                     this.generateResponse(data['message']);
+                    this.modeStr = null;
                 }
                 else {
                     this.message = [];
                     this.message.push({severity:'error', summary:'Email Does Not Exists', detail:'Please Try Again With Different Email Address'})
                     this.spinner = false;
                     this.spinner2 = false;
+                    this.modeStr = null;
                 }
             },
             err=>{
@@ -210,6 +234,7 @@ export class LoginComponent implements OnInit {
                 this.spinner2 = false
                 this.message = [];
                 this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
+                this.modeStr = null;
             });
     }
 
@@ -247,23 +272,30 @@ export class LoginComponent implements OnInit {
         .subscribe((data)=>{
             if(data['status']==200){
                 this.verifyResponse(wrapper);
+                this.modeStr = null;
             }else if(data['status']==721){
                 this.spinner = false;
                 this.spinner2 = false;
                 this.message = [];
-                this.message.push({severity:'error', summary:'Incorrect Otp', detail:'Please Try Again'})
+                this.message.push({severity:'error', summary:'Incorrect Otp', detail:'Please Try Again'});
+                this.modeStr = null;
+
             }
             else{
                 this.spinner = false;
                 this.spinner2 = false;
                 this.message = [];
-                this.message.push({severity:'error', summary:'Server Error', detail:'Please Try Again'})
+                this.message.push({severity:'error', summary:'Server Error', detail:'Please Try Again'});
+                this.modeStr = null;
+
             }
         }, err=>{
                 this.spinner = false;
                 this.spinner2 = false;
                 this.message = [];
-                this.message.push({severity:'error', summary:'Server Error', detail:'Please Try Again'})
+                this.message.push({severity:'error', summary:'Server Error', detail:'Please Try Again'});
+                this.modeStr = null;
+
         })
     }
 

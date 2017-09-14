@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ElementRef, Renderer, ViewChild } from '@angu
 import { Router } from '@angular/router';
 import { MasterHttpService } from './services/masterhttp.service';
 import { JwtHelper } from 'angular2-jwt';
-// import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { Message } from 'primeng/primeng';
 
 
 enum MenuOrientation {
@@ -19,12 +19,19 @@ declare var jQuery: any;
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
+    growlMsg:Message[];
 
 
     constructor(private router: Router,private masterhttp:MasterHttpService) { }
 
     ngOnInit() {
         this.decodeJwt();
+        this.masterhttp.errorEvent.subscribe((data)=>{
+            if(data){
+                this.growlMsg = [];
+                this.growlMsg.push({severity:'error',summary:'Server Error',detail:'Please Login'});
+            }
+        })
     }
 
     decodeJwt(){

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MasterHttpService } from '../../services/masterhttp.service';
 import { PersonalInfo, SubjectInfo, Misc } from '../../services/data.service';
+import { Message } from 'primeng/primeng';
 
 @Component({
     selector: 'app-loadout',
@@ -10,7 +11,7 @@ import { PersonalInfo, SubjectInfo, Misc } from '../../services/data.service';
 })
 export class LoadoutComponent implements OnInit {
 
-    loaderActive: boolean
+    growlMsg:Message[];
 
     constructor(
         public http: MasterHttpService,
@@ -21,6 +22,7 @@ export class LoadoutComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.errorCheck();
         this.http.updated = 0;
         this.http.setToken(localStorage.getItem('session_token'));
         this.http.getPersonalInfo();
@@ -35,6 +37,16 @@ export class LoadoutComponent implements OnInit {
         })
         this.http.getResult();
         this.misc.logIn();
+    }
+
+    errorCheck(){
+        this.http.errorEvent.subscribe(data=>{
+            if(data){
+                localStorage.clear();
+                sessionStorage.clear();
+                this.router.navigate(['login']);
+            }
+        })
     }
 
     ngOnDestroy() {
