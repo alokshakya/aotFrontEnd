@@ -225,6 +225,12 @@ export class Misc {
         this.currentRoute.emit(component);
     }
 
+    userTestimonial = [
+        "Lorem 11111111 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+        "Lorem 22222222 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy",
+        "Lorem 33333333 Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy"
+    ]
+
     
     setLocalRoute(route){
         sessionStorage.setItem('route',route);
