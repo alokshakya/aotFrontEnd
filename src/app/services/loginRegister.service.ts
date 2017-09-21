@@ -24,13 +24,6 @@ export class LoginRegisterService {
     login(loginCreds) {
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/user/login', loginCreds, this.options)
             .map((resp: Response) => resp.json());
-        // var obj = JSON.parse(data['_body']);
-        // if(obj['Status']==706){
-        //   return false;
-        // }else {
-        //   this.misc.setToken(obj['session_token'])
-        //   return true;
-        // }
     }
 
     register(registerCreds) {

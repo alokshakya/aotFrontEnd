@@ -30,6 +30,7 @@ export class LoadoutComponent implements OnInit {
         this.http.getNotices();
         this.http.getTestDetails();
         this.http.getTestimonials();
+        this.http.getResult();
         this.personalInfo.userInfoEvent.subscribe((data)=>{
             if(data){
                 this.http.getUserTestimonials(this.personalInfo.studentInfo['student_id']);

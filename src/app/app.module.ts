@@ -144,6 +144,7 @@ import { MocktestReasoningComponent } from './account/reasoning/mocktest-reasoni
 import { ResultReasoningComponent } from './account/reasoning/result-reasoning/result-reasoning.component';
 
 import {MathJaxDirective} from './directives/mathjax.directive';
+import { RoundPipe } from './pipes/round.pipe';
 @NgModule({
     imports: [
         BrowserModule,
@@ -264,7 +265,8 @@ import {MathJaxDirective} from './directives/mathjax.directive';
         DemotestReasoningComponent,
         MocktestReasoningComponent,
         ResultReasoningComponent,
-        MathJaxDirective
+        MathJaxDirective,
+        RoundPipe
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

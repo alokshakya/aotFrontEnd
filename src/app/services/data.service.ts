@@ -267,6 +267,43 @@ export class Misc {
 
 @Injectable()
 export class Result {
+    computers;
+    science;
+    gk;
+    math;
+    english;
+    reasoning;
+
+    setResult(data) {
+        for (let i in data['generated']['subjects']) {
+            switch (data['generated']['subjects'][i]['name']) {
+                case "Computer-Cyber":
+                    this.computers = data['generated']['subjects'][i];
+                    break;
+
+                case "Science":
+                    this.science = data['generated']['subjects'][i];
+                    break;
+
+                case "General-Knowledge":
+                    this.gk = data['generated']['subjects'][i];
+                    break;
+
+                case "Mathematics":
+                    this.math = data['generated']['subjects'][i];
+                    break;
+
+                case "English":
+                    this.english = data['generated']['subjects'][i];
+                    break;
+
+                case "Reasoning":
+                    this.reasoning = data['generated']['subjects'][i];
+                    break;
+            }
+        }
+    }
+
     testSummary = {
         "Computer-Cyber": {
             "Chapterwise Test": {

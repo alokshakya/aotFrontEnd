@@ -85,7 +85,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         this.hintDisplay = false;
         this.response = {};
         this.questionStatus = {};
-        this.imageUrl = 'https://s3.ap-south-1.amazonaws.com/olympiadbox';
+        this.imageUrl = 'https://s3.ap-south-1.amazonaws.com/olympiadbox/oa-images';
     }
 
     ngOnInit() {
@@ -275,10 +275,17 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     quit() {
+        this.masterhttp.errorEvent.subscribe((data)=>{
+            if(data){
+                this.errMsg = [];
+                this.errMsg.push({severity:'error',summary:'Unable To Get Result',detail:'Please Try Again'});
+            }
+        })
         this.stopFlag = true;
         this.confirmservice.confirm({
             message: 'Are you sure you want to quit ?',
             accept: () => {
+                this.masterhttp.getResult();
                 this.router.navigate([sessionStorage['route']]);
             },
             reject: () =>{
@@ -301,3 +308,4 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
 
 }
 
+ 

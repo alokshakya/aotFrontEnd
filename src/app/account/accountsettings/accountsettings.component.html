@@ -1,26 +1,6 @@
 <div class="fluid">
     <div class="ui-g">
         <div class="ui-g-12">
-            <p-panel header="Subscription Details">
-                <br>
-                <br>
-                <p-dataTable [responsive]="true" [value]="subscriptionTableData">
-                    <p-column field="Order ID" header="Order ID"></p-column>
-                    <p-column field="Subject" header="Subject"></p-column>
-                    <p-column field="Subscription Date" header="Subscription Date"></p-column>
-                    <p-column field="Valid Till" header="Valid Till"></p-column>
-                    <p-column field="Download Invoice" header="Invoice">
-                        <ng-template pTemplate="body">
-                            <div class="text-center">
-                                <i pTooltip="Download Invoice" tooltipPosition="left" style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>
-                            </div>
-                        </ng-template>
-                    </p-column>
-                </p-dataTable>
-                <br>
-            </p-panel>
-        </div>
-        <div class="ui-g-12">
             <p-panel header="Subscribe Now">
                 <br>
                 <div class="ui-g">
@@ -55,6 +35,26 @@
                     <button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==null" pButton label="Pay Now"></button>
                 </div>
                 <br> -->
+            </p-panel>
+        </div>
+        <div class="ui-g-12">
+            <p-panel header="Subscription Details">
+                <br>
+                <br>
+                <p-dataTable [responsive]="true" [value]="subscriptionTableData">
+                    <p-column field="Order ID" header="Order ID"></p-column>
+                    <p-column field="Subject" header="Subject"></p-column>
+                    <p-column field="Subscription Date" header="Subscription Date"></p-column>
+                    <p-column field="Valid Till" header="Valid Till"></p-column>
+                    <p-column field="Download Invoice" header="Invoice">
+                        <ng-template pTemplate="body">
+                            <div class="text-center">
+                                <i pTooltip="Download Invoice" tooltipPosition="left" style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>
+                            </div>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable>
+                <br>
             </p-panel>
         </div>
     </div>

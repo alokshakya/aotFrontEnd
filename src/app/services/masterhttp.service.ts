@@ -40,7 +40,7 @@ export class MasterHttpService {
 
     dataRetreived() {
         this.updated++;
-        if (this.updated == 6) {
+        if (this.updated == 7) {
             let previousRoute = sessionStorage.getItem('route')
             if(previousRoute!=null){
                 this.router.navigate([previousRoute]);
@@ -157,6 +157,22 @@ export class MasterHttpService {
                 }
                 else{
                     this.chapterwiseTest.setTestDetails(data['message']);
+                    this.dataRetreived();
+                }
+            },
+            err=>{
+                this.httpError();
+            })
+    }
+
+    getResult() {
+        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/result/generate', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
+            .subscribe((data) => {
+                if(data['status']==723){
+                    this.httpError();
+                }
+                else{
+                    this.result.setResult(data['message']);
                     this.dataRetreived();
                 }
             },
