@@ -110,8 +110,9 @@ export class DashboardComponent implements OnInit {
 
     redirectToTest(i, j) {
         // let a = i.toLowerCase()
-        let b = j.toLowerCase().replace(/\s/g, "");
+        // let b = j.toLowerCase().replace(/\s/g, "");
         // this.router.navigate(['account/'+a+'/'+b]);
+        let b = j;
         switch (i) {
             case "Computer-Cyber":
                 this.router.navigate(['account/computers/' + b])
@@ -143,6 +144,21 @@ export class DashboardComponent implements OnInit {
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     }
 
+    chapterwiseTest(index){
+        let totalTests = this.result.completeResult['generated']['subjects'][index]['total_tests']
+        let totalGen = this.result.completeResult['generated']['subjects'][index]['total_generated']
+        let remaining = totalTests-totalGen;
+        let completed = totalGen-1;
+        return [100*remaining/totalTests, 100*totalGen/totalTests,(totalGen-remaining)/totalTests]
+    }
+
+    chapterwiseResult(index){
+        let correct = this.result.completeResult['generated']['subjects'][index]['total_correct']
+        let incorrect = this.result.completeResult['generated']['subjects'][index]['total_incorrect']
+        let marked = this.result.completeResult['generated']['subjects'][index]['total_marked']
+        return[100*correct/(correct+incorrect+marked),100*incorrect/(correct+incorrect+marked),100*marked/(correct+incorrect+marked)]
+    }
+
     redirectToResult(i) {
         switch (i) {
             case "Computer-Cyber":
@@ -168,7 +184,6 @@ export class DashboardComponent implements OnInit {
             case "Mathematics":
                 this.router.navigate(['account/math/result'])
                 break;
-            
         }
     }
 

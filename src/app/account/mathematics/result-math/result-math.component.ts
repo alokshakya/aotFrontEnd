@@ -114,9 +114,9 @@ detailedResult: any;
         if(toggle){
             let cor = correct*100/(incorrect+correct);
             let inc = incorrect*100/(incorrect+correct);
-            return [cor+'%',inc+'%'];
+            return [cor,inc];
         }
-        return [cor+'%',mar+'%',inc+'%'];
+        return [cor,mar,inc];
     }
 
     width(chapter,test,toggle=false){
@@ -127,12 +127,12 @@ detailedResult: any;
         if(toggle){
             let cor = correct*100/(correct+incorrect);
             let inc = incorrect*100/(correct+incorrect);
-            return [cor+'%',inc+'%'];
+            return [cor,inc];
         }
         let cor = correct*100/(marked+incorrect+correct);
         let inc = incorrect*100/(marked+incorrect+correct);
         let mar = marked*100/(marked+incorrect+correct);
-        return [cor+'%',mar+'%',inc+'%'];
+        return [cor,mar,inc];
     }
 
     resultPanel(){

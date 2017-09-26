@@ -46,8 +46,8 @@ export class SampletestGkComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["English","Sample Test"]);
-        this.misc.setLocalRoute('account/english/sampletest');
+        this.misc.setCurrentRoute(["General-Knowledge","Sample Test"]);
+        this.misc.setLocalRoute('account/gk/sampletest');
 
 
         //for chart

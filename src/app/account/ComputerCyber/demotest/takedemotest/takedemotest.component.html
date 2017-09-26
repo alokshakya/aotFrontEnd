@@ -29,14 +29,14 @@
             <!--                 <div class="ui-g-1" class="buttonTop v" (click)="validate()"> V </div>
                 <div class="ui-g-1" class="buttonTop n" (click)="nextQuestion()"></div> -->
             <div class="ui-g-1 ui-sm-4 m text-center big">
-                <button md-mini-fab *ngIf="!spinner2" id="m" [disabled]="validated()||this.selectedQuestion['state']!='unattempted'" (click)="markForReview()">M</button>
+                <button md-mini-fab *ngIf="!spinner2" id="m" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='unattempted'" (click)="markForReview()">M</button>
 
                 <button md-mini-fab *ngIf="spinner2" id="m"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
 
                 <br>Mark For Review
             </div>
             <div class="ui-g-1 ui-sm-4 v text-center small">
-                <button *ngIf="!spinner" md-mini-fab id="v" [disabled]="answer==null||validated()||this.selectedQuestion['state']!='unattempted'" (click)="validate()">V</button>
+                <button *ngIf="!spinner" md-mini-fab id="v" [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='unattempted'" (click)="validate()">V</button>
                 
                 <button md-mini-fab *ngIf="spinner" id="v"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
                 <br>Validate
@@ -69,8 +69,8 @@
                 <!-- <div class="ui-g-2">
                         <div class="ui-g">
                             <div class="ui-g-12">
-                                <button type="button" [disabled]="validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button>
-                                <button id="longbtn" class="ui-button-info" type="button" pButton label="Validate" [disabled]="answer==null||validated()" (click)="validate()"></button>
+                                <button type="button" [disabled]="spinner||spinner2||validated()" pButton label="Mark for review" class="ui-button-warning" (click)="mark()"></button>
+                                <button id="longbtn" class="ui-button-info" type="button" pButton label="Validate" [disabled]="spinner||spinner2||answer==null||validated()" (click)="validate()"></button>
                             </div>
                             <div class="ui-g-12">
                             </div>
@@ -80,14 +80,14 @@
                     <div class="ui-g">
                         <div class="ui-g-6 ui-sm-12">
                             <span id="a">A</span>
-                            <p-radioButton [disabled]="validated()" name="ques" value="0" [(ngModel)]="answer"></p-radioButton><span [MathJax]="selectedQuestion['answers'][0]['answer']"></span>
+                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="0" [(ngModel)]="answer"></p-radioButton><span [MathJax]="selectedQuestion['answers'][0]['answer']"></span>
                             <div class="image" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][0]['image']['image_path']}}{{selectedQuestion['answers'][0]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="b">B</span>
-                            <p-radioButton [disabled]="validated()" name="ques" value="1" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="1" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][1]['answer']"></span>
                             <div class="image" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][1]['image']['image_path']}}{{selectedQuestion['answers'][1]['image']['file_name']}}">
@@ -95,7 +95,7 @@
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="c">C</span>
-                            <p-radioButton [disabled]="validated()" name="ques" value="2" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="2" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][2]['answer']"></span>
 
                             <div class="image" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="d">D</span>
-                            <p-radioButton [disabled]="validated()" name="ques" value="3" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="3" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][3]['answer']"></span>
 
                             <div class="image" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null">

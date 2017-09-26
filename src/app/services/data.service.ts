@@ -73,13 +73,6 @@ export class SubjectInfo {
 
     constructor() { }
 
-    // setSubjects(data){
-    //     this.subjectList = []
-    //     for(let i in data){
-    //         this.subjectList.push(data[i][1])
-    //     }
-    // }
-
     setSyllabus(data) {
         this.subjectList = [];
         for (let i in data) {
@@ -273,8 +266,10 @@ export class Result {
     math;
     english;
     reasoning;
+    completeResult;
 
     setResult(data) {
+        this.completeResult = data;
         for (let i in data['generated']['subjects']) {
             switch (data['generated']['subjects'][i]['name']) {
                 case "Computer-Cyber":
