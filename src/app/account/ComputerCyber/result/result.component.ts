@@ -5,7 +5,7 @@ import { Misc, Result } from '../../../services/data.service';
 
 @Component({
     selector: 'app-result',
-    templateUrl: './s.html',
+    templateUrl: './result.component.html',
     styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
@@ -46,9 +46,21 @@ export class ResultComponent implements OnInit {
         public Result:Result){
     }
 
-    show(i, j) {
-        let object = this.Result.computers.chapters[i]['tests'][j];
-        this.currentChapter = this.Result.computers.chapters[i]['name'];
+    show(chapterId, testId) {
+        let object;
+        let chapter;
+        for(let i in this.Result.computers.chapters){
+            if(this.Result.computers.chapters[i]['id']==chapterId){
+                chapter = this.Result.computers.chapters[i];
+                break;
+            }
+        }
+        for(let i in chapter['tests']){
+            if(chapter['tests'][i]['id']==testId){
+                object = chapter['tests'][i];
+            }
+        }
+        this.currentChapter = chapter['name'];
         this.currentTest = object['name'];
         this.chapter = {
             Test:object['name'],
@@ -135,14 +147,26 @@ export class ResultComponent implements OnInit {
         return [cor,mar,inc];
     }
 
+    headerWidth(total,correct,incorrect,marked,toggle=false){
+        if(toggle){
+            let cor = correct*100/(correct+incorrect);
+            let inc = incorrect*100/(correct+incorrect);
+            return [cor,inc];
+        }
+        let cor = correct*100/(marked+incorrect+correct);
+        let inc = incorrect*100/(marked+incorrect+correct);
+        let mar = marked*100/(marked+incorrect+correct);
+        return [cor,mar,inc];
+    }
+
     resultPanel(){
         let a = [];
         for(let i in this.Result.computers['chapters']){
-            if(this.Result.computers['chapters'][i].hasOwnProperty('tests')){
+            if(this.Result.computers['chapters'][i]['total_marked']+this.Result.computers['chapters'][i]['total_incorrect']+this.Result.computers['chapters'][i]['total_correct']!=0){
                 a.push(this.Result.computers['chapters'][i]);
             }
         }
-        return a;
+        return a
     }
 
     ngOnInit() {

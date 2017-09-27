@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { PersonalInfo, SubjectInfo, Result, chapterwiseTest, Misc } from './data.service';
+import { EventService } from './event.service';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 import * as constants from '../../config/constants';
@@ -9,7 +10,6 @@ import * as constants from '../../config/constants';
 export class MasterHttpService {
     token: string;
     updated = 0;
-    loginEvent: EventEmitter<number>;
     errorEvent:EventEmitter<boolean> = new EventEmitter();
     queryHeaders;
     baseUrl = 'http://scripts.olympiadbox.com/services/api/api.php';
@@ -20,7 +20,8 @@ export class MasterHttpService {
         public subjectInfo: SubjectInfo,
         public misc: Misc,
         public chapterwiseTest: chapterwiseTest,
-        public result: Result) {
+        public result: Result,
+        public event:EventService) {
         this.queryHeaders = new Headers();
         this.queryHeaders.append('Content-Type', 'application/json');
         this.queryHeaders.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
@@ -35,7 +36,8 @@ export class MasterHttpService {
     }
 
     httpError(){
-        this.errorEvent.emit(true);
+        // this.errorEvent.emit(true);
+        this.event.emitErrEvent();
     }
 
     dataRetreived() {

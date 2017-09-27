@@ -7,7 +7,7 @@ import { ConfirmationService } from 'primeng/primeng';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
 import { SubjectInfo, Misc, chapterwiseTest, PersonalInfo } from '../../../../services/data.service';
 import { ComponentCanDeactivate } from '../../../account.guard';
-// import * as constants from '../../../../../config/constants'
+import { EventService } from '../../../../services/event.service';
 
 declare var MathJax:any;
 @Component({
@@ -73,7 +73,8 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         public subjectInfo: SubjectInfo,
         public personalInfo: PersonalInfo,
         public chapterwiseTest: chapterwiseTest,
-        public misc:Misc ) {
+        public misc:Misc,
+        public event:EventService ) {
         this.counter = 0;
         this.clickListener = '';
         this.test = "Demo Test"
@@ -275,7 +276,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     quit() {
-        this.masterhttp.errorEvent.subscribe((data)=>{
+        this.event.errorEvent.subscribe((data)=>{
             if(data){
                 this.errMsg = [];
                 this.errMsg.push({severity:'error',summary:'Unable To Get Result',detail:'Please Try Again'});

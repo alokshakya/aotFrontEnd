@@ -44,9 +44,21 @@ detailedResult: any;
         public Result:Result){
     }
 
-    show(i, j) {
-        let object = this.Result.science.chapters[i]['tests'][j];
-        this.currentChapter = this.Result.science.chapters[i]['name'];
+    show(chapterId, testId) {
+        let object;
+        let chapter;
+        for(let i in this.Result.science.chapters){
+            if(this.Result.science.chapters[i]['id']==chapterId){
+                chapter = this.Result.science.chapters[i];
+                break;
+            }
+        }
+        for(let i in chapter['tests']){
+            if(chapter['tests'][i]['id']==testId){
+                object = chapter['tests'][i];
+            }
+        }
+        this.currentChapter = chapter['name'];
         this.currentTest = object['name'];
         this.chapter = {
             Test:object['name'],
@@ -133,14 +145,26 @@ detailedResult: any;
         return [cor,mar,inc];
     }
 
+    headerWidth(total,correct,incorrect,marked,toggle=false){
+        if(toggle){
+            let cor = correct*100/(correct+incorrect);
+            let inc = incorrect*100/(correct+incorrect);
+            return [cor,inc];
+        }
+        let cor = correct*100/(marked+incorrect+correct);
+        let inc = incorrect*100/(marked+incorrect+correct);
+        let mar = marked*100/(marked+incorrect+correct);
+        return [cor,mar,inc];
+    }
+
     resultPanel(){
         let a = [];
         for(let i in this.Result.science['chapters']){
-            if(this.Result.science['chapters'][i].hasOwnProperty('tests')){
+            if(this.Result.science['chapters'][i]['total_marked']+this.Result.science['chapters'][i]['total_incorrect']+this.Result.science['chapters'][i]['total_correct']!=0){
                 a.push(this.Result.science['chapters'][i]);
             }
         }
-        return a;
+        return a
     }
 
     ngOnInit() {

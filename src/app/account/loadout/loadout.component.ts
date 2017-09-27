@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MasterHttpService } from '../../services/masterhttp.service';
 import { PersonalInfo, SubjectInfo, Misc } from '../../services/data.service';
+import { EventService } from '../../services/event.service';
 import { Message } from 'primeng/primeng';
 
 @Component({
@@ -18,7 +19,8 @@ export class LoadoutComponent implements OnInit {
         public personalInfo: PersonalInfo,
         public SubjectInfo: SubjectInfo,
         public misc: Misc,
-        public router: Router
+        public router: Router,
+        public event: EventService
     ) { }
 
     ngOnInit() {
@@ -31,7 +33,12 @@ export class LoadoutComponent implements OnInit {
         this.http.getTestDetails();
         this.http.getTestimonials();
         this.http.getResult();
-        this.personalInfo.userInfoEvent.subscribe((data)=>{
+        // this.personalInfo.userInfoEvent.subscribe((data)=>{
+        //     if(data){
+        //         this.http.getUserTestimonials(this.personalInfo.studentInfo['student_id']);
+        //     }
+        // })
+        this.event.userInfoEvent.subscribe((data)=>{
             if(data){
                 this.http.getUserTestimonials(this.personalInfo.studentInfo['student_id']);
             }
@@ -40,7 +47,7 @@ export class LoadoutComponent implements OnInit {
     }
 
     errorCheck(){
-        this.http.errorEvent.subscribe(data=>{
+        this.event.errorEvent.subscribe(data=>{
             if(data){
                 localStorage.clear();
                 sessionStorage.clear();

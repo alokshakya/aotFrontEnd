@@ -7,6 +7,8 @@ import { MessagesModule } from 'primeng/primeng';
 
 import { SubjectInfo, PersonalInfo, Result, Misc, chapterwiseTest } from '../../../services/data.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
+import { EventService } from '../../../services/event.service';
+
 @Component({
   selector: 'app-chapterwisetest-reasoning',
   templateUrl: './chapterwisetest-reasoning.component.html',
@@ -36,7 +38,8 @@ export class ChapterwisetestReasoningComponent implements OnInit {
         public misc: Misc,
         public chapterwiseTest: chapterwiseTest,
         public personalInfo: PersonalInfo,
-        public masterhttp: MasterHttpService)
+        public masterhttp: MasterHttpService,
+        private event:EventService)
     { }
 
     redirect() {
@@ -132,7 +135,15 @@ export class ChapterwisetestReasoningComponent implements OnInit {
     updatePanel() {
         this.generateMsg = []
         this.masterhttp.getTestDetails()
-        this.chapterwiseTest.testEvent.subscribe((data)=>{
+        // this.chapterwiseTest.testEvent.subscribe((data)=>{
+        //     if(data){
+        //         this.generatedPanel();
+        //         this.generatedFlag = false;
+        //         this.selectedChapter = null;
+        //         this.spinner = false;
+        //     }
+        // })
+        this.event.testEvent.subscribe((data)=>{
             if(data){
                 this.generatedPanel();
                 this.generatedFlag = false;

@@ -45,9 +45,21 @@ detailedResult: any;
         public Result:Result){
     }
 
-    show(i, j) {
-        let object = this.Result.gk.chapters[i]['tests'][j];
-        this.currentChapter = this.Result.gk.chapters[i]['name'];
+    show(chapterId, testId) {
+        let object;
+        let chapter;
+        for(let i in this.Result.gk.chapters){
+            if(this.Result.gk.chapters[i]['id']==chapterId){
+                chapter = this.Result.gk.chapters[i];
+                break;
+            }
+        }
+        for(let i in chapter['tests']){
+            if(chapter['tests'][i]['id']==testId){
+                object = chapter['tests'][i];
+            }
+        }
+        this.currentChapter = chapter['name'];
         this.currentTest = object['name'];
         this.chapter = {
             Test:object['name'],
@@ -134,14 +146,26 @@ detailedResult: any;
         return [cor,mar,inc];
     }
 
+    headerWidth(total,correct,incorrect,marked,toggle=false){
+        if(toggle){
+            let cor = correct*100/(correct+incorrect);
+            let inc = incorrect*100/(correct+incorrect);
+            return [cor,inc];
+        }
+        let cor = correct*100/(marked+incorrect+correct);
+        let inc = incorrect*100/(marked+incorrect+correct);
+        let mar = marked*100/(marked+incorrect+correct);
+        return [cor,mar,inc];
+    }
+
     resultPanel(){
         let a = [];
         for(let i in this.Result.gk['chapters']){
-            if(this.Result.gk['chapters'][i].hasOwnProperty('tests')){
+            if(this.Result.gk['chapters'][i]['total_marked']+this.Result.gk['chapters'][i]['total_incorrect']+this.Result.gk['chapters'][i]['total_correct']!=0){
                 a.push(this.Result.gk['chapters'][i]);
             }
         }
-        return a;
+        return a
     }
 
     ngOnInit() {

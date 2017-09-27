@@ -41,20 +41,3 @@ export class TestDeactivate implements CanDeactivate<ComponentCanDeactivate> {
 		return component.canDeactivate ? component.canDeactivate(): true;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

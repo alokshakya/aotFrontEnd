@@ -3,6 +3,8 @@ import { AccountMainComponent } from '../main/main.component';
 import { Router } from '@angular/router';
 import { PersonalInfo, Misc } from '../../services/data.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
+import { EventService } from '../../services/event.service';
+
 import { Observable } from 'rxjs/Rx';
 import * as handle from '../../services/data.service';
 
@@ -18,7 +20,8 @@ export class AppTopBar implements OnInit {
         public router: Router,
         public misc: Misc,
         public personalInfo: PersonalInfo,
-        public masterhttp: MasterHttpService) { }
+        public masterhttp: MasterHttpService,
+        private event:EventService) { }
 
     currentComponent:string;
 
@@ -36,7 +39,10 @@ export class AppTopBar implements OnInit {
     };
 
     activeComponent(){
-        this.misc.currentRoute.subscribe((data)=>{
+        // this.misc.currentRoute.subscribe((data)=>{
+        //     this.currentComponent = data;
+        // })
+        this.event.currentRoute.subscribe((data)=>{
             this.currentComponent = data;
         })
     }

@@ -68,7 +68,7 @@
                                 </div>
                             </div>
                         </p-tabPanel> -->
-                        <p-tabPanel *ngFor="let sub of result.completeResult?.generated?.subjects;let index = index;let first = first" header="{{sub.name}}" [selected]="first">
+                        <p-tabPanel *ngFor="let sub of chTest.completeTestDetails?.generated?.subjects;let index = index;let first = first" header="{{sub.name}}" [selected]="first">
                             <div class="ui-g">
                                 <div class="ui-g-12">
                                     <div class="ui-g">
@@ -80,11 +80,11 @@
                                         </div>
                                         <div class="ui-g-8 ui-sm-12">
                                             <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirectToTest(sub.name,'chapterwisetest')">
-                                                <div class="progress-bar progress-bar-success" [style.width.%]="chapterwiseTest(index)[2]" role="progressbar">{{chapterwiseTest(index)[2]|round}}
+                                                <div class="progress-bar progress-bar-success" [style.width.%]="chapterwiseTest(sub['total_generated'],sub['total_tests'])[2]" role="progressbar">{{chapterwiseTest(sub['total_generated'],sub['total_tests'])[2]|round}}
                                                 </div>
-                                                <div class="progress-bar progress-bar-warning" [style.width.%]="chapterwiseTest(index)[1]" role="progressbar">{{chapterwiseTest(index)[1]|round}}
+                                                <div class="progress-bar progress-bar-warning" [style.width.%]="chapterwiseTest(sub['total_generated'],sub['total_tests'])[1]" role="progressbar">{{chapterwiseTest(sub['total_generated'],sub['total_tests'])[1]|round}}
                                                 </div>
-                                                <div class="progress-bar progress-bar-danger" [style.width.%]="chapterwiseTest(index)[0]" role="progressbar">{{chapterwiseTest(index)[0]|round}}
+                                                <div class="progress-bar progress-bar-danger" [style.width.%]="chapterwiseTest(sub['total_generated'],sub['total_tests'])[0]" role="progressbar">{{chapterwiseTest(sub['total_generated'],sub['total_tests'])[0]|round}}
                                                 </div>
                                             </div>
                                             <div class="progress hover progmob" pTooltip="Go To Demo Test" (click)="redirectToTest(sub.name,'demotest')">

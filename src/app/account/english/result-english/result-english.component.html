@@ -11,18 +11,18 @@
                                 <p-accordionTab *ngFor="let chapter of resultPanel();let i=index">
                                     <p-header>
                                         <div class="padtop">{{chapter.name}}</div>
-                                        <div class="progress" *ngIf="!showMark">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" [style.width.%]="clubbedWidth(i)[0]">{{clubbedWidth(i)[0]|round}}
+                                        <div class="progress" *ngIf="showMark">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" [style.width.%]="headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'])[0]">{{headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'])[0]|round}}
                                             </div>
-                                            <div class="progress-bar progress-bar-warning" role="progressbar" [style.width.%]="clubbedWidth(i)[1]">{{clubbedWidth(i)[1]|round}}
+                                            <div class="progress-bar progress-bar-warning" role="progressbar" [style.width.%]="headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'])[1]">{{headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'])[1]|round}}
                                             </div>
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" [style.width.%]="clubbedWidth(i)[2]">{{clubbedWidth(i)[2]|round}}
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" [style.width.%]="headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'])[2]">{{headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'])[2]|round}}
                                             </div>
                                         </div>
-                                        <div class="progress" *ngIf="showMark">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" [style.width.%]="clubbedWidth(i,true)[0]">{{clubbedWidth(i,true)[0]|round}}
+                                        <div class="progress" *ngIf="!showMark">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" [style.width.%]="headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'],true)[0]">{{headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'],true)[0]|round}}
                                             </div>
-                                            <div class="progress-bar progress-bar-danger" role="progressbar" [style.width.%]="clubbedWidth(i,true)[1]">{{clubbedWidth(i,true)[1]|round}}
+                                            <div class="progress-bar progress-bar-danger" role="progressbar" [style.width.%]="headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'],true)[1]">{{headerWidth(chapter['total_questions'],chapter['total_correct'],chapter['total_incorrect'],chapter['total_marked'],true)[1]|round}}
                                             </div>
                                         </div>
                                     </p-header>
@@ -30,18 +30,18 @@
                                         <div class="ui-g-2" *ngIf="test?.result?.total_attempted_questions>0"></div>
                                         <div class="ui-g-10" *ngIf="test?.result?.total_attempted_questions>0">
                                             {{test.name}}
-                                            <div *ngIf="!showMark" class="progress hover" (click)="show(i,j)">
-                                                <div class="progress-bar progress-bar-success" tooltipPosition="top" pTooltip="Correct" role="progressbar" [style.width.%]="width(i,j)[0]">{{width(i,j)[0]|round}}
+                                            <div *ngIf="showMark" class="progress hover" (click)="show(chapter['id'],test['id'])">
+                                                <div class="progress-bar progress-bar-success" tooltipPosition="top" pTooltip="Correct" role="progressbar" [style.width.%]="headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'])[0]">{{headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'])[0]|round}}
                                                 </div>
-                                                <div class="progress-bar progress-bar-warning" tooltipPosition="top" pTooltip="Marked" role="progressbar" [style.width.%]="width(i,j)[1]">{{width(i,j)[1]|round}}
+                                                <div class="progress-bar progress-bar-warning" tooltipPosition="top" pTooltip="Marked" role="progressbar" [style.width.%]="headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'])[1]">{{headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'])[1]|round}}
                                                 </div>
-                                                <div class="progress-bar progress-bar-danger" tooltipPosition="top" pTooltip="Incorrect" role="progressbar" [style.width.%]="width(i,j)[2]">{{width(i,j)[2]|round}}
+                                                <div class="progress-bar progress-bar-danger" tooltipPosition="top" pTooltip="Incorrect" role="progressbar" [style.width.%]="headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'])[2]">{{headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'])[2]|round}}
                                                 </div>
                                             </div>
-                                            <div *ngIf="showMark" class="progress hover" (click)="show(i,j)">
-                                                <div class="progress-bar progress-bar-success" tooltipPosition="top" pTooltip="Correct" [style.width.%]="width(i,j,true)[0]" role="progressbar">{{width(i,j,true)[0]|round}}
+                                            <div *ngIf="!showMark" class="progress hover" (click)="show(chapter['id'],test['id'])">
+                                                <div class="progress-bar progress-bar-success" tooltipPosition="top" pTooltip="Correct" [style.width.%]="headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'],true)[0]" role="progressbar">{{headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'],true)[0]|round}}
                                                 </div>
-                                                <div class="progress-bar progress-bar-danger" tooltipPosition="top" pTooltip="Incorrect" [style.width.%]="width(i,j,true)[1]" role="progressbar">{{width(i,j,true)[1]|round}}
+                                                <div class="progress-bar progress-bar-danger" tooltipPosition="top" pTooltip="Incorrect" [style.width.%]="headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'],true)[1]" role="progressbar">{{headerWidth(test.result['total_attempted_questions'],test.result['correct'],test.result['incorrect'],test.result['marked'],true)[1]|round}}
                                                 </div>
                                             </div>
                                         </div>

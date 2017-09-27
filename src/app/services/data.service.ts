@@ -1,11 +1,12 @@
 import { Injectable, OnChanges, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
+import { EventService } from './event.service';
 
 
 @Injectable()
 export class PersonalInfo {
-    userInfoEvent: EventEmitter<boolean> = new EventEmitter();
-    schoolEvent: EventEmitter<boolean> = new EventEmitter();
+    // userInfoEvent: EventEmitter<boolean> = new EventEmitter();
+    // schoolEvent: EventEmitter<boolean> = new EventEmitter();
     userInfo: any;
     classInfo: any;
     studentInfo: any;
@@ -19,7 +20,7 @@ export class PersonalInfo {
         return this.userTestimonials;
     }
 
-    constructor() { }
+    constructor(private event:EventService) { }
 
     setUserTestimonials(data){
         this.userTestimonials = data;
@@ -35,7 +36,8 @@ export class PersonalInfo {
                 this.dummySchoolInfo[key] = data['school_info'][key];
             }
         }
-        this.userInfoEvent.emit(true);
+        // this.userInfoEvent.emit(true);
+        this.event.emitUserInfoEvent();
     }
 
     setSchoolInfo(data) {
@@ -45,7 +47,8 @@ export class PersonalInfo {
         for (let key in data['complete_school_info']) {
             this.schoolInfo[key] = data['complete_school_info'][key]
         }
-        this.schoolEvent.emit(true);
+        // this.schoolEvent.emit(true);
+        this.event.emitSchoolEvent();
     }
 
 
@@ -136,11 +139,14 @@ export class chapterwiseTest {
     gk: any;
     science: any;
     english: any;
-    testEvent: EventEmitter<boolean> = new EventEmitter();
+    // testEvent: EventEmitter<boolean> = new EventEmitter();
     qaSet: any;
     testHistory: any;
     attemptDetails: any;
     activateRoute:boolean;
+    completeTestDetails;
+
+    constructor(private event:EventService){}
 
     setSubject(subject){
         this.subject = subject; 
@@ -151,6 +157,7 @@ export class chapterwiseTest {
     }
 
     setTestDetails(data) {
+        this.completeTestDetails = data;
         for (let i in data['generated']['subjects']) {
             switch (data['generated']['subjects'][i]['name']) {
                 case "Computer-Cyber":
@@ -178,10 +185,11 @@ export class chapterwiseTest {
                     break;
             }
         }
-        this.testEvent.emit(true);
+        // this.testEvent.emit(true);
+        this.event.emitTestEvent();
     }
 
-    setQuesAnswerSet(data) {
+     setQuesAnswerSet(data) {
         this.qaSet = data['attempt']['question_answer_set']
         if (data.hasOwnProperty('test_history')) {
             this.testHistory = data['test_history'];
@@ -212,10 +220,13 @@ export class Misc {
     syllabus: Array<any>;
     testDetails: any;
     login:boolean;
-    currentRoute: EventEmitter<[string]> = new EventEmitter();
+    // currentRoute: EventEmitter<[string]> = new EventEmitter();
+
+    constructor(private event:EventService){}
 
     setCurrentRoute(component){
-        this.currentRoute.emit(component);
+        // this.currentRoute.emit(component);
+        this.event.emitCurrentRouteEvent(component);
     }
 
     userTestimonial = [
@@ -299,257 +310,4 @@ export class Result {
         }
     }
 
-    testSummary = {
-        "Computer-Cyber": {
-            "Chapterwise Test": {
-                "completed": 34,
-                "generated": 44,
-                "notcompleted": 22
-            },
-            "Sample Test": {
-                "completed": 35,
-                "notcompleted": 65
-            },
-            "Mock Test": {
-                "completed": 74,
-                "notcompleted": 26
-            },
-            "Demo Test": {
-                "completed": 0,
-                "notcompleted": 100,
-            }
-        },
-        "Science": {
-            "Chapterwise Test": {
-                "completed": 74,
-                "generated": 13,
-                "notcompleted": 13
-            },
-            "Sample Test": {
-                "completed": 60,
-                "notcompleted": 40
-            },
-            "Mock Test": {
-                "completed": 34,
-                "notcompleted": 66
-            },
-            "Demo Test": {
-                "completed": 0,
-                "notcompleted": 100,
-            }
-        },
-        "Mathematics": {
-            "Chapterwise Test": {
-                "completed": 44,
-                "generated": 36,
-                "notcompleted": 20
-            },
-            "Sample Test": {
-                "completed": 42,
-                "notcompleted": 58
-            },
-            "Mock Test": {
-                "completed": 69,
-                "notcompleted": 31
-            },
-            "Demo Test": {
-                "completed": 0,
-                "notcompleted": 100,
-            }
-        },
-        "General-Knowledge": {
-            "Chapterwise Test": {
-                "completed": 48,
-                "generated": 20,
-                "notcompleted": 32
-            },
-            "Sample Test": {
-                "completed": 12,
-                "notcompleted": 88
-            },
-            "Mock Test": {
-                "completed": 45,
-                "notcompleted": 55
-            },
-            "Demo Test": {
-                "completed": 0,
-                "notcompleted": 100,
-            }
-        },
-        "English": {
-            "Chapterwise Test": {
-                "completed": 85,
-                "generated": 15,
-                "notcompleted": 0
-            },
-            "Sample Test": {
-                "completed": 45,
-                "notcompleted": 55
-            },
-            "Mock Test": {
-                "completed": 13,
-                "notcompleted": 87
-            },
-            "Demo Test": {
-                "completed": 0,
-                "notcompleted": 100,
-            }
-
-        },
-        "Reasoning": {
-            "Chapterwise Test": {
-                "completed": 0,
-                "generated": 0,
-                "notcompleted": 100
-            },
-            "Sample Test": {
-                "completed": 0,
-                "notcompleted": 100
-            },
-            "Mock Test": {
-                "completed": 54,
-                "notcompleted": 46
-            },
-            "Demo Test": {
-                "completed": 100,
-                "notcompleted": 0,
-            }
-        }
-    }
-
-    resultSummary = {
-        "Computer-Cyber": {
-            "Chapterwise Test": {
-                "right": 34,
-                "review": 44,
-                "wrong": 22
-            },
-            "Sample Test": {
-                "right": 35,
-                "review": 34,
-                "wrong": 31
-            },
-            "Mock Test": {
-                "right": 74,
-                "review": 22,
-                "wrong": 4
-            },
-            "Demo Test": {
-                "right": 34,
-                "review": 44,
-                "wrong": 22
-            }
-        },
-        "Science": {
-            "Chapterwise Test": {
-                "right": 74,
-                "review": 13,
-                "wrong": 13
-            },
-            "Sample Test": {
-                "right": 60,
-                "review": 34,
-                "wrong": 6
-            },
-            "Mock Test": {
-                "right": 34,
-                "review": 32,
-                "wrong": 34
-            },
-            "Demo Test": {
-                "right": 67,
-                "review": 23,
-                "wrong": 10
-            }
-        },
-        "Mathematics": {
-            "Chapterwise Test": {
-                "right": 44,
-                "review": 36,
-                "wrong": 20
-            },
-            "Sample Test": {
-                "right": 42,
-                "review": 42,
-                "wrong": 14
-            },
-            "Mock Test": {
-                "right": 69,
-                "review": 9,
-                "wrong": 22
-            },
-            "Demo Test": {
-                "right": 100,
-                "review": 0,
-                "wrong": 0
-            }
-        },
-        "General-Knowledge": {
-            "Chapterwise Test": {
-                "right": 48,
-                "review": 20,
-                "wrong": 32
-            },
-            "Sample Test": {
-                "right": 12,
-                "review": 5,
-                "wrong": 83
-            },
-            "Mock Test": {
-                "right": 45,
-                "review": 15,
-                "wrong": 40
-            },
-            "Demo Test": {
-                "right": 100,
-                "review": 0,
-                "wrong": 0
-            }
-        },
-        "English": {
-            "Chapterwise Test": {
-                "right": 85,
-                "review": 15,
-                "wrong": 0
-            },
-            "Sample Test": {
-                "right": 45,
-                "review": 25,
-                "wrong": 30
-            },
-            "Mock Test": {
-                "right": 13,
-                "review": 2,
-                "wrong": 85
-            },
-            "Demo Test": {
-                "right": 0,
-                "review": 100,
-                "wrong": 0
-            }
-        },
-        "Reasoning": {
-            "Chapterwise Test": {
-                "right": 0,
-                "review": 0,
-                "wrong": 100
-            },
-            "Sample Test": {
-                "right": 0,
-                "review": 100,
-                "wrong": 0
-            },
-            "Mock Test": {
-                "right": 54,
-                "review": 21,
-                "wrong": 25
-            },
-            "Demo Test": {
-                "right": 34,
-                "review": 44,
-                "wrong": 22
-            }
-        }
-
-    }
 }

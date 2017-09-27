@@ -98,6 +98,7 @@ import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemo
 //services
 import { ConfirmationService } from 'primeng/primeng';
 import { LoginRegisterService } from './services/loginRegister.service';
+import { EventService } from './services/event.service';
 import { MasterHttpService } from './services/masterhttp.service';
 import { PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest } from './services/data.service';
 import { AccountGuard, TestAccountGuard, TestDeactivate } from './account/account.guard';
@@ -273,7 +274,9 @@ import { RoundPipe } from './pipes/round.pipe';
         LoginRegisterService,
         MasterHttpService,
         ConfirmationService,
-        PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest, AccountGuard, TestAccountGuard, TestDeactivate
+        PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest, 
+        AccountGuard, TestAccountGuard, TestDeactivate,
+        EventService
     ],
     bootstrap: [AppComponent]
 })

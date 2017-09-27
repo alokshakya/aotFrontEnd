@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ElementRef, Renderer, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MasterHttpService } from './services/masterhttp.service';
+import { EventService } from './services/event.service';
 import { JwtHelper } from 'angular2-jwt';
 import { Message } from 'primeng/primeng';
 
@@ -22,11 +23,11 @@ export class AppComponent implements AfterViewInit {
     growlMsg:Message[];
 
 
-    constructor(private router: Router,private masterhttp:MasterHttpService) { }
+    constructor(private router: Router,private masterhttp:MasterHttpService, private event:EventService) { }
 
     ngOnInit() {
         this.decodeJwt();
-        this.masterhttp.errorEvent.subscribe((data)=>{
+        this.event.errorEvent.subscribe((data)=>{
             if(data){
                 this.growlMsg = [];
                 this.growlMsg.push({severity:'error',summary:'Server Error',detail:'Please Login'});

@@ -3,7 +3,7 @@ import { SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 
-import { SubjectInfo, Result, Misc } from '../../services/data.service';
+import { SubjectInfo, chapterwiseTest, Result, Misc } from '../../services/data.service';
 
 declare var MathJax:any;
 @Component({
@@ -35,7 +35,8 @@ export class DashboardComponent implements OnInit {
         public router: Router,
         public subjectInfo: SubjectInfo,
         public result: Result,
-        public misc: Misc
+        public misc: Misc,
+        public chTest:chapterwiseTest
     ) {}
 
     ngOnInit() {
@@ -144,12 +145,9 @@ export class DashboardComponent implements OnInit {
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     }
 
-    chapterwiseTest(index){
-        let totalTests = this.result.completeResult['generated']['subjects'][index]['total_tests']
-        let totalGen = this.result.completeResult['generated']['subjects'][index]['total_generated']
-        let remaining = totalTests-totalGen;
-        let completed = totalGen-1;
-        return [100*remaining/totalTests, 100*totalGen/totalTests,(totalGen-remaining)/totalTests]
+    chapterwiseTest(generated,total){
+        let remaining = total-generated;
+        return [100*remaining/total, 100*generated/total,(generated-remaining)/total]
     }
 
     chapterwiseResult(index){
