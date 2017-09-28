@@ -45,6 +45,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     response: any;
 
     questionStatus: any;
+    questionResponse:any;
 
     hintDisplay: any;
 
@@ -60,6 +61,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
     history:boolean;
     attemptHistory:any;
 
+    correctOptionIndex:any;
     lastQuestion:number;
     errMsg:Message[];
     imageUrl:string;
@@ -108,6 +110,9 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         this.history = false;
         this.setCorrectAnswer();
         this.showHint();
+        if(this.questionStatus[this.clickListener]=='Correct'||this.questionStatus[this.clickListener]=='Wrong'){
+            this.answer = this.selectedQuestion['attempted_answer_id'];
+        }
     }
 
     setResponse(){
@@ -145,6 +150,7 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
         for (let i in this.selectedQuestion['answers']) {
             if (this.selectedQuestion['answers'][i]['id'] == this.selectedQuestion['correct_answer_id']) {
                 this.correctAnswer = this.selectedQuestion['answers'][i];
+                this.correctOptionIndex = i;
                 break;
             }
         }
@@ -152,17 +158,18 @@ export class TakedemotestComponent implements OnInit, ComponentCanDeactivate {
 
     validate() {
         this.spinner = true;
-        this.response[this.clickListener] = this.selectedQuestion['answers'][this.answer];
+        this.response[this.clickListener] = this.answer;
         this.wrapper['mark_for_review'] = "0";
         this.wrapper['question_id'] = this.selectedQuestion['id'];
         this.wrapper['correct_answer'] = this.selectedQuestion['correct_answer_id'];
-        this.wrapper['attempted_answer'] = this.selectedQuestion['answers'][this.answer]['id'];
+        this.wrapper['attempted_answer'] = this.answer;
         this.masterhttp.nextQuestion(this.wrapper).subscribe((data) => {
-            if (data['status'] == 200) {       
+            if (data['status'] == 200) {
                 this.attemptedQues += 1;
                 this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
                 // this.counter+=Math.ceil(100/this.totalQues);
-                if (this.selectedQuestion['correct_answer_id'] == this.selectedQuestion['answers'][this.answer]['id']) {
+                this.chapterwiseTest.qaSet[this.clickListener]['attempted_answer_id'] = this.answer;
+                if (this.selectedQuestion['correct_answer_id'] == this.answer) {
                     this.questionStatus[this.clickListener] = "Correct";
                     this.correct = true;
                 }

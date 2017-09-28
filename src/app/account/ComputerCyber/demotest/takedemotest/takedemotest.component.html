@@ -80,14 +80,14 @@
                     <div class="ui-g">
                         <div class="ui-g-6 ui-sm-12">
                             <span id="a">A</span>
-                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="0" [(ngModel)]="answer"></p-radioButton><span [MathJax]="selectedQuestion['answers'][0]['answer']"></span>
+                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][0]['id']}}" [(ngModel)]="answer"></p-radioButton><span [MathJax]="selectedQuestion['answers'][0]['answer']"></span>
                             <div class="image" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][0]['image']['image_path']}}{{selectedQuestion['answers'][0]['image']['file_name']}}">
                             </div>
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="b">B</span>
-                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="1" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][1]['id']}}" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][1]['answer']"></span>
                             <div class="image" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][1]['image']['image_path']}}{{selectedQuestion['answers'][1]['image']['file_name']}}">
@@ -95,7 +95,7 @@
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="c">C</span>
-                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="2" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][2]['id']}}" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][2]['answer']"></span>
 
                             <div class="image" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="ui-g-6 ui-sm-12">
                             <span id="d">D</span>
-                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="3" [(ngModel)]="answer"></p-radioButton>
+                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][3]['id']}}" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][3]['answer']"></span>
 
                             <div class="image" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null">
@@ -121,7 +121,11 @@
                                     <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br><br></span>
                                     <br *ngIf="correct">
                                     <br *ngIf="correct">
-                                    <span class="correct">Correct Answer: {{correctAnswer['answer']}} <br><br></span>
+                                    <span class="correct" *ngIf="correctOptionIndex==0">Correct Answer: <span id="a">A</span> {{correctAnswer['answer']}} <br><br></span>
+                                    <span class="correct" *ngIf="correctOptionIndex==1">Correct Answer: <span id="b">B</span> {{correctAnswer['answer']}} <br><br></span>
+                                    <span class="correct" *ngIf="correctOptionIndex==2">Correct Answer: <span id="c">C</span> {{correctAnswer['answer']}} <br><br></span>
+                                    <span class="correct" *ngIf="correctOptionIndex==3">Correct Answer: <span id="d">D</span> {{correctAnswer['answer']}} <br><br></span>
+
                                 </div>
                                 <div class="hintimg" *ngIf="correctAnswer['image']['image_path']!=null">
                                     <img src="{{imageUrl}}{{correctAnswer['image']['image_path']}}{{correctAnswer['image']['file_name']}}">
