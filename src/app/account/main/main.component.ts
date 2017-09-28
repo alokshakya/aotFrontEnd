@@ -5,6 +5,8 @@ import { MasterHttpService } from '../../services/masterhttp.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Misc } from '../../services/data.service';
+import * as constants from '../../../config/constants';
+import { Message } from 'primeng/primeng';
 
 enum MenuOrientation {
     STATIC,
@@ -67,6 +69,8 @@ export class AccountMainComponent implements AfterViewInit {
     email: string;
     class: string;
     name: string;
+    xhr:any;
+    growlMsg:Message[];
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
@@ -88,6 +92,11 @@ export class AccountMainComponent implements AfterViewInit {
         if (this.email.length > 24) {
             this.shownEmail = this.email.slice(24, );
         }
+    }
+
+    messageDisplay(severity,summary,detail){
+        this.growlMsg = [];
+        this.growlMsg.push({severity:severity,summary:summary,detail:detail});
     }
 
     ngAfterViewInit() {
@@ -148,6 +157,25 @@ export class AccountMainComponent implements AfterViewInit {
                 jQuery(this.layoutMenuScroller).nanoScroller();
             }, 500);
         }
+    }
+
+
+
+    onBeforeSend(e){
+        e.xhr.setRequestHeader('session_token',localStorage.getItem('session_token'))
+        e.xhr.setRequestHeader('Olympiadbox-Api-Key',constants.OLYMPIADBOX_API_KEY)
+    }
+
+
+
+    onUpload(e){
+        e.files = [];
+        let a = JSON.parse(e.xhr.response);
+        if(a['status']!=200){
+            this.messageDisplay('error','Error','Couldn\'t Update Image')
+        }
+        this.changeImg = false;
+        // console.log(e.xhr.response.responseType);
     }
 
     onTopbarMenuButtonClick(event) {
