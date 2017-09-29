@@ -102,6 +102,14 @@ export class ChapterwisetestReasoningComponent implements OnInit {
         this.makeGraph();
     }
 
+    
+    shade(index){
+        if(index==0||index==2||index==4){
+            return 'dark';
+        }
+        return 'light';
+    }
+
     tabOpen(e) {
         if (this.check(e)) {
             this.selectedChapter = this.subjectInfo.reasoningChapters['chapters'][e.index]['id'];

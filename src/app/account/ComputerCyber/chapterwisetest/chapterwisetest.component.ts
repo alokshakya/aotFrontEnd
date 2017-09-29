@@ -201,6 +201,13 @@ export class ChapterwisetestComponent implements OnInit {
             });
     }
 
+    shade(index){
+        if(index==0||index==2||index==4){
+            return 'dark';
+        }
+        return 'light';
+    }
+
     checkGeneratedTest() {
         if (this.chapterwiseTest.qaSet.length == 15) {
             return true;

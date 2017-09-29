@@ -18,6 +18,25 @@
     overflow-y: auto;
 }
 
+
+.dark, .light{
+    margin-left: 1%;
+        display: inline-block;
+    color: white;
+    text-align: center;
+    width: 22px;
+    height: 21px;
+    border-radius: 20%;
+}
+
+.dark{
+    background-color: #5A5955;
+}
+
+.light{
+    background-color: #A4A5AA
+}
+
 .spin1{
     margin-left: 63%;
 }

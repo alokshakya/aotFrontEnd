@@ -65,6 +65,14 @@ export class ChapterwisetestScienceComponent implements OnInit {
         this.generatedPanel();
     }
 
+    
+    shade(index){
+        if(index==0||index==2||index==4){
+            return 'dark';
+        }
+        return 'light';
+    }
+
     makeGraph(){
         let chapters = 0;
         let remaining = 0;

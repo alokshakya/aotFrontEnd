@@ -174,7 +174,10 @@ export class AccountMainComponent implements AfterViewInit {
         if(a['status']!=200){
             this.messageDisplay('error','Error','Couldn\'t Update Image')
         }
-        this.changeImg = false;
+        else{
+            this.masterhttp.getPersonalInfo();
+            this.changeImg = false;
+        }
         // console.log(e.xhr.response.responseType);
     }
 
