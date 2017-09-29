@@ -119,12 +119,12 @@
                                 <div>
                                     <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br><br></span>
                                     <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br><br></span>
-                                    <br *ngIf="correct">
-                                    <br *ngIf="correct">
-                                    <span class="correct" *ngIf="correctOptionIndex==0">Correct Answer: <span id="a">A</span> {{correctAnswer['answer']}} <br><br></span>
-                                    <span class="correct" *ngIf="correctOptionIndex==1">Correct Answer: <span id="b">B</span> {{correctAnswer['answer']}} <br><br></span>
-                                    <span class="correct" *ngIf="correctOptionIndex==2">Correct Answer: <span id="c">C</span> {{correctAnswer['answer']}} <br><br></span>
-                                    <span class="correct" *ngIf="correctOptionIndex==3">Correct Answer: <span id="d">D</span> {{correctAnswer['answer']}} <br><br></span>
+                                    <!-- <br *ngIf="correct"> -->
+                                    <!-- <br *ngIf="correct"> -->
+                                    <span class="correct" *ngIf="correctOptionIndex==0">Correct Answer: <span id="a">A</span><span [MathJax]="correctAnswer['answer']"></span><br><br></span>
+                                    <span class="correct" *ngIf="correctOptionIndex==1">Correct Answer: <span id="b">B</span> <span [MathJax]="correctAnswer['answer']"></span><br><br></span>
+                                    <span class="correct" *ngIf="correctOptionIndex==2">Correct Answer: <span id="c">C</span> <span [MathJax]="correctAnswer['answer']"></span><br><br></span>
+                                    <span class="correct" *ngIf="correctOptionIndex==3">Correct Answer: <span id="d">D</span> <span [MathJax]="correctAnswer['answer']"></span> <br><br></span>
 
                                 </div>
                                 <div class="hintimg" *ngIf="correctAnswer['image']['image_path']!=null">
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                             <div class="ui-g-6">
-                                <i class="fa fa-lightbulb-o fa-lg" style="color:#EEA236"></i> &nbsp; Hint: {{selectedQuestion['hint']['name']}}
+                                <i class="fa fa-lightbulb-o fa-lg" style="color:#EEA236"></i> &nbsp; Hint: <span [MathJax]="selectedQuestion['hint']['name']"></span>
                                 <div class="valimg" *ngIf="selectedQuestion['hint']['image']['file_name']!=null">
                                     <img src="{{imageUrl}}{{selectedQuestion['hint']['image']['image_path']}}{{selectedQuestion['hint']['image']['file_name']}}">
                                 </div>
