@@ -205,7 +205,7 @@
                     <br>
                     <button pButton *ngIf="modeStr=='forgotVerifyMobile'&&spinner" style="width:60px" icon="fa fa-circle-o-notch fa-lg fa-spin fa-forward" class="ui-button-success"></button>
 
-                    <button pButton *ngIf="modeStr!='forgotVerifyMobile'||!spinner" class="ui-button-success" [disabled]="mobileVerified||spinner" (click)="setWrapper(true,'mobile');verifyOtp();spinnerCondition('forgotVerifyMobile')" label="Verify"></button>;
+                    <button pButton *ngIf="modeStr!='forgotVerifyMobile'||!spinner" class="ui-button-success" [disabled]="mobileVerified||spinner" (click)="setWrapper(true,'mobile');verifyOtp();spinnerCondition('forgotVerifyMobile')" label="Verify"></button>
                 
                     <button pButton *ngIf="modeStr=='forgotResendMobile'&&spinner" style="width:70px" icon="fa fa-circle-o-notch fa-lg fa-spin fa-forward" class="ui-button-info"></button>
 
@@ -222,7 +222,7 @@
                     <br>
                     <button *ngIf="modeStr=='forgotVerifyEmail'&&spinner2" pButton style="width:60px" icon="fa fa-circle-o-notch fa-lg fa-spin fa-forward" class="ui-button-success"></button>
                     
-                    <button pButton *ngIf="modeStr!='forgotVerifyEmail'||!spinner2" [disabled]="emailVerified||spinner2" class="ui-button-success" (click)="setWrapper(true,'email');verifyOtp();spinnerCondition('forgotVerifyEmail')" label="Verify"></button>;
+                    <button pButton *ngIf="modeStr!='forgotVerifyEmail'||!spinner2" [disabled]="emailVerified||spinner2" class="ui-button-success" (click)="setWrapper(true,'email');verifyOtp();spinnerCondition('forgotVerifyEmail')" label="Verify"></button>
                 
                     <button *ngIf="modeStr=='forgotResendEmail'&&spinner2" pButton style="width:70px" icon="fa fa-circle-o-notch fa-lg fa-spin fa-forward" class="ui-button-info"></button>
 
