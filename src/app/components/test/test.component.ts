@@ -127,17 +127,17 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
                 this.lastQuestion = parseInt(i);
             }
             switch (this.chapterwiseTest.qaSet[i]['state']) {
-            case "correct":
+            case "c":
                 this.questionStatus[i] = "Correct";
                 this.attemptedQues++;
                 break;
             
-            case "wrong":
+            case "i":
                 this.questionStatus[i] = "Wrong";
                 this.attemptedQues++;
                 break;
 
-            case "marked":
+            case "m":
                 this.questionStatus[i] = "Marked"
                 this.attemptedQues++;
                 break;
