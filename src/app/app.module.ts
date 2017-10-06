@@ -76,24 +76,24 @@ import { TreeTableModule } from 'primeng/primeng';
 
 //Default theme Components
 import { AppComponent } from './app.component';
-import { AppMenuComponent, AppSubMenu } from './account/main/main.menu.component';
-import { AppTopBar } from './account/apptopbar/app.topbar.component';
-import { AppFooter } from './account/appfooter/app.footer.component';
-import { InlineProfileComponent } from './account/appProfile/app.profile.component';
+import { AppMenuComponent, AppSubMenu } from './components/account/main/main.menu.component';
+import { AppTopBar } from './components/account/apptopbar/app.topbar.component';
+import { AppFooter } from './components/account/appfooter/app.footer.component';
+import { InlineProfileComponent } from './components/account/appProfile/app.profile.component';
 
 
 //Added Components
-import { AccountMainComponent } from "./account/main/main.component";
-import { DashboardComponent } from './account/dashboard/dashboard.component';
-import { AccountsettingsComponent } from './account/accountsettings/accountsettings.component';
-import { DemotestComponent } from './account/ComputerCyber/demotest/demotest.component';
-import { ChapterwisetestComponent } from './account/ComputerCyber/chapterwisetest/chapterwisetest.component';
-import { SampletestComponent } from './account/ComputerCyber/sampletest/sampletest.component';
-import { MocktestComponent } from './account/ComputerCyber/mocktest/mocktest.component';
-import { ResultComponent } from './account/ComputerCyber/result/result.component';
-import { ProfileComponent } from './account/profile/profile.component';
-import { LoginComponent } from './login/login.component';
-import { TakedemotestComponent } from './account/ComputerCyber/demotest/takedemotest/takedemotest.component';
+import { AccountMainComponent } from "./components/account/main/main.component";
+import { DashboardComponent } from './components/account/dashboard/dashboard.component';
+import { AccountsettingsComponent } from './components/account/accountsettings/accountsettings.component';
+import { DemotestComputersComponent } from './components/account/computers/demotest/demotest-computers.component';
+import { ChapterwisetestComputersComponent } from './components/account/computers/chapterwisetest/chapterwisetest-computers.component';
+import { SampletestComputersComponent } from './components/account/computers/sampletest/sampletest-computers.component';
+import { MocktestComputersComponent } from './components/account/computers/mocktest/mocktest-computers.component';
+import { ResultComputersComponent } from './components/account/computers/result/result-computers.component';
+import { ProfileComponent } from './components/account/profile/profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { TestComponent } from './components/test/test.component';
 
 //services
 import { ConfirmationService } from 'primeng/primeng';
@@ -101,7 +101,7 @@ import { LoginRegisterService } from './services/loginRegister.service';
 import { EventService } from './services/event.service';
 import { MasterHttpService } from './services/masterhttp.service';
 import { PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest } from './services/data.service';
-import { AccountGuard, TestAccountGuard, TestDeactivate } from './account/account.guard';
+import { AccountGuard, TestAccountGuard, TestDeactivate } from './components/account/account.guard';
 
 //Moment
 // import * as moment from 'moment';
@@ -110,39 +110,39 @@ import { AccountGuard, TestAccountGuard, TestDeactivate } from './account/accoun
 //pipes
 import { KeysPipe } from './pipes/keys.pipe';
 import { CssIdPipe } from './pipes/css-id.pipe';
-import { LoadoutComponent } from './account/loadout/loadout.component';
+import { LoadoutComponent } from './components/account/loadout/loadout.component';
 
-import { DemotestEnglishComponent } from './account/english/demotest-english/demotest-english.component';
-import { ChapterwisetestEnglishComponent } from './account/english/chapterwisetest-english/chapterwisetest-english.component';
-import { SampletestEnglishComponent } from './account/english/sampletest-english/sampletest-english.component';
-import { MocktestEnglishComponent } from './account/english/mocktest-english/mocktest-english.component';
-import { ResultEnglishComponent } from './account/english/result-english/result-english.component';
-
-
-import { ChapterwisetestScienceComponent } from './account/science/chapterwisetest-science/chapterwisetest-science.component';
-import { DemotestScienceComponent } from './account/science/demotest-science/demotest-science.component';
-import { MocktestScienceComponent } from './account/science/mocktest-science/mocktest-science.component';
-import { SampletestScienceComponent } from './account/science/sampletest-science/sampletest-science.component';
-import { ResultScienceComponent } from './account/science/result-science/result-science.component';
-
-import { ChapterwisetestMathComponent } from './account/mathematics/chapterwisetest-math/chapterwisetest-math.component';
-import { DemotestMathComponent } from './account/mathematics/demotest-math/demotest-math.component';
-import { MocktestMathComponent } from './account/mathematics/mocktest-math/mocktest-math.component';
-import { ResultMathComponent } from './account/mathematics/result-math/result-math.component';
-import { SampletestMathComponent } from './account/mathematics/sampletest-math/sampletest-math.component';
-
-import { ChapterwisetestGkComponent } from './account/gk/chapterwisetest-gk/chapterwisetest-gk.component';
-import { SampletestGkComponent } from './account/gk/sampletest-gk/sampletest-gk.component';
-import { MocktestGkComponent } from './account/gk/mocktest-gk/mocktest-gk.component';
-import { DemotestGkComponent } from './account/gk/demotest-gk/demotest-gk.component';
-import { ResultGkComponent } from './account/gk/result-gk/result-gk.component';
+import { DemotestEnglishComponent } from './components/account/english/demotest/demotest-english.component';
+import { ChapterwisetestEnglishComponent } from './components/account/english/chapterwisetest/chapterwisetest-english.component';
+import { SampletestEnglishComponent } from './components/account/english/sampletest/sampletest-english.component';
+import { MocktestEnglishComponent } from './components/account/english/mocktest/mocktest-english.component';
+import { ResultEnglishComponent } from './components/account/english/result/result-english.component';
 
 
-import { ChapterwisetestReasoningComponent } from './account/reasoning/chapterwisetest-reasoning/chapterwisetest-reasoning.component';
-import { SampletestReasoningComponent } from './account/reasoning/sampletest-reasoning/sampletest-reasoning.component';
-import { DemotestReasoningComponent } from './account/reasoning/demotest-reasoning/demotest-reasoning.component';
-import { MocktestReasoningComponent } from './account/reasoning/mocktest-reasoning/mocktest-reasoning.component';
-import { ResultReasoningComponent } from './account/reasoning/result-reasoning/result-reasoning.component';
+import { ChapterwisetestScienceComponent } from './components/account/science/chapterwisetest/chapterwisetest-science.component';
+import { DemotestScienceComponent } from './components/account/science/demotest/demotest-science.component';
+import { MocktestScienceComponent } from './components/account/science/mocktest/mocktest-science.component';
+import { SampletestScienceComponent } from './components/account/science/sampletest/sampletest-science.component';
+import { ResultScienceComponent } from './components/account/science/result/result-science.component';
+
+import { ChapterwisetestMathComponent } from './components/account/mathematics/chapterwisetest/chapterwisetest-math.component';
+import { DemotestMathComponent } from './components/account/mathematics/demotest/demotest-math.component';
+import { MocktestMathComponent } from './components/account/mathematics/mocktest/mocktest-math.component';
+import { ResultMathComponent } from './components/account/mathematics/result/result-math.component';
+import { SampletestMathComponent } from './components/account/mathematics/sampletest/sampletest-math.component';
+
+import { ChapterwisetestGkComponent } from './components/account/gk/chapterwisetest/chapterwisetest-gk.component';
+import { SampletestGkComponent } from './components/account/gk/sampletest/sampletest-gk.component';
+import { MocktestGkComponent } from './components/account/gk/mocktest/mocktest-gk.component';
+import { DemotestGkComponent } from './components/account/gk/demotest/demotest-gk.component';
+import { ResultGkComponent } from './components/account/gk/result/result-gk.component';
+
+
+import { ChapterwisetestReasoningComponent } from './components/account/reasoning/chapterwisetest/chapterwisetest-reasoning.component';
+import { SampletestReasoningComponent } from './components/account/reasoning/sampletest/sampletest-reasoning.component';
+import { DemotestReasoningComponent } from './components/account/reasoning/demotest/demotest-reasoning.component';
+import { MocktestReasoningComponent } from './components/account/reasoning/mocktest/mocktest-reasoning.component';
+import { ResultReasoningComponent } from './components/account/reasoning/result/result-reasoning.component';
 
 import {MathJaxDirective} from './directives/mathjax.directive';
 import { RoundPipe } from './pipes/round.pipe';
@@ -230,14 +230,14 @@ import { RoundPipe } from './pipes/round.pipe';
         AccountMainComponent,
         DashboardComponent,
         AccountsettingsComponent,
-        DemotestComponent,
-        ChapterwisetestComponent,
-        SampletestComponent,
-        MocktestComponent,
-        ResultComponent,
+        DemotestComputersComponent,
+        ChapterwisetestComputersComponent,
+        SampletestComputersComponent,
+        MocktestComputersComponent,
+        ResultComputersComponent,
         ProfileComponent,
         LoginComponent,
-        TakedemotestComponent,
+        TestComponent,
         KeysPipe,
         CssIdPipe,
         LoadoutComponent,

@@ -194,6 +194,10 @@ export class MasterHttpService {
     }
     // -------------------------------------------------------------------------------------------------
 
+    retakeTest(requestBody){
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+ '/test/retake', requestBody, {headers: this.queryHeaders})
+        .map((resp: Response) => resp.json())
+    }
 
     getTestimonials() {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/tablerecords/testimonial', { headers: this.queryHeaders }).map((resp: Response) => resp.json())

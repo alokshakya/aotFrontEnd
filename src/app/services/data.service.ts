@@ -279,6 +279,8 @@ export class Result {
     reasoning;
     completeResult;
 
+    constructor(private event:EventService){}
+
     setResult(data) {
         this.completeResult = data;
         for (let i in data['generated']['subjects']) {
@@ -308,6 +310,8 @@ export class Result {
                     break;
             }
         }
+        this.event.emitResultEvent();
+        
     }
 
 }

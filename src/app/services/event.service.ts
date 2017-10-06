@@ -7,6 +7,8 @@ export class EventService {
     schoolEvent: EventEmitter<boolean> = new EventEmitter();
     testEvent: EventEmitter<boolean> = new EventEmitter();
     currentRoute: EventEmitter<[string]> = new EventEmitter();
+    resultEvent: EventEmitter<boolean> = new EventEmitter();
+
 
 
 
@@ -26,10 +28,16 @@ export class EventService {
 
 	emitTestEvent(){
 		this.testEvent.emit(true);
-	}
+	} 
 
 	emitCurrentRouteEvent(component){
 		this.currentRoute.emit(component);
 	}
+
+	emitResultEvent(){
+		this.resultEvent.emit(true);
+	}
+
+
 
 }
