@@ -17,10 +17,11 @@
         <div #layoutMenuScroller class="nano">
             <div class="nano-content menu-scroll-content">
                 <div class="ui-g">
-                    <div class="ui-g-12 ui-g-nopad">
-                        <img class="img-responsive" src="../../../assets/layout/images/Profile_picture.png">
-                        <!-- <img class="img-responsive" src="{{personalInfo.userInfo['image_path']}}"> -->
-
+                    <div class="ui-g-12 ui-g-nopad" id="menu-block">
+                        <img class="img-responsive profile-img" *ngIf="personalInfo.userInfo['image_path']==null" src="../../../assets/layout/images/Profile_picture.png">
+                        <img class="img-responsive profile-img" *ngIf="personalInfo.userInfo['image_path']!=null" src="{{personalInfo.userInfo['image_path']}}">
+                        <!-- <img class="img-responsive" src="../../../assets/layout/images/21.jpg"> -->
+                        <!-- <img class="img-responsive profile-img" src="../../../assets/layout/images/favicon.png"> -->
                     </div>
                 </div>
                 <div style="padding-left:20px;color:white">
