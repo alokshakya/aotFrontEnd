@@ -1,7 +1,7 @@
 <p-dialog header="Change Profile Picture" responsive="true" [(visible)]="changeImg">
     <div class="ui-g">
         <div class="ui-g-12">
-            <p-fileUpload invalidFileTypeMessageSummary="{0}: Invalid file type," [showCancelButton]="false" name="userfile" url="http://localhost/backy-api/profilepicture/upload" accept="image/*" (onError)="messageDisplay('error','Error','Could Not Update')" previewWidth="200" (onUpload)="onUpload($event)" (onBeforeSend)="onBeforeSend($event)" maxFileSize="3000000">
+            <p-fileUpload invalidFileTypeMessageSummary="{0}: Invalid file type," [showCancelButton]="false" name="userfile" url="{{imgUploadUrl}}" accept="image/*" (onError)="messageDisplay('error','Error','Could Not Update')" previewWidth="200" (onUpload)="onUpload($event)" (onBeforeSend)="onBeforeSend($event)" maxFileSize="3000000">
             </p-fileUpload>
         </div>
     </div>
