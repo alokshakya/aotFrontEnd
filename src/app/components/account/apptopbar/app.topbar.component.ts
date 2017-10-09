@@ -4,10 +4,8 @@ import { Router } from '@angular/router';
 import { PersonalInfo, Misc } from '../../../services/data.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
 import { EventService } from '../../../services/event.service';
-
 import { Observable } from 'rxjs/Rx';
-import * as handle from '../../../services/data.service';
-
+import * as constants from '../../../../config/constants';
 
 @Component({
     selector: 'app-topbar',
@@ -16,6 +14,8 @@ import * as handle from '../../../services/data.service';
 export class AppTopBar implements OnInit {
 
     currentPage: Array<string>;
+    imgTimeStamp;
+    imgPath:string;
     constructor( @Inject(forwardRef(() => AccountMainComponent)) public app: AccountMainComponent,
         public router: Router,
         public misc: Misc,
@@ -48,7 +48,13 @@ export class AppTopBar implements OnInit {
     }
 
     ngOnInit() {
+        this.imgPath = constants.OLYMPIADBOX_IMG_URL;
         this.activeComponent();
+        this.event.userInfoEvent.subscribe((data)=>{
+            if(data){
+                this.getDate();
+            }
+        })
 
         this.router.events.subscribe(event => {
             let a = event['url'];
@@ -56,6 +62,10 @@ export class AppTopBar implements OnInit {
             this.currentPage.shift();
             this.currentPage.shift();
         })
+    }
+
+    getDate(){
+        this.imgTimeStamp = new Date().getTime();
     }
 
     redirect(target) {

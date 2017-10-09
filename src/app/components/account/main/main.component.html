@@ -19,7 +19,7 @@
                 <div class="ui-g">
                     <div class="ui-g-12 ui-g-nopad" id="menu-block">
                         <img class="img-responsive profile-img" *ngIf="personalInfo.userInfo['image_path']==null" src="../../../assets/layout/images/Profile_picture.png">
-                        <img class="img-responsive profile-img" *ngIf="personalInfo.userInfo['image_path']!=null" src="{{imgPath}}{{personalInfo.userInfo['image_path']}}">
+                        <img class="img-responsive profile-img" *ngIf="personalInfo.userInfo['image_path']!=null" src="{{imgPath}}{{personalInfo.userInfo['image_path']}}?{{imgTimeStamp}}">
                         <!-- <img class="img-responsive" src="../../../assets/layout/images/21.jpg"> -->
                         <!-- <img class="img-responsive profile-img" src="../../../assets/layout/images/favicon.png"> -->
                     </div>
@@ -29,7 +29,7 @@
                         <h5>{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</h5>
                         <h5>Class {{personalInfo.classInfo.abbreviation}}</h5>
                         <h5 pTooltip="{{shownEmail}}" tooltipPosition="bottom">{{personalInfo.userInfo.email}}</h5>
-                        <i pTooltip="Change Profile Picture" tooltipPosition="bottom" class="fa fa-edit" (click)="changeImg=true"></i>
+                        <i pTooltip="Change Profile Picture" style="color:white" tooltipPosition="bottom" class="fa fa-edit" (click)="changeImg=true"></i>
                     </div>
                 </div>
                 <hr>

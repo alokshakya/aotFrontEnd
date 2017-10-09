@@ -1,7 +1,8 @@
 import { Router } from '@angular/router';
-import { Component, AfterViewInit, OnInit, ElementRef, Renderer, ViewChild, OnDestroy } from '@angular/core';
+import { Component, AfterViewInit, OnInit, ElementRef, Renderer, ViewChild, OnDestroy, OnChanges } from '@angular/core';
 import { PersonalInfo } from '../../../services/data.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
+import { EventService } from '../../../services/event.service';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Misc } from '../../../services/data.service';
@@ -73,6 +74,7 @@ export class AccountMainComponent implements AfterViewInit {
     name: string;
     xhr:any;
     growlMsg:Message[];
+    imgTimeStamp;
     @ViewChild('layoutWrapper') layourContainerViewChild: ElementRef;
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
@@ -84,6 +86,7 @@ export class AccountMainComponent implements AfterViewInit {
         public personalInfo: PersonalInfo,
         public misc: Misc,
         public masterhttp: MasterHttpService,
+        public uEvent: EventService
     )
     { }
 
@@ -96,6 +99,10 @@ export class AccountMainComponent implements AfterViewInit {
         if (this.email.length > 24) {
             this.shownEmail = this.email.slice(24, );
         }
+    }
+
+    getDate(){
+        this.imgTimeStamp = new Date().getTime();
     }
 
     messageDisplay(severity,summary,detail){
@@ -168,6 +175,11 @@ export class AccountMainComponent implements AfterViewInit {
     onBeforeSend(e){
         e.xhr.setRequestHeader('session_token',localStorage.getItem('session_token'))
         e.xhr.setRequestHeader('Olympiadbox-Api-Key',constants.OLYMPIADBOX_API_KEY)
+        this.uEvent.userInfoEvent.subscribe((data)=>{
+            if(data){
+                this.getDate();
+            }
+        })
     }
 
 
@@ -252,5 +264,4 @@ export class AccountMainComponent implements AfterViewInit {
         jQuery(this.layoutMenuScroller).nanoScroller({ flash: true });
         this.masterhttp.updated = 0;
     }
-
 }
