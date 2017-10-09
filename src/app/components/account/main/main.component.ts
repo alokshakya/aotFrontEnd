@@ -64,6 +64,7 @@ export class AccountMainComponent implements AfterViewInit {
 
     userEvent: any;
     imgUploadUrl:string;
+    imgPath:string;
 
     //profile data
     shownEmail: string;
@@ -88,6 +89,7 @@ export class AccountMainComponent implements AfterViewInit {
 
     ngOnInit() {
         this.imgUploadUrl = constants.OLYMPIADBOX_INSTANCE_URL+'/profilepicture/upload';
+        this.imgPath = constants.OLYMPIADBOX_IMG_URL;
         this.email = this.personalInfo.userInfo.email;
         this.shownEmail = this.email;
         this.class = this.personalInfo.classInfo.abbreviation;
@@ -174,13 +176,13 @@ export class AccountMainComponent implements AfterViewInit {
         e.files = [];
         let a = JSON.parse(e.xhr.response);
         // console.log(a);
-        if(a['status']!=200){
-            this.messageDisplay('error','Error','Could Not Update Image')
-        }
-        else{
+        if(a['status']==200){
             this.masterhttp.getPersonalInfo();
             this.changeImg = false;
             this.messageDisplay('success','Success','Profile Updated Successfully');
+        }
+        else{
+            this.messageDisplay('error','Error','Could Not Update Image');
         }
 
         // console.log(e.xhr.response.responseType);
