@@ -96,7 +96,7 @@ export class ChapterwisetestMathComponent implements OnInit {
         //generated chapters tab event
         this.currentTabIndex = e.index; 
     }
-
+ 
     generatedPanel() {
         this.generatedChapters = [];
         this.generatedChapterIds = [];
@@ -104,7 +104,7 @@ export class ChapterwisetestMathComponent implements OnInit {
             if (this.chapterwiseTest.math['chapters'][i].hasOwnProperty('tests')) {
                 this.generatedChapters.push(this.chapterwiseTest.math['chapters'][i]);
                 this.generatedChapterIds.push(this.chapterwiseTest.math['chapters'][i]['id'])
-                this.generatedChapters[i]['resultIndex'] = i;
+                // this.generatedChapters[i]['resultIndex'] = i;
             }
         }
         this.makeGraph();

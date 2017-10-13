@@ -90,7 +90,7 @@ export class ChapterwisetestComputersComponent implements OnInit {
             if (this.chapterwiseTest.computers['chapters'][i].hasOwnProperty('tests')) {
                 this.generatedChapters.push(this.chapterwiseTest.computers['chapters'][i]);
                 this.generatedChapterIds.push(this.chapterwiseTest.computers['chapters'][i]['id'])
-                this.generatedChapters[i]['resultIndex'] = i;
+                // this.generatedChapters[i]['resultIndex'] = i;
             }
         }
         this.makeGraph();

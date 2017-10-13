@@ -100,7 +100,7 @@ export class ChapterwisetestGkComponent implements OnInit {
             if (this.chapterwiseTest.gk['chapters'][i].hasOwnProperty('tests')) {
                 this.generatedChapters.push(this.chapterwiseTest.gk['chapters'][i]);
                 this.generatedChapterIds.push(this.chapterwiseTest.gk['chapters'][i]['id'])
-                this.generatedChapters[i]['resultIndex'] = i;
+                // this.generatedChapters[i]['resultIndex'] = i;
             }
         }
         this.makeGraph();

@@ -93,7 +93,7 @@ makeGraph(){
             if (this.chapterwiseTest.reasoning['chapters'][i].hasOwnProperty('tests')) {
                 this.generatedChapters.push(this.chapterwiseTest.reasoning['chapters'][i]);
                 this.generatedChapterIds.push(this.chapterwiseTest.reasoning['chapters'][i]['id'])
-                this.generatedChapters[i]['resultIndex'] = i;
+                // this.generatedChapters[i]['resultIndex'] = i;
             }
         }
         this.makeGraph();

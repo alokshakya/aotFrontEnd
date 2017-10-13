@@ -98,7 +98,7 @@ export class ChapterwisetestScienceComponent implements OnInit {
             if (this.chapterwiseTest.science['chapters'][i].hasOwnProperty('tests')) {
                 this.generatedChapters.push(this.chapterwiseTest.science['chapters'][i]);
                 this.generatedChapterIds.push(this.chapterwiseTest.science['chapters'][i]['id'])
-                this.generatedChapters[i]['resultIndex'] = i;
+                // this.generatedChapters[i]['resultIndex'] = i;
             }
         }
         this.makeGraph();
