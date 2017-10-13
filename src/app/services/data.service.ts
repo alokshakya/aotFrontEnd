@@ -70,9 +70,9 @@ export class SubjectInfo {
     gkChapters: Array<any>;
     mathChapters: Array<any>;
 
-    subscribedSubjects = { "Computer-Cyber": true, "Science": true, "Mathematics": true,
+    subscribedSubjects = { "Computers": true, "Science": true, "Mathematics": true,
      "English": true, "General-Knowledge": true, "Reasoning": true }
-    attemptedDemo = { "Computer-Cyber": false, "Science": false, "Mathematics": false, "English": false, "General-Knowledge": false, "Reasoning": false }
+    attemptedDemo = { "Computers": false, "Science": false, "Mathematics": false, "English": false, "General-Knowledge": false, "Reasoning": false }
 
     constructor() { }
 
@@ -81,7 +81,7 @@ export class SubjectInfo {
         for (let i in data) {
             this.subjectList.push(data[i]['name']);
             switch (data[i]['name']) {
-                case "Computer-Cyber":
+                case "Computers":
                     this.computerChapters = data[i];
                     break;
 
@@ -160,7 +160,7 @@ export class chapterwiseTest {
         this.completeTestDetails = data;
         for (let i in data['generated']['subjects']) {
             switch (data['generated']['subjects'][i]['name']) {
-                case "Computer-Cyber":
+                case "Computers":
                     this.computers = data['generated']['subjects'][i];
                     break;
 
@@ -282,7 +282,7 @@ export class Result {
         this.completeResult = data;
         for (let i in data['generated']['subjects']) {
             switch (data['generated']['subjects'][i]['name']) {
-                case "Computer-Cyber":
+                case "Computers":
                     this.computers = data['generated']['subjects'][i];
                     break;
 

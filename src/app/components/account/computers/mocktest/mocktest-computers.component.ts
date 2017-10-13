@@ -39,7 +39,7 @@ export class MocktestComputersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Computer-Cyber","Mock Test"]);
+        this.misc.setCurrentRoute(["Computers","Mock Test"]);
         this.misc.setLocalRoute('account/computers/mocktest');
 
         //for chart

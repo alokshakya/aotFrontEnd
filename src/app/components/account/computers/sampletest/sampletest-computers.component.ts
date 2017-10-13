@@ -47,7 +47,7 @@ export class SampletestComputersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Computer-Cyber","Sample Test"]);
+        this.misc.setCurrentRoute(["Computers","Sample Test"]);
         this.misc.setLocalRoute('account/computers/sampletest');
 
 

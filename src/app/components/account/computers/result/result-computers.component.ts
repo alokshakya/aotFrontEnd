@@ -194,7 +194,7 @@ export class ResultComputersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Computer-Cyber","Result"]);
+        this.misc.setCurrentRoute(["Computers","Result"]);
         this.misc.setLocalRoute('account/computers/result');
         this.showMark = true;
         this.resultPanel()

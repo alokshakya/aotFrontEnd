@@ -48,7 +48,7 @@ export class ChapterwisetestComputersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Computer-Cyber","Chapterwise Test"]);
+        this.misc.setCurrentRoute(["Computers","Chapterwise Test"]);
         this.misc.setLocalRoute('account/computers/chapterwisetest');
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
@@ -178,11 +178,8 @@ export class ChapterwisetestComputersComponent implements OnInit {
             "attempt":attempted,
             "completed":completed.toString()
         }
-
-        console.log(wrapper);
-
         this.chapterwiseTest.activateTestRoute();
-        this.chapterwiseTest.setSubject('Computer-Cyber');
+        this.chapterwiseTest.setSubject('Computers');
         this.masterhttp.beginTest(wrapper)
         .subscribe((data) => {
                 if (data['status'] == 200){

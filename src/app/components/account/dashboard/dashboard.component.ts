@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
         }
         else if(destination=='demo'){
             switch (sub) {
-                case "Computer-Cyber":
+                case "Computers":
                     this.router.navigate(['account/computers/demotest'])
                     break;
 
@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit {
         }
         else if(destination=='sample'){
             switch (sub) {
-                case "Computer-Cyber":
+                case "Computers":
                     this.router.navigate(['account/computers/sampletest'])
                     break;
 
@@ -115,7 +115,7 @@ export class DashboardComponent implements OnInit {
         // this.router.navigate(['account/'+a+'/'+b]);
         let b = j;
         switch (i) {
-            case "Computer-Cyber":
+            case "Computers":
                 this.router.navigate(['account/computers/' + b])
                 break;
             
@@ -169,7 +169,7 @@ export class DashboardComponent implements OnInit {
 
     redirectToResult(i) {
         switch (i) {
-            case "Computer-Cyber":
+            case "Computers":
                 this.router.navigate(['account/computers/result'])
                 break;
             

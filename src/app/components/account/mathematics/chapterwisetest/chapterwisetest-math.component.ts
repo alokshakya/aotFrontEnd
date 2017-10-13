@@ -192,9 +192,6 @@ export class ChapterwisetestMathComponent implements OnInit {
             "attempt":attempted,
             "completed":completed.toString()
         }
-
-        console.log(wrapper);
-
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('Mathematics');
         this.masterhttp.beginTest(wrapper)

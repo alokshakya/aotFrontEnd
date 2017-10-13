@@ -190,7 +190,7 @@ export class ChapterwisetestScienceComponent implements OnInit {
         console.log(wrapper);
 
         this.chapterwiseTest.activateTestRoute();
-        this.chapterwiseTest.setSubject('Computer-Cyber');
+        this.chapterwiseTest.setSubject('Computers');
         this.masterhttp.beginTest(wrapper)
         .subscribe((data) => {
                 if (data['status'] == 200){

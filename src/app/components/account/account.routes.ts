@@ -5,7 +5,7 @@ import { AccountMainComponent } from "./main/main.component";
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { AccountsettingsComponent } from './accountsettings/accountsettings.component'
 
-//computer-cyber
+//Computers
 import { DemotestComputersComponent } from './computers/demotest/demotest-computers.component'
 import { ChapterwisetestComputersComponent } from './computers/chapterwisetest/chapterwisetest-computers.component'
 import { SampletestComputersComponent } from './computers/sampletest/sampletest-computers.component';

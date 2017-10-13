@@ -33,7 +33,7 @@ export class DemotestComputersComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Computer-Cyber","Demo Test"]);
+        this.misc.setCurrentRoute(["Computers","Demo Test"]);
         this.misc.setLocalRoute('account/computers/demotest');
         this.demoTestData = {
             labels: ['Remaining'],
