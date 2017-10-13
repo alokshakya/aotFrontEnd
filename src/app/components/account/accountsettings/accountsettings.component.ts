@@ -53,7 +53,6 @@ export class AccountsettingsComponent implements OnInit {
         let path = constants.PAYMENT_GATEWAY_URL+url;
         window.location.href = path;
         this.spinner = false;
-        console.log(path);
     }
 
     growlDisplay(severity,summary,detail){
@@ -74,9 +73,11 @@ export class AccountsettingsComponent implements OnInit {
             }
             else{
                 this.growlDisplay('error','Could Not Process','Please Try Again');
+                this.spinner=false;
             }
         },err=>{
                 this.growlDisplay('error','Server Error','Please Try Again');
+                this.spinner=false;
         })
     }
 }
