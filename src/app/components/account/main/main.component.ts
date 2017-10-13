@@ -187,7 +187,6 @@ export class AccountMainComponent implements AfterViewInit {
     onUpload(e){
         e.files = [];
         let a = JSON.parse(e.xhr.response);
-        // console.log(a);
         if(a['status']==200){
             this.masterhttp.getPersonalInfo();
             this.changeImg = false;
@@ -196,8 +195,6 @@ export class AccountMainComponent implements AfterViewInit {
         else{
             this.messageDisplay('error','Error','Could Not Update Image');
         }
-
-        // console.log(e.xhr.response.responseType);
     }
 
     onTopbarMenuButtonClick(event) {

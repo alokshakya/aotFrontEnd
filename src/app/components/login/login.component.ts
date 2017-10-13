@@ -331,10 +331,10 @@ export class LoginComponent implements OnInit {
         this.spinner = true;
         this.emailVerified = false;
         this.mobileVerified = false;
-        this.wrapper = {'email':this.userRegCreds['email'],'verify_email':true,'verify_mobile':true}
         this.httpService.register(this.userRegCreds)
             .subscribe((data) => {
                 if(data['status']==200){
+                    this.wrapper = {'email':this.userRegCreds['email'],'verify_email':true,'verify_mobile':true}
                     this.sendOtp();
                 }
                 else{

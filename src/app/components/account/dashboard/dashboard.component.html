@@ -12,7 +12,7 @@
                             <i class="icon-gk icon-4x" *ngIf="sub=='General-Knowledge'"></i>
                             <i class="icon-english icon-4x" *ngIf="sub=='English'"></i>
                             <i class="icon-maths icon-4x" *ngIf="sub=='Mathematics'"></i>
-                            <i class="icon-cyber icon-4x" *ngIf="sub=='Computer-Cyber'"></i>
+                            <i class="icon-cyber icon-4x" *ngIf="sub=='Computers'"></i>
                             <p>{{sub|uppercase}}</p>
                             <button pButton *ngIf="!subjectInfo.attemptedDemo[sub]" class="ui-button-success" (click)="redirect(sub,'demo')" label="Demo"></button>
                             <button *ngIf="!subjectInfo.subscribedSubjects[sub]" pButton class="ui-button-warning" [ngClass]="{'ui-button-danger':sub=='Science'||sub=='English'}" (click)="redirect(sub,'settings')" label="Subscribe"></button>
