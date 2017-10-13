@@ -5,9 +5,17 @@
                 <br>
                 <div class="ui-g">
                     <div class="ui-g-12 ui-sm-12">
-                        <p-dataTable [value]="subPriceTable" dataKey="Subject" [responsive]="true" [(selection)]="selectedPackage">
+                        <!-- <p-dataTable [value]="misc.fee" dataKey="subject_name" [responsive]="true" [(selection)]="selectedPackage">
                             <p-column [style]="{'width':'5.3%','padding-left':'1.5%'}" selectionMode="multiple"></p-column>
-                            <p-column *ngFor="let i of col" header="{{i.header}}" field="{{i.field}}"></p-column>
+                            <p-column [style]="{'text-align':'left'}" *ngFor="let i of col" header="{{i.header}}" field="{{i.field}}"></p-column>
+                        </p-dataTable> -->
+                        <p-dataTable [value]="misc.fee" dataKey="subject_name" [responsive]="true" [(selection)]="selectedPackage">
+                            <p-column [style]="{'width':'5.3%','padding-left':'1.5%'}" selectionMode="multiple"></p-column>
+                            <p-column [style]="{'text-align':'left'}" *ngFor="let i of col" field="{{i.field}}">
+                                <ng-template pTemplate="header">
+                                    {{i.header}}<span *ngIf="i.header=='Price'"> (&#8377;) </span>
+                                </ng-template>
+                            </p-column>
                         </p-dataTable>
                     </div>
                     <div class="ui-g-12 ui-sm-12">
@@ -19,22 +27,12 @@
                                 </label>
                             </div>
                             <div class="ui-g-12 text-center ui-sm-12">
-                                <button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage[0]==null" pButton label="Pay Now"></button>
+                                <button type="button" *ngIf="!spinner" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage[0]==null" pButton label="Pay Now"></button>
+                                <button type="button" *ngIf="spinner" pButton class="ui-button-success fifty" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- <br>
-                <br>
-                <span id="coupontext"><strong>Enter Coupon/School Code*</strong></span>
-                <input size="40" type="text" [(ngModel)]="coupon" pInputText/>
-                <button id="applybutton" type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
-                <br>
-                <br> -->
-                <!--                 <div id="paybutton">
-                    <button type="button" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage==null" pButton label="Pay Now"></button>
-                </div>
-                <br> -->
             </p-panel>
         </div>
         <div class="ui-g-12">

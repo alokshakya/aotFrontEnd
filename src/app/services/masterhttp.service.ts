@@ -42,7 +42,7 @@ export class MasterHttpService {
 
     dataRetreived() {
         this.updated++;
-        if (this.updated == 7) {
+        if (this.updated == 8) {
             let previousRoute = sessionStorage.getItem('route')
             if(previousRoute!=null){
                 this.router.navigate([previousRoute]);
@@ -182,6 +182,20 @@ export class MasterHttpService {
                 this.httpError();
             })
     }
+
+    getFee(){
+        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/payment/fee', {headers:this.queryHeaders})
+        .map((resp:Response)=>resp.json())
+        .subscribe((data)=>{
+            if(data['status']==200){
+                this.misc.setFee(data['message']);
+                this.dataRetreived();
+            }
+            else{
+                this.httpError();
+            }
+        }, err=>this.httpError())
+    }
     // -----------------------------------------------------------------------------------------------
     setQuestions(data) {
         this.chapterwiseTest.setQuesAnswerSet(data);
@@ -226,4 +240,10 @@ export class MasterHttpService {
                 this.httpError();
             })
     }
+
+    subscribe(requestBody){
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/payment/pay', requestBody, {headers:this.queryHeaders})
+        .map((resp:Response)=>resp.json())
+    }
+
 }

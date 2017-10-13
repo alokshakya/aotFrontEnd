@@ -256,10 +256,7 @@ export class Misc {
     }
 
     setFee(data) {
-        this.fee = [];
-        for (let i in data) {
-            this.fee.push(data[i][2])
-        }
+        this.fee = data;
     }
 
     setTestDetails(data) {
