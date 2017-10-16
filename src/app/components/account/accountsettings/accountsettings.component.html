@@ -40,7 +40,7 @@
             <p-panel header="Subscription Details">
                 <br>
                 <br>
-                <p-dataTable [responsive]="true" [value]="subscriptionTableData">
+                <!--                 <p-dataTable [responsive]="true" [value]="subscriptionTableData">
                     <p-column field="Order ID" header="Order ID"></p-column>
                     <p-column field="Subject" header="Subject"></p-column>
                     <p-column field="Subscription Date" header="Subscription Date"></p-column>
@@ -50,6 +50,13 @@
                             <div class="text-center">
                                 <i pTooltip="Download Invoice" tooltipPosition="left" style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>
                             </div>
+                        </ng-template>
+                    </p-column>
+                </p-dataTable> -->
+                <p-dataTable [value]="misc.paymentData" [responsive]="true">
+                    <p-column [style]="{'text-align':'left'}" *ngFor="let i of col2" header="{{i.header}}" field="{{i.field}}">
+                        <ng-template let-col let-data="rowData" *ngIf="i.header=='Invoice'" header = "Invoice" pTemplate="body">
+                                <i (click)="download(data['payments_id'])" pTooltip="Download Invoice" tooltipPosition="right" style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>
                         </ng-template>
                     </p-column>
                 </p-dataTable>

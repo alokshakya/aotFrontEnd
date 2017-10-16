@@ -1,13 +1,15 @@
 <div class="ui-g">
     <div class="ui-g-12" *ngIf="!subjectInfo.subscribedSubjects['Science']">
-        <p-panel header="Subscribe">
-            <div id="subscribepanel">
-                <h1>No Test Available</h1>
-                <br>
-                <button pButton (click)="redirect()" type="text" class="ui-button-info" label="Subscribe Now"></button>
-            </div>
-        </p-panel>
-    </div>
+            <p-panel header="Subscribe">
+                <div class="ui-g">
+                    <div class="ui-g-12 text-center">
+                        <h1>No Test Available</h1>
+                        <br>
+                        <button pButton (click)="redirect()" type="text" class="ui-button-info" label="Subscribe Now"></button>
+                    </div>
+                </div>
+            </p-panel>
+        </div>
     <div class="ui-g-6 ui-sm-12">
         <p-panel header="Introduction">
             <div id="intro">

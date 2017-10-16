@@ -3,10 +3,12 @@
     <div class="ui-g">
         <div class="ui-g-12" *ngIf="!subjectInfo.subscribedSubjects['English']">
             <p-panel header="Subscribe">
-                <div id="subscribepanel">
-                    <h1>No Test Available</h1>
-                    <br>
-                    <button pButton (click)="redirect()" type="text" class="ui-button-info" label="Subscribe Now"></button>
+                <div class="ui-g">
+                    <div class="ui-g-12 text-center">
+                        <h1>No Test Available</h1>
+                        <br>
+                        <button pButton (click)="redirect()" type="text" class="ui-button-info" label="Subscribe Now"></button>
+                    </div>
                 </div>
             </p-panel>
         </div>

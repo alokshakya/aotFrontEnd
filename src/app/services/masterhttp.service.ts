@@ -42,7 +42,7 @@ export class MasterHttpService {
 
     dataRetreived() {
         this.updated++;
-        if (this.updated == 8) {
+        if (this.updated == 9) {
             let previousRoute = sessionStorage.getItem('route')
             if(previousRoute!=null){
                 this.router.navigate([previousRoute]);
@@ -136,14 +136,12 @@ export class MasterHttpService {
     getSyllabus() {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/classdata/topics', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
-                if(data.hasOwnProperty('status')){
-                    if(data['status']==719){
-                        this.httpError();
-                    }
+                if(data['status']==200){
+                    this.subjectInfo.setSyllabus(data['message']['class']['subjects']);
+                    this.dataRetreived();
                 }
                 else{
-                    this.subjectInfo.setSyllabus(data['class']['subjects']);
-                    this.dataRetreived();
+                    this.httpError();
                 }
             },
             err=>{
@@ -244,6 +242,19 @@ export class MasterHttpService {
     subscribe(requestBody){
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/payment/pay', requestBody, {headers:this.queryHeaders})
         .map((resp:Response)=>resp.json())
+    }
+
+    getPaymentHistory(){
+        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL+'/payment/history',{headers:this.queryHeaders})
+        .map((resp:Response)=>resp.json()).subscribe((data)=>{
+            if(data['status']==200){
+                this.misc.setPaymentDetails(data['message']['payments_history']);
+            }
+                this.dataRetreived();
+            
+        },err=>{
+            this.httpError();
+        })
     }
 
 }

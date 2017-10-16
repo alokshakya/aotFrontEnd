@@ -70,8 +70,7 @@ export class SubjectInfo {
     gkChapters: Array<any>;
     mathChapters: Array<any>;
 
-    subscribedSubjects = { "Computers": true, "Science": true, "Mathematics": true,
-     "English": true, "General-Knowledge": true, "Reasoning": true }
+    subscribedSubjects = {};
     attemptedDemo = { "Computers": false, "Science": false, "Mathematics": false, "English": false, "General-Knowledge": false, "Reasoning": false }
 
     constructor() { }
@@ -80,6 +79,7 @@ export class SubjectInfo {
         this.subjectList = [];
         for (let i in data) {
             this.subjectList.push(data[i]['name']);
+            // this.subscribedSubjects[data[i]['name']]=false;
             switch (data[i]['name']) {
                 case "Computers":
                     this.computerChapters = data[i];
@@ -220,9 +220,10 @@ export class Misc {
     syllabus: Array<any>;
     testDetails: any;
     login:boolean;
+    paymentData:any;
     // currentRoute: EventEmitter<[string]> = new EventEmitter();
 
-    constructor(private event:EventService){}
+    constructor(private event:EventService, private subjectInfo:SubjectInfo){}
 
     setCurrentRoute(component){
         // this.currentRoute.emit(component);
@@ -261,6 +262,26 @@ export class Misc {
 
     setTestDetails(data) {
         this.testDetails = data;
+    }
+
+    setPaymentDetails(data){
+        let buffer = [];
+        let paymentDetails = [];
+        for(let i in data){
+            this.subjectInfo.subscribedSubjects[data[i]['subject']]=true;
+            if(i=='0'){
+                buffer = data[i];
+                paymentDetails.push(data[i]);
+            }
+            else if(buffer['gateway_order_id']==data[i]['gateway_order_id']){
+                continue;
+            }
+            else{
+                buffer = data[i];
+                paymentDetails.push(data[i]);
+            }
+        }
+        this.paymentData = paymentDetails;
     }
 
 

@@ -29,6 +29,7 @@ export class AccountsettingsComponent implements OnInit {
 
     //temporary
     col: Array<any>;  //header for datatable
+    col2: Array<any>;  //header for datatable
     dummySubjects: Array<string>;
     dummyPrice: Array<number>;
     growlMsg:Message[];
@@ -40,8 +41,8 @@ export class AccountsettingsComponent implements OnInit {
         public http: MasterHttpService) {
         this.selectedPackage = [];
 
-        this.col = [{ "header": "Subject", "field": "subject_name" }, { "header": "Price", "field": "amount" }]
-
+        this.col = [{ "header": "Subject", "field": "subject_name" }, { "header": "Price", "field": "amount" }];
+        this.col2 = [{ "header": "Order Id", "field": "gateway_order_id" }, { "header": "Transaction Id", "field": "transaction_id" },{"header":"Date","field":"paid_date"},{"header":"Invoice","field":"payments_id"}];
     }
 
     ngOnInit() {
@@ -79,6 +80,10 @@ export class AccountsettingsComponent implements OnInit {
                 this.growlDisplay('error','Server Error','Please Try Again');
                 this.spinner=false;
         })
+    }
+
+    download(e){
+        console.log(e);
     }
 }
 
