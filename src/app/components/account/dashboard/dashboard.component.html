@@ -70,7 +70,62 @@
                         </p-tabPanel> -->
                         <p-tabPanel *ngFor="let sub of chTest.completeTestDetails?.generated?.subjects;let index = index;let first = first" header="{{sub.name}}" [selected]="first">
                             <div class="ui-g">
+                                <div class="ui-g-3">Chapterwise Test</div>
+                                <div class="ui-g-9">
+                                    <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirectToTest(sub.name,'chapterwisetest')">
+                                                <div class="progress-bar progress-bar-success" [style.width.%]="chapterwiseTest(sub['total_generated'],sub['total_tests'],sub['total_completed'])['data'][2]" role="progressbar">{{chapterwiseTest(sub['total_generated'],sub['total_tests'],sub['total_completed'])['show'][2]|round}}
+                                                </div>
+                                                <div class="progress-bar progress-bar-warning" [style.width.%]="chapterwiseTest(sub['total_generated'],sub['total_tests'],sub['total_completed'])['data'][1]" role="progressbar">{{chapterwiseTest(sub['total_generated'],sub['total_tests'],sub['total_completed'])['show'][1]|round}}
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" [style.width.%]="chapterwiseTest(sub['total_generated'],sub['total_tests'],sub['total_completed'])['data'][0]" role="progressbar">{{chapterwiseTest(sub['total_generated'],sub['total_tests'],sub['total_completed'])['show'][0]|round}}
+                                                </div>
+                                            </div>
+                                    
+                                </div>
+                                <div class="ui-g-3">Demo Test</div>
+                                <div class="ui-g-9">
+                                    <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirectToTest(sub.name,'chapterwisetest')">
+                                                <div class="progress-bar progress-bar-success" [style.width.%]="30" role="progressbar">30%
+                                                </div>
+                                                <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" [style.width.%]="70" role="progressbar">70%
+                                                </div>
+                                    </div>
+                                </div>
+                                <div class="ui-g-3">Sample Test</div>
+                                <div class="ui-g-9">
+                                    <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirectToTest(sub.name,'chapterwisetest')">
+                                                <div class="progress-bar progress-bar-success" [style.width.%]="20" role="progressbar">20%
+                                                </div>
+                                                <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" [style.width.%]="80" role="progressbar">80%
+                                                </div>
+                                    </div>
+                                </div>
+                                <div class="ui-g-3">Mock Test</div>
+                                <div class="ui-g-9">
+                                    <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirectToTest(sub.name,'chapterwisetest')">
+                                                <div class="progress-bar progress-bar-success" [style.width.%]="80" role="progressbar">80%
+                                                </div>
+                                                <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                                </div>
+                                                <div class="progress-bar progress-bar-danger" [style.width.%]="20" role="progressbar">20%
+                                                </div>
+                                    </div>
+                                </div>
                                 <div class="ui-g-12">
+                                        <div class="ui-g">
+                                            <div class="ui-g-3 ui-sm-12"></div>
+                                            <div class="ui-g-9 ui-sm-12">
+                                                <span class="comp">Completed</span>
+                                                <span class="gen">Generated</span>
+                                                <span class="inc">Remaining</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- <div class="ui-g-12">
                                     <div class="ui-g">
                                         <div class="ui-g-3 ui-sm-12">
                                             <span class="testsubject submob">Chapterwise Test<br><br></span>
@@ -123,7 +178,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <!--                             <div class="ui-g a">
                                 <div class="ui-g-12 info">
@@ -182,7 +237,62 @@
                         </p-tabPanel> -->
                         <p-tabPanel *ngFor="let sub of result.completeResult?.generated?.subjects;let index = index;let first = first;" header="{{sub.name}}" [selected]="first">
                             <div class="ui-g">
+                                <div class="ui-g-3" *ngIf="(sub?.total_correct+sub?.total_marked+sub?.total_incorrect)!=0">Chapterwise Test</div>
+                                <div class="ui-g-9" *ngIf="(sub?.total_correct+sub?.total_marked+sub?.total_incorrect)!=0">
+                                    <div class="progress hover" pTooltip="Go To Result" (click)="redirectToResult(sub.name)">
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="chapterwiseResult(index)[0]" role="progressbar">{{chapterwiseResult(index)[0]|round}}
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" [style.width.%]="chapterwiseResult(index)[2]" role="progressbar">{{chapterwiseResult(index)[2]|round}}
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="chapterwiseResult(index)[1]" role="progressbar">{{chapterwiseResult(index)[1]|round}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-g-3">Demo Test</div>
+                                <div class="ui-g-9">
+                                    <div class="progress hover"  pTooltip="Go To Result" (click)="redirectToResult(sub.name)">
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="100" role="progressbar">1000%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="0" role="progressbar">{{chapterwiseResult(index)[1]|round}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-g-3">Sample Test</div>
+                                <div class="ui-g-9">
+                                    <div class="progress hover" pTooltip="Go To Result" (click)="redirectToResult(sub.name)">
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="60" role="progressbar">60%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="40" role="progressbar">40%
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-g-3">Mock Test</div>
+                                <div class="ui-g-9">
+                                    <div class="progress hover" 
+                                     pTooltip="Go To Result" (click)="redirectToResult(sub.name)">
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="20" role="progressbar">80%
+                                        </div>
+                                        <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="80" role="progressbar">20%
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="ui-g-12">
+                                        <div class="ui-g">
+                                            <div class="ui-g-3 ui-sm-12"></div>
+                                            <div class="ui-g-9 ui-sm-12">
+                                                <span class="cor">Correct</span>
+                                                <span class="mark">Review</span>
+                                                <span class="inc">Wrong</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <!-- <div class="ui-g-12">
                                     <div class="ui-g">
                                         <div class="ui-g-3 ui-sm-12">
                                             <span class="testsubject submob" *ngIf="(sub?.total_correct+sub?.total_marked+sub?.total_incorrect)!=0">Chapterwise Test<br><br></span>
@@ -235,7 +345,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </p-tabPanel>
                     </p-tabView>

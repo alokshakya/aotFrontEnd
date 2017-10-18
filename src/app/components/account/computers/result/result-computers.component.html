@@ -49,8 +49,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                         <div class="ui-g-12" *ngIf="test.attempted==2">
                                             <div class="ui-g">
                                                 <div class="ui-g-2" *ngIf="test?.result?.attempt_2.total_attempted_questions>0"></div>
@@ -73,7 +71,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="ui-g-12" *ngIf="test.attempted==3">
                                             <div class="ui-g">
                                                 <div class="ui-g-2" *ngIf="test?.result?.attempt_3.total_attempted_questions>0"></div>
@@ -105,51 +102,55 @@
                         <p-panel header="Result-Analysis >> {{currentChapter}}">
                             <div class="ui-g">
                                 <div class="ui-g-12 container">
-                                    <table class="table table-hover table-bordered table-responsive">
-                                        <thead>
-                                            <tr *ngFor="let data of chapter|keys">
-                                                <th>{{data.key}}</th>
-                                                <td>{{data.value}}</td>
-                                            </tr>
-                                        </thead>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr *ngFor="let data of chapter|keys">
+                                                    <th>{{data.key}}</th>
+                                                    <td>{{data.value}}</td>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
                                 </div>
                                 <div class="ui-g-12">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Test Response</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div class="ui-g">
-                                                        <!-- <div class="ui-g-1 a" *ngFor="let resp of resultSummary?.result?.response;let i=index" [ngClass]="{'correct':resp.state=='correct', 'wrong':resp.state=='incorrect', 'un':resp.state=='unattempted', 'mark':resp.state=='marked'}">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Test Response</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="ui-g">
+                                                            <!-- <div class="ui-g-1 a" *ngFor="let resp of resultSummary?.result?.response;let i=index" [ngClass]="{'correct':resp.state=='correct', 'wrong':resp.state=='incorrect', 'un':resp.state=='unattempted', 'mark':resp.state=='marked'}">
                                                             {{i+1}}
                                                         </div> -->
-                                                        <div class="ui-g-12">
-                                                            <button md-mini-fab class="a" *ngFor="let resp of resultSummary;let i=index" [ngClass]="{'correct':resp.state=='c', 'wrong':resp.state=='i', 'un':resp.state=='u', 'mark':resp.state=='m'}"><span class="">{{i+1}}</span></button>
+                                                            <div class="ui-g-12">
+                                                                <button md-mini-fab class="a" *ngFor="let resp of resultSummary;let i=index" [ngClass]="{'correct':resp.state=='c', 'wrong':resp.state=='i', 'un':resp.state=='u', 'mark':resp.state=='m'}"><span class="">{{i+1}}</span></button>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="ui-g">
-                                                        <div class="ui-g-12 nopad">Correct
-                                                            <label class="chip correct"></label>
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-12 nopad">Correct
+                                                                <label class="chip correct"></label>
+                                                            </div>
+                                                            <div class="ui-g-12 nopad">Marked For Review
+                                                                <label class="chip mark"></label>
+                                                            </div>
+                                                            <div class="ui-g-12 nopad">Wrong
+                                                                <label class="chip wrong"></label>
+                                                            </div>
+                                                            <div class="ui-g-12 nopad">Unattempted
+                                                                <label class="chip un"></label>
+                                                            </div>
                                                         </div>
-                                                        <div class="ui-g-12 nopad">Marked For Review
-                                                            <label class="chip mark"></label>
-                                                        </div>
-                                                        <div class="ui-g-12 nopad">Wrong
-                                                            <label class="chip wrong"></label>
-                                                        </div>
-                                                        <div class="ui-g-12 nopad">Unattempted
-                                                            <label class="chip un"></label>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </p-panel>

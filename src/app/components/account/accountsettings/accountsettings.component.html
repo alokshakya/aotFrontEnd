@@ -10,7 +10,7 @@
                             <p-column [style]="{'width':'5.3%','padding-left':'1.5%'}" selectionMode="multiple"></p-column>
                             <p-column [style]="{'text-align':'left'}" *ngFor="let i of col" header="{{i.header}}" field="{{i.field}}"></p-column>
                         </p-dataTable> -->
-                        <p-dataTable [value]="misc.fee" dataKey="subject_name" [responsive]="true" [(selection)]="selectedPackage">
+                        <p-dataTable [value]="misc.fee" [(selection)]="selectedPackage" (onHeaderCheckboxToggle)="updateAmount()" (onRowSelect)="updateAmount()" (onRowUnselect)="updateAmount()" dataKey="subject_name" [responsive]="true">
                             <p-column [style]="{'width':'5.3%','padding-left':'1.5%'}" selectionMode="multiple"></p-column>
                             <p-column [style]="{'text-align':'left'}" *ngFor="let i of col" field="{{i.field}}">
                                 <ng-template pTemplate="header">
@@ -24,8 +24,10 @@
                             <div class="ui-g-12 ui-sm-12">
                                 <label>Enter Coupon/School Code* &nbsp;
                                     <input type="text" [(ngModel)]="coupon" pInputText> &nbsp;
-                                    <button type="button" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
                                 </label>
+                                <button type="button" class="ui-button-info" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
+
+                                <label class="left-margin">Total Amount: &#x20B9; {{sum}} </label>
                             </div>
                             <div class="ui-g-12 text-center ui-sm-12">
                                 <button type="button" *ngIf="!spinner" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage[0]==null" pButton label="Pay Now"></button>
@@ -53,7 +55,7 @@
                         </ng-template>
                     </p-column>
                 </p-dataTable> -->
-                <p-dataTable [value]="misc.paymentData" [responsive]="true">
+                <p-dataTable alwaysShowPaginator="false" emptyMessage="All Subjects Are Subscribed" [value]="misc.paymentData" [responsive]="true">
                     <p-column [style]="{'text-align':'left'}" *ngFor="let i of col2" header="{{i.header}}" field="{{i.field}}">
                         <ng-template let-col let-data="rowData" *ngIf="i.header=='Invoice'" header = "Invoice" pTemplate="body">
                                 <i (click)="download(data['payments_id'])" pTooltip="Download Invoice" tooltipPosition="right" style="color:#BC1900" class="fa fa-file-pdf-o fa-lg"></i>

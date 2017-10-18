@@ -34,6 +34,7 @@ export class AccountsettingsComponent implements OnInit {
     dummyPrice: Array<number>;
     growlMsg:Message[];
     spinner:boolean;
+    sum = 0;
     constructor(
         public _router: Router,
         public subjectInfo: SubjectInfo,
@@ -61,6 +62,17 @@ export class AccountsettingsComponent implements OnInit {
         this.growlMsg.push({'severity':severity,'summary':summary,'detail':detail});
     }
 
+    updateAmount(){
+        this.sum = 0;
+        setTimeout(()=>{
+            if(this.selectedPackage!=null){
+                for(let i in this.selectedPackage){
+                    this.sum += parseInt(this.selectedPackage[i]['amount'])
+                }
+            }
+        },10);
+    }
+
     pay() {
         this.spinner=true;
         let wrapper = {amount:0, fee_id:''};
@@ -80,6 +92,7 @@ export class AccountsettingsComponent implements OnInit {
                 this.growlDisplay('error','Server Error','Please Try Again');
                 this.spinner=false;
         })
+        console.log(this.sum)
     }
 
     download(e){

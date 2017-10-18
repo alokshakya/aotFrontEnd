@@ -8,7 +8,7 @@ import { SubjectInfo, chapterwiseTest, Result, Misc } from '../../../services/da
 declare var MathJax:any;
 @Component({
     selector: 'app-dashboard',
-    templateUrl: './dashboard.component.html',
+    templateUrl: './test.dashboard.component.html',
     styleUrls: ['./dashboard.css']
 })
 export class DashboardComponent implements OnInit {
