@@ -83,22 +83,14 @@
                             <p-accordionTab *ngFor="let data of generatedChapters; let k=index">
                                 <p-header>
                                     <div class="ui-g">
-                                        <div [ngClass]="{'ui-g-9':currentTabIndex!=null,'ui-g-12':currentTabIndex==null}">
+                                        <div class="ui-g-12">
                                             <span class="chapter">{{data?.name}}</span>
-                                        </div>
-                                        <div class="ui-g-3" *ngIf="currentTabIndex==k">
-                                            <span class="chapter white-text">Completed</span>
                                         </div>
                                     </div>
                                 </p-header>
-                                <div class="ui-g">
+                                <!-- <div class="ui-g">
                                     <div class="ui-g-12 ui-sm-12" *ngFor="let test of data['tests'];let i = index">
                                         <span class="leftpad">Test <span [ngClass]="shade(i)">{{i+1}}</span></span>
-                                        <!-- <span *ngIf="test.attempted==0&&test.completed==0" class="low">
-                                            <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
-                                            <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" [disabled]="false" type="button" pButton></button>
-                                        </span> -->
-
                                         <span *ngIf="test.attempted==0" class="low">
                                             <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
                                             <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" [disabled]="false" type="button" pButton></button>
@@ -119,6 +111,51 @@
                                             <span class="round" *ngIf="test.attempted!=0&&test.completed==0">{{test.attempted-1}}</span>
                                             <span class="round" *ngIf="test.attempted!=0&&test.completed==1">{{test.attempted}}</span>
                                         </span>
+                                    </div>
+                                </div> -->
+                                <div class="ui-g">
+                                    <div class="ui-g-12 ui-sm-12 container">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                            <thead>
+                                              <tr>
+                                                <th>Test</th>
+                                                <th>Attempt</th>
+                                                <th>Action</th>
+                                                <th>Completed</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr *ngFor="let test of data['tests'];let k=index">
+                                                <td><span [ngClass]="shade(k)">{{k+1}}</span></td>
+                                                <td><span class="blue">{{test?.attempted}}</span></td>
+                                                <td>
+                                                    <span *ngIf="test.attempted==0" class="low">
+                                                        <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
+                                                        <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" [disabled]="false" type="button" pButton></button>
+                                                    </span>
+
+                                                    <span *ngIf="test.completed==1" class="low">
+                                                        <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed)" label="Start" [disabled]="spinner2!=null||test.attempted>=3" type="button" pButton></button>
+                                                        <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" type="button" pButton></button>
+                                                    </span>
+
+                                                    <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
+                                                        <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,data.id,test.attempted,test.completed)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
+                                                        <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" type="button" pButton></button>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="low">
+                                                        <span class="round" *ngIf="test.attempted==0">0</span>
+                                                        <span class="round" *ngIf="test.attempted!=0&&test.completed==0">{{test.attempted-1}}</span>
+                                                        <span class="round" *ngIf="test.attempted!=0&&test.completed==1">{{test.attempted}}</span>
+                                                    </span>
+                                                </td>
+                                              </tr>
+                                            </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </p-accordionTab>

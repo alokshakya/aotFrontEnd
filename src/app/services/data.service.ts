@@ -2,7 +2,6 @@ import { Injectable, OnChanges, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { EventService } from './event.service';
 
-
 @Injectable()
 export class PersonalInfo {
     // userInfoEvent: EventEmitter<boolean> = new EventEmitter();
@@ -258,6 +257,7 @@ export class Misc {
 
     setFee(data) {
         this.fee = data;
+        this.event.emitFeeEvent();
     }
 
     setTestDetails(data) {
@@ -269,6 +269,13 @@ export class Misc {
         let paymentDetails = [];
         for(let i in data){
             this.subjectInfo.subscribedSubjects[data[i]['subject']]=true;
+            for(let k in this.fee){
+                    if(data[i]['fee_id']==this.fee[k]['fee_id']){
+                        this.fee.splice(parseInt(k),1);
+                    }
+                    // console.log(data[i]['fee_id']);
+                    // console.log(this.fee[k]['fee_id']);
+                }
             if(i=='0'){
                 buffer = data[i];
                 paymentDetails.push(data[i]);
@@ -283,7 +290,6 @@ export class Misc {
         }
         this.paymentData = paymentDetails;
     }
-
 
 }
 

@@ -8,9 +8,7 @@ export class EventService {
     testEvent: EventEmitter<boolean> = new EventEmitter();
     currentRoute: EventEmitter<[string]> = new EventEmitter();
     resultEvent: EventEmitter<boolean> = new EventEmitter();
-
-
-
+    feeEvent: EventEmitter<boolean> = new EventEmitter();
 
 	constructor() { }
 
@@ -36,6 +34,10 @@ export class EventService {
 
 	emitResultEvent(){
 		this.resultEvent.emit(true);
+	}
+
+	emitFeeEvent(){
+		this.feeEvent.emit(true);
 	}
 
 
