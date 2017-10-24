@@ -206,36 +206,7 @@ export class AppMenuComponent implements OnInit {
     }
 
 
-    ngOnInit() {
-        // this.model = []
-        // this.subjectSet.getSubjectSet(1).subscribe((data:Response) =>{
-        //     data = data['resource'];
-        //     var k = 2;
-        //     for(let i in data){
-        //         this.menuTabs[k]['label'] = data[i]['subjects_by_subject_id']['name'];
-        //         k++;
-        //     }
-        //     for (let j in this.menuTabs){
-        //         this.model.push(this.menuTabs[j])
-        //     }
-        // })
-
-        //temporary
-        // this.temporaryModel = [];
-        // this.masterhttp.getSubjects().subscribe((data: Response) => {
-        //     var l = 2;
-        //     for(let i in data['subjects']['records']){
-        //         this.menuTabs[l]['label'] = data['subjects']['records'][i][1];
-        //         l++;
-        //     }
-
-        //     for (let m in this.menuTabs){
-        //         this.temporaryModel.push(this.menuTabs[m])
-        //     }
-        // })
-
-
-    }
+    ngOnInit() {}
 
 }
 

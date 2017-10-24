@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { style, state, animate, transition, trigger } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginRegisterService } from '../../services/loginRegister.service';
@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.loggedInCheck();
         this.wrapper = { 'email':null,'verify_mobile':false,'verify_email':false };
-        this.userLoginCreds = { "username": "", "password": "" };
+        this.userLoginCreds = { "username": null, "password": null };
         this.userRegCreds = { "firstname": "", "lastname": "", "email": "", "password": "", "class": "", "mobile": "" };
         this.passwordObj = { "new_password": "", "email": "" };
         //temporary

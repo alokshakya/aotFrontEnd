@@ -19,7 +19,7 @@
 .light {
     color: black;
     background-color: white;
-    ;
+    margin-left: -7px;
 }
 
 .bar {
@@ -154,8 +154,8 @@
     padding: 0 0 0 0;
 }
 
-.icons i:hover{
-    cursor:pointer;
+.icons i:hover {
+    cursor: pointer;
 }
 
 .head {
@@ -166,20 +166,15 @@
 }
 
 .minwidth {
+    height: 550px;
     width: 9%;
     padding: 2% 0 0 0;
     margin-top: -0.28%;
-    height: 100%
 }
 
 .foot {
-    width: 100%;
-    background-color: #2D353C;
+    color: #2D353C;
     text-align: right;
-    height: 50px;
-    color: white;
-    padding-top: 1%;
-    padding-right: 2%
 }
 
 .image {
@@ -197,13 +192,17 @@
     margin-bottom: 2%;
 }
 
-
+.max-height {
+    height: 520px;
+    overflow-x: hidden;
+    overflow-y: auto
+}
 
 .center {
-    padding-left: 5%;
-    height: 476px;
-    width: 1227px;
-    overflow: auto;
+    display: inline;
+    width: 90%;
+    height: 520px;
+    margin-top: -0.2%;
 }
 
 
@@ -257,7 +256,7 @@
 #n {
     font-size: 171%;
     margin-bottom: 4px;
-    color:white;
+    color: white;
 }
 
 #a,
@@ -288,51 +287,57 @@
     background-color: #EEAE4C;
 }
 
-.image img{
-    width:20%;
-    height:20%;
+.image img {
+    width: 20%;
+    height: 20%;
 }
 
-.hintimg img{
-    height:20%;
+.hintimg img {
+    height: 20%;
     width: 20%;
 }
-.hintimg{
-    padding-top:10%;
+
+.hintimg {
+    padding-top: 10%;
 }
 
-.hintimg, .valimg{
+.hintimg,
+.valimg {
     padding-left: 2%;
 }
 
 
-.valimg img{
-    height:20%;
-    width:20%;
+.valimg img {
+    height: 20%;
+    width: 20%;
 }
 
 
 .box {
     border: 1px solid black;
-    margin-top: 1%;
-    margin-left: -4%;
-    padding: 1% 1% 1% 1%;
+    margin-left: 0.8%;
+    margin-bottom: 0.5%;
+    padding: 5px 5px 5px 5px
 }
 
-.class{
-    width:93px;
+
+
+
+.class {
+    width: 93px;
     margin-left: -24px;
 }
 
-.subject{
-    width:145px;
+.subject {
+    width: 145px;
 }
 
-.timer{
-    width:102px;
+.timer {
+    width: 102px;
 }
-.count{
-    width:130px;
+
+.count {
+    width: 130px;
 }
 
 
@@ -388,13 +393,32 @@
         padding: 3px 0 0 3px;
     }
     .box {
-        padding: 0 0 0 0;
+        padding: 5px 5px 5px 5px;
         margin: 0 0 11px 5px;
+    }
+    .foot {
+        position: relative;
+    }
+    .light {
+        margin-left: -3px;
+        margin-bottom: 0px;
     }
 }
 
 
 @media only screen and (max-width: 1336px) and (min-width: 421px) {
+
+    #class {
+        width: 65px;
+    }
+
+    #timer {
+        margin-left: 22px;
+    }
+
+    .foot {
+        position: relative;
+    }
     .img {
         width: 2%;
     }
@@ -447,7 +471,11 @@
         padding: 3px 0 0 3px;
     }
     .box {
-        padding: 0 0 0 0;
+        padding: 5px 5px 5px 5px;
         margin: 0 0 11px 5px;
+    }
+    .light {
+        margin-left: -3px;
+        margin-bottom: -33px;
     }
 }
