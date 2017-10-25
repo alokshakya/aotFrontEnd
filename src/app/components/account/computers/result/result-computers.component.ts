@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { UIChart, SelectItem } from 'primeng/primeng';
 import { Misc, Result } from '../../../../services/data.service';
 
 
 @Component({
     selector: 'app-result-computers',
-    templateUrl: './result-computers.component.html',
+    // templateUrl: './result-computers.component.html',
+    templateUrl: './test.html',
+
     styleUrls: ['./result-computers.component.scss']
 })
 export class ResultComputersComponent implements OnInit {
@@ -28,6 +30,11 @@ export class ResultComputersComponent implements OnInit {
     showMarkMock: boolean;
     showMarkDemo: boolean;
 
+    attempt:Array<any>=[];
+    attemptProgress:Array<any>=[];
+
+    selectedAttempt:any;
+
     chapter: any;
     sample: any;
     mock: any;
@@ -39,7 +46,15 @@ export class ResultComputersComponent implements OnInit {
     currentSample: string;
     currentMock: string;
     currentDemo: string;
+    dummyData;
+    dummyDataProgress;
+    dummyDataComplete;
+    options:any;
+    options1:any;
+    options2:any;
+    activeIndex:number;
 
+    display:boolean
 
     constructor(
         public misc:Misc,
@@ -193,11 +208,141 @@ export class ResultComputersComponent implements OnInit {
         return a
     }
 
+    makeGraph(){
+        this.dummyData = {
+            labels: [''],
+            datasets: [
+                {
+                    label: 'Chapter 1',
+                    backgroundColor: 'green',
+                    borderColor: '#1E88E5',
+                    data: [40]
+                },
+                {
+                    label: 'Chapter 2',
+                    backgroundColor: '#42A5F5',
+                    borderColor: '#1E88E5',
+                    data: [28]
+                },
+                                    {
+                    label: 'Chapter 3',
+                    backgroundColor: 'yellow',
+                    borderColor: '#1E88E5',
+                    data: [22]
+                }
+            ]
+        }
+
+        this.dummyDataComplete = {
+            labels: ['Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1',],
+            datasets: [
+                {
+                    label: 'Correct',
+                    fill:false,
+                    backgroundColor: 'green',
+                    borderColor: '#1E88E5',
+                    data: [40,21,32,12,31,12,32,12,32,34,12,32,21,12,31]
+                },
+                {
+                    label: 'Incorrect',
+                    fill:false,
+                    backgroundColor: '#42A5F5',
+                    borderColor: '#1E88E5',
+                    data: [28,12,32,12,32,12,21,34,45,2,34,23,54,1,1]
+                },
+                                    {
+                    label: 'Marked',
+                    fill:false,
+                    backgroundColor: 'yellow',
+                    borderColor: '#1E88E5',
+                    data: [12,0,83,2,12,3,12,12,32,31,33,21,33,56,13]
+                }
+            ]
+        }
+
+        this.options = {
+            title: {
+                display: true,
+                text: 'Most Correct',
+                fontSize: 16
+            },
+            legend: {
+                position: 'bottom'
+            }
+        };
+        this.options1 = {
+            title: {
+                display: true,
+                text: 'Most Incorrect',
+                fontSize: 16
+            },
+            legend: {
+                position: 'bottom'
+            }
+        };
+        this.options2 = {
+            title: {
+                display: true,
+                text: 'Most Marked',
+                fontSize: 16
+            },
+            legend: {
+                position: 'bottom'
+            }
+        };
+
+        this.dummyDataProgress = {
+            labels: ['Attempt 1', 'Attempt 2', 'Attempt 3'],
+            datasets: [
+                {
+                    label: 'Correct',
+                    fill: false,
+                    backgroundColor: 'green',
+                    borderColor: 'green',
+                    data: [5,10,12]
+                },
+                {
+                    label: 'Incorrect',
+                    fill: false,
+                    backgroundColor: 'red',
+                    borderColor: 'red',
+                    data: [8,3,0]
+                },
+                {
+                    label: 'Marked',
+                    fill: false,
+                    backgroundColor: 'orange',
+                    borderColor: 'orange',
+                    data: [2,2,3]
+                },
+            ]
+        }
+
+
+    }
+
     ngOnInit() {
+        this.dummyData = {
+            labels: ['CH-1'],
+            datasets: [
+                {
+                    label: 'Correct',
+                    backgroundColor: '#42A5F5',
+                    borderColor: '#1E88E5',
+                    data: [65]
+                }
+            ]
+        }
+        this.selectedAttempt = 'attempt 1';
+        this.attemptProgress.push({label:"Select Chapter",value:null});
+        this.attempt.push({label:'1',value:'attempt 1'});
+        this.attempt.push({label:'2',value:'attempt 2'});
+        this.attempt.push({label:'3',value:'attempt 3'});
         this.misc.setCurrentRoute(["Computers","Result"]);
         this.misc.setLocalRoute('account/computers/result');
         this.showMark = true;
-        this.resultPanel()
+        this.resultPanel();
+        this.makeGraph();
     }
 
 }
