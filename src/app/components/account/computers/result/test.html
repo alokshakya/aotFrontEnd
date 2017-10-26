@@ -144,16 +144,18 @@
                                 <div class="ui-g">
                                     <div class="ui-g-12">
                                         <p-dropdown [options]="attemptProgress" [autoWidth]="false" [(ngModel)]="selectedAttempt"></p-dropdown>
+                                        <p-dropdown [options]="testProgress" [autoWidth]="false" [(ngModel)]="selectedAttempt"></p-dropdown>
+
                                     </div>
                                     <div class="ui-g-12">
                                         <p-chart type="line" [data]="dummyDataProgress"></p-chart>
                                     </div>
                                 </div>
                             </p-tabPanel>
-                            <p-tabPanel header="Tab 3">
+<!--                             <p-tabPanel header="Tab 3">
                             </p-tabPanel>
                             <p-tabPanel header="Tab 4">
-                            </p-tabPanel>
+                            </p-tabPanel> -->
                         </p-tabView>
                     </div>
                 </div>

@@ -32,6 +32,8 @@ export class ResultComputersComponent implements OnInit {
 
     attempt:Array<any>=[];
     attemptProgress:Array<any>=[];
+    testProgress:Array<any>=[];
+
 
     selectedAttempt:any;
 
@@ -297,22 +299,22 @@ export class ResultComputersComponent implements OnInit {
                 {
                     label: 'Correct',
                     fill: false,
-                    backgroundColor: 'green',
-                    borderColor: 'green',
+                    backgroundColor: '#5CB85C',
+                    borderColor: '#5CB85C',
                     data: [5,10,12]
                 },
                 {
                     label: 'Incorrect',
                     fill: false,
-                    backgroundColor: 'red',
-                    borderColor: 'red',
+                    backgroundColor: '#D9534F',
+                    borderColor: '#D9534F',
                     data: [8,3,0]
                 },
                 {
                     label: 'Marked',
                     fill: false,
-                    backgroundColor: 'orange',
-                    borderColor: 'orange',
+                    backgroundColor: '#F0AD4E',
+                    borderColor: '#F0AD4E',
                     data: [2,2,3]
                 },
             ]
@@ -335,9 +337,12 @@ export class ResultComputersComponent implements OnInit {
         }
         this.selectedAttempt = 'attempt 1';
         this.attemptProgress.push({label:"Select Chapter",value:null});
+        this.testProgress.push({label:"Select Test",value:null});
+
         this.attempt.push({label:'1',value:'attempt 1'});
         this.attempt.push({label:'2',value:'attempt 2'});
         this.attempt.push({label:'3',value:'attempt 3'});
+
         this.misc.setCurrentRoute(["Computers","Result"]);
         this.misc.setLocalRoute('account/computers/result');
         this.showMark = true;
