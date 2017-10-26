@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnChanges,trigger, state, style, transition, animate } from '@angular/core';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 import {Message} from 'primeng/primeng';
@@ -13,18 +13,36 @@ import * as constants from '../../../config/constants';
 declare var MathJax:any;
 @Component({
     selector: 'app-test',
-    templateUrl: './test.component.html',
-    styleUrls: ['./test.component.scss']
+    templateUrl: './test.test.component.html',
+    styleUrls: ['./test.test.component.scss'],
+    animations: [
+        trigger('fadeInOut', [
+            state('*', style({ 'overflow-y': 'hidden' })),
+            state('void', style({ 'overflow-y': 'hidden' })),
+            transition('* => void', [
+                style({ width: '*' }),
+                animate(20, style({ width: 0 ,display:'none'}))
+            ]),
+            transition('void => *', [
+                style({ width: '0' }),
+                animate(150, style({ width: '*' }))
+            ]),
+        ]
+        )
+    ],
 })
 export class TestComponent implements OnInit, ComponentCanDeactivate {
 
-    //header  
+    //header 
     test: string;
     subject: string;
     timer: number;
     sec: number;
     min: number;
     hour: number;
+
+    menuToggle:boolean;
+    animate:boolean;    
 
     help: boolean;
 
@@ -90,6 +108,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
         this.response = {};
         this.imageUrl = constants.OLYMPIADBOX_IMG_URL;
         this.questionStatus = {};
+
     }
 
     ngOnInit() {
@@ -116,6 +135,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
         if(this.questionStatus[this.clickListener]=='Correct'||this.questionStatus[this.clickListener]=='Wrong'){
             this.answer = this.selectedQuestion['attempted_answer_id'];
         }
+        this.menuToggle = false;
     }
 
     setResponse(){
@@ -330,6 +350,24 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
         this.chapterwiseTest.activateRoute = false;
     }
 
-}
+    isMobile() {
+         if(window.innerWidth <= 640){
+             return true;
+         }
+         return false;
+    }
 
- 
+    toggle(){
+        this.animate = false
+        this.menuToggle = !this.menuToggle;
+    }
+
+    animationDone(e){
+        this.animate = !this.animate;
+    }
+
+    animationStarted(e){
+        this.animate = false;
+    }
+
+}
