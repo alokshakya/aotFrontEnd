@@ -10,12 +10,14 @@ import * as constants from '../../../../config/constants';
 @Component({
     selector: 'app-topbar',
     templateUrl: './app.topbar.component.html',
+    styleUrls:['./app.topbar.component.scss']
 })
 export class AppTopBar implements OnInit {
 
     currentPage: Array<string>;
     imgTimeStamp;
     imgPath:string;
+    menuFlag:boolean
     constructor( @Inject(forwardRef(() => AccountMainComponent)) public app: AccountMainComponent,
         public router: Router,
         public misc: Misc,
@@ -70,6 +72,14 @@ export class AppTopBar implements OnInit {
 
     redirect(target) {
         this.router.navigate([target]);
+    }
+
+    menuEvent(){
+        if(!this.menuFlag){
+            this.event.emitMenuEvent(1);
+        }
+        else this.event.emitMenuEvent(0);
+        this.menuFlag =! this.menuFlag;
     }
 
 }
