@@ -1,7 +1,7 @@
 .main-content-view{
-    overflow-y:scroll;
+    height:90%;
+    overflow-y:auto;
     overflow-x:hidden; 
-    height:487px; 
 }
 
 ::-webkit-scrollbar {
@@ -68,4 +68,9 @@ and (max-device-width : 1024px)  {
     .main-content-view{
         height: 1000px;
     }
+}
+
+.foot{
+    position:fixed;
+    bottom:0;
 }

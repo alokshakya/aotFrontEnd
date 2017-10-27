@@ -1,17 +1,27 @@
 import { Component, Inject, forwardRef } from '@angular/core';
-import { AccountMainComponent } from '../main/main.component';
-
+import { EventService } from '../../../services/event.service';
 @Component({
     selector: 'app-footer',
-    template: `
-        <div class="footer">
-            <div class="card clearfix" style="background-color:#2D353C;margin-bottom:0px">
-                <span class="footer-text-right" style="color:white"> All Rights Reserved</span>
-                <span class="footer-text-right" style="color:white;margin-right:5px">Copyright <i class="fa fa-copyright"></i> 2017 OlympiadBox. </span>
-            </div>
-        </div>
-    `
+    templateUrl: './app.footer.component.html',
+    styleUrls: ['./app.footer.component.scss']
 })
 export class AppFooter {
+	menuFlag:boolean;
+	constructor(public event: EventService){}
+	ngOnInit(){
+		this.eventListener()
+	}
 
+	eventListener(){
+		this.event.menuEvent.subscribe((data)=>{
+			if(data==0){
+				this.menuFlag = true;
+			}
+			else this.menuFlag = false;
+		})
+	}
+
+	isDesktop() {
+        return window.innerWidth > 1024;
+    }
 }

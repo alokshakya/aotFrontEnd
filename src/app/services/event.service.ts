@@ -9,6 +9,7 @@ export class EventService {
     currentRoute: EventEmitter<[string]> = new EventEmitter();
     resultEvent: EventEmitter<boolean> = new EventEmitter();
     feeEvent: EventEmitter<boolean> = new EventEmitter();
+    menuEvent: EventEmitter<number> = new EventEmitter()
 
 	constructor() { }
 
@@ -38,6 +39,10 @@ export class EventService {
 
 	emitFeeEvent(){
 		this.feeEvent.emit(true);
+	}
+
+	emitMenuEvent(e){
+		this.menuEvent.emit(e);
 	}
 
 

@@ -153,9 +153,11 @@
     z-index: -1;
 }
 
-.foot {
-    line-height: 4;
-    text-align: right;
+.footer {
+    position:fixed;
+    bottom:0;
+    background-color:#2D353C;
+    padding-left:28%;
 }
 
 
@@ -367,9 +369,9 @@
         padding: 5px 5px 5px 5px;
         margin: 0 0 11px 5px;
     }
-    .foot {
+    /*.foot {
         position: relative;
-    }
+    }*/
     .light {
         margin-left: -3px;
         margin-bottom: 0px;
@@ -387,9 +389,9 @@
         margin-left: 22px;
     }
 
-    .foot {
+    /*.foot {
         position: relative;
-    }
+    }*/
     .img {
         width: 2%;
     }
@@ -456,9 +458,11 @@
     display: inline-block;
 }
 
+/*
 .m-group {
     margin-left: 28%;
 }
+*/
 
 .m-group,
 .n-group,
@@ -517,8 +521,10 @@
 }
 
 .fixed-height {
-    height: 500px;
-    overflow-y: scroll
+    background-color:white;
+    height:90%;
+    padding-top:0.7%;
+    overflow-y: auto;
 }
 
 
@@ -526,12 +532,13 @@
 /*0-----------------------------------------------------------------------------------------------------------------------------------------*/
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 40/71) and (orientation:portrait) {
-    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:scroll}
+    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:auto}
     .icons{margin-left:3px}
     .fixed-height{height:334px}
-    .m-group{margin-left:0}
+    .m-group{margin-left:0px}
     .m-group,.v-group,-n-group{margin-right:10px}
     .test{margin-left:0px;width:195px}
+    .footer{padding-left:13%}
     #timer{margin-left:40px}
 }
 
@@ -539,12 +546,13 @@
 and (min-device-width : 414px) 
 and (max-device-width : 736px) 
 and (orientation : portrait){
-    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:scroll}
+    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:auto}
     .icons{margin-left:3px}
     .fixed-height{height:512px}
-    .m-group{margin-left:50px}
+    .m-group{margin-left:0px}
     .m-group,.v-group,-n-group{margin-right:10px}
     .test{margin-left:43px;width:195px}
+    .footer{padding-left:13%}
     #timer{margin-left:40px}
 }
 
@@ -553,27 +561,29 @@ and (orientation : portrait){
 and (min-device-width : 375px) 
 and (max-device-width : 667px) 
 and (orientation : portrait){
-    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:scroll}
+    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:auto}
     .icons{margin-left:3px}
     .fixed-height{height:512px}
-    .m-group{margin-left:50px}
+    .m-group{margin-left:0px}
     .m-group,.v-group,-n-group{margin-right:10px}
     .test{margin-left:43px;width:195px}
+    .footer{padding-left:13%}
     #timer{margin-left:40px}
 }
 
 @media screen and (device-width: 360px) and (device-height: 640px) and (-webkit-device-pixel-ratio: 3) {
-    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:scroll}
+    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:auto}
     .icons{margin-left:3px}
     .fixed-height{height:418px}
-    .m-group{margin-left:28px}
+    .m-group{margin-left:8px}
     .m-group,.v-group,-n-group{margin-right:10px}
     .test{margin-left:43px;width:195px}
+    .footer{padding-left:13%}
     #timer{margin-left:40px}
 }
 /*
 @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
-  .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:scroll}
+  .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:auto}
     .icons{margin-left:3px}
     .fixed-height{height:833px}
     .m-group{margin-left:28px}
@@ -581,6 +591,7 @@ and (orientation : portrait){
     .test{margin-left:-11px;width:133px}
     .bar{margin-left:20px}
     .count{width:133px}
+    .footer{padding-left:13%}
     #timer{margin-left:80px}
 }
 */
@@ -589,7 +600,7 @@ and (orientation : portrait){
 @media only screen 
 and (min-device-width : 1024px) 
 and (max-device-width : 1366px) {
-    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:scroll}
+    .height-res{z-index:1;position:absolute;height:563px;opacity:50%;overflow-y:auto}
     .icons{margin-left:3px}
     .fixed-height{height:1190px}
     .m-group{margin-left:184px}
@@ -600,3 +611,7 @@ and (max-device-width : 1366px) {
     #timer{margin-left:80px}
 }
 */
+.sidenav{
+    background-color: #2d353c;
+    height:100%;
+}

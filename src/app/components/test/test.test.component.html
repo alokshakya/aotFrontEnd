@@ -11,8 +11,8 @@
     </div> -->
 </p-dialog>
 <p-growl [(value)]="errMsg"></p-growl>
-<div class="ui-g">
-    <div class="ui-g-1 ui-sm-2 dark-theme" *ngIf="!isMobile()">
+<div class="ui-g sidenav">
+    <div class="ui-g-1 ui-sm-2 dark-theme sidenav" *ngIf="!isMobile()">
         <div class="ui-g">
             <div class="ui-g-12 image"><img src="../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65"></div>
             <div class="ui-g-4 ui-sm-6 icons">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
@@ -128,7 +128,7 @@
             </div>
         </div>
         <div class="ui-g dark-theme">
-                <div class="ui-g-12">
+                <div class="ui-g-12 footer">
                     <div class="inline text-center m-group">
                         <button md-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()">M</button>
                         <button md-mini-fab *ngIf="spinner2"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
