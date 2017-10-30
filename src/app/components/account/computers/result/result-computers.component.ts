@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { UIChart, SelectItem } from 'primeng/primeng';
-import { Misc, Result } from '../../../../services/data.service';
+import { Misc, Result, SubjectInfo } from '../../../../services/data.service';
 
 
 @Component({
@@ -11,343 +11,209 @@ import { Misc, Result } from '../../../../services/data.service';
     styleUrls: ['./result-computers.component.scss']
 })
 export class ResultComputersComponent implements OnInit {
-    detailedResult: any;
-    resultSummary: any;
-    chapterwiseSummary: any;
-
-    testResponse: any;
-
-    overview: any;
-    organisation: SelectItem[];
-    selectedOrg: string;
-    showSample: boolean;
-    showDemo: boolean;
-    showMock: boolean;
-    showResult: boolean;
-
-    showMark: boolean;
-    showMarkSample: boolean;
-    showMarkMock: boolean;
-    showMarkDemo: boolean;
-
-    attempt:Array<any>=[];
-    attemptProgress:Array<any>=[];
-    testProgress:Array<any>=[];
-
-
+    chapterCols:any;
+    selectedChapter:any;
+    chapterwiseGraph:any;
+    questionWiseGraph:any;
+    testArray:any;
+    selectedTest:any;
     selectedAttempt:any;
+    selectedAttemptObject:any;
 
-    chapter: any;
-    sample: any;
-    mock: any;
-    demo: any;
+    selectItem:SelectItem[]
+    testCols:any;
 
-    currentChapter: string;
-    currentTest: string;
+    totalAttempts:number;
 
-    currentSample: string;
-    currentMock: string;
-    currentDemo: string;
-    dummyData;
-    dummyDataProgress;
-    dummyDataComplete;
-    options:any;
-    options1:any;
-    options2:any;
-    activeIndex:number;
-
-    display:boolean
-
+    resultObj:any;
+    tu:boolean
+    chapterArray:Array<any>=[];
+    options:any
+    resultSummary:any;
+    testSummary:any;
     constructor(
         public misc:Misc,
-        public Result:Result){
+        public result:Result,
+        public subject:SubjectInfo){
     }
 
-    show(chapterId, testId) {
-        let object;
-        let chapter;
-        let attempt:string;
-        for(let i in this.Result.computers.chapters){
-            if(this.Result.computers.chapters[i]['id']==chapterId){
-                chapter = this.Result.computers.chapters[i];
-                break;
+    ngOnInit(){
+        this.makeGraph();
+        this.misc.setCurrentRoute(["Computers","Result"]);
+        this.misc.setLocalRoute('account/computers/result');
+        this.chapterCols = [{header:'Chapter',field:'name'},{header:'Score',field:'total_correct'}];
+        this.testCols = [{
+            header:'Test',field:null},
+            {header:'Attempted',field:'attempted'},
+            {header:'Total Correct',field:'total_correct'},
+            {header:'Total Incorrect',field:'total_incorrect'},
+            {header:'Total Marked',field:'total_marked'},
+            {header:'Score',field:'total_correct'}
+            ]
+        this.setChapters();
+    }
+
+    makeQuestionWIseGraph(){
+        let label = [];
+        let data = [[],[],[]];
+        for(let i in this.selectItem){
+            let attemptArray = this.selectedTest['result'][this.selectItem[i]['value']]['response'];
+            for(let j in attemptArray){
+                if(i=='0'){
+                    label.push('Q'+(parseInt(j)+1))
+                }
+                switch (attemptArray[j]['state']) {
+                    case "m":
+                        data[i].push(2)
+                        break;
+                    
+                    case "i":
+                        data[i].push(1)
+                        break;
+                    
+                    case "c":
+                        data[i].push(3)
+                        break;
+
+                    case "u":
+                        data[i].push(0);
+                }
             }
         }
-        for(let i in chapter['tests']){
-            if(chapter['tests'][i]['id']==testId){
-                object = chapter['tests'][i];
-            }
+        this.questionWiseGraph = {
+            labels:label,
+            datasets: [
+                {
+                    label: 'Attempt 1',
+                    data: data[0],
+                    fill: false,
+                    borderColor: '#177DB6',
+                    backgroundColor: '#177DB6'
+                },
+                {
+                    label: 'Attempt 2',
+                    data: data[1],
+                    fill: false,
+                    borderColor: '#A184F6',
+                    backgroundColor: '#A184F6'
+                },
+                {
+                    label: 'Attempt 3',
+                    data: data[2],
+                    fill: false,
+                    borderColor: '#565656',
+                    backgroundColor: '#565656'
+                }
+                ]
         }
-        switch (object['attempted']) {
-            case "1":
-                attempt = 'attempt_1'
-                break;
+        this.tu=true
 
-            case "2":
-                attempt = 'attempt_2'
-                break;
-
-            case "3":
-                attempt = 'attempt_3'
-                break;
-        }
-        this.currentChapter = chapter['name'];
-        this.currentTest = object['name'];
-        this.chapter = {
-            Test:object['name'],
-            'Total Questions':object['total_no_question'],
-            'Attempted':object['result'][attempt]['total_attempted_questions'],
-            'Correct':object['result'][attempt]['correct'],
-            'Incorrect':object['result'][attempt]['incorrect'],
-            'Marked':object['result'][attempt]['marked'],
-            'Score':object['result'][attempt]['correct'],
-        }
-        this.showResult = true;
-        this.resultSummary = object['result'][attempt]['response'];
     }
 
-    sampleResult(s) {
-        this.sample = {};
-        this.sample = this.detailedResult['Sample Test'][s];
-        this.currentSample = s;
-        this.showSample = true;
-    }
-
-    demoResult(number) {
-        this.demo = { number };
-        this.demo = this.detailedResult['Demo Test'][number];
-        this.currentDemo = number;
-        this.showDemo = true;
-    }
-
-    mockResult(number) {
-        this.mock = {};
-        this.mock = this.detailedResult['Mock Test'][number];
-        this.currentMock = number
-        this.showMock = true;
-    }
-
-    close(e) {
-        this.showResult = false;
-        this.showDemo = false;
-        this.showSample = false;
-        this.showMock = false;
-    }
-
-    showPanel(e) {
-    }
-
-    // clubbedWidth(i,toggle=false){
-    //     let obj = this.Result.computers['chapters'][i];
-    //     let correct = 0;
-    //     let marked = 0;
-    //     let incorrect = 0;
-    //     if(obj.hasOwnProperty('tests')){
-    //         for (let k in obj['tests']) {
-    //             if(obj['tests'][k]['attempted']==1){
-    //                 correct = correct + obj['tests'][k]['result']['attempt_1']['correct'];
-    //                 marked = marked + obj['tests'][k]['result']['attempt_1']['marked'];
-    //                 incorrect = incorrect + obj['tests'][k]['result']['attempt_1']['incorrect'];
-    //             }
-    //             else if(obj['tests'][k]['attempted']==2){
-    //                 correct = correct + obj['tests'][k]['result']['attempt_2']['correct'];
-    //                 marked = marked + obj['tests'][k]['result']['attempt_2']['marked'];
-    //                 incorrect = incorrect + obj['tests'][k]['result']['attempt_2']['incorrect'];
-    //             }
-    //             else if(obj['tests'][k]['attempted']==2){
-    //                 correct = correct + obj['tests'][k]['result']['attempt_3']['correct'];
-    //                 marked = marked + obj['tests'][k]['result']['attempt_3']['marked'];
-    //                 incorrect = incorrect + obj['tests'][k]['result']['attempt_3']['incorrect'];
-    //             }
-    //         }
-    //     }
-    //     let cor = correct*100/(marked+incorrect+correct);
-    //     let inc = incorrect*100/(marked+incorrect+correct);
-    //     let mar = marked*100/(marked+incorrect+correct);
-    //     if(toggle){
-    //         let cor = correct*100/(incorrect+correct);
-    //         let inc = incorrect*100/(incorrect+correct);
-    //         return [cor,inc];
-    //     }
-    //     return [cor,mar,inc];
-    // }
-
-    // width(chapter,test,toggle=false){
-    //     let correct = this.Result.computers.chapters[chapter]['tests'][test]['result']['correct'];
-    //     let incorrect = this.Result.computers.chapters[chapter]['tests'][test]['result']['incorrect'];
-    //     let marked = this.Result.computers.chapters[chapter]['tests'][test]['result']['marked'];
-    //     let total = this.Result.computers.chapters[chapter]['tests'][test]['total_no_question'];
-    //     if(toggle){
-    //         let cor = correct*100/(correct+incorrect);
-    //         let inc = incorrect*100/(correct+incorrect);
-    //         return [cor,inc];
-    //     }
-    //     let cor = correct*100/(marked+incorrect+correct);
-    //     let inc = incorrect*100/(marked+incorrect+correct);
-    //     let mar = marked*100/(marked+incorrect+correct);
-    //     return [cor,mar,inc];
-    // }
-
-    headerWidth(total,correct,incorrect,marked,toggle=false){
-        if(toggle){
-            let cor = correct*100/(correct+incorrect);
-            let inc = incorrect*100/(correct+incorrect);
-            return [cor,inc];
-        }
-        let cor = correct*100/(marked+incorrect+correct);
-        let inc = incorrect*100/(marked+incorrect+correct);
-        let mar = marked*100/(marked+incorrect+correct);
-        return [cor,mar,inc];
-    }
-
-    resultPanel(){
-        let a = [];
-        for(let i in this.Result.computers['chapters']){
-            if(this.Result.computers['chapters'][i]['total_marked']+this.Result.computers['chapters'][i]['total_incorrect']+this.Result.computers['chapters'][i]['total_correct']!=0){
-                a.push(this.Result.computers['chapters'][i]);
-            }
-        }
-        return a
-    }
 
     makeGraph(){
-        this.dummyData = {
-            labels: [''],
+        let ref = {0:'Unattempted',1:'Incorrect', 2:'Marked For Review', 3:'Correct'}
+        this.chapterwiseGraph = {
+            labels: [],
             datasets: [
                 {
-                    label: 'Chapter 1',
-                    backgroundColor: 'green',
-                    borderColor: '#1E88E5',
-                    data: [40]
-                },
-                {
-                    label: 'Chapter 2',
-                    backgroundColor: '#42A5F5',
-                    borderColor: '#1E88E5',
-                    data: [28]
-                },
-                                    {
-                    label: 'Chapter 3',
-                    backgroundColor: 'yellow',
-                    borderColor: '#1E88E5',
-                    data: [22]
+                    label: 'Score',
+                    data: [],
+                    fill: false,
+                    borderColor: '#4BC0C0',
+                    backgroundColor: '#4BC0C0'
                 }
-            ]
-        }
-
-        this.dummyDataComplete = {
-            labels: ['Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1','Chapter 1',],
-            datasets: [
-                {
-                    label: 'Correct',
-                    fill:false,
-                    backgroundColor: 'green',
-                    borderColor: '#1E88E5',
-                    data: [40,21,32,12,31,12,32,12,32,34,12,32,21,12,31]
-                },
-                {
-                    label: 'Incorrect',
-                    fill:false,
-                    backgroundColor: '#42A5F5',
-                    borderColor: '#1E88E5',
-                    data: [28,12,32,12,32,12,21,34,45,2,34,23,54,1,1]
-                },
-                                    {
-                    label: 'Marked',
-                    fill:false,
-                    backgroundColor: 'yellow',
-                    borderColor: '#1E88E5',
-                    data: [12,0,83,2,12,3,12,12,32,31,33,21,33,56,13]
-                }
-            ]
+                ]
         }
 
         this.options = {
-            title: {
-                display: true,
-                text: 'Most Correct',
-                fontSize: 16
-            },
-            legend: {
-                position: 'bottom'
-            }
-        };
-        this.options1 = {
-            title: {
-                display: true,
-                text: 'Most Incorrect',
-                fontSize: 16
-            },
-            legend: {
-                position: 'bottom'
-            }
-        };
-        this.options2 = {
-            title: {
-                display: true,
-                text: 'Most Marked',
-                fontSize: 16
-            },
-            legend: {
-                position: 'bottom'
-            }
-        };
-
-        this.dummyDataProgress = {
-            labels: ['Attempt 1', 'Attempt 2', 'Attempt 3'],
-            datasets: [
-                {
-                    label: 'Correct',
-                    fill: false,
-                    backgroundColor: '#5CB85C',
-                    borderColor: '#5CB85C',
-                    data: [5,10,12]
-                },
-                {
-                    label: 'Incorrect',
-                    fill: false,
-                    backgroundColor: '#D9534F',
-                    borderColor: '#D9534F',
-                    data: [8,3,0]
-                },
-                {
-                    label: 'Marked',
-                    fill: false,
-                    backgroundColor: '#F0AD4E',
-                    borderColor: '#F0AD4E',
-                    data: [2,2,3]
-                },
-            ]
-        }
-
-
-    }
-
-    ngOnInit() {
-        this.dummyData = {
-            labels: ['CH-1'],
-            datasets: [
-                {
-                    label: 'Correct',
-                    backgroundColor: '#42A5F5',
-                    borderColor: '#1E88E5',
-                    data: [65]
+            scales: {
+                yAxes: [{
+                    ticks: {
+                    max:4,
+                    beginAtZero: true,
+                    callback: function(value, index, values) {
+                        // console.log(index[value]);
+                        return ref[value];
+                    }
                 }
+            }
             ]
+            },
+            tooltips:{
+                callbacks:{
+                    title:((tooltipItem, data)=>{
+                        return ref[tooltipItem[0]['yLabel']]
+                    }),
+                    label:((tooltipItem, data)=>{
+                        // console.log(tooltipItem);
+                    })
+
+                }
+            }
         }
-        this.selectedAttempt = 'attempt 1';
-        this.attemptProgress.push({label:"Select Chapter",value:null});
-        this.testProgress.push({label:"Select Test",value:null});
+}
+            
 
-        this.attempt.push({label:'1',value:'attempt 1'});
-        this.attempt.push({label:'2',value:'attempt 2'});
-        this.attempt.push({label:'3',value:'attempt 3'});
-
-        this.misc.setCurrentRoute(["Computers","Result"]);
-        this.misc.setLocalRoute('account/computers/result');
-        this.showMark = true;
-        this.resultPanel();
-        this.makeGraph();
+    setChapters(){
+        for(let i in this.result.computers.chapters){
+            if(this.result.computers.chapters[i].hasOwnProperty('tests')){
+                this.chapterArray.push(this.result.computers.chapters[i]);
+                this.chapterwiseGraph.labels[i] = 'CH-'+(parseInt(i)+1);
+                this.chapterwiseGraph.datasets[0]['data'][i] = this.result.computers.chapters[i]['total_correct'];
+            }
+        }
     }
 
+    selectChapter(e){
+        if(e.data.hasOwnProperty('tests')){
+            this.totalAttempts = 0;
+            this.testArray = e.data.tests;
+            for(let i in this.testArray){
+                this.totalAttempts += parseInt(this.testArray[i]['attempted'])
+                if(this.testArray[i].attempted==0){
+                    this.testArray.splice(i);
+                }
+            }
+        }
+    }
+
+    selectTest(e){
+        this.selectItem = [];
+        if(this.selectedTest.result.hasOwnProperty('attempt_1')){
+            this.selectItem.push({label:'Attempt 1',value:'attempt_1'});
+        }
+        if(this.selectedTest.result.hasOwnProperty('attempt_2')){
+            this.selectItem.push({label:'Attempt 2',value:'attempt_2'});
+        }
+        if(this.selectedTest.result.hasOwnProperty('attempt_3')){
+            this.selectItem.push({label:'Attempt 3',value:'attempt_3'});
+        }
+        this.chooseAttempt();
+        this.selectedAttempt = 'attempt_1';
+        this.makeQuestionWIseGraph();
+        setTimeout(()=>{
+            // console.log(this.selectedTest);
+        },10)
+    }
+
+
+    shade(i){
+        if(i%2!=0){
+            return 'light';
+        }
+        return 'dark'
+    }
+
+    chooseAttempt(e=null){
+        let attempt;
+        if(e==null){
+            attempt = this.selectItem[0].value
+        }
+        else{
+            attempt = e.option.value;
+        }
+        let object = this.selectedTest['result'][attempt];
+        this.selectedAttemptObject = object;
+    }
 }
