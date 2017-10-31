@@ -59,10 +59,9 @@
                     </p-dataTable>
                 </p-panel>
             </div>
-            <div class="ui-g-12" *ngIf="selectedChapter!=null">
+            <!-- <div class="ui-g-12" *ngIf="selectedChapter!=null">
                 <p-panel header="Attempted Test Summary">
                     <p-dataTable [value]="testArray" (onRowSelect)="selectTest($event)" [responsive]="true" selectionMode="single" dataKey="id" [(selection)]="selectedTest">
-                        <!-- <p-column [style]="{'width':'50px'}" selectionMode="single"></p-column> -->
                         <p-column selectionMode="single" [style]="{'width':'10%'}"></p-column>
                         <p-column *ngFor="let item of testCols;let i = index" [field]="item.field" [header]="item.header">
                             <ng-template pTemplate="header">
@@ -94,10 +93,51 @@
                         </p-footerColumnGroup>
                     </p-dataTable>
                 </p-panel>
+            </div> -->
+            <div class="ui-g-12" *ngIf="selectedChapter!=null">
+                <p-panel header="Attempted Test Summary">
+                    <p-dataTable [value]="testArray" (onRowSelect)="selectTest($event)" (onHeaderCheckboxToggle)="selectTest($event)" (onRowUnselect)="selectTest($event)" [responsive]="true" selectionMode="multiple" dataKey="id" [(selection)]="selectedTest2">
+                        <p-column selectionMode="multiple" [style]="{'width':'10%'}"></p-column>
+                        <p-column *ngFor="let item of testCols;let i = index" [field]="item.field" [header]="item.header">
+                            <ng-template pTemplate="header">
+                                <span class="theme-text" [ngClass]="{'attempted':item.header=='Attempted'}">{{item.header}}</span>
+                            </ng-template>
+                            <ng-template let-col let-data="rowData" let-ri="rowIndex" *ngIf="item.header=='Test'" header="Test" pTemplate="body">
+                                <span class="test" [ngClass]="shade(ri)">{{ri+1}}</span>
+                            </ng-template>
+                            <ng-template let-col let-data="rowData" *ngIf="item.header=='Attempted'" pTemplate="body">
+                                <span *ngIf="data.attempted=='0'">None</span>
+                                <span *ngIf="data.attempted=='1'">Once</span>
+                                <span *ngIf="data.attempted=='2'">Twice</span>
+                                <span *ngIf="data.attempted=='3'">Thrice</span>
+                            </ng-template>
+                        </p-column>
+                        <p-footerColumnGroup *ngIf="selectedChapter!=null">
+                            <p-row>
+                                <p-column colspan="2" footer="Total">
+                                    <ng-template pTemplate="footer">
+                                        <span class="theme-text"><strong>Total</strong></span>
+                                    </ng-template>
+                                </p-column>
+                                <p-column [style]="{'text-align':'left'}" footer="{{totalAttempts}}"></p-column>
+                                <p-column [style]="{'text-align':'left'}" footer="{{selectedChapter?.total_correct}}{{selectedChapter[0]?.total_correct}}"></p-column>
+                                <p-column [style]="{'text-align':'left'}" footer="{{selectedChapter?.total_incorrect}}{{selectedChapter[0]?.total_incorrect}}"></p-column>
+                                <p-column [style]="{'text-align':'left'}" footer="{{selectedChapter?.total_marked}}{{selectedChapter[0]?.total_marked}}"></p-column>
+                                <p-column [style]="{'text-align':'left'}" footer="{{selectedChapter?.total_correct}}{{selectedChapter[0]?.total_correct}}"></p-column>
+                            </p-row>
+                        </p-footerColumnGroup>
+                    </p-dataTable>
+                </p-panel>
             </div>
-            <div class="ui-g-12" *ngIf="questionWiseGraph!=null&&tu">
-                <p-panel header="Test Wise Graph">
+            <div class="ui-g-12">
+                <!-- <p-panel header="Test Wise Graph">
                     <p-chart [options]="options" type="line" [data]="questionWiseGraph"></p-chart>
+                </p-panel> -->
+                <!-- <p-panel header="Test Wise Graph">
+                    <p-chart type="bar" [options]="options2" [data]="questionWiseGraph2"></p-chart>
+                </p-panel> -->
+                <p-panel header="Test Wise Graph" *ngIf="tu">
+                    <p-chart type="bar" [options]="options2" [data]="questionWiseGraph3"></p-chart>
                 </p-panel>
             </div>
         </div>
@@ -106,7 +146,7 @@
         <div class="ui-g">
             <div class="ui-g-12">
                 <p-panel header="Chapterwise Graph">
-                    <p-chart type="bar" [data]="chapterwiseGraph"></p-chart>
+                    <p-chart type="bar" [options]="ChapterwiseGraphOptions" [data]="chapterwiseGraph"></p-chart>
                     <!-- <p-chart type="line" [data]="chapterwiseGraph"></p-chart> -->
                 </p-panel>
             </div>
@@ -120,33 +160,36 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
+                                        <tr class="header">
+                                            <th colspan="2">{{selectedChapter?.name}}</th>
+                                        </tr>
                                         <tr>
                                             <th><span>Test</span></th>
-                                            <td class="hover">{{selectedTest?.name}}</td>
+                                            <td>{{selectedTest?.name}}</td>
                                         </tr>
                                         <tr>
                                             <th><span>Total Questions</span></th>
-                                            <td class="hover">{{selectedTest?.total_no_question}}</td>
+                                            <td>{{selectedTest?.total_no_question}}</td>
                                         </tr>
                                         <tr>
                                             <th><span>Attempted</span></th>
-                                            <td class="hover">{{selectedTest?.attempted}}</td>
+                                            <td>{{selectedTest?.attempted}}</td>
                                         </tr>
                                         <tr>
                                             <th><span>Correct</span></th>
-                                            <td class="hover">{{selectedAttemptObject?.correct}}</td>
+                                            <td>{{selectedAttemptObject?.correct}}</td>
                                         </tr>
                                         <tr>
                                             <th><span>Incorrect</span></th>
-                                            <td class="hover">{{selectedAttemptObject?.incorrect}}</td>
+                                            <td>{{selectedAttemptObject?.incorrect}}</td>
                                         </tr>
                                         <tr>
                                             <th><span>Marked</span></th>
-                                            <td class="hover">{{selectedAttemptObject?.marked}}</td>
+                                            <td>{{selectedAttemptObject?.marked}}</td>
                                         </tr>
                                         <tr>
                                             <th><span>Score</span></th>
-                                            <td class="hover">{{selectedAttemptObject?.correct}}</td>
+                                            <td>{{selectedAttemptObject?.correct}}</td>
                                         </tr>
                                     </thead>
                                 </table>
@@ -157,12 +200,12 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th><span>Test Response</span></th>
+                                            <th class="header">Test Response</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td class="hover">
+                                            <td>
                                                 <div class="ui-g">
                                                     <div class="ui-g-12">
                                                         <button md-mini-fab class="a" *ngFor="let resp of selectedAttemptObject['response'];let i=index" [ngClass]="{'correct':resp.state=='c', 'wrong':resp.state=='i', 'un':resp.state=='u', 'mark':resp.state=='m'}"><span class="">{{i+1}}</span></button>
