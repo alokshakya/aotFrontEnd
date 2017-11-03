@@ -92,11 +92,9 @@ export class AccountsettingsComponent implements OnInit {
                 this.growlDisplay('error','Server Error','Please Try Again');
                 this.spinner=false;
         })
-        console.log(this.sum)
     }
 
     download(e){
-        console.log(e);
     }
 }
 

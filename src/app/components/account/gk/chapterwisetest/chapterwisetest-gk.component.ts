@@ -189,7 +189,6 @@ startTest(testId, chapterId, attempted, completed) {
             "completed":completed.toString()
         }
 
-        console.log(wrapper);
 
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('General-Knowledge');

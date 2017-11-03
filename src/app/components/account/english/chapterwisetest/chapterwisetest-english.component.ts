@@ -187,8 +187,6 @@ export class ChapterwisetestEnglishComponent implements OnInit {
             "completed":completed.toString()
         }
 
-        console.log(wrapper);
-
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('English');
         this.masterhttp.beginTest(wrapper)

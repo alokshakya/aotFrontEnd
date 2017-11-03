@@ -187,8 +187,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
             "completed":completed.toString()
         }
 
-        console.log(wrapper);
-
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('Computers');
         this.masterhttp.beginTest(wrapper)
