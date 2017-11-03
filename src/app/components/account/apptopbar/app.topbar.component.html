@@ -11,7 +11,8 @@
         <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
                 <i class="fa fa-bars"></i>
             </a>
-            <ul id="breadcrumb">
+            
+        <ul id="breadcrumb" *ngIf="!app.isMobile()">
           <li><a href="#"><i class="fa fa-home fa-lg"></i></a></li>
           <li *ngIf="currentComponent[0]=='Science'"><a href="#"><i class="icon-science icon-2x"> &nbsp;</i><span> Science</span></a></li>
           <li *ngIf="currentComponent[0]=='Computers'"><a href="#"><i class="icon-cyber icon-2x"> &nbsp;</i><span> Computers</span></a></li>
@@ -25,6 +26,7 @@
 
           <li *ngIf="currentComponent[1]!=null"><a href="#">{{currentComponent[1]}}</a></li>
         </ul>
+        
         <ul class="topbar-items fadeInDown animated" [ngClass]="{'topbar-items-visible': app.topbarMenuActive}">
             <li #profile class="profile-item" [ngClass]="{'active-top-menu':app.activeTopbarItem === profile}">
                 <a href="#" (click)="app.onTopbarItemClick($event,profile)">                            
