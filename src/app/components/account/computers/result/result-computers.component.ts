@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { UIChart, SelectItem } from 'primeng/primeng';
 import { Misc, Result, SubjectInfo } from '../../../../services/data.service';
-
+ 
 
 @Component({
     selector: 'app-result-computers',
@@ -214,7 +214,7 @@ export class ResultComputersComponent implements OnInit {
                 this.chapterwiseGraph.datasets[0]['data'][i] = this.result.computers.chapters[i]['total_correct'];
             }
         }
-        if(this.chapterArray==[]){
+        if(this.chapterArray.length==0){
             return false;
         }
         this.selectedChapter = []
@@ -279,64 +279,80 @@ export class ResultComputersComponent implements OnInit {
             'Test 4':'#FFCE56',
             'Test 5':'#B3B5C6',
         }
-        this.questionWiseGraph3 = {
-            labels : ['Attempt 1', 'Attempt 2', 'Attempt 3'],
-            datasets:[
-            {
-                label: '',
-                data: [0,0,0],
-                fill: false,
-                borderColor: 'white',
-                backgroundColor: 'white'
-            },
-            {
-                label: '',
-                data: [0,0,0],
-                fill: false,
-                borderColor: 'white',
-                backgroundColor: 'white'
-            },
-            {
-                label: '',
-                data: [0,0,0],
-                fill: false,
-                borderColor: 'white',
-                backgroundColor: 'white'
-            },
-            {
-                label: '',
-                data: [0,0,0],
-                fill: false,
-                borderColor: 'white',
-                backgroundColor: 'white'
-            },
-            {
-                label: '',
-                data: [0,0,0],
-                fill: false,
-                borderColor: 'white',
-                backgroundColor: 'white'
+        // this.questionWiseGraph3 = {
+        //     labels : ['Attempt 1', 'Attempt 2', 'Attempt 3'],
+        //     datasets:[
+        //     {
+        //         label: '',
+        //         data: [0,0,0],
+        //         fill: false,
+        //         borderColor: 'white',
+        //         backgroundColor: 'white'
+        //     },
+        //     {
+        //         label: '',
+        //         data: [0,0,0],
+        //         fill: false,
+        //         borderColor: 'white',
+        //         backgroundColor: 'white'
+        //     },
+        //     {
+        //         label: '',
+        //         data: [0,0,0],
+        //         fill: false,
+        //         borderColor: 'white',
+        //         backgroundColor: 'white'
+        //     },
+        //     {
+        //         label: '',
+        //         data: [0,0,0],
+        //         fill: false,
+        //         borderColor: 'white',
+        //         backgroundColor: 'white'
+        //     },
+        //     {
+        //         label: '',
+        //         data: [0,0,0],
+        //         fill: false,
+        //         borderColor: 'white',
+        //         backgroundColor: 'white'
+        //     }
+        //     ]
+        // }
+            this.questionWiseGraph3 = {
+                labels:[],
+                datasets:[]
             }
-            ]
-        }
+            let labels = ['Attempt 1','Attempt 2', 'Attempt 3'];
+            let datasets = [];
         for(let i in this.selectedTest2){
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_1')){
-                this.questionWiseGraph3.datasets[i]['data'][0] = this.selectedTest2[i]['result']['attempt_1']['correct'];
-                this.questionWiseGraph3.datasets[i]['label'] = this.selectedTest2[i]['name'];
+                // this.questionWiseGraph3.datasets[i]['data'][0] = this.selectedTest2[i]['result']['attempt_1']['correct'];
+                // this.questionWiseGraph3.datasets[i]['label'] = this.selectedTest2[i]['name'];
+                datasets.push({
+                    label:this.selectedTest2[i]['name'],
+                    data:[this.selectedTest2[i]['result']['attempt_1']['correct'],0,0],
+                    borderColor:color[this.selectedTest2[i]['name']],
+                    backgroundColor:color[this.selectedTest2[i]['name']],
+                    fill:false
+                })
             }
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_2')){
-                this.questionWiseGraph3.datasets[i]['data'][1] = this.selectedTest2[i]['result']['attempt_2']['correct'];
-                this.questionWiseGraph3.datasets[i]['label'] = this.selectedTest2[i]['name'];
-
+                // this.questionWiseGraph3.datasets[i]['data'][1] = this.selectedTest2[i]['result']['attempt_2']['correct'];
+                // this.questionWiseGraph3.datasets[i]['label'] = this.selectedTest2[i]['name'];
+                datasets[i]['data'][1] = this.selectedTest2[i]['result']['attempt_2']['correct'];
             }
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_3')){
-                this.questionWiseGraph3.datasets[i]['data'][2] = this.selectedTest2[i]['result']['attempt_3']['correct'];
-                this.questionWiseGraph3.datasets[i]['label'] = this.selectedTest2[i]['name'];
-
+                // this.questionWiseGraph3.datasets[i]['data'][2] = this.selectedTest2[i]['result']['attempt_3']['correct'];
+                // this.questionWiseGraph3.datasets[i]['label'] = this.selectedTest2[i]['name'];
+                datasets[i]['data'][2] = this.selectedTest2[i]['result']['attempt_3']['correct'];
             }
-            this.questionWiseGraph3.datasets[i]['backgroundColor'] = color[this.selectedTest2[i]['name']];
-            this.questionWiseGraph3.datasets[i]['borderColor'] = color[this.selectedTest2[i]['name']];
+            // this.questionWiseGraph3.datasets[i]['backgroundColor'] = color[this.selectedTest2[i]['name']];
+            // this.questionWiseGraph3.datasets[i]['borderColor'] = color[this.selectedTest2[i]['name']];
+
         }
+        this.questionWiseGraph3.labels = labels;
+        this.questionWiseGraph3.datasets = datasets;
     }
 
 
@@ -360,4 +376,6 @@ export class ResultComputersComponent implements OnInit {
         let object = this.selectedTest['result'][attempt];
         this.selectedAttemptObject = object;
     }
+
+
 }

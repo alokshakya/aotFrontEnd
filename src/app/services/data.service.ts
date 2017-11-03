@@ -273,8 +273,6 @@ export class Misc {
                     if(data[i]['fee_id']==this.fee[k]['fee_id']){
                         this.fee.splice(parseInt(k),1);
                     }
-                    // console.log(data[i]['fee_id']);
-                    // console.log(this.fee[k]['fee_id']);
                 }
             if(i=='0'){
                 buffer = data[i];
