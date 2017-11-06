@@ -23,6 +23,8 @@ export class PersonalInfo {
 
     setUserTestimonials(data){
         this.userTestimonials = data;
+        this.event.emitDataEvent();
+
     }
 
     setInfo(data) {
@@ -37,6 +39,7 @@ export class PersonalInfo {
         }
         // this.userInfoEvent.emit(true);
         this.event.emitUserInfoEvent();
+        this.event.emitDataEvent();
     }
 
     setSchoolInfo(data) {
@@ -72,7 +75,7 @@ export class SubjectInfo {
     subscribedSubjects = {};
     attemptedDemo = { "Computers": false, "Science": false, "Mathematics": false, "English": false, "General-Knowledge": false, "Reasoning": false }
 
-    constructor() { }
+    constructor(private event: EventService) { }
 
     setSyllabus(data) {
         this.subjectList = [];
@@ -109,6 +112,7 @@ export class SubjectInfo {
             }
 
         }
+        this.event.emitDataEvent()
     }
 
     setComputerChapters(data) {
@@ -253,15 +257,19 @@ export class Misc {
         for (let i in data) {
             this.notice.push(data[i])
         }
+        this.event.emitDataEvent();
     }
 
     setFee(data) {
         this.fee = data;
         this.event.emitFeeEvent();
+        this.event.emitDataEvent();
     }
 
     setTestDetails(data) {
         this.testDetails = data;
+        this.event.emitDataEvent();
+
     }
 
     setPaymentDetails(data){
@@ -287,6 +295,7 @@ export class Misc {
             }
         }
         this.paymentData = paymentDetails;
+        this.event.emitDataEvent();
     }
 
 }
@@ -300,15 +309,17 @@ export class Result {
     english;
     reasoning;
     completeResult;
+    computers2;
 
     constructor(private event:EventService){}
 
     setResult(data) {
         this.completeResult = data;
-        for (let i in data['generated']['subjects']) {
+        for (let i=0; i<data['generated']['subjects'].length; i++) {
             switch (data['generated']['subjects'][i]['name']) {
                 case "Computers":
                     this.computers = data['generated']['subjects'][i];
+                    this.computers2 = JSON.stringify(data['generated']['subjects'][i]);
                     break;
 
                 case "Science":
@@ -335,5 +346,4 @@ export class Result {
         this.event.emitResultEvent();
         
     }
-
 }

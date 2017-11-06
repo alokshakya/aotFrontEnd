@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MasterHttpService } from '../../../services/masterhttp.service';
-import { PersonalInfo, SubjectInfo, Misc } from '../../../services/data.service';
+import { PersonalInfo, SubjectInfo, Misc, Result } from '../../../services/data.service';
 import { EventService } from '../../../services/event.service';
 import { Message } from 'primeng/primeng';
 
@@ -20,12 +20,30 @@ export class LoadoutComponent implements OnInit {
         public SubjectInfo: SubjectInfo,
         public misc: Misc,
         public router: Router,
-        public event: EventService
+        public event: EventService,
+        public result: Result
     ) { }
 
     ngOnInit() {
         this.errorCheck();
-        
+        this.eventAction();
+        this.loadData();
+    }
+
+    eventAction(){
+        this.event.dataEvent.subscribe((data)=>{
+            if(data==5){
+                let previousRoute = sessionStorage.getItem('route')
+                if(previousRoute!=null){
+                    this.router.navigate([previousRoute]);
+                }
+                else this.router.navigate(['account'])
+            }
+        })
+    }
+
+    loadData(){
+        this.http.getResult();
         this.event.feeEvent.subscribe((data)=>{
             if(data){
                 this.http.getPaymentHistory();
@@ -38,14 +56,7 @@ export class LoadoutComponent implements OnInit {
         this.http.getNotices();
         this.http.getTestDetails();
         this.http.getTestimonials();
-        this.http.getResult();
         this.http.getFee();
-        // this.http.getPaymentHistory();
-        // this.personalInfo.userInfoEvent.subscribe((data)=>{
-        //     if(data){
-        //         this.http.getUserTestimonials(this.personalInfo.studentInfo['student_id']);
-        //     }
-        // })
         this.event.userInfoEvent.subscribe((data)=>{
             if(data){
                 this.http.getUserTestimonials(this.personalInfo.studentInfo['student_id']);

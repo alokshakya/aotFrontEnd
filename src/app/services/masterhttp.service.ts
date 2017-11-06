@@ -40,16 +40,7 @@ export class MasterHttpService {
         this.event.emitErrEvent();
     }
 
-    dataRetreived() {
-        this.updated++;
-        if (this.updated == 9) {
-            let previousRoute = sessionStorage.getItem('route')
-            if(previousRoute!=null){
-                this.router.navigate([previousRoute]);
-            }
-            else this.router.navigate(['account'])
-        }
-    }
+
 
     setToken(token) {
         this.token = token;
@@ -57,7 +48,6 @@ export class MasterHttpService {
         this.queryHeaders.append('Content-Type', 'application/json');
         this.queryHeaders.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
         this.queryHeaders.append('session_token', localStorage.getItem('session_token'));
-        this.dataRetreived();
     }
 
     sendOtp(requestBody) {
@@ -124,7 +114,6 @@ export class MasterHttpService {
             .subscribe((data) => {
                 if (data['status'] == 200) {
                     this.personalInfo.setInfo(data['message'][0]);
-                    this.dataRetreived();
                 }
                 else{
                     this.httpError();
@@ -138,7 +127,6 @@ export class MasterHttpService {
             .subscribe((data) => {
                 if(data['status']==200){
                     this.subjectInfo.setSyllabus(data['message']['class']['subjects']);
-                    this.dataRetreived();
                 }
                 else{
                     this.httpError();
@@ -157,7 +145,6 @@ export class MasterHttpService {
                 }
                 else{
                     this.chapterwiseTest.setTestDetails(data['message']);
-                    this.dataRetreived();
                 }
             },
             err=>{
@@ -168,12 +155,11 @@ export class MasterHttpService {
     getResult() {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/result/generate', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
-                if(data['status']==723){
+                if(data['status']!=200){
                     this.httpError();
                 }
                 else{
                     this.result.setResult(data['message']);
-                    this.dataRetreived();
                 }
             },
             err=>{
@@ -187,7 +173,6 @@ export class MasterHttpService {
         .subscribe((data)=>{
             if(data['status']==200){
                 this.misc.setFee(data['message']);
-                this.dataRetreived();
             }
             else{
                 this.httpError();
@@ -215,7 +200,6 @@ export class MasterHttpService {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/tablerecords/testimonial', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
                 this.misc.setTestimonial(data['message']);
-                this.dataRetreived();
             })
     }
 
@@ -223,7 +207,6 @@ export class MasterHttpService {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/tablerecords/notice_board', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
                 this.misc.setNotice(data['message']);
-                this.dataRetreived();
             },
             err=>{
                 this.httpError();
@@ -250,8 +233,6 @@ export class MasterHttpService {
             if(data['status']==200){
                 this.misc.setPaymentDetails(data['message']['payments_history']);
             }
-                this.dataRetreived();
-            
         },err=>{
             this.httpError();
         })

@@ -9,9 +9,16 @@ export class EventService {
     currentRoute: EventEmitter<[string]> = new EventEmitter();
     resultEvent: EventEmitter<boolean> = new EventEmitter();
     feeEvent: EventEmitter<boolean> = new EventEmitter();
-    menuEvent: EventEmitter<number> = new EventEmitter()
+    menuEvent: EventEmitter<number> = new EventEmitter();
+    control:number=0;
+    dataEvent:EventEmitter<number> = new EventEmitter();
 
 	constructor() { }
+
+	emitDataEvent(){
+		this.control+=1;
+		this.dataEvent.emit(this.control);
+	}
 
 	emitErrEvent(){
 		this.errorEvent.emit(true);
