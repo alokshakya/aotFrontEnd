@@ -49,7 +49,7 @@
         </div>
         <div class="ui-g fixed-height">
             <div class="ui-g-12 box"><span class="statement">Q{{clickListener+1}}. </span><span [MathJax]="selectedQuestion['question']" class="statement"></span>
-                    <div *ngIf="selectedQuestion['image']['image_path']!=null" class="image">
+                    <div *ngIf="selectedQuestion['image']['image_path']!=null" class="image text-center">
                         <img src="{{imageUrl}}{{selectedQuestion['image']['image_path']}}{{selectedQuestion['image']['file_name']}}">
                     </div>
             </div>
@@ -58,7 +58,7 @@
                         <div class="ui-g-6 ui-sm-12">
                             <span id="a">A</span>
                             <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][0]['id']}}" [(ngModel)]="answer"></p-radioButton><span [MathJax]="selectedQuestion['answers'][0]['answer']"></span>
-                            <div class="image" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
+                            <div class="image text-center" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][0]['image']['image_path']}}{{selectedQuestion['answers'][0]['image']['file_name']}}">
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                             <span id="b">B</span>
                             <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][1]['id']}}" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][1]['answer']"></span>
-                            <div class="image" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
+                            <div class="image text-center" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][1]['image']['image_path']}}{{selectedQuestion['answers'][1]['image']['file_name']}}">
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                             <span id="c">C</span>
                             <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][2]['id']}}" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][2]['answer']"></span>
-                            <div class="image" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null">
+                            <div class="image text-center" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][2]['image']['image_path']}}{{selectedQuestion['answers'][2]['image']['file_name']}}">
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                             <span id="d">D</span>
                             <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][3]['id']}}" [(ngModel)]="answer"></p-radioButton>
                             <span [MathJax]="selectedQuestion['answers'][3]['answer']"></span>
-                            <div class="image" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null">
+                            <div class="image text-center" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null">
                                 <img src="{{imageUrl}}{{selectedQuestion['answers'][3]['image']['image_path']}}{{selectedQuestion['answers'][3]['image']['file_name']}}">
                             </div>
                         </div>
@@ -127,7 +127,8 @@
                     </div>
             </div>
         </div>
-        <div class="ui-g dark-theme">
+        <footer>
+                    <div class="ui-g dark-theme">
                 <div class="ui-g-12 footer">
                     <div class="inline text-center m-group">
                         <button md-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()">M</button>
@@ -144,5 +145,7 @@
                         <br>Next Question
                     </div>
                 </div>
-            </div>
+        </div>
+        </footer>
     </div>
+</div>
