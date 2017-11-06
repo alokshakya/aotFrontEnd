@@ -21,6 +21,8 @@ export class ResultComputersComponent implements OnInit {
 
 
     testArray:any;
+    testArray2 = [];
+
     selectedTest:any;
     selectedTest2:any;
 
@@ -207,11 +209,12 @@ export class ResultComputersComponent implements OnInit {
             
 
     setChapters(){
-        for(let i in this.result.computers.chapters){
-            if(this.result.computers.chapters[i].hasOwnProperty('tests')){
-                this.chapterArray.push(this.result.computers.chapters[i]);
-                this.chapterwiseGraph.labels[i] = 'CH-'+(parseInt(i)+1);
-                this.chapterwiseGraph.datasets[0]['data'][i] = this.result.computers.chapters[i]['total_correct'];
+        let obj = this.result.computers.chapters;
+        for(let i=0; i<obj.length; i++){
+            if(obj[i].hasOwnProperty('tests')){
+                this.chapterArray.push(obj[i]);
+                this.chapterwiseGraph.labels[i] = 'CH-'+(i+1);
+                this.chapterwiseGraph.datasets[0]['data'][i] = obj[i]['total_correct'];
             }
         }
         if(this.chapterArray.length==0){
@@ -230,18 +233,21 @@ export class ResultComputersComponent implements OnInit {
         else{
             data = e.data
         }
-        if(data.hasOwnProperty('tests')){
+          let  testSelected:boolean;
             this.totalAttempts = 0;
             this.testArray = data.tests;
-            for(let i in this.testArray){
-                this.totalAttempts += parseInt(this.testArray[i]['attempted'])
-                if(this.testArray[i].attempted==0){
-                    this.testArray.splice(i);
+            for(let i=0;i<this.testArray.length;i++){
+                this.totalAttempts+=parseInt(this.testArray[i]['attempted']);
+                if(this.testArray[i]['attempted']>0){
+                    if(!testSelected){
+                        this.selectedTest2 = []
+                        this.selectedTest2[0] = this.testArray[i];
+                        testSelected = true;
+                    }
+                    this.testArray2.push(this.testArray[i]);
+                    this.testArray2[this.testArray2.length-1]['index'] = i+1;
                 }
             }
-        }
-        this.selectedTest2 = []
-        this.selectedTest2[0] = data.tests[0]
         this.selectTest();
     }
 
@@ -338,18 +344,11 @@ export class ResultComputersComponent implements OnInit {
                 })
             }
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_2')){
-                // this.questionWiseGraph3.datasets[i]['data'][1] = this.selectedTest2[i]['result']['attempt_2']['correct'];
-                // this.questionWiseGraph3.datasets[i]['label'] = this.selectedTest2[i]['name'];
                 datasets[i]['data'][1] = this.selectedTest2[i]['result']['attempt_2']['correct'];
             }
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_3')){
-                // this.questionWiseGraph3.datasets[i]['data'][2] = this.selectedTest2[i]['result']['attempt_3']['correct'];
-                // this.questionWiseGraph3.datasets[i]['label'] = this.selectedTest2[i]['name'];
                 datasets[i]['data'][2] = this.selectedTest2[i]['result']['attempt_3']['correct'];
             }
-            // this.questionWiseGraph3.datasets[i]['backgroundColor'] = color[this.selectedTest2[i]['name']];
-            // this.questionWiseGraph3.datasets[i]['borderColor'] = color[this.selectedTest2[i]['name']];
-
         }
         this.questionWiseGraph3.labels = labels;
         this.questionWiseGraph3.datasets = datasets;

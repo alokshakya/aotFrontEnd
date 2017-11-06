@@ -18,6 +18,8 @@ export class ResultEnglishComponent implements OnInit {
 
 
     testArray:any;
+    testArray2 = [];
+
     selectedTest:any;
     selectedTest2:any;
 
@@ -203,12 +205,14 @@ export class ResultEnglishComponent implements OnInit {
 }
             
 
+    
     setChapters(){
-        for(let i in this.result.english.chapters){
-            if(this.result.english.chapters[i].hasOwnProperty('tests')){
-                this.chapterArray.push(this.result.english.chapters[i]);
-                this.chapterwiseGraph.labels[i] = 'CH-'+(parseInt(i)+1);
-                this.chapterwiseGraph.datasets[0]['data'][i] = this.result.english.chapters[i]['total_correct'];
+        let obj = this.result.english.chapters;
+        for(let i=0; i<obj.length; i++){
+            if(obj[i].hasOwnProperty('tests')){
+                this.chapterArray.push(obj[i]);
+                this.chapterwiseGraph.labels[i] = 'CH-'+(i+1);
+                this.chapterwiseGraph.datasets[0]['data'][i] = obj[i]['total_correct'];
             }
         }
         if(this.chapterArray.length==0){
@@ -227,18 +231,21 @@ export class ResultEnglishComponent implements OnInit {
         else{
             data = e.data
         }
-        if(data.hasOwnProperty('tests')){
+          let  testSelected:boolean;
             this.totalAttempts = 0;
             this.testArray = data.tests;
-            for(let i in this.testArray){
-                this.totalAttempts += parseInt(this.testArray[i]['attempted'])
-                if(this.testArray[i].attempted==0){
-                    this.testArray.splice(i);
+            for(let i=0;i<this.testArray.length;i++){
+                this.totalAttempts+=parseInt(this.testArray[i]['attempted']);
+                if(this.testArray[i]['attempted']>0){
+                    if(!testSelected){
+                        this.selectedTest2 = []
+                        this.selectedTest2[0] = this.testArray[i];
+                        testSelected = true;
+                    }
+                    this.testArray2.push(this.testArray[i]);
+                    this.testArray2[this.testArray2.length-1]['index'] = i+1;
                 }
             }
-        }
-        this.selectedTest2 = []
-        this.selectedTest2[0] = data.tests[0]
         this.selectTest();
     }
 
@@ -265,7 +272,6 @@ export class ResultEnglishComponent implements OnInit {
             this.multiSelectTest();
         },10)
     }
-
     multiSelectTest(){
         let data = [];
         let label = [];

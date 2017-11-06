@@ -96,21 +96,22 @@
             </div> -->
             <div class="ui-g-12" *ngIf="selectedChapter!=null">
                 <p-panel header="Attempted Test Summary">
-                    <p-dataTable [value]="testArray" (onRowSelect)="selectTest($event)" (onHeaderCheckboxToggle)="selectTest($event)" (onRowUnselect)="selectTest($event)" [responsive]="true" selectionMode="multiple" dataKey="id" [(selection)]="selectedTest2">
+                    <p-dataTable [value]="testArray2" (onRowSelect)="selectTest($event)" (onHeaderCheckboxToggle)="selectTest($event)" (onRowUnselect)="selectTest($event)" [responsive]="true" selectionMode="multiple" dataKey="id" [(selection)]="selectedTest2">
                         <p-column selectionMode="multiple" [style]="{'width':'10%'}"></p-column>
                         <p-column *ngFor="let item of testCols;let i = index" [field]="item.field" [header]="item.header">
                             <ng-template pTemplate="header">
                                 <span class="theme-text" [ngClass]="{'attempted':item.header=='Attempted'}">{{item.header}}</span>
                             </ng-template>
                             <ng-template let-col let-data="rowData" let-ri="rowIndex" *ngIf="item.header=='Test'" header="Test" pTemplate="body">
-                                <span class="test" [ngClass]="shade(ri)">{{ri+1}}</span>
+                                <span class="test" [ngClass]="shade(data.index)">{{data.index}}</span>
                             </ng-template>
+                            
                             <ng-template let-col let-data="rowData" *ngIf="item.header=='Attempted'" pTemplate="body">
                                 <span *ngIf="data.attempted=='0'">None</span>
                                 <span *ngIf="data.attempted=='1'">Once</span>
                                 <span *ngIf="data.attempted=='2'">Twice</span>
                                 <span *ngIf="data.attempted=='3'">Thrice</span>
-                            </ng-template>
+                            </ng-template> 
                         </p-column>
                         <p-footerColumnGroup *ngIf="selectedChapter!=null">
                             <p-row>
