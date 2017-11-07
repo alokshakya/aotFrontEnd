@@ -10,10 +10,16 @@ export class EventService {
     resultEvent: EventEmitter<boolean> = new EventEmitter();
     feeEvent: EventEmitter<boolean> = new EventEmitter();
     menuEvent: EventEmitter<number> = new EventEmitter();
-    control:number=0;
     dataEvent:EventEmitter<number> = new EventEmitter();
+    userVerifiedEvent: EventEmitter<number> = new EventEmitter();
+    control:number=0;
+    user:number=0;
 
 	constructor() { }
+
+	emitVerifiedUserEvent(){
+		this.user+=1;;
+	}
 
 	emitDataEvent(){
 		this.control+=1;

@@ -1,8 +1,37 @@
-<p-dialog header="Change Profile Picture" responsive="true" [(visible)]="changeImg">
+<p-blockUI [blocked]="unVerified"></p-blockUI>
+
+<p-dialog header="Change Profile Picture" [responsive]="true" [(visible)]="changeImg">
     <div class="ui-g">
         <div class="ui-g-12">
             <p-fileUpload invalidFileTypeMessageSummary="{0}: Invalid file type," [showCancelButton]="false" name="userfile" url="{{imgUploadUrl}}" accept="image/*" (onError)="messageDisplay('error','Error','Could Not Update')" previewWidth="200" (onUpload)="onUpload($event)" (onBeforeSend)="onBeforeSend($event)" maxFileSize="3000000">
             </p-fileUpload>
+        </div>
+    </div>
+</p-dialog>
+<p-dialog [responsive]="true" [(visible)]="unVerified" [closeOnEscape]="false" [width]="400" [closable]="false">
+    <p-header>
+        Verification<span class="to-right" (click)="logout()" ><a href=""><i pTooltip="Logout" class="fa fa-sign-out fa-lg"></i></a></span>
+    </p-header>
+    <div class="ui-g">
+        <div class="ui-g-12" *ngIf="!userObject?.email_verified">
+            <p>Enter Otp Sent On <strong>{{email}}</strong></p>
+            <span class="pad-right"><p-inputMask mask="999-999" [disabled]="emailVerified" placeholder="OTP" [(ngModel)]="userObject.email_otp" unmask="true"></p-inputMask></span>
+            <button *ngIf="modeStr!='verifyemail'&&!spinner3" class="ui ui-button-info" (click)="verify('email')" pButton [disabled]="userObject.email_otp==null||userObject.email_otp==''||spinner||spinner2||spinner3||spinner4||emailVerified" label="Verify"></button>
+            <button *ngIf="modeStr=='verifyemail'&&spinner3" style="width:55px" class="ui ui-button-info" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton></button>
+
+            <button [disabled]="spinner||spinner2||spinner3||spinner4||emailVerified" *ngIf="modeStr!='email'&&!spinner" class="ui ui-button-success" pButton label="Resend" (click)="setWrapper('email')"></button>
+            <button *ngIf="spinner&&modeStr=='email'" style="width:68px" class="ui ui-button-success" pButton icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
+            <p *ngIf="emailVerified" class="success">Email Verified Successfully</p>
+        </div>
+        <div class="ui-g-12" *ngIf="!userObject?.mobile_verified">
+            <p>Enter Otp Sent On <strong>{{personalInfo.userInfo.mobile}}</strong></p>
+            <span class="pad-right"><p-inputMask mask="999-999" [disabled]="mobileVerified" placeholder="OTP" [(ngModel)]="userObject.mobile_otp" unmask="true"></p-inputMask></span>
+            <button *ngIf="modeStr!='verifymobile'&&!spinner4" class="ui ui-button-info" (click)="verify('mobile')" pButton [disabled]="userObject.mobile_otp==null||userObject.email_otp==''||spinner||spinner2||spinner3||spinner4||mobileVerified" label="Verify"></button>
+            <button *ngIf="modeStr=='verifymobile'&&spinner4" style="width:55px" class="ui ui-button-info" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton></button>
+
+            <button [disabled]="spinner||spinner2||spinner3||spinner4||mobileVerified" *ngIf="modeStr!='mobile'&&!spinner2" class="ui ui-button-success" pButton label="Resend" (click)="setWrapper('mobile')"></button>
+            <button *ngIf="spinner2&&modeStr=='mobile'" style="width:68px" class="ui ui-button-success" pButton icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
+            <p *ngIf="mobileVerified" class="success">Mobile Verified Successfully</p>
         </div>
     </div>
 </p-dialog>

@@ -1,7 +1,26 @@
+.to-right{
+    margin-left: 73%;
+}
+
+.to-right:hover{
+    cursor: pointer;
+}
+
+.to-right a{
+    color: white
+}
+
+.pad-right{
+    margin-right: 10px;
+}
 .main-content-view{
     height:90%;
     overflow-y:auto;
     overflow-x:hidden; 
+}
+
+.success{
+    color:#5CB85C;
 }
 
 ::-webkit-scrollbar {

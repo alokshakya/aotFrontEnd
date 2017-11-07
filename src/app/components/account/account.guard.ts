@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CanActivate, CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { MasterHttpService } from '../../services/masterhttp.service';
+import { EventService } from '../../services/event.service';
 import { chapterwiseTest, Misc } from '../../services/data.service';
 import { DashboardComponent } from './dashboard/dashboard.component'
 
@@ -18,6 +19,18 @@ export class AccountGuard implements CanActivate {
         return false;
         
     }
+}
+
+@Injectable()
+export class verifiedGuard implements CanActivate{
+	constructor(private event:EventService){}
+
+	canActivate(route: ActivatedRouteSnapshot, state:RouterStateSnapshot): Observable<boolean>|boolean{
+		if(this.event.user>2){
+			return true;
+		}
+		return true;
+	}
 }
 
 @Injectable()

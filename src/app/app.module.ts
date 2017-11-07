@@ -7,13 +7,14 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
-import { MdButtonModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material';
 
 // import { MathJax } from 'mathjax';
 import { AccordionModule } from 'primeng/primeng';
 import { AutoCompleteModule } from 'primeng/primeng';
 import { BreadcrumbModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
+import { BlockUIModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
 import { CarouselModule } from 'primeng/primeng';
 import { ChartModule } from 'primeng/primeng';
@@ -59,6 +60,7 @@ import { RadioButtonModule } from 'primeng/primeng';
 import { RatingModule } from 'primeng/primeng';
 import { ScheduleModule } from 'primeng/primeng';
 import { SelectButtonModule } from 'primeng/primeng';
+import { SidebarModule } from 'primeng/primeng';
 import { SlideMenuModule } from 'primeng/primeng';
 import { SliderModule } from 'primeng/primeng';
 import { SpinnerModule } from 'primeng/primeng';
@@ -101,7 +103,7 @@ import { LoginRegisterService } from './services/loginRegister.service';
 import { EventService } from './services/event.service';
 import { MasterHttpService } from './services/masterhttp.service';
 import { PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest } from './services/data.service';
-import { AccountGuard, TestAccountGuard, TestDeactivate } from './components/account/account.guard';
+import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from './components/account/account.guard';
 
 //Moment
 // import * as moment from 'moment';
@@ -157,6 +159,7 @@ import { RoundPipe } from './pipes/round.pipe';
         AutoCompleteModule,
         BreadcrumbModule,
         ButtonModule,
+        BlockUIModule,
         CalendarModule,
         CarouselModule,
         ChartModule,
@@ -202,6 +205,7 @@ import { RoundPipe } from './pipes/round.pipe';
         RatingModule,
         ScheduleModule,
         SelectButtonModule,
+        SidebarModule,
         SlideMenuModule,
         SliderModule,
         SpinnerModule,
@@ -215,7 +219,7 @@ import { RoundPipe } from './pipes/round.pipe';
         ToolbarModule,
         TooltipModule,
         TreeModule,
-        MdButtonModule,
+        MatButtonModule,
         TreeTableModule,
         //MomentModule //Moment
 
@@ -275,7 +279,7 @@ import { RoundPipe } from './pipes/round.pipe';
         MasterHttpService,
         ConfirmationService,
         PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest, 
-        AccountGuard, TestAccountGuard, TestDeactivate,
+        AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard,
         EventService
     ],
     bootstrap: [AppComponent]
