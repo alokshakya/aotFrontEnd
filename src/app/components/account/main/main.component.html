@@ -15,7 +15,7 @@
     <div class="ui-g">
         <div class="ui-g-12" *ngIf="!userObject?.email_verified">
             <p>Enter Otp Sent On <strong>{{email}}</strong></p>
-            <span class="pad-right"><p-inputMask mask="999-999" [disabled]="emailVerified" placeholder="OTP" [(ngModel)]="userObject.email_otp" unmask="true"></p-inputMask></span>
+            <span class="pad-right"><p-inputMask mask="999-999" slotChar=" " [disabled]="emailVerified" placeholder="Enter Otp" [(ngModel)]="userObject.email_otp" unmask="true"></p-inputMask></span>
             <button *ngIf="modeStr!='verifyemail'&&!spinner3" class="ui ui-button-info" (click)="verify('email')" pButton [disabled]="userObject.email_otp==null||userObject.email_otp==''||spinner||spinner2||spinner3||spinner4||emailVerified" label="Verify"></button>
             <button *ngIf="modeStr=='verifyemail'&&spinner3" style="width:55px" class="ui ui-button-info" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton></button>
 
@@ -25,7 +25,7 @@
         </div>
         <div class="ui-g-12" *ngIf="!userObject?.mobile_verified">
             <p>Enter Otp Sent On <strong>{{personalInfo.userInfo.mobile}}</strong></p>
-            <span class="pad-right"><p-inputMask mask="999-999" [disabled]="mobileVerified" placeholder="OTP" [(ngModel)]="userObject.mobile_otp" unmask="true"></p-inputMask></span>
+            <span class="pad-right"><p-inputMask mask="999-999" slotChar=" " [disabled]="mobileVerified" placeholder="Enter Otp" [(ngModel)]="userObject.mobile_otp" unmask="true"></p-inputMask></span>
             <button *ngIf="modeStr!='verifymobile'&&!spinner4" class="ui ui-button-info" (click)="verify('mobile')" pButton [disabled]="userObject.mobile_otp==null||userObject.email_otp==''||spinner||spinner2||spinner3||spinner4||mobileVerified" label="Verify"></button>
             <button *ngIf="modeStr=='verifymobile'&&spinner4" style="width:55px" class="ui ui-button-info" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton></button>
 

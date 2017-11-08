@@ -194,13 +194,14 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             'city': this.dummyBasicInfo['city'],
             'birthdate': this.dummyBasicInfo['birthdate'],
             'pincode': this.dummyBasicInfo['pincode'],
-            'mobile': this.dummyBasicInfo['mobile'],
+            // 'mobile': this.dummyBasicInfo['mobile'],
             'gender': this.dummyBasicInfo['gender'], 
             'school_id': this.personalInfo.studentInfo['school_id']
         }
         this.masterhtttp.updateProfile(wrapper)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
+                    this.dummyBasicInfo.mobile = this.personalInfo.userInfo.mobile;
                     this.personalInfo.userInfo = this.dummyBasicInfo;
                     this.editBasic = false;
                     this.generateMsg('success','Success','Profile Updated Successfully');
@@ -330,6 +331,20 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             })
     }
 
+    invalidName(){
+        let arr = [false,false];
+        let pattern = new RegExp("^[a-zA-Z]+$");
+        if(this.editBasic){
+            if(!pattern.test(this.dummyBasicInfo.firstname)){
+                arr[0] = true;
+            }
+            if(!pattern.test(this.dummyBasicInfo.lastname)){
+                arr[1] = true;
+            }
+        }
+        return arr;
+    }
+
     cancelAchievement() {
         this.achievement = null;
         this.dec = [];
@@ -341,6 +356,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             if(data['status']==200){
                 this.generateMsg('success','Success','Mobile Number Updated Successfully');
                 this.otpDialog = false;
+                this.personalInfo.userInfo['mobile'] = this.dummyBasicInfo['mobile'];
             }
             else {
                 this.generateMsg('error','Server Error','Please Try Again');
@@ -361,7 +377,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             if(data['status']==200){
                 this.updateMobile();
                 this.spinner = false;
-                this.personalInfo.userInfo['mobile'] = this.dummyBasicInfo['mobile'];
             }
             else if(data['status']==721){
                 this.spinner = false;

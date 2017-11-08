@@ -19,13 +19,13 @@
         <div class="ui-g-12" *ngIf="otpDialog">
             <h5>Enter OTP sent on {{dummyBasicInfo?.mobile}} </h5>
             <p-inputMask slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP"[(ngModel)]="dummyOtp"></p-inputMask>
-            <button *ngIf="otpDialog&&!spinner2" class="ui-button-info withinput" pButton (click)="verify()" [disabled]="spinner&&otpDialog" label="Resend"></button>
+            <button *ngIf="otpDialog&&!spinner2" class="ui-button-info withinput" pButton (click)="verify()" [disabled]="spinner&&otpDialog||spinner2" label="Resend"></button>
             
-            <button *ngIf="otpDialog&&spinner2" style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" class="ui-button-info withinput" pButton></button>
+            <button *ngIf="otpDialog&&spinner2" style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info withinput" pButton></button>
 
-            <button *ngIf="otpDialog&&!spinner" pButton (click)="dummyVerify()" [disabled]="spinner&&otpDialog||dummyOtp==null" class="ui-button-success" label="Verify"></button>
+            <button *ngIf="otpDialog&&!spinner" pButton (click)="dummyVerify()" [disabled]="spinner&&otpDialog||dummyOtp==null||spinner2" class="ui-button-success" label="Verify"></button>
 
-            <button *ngIf="otpDialog&&spinner" style="width:60px" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" pButton class="ui-button-success"></button><br>
+            <button *ngIf="otpDialog&&spinner" style="width:60px" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-success"></button><br>
             <br>
         </div>
     </div>
@@ -40,8 +40,10 @@
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-user"></i> Name</h4>
                             <p><span class="userdetails" *ngIf="!editBasic">{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</span>
-                                <input pInputText placeholder="{{dummyBasicInfo.firstname}}" *ngIf="editBasic" type="text" [(ngModel)]="dummyBasicInfo.firstname">
-                                <input [(ngModel)]="dummyBasicInfo.lastname" placeholder="{{dummyBasicInfo.lastname}}" pInputText *ngIf="editBasic" type="text">
+                                <input pInputText maxlength="30" placeholder="{{dummyBasicInfo.firstname}}" *ngIf="editBasic" type="text" [(ngModel)]="dummyBasicInfo.firstname">
+                                <input [(ngModel)]="dummyBasicInfo.lastname" maxlength="30" placeholder="{{dummyBasicInfo.lastname}}" pInputText *ngIf="editBasic" type="text">
+                                <span class="red-text" *ngIf="invalidName()[0]&&editBasic"><br>Invalid Firstname</span>
+                                <span class="red-text" *ngIf="invalidName()[1]&&editBasic"><br>Invalid Lastname</span>
                             </p>
                         </div>
                         <div class="col-md-4 col-xs-12  userinfo">
@@ -50,8 +52,8 @@
                         </div>
                         <div class="col-md-4 col-xs-12 mob">
                             <button type="button" *ngIf="!editBasic" pButton class="ui-button-info" label="Edit" (click)="editBasicInfo()"></button>
-                            <button type="button" *ngIf="editBasic&&!spinner" pButton class="ui-button-success" label="Save" (click)="saveBasicInfo()"></button>
-                            <button type="button" style="width:54px" *ngIf="editBasic&&spinner" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" pButton class="ui-button-success"></button>
+                            <button type="button" *ngIf="editBasic&&!spinner" [disabled]="invalidName()[0]||invalidName()[1]" pButton class="ui-button-success" label="Save" (click)="saveBasicInfo()"></button>
+                            <button type="button" style="width:54px" *ngIf="editBasic&&spinner" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-success"></button>
                             <button type="button" *ngIf="editBasic" pButton class="ui-button-danger" label="Cancel" (click)="cancelBasicInfo()"></button>
                         </div>
                     </div>
@@ -65,7 +67,7 @@
                             <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span>
                                 <input class="withbtn" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="dummyBasicInfo.mobile" pInputText   *ngIf="editBasic" type="number">
                                 <button *ngIf="editBasic&&!spinner2" pButton [disabled]="checkMobile()||(spinner&&!otpDialog)" (click)="verify()" class="ui-button-warning" label="Verify"></button>
-                                <button style="width:54px" *ngIf="editBasic&&!otpDialog&&spinner2" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" pButton class="ui-button-warning"></button>
+                                <button style="width:54px" *ngIf="editBasic&&!otpDialog&&spinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-warning"></button>
                             </p>
                         </div>
                     </div>
@@ -128,7 +130,7 @@
                         <div class="col-md-4 col-xs-12">
                             <button type="button" *ngIf="!editSchool" pButton class="ui-button-info" label="Edit" (click)="editSchoolInfo()"></button>
                             <button type="button" *ngIf="editSchool&&!spinner" pButton class="ui-button-success" label="Save" [disabled]="couponCode==''||couponCode==null" (click)="saveSchoolInfo()"></button>
-                            <button type="button" style="width:55px" *ngIf="editSchool&&spinner" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" pButton class="ui-button-success"></button>
+                            <button type="button" style="width:55px" *ngIf="editSchool&&spinner" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-success"></button>
                             <button type="button" *ngIf="editSchool" pButton class="ui-button-danger" label="Cancel" (click)="cancelSchoolInfo()"></button>
                         </div>
                     </div>
@@ -225,7 +227,7 @@
                                         </div>
                                         <div>
                                             <button pButton *ngIf="!spinner" label="Add Testimonial" (click)="addTestimonial()" class="ui-button-success"></button>
-                                            <button pButton *ngIf="spinner" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" style="width:125px" class="ui-button-success"></button>
+                                            <button pButton *ngIf="spinner" icon="fa fa-circle-o-notch fa-spin fa-forward" style="width:125px" class="ui-button-success"></button>
                                             <button pButton label="Not Now" (click)="cancelTestimonial()" class="ui-button-danger"></button>
                                         </div>
                                     </div>
@@ -286,7 +288,7 @@
                             <br>
                             <div class="text-center">
                                 <button pButton *ngIf="!spinner" class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null||achievement==null" label="Add Achievement" (click)="addAchievement()"></button>
-                                <button pButton *ngIf="spinner" style="width:135px" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg"></button>
+                                <button pButton *ngIf="spinner" style="width:135px" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
                                 <button pButton class="ui-button-danger" (click)="cancelAchievement()" label="Not Now"></button>
                             </div>
                         </div>
