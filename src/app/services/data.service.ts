@@ -319,7 +319,7 @@ export class Result {
             switch (data['generated']['subjects'][i]['name']) {
                 case "Computers":
                     this.computers = data['generated']['subjects'][i];
-                    this.computers2 = JSON.stringify(data['generated']['subjects'][i]);
+                    // this.computers2 = JSON.stringify(data['generated']['subjects'][i]);
                     break;
 
                 case "Science":
@@ -344,6 +344,6 @@ export class Result {
             }
         }
         this.event.emitResultEvent();
-        
+        this.event.emitDataEvent();
     }
 }

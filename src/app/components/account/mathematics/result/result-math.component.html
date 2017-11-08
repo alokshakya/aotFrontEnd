@@ -209,7 +209,7 @@
                                             <td>
                                                 <div class="ui-g">
                                                     <div class="ui-g-12">
-                                                        <button md-mini-fab class="a" *ngFor="let resp of selectedAttemptObject['response'];let i=index" [ngClass]="{'correct':resp.state=='c', 'wrong':resp.state=='i', 'un':resp.state=='u', 'mark':resp.state=='m'}"><span class="">{{i+1}}</span></button>
+                                                        <button mat-mini-fab class="a" *ngFor="let resp of selectedAttemptObject['response'];let i=index" [ngClass]="{'correct':resp.state=='c', 'wrong':resp.state=='i', 'un':resp.state=='u', 'mark':resp.state=='m'}"><span class="">{{i+1}}</span></button>
                                                     </div>
                                                 </div>
                                                 <div class="ui-g">

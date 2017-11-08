@@ -131,17 +131,17 @@
                     <div class="ui-g dark-theme">
                 <div class="ui-g-12 footer">
                     <div class="inline text-center m-group">
-                        <button md-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()">M</button>
-                        <button md-mini-fab *ngIf="spinner2"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
+                        <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()">M</button>
+                        <button mat-mini-fab *ngIf="spinner2"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
                         <br>Mark For Review
                     </div>
                     <div class="inline text-center v-group">
-                        <button *ngIf="!spinner" md-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()">V</button>
-                        <button md-mini-fab *ngIf="spinner"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
+                        <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()">V</button>
+                        <button mat-mini-fab *ngIf="spinner"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
                         <br>Validate
                     </div>
                     <div class="inline text-center n-group">
-                        <button md-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><i class="fa fa-chevron-right"></i></button>
+                        <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><i class="fa fa-chevron-right"></i></button>
                         <br>Next Question
                     </div>
                 </div>
