@@ -35,12 +35,8 @@ export class LoadoutComponent implements OnInit {
             if(data==5){
                 let previousRoute = sessionStorage.getItem('route')
                 if(previousRoute!=null){
-                    // this.router.navigate([previousRoute]);
-                    this.router.navigate(['account']);
                     if(this.personalInfo.userInfo.email_verified==1&&this.personalInfo.userInfo.mobile_verified==1){
-                        this.event.emitVerifiedUserEvent()
-                        this.event.emitVerifiedUserEvent()
-                        this.router.navigate([previousRoute])
+                        this.router.navigate([previousRoute]);
                     }
                     else this.router.navigate(['account']);
                 }

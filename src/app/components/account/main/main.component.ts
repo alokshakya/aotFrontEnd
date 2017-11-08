@@ -160,10 +160,13 @@ export class AccountMainComponent implements AfterViewInit {
 
     check(mode){
         if(mode=='mobile'){
+            this.personalInfo.userInfo.mobile_verified=1;
             this.mobileVerified = true;
         }
         if(mode=='email'){
             this.emailVerified = true;
+            this.personalInfo.userInfo.email_verified=1;
+
         }
         if(this.mobileVerified&&this.emailVerified){
             this.unVerified = false;
