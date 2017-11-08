@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, AfterViewInit } from '@angular/core';
 import { style, state, animate, transition, trigger } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginRegisterService } from '../../services/loginRegister.service';
@@ -113,6 +113,10 @@ export class LoginComponent implements OnInit {
                 this.router.navigate([previousRoute]);
             }
         }
+    }
+
+    ngAfterViewInit(){
+        this.userLoginCreds.password = null;
     }
 
     spinnerCondition(value){
