@@ -25,14 +25,15 @@ export class LoadoutComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.errorCheck();
         this.eventAction();
+
+        this.errorCheck();
         this.loadData();
     }
 
     eventAction(){
         this.event.dataEvent.subscribe((data)=>{
-            if(data==5){
+            if(data==7){
                 let previousRoute = sessionStorage.getItem('route')
                 if(previousRoute!=null){
                     if(this.personalInfo.userInfo.email_verified==1&&this.personalInfo.userInfo.mobile_verified==1){
