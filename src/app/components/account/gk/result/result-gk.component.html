@@ -53,7 +53,7 @@
         <div class="ui-g">
             <div class="ui-g-12">
                 <p-panel header="Select Chapter">
-                    <p-dataTable [value]="chapterArray" (onRowUnselect)="tu=false;selectedChapter=null" (onRowSelect)="selectChapter($event)" [responsive]="true" selectionMode="single" dataKey="name" [(selection)]="selectedChapter">
+                    <p-dataTable [value]="chapterArray" (onRowUnselect)="onChapterUnselect()" (onRowSelect)="selectChapter($event)" [responsive]="true" selectionMode="single" dataKey="name" [(selection)]="selectedChapter">
                         <p-column selectionMode="single" [style]="{'width':'8%'}"></p-column>
                         <p-column [style]="{'text-align':'left'}" *ngFor="let item of chapterCols" [header]="item.header" [field]="item.field"></p-column>
                     </p-dataTable>

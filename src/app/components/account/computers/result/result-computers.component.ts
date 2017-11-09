@@ -225,8 +225,15 @@ export class ResultComputersComponent implements OnInit {
         this.selectChapter();
     }
 
+    onChapterUnselect(){
+        this.tu = false;
+        this.testArray = [];
+        this.testArray2 = []
+    }
+
     selectChapter(e=null){
         let data;
+        console.log(this.selectedChapter);
         if(e==null){
             data = this.selectedChapter[0]
         }

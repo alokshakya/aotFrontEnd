@@ -60,6 +60,12 @@ chapterCols:any;
         this.setChapters();
     }
 
+    onChapterUnselect(){
+        this.tu = false;
+        this.testArray = [];
+        this.testArray2 = []
+    }
+
     makeQuestionWIseGraph(){
         let label = [];
         let data = [[],[],[]];
