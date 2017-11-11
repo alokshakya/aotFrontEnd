@@ -13,8 +13,8 @@ import * as constants from '../../../config/constants';
 declare var MathJax:any;
 @Component({
     selector: 'app-test',
-    templateUrl: './test.test.component.html',
-    styleUrls: ['./test.test.component.scss'],
+    templateUrl: './test.component.html',
+    styleUrls: ['./test.component.scss'],
     animations: [
         trigger('fadeInOut', [
             state('*', style({ 'overflow-y': 'hidden' })),
@@ -113,7 +113,6 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
 
     ngOnInit() {
         this.imageUrl = constants.OLYMPIADBOX_IMG_URL;
-
         this.counter = 0;
         this.totalQues = this.chapterwiseTest.qaSet.length;
         this.setResponse();
