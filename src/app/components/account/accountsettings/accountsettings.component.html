@@ -23,7 +23,7 @@
                         <div class="ui-g">
                             <div class="ui-g-12 ui-sm-12">
                                 <label>Enter Coupon/School Code* &nbsp;
-                                    <input type="text" [(ngModel)]="coupon" pInputText> &nbsp;
+                                    <input type="text" maxlength="30" [(ngModel)]="coupon" pInputText> &nbsp;
                                 </label>
                                 <button type="button" class="ui-button-info" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
 

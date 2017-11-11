@@ -6,7 +6,7 @@
 <p-dialog [(visible)]="editTestimonial" modal="true" responsive="true" header="Edit Testimonial">
     <div class="ui-g">
         <div class="ui-g-12 text-center">
-            <textarea pInputTextarea [(ngModel)]="currentTestimonial"></textarea>
+            <textarea pInputTextarea [(ngModel)]="currentTestimonial" maxlength="280"></textarea>
         </div>
         <div class="ui-g-12 text-center">
             <button type="button" class="ui-button-success" (click)="saveTestimonial()" pButton label="Save"></button>
@@ -97,7 +97,7 @@
                             <h4><i class="fa fa-home"></i> Address</h4>
                             <p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo.address}}, {{personalInfo.userInfo.city}}<br>&nbsp;{{personalInfo.userInfo.state}}, {{personalInfo.userInfo.country}}, &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
                             <div class="address" *ngIf="editBasic">
-                                <input pInputText type="text" [(ngModel)]="dummyBasicInfo.address">
+                                <input pInputText type="text" maxlength="100" [(ngModel)]="dummyBasicInfo.address">
                                 <br>
                                 <div class="select">
                                     <p-dropdown [options]="state" [(ngModel)]="dummyBasicInfo.state"></p-dropdown>
@@ -120,7 +120,7 @@
                         <div class="col-md-4 userinfo col-xs-12">
                             <h4><i class="fa fa-sticky-note-o"></i> School Code </h4>
                             <p><span *ngIf="!editSchool" class="userdetails schoolcode"> {{personalInfo.schoolInfo['coupon_code']}}</span> &nbsp;
-                                <input class="longinput" [(ngModel)]="couponCode" pInputText *ngIf="editSchool" type="text">
+                                <input class="longinput" [(ngModel)]="couponCode" maxlength="30" pInputText *ngIf="editSchool" type="text">
                             </p>
                         </div>
                         <div class="col-md-4 col-xs-12 userinfo">
@@ -263,7 +263,7 @@
                             <br>
                             <br>
                             <label>Exam Roll No.*</label>
-                            <input class="achieve" type="text" pInputText placeholder="Roll number">
+                            <input class="achieve" type="number" pInputText placeholder="Roll number">
                         </div>
                         <div class="ui-g-4 ui-sm-12">
                             <p class="guidelines">Submission Guidelines</p>
