@@ -47,25 +47,15 @@ export class LoadoutComponent implements OnInit {
     }
 
     loadData(){
-        this.http.getResult();
-        this.event.feeEvent.subscribe((data)=>{
-            if(data){
-                this.http.getPaymentHistory();
-            }
-        })
-        this.http.updated = 0;
+        this.http.getResult(); //
+        this.http.getPaymentHistory(); //
         this.http.setToken(localStorage.getItem('session_token'));
-        this.http.getPersonalInfo();
-        this.http.getSyllabus();
-        this.http.getNotices();
-        this.http.getTestDetails();
-        this.http.getTestimonials();
+        this.http.getPersonalInfo();//
+        this.http.getSyllabus();//
+        this.http.getNotices(); //
+        this.http.getTestDetails();//
+        this.http.getTestimonials(); //
         this.http.getFee();
-        this.event.userInfoEvent.subscribe((data)=>{
-            if(data){
-                this.http.getUserTestimonials(this.personalInfo.studentInfo['student_id']);
-            }
-        })
         this.misc.logIn();
     }
 

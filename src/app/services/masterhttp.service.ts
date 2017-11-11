@@ -143,7 +143,7 @@ export class MasterHttpService {
                 if(data['status']==723){
                     this.httpError();
                 }
-                else{
+                else if(data['status']==200){
                     this.chapterwiseTest.setTestDetails(data['message']);
                 }
             },

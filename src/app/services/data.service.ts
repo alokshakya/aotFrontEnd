@@ -23,7 +23,6 @@ export class PersonalInfo {
 
     setUserTestimonials(data){
         this.userTestimonials = data;
-        this.event.emitDataEvent();
 
     }
 
@@ -39,7 +38,7 @@ export class PersonalInfo {
         }
         // this.userInfoEvent.emit(true);
         this.event.emitUserInfoEvent();
-        this.event.emitDataEvent();
+        this.event.emitDataEvent;
     }
 
     setSchoolInfo(data) {
@@ -112,7 +111,7 @@ export class SubjectInfo {
             }
 
         }
-        this.event.emitDataEvent()
+        this.event.emitDataEvent();
     }
 
     setComputerChapters(data) {
@@ -190,6 +189,7 @@ export class chapterwiseTest {
         }
         // this.testEvent.emit(true);
         this.event.emitTestEvent();
+        this.event.emitDataEvent()
     }
 
      setQuesAnswerSet(data) {
@@ -250,6 +250,7 @@ export class Misc {
 
     setTestimonial(data) {
         this.testimonial = data;
+        this.event.emitDataEvent();
     }
 
     setNotice(data) {
