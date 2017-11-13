@@ -140,7 +140,7 @@ export class MasterHttpService {
     getTestDetails() {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/test/details', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
-                if(data['status']==723){
+                if(data['status']!=200){
                     this.httpError();
                 }
                 else if(data['status']==200){
@@ -199,8 +199,11 @@ export class MasterHttpService {
     getTestimonials() {
         this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/tablerecords/testimonial', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
-                this.misc.setTestimonial(data['message']);
-            })
+                // if(data['status']==200){
+                    this.misc.setTestimonial(data['message']);
+                // }
+                // else this.httpError();
+            }, err=>this.httpError())
     }
 
     getNotices() {
@@ -233,6 +236,7 @@ export class MasterHttpService {
             if(data['status']==200){
                 this.misc.setPaymentDetails(data['message']['payments_history']);
             }
+            else this.httpError();
         },err=>{
             this.httpError();
         })
