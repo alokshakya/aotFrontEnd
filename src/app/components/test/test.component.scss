@@ -1,18 +1,14 @@
 body{
-    background-color: #2D353C;
+    // background-color: #2D353C;
 }
 
 .top-border{
     border-top: 1px solid white;
 }
 
-// .padded{
-//     padding-right: 24%;
-//     padding-left: 24%;
-// }
-
-.to-right{
-    padding-left: 90px;
+.padded{
+    padding-right: 8%;
+    padding-left: 18%;
 }
 
 .hover:hover{
@@ -37,18 +33,26 @@ body{
 }
 
 .fixed-height{
-    min-height: 590px; 
+    min-height: 615px; 
     padding-bottom: 20px;
 }
 
-.right-fixed{
-    position: fixed;
-    right: 0;
-}
+// .right-fixed{
+//     position: fixed;
+//     right: 0;
+// }
 
 .white-theme{
     background-color: white;
     color: #2D353C;
+}
+
+.long-width{
+    width: 80%;
+}
+
+.short-width{
+    width: 20%
 }
 
 .dark-theme{
@@ -63,7 +67,7 @@ body{
 
 .n{
     display: inline-block;
-    width:12%;
+    width:18%;
     margin-bottom: 3%
 }
 
@@ -127,8 +131,13 @@ body{
 .m-group button,
 .n-group button,
 .v-group button {
-    font-size: 171%;
     color: white;
+    height: 32px;
+    width: 32px
+}
+
+.m-group{
+    width: 25%;
 }
 
 .m-group button {
@@ -136,15 +145,21 @@ body{
 }
 
 .v-group{
-    margin: 0 4% 0 4%;
+    margin: 0 9% 0 9%;
 }
 
 .v-group button {
     background-color: #5BB85D;
+    // margin: 0 9% 0 9%;
 }
 
 .n-group button {
     background-color: #2196F5;
+}
+
+.button-text{
+    font-size: 20px;
+    line-height: 0;
 }
 
 
@@ -174,4 +189,13 @@ body{
 
 #d {
     background-color: #EEAE4C;
+}
+
+
+.left-pad{
+    padding-left: 2%
+}
+
+.min-height{
+    min-height: 47%;
 }

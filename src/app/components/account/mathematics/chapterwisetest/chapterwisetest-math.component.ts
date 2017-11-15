@@ -183,7 +183,7 @@ export class ChapterwisetestMathComponent implements OnInit {
             })
     }
 
-    startTest(testId, chapterId, attempted, completed) {
+    startTest(testId, chapterId, attempted, completed, chapter) {
         this.spinner2 = testId;
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
@@ -193,7 +193,7 @@ export class ChapterwisetestMathComponent implements OnInit {
             "completed":completed.toString()
         }
         this.chapterwiseTest.activateTestRoute();
-        this.chapterwiseTest.setSubject('Mathematics');
+        this.chapterwiseTest.setSubject('Mathematics',chapter);
         this.masterhttp.beginTest(wrapper)
         .subscribe((data) => {
                 if (data['status'] == 200){

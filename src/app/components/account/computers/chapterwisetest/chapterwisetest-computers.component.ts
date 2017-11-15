@@ -169,7 +169,7 @@ export class ChapterwisetestComputersComponent implements OnInit {
             })
     }
 
-    startTest(testId, chapterId, attempted, completed) {
+    startTest(testId, chapterId, attempted, completed,chapter) {
         this.spinner2 = testId;
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
@@ -179,11 +179,12 @@ export class ChapterwisetestComputersComponent implements OnInit {
             "completed":completed.toString()
         }
         this.chapterwiseTest.activateTestRoute();
-        this.chapterwiseTest.setSubject('Computers');
+        this.chapterwiseTest.setSubject('Computers',chapter);
         this.masterhttp.beginTest(wrapper)
         .subscribe((data) => {
                 if (data['status'] == 200){
                     this.chapterwiseTest.setQuesAnswerSet(data['message']);
+
                     this.router.navigate(['test']);
                 }else{
                     this.generateMsg = [];

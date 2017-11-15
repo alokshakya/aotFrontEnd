@@ -147,11 +147,13 @@ export class chapterwiseTest {
     attemptDetails: any;
     activateRoute:boolean;
     completeTestDetails;
+    chapter:string;
 
     constructor(private event:EventService){}
 
-    setSubject(subject){
-        this.subject = subject; 
+    setSubject(subject,chapter){
+        this.subject = subject;
+        this.chapter = chapter;
     }
 
     activateTestRoute(){
