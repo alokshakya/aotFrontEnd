@@ -65,8 +65,8 @@
                         <div class="col-md-6 col-xs-12 userinfo">
                             <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4>
                             <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span>
-                                <input class="withbtn" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="dummyBasicInfo.mobile" pInputText   *ngIf="editBasic" type="number">
-                                <button *ngIf="editBasic&&!spinner2" pButton [disabled]="checkMobile()||(spinner&&!otpDialog)" (click)="verify()" class="ui-button-warning" label="Verify"></button>
+                                <p-inputMask mask="9999999999" [style]="{'background-color':'#e1e1e1','width':'247px','border':'none', 'margin-left':'-2%','margin-right':'7px'}" slotChar=" " [(ngModel)]="dummyBasicInfo.mobile" *ngIf="editBasic"></p-inputMask>
+                                <button *ngIf="editBasic&&!spinner2" pButton [disabled]="checkMobile()||(spinner&&!otpDialog)" (click)="verify()" class="ui-button-warning" label="Update"></button>
                                 <button style="width:54px" *ngIf="editBasic&&!otpDialog&&spinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-warning"></button>
                             </p>
                         </div>
@@ -77,7 +77,7 @@
                                 <div class="col-md-12 col-xs-12 column userinfo">
                                     <h4><i class="fa fa-calendar"></i> Date Of Birth</h4>
                                     <p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo['birthdate']}}</span> &nbsp;
-                                        <p-calendar [(ngModel)]="dummyBasicInfo.birthdate" dataType="string" dateFormat="yy-mm-dd" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2017" *ngIf="editBasic"></p-calendar>
+                                        <p-calendar [style]="{'width':'247px'}" [(ngModel)]="dummyBasicInfo.birthdate" dataType="string" dateFormat="yy-mm-dd" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2017" *ngIf="editBasic"></p-calendar>
                                     </p>
                                 </div>
                                 <div class="col-md-12 col-xs-12"></div>
@@ -95,20 +95,21 @@
                         </div>
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-home"></i> Address</h4>
-                            <p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo.address}}, {{personalInfo.userInfo.city}}<br>&nbsp;{{personalInfo.userInfo.state}}, {{personalInfo.userInfo.country}}, &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
+                            <p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo.address}}<span *ngIf="personalInfo.userInfo.address!=null">,</span> {{personalInfo.userInfo.city}}<br>&nbsp;{{personalInfo.userInfo.state}}<span *ngIf="personalInfo.userInfo.state!=null">,</span> {{personalInfo.userInfo.country}} &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
                             <div class="address" *ngIf="editBasic">
                                 <input pInputText type="text" maxlength="100" [(ngModel)]="dummyBasicInfo.address">
                                 <br>
                                 <div class="select">
-                                    <p-dropdown [options]="state" [(ngModel)]="dummyBasicInfo.state"></p-dropdown>
+                                    <p-dropdown filter="true" [style]="{'width':'247px'}" autoWidth="false" filterPlaceholder="Search" placeholder="Select State" (onChange)="onStateSelect($event)" [options]="state" [(ngModel)]="dummyBasicInfo.state"></p-dropdown>
                                 </div>
                                 <div class="select">
-                                    <p-dropdown [options]="city" [(ngModel)]="dummyBasicInfo.city"></p-dropdown>
+                                    <p-dropdown filter="true" [style]="{'width':'247px'}" autoWidth="false" filterPlaceholder="Search" placeholder="Select City" [options]="city" [(ngModel)]="dummyBasicInfo.city"></p-dropdown>
                                 </div>
+                                <!-- <p><span class="userdetails" *ngIf="editBasic"> India</span></p> -->
                                 <div class="select">
-                                    <p-dropdown [options]="country" [(ngModel)]="dummyBasicInfo.country"></p-dropdown>
+                                    <p-dropdown [disabled]="true" filter="true" [style]="{'width':'247px'}" autoWidth="false" filterPlaceholder="Search" placeholde="Select Country" [options]="country" [(ngModel)]="dummyBasicInfo.country"></p-dropdown>
                                 </div>
-                                <input type="number" pInputText maxlength="6" [(ngModel)]="dummyBasicInfo.pincode">
+                                <p-inputMask mask="999999" slotChar=" " [style]="{'background-color':'#e1e1e1','width':'247px' ,'border':'none','margin-left':'7%'}" [(ngModel)]="dummyBasicInfo.pincode"></p-inputMask>
                             </div>
                         </div>
                     </div>

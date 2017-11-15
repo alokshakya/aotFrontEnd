@@ -7,6 +7,7 @@ import { PersonalInfo, Misc } from '../../../services/data.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
 import { ComponentCanDeactivate } from '../account.guard';
 import { Observable } from 'rxjs/Rx';
+import * as constants from '../../../../config/states'
 
 @Component({
     selector: 'app-profile',
@@ -80,10 +81,35 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         public masterhtttp: MasterHttpService
     ) { }
 
+    setStates(){
+        let states = Object.keys(constants.states);
+        for(let i in states){
+            this.state.push({label:states[i],value:states[i]});
+        }
+        this.country.push({label:'India',value:'India'})
+    }
+
+    onStateSelect(e){
+        let state;
+        if(e==null){
+            state = this.personalInfo.userInfo.state;
+        }
+        else state = e.value;
+        this.city = [];
+        if(state!=null){
+            for(let i in constants.states[state]){
+                this.city.push({label:constants.states[state][i],value:constants.states[state][i]})
+            }
+        }
+    }
+
 
     ngOnInit() {
+        // this.decode();
+        this.setStates();
         this.misc.setCurrentRoute(["Profile"]);
         this.misc.setLocalRoute('account/profile');
+        this.onStateSelect(null);
 
         this.dec = [];
         this.exam.push(
@@ -100,31 +126,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             { label: "IOM 2016 - Level 1", value: "IOM 2016 - Level 1" },
             { label: "IOS 2016 - Level 1", value: "IOS 2016 - Level 1" },
             { label: "IOEL 2016 - Level 1", value: "IOEL 2016 - Level 1" },
-        )
-
-        this.city.push(
-            { label: "Select City", value: null},
-            { label: "Ghaziabad", value: "Ghaziabad" },
-            { label: "Delhi", value: "Delhi" },
-            { label: "Gurgaon", value: "Gurgaon" },
-            { label: "Bombay", value: "Bombay" },
-            { label: "Kolkata", value: "Kolkata" },
-        )
-
-        this.state.push(
-            { label: "Select State", value: null},
-            { label: "Uttar Pradesh", value: "Uttar Pradesh" },
-            { label: "West Bengal", value: "West Bengal" },
-            { label: "Maharashtra", value: "Maharashtra" },
-            { label: "Haryana", value: "Haryana" }
-        )
-
-        this.country.push(
-            { label: "Select Country", value:null },
-            { label: "India", value: "India" },
-            { label: "Sri Lanka", value: "Sri Lanka" },
-            { label: "Indonesia", value: "Indonesia" },
-            { label: "Nepal", value: "Nepal" }
         )
 
         this.classList.push(
@@ -167,10 +168,8 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             mobile: 9324567322
         }
 
-        // this.date = new Date();
         this.maxDate = new Date();
         this.maxDate.setFullYear(2013, 0, 1);
-        // this.date.setFullYear(1998, 5, 14);
     }
 
     editBasicInfo() {
@@ -501,5 +500,23 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         this.editPassword = false;
         this.editTestimonial = false;
     }
+
+    // decode(){
+    //     var json = constants.con;
+    //     let q = {};
+    //     let state;
+    //     let city;
+    //     for(let i=0; i<json.length; i++){
+    //         state = json[i]['state']
+    //         city = json[i]['name']
+    //         if(!q.hasOwnProperty(state)){
+    //             q[state]=[]
+    //         }
+    //         else{
+    //             q[state].push(city)
+    //         }
+    //     }
+    //     console.log(JSON.stringify(q));
+    // }
 
 }
