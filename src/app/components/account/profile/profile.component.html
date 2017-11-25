@@ -6,7 +6,7 @@
 <p-dialog [(visible)]="editTestimonial" modal="true" responsive="true" header="Edit Testimonial">
     <div class="ui-g">
         <div class="ui-g-12 text-center">
-            <textarea pInputTextarea [(ngModel)]="currentTestimonial" maxlength="280"></textarea>
+            <textarea pInputTextarea [(ngModel)]="currentTestimonial" placeholder="Enter Testimonial Here..." maxlength="280"></textarea>
         </div>
         <div class="ui-g-12 text-center">
             <button type="button" class="ui-button-success" (click)="saveTestimonial()" pButton label="Save"></button>
@@ -40,8 +40,8 @@
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-user"></i> Name</h4>
                             <p><span class="userdetails" *ngIf="!editBasic">{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</span>
-                                <input pInputText maxlength="30" placeholder="{{dummyBasicInfo.firstname}}" *ngIf="editBasic" type="text" [(ngModel)]="dummyBasicInfo.firstname">
-                                <input [(ngModel)]="dummyBasicInfo.lastname" maxlength="30" placeholder="{{dummyBasicInfo.lastname}}" pInputText *ngIf="editBasic" type="text">
+                                <input pInputText maxlength="30" placeholder="Firstname" *ngIf="editBasic" type="text" [(ngModel)]="dummyBasicInfo.firstname">
+                                <input [(ngModel)]="dummyBasicInfo.lastname" maxlength="30" placeholder="Lastname" pInputText *ngIf="editBasic" type="text">
                                 <span class="red-text" *ngIf="invalidName()[0]&&editBasic"><br>Invalid Firstname</span>
                                 <span class="red-text" *ngIf="invalidName()[1]&&editBasic"><br>Invalid Lastname</span>
                             </p>
@@ -65,7 +65,7 @@
                         <div class="col-md-6 col-xs-12 userinfo">
                             <h4><i class="fa fa-mobile"></i> &nbsp;Mobile</h4>
                             <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span>
-                                <p-inputMask mask="9999999999" [style]="{'background-color':'#e1e1e1','width':'247px','border':'none', 'margin-left':'-2%','margin-right':'7px'}" slotChar=" " [(ngModel)]="dummyBasicInfo.mobile" *ngIf="editBasic"></p-inputMask>
+                                <p-inputMask  mask="9999999999" [style]="{'background-color':'#e1e1e1','width':'247px','border':'none', 'margin-left':'-2%','margin-right':'7px'}" slotChar=" " [(ngModel)]="dummyBasicInfo.mobile" *ngIf="editBasic" placeholder="Mobile Number"></p-inputMask>
                                 <button *ngIf="editBasic&&!spinner2" pButton [disabled]="checkMobile()||(spinner&&!otpDialog)" (click)="verify()" class="ui-button-warning" label="Update"></button>
                                 <button style="width:54px" *ngIf="editBasic&&!otpDialog&&spinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-warning"></button>
                             </p>
@@ -77,7 +77,7 @@
                                 <div class="col-md-12 col-xs-12 column userinfo">
                                     <h4><i class="fa fa-calendar"></i> Date Of Birth</h4>
                                     <p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo['birthdate']}}</span> &nbsp;
-                                        <p-calendar [style]="{'width':'247px'}" [(ngModel)]="dummyBasicInfo.birthdate" dataType="string" dateFormat="yy-mm-dd" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2017" *ngIf="editBasic"></p-calendar>
+                                        <p-calendar [style]="{'width':'247px'}" [(ngModel)]="dummyBasicInfo.birthdate" dataType="string" dateFormat="yy-mm-dd" placeholder="YYYY-MM-DD" [monthNavigator]="true" [yearNavigator]="true" yearRange="1980:2017" *ngIf="editBasic"></p-calendar>
                                     </p>
                                 </div>
                                 <div class="col-md-12 col-xs-12"></div>
@@ -97,7 +97,7 @@
                             <h4><i class="fa fa-home"></i> Address</h4>
                             <p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo.address}}<span *ngIf="personalInfo.userInfo.address!=null">,</span> {{personalInfo.userInfo.city}}<br>&nbsp;{{personalInfo.userInfo.state}}<span *ngIf="personalInfo.userInfo.state!=null">,</span> {{personalInfo.userInfo.country}} &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
                             <div class="address" *ngIf="editBasic">
-                                <input pInputText type="text" maxlength="100" [(ngModel)]="dummyBasicInfo.address">
+                                <input pInputText type="text" maxlength="100" placeholder="Address" [(ngModel)]="dummyBasicInfo.address">
                                 <br>
                                 <div class="select">
                                     <p-dropdown filter="true" [style]="{'width':'247px'}" autoWidth="false" filterPlaceholder="Search" placeholder="Select State" (onChange)="onStateSelect($event)" [options]="state" [(ngModel)]="dummyBasicInfo.state"></p-dropdown>
@@ -109,7 +109,7 @@
                                 <div class="select">
                                     <p-dropdown [disabled]="true" filter="true" [style]="{'width':'247px'}" autoWidth="false" filterPlaceholder="Search" placeholde="Select Country" [options]="country" [(ngModel)]="dummyBasicInfo.country"></p-dropdown>
                                 </div>
-                                <p-inputMask mask="999999" slotChar=" " [style]="{'background-color':'#e1e1e1','width':'247px' ,'border':'none','margin-left':'7%'}" [(ngModel)]="dummyBasicInfo.pincode"></p-inputMask>
+                                <p-inputMask mask="999999" slotChar=" " [style]="{'background-color':'#e1e1e1','width':'247px' ,'border':'none','margin-left':'7%'}" placeholder="Pincode" [(ngModel)]="dummyBasicInfo.pincode"></p-inputMask>
                             </div>
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         <div class="col-md-4 userinfo col-xs-12">
                             <h4><i class="fa fa-sticky-note-o"></i> School Code </h4>
                             <p><span *ngIf="!editSchool" class="userdetails schoolcode"> {{personalInfo.schoolInfo['coupon_code']}}</span> &nbsp;
-                                <input class="longinput" [(ngModel)]="couponCode" maxlength="30" pInputText *ngIf="editSchool" type="text">
+                                <input class="longinput" placeholder="Coupon Code" [(ngModel)]="couponCode" maxlength="30" pInputText *ngIf="editSchool" type="text">
                             </p>
                         </div>
                         <div class="col-md-4 col-xs-12 userinfo">
@@ -171,7 +171,7 @@
                     <div class="row">
                         <div class="col-md-4 userinfo col-xs-9">
                             <h4><i class="fa fa-key"></i> Old Password</h4>
-                            <input class="xpassword" *ngIf="editPassword" pInputText type="password" [(ngModel)]="oldPassword">
+                            <input class="xpassword" placeholder="Enter Old Password" *ngIf="editPassword" pInputText type="password" [(ngModel)]="oldPassword">
                         </div>
                         <div class="col-md-4 col-xs-1"></div>
                         <div class="col-md-4 col-xs-2">
@@ -185,14 +185,14 @@
                     <div class="row">
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-key"></i> New Password</h4>
-                            <input class="xpassword" pInputText #password="ngModel" *ngIf="editPassword" pPassword promptLabel="Atleast 6 characters" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}" />
+                            <input class="xpassword" pInputText #password="ngModel" *ngIf="editPassword" pPassword promptLabel="Atleast 6 characters" placeholder="Enter New Password" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}" />
                         </div>
                         <div class="col-md-4 col-xs-12"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-key"></i> Confirm Password</h4>
-                            <input class="xpassword" *ngIf="editPassword" pInputText type="password" [(ngModel)]="confirmNewPassword">
+                            <input class="xpassword" *ngIf="editPassword" pInputText type="password" placeholder="Re-enter New Password" [(ngModel)]="confirmNewPassword">
                         </div>
                         <div class="col-md-4 col-xs-12"></div>
                     </div>
