@@ -25,6 +25,11 @@ export class LoadoutComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.event.feeEvent.subscribe((data)=>{
+            if(data){
+                this.http.getPaymentHistory(); //
+            }
+        })
         this.eventAction();
 
         this.errorCheck();
@@ -48,7 +53,6 @@ export class LoadoutComponent implements OnInit {
 
     loadData(){
         this.http.getResult(); //
-        this.http.getPaymentHistory(); //
         this.http.setToken(localStorage.getItem('session_token'));
         this.http.getPersonalInfo();//
         this.http.getSyllabus();//

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
-import { SubjectInfo, Misc } from '../../../services/data.service';
+import { PersonalInfo ,SubjectInfo ,Misc } from '../../../services/data.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
 import { Message } from 'primeng/primeng';
+import { ConfirmDialogModule, ConfirmationService } from 'primeng/primeng';
+
 import { CurrencyPipe } from '@angular/common';
 import * as constants from '../../../../config/constants';
 
@@ -35,11 +37,14 @@ export class AccountsettingsComponent implements OnInit {
     growlMsg:Message[];
     spinner:boolean;
     sum = 0;
+    confirmDialog:boolean
     constructor(
-        public _router: Router,
+        public router: Router,
         public subjectInfo: SubjectInfo,
         public misc: Misc,
-        public http: MasterHttpService) {
+        public http: MasterHttpService,
+        private userInfo: PersonalInfo,
+        private confirmationService: ConfirmationService) {
         this.selectedPackage = [];
 
         this.col = [{ "header": "Subject", "field": "subject_name" }, { "header": "Price", "field": "amount" }];
@@ -75,6 +80,11 @@ export class AccountsettingsComponent implements OnInit {
 
     pay() {
         this.spinner=true;
+        if(this.userInfo.userInfo['address']==null||this.userInfo.userInfo['state']==null||this.userInfo.userInfo['country']==null||this.userInfo.userInfo['pincode']==null||this.userInfo.userInfo['state']==null||this.userInfo.userInfo['city']==null){
+            this.confirm();
+            this.spinner = false;
+            return false
+        }
         let wrapper = {amount:0, fee_id:''};
         for(let i in this.selectedPackage){
             wrapper['amount'] += parseInt(this.selectedPackage[i]['amount']);
@@ -92,6 +102,19 @@ export class AccountsettingsComponent implements OnInit {
                 this.growlDisplay('error','Server Error','Please Try Again');
                 this.spinner=false;
         })
+    }
+
+    confirm() {
+        this.confirmationService.confirm({
+            message: 'Please complete profile in order to continue.',
+            accept: () => {
+                console.log(23);
+                this.router.navigate(['profile']);
+            },
+            reject: () =>{
+                return false;
+            }
+        });
     }
 
     download(e){

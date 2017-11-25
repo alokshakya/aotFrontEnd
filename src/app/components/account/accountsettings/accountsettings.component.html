@@ -1,4 +1,10 @@
 <p-growl [(value)]="growlMsg"></p-growl>
+<p-confirmDialog header="Info" icon="fa fa-question-circle" width="425" #cd>
+    <p-footer>
+        <button class="ui-button-success" pButton [routerLink]="['/account/profile']" label="Go To Profile"></button>
+    </p-footer>
+</p-confirmDialog>
+
 <div class="fluid">
     <div class="ui-g">
         <div class="ui-g-12">
@@ -23,7 +29,7 @@
                         <div class="ui-g">
                             <div class="ui-g-12 ui-sm-12">
                                 <label>Enter Coupon/School Code* &nbsp;
-                                    <input type="text" maxlength="30" [(ngModel)]="coupon" pInputText> &nbsp;
+                                    <input type="text" maxlength="30" placeholder="Coupon Code" [(ngModel)]="coupon" pInputText> &nbsp;
                                 </label>
                                 <button type="button" class="ui-button-info" [disabled]="coupon==null||coupon==''" pButton label="Apply"></button>
 
