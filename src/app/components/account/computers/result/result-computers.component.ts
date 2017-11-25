@@ -63,6 +63,7 @@ export class ResultComputersComponent implements OnInit {
         this.setChapters();
     }
 
+    
     makeQuestionWIseGraph(){
         let label = [];
         let data = [[],[],[]];
@@ -205,7 +206,7 @@ export class ResultComputersComponent implements OnInit {
                 ]
             }
         }
-}
+    }
             
 
     setChapters(){
@@ -221,7 +222,7 @@ export class ResultComputersComponent implements OnInit {
             return false;
         }
         this.selectedChapter = []
-        this.selectedChapter[0] = this.chapterArray[0]
+        this.selectedChapter[0] = this.chapterArray[0];
         this.selectChapter();
     }
 
@@ -232,29 +233,29 @@ export class ResultComputersComponent implements OnInit {
     }
 
     selectChapter(e=null){
+        this.testArray2 = []
         let data;
-        console.log(this.selectedChapter);
         if(e==null){
             data = this.selectedChapter[0]
         }
         else{
             data = e.data
         }
-          let  testSelected:boolean;
-            this.totalAttempts = 0;
-            this.testArray = data.tests;
-            for(let i=0;i<this.testArray.length;i++){
-                this.totalAttempts+=parseInt(this.testArray[i]['attempted']);
-                if(this.testArray[i]['attempted']>0){
-                    if(!testSelected){
-                        this.selectedTest2 = []
-                        this.selectedTest2[0] = this.testArray[i];
-                        testSelected = true;
-                    }
-                    this.testArray2.push(this.testArray[i]);
-                    this.testArray2[this.testArray2.length-1]['index'] = i+1;
+        let testSelected:boolean;
+        this.totalAttempts = 0;
+        this.testArray = data.tests;
+        for(let i=0;i<this.testArray.length;i++){
+            this.totalAttempts+=parseInt(this.testArray[i]['attempted']);
+            if(this.testArray[i]['attempted']>0){
+                if(!testSelected){
+                    this.selectedTest2 = []
+                    this.selectedTest2[0] = this.testArray[i];
+                    testSelected = true;
                 }
+                this.testArray2.push(this.testArray[i]);
+                this.testArray2[this.testArray2.length-1]['index'] = i+1;
             }
+        }
         this.selectTest();
     }
 
@@ -361,9 +362,6 @@ export class ResultComputersComponent implements OnInit {
         this.questionWiseGraph3.datasets = datasets;
     }
 
-
-
-
     shade(i){
         if(i%2!=0){
             return 'light';
@@ -382,6 +380,5 @@ export class ResultComputersComponent implements OnInit {
         let object = this.selectedTest['result'][attempt];
         this.selectedAttemptObject = object;
     }
-
 
 }
