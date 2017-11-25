@@ -7,6 +7,8 @@ import { MasterHttpService } from '../../services/masterhttp.service';
 import * as constants from '../../../config/constants';
 import { Message } from 'primeng/primeng';
 import { SelectItem } from 'primeng/primeng';
+import { EventService } from '../../services/event.service'
+
 
 
 
@@ -86,10 +88,12 @@ export class LoginComponent implements OnInit {
         public masterhttp: MasterHttpService,
         public misc: Misc,
         public personalInfo: PersonalInfo,
-        public router: Router) { }
+        public router: Router,
+        public event: EventService) { }
 
     ngOnInit() {
         this.loggedInCheck();
+        this.event.control = 0;
         this.wrapper = { 'email':null,'verify_mobile':false,'verify_email':false };
         this.userLoginCreds = { "username": null, "password": null };
         this.userRegCreds = { "firstname": "", "lastname": "", "email": "", "password": "", "class": "", "mobile": "" };
