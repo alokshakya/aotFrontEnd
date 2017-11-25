@@ -350,10 +350,10 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     isMobile() {
-         if(window.innerWidth <= 640){
-             return true;
-         }
-         return false;
+        if(window.innerWidth <= 640){
+            return true;
+        }
+        return false;
     }
 
     toggle(){

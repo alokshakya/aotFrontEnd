@@ -116,15 +116,14 @@
         </div>
         <div class="ui-g bottom-border">
             <div class="ui-g-6">
-                <!-- {{chapterwiseTest.attemptDetails['name']}} -->
-                Chapter-Wise Test
+                {{chapterwiseTest.attemptDetails['name']}}
             </div>
             <div class="ui-g-6 text-right">
                 <i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s
             </div>
             <hr>
         </div>
-        <div class="ui-g bottom-border">
+        <div class="ui-g bottom-border" *ngIf="chapterwiseTest.chapter!=null">
             <div class="ui-g-6">Chapter |</div>
             <div class="ui-g-6 text-right">{{chapterwiseTest.chapter}}</div>
         </div>
