@@ -135,6 +135,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
             this.answer = this.selectedQuestion['attempted_answer_id'];
         }
         this.menuToggle = false;
+        console.log(this.selectedQuestion);
     }
 
     setResponse(){

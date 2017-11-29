@@ -35,7 +35,7 @@
                 <p-header>
                     Chapterwise Test & Syllabus<span class="toright"></span>
                     <button *ngIf="!spinner" [disabled]="generatedFlag" (click)="generate()" id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button>
-                    <button *ngIf="spinner" style="width:82px" [disabled]="false" id="inlinebutton" pButton type="text" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg"></button>
+                    <button *ngIf="spinner" style="width:82px" [disabled]="false" id="inlinebutton" pButton type="text" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
                 </p-header>
                 <p-accordion (onOpen)="tabOpen($event)" (onClose)="tabClose($event)">
                     <div class="ui-g">
@@ -56,25 +56,6 @@
                 <p-growl [(value)]="generateMsg" [life]="3000"></p-growl>
             </p-panel>
         </div>
-        <!--<div class="ui-g-6">
-       <p-panel header="Generated">
-            <p-accordion>
-              <div class="ui-g">
-                <div class="ui-g-12">
-                  <p-accordionTab  *ngFor="let data of result.chapterwiseTestDetails|keys">
-                    <p-header><span class="chapter">{{data.key}}</span></p-header>
-                    <div class="ui-g">
-                      <div class="ui-g-12"  *ngFor="let test of data.value|keys">
-                        <span class="leftpad">{{test.key}}</span>
-                        <span class="low"><button label="{{test.value}}" [ngClass]="{'ui-button-success':test.value!='Resume'||test.value!='Start', 'ui-button-danger':test.value=='Start', 'ui-button-warning':test.value=='Resume'}" type="button" pButton></button><button pButton type="button" style="width:40px;" pTooltip="Retake {{test.key}}" tooltipPosition="right" icon="fa fa-refresh fa-spin fa-fw" *ngIf=" !(test.value=='Start'|| test.value=='Resume') "></button></span>
-                      </div>
-                    </div>
-                  </p-accordionTab>
-                </div>
-              </div>
-            </p-accordion>
-      </p-panel>
-    </div>-->
         <div class="ui-g-6 ui-sm-12">
             <p-panel header="Generated">
                 <p-accordion (onOpen)="onTabOpen($event)" (onClose)="currentTabIndex=null">
@@ -84,32 +65,6 @@
                                 <p-header>
                                             <span class="chapter">{{data?.name}}</span>
                                 </p-header>
-                                <!-- <div class="ui-g">
-                                    <div class="ui-g-12 ui-sm-12" *ngFor="let test of data['tests'];let i = index">
-                                        <span class="leftpad">Test <span [ngClass]="shade(i)">{{i+1}}</span></span>
-
-                                        <span *ngIf="test.attempted==0" class="low">
-                                            <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed,data.name)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
-                                            <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" [disabled]="false" type="button" pButton></button>
-                                        </span>
-
-                                        <span *ngIf="test.completed==1" class="low">
-                                            <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed,data.name)" label="Start" [disabled]="spinner2!=null||test.attempted>=3" type="button" pButton></button>
-                                            <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" type="button" pButton></button>
-                                        </span>
-
-                                        <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
-                                            <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,data.id,test.attempted,test.completed,data.name)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
-                                            <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" type="button" pButton></button>
-                                        </span>
-                                        <span class="low">
-                                            <span class="round" *ngIf="test.attempted==0">0</span>
-
-                                            <span class="round" *ngIf="test.attempted!=0&&test.completed==0">{{test.attempted-1}}</span>
-                                            <span class="round" *ngIf="test.attempted!=0&&test.completed==1">{{test.attempted}}</span>
-                                        </span>
-                                    </div>
-                                </div> -->
                                 <div class="ui-g">
                                     <div class="ui-g-12 ui-sm-12 container">
                                         <div class="table-responsive">
@@ -129,17 +84,17 @@
                                                 <td>
                                                     <span *ngIf="test.attempted==0" class="low">
                                                         <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed,data.name)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
-                                                        <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" [disabled]="false" type="button" pButton></button>
+                                                        <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" [disabled]="false" type="button" pButton></button>
                                                     </span>
 
                                                     <span *ngIf="test.completed==1" class="low">
                                                         <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed,data.name)" label="Start" [disabled]="spinner2!=null||test.attempted>=3" type="button" pButton></button>
-                                                        <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" type="button" pButton></button>
+                                                        <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
                                                     </span>
 
                                                     <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
                                                         <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,data.id,test.attempted,test.completed,data.name)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
-                                                        <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward fa-lg" type="button" pButton></button>
+                                                        <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
                                                     </span>
                                                 </td>
                                                 <td>

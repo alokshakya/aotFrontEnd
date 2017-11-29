@@ -129,14 +129,6 @@ export class ChapterwisetestComputersComponent implements OnInit {
     updatePanel() {
         this.generateMsg = []
         this.masterhttp.getTestDetails()
-        // this.chapterwiseTest.testEvent.subscribe((data)=>{
-        //     if(data){
-        //         this.generatedPanel();
-        //         this.generatedFlag = false;
-        //         this.selectedChapter = null;
-        //         this.spinner = false;
-        //     }
-        // })
         this.event.testEvent.subscribe((data)=>{
             if(data){
                 this.generatedPanel();
@@ -204,15 +196,6 @@ export class ChapterwisetestComputersComponent implements OnInit {
         //generated chapters tab event
         this.currentTabIndex = e.index; 
     }
-
-    // retake(studTestId,testId, chapterId){
-    //     let wrapper = {student_test_id:studTestId}
-    //     this.masterhttp.retakeTest(wrapper).subscribe((data)=>{
-    //         if(data['status']==200){
-    //             this.startTest(testId,chapterId,);
-    //         }
-    //     })
-    // }
 
 
     shade(index){

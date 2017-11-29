@@ -8,7 +8,7 @@ import { SubjectInfo, chapterwiseTest, Result, Misc } from '../../../services/da
 declare var MathJax:any;
 @Component({
     selector: 'app-dashboard',
-    templateUrl: './test.dashboard.component.html',
+    templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.css']
 })
 export class DashboardComponent implements OnInit {
@@ -50,97 +50,24 @@ export class DashboardComponent implements OnInit {
     }
 
     redirect(sub,destination) {
-        if(destination=='settings'){
-            this.router.navigate(['account/accountsettings'])
-        }
-        else if(destination=='demo'){
-            switch (sub) {
-                case "Computers":
-                    this.router.navigate(['account/computers/demotest'])
-                    break;
+        var routeObj = {
+            partRoute:{
+            'Computers':'account/computers',
+            'General-Knowledge':'account/gk',
+            'Science':'account/science',
+            'Mathematics':'account/math',
+            'Reasoning':'account/reasoning',
+            'English':'account/english',
+            },
 
-                case "General-Knowledge":
-                    this.router.navigate(['account/gk/demotest'])
-                    break;
-                
-                case "Science":
-                    this.router.navigate(['account/science/demotest'])
-                    break;
-
-                case "English":
-                    this.router.navigate(['account/english/demotest'])
-                    break;
-
-                case "Reasoning":
-                    this.router.navigate(['account/reasoning/demotest'])
-                    break;
-
-                case "Mathematics":
-                    this.router.navigate(['account/math/demotest'])
-                    break;
+            getRoute:(subject,test)=>{
+                return routeObj.partRoute[subject]+'/'+test;
             }
         }
-        else if(destination=='sample'){
-            switch (sub) {
-                case "Computers":
-                    this.router.navigate(['account/computers/sampletest'])
-                    break;
-
-                case "General-Knowledge":
-                    this.router.navigate(['account/gk/sampletest'])
-                    break;
-                
-                case "Science":
-                    this.router.navigate(['account/science/sampletest'])
-                    break;
-
-                case "English":
-                    this.router.navigate(['account/english/sampletest'])
-                    break;
-
-                case "Reasoning":
-                    this.router.navigate(['account/reasoning/sampletest'])
-                    break;
-
-                case "Mathematics":
-                    this.router.navigate(['account/math/sampletest'])
-                    break;
-            }
-        }
+        var builtRoute = routeObj.getRoute(sub,destination);
+        this.router.navigate([builtRoute])
     }
 
-    redirectToTest(i, j) {
-        // let a = i.toLowerCase()
-        // let b = j.toLowerCase().replace(/\s/g, "");
-        // this.router.navigate(['account/'+a+'/'+b]);
-        let b = j;
-        switch (i) {
-            case "Computers":
-                this.router.navigate(['account/computers/' + b])
-                break;
-            
-            case "Science":
-                this.router.navigate(['account/science/' + b])
-                break;
-            
-            case "English":
-                this.router.navigate(['account/english/' + b])
-                break;
-            
-            case "General-Knowledge":
-                this.router.navigate(['account/gk/' + b])
-                break;
-            
-            case "Reasoning":
-                this.router.navigate(['account/reasoning/' + b])
-                break;
-            
-            case "Mathematics":
-                this.router.navigate(['account/math/' + b])
-                break;
-            
-        }
-    }
     ngAfterViewInit(){
         MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
     }
@@ -165,34 +92,6 @@ export class DashboardComponent implements OnInit {
         let incorrect = this.result.completeResult['generated']['subjects'][index]['total_incorrect']
         let marked = this.result.completeResult['generated']['subjects'][index]['total_marked']
         return[100*correct/(correct+incorrect+marked),100*incorrect/(correct+incorrect+marked),100*marked/(correct+incorrect+marked)]
-    }
-
-    redirectToResult(i) {
-        switch (i) {
-            case "Computers":
-                this.router.navigate(['account/computers/result'])
-                break;
-            
-            case "Science":
-                this.router.navigate(['account/science/result'])
-                break;
-            
-            case "English":
-                this.router.navigate(['account/english/result'])
-                break;
-            
-            case "General-Knowledge":
-                this.router.navigate(['account/gk/result'])
-                break;
-            
-            case "Reasoning":
-                this.router.navigate(['account/reasoning/result'])
-                break;
-            
-            case "Mathematics":
-                this.router.navigate(['account/math/result'])
-                break;
-        }
     }
 
 }

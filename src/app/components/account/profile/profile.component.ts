@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy,Output, ViewChild, ElementRef } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import { Response } from '@angular/http';
+
 import { SelectItem } from 'primeng/primeng';
 import { Message } from 'primeng/primeng';
 import { ConfirmationService } from 'primeng/primeng';
+
 import { PersonalInfo, Misc } from '../../../services/data.service';
 import { MasterHttpService } from '../../../services/masterhttp.service';
 import { ComponentCanDeactivate } from '../account.guard';
-import { Observable } from 'rxjs/Rx';
 import * as constants from '../../../../config/states'
 
 @Component({

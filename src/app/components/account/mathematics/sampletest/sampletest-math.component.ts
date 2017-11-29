@@ -50,7 +50,7 @@ export class SampletestMathComponent implements OnInit {
 
     }
     shade(index){
-        if(index==0||index==2||index==4){
+        if(index%2==0){
             return 'dark';
         }
         return 'light';
@@ -70,34 +70,6 @@ export class SampletestMathComponent implements OnInit {
                 hoverBackgroundColor: ["#5CB85C", "#D9534F"]
             }]
         };
-        //   this.chapterNames = []
-        //   this.subject.getChapters(1).subscribe((data: Response) =>{
-        //       data = data['resource'];
-        //       for(let i in data){
-        //           this.chapterNames.push(data[i]['name']);
-        //       }
-        //   })
-
-        //temporary service used
-        // this.dummyChapters=[]
-        // this.masterhttp.getChapters()
-        // .subscribe(data=>{
-        //   data = data['chapters']['records'];
-        //   for(let i in data){
-        //     this.dummyChapters.push(data[i][1])
-        //   }
-        // })
-
-        // //temporary service used
-        // this.dummyTopics = [];
-        // this.masterhttp.getTopics()
-        // .subscribe(data=>{
-        //   data = data['topics']['records'];
-        //   for(let i in data){
-        //     this.dummyTopics.push(data[i][1])
-        //   }
-        // })
-
     }
 
     startTest(testId, chapterId, attempted, completed, chapter) {
