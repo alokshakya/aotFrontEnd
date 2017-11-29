@@ -313,8 +313,36 @@ export class Result {
     reasoning;
     completeResult;
     computers2;
+    chapterwiseObject:any;
 
     constructor(private event:EventService){}
+
+    filteredResult(){
+        var chapterObject = {
+            selectiveChapters:(chapterArray)=>{
+                let chapters = [];
+                let labels = [];
+                let datasets = [];
+                for(let i in chapterArray){
+                    if(chapterArray[i].hasOwnProperty('tests')){
+                        
+                        for(let k in chapterArray[i]['tests']){
+                            if(chapterArray[i]['tests'][k]['attempted']>0){
+                                chapters.push(chapterArray[i]);
+                                chapters[chapters.length-1]['chapter_index'] = parseInt(i);
+                                chapters[chapters.length-1]['test_index'] = parseInt(k);
+                                labels.push(`CH- ${parseInt(i)+1}`);
+                                datasets.push(chapterArray[i]['total_correct']);
+                                break;
+                            }
+                        }
+                    }
+                }
+                return {chapters,labels,datasets}
+            }
+        }
+        this.chapterwiseObject = chapterObject;
+    }
 
     setResult(data) {
         this.completeResult = data;
@@ -322,7 +350,6 @@ export class Result {
             switch (data['generated']['subjects'][i]['name']) {
                 case "Computers":
                     this.computers = data['generated']['subjects'][i];
-                    // this.computers2 = JSON.stringify(data['generated']['subjects'][i]);
                     break;
 
                 case "Science":
@@ -346,6 +373,7 @@ export class Result {
                     break;
             }
         }
+        this.filteredResult();
         this.event.emitResultEvent();
         this.event.emitDataEvent();
     }
