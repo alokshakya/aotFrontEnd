@@ -25,6 +25,7 @@ export class LoadoutComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.event.control=0;
         this.event.feeEvent.subscribe((data)=>{
             if(data){
                 this.http.getPaymentHistory(); //

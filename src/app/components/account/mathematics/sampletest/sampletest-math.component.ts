@@ -46,9 +46,10 @@ export class SampletestMathComponent implements OnInit {
         }
 
         this.examPattern = [];
-        this.examPattern.push({ label: "SOF", value: "null" }, { label: "SELECT EXAM", value: "null" }, )
+        this.examPattern.push({ label: "SOF", value: "null" }, { label: "SELECT EXAM", value: "null" })
 
     }
+
     shade(index){
         if(index%2==0){
             return 'dark';
@@ -59,17 +60,24 @@ export class SampletestMathComponent implements OnInit {
     ngOnInit() {
         this.misc.setCurrentRoute(["Mathematics","Sample Test"]);
         this.misc.setLocalRoute('account/math/sampletest');
+        this.makeGraph();
+    }
 
+    makeGraph(){
 
-        //for chart
         this.sampleTestData = {
             labels: ['Completed', 'Remaining'],
             datasets: [{
-                data: [4, 10],
+                // data: [this.test.math['sample_test']['total_completed'],this.test.math['sample_test']['total_attempted']-this.test.math['sample_test']['total_completed']],
+                data:[0,10],
                 backgroundColor: ["#5CB85C", "#D9534F"],
                 hoverBackgroundColor: ["#5CB85C", "#D9534F"]
             }]
         };
+        if(this.test.math.hasOwnProperty('sample_test')){
+            let completed = parseInt(this.test.math['sample_test']['total_completed']);
+            this.sampleTestData.datasets[0]['data'] = [completed,10-completed];
+        }
     }
 
     startTest(testId, chapterId, attempted, completed, chapter) {

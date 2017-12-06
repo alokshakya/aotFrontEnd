@@ -135,7 +135,6 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
             this.answer = this.selectedQuestion['attempted_answer_id'];
         }
         this.menuToggle = false;
-        console.log(this.selectedQuestion);
     }
 
     setResponse(){
@@ -306,8 +305,6 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     goBack(){
-        this.masterhttp.getTestDetails();
-        this.masterhttp.getResult();
         this.event.testEvent.subscribe((data=>{
             if(data){
                 this.event.resultEvent.subscribe(data=>{
@@ -317,6 +314,9 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
                 })
             }
         }))
+        this.masterhttp.getTestDetails();
+        this.masterhttp.getResult();
+        
     }
 
     quit() {

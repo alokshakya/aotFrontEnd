@@ -114,7 +114,6 @@ export class AccountsettingsComponent implements OnInit {
         this.confirmationService.confirm({
             message: 'Please complete profile in order to continue.',
             accept: () => {
-                console.log(23);
                 this.router.navigate(['profile']);
             },
             reject: () =>{

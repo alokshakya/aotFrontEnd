@@ -314,6 +314,23 @@ export class Result {
     completeResult;
     computers2;
     chapterwiseObject:any;
+    sampleMockDemoResult = {
+        sample_test:{
+            totalCorrect:0,
+            totalIncorrect:0,
+            totalMarked:0
+        },
+        demo_test:{
+            totalCorrect:0,
+            totalIncorrect:0,
+            totalMarked:0
+        },
+        mock_test:{
+            totalCorrect:0,
+            totalIncorrect:0,
+            totalMarked:0
+        },
+    }
 
     constructor(private event:EventService){}
 
@@ -344,9 +361,21 @@ export class Result {
         this.chapterwiseObject = chapterObject;
     }
 
+    setDemoMockSampleResult(subject,test){
+        if(subject.hasOwnProperty(test)){
+            this.sampleMockDemoResult[test]['totalCorrect'] += subject[test]['total_correct'];
+            this.sampleMockDemoResult[test]['totalIncorrect'] += subject[test]['total_incorrect'];
+            this.sampleMockDemoResult[test]['totalMarked'] += subject[test]['total_marked'];
+        }
+    }
+
     setResult(data) {
         this.completeResult = data;
         for (let i=0; i<data['generated']['subjects'].length; i++) {
+            this.setDemoMockSampleResult(data['generated']['subjects'][i],'sample_test');
+            this.setDemoMockSampleResult(data['generated']['subjects'][i],'demo_test');
+            this.setDemoMockSampleResult(data['generated']['subjects'][i],'mock_test');
+
             switch (data['generated']['subjects'][i]['name']) {
                 case "Computers":
                     this.computers = data['generated']['subjects'][i];

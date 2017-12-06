@@ -518,7 +518,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     //             q[state].push(city)
     //         }
     //     }
-    //     console.log(JSON.stringify(q));
     // }
 
 }

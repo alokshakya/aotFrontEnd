@@ -52,11 +52,18 @@
             </div>
         </p-panel>
     </div>
-    <div class="ui-g-6 ui-sm-12">
+    <div class="ui-g-6 ui-sm-12" *ngIf="displayTest">
         <p-panel header="Demo Test">
-            <div id="demotest">
-                <button pButton [disabled]="true" type="button" *ngIf="!subjectInfo.attemptedDemo['Mathematics']" (click)="takedemotest()" label="Start" class="ui-button-danger"></button>
-                <button pButton type="button" *ngIf="subjectInfo.attemptedDemo['Mathematics']" (click)="takedemotest()" label="23/50" class="ui-button-success"></button>
+            <div id="demotest" *ngFor="let test of chapterwiseTest.math?.demo_test['tests']">
+                <span *ngIf="test.attempted==0" class="low">
+                    <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
+                    <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" [disabled]="false" type="button" pButton></button>
+                </span>
+
+                <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
+                    <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
+                    <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
+                </span>
             </div>
         </p-panel>
     </div>

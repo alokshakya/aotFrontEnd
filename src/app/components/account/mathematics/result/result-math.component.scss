@@ -25,6 +25,7 @@
 
 
 
+
 /*
 .correct{
     color:#5CB85C;
@@ -74,20 +75,21 @@ color:white;
 
 .hover:hover{
     cursor:pointer;
-    background-color:#C9CDD2
+    background-color:#C9CDD2;
 }
 
 
 .correct {
-    background-color: #5CB85C
+    background-color: #5CB85C;
 }
 
 .wrong {
-    background-color: #D9534F
+    background-color: #D9534F;
 }
 
 .mark {
-    background-color: #F0AD4E
+    background-color: #F0AD4E;
+    padding: 0 0 0 0;
 }
 
 .chip {

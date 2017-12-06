@@ -14,9 +14,9 @@
                             <i class="icon-maths icon-4x" *ngIf="sub=='Mathematics'"></i>
                             <i class="icon-cyber icon-4x" *ngIf="sub=='Computers'"></i>
                             <p>{{sub|uppercase}}</p>
-                            <button pButton *ngIf="!subjectInfo.attemptedDemo[sub]" class="ui-button-success" (click)="redirect(sub,'demo')" label="Demo"></button>
+                            <button pButton *ngIf="!subjectInfo.attemptedDemo[sub]" class="ui-button-success" (click)="redirect(sub,'demotest')" label="Demo"></button>
                             <button *ngIf="!subjectInfo.subscribedSubjects[sub]" pButton class="ui-button-warning" [ngClass]="{'ui-button-danger':sub=='Science'||sub=='English'}" (click)="redirect(sub,'settings')" label="Subscribe"></button>
-                            <button *ngIf="subjectInfo.subscribedSubjects[sub]" pButton class="ui-button-warning" [ngClass]="{'ui-button-danger':sub=='Science'||sub=='English'}" (click)="redirect(sub,'sample')" label="Start Test"></button>
+                            <button *ngIf="subjectInfo.subscribedSubjects[sub]" pButton class="ui-button-warning" [ngClass]="{'ui-button-danger':sub=='Science'||sub=='English'}" (click)="redirect(sub,'sampletest')" label="Start Test"></button>
                             <br>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                 <p-panel header="Test Summary">
                     <p-tabView id="tab head">
                         <p-tabPanel *ngFor="let sub of chTest.completeTestDetails?.generated?.subjects;let index = index;let first = first" header="{{sub.name}}" [selected]="first">
-                            <div class="ui-g">
+                            <div class="ui-g" *ngIf="subjectInfo.subscribedSubjects[sub.name]">
                                 <div class="ui-g-3">Chapterwise Test</div>
                                 <div class="ui-g-9">
                                     <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirect(sub.name,'chapterwisetest')">
@@ -40,37 +40,31 @@
                                             </div>
                                     
                                 </div>
-                                <div class="ui-g-3">Demo Test</div>
-                                <div class="ui-g-9">
-                                    <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirect(sub.name,'demotest')">
-                                                <div class="progress-bar progress-bar-success" [style.width.%]="100" role="progressbar">100%
-                                                </div>
-                                                <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
-                                                </div>
-                                                <div class="progress-bar progress-bar-danger" [style.width.%]="70" role="progressbar">70%
-                                                </div>
+                                <div class="ui-g-3" *ngIf="sub.id==3">Demo Test</div>
+                                <div class="ui-g-9" *ngIf="sub.id==3">
+                                    <div class="progress hover progmob" pTooltip="Go To Sample Test" (click)="redirect(sub.name,'demotest')">
+                                        <div *ngIf="sub['demo_test']['total_completed']==1" class="progress-bar progress-bar-success"  role="progressbar" style="width:100%">100%
+                                        </div>
+                                        <div *ngIf="sub['demo_test']['total_completed']==0" class="progress-bar progress-bar-danger" style="width:100%" role="progressbar">100%
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="ui-g-3">Sample Test</div>
-                                <div class="ui-g-9">
-                                    <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirect(sub.name,'sampletest')">
-                                                <div class="progress-bar progress-bar-success" [style.width.%]="20" role="progressbar">20%
-                                                </div>
-                                                <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
-                                                </div>
-                                                <div class="progress-bar progress-bar-danger" [style.width.%]="80" role="progressbar">80%
-                                                </div>
+                                <div class="ui-g-3" *ngIf="sub.id==3">Sample Test</div>
+                                <div class="ui-g-9" *ngIf="sub.id==3">
+                                    <div class="progress hover progmob" pTooltip="Go To Sample Test" (click)="redirect(sub.name,'sampletest')">
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="mockSample(sub['sample_test']['total_completed'],true)[0]" role="progressbar">{{mockSample(sub['sample_test']['total_completed'],true)[0]}}%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="mockSample(sub['sample_test']['total_completed'],true)[1]" role="progressbar">{{mockSample(sub['sample_test']['total_completed'],true)[1]}}%
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="ui-g-3">Mock Test</div>
-                                <div class="ui-g-9">
-                                    <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirect(sub.name,'mocktest')">
-                                                <div class="progress-bar progress-bar-success" [style.width.%]="80" role="progressbar">80%
-                                                </div>
-                                                <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
-                                                </div>
-                                                <div class="progress-bar progress-bar-danger" [style.width.%]="20" role="progressbar">20%
-                                                </div>
+                                <div class="ui-g-3" *ngIf="sub.id==3">Mock Test</div>
+                                <div class="ui-g-9" *ngIf="sub.id==3">
+                                    <div class="progress hover progmob" pTooltip="Go To Mock Test" (click)="redirect(sub.name,'mocktest')">
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="mockSample(sub['sample_test']['total_completed'])[0]" role="progressbar">{{mockSample(sub['sample_test']['total_completed'])[0]}}%
+                                        </div>
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="mockSample(sub['sample_test']['total_completed'])[1]" role="progressbar">{{mockSample(sub['sample_test']['total_completed'])[1]}}%
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="ui-g-12">
@@ -84,6 +78,12 @@
                                         </div>
                                     </div>
                             </div>
+                            <div class="ui-g" *ngIf="!subjectInfo.subscribedSubjects[sub.name]">
+                                <div class="ui-g-12 text-center">
+                                    <h3>Subject Not Subscribed</h3>
+                                    <button pButton class="ui-button-info" (click)="redirect(sub.name,'settings')" label="Subscribe"></button>
+                                </div>
+                            </div>
                         </p-tabPanel>
                     </p-tabView>
                 </p-panel>
@@ -93,49 +93,50 @@
                 <p-panel header="Result Summary">
                     <p-tabView id="tab head">
                         <p-tabPanel *ngFor="let sub of result.completeResult?.generated?.subjects;let index = index;let first = first;" header="{{sub.name}}" [selected]="first">
-                            <div class="ui-g">
+                            <div class="ui-g" *ngIf="subjectInfo.subscribedSubjects[sub.name]">
                                 <div class="ui-g-3" *ngIf="(sub?.total_correct+sub?.total_marked+sub?.total_incorrect)!=0">Chapterwise Test</div>
                                 <div class="ui-g-9" *ngIf="(sub?.total_correct+sub?.total_marked+sub?.total_incorrect)!=0">
                                     <div class="progress hover" pTooltip="Go To Result" (click)="redirect(sub.name,'result')">
+                                        
                                         <div class="progress-bar progress-bar-success" [style.width.%]="chapterwiseResult(index)[0]" role="progressbar">{{chapterwiseResult(index)[0]|round}}
                                         </div>
                                         <div class="progress-bar progress-bar-warning" [style.width.%]="chapterwiseResult(index)[2]" role="progressbar">{{chapterwiseResult(index)[2]|round}}
                                         </div>
                                         <div class="progress-bar progress-bar-danger" [style.width.%]="chapterwiseResult(index)[1]" role="progressbar">{{chapterwiseResult(index)[1]|round}}
                                         </div>
+                                    
                                     </div>
                                 </div>
                                 <div class="ui-g-3">Demo Test</div>
                                 <div class="ui-g-9">
                                     <div class="progress hover"  pTooltip="Go To Result" (click)="redirect(sub.name,'result')">
-                                        <div class="progress-bar progress-bar-success" [style.width.%]="100" role="progressbar">1000%
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="mockDemoSampleResult(sub,'demo_test')[0]" role="progressbar">{{mockDemoSampleResult(sub,'demo_test')[3]}}%
                                         </div>
-                                        <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                        <div class="progress-bar progress-bar-warning" [style.width.%]="mockDemoSampleResult(sub,'demo_test')[1]" role="progressbar">{{mockDemoSampleResult(sub,'demo_test')[4]}}%
                                         </div>
-                                        <div class="progress-bar progress-bar-danger" [style.width.%]="0" role="progressbar">{{chapterwiseResult(index)[1]|round}}
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="mockDemoSampleResult(sub,'demo_test')[2]" role="progressbar">{{mockDemoSampleResult(sub,'demo_test')[5]}}%
                                         </div>
                                     </div>
                                 </div>
                                 <div class="ui-g-3">Sample Test</div>
                                 <div class="ui-g-9">
-                                    <div class="progress hover" pTooltip="Go To Result" (click)="redirect(sub.name,'result')">
-                                        <div class="progress-bar progress-bar-success" [style.width.%]="60" role="progressbar">60%
+                                    <div class="progress hover"  pTooltip="Go To Result" (click)="redirect(sub.name,'result')">
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="mockDemoSampleResult(sub,'sample_test')[0]" role="progressbar">{{mockDemoSampleResult(sub,'sample_test')[3]}}%
                                         </div>
-                                        <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                        <div class="progress-bar progress-bar-warning" [style.width.%]="mockDemoSampleResult(sub,'sample_test')[1]" role="progressbar">{{mockDemoSampleResult(sub,'sample_test')[4]}}%
                                         </div>
-                                        <div class="progress-bar progress-bar-danger" [style.width.%]="40" role="progressbar">40%
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="mockDemoSampleResult(sub,'sample_test')[2]" role="progressbar">{{mockDemoSampleResult(sub,'sample_test')[5]}}%
                                         </div>
                                     </div>
                                 </div>
                                 <div class="ui-g-3">Mock Test</div>
                                 <div class="ui-g-9">
-                                    <div class="progress hover" 
-                                     pTooltip="Go To Result" (click)="redirect(sub.name,'result')">
-                                        <div class="progress-bar progress-bar-success" [style.width.%]="20" role="progressbar">80%
+                                    <div class="progress hover"  pTooltip="Go To Result" (click)="redirect(sub.name,'result')">
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="mockDemoSampleResult(sub,'mock_test')[0]" role="progressbar">{{mockDemoSampleResult(sub,'mock_test')[3]}}%
                                         </div>
-                                        <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                        <div class="progress-bar progress-bar-warning" [style.width.%]="mockDemoSampleResult(sub,'mock_test')[1]" role="progressbar">{{mockDemoSampleResult(sub,'mock_test')[4]}}%
                                         </div>
-                                        <div class="progress-bar progress-bar-danger" [style.width.%]="80" role="progressbar">20%
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="mockDemoSampleResult(sub,'mock_test')[2]" role="progressbar">{{mockDemoSampleResult(sub,'mock_test')[5]}}%
                                         </div>
                                     </div>
                                 </div>
@@ -149,6 +150,12 @@
                                             </div>
                                         </div>
                                     </div>
+                            </div>
+                            <div class="ui-g" *ngIf="!subjectInfo.subscribedSubjects[sub.name]">
+                                <div class="ui-g-12 text-center">
+                                    <h3>Subject Not Subscribed</h3>
+                                    <button pButton class="ui-button-info" (click)="redirect(sub.name,'settings')" label="Subscribe"></button>
+                                </div>
                             </div>
                         </p-tabPanel>
                     </p-tabView>
