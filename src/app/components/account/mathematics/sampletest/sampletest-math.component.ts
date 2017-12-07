@@ -111,7 +111,7 @@ export class SampletestMathComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/accountsettings'])
+        this.router.navigate(['account/subscribe'])
     }
 
 }

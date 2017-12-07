@@ -27,7 +27,7 @@ export class AppMenuComponent implements OnInit {
 
         this.model = [
             { label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['dashboard'] },
-            { label: 'Account Settings', icon: 'fa fa-pencil-square-o', routerLink: ['accountsettings'] },
+            { label: 'Subscribe', icon: 'fa fa-pencil-square-o', routerLink: ['subscribe'] },
             {
                 label: 'Computers', icon: 'icon-cyber',
                 items: [{

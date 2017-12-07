@@ -43,7 +43,7 @@ export class ChapterwisetestMathComponent implements OnInit {
     { }
 
     redirect() {
-        this.router.navigate(['account/accountsettings'])
+        this.router.navigate(['account/subscribe'])
     }
 
     ngOnInit() {

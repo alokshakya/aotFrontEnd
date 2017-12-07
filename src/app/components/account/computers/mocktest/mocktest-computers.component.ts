@@ -35,7 +35,7 @@ export class MocktestComputersComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/accountsettings'])
+        this.router.navigate(['account/subscribe'])
     }
 
     ngOnInit() {

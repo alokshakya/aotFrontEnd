@@ -10,11 +10,11 @@ import { CurrencyPipe } from '@angular/common';
 import * as constants from '../../../../config/constants';
 
 @Component({
-    selector: 'app-accountsettings',
-    templateUrl: './accountsettings.component.html',
-    styleUrls: ['./accountsettings.component.scss']
+    selector: 'app-subscribe',
+    templateUrl: './subscribe.component.html',
+    styleUrls: ['./subscribe.component.scss']
 })
-export class AccountsettingsComponent implements OnInit {
+export class SubscribeComponent implements OnInit {
 
     //subscription details panel
     subscriptionTableData: any;
@@ -52,8 +52,8 @@ export class AccountsettingsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Account Settings"]);
-        this.misc.setLocalRoute('account/accountsettings');
+        this.misc.setCurrentRoute(["Subscribe"]);
+        this.misc.setLocalRoute('account/subscribe');
     }
 
     redirect(url){

@@ -3,7 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { AccountMainComponent } from "./main/main.component";
 import { DashboardComponent } from './dashboard/dashboard.component'
-import { AccountsettingsComponent } from './accountsettings/accountsettings.component'
+import { SubscribeComponent } from './subscribe/subscribe.component'
 
 //Computers
 import { DemotestComputersComponent } from './computers/demotest/demotest-computers.component'
@@ -57,7 +57,7 @@ export const AccountRoutes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent, },
-            { path: 'accountsettings', component: AccountsettingsComponent, canActivate:[verifiedGuard] },
+            { path: 'subscribe', component: SubscribeComponent, canActivate:[verifiedGuard] },
             
             { path: 'computers/demotest', component: DemotestComputersComponent, canActivate:[verifiedGuard] },
             { path: 'computers/chapterwisetest', component: ChapterwisetestComputersComponent, canActivate:[verifiedGuard] },

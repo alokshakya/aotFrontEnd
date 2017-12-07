@@ -5,15 +5,15 @@
         </div>
     </div>
     <div class="topbar-right">
-        <a id="menu-button" href="#" (click)="app.onMenuButtonClick($event);menuEvent()">
-                <i class="fa fa-angle-left"></i>
+        <a id="menu-button" style="margin-top:-50px" href="#" (click)="app.onMenuButtonClick($event);menuEvent()">
+                <i class="fa fa-chevron-circle-left"></i>
             </a>
         <a id="topbar-menu-button" href="#" (click)="app.onTopbarMenuButtonClick($event)">
                 <i class="fa fa-bars"></i>
             </a>
             
         <ul id="breadcrumb" *ngIf="!app.isMobile()">
-          <li><a href="#"><i class="fa fa-home fa-lg"></i></a></li>
+          <li [routerLink]="['/account/dashboard']"><a href="#"><i class="fa fa-home fa-lg"></i></a></li>
           <li *ngIf="currentComponent[0]=='Science'"><a href="#"><i class="icon-science icon-2x"> &nbsp;</i><span> Science</span></a></li>
           <li *ngIf="currentComponent[0]=='Computers'"><a href="#"><i class="icon-cyber icon-2x"> &nbsp;</i><span> Computers</span></a></li>
           <li *ngIf="currentComponent[0]=='Mathematics'"><a href="#"><i class="icon-maths icon-2x"> &nbsp;</i><span> Mathematics</span></a></li>
@@ -50,23 +50,23 @@
                             </a>
                         </li>-->
                     <!-- <li role="menuitem">
-                        <a href="#/account/accountsettings">
+                        <a href="#/account/subscribe">
                                 <i class="fa fa-fw fa-cog"></i>
                                 <span>Settings</span>
                             </a>
                     </li> -->
                     <li (click)="logout()" role="menuitem">
                         <a href="">
-                                <i class="fa fa-fw fa-sign-out"></i>
+                                <i class="fa fa-fw fa-sign-out red-text"></i>
                                 <span >Logout</span>
                             </a>
                     </li>
                 </ul>
             </li>
             <li #settings [ngClass]="{'active-top-menu':app.activeTopbarItem === settings}">
-                <a href="#/account/accountsettings">
+                <a href="#/account/subscribe">
                     <!--(click)="app.onTopbarItemClick($event,settings)">-->
-                    <i class="topbar-icon fa fa-fw fa-cog"></i>
+                    <i class="topbar-icon fa fa-shopping-cart"></i>
                     <span class="topbar-item-name">Settings</span>
                 </a>
             </li>

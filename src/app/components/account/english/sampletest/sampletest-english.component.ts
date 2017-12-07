@@ -90,7 +90,7 @@ export class SampletestEnglishComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/accountsettings'])
+        this.router.navigate(['account/subscribe'])
     }
 
 }

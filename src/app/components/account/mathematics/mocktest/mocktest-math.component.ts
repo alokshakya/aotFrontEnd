@@ -35,7 +35,7 @@ date: number = Date.now();
     }
 
     redirect() {
-        this.router.navigate(['account/accountsettings'])
+        this.router.navigate(['account/subscribe'])
     }
 
     ngOnInit() {

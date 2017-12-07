@@ -87,7 +87,7 @@ import { InlineProfileComponent } from './components/account/appProfile/app.prof
 //Added Components
 import { AccountMainComponent } from "./components/account/main/main.component";
 import { DashboardComponent } from './components/account/dashboard/dashboard.component';
-import { AccountsettingsComponent } from './components/account/accountsettings/accountsettings.component';
+import { SubscribeComponent } from './components/account/subscribe/subscribe.component';
 import { DemotestComputersComponent } from './components/account/computers/demotest/demotest-computers.component';
 import { ChapterwisetestComputersComponent } from './components/account/computers/chapterwisetest/chapterwisetest-computers.component';
 import { SampletestComputersComponent } from './components/account/computers/sampletest/sampletest-computers.component';
@@ -233,7 +233,7 @@ import { RoundPipe } from './pipes/round.pipe';
         InlineProfileComponent,
         AccountMainComponent,
         DashboardComponent,
-        AccountsettingsComponent,
+        SubscribeComponent,
         DemotestComputersComponent,
         ChapterwisetestComputersComponent,
         SampletestComputersComponent,
