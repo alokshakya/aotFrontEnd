@@ -228,7 +228,7 @@ export class Misc {
     paymentData:any;
     // currentRoute: EventEmitter<[string]> = new EventEmitter();
 
-    constructor(private event:EventService, private subjectInfo:SubjectInfo){}
+    constructor(private event:EventService, private subjectInfo:SubjectInfo, private PersonalInfo:PersonalInfo){}
 
     setCurrentRoute(component){
         // this.currentRoute.emit(component);
@@ -252,6 +252,7 @@ export class Misc {
 
     setTestimonial(data) {
         this.testimonial = data;
+        this.PersonalInfo.userTestimonials = data;
         this.event.emitDataEvent();
     }
 

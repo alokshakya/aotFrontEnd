@@ -197,17 +197,18 @@ export class MasterHttpService {
     }
 
     getTestimonials() {
-        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/tablerecords/testimonial', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
+        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/misc/testimonials', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
                 // if(data['status']==200){
-                    this.misc.setTestimonial(data['message']);
+                    this.misc.setTestimonial(data['message']['all_testimonials']);
+                    this.personalInfo.setUserTestimonials(data['message']['user_testimonials']);
                 // }
                 // else this.httpError();
             }, err=>this.httpError())
     }
 
     getNotices() {
-        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/tablerecords/notice_board', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
+        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/misc/notices', { headers: this.queryHeaders }).map((resp: Response) => resp.json())
             .subscribe((data) => {
                 this.misc.setNotice(data['message']);
             },
@@ -216,14 +217,19 @@ export class MasterHttpService {
             })
     }
 
-    getUserTestimonials(studentId){
-        return this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/relatedtable/testimonial/user_testimonial_set/testimonial_id/student_id/'+studentId, {headers: this.queryHeaders})
-        .map((resp: Response)=>resp.json())
-        .subscribe((data)=>this.personalInfo.setUserTestimonials(data['message']),
-            err=>{
-                this.httpError();
-            })
+    updateTestimoial(requestBody){
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/updatetestimonial', requestBody,{headers:this.queryHeaders})
+        .map((resp:Response) => resp.json())
     }
+
+    // getUserTestimonials(studentId){
+    //     return this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/common/relatedtable/testimonial/user_testimonial_set/testimonial_id/student_id/'+studentId, {headers: this.queryHeaders})
+    //     .map((resp: Response)=>resp.json())
+    //     .subscribe((data)=>this.personalInfo.setUserTestimonials(data['message']),
+    //         err=>{
+    //             this.httpError();
+    //         })
+    // }
 
     subscribe(requestBody){
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/payment/pay', requestBody, {headers:this.queryHeaders})

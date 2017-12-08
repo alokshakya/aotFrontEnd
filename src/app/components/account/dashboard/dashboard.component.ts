@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { SubjectInfo, chapterwiseTest, Result, Misc } from '../../../services/data.service';
+import * as constants from '../../../../config/constants';
 
 declare var MathJax:any;
 @Component({
@@ -31,13 +32,16 @@ export class DashboardComponent implements OnInit {
     dummySubjects: any;
     testSummary;
     resultSummary;
+    imagePath:string
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
         public result: Result,
         public misc: Misc,
         public chTest:chapterwiseTest
-    ) {}
+    ) {
+        this.imagePath = constants.OLYMPIADBOX_IMG_URL;
+    }
 
     ngOnInit() {
         this.misc.setLocalRoute('account/dashboard');
@@ -51,7 +55,7 @@ export class DashboardComponent implements OnInit {
 
     redirect(sub,destination) {
         if(destination=='settings'){
-            this.router.navigate(['/account/accountsettings']);
+            this.router.navigate(['/account/subscribe']);
             return false;
         }
         var routeObj = {
@@ -69,7 +73,7 @@ export class DashboardComponent implements OnInit {
             }
         }
         var builtRoute = routeObj.getRoute(sub,destination);
-        // if(destination=='accountsettings')
+        // if(destination=='subscribe')
         this.router.navigate([builtRoute])
     }
 

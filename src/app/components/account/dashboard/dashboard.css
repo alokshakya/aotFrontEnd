@@ -186,3 +186,7 @@
     .inc{display: inline-block;width:63%;}
 }
 
+.inline{
+    display: inline-block;
+    margin-right: 28%;
+}

@@ -61,9 +61,9 @@
                                 <div class="ui-g-3" *ngIf="sub.id==3">Mock Test</div>
                                 <div class="ui-g-9" *ngIf="sub.id==3">
                                     <div class="progress hover progmob" pTooltip="Go To Mock Test" (click)="redirect(sub.name,'mocktest')">
-                                        <div class="progress-bar progress-bar-success" [style.width.%]="mockSample(sub['sample_test']['total_completed'])[0]" role="progressbar">{{mockSample(sub['sample_test']['total_completed'])[0]}}%
+                                        <div class="progress-bar progress-bar-success" [style.width.%]="mockSample(sub['mock_test']['total_completed'])[0]" role="progressbar">{{mockSample(sub['mock_test']['total_completed'])[0]}}%
                                         </div>
-                                        <div class="progress-bar progress-bar-danger" [style.width.%]="mockSample(sub['sample_test']['total_completed'])[1]" role="progressbar">{{mockSample(sub['sample_test']['total_completed'])[1]}}%
+                                        <div class="progress-bar progress-bar-danger" [style.width.%]="mockSample(sub['mock_test']['total_completed'])[1]" role="progressbar">{{mockSample(sub['mock_test']['total_completed'])[1]}}%
                                         </div>
                                     </div>
                                 </div>
@@ -168,8 +168,8 @@
             <p-panel header="Notice Board">
                 <div id="notice">
                     <div class='noticebox' *ngFor="let item of misc.notice; let i = index ">
-                        <h3>Notice {{i+1}}</h3>
-                        <p>{{item['date_published']}}</p>
+                        <span class="inline"><h3>Notice {{i+1}}</h3></span>
+                        <span>{{item['date_published']}}</span>
                         <p>{{item['news']}}</p>
                     </div>
                 </div>
@@ -180,7 +180,7 @@
                 <div id="testimonials">
                     <div class="testbox" *ngFor="let i of misc.testimonial">
                         <div class="ui-g">
-                            <div class="ui-g-7"><img class="testimonialimg"></div>
+                            <div class="ui-g-7" *ngIf="i.imageUrl!=''"><img class="testimonialimg" src="{{imagePath}}{{i.imageUrl}}"></div>
                             <div class="ui-g-5"></div>
                             <div class="ui-g-12">{{i['text']}}</div>
                         </div>
