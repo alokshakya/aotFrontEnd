@@ -3,14 +3,15 @@
         <button type="button" pButton class="ui-button-success" label="Close" (click)="cd.accept()"></button>
     </p-footer>
 </p-confirmDialog>
-<p-dialog [(visible)]="editTestimonial" modal="true" responsive="true" header="Edit Testimonial">
+<p-dialog [(visible)]="editTestimonial" closable="false" modal="true" responsive="true" header="Edit Testimonial">
     <div class="ui-g">
         <div class="ui-g-12 text-center">
             <textarea pInputTextarea [(ngModel)]="currentTestimonial" placeholder="Enter Testimonial Here..." maxlength="280"></textarea>
         </div>
         <div class="ui-g-12 text-center">
-            <button type="button" class="ui-button-success" (click)="saveTestimonial()" pButton label="Save"></button>
-            <button (click)="cancel()" type="button" pButton class="ui-button-danger" label="Cancel"></button>
+            <button *ngIf="!spinner&&editTestimonial" type="button" style="width:80px"  class="ui-button-success" (click)="saveTestimonial()" [disabled]="currentTestimonial==null||currentTestimonial==''" pButton label="Update"></button>
+            <button *ngIf="spinner&&editTestimonial" type="button" style="width:80px" pButton class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
+            <button (click)="cancel()" type="button" [disabled]="currentTestimonial==null||currentTestimonial==''" pButton class="ui-button-danger" label="Not Now"></button>
         </div>
     </div>
 </p-dialog>
@@ -23,7 +24,7 @@
             
             <button *ngIf="otpDialog&&spinner2" style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info withinput" pButton></button>
 
-            <button *ngIf="otpDialog&&!spinner" pButton (click)="dummyVerify()" [disabled]="spinner&&otpDialog||dummyOtp==null||spinner2" class="ui-button-success" label="Verify"></button>
+            <button *ngIf="otpDialog&&!spinner" pButton (click)="dummyVerify()" [disabled]="spinner&&otpDialog||dummyOtp==null||spinner2||dummyOtp==''" class="ui-button-success" label="Verify"></button>
 
             <button *ngIf="otpDialog&&spinner" style="width:60px" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-success"></button><br>
             <br>
@@ -95,7 +96,7 @@
                         </div>
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-home"></i> Address</h4>
-                            <p><span class="userdetails" *ngIf="!editBasic"> &nbsp;{{personalInfo.userInfo.address}}<span *ngIf="personalInfo.userInfo.address!=null||personalInfo.userInfo.address!=''">,</span> {{personalInfo.userInfo.city}}<br>&nbsp;{{personalInfo.userInfo.state}}<span *ngIf="personalInfo.userInfo.state!=null||personalInfo.userInfo.address!=''">,</span> {{personalInfo.userInfo.country}} &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
+                            <p><span class="userdetails" *ngIf="!editBasic"> {{personalInfo.userInfo.address}}<br>{{personalInfo.userInfo.city}} &nbsp; {{personalInfo.userInfo.state}} <br> {{personalInfo.userInfo.country}} &nbsp;{{personalInfo.userInfo.pincode}}</span></p>
                             <div class="address" *ngIf="editBasic">
                                 <input pInputText type="text" maxlength="100" placeholder="Address" [(ngModel)]="dummyBasicInfo.address">
                                 <br>
@@ -148,7 +149,8 @@
                     <div class="row">
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-home"></i> Address</h4>
-                            <p><span class="userdetails">  &nbsp;<span *ngIf="personalInfo.schoolInfo['address']!=null">{{personalInfo.schoolInfo['address']}},</span> <span *ngIf="personalInfo.schoolInfo['city']!=null"> {{personalInfo.schoolInfo['city']}},</span><span *ngIf="personalInfo.schoolInfo['state']!=null"> {{personalInfo.schoolInfo['state']}},</span> <br> &nbsp;<span *ngIf="personalInfo.schoolInfo['country']!=null">{{personalInfo.schoolInfo['country']}}, </span>{{personalInfo.schoolInfo['pincode']}}</span></p>
+                            <p><span class="userdetails">{{personalInfo.schoolInfo['address']}} <br> 
+                                {{personalInfo.schoolInfo['city']}} &nbsp; {{personalInfo.schoolInfo['state']}}<br>{{personalInfo.schoolInfo['country']}} &nbsp; {{personalInfo.schoolInfo['pincode']}}</span></p>
                         </div>
                         <div class="col-md-4 col-xs-12">
                             <div class="row">
@@ -170,29 +172,26 @@
                 <div class="container long">
                     <div class="row">
                         <div class="col-md-4 userinfo col-xs-9">
-                            <h4><i class="fa fa-key"></i> Old Password</h4>
-                            <input class="xpassword" placeholder="Enter Old Password" *ngIf="editPassword" pInputText type="password" [(ngModel)]="oldPassword">
+                            <h4><i class="fa fa-unlock"></i> Old Password</h4>
+                            <input class="xpassword" placeholder="Enter Old Password" pInputText type="password" [(ngModel)]="oldPassword">
                         </div>
                         <div class="col-md-4 col-xs-1"></div>
                         <div class="col-md-4 col-xs-2">
-                            <button type="button" *ngIf="!editPassword" pButton class="ui-button-info" label="Edit" (click)="editPassword=true"></button>
-                            <button type="button" [disabled]="confirmNewPassword==null||confirmNewPassword==''||oldPassword==null||oldPassword==''||newPassword==null||newPassword==''||newPassword!=confirmNewPassword" *ngIf="editPassword&&!spinner" pButton class="ui-button-success" label="Save" (click)="changePassword()"></button>
-                            <button type="button" style="width:52px" *ngIf="editPassword&&spinner" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-success"></button>
-
-                            <button type="button" *ngIf="editPassword" pButton class="ui-button-danger" label="Cancel" (click)="cancelPassword()"></button>
+                            <button type="button" [disabled]="confirmNewPassword==null||confirmNewPassword==''||oldPassword==null||oldPassword==''||newPassword==null||newPassword==''||newPassword!=confirmNewPassword||maxLength()" *ngIf="!spinner" pButton class="ui-button-success" label="Save" (click)="changePassword()"></button>
+                            <button type="button" style="width:52px" *ngIf="spinner" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-success"></button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-key"></i> New Password</h4>
-                            <input class="xpassword" pInputText #password="ngModel" *ngIf="editPassword" pPassword promptLabel="Atleast 6 characters" placeholder="Enter New Password" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}" /><span style="color:red" *ngIf="newPassword!=confirmNewPassword">*</span>
+                            <input class="xpassword" pInputText #password="ngModel" pPassword promptLabel="Atleast 6 characters" placeholder="Enter New Password" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}" /> &nbsp; <span style="color:red" *ngIf="newPassword!=confirmNewPassword"><i class="fa fa-exclamation-triangle"></i></span>
                         </div>
                         <div class="col-md-4 col-xs-12"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-key"></i> Confirm Password</h4>
-                            <input class="xpassword" *ngIf="editPassword" pInputText type="password" placeholder="Re-enter New Password" [(ngModel)]="confirmNewPassword"><span style="color:red" *ngIf="newPassword!=confirmNewPassword">*</span><br>
+                            <input class="xpassword" pInputText type="password" placeholder="Re-enter New Password" [(ngModel)]="confirmNewPassword"> &nbsp; <span style="color:red" *ngIf="newPassword!=confirmNewPassword"><i class="fa fa-exclamation-triangle"></i></span><br>
                             <span class="xpassword" style="color:red" *ngIf="newPassword!=confirmNewPassword">Passwords Doesn't Match</span>
                         </div>
                         <div class="col-md-4 col-xs-12"></div>
@@ -213,10 +212,6 @@
                                         <div class="col-md-2"><i pTooltip="Edit" (click)="edit(i)" class="fa fa-pencil clickable"></i></div>
                                     </div>
                                 </div>
-                                <hr>
-                                <h4>Rate OlympiadBox</h4>
-                                <p-rating [cancel]="false" [(ngModel)]="rating"></p-rating>
-
                             </p-panel>
                         </div>
                         <div class="col-md-8 col-xs-12">
@@ -230,15 +225,18 @@
                                         <div>
                                             <button pButton *ngIf="!spinner" [disabled]="testimonial==null||testimonial==''" label="Add Testimonial" (click)="addTestimonial()" class="ui-button-success"></button>
                                             <button pButton *ngIf="spinner"  icon="fa fa-circle-o-notch fa-spin fa-forward" style="width:125px" class="ui-button-success"></button>
-                                            <button pButton label="Not Now" (click)="cancelTestimonial()" class="ui-button-danger"></button>
+                                            <button pButton label="Not Now" [disabled]="testimonial==null||testimonial==''" (click)="cancelTestimonial()" class="ui-button-danger"></button>
                                         </div>
                                     </div>
                                     <div class="col-md-5 col-xs-12">
                                         <br>
                                         <p class="guidelines">Posting Guidelines</p>
-                                        <span class="point"><i class="fa fa-check-square fa-lg"></i>Be Polite.</span>
+                                        <span class="point"><i class="fa fa-check fa-lg"></i>Be Polite.</span>
                                         <br>
-                                        <span class="point"><i class="fa fa-check-square fa-lg"></i>Never Abuse.</span>
+                                        <span class="point"><i class="fa fa-check fa-lg"></i>Never Abuse.</span><br>
+                                        <hr>
+                                        <h4>Rate OlympiadBox</h4>
+                                        <p-rating [cancel]="false" [(ngModel)]="rating"></p-rating>
                                     </div>
                                 </div>
                             </p-panel>
@@ -269,9 +267,9 @@
                         </div>
                         <div class="ui-g-4 ui-sm-12">
                             <p class="guidelines">Submission Guidelines</p>
-                            <span class="point"><i class="fa fa-check-square fa-lg"></i>Be Polite.</span>
+                            <span class="point"><i class="fa fa-check fa-lg"></i>Be Polite.</span>
                             <br>
-                            <span class="point"><i class="fa fa-check-square fa-lg"></i>Never Abuse.</span>
+                            <span class="point"><i class="fa fa-check fa-lg"></i>Never Abuse.</span>
                         </div>
                         <div class="ui-g-12">
                             <hr>
@@ -289,9 +287,9 @@
                             <br>
                             <br>
                             <div class="text-center">
-                                <button pButton *ngIf="!spinner" class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null||achievement==null" label="Add Achievement" (click)="addAchievement()"></button>
-                                <button pButton *ngIf="spinner" style="width:135px" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
-                                <button pButton class="ui-button-danger" (click)="cancelAchievement()" label="Not Now"></button>
+                                <button pButton *ngIf="!spinner" style="width:145px" class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''" label="Add Achievement" (click)="addAchievement()"></button>
+                                <button pButton *ngIf="spinner" style="width:145px" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
+                                <button pButton class="ui-button-danger" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''" (click)="cancelAchievement()" label="Not Now"></button>
                             </div>
                         </div>
                         </div>

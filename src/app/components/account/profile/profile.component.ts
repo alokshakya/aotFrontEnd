@@ -55,7 +55,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     editTestimonial: boolean
     testimonial: string;
     index: number;
-    rating: number = 2;
+    rating: number;
     currentTestimonial: string;
 
     //add achievement tab
@@ -112,7 +112,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         this.misc.setCurrentRoute(["Profile"]);
         this.misc.setLocalRoute('account/profile');
         this.onStateSelect(null);
-
+        this.rating = 0;
         this.dec = [];
         this.exam.push(
             { label: "Select Exam", value: "null" }, { label: "NCO 2016-17 - Level 2", value: "NCO-16-17" },
@@ -172,6 +172,8 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
         this.maxDate = new Date();
         this.maxDate.setFullYear(2013, 0, 1);
+        if(this.personalInfo.userInfo['address']==''){
+        }
     }
 
     editBasicInfo() {
@@ -294,12 +296,12 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         this.masterhtttp.addTestimonial(requestBody)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
-                    this.masterhtttp.getUserTestimonials(this.personalInfo.studentInfo['student_id']);
+                    this.masterhtttp.getTestimonials();
                     this.generateMsg('success','Success','Testimonial Added Successfully');
                     this.testimonial = null;
                 }
                 else if(data['status'] == 713){
-                    this.generateMsg('warning','Limit Reached','You Cannot Add More Than 3 Testimonials');
+                    this.generateMsg('error','Limit Reached','You Cannot Add More Than 3 Testimonials');
                 }
                 else{
                     this.generateMsg('error','Unable To Add Testimonial','Please Try Again')
@@ -311,7 +313,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     cancelTestimonial() {
-        this.testimonial = "Enter Your Testimonial Here..."
+        this.testimonial = null;
     }
 
     addAchievement() {
@@ -321,14 +323,22 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
                     this.achievement = null;
-                    this.generateMsg('success','Success','Achievement Added Successfully')
+                    this.generateMsg('success','Success','Achievement Added Successfully');
+                    this.spinner = false;
+                }
+                else if(data['status']==777){
+                    this.generateMsg('error','Limit Reached','You Cannot Add More Achievements');
+                    this.spinner = false;
+
                 }
                 else{
                     this.generateMsg('error','Error','Unable To Add Testimonial');
+                    this.spinner = false;
+
                 }
             },
             err=>{
-                this.generateMsg('error','Server Error','Please');
+                this.generateMsg('error','Server Error','Please Try Again');
             })
     }
 
@@ -389,6 +399,13 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         })
     }
 
+    maxLength(){
+        if(this.confirmNewPassword.length<6||this.newPassword.length<6||this.oldPassword.length<6){
+            return true;
+        }
+        return false;
+    }
+
     edit(a) {
         this.index = a
         this.currentTestimonial = this.personalInfo.userTestimonials[a]['text'];
@@ -396,8 +413,24 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     saveTestimonial() {
-        this.misc.userTestimonial[this.index] = this.currentTestimonial;
-        this.editTestimonial = false;
+        this.spinner = true
+        var wrapper = {'text':this.currentTestimonial,'testimonial_id':this.personalInfo.userTestimonials[this.index]['testimonial_id']};
+        this.masterhtttp.updateTestimoial(wrapper).subscribe((data)=>{
+            if(data['status']==200){
+                this.personalInfo.userTestimonials[this.index]['text'] = this.currentTestimonial;
+                this.spinner = false;
+                this.editTestimonial = false;
+                this.generateMsg('success','Success','Testimonial Updated Successfully')
+            }
+            else {
+                this.spinner = false;
+                this.generateMsg('error','Error','Unable To Update Testimonial')
+            }
+        },err=>{
+            this.spinner = false;
+            this.generateMsg('error','Server Error','Please Try Again')
+        })
+
     }
 
     cancel() {

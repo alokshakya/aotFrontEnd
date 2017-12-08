@@ -194,12 +194,16 @@ label {
 }
 
 .fixed{
-    height:161px;
+    height:260px;
     overflow-x: hidden;
-    overflow-y: scroll; 
+    overflow-y: auto; 
 }
 
 .leftpad{
     padding-top: 2%;
     padding-left: 20%;
+}
+
+.red-border{
+    border: 1px solid red;
 }
