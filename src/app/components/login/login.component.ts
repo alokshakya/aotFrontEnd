@@ -445,4 +445,11 @@ export class LoginComponent implements OnInit {
         this.clearFlags();
     }
 
+    conditionalDisplay(){
+        if(this.loginForgotToggle||this.verifyForgotToggle){
+            this.loginRegToggle = false;
+        }
+        else this.loginRegToggle = !this.loginRegToggle
+    }
+
 }

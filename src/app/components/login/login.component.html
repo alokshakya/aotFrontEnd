@@ -5,7 +5,10 @@
         <a href="http://olympiadbox.com"><img src="../../assets/layout/images/Olympiadbox-logo.png" id="oblogo" height="100px" width="100px"></a>
     </div>
     <div class=" module form-module" *ngIf="!loginRegToggle" [@fadeInOut]>
-        <div class="toggle" pTooltip=" Register" (click)="loginRegToggle=!loginRegToggle;reset();clearFlags()">
+        <div class="toggle" pTooltip=" Login" (click)="conditionalDisplay();reset();clearFlags()" *ngIf="loginForgotToggle||verifyForgotToggle">
+            <i class="fa fa-user-plus fa-lg"></i>
+        </div>
+        <div class="toggle" pTooltip=" Register" (click)="conditionalDisplay();reset();clearFlags()" *ngIf="!(verifyForgotToggle||loginForgotToggle)">
             <i class="fa fa-user-plus fa-lg"></i>
         </div>
         <!--LOGIN BOX-->
@@ -43,8 +46,19 @@
                 <button *ngIf="spinner" class="ui-button-info" pButton icon="fa fa-circle-o-notch fa-spin fa-forward" type="submit"></button>
                 <br>
                 <br>
-                <span id="lostpassword"><a (click)="forgotPassword()">Forgot Password?</a></span>
+                <span id="lostpassword"><a (click)="forgotPassword()">Forgot Password?</a></span><br>
             </form>
+            <div class="ui-g" id="optional">
+                <div class="ui-g-5">
+                    <hr>
+                </div>
+                <div class="ui-g-2">
+                    <h4>Or</h4></div>
+                <div class="ui-g-5">
+                    <hr>
+                </div>
+                <button pButton (click)="loginRegToggle=!loginRegToggle;reset();clearFlags()" class="ui-button-success" type="button" label="Register"></button>
+            </div>
             <div *ngIf="false" class="ui-g" id="optional">
                 <div class="ui-g-5">
                     <hr>
