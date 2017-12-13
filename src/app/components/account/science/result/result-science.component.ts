@@ -8,35 +8,50 @@ import { Misc, Result, SubjectInfo } from '../../../../services/data.service';
   styleUrls: ['./result-science.component.scss']
 })
 export class ResultScienceComponent implements OnInit {
-chapterCols:any;
-    selectedChapter:any;
+    buffer = {};
+    chapterArray:Array<any>=[];
+    chapterCols:any;
     chapterwiseGraph:any;
     ChapterwiseGraphOptions:any;
-    questionWiseGraph:any;
-    questionWiseGraph2:any;
-    questionWiseGraph3:any;
-
-
-    testArray:any;
-    testArray2 = [];
-    selectedTest:any;
-    selectedTest2:any;
-
-    selectedAttempt:any;
-    selectedAttemptObject:any;
-
-    selectItem:SelectItem[]
-    testCols:any;
-
-    totalAttempts:number;
-
-    resultObj:any;
-    tu:boolean
-    chapterArray:Array<any>=[];
+    combinedTests:any;
+    demoTestArray:Array<any>;
+    demoTestGraph:any;
+    demoTestObject:any;
+    firstDemoChange:boolean
+    firstMockChange:boolean;
+    firstSampleChange:boolean;
+    isDemoAttempted:boolean;
+    isMockAttempted:boolean;
+    isSampleAttmempted:boolean;
+    mockTestArray:Array<any>;
+    mockTestCols:any
+    mockTestGraph:any;
+    mockTestObject:any;
     options:any;
     options2:any;
+    prevTabIndex:number = 0;
+    testwiseGraph:any;
+    resultObj:any;
     resultSummary:any;
+    sampleTestArray:Array<any>;
+    sampleTestGraph:any;
+    sampleTestObject:any;
+    selectedAttempt:any;
+    selectedAttemptObject:any;
+    selectedChapter:any;
+    selectedSampleTest:Array<any>;
+    selectedTest:any;
+    selectedTestType:any;
+    selectedTest2:any;
+    selectItem:SelectItem[]
+    testArray:any;
+    testArray2=[];
+    totalAttempts:number;
+    tests:SelectItem[]
+    testCols:any;
     testSummary:any;
+    isTestSelected:boolean
+
     constructor(
         public misc:Misc,
         public result:Result,
@@ -48,77 +63,43 @@ chapterCols:any;
         this.misc.setCurrentRoute(["Science","Result"]);
         this.misc.setLocalRoute('account/science/result');
         this.chapterCols = [{header:'Chapter',field:'name'},{header:'Score',field:'total_correct'}];
-        this.testCols = [{
-            header:'Test',field:null},
+        this.testCols = [
+            {header:'Test',field:null},
             {header:'Attempted',field:'attempted'},
             {header:'Total Correct',field:'total_correct'},
             {header:'Total Incorrect',field:'total_incorrect'},
             {header:'Total Marked',field:'total_marked'},
-            {header:'Score',field:'total_correct'}
-            ]
+            {header:'Score',field:'score'}
+        ]
+
+        this.mockTestCols = [
+            {header:'Test',field:null},
+            {header:'Total Correct',field:'total_correct'},
+            {header:'Total Incorrect',field:'total_incorrect'},
+            {header:'Total Marked',field:'total_marked'},
+            {header:'Score',field:'score'}
+        ]
         this.setChapters();
+        // this.setSampleTest();
+        this.setTest('sample_test');
+        this.setTest('demo_test');
+        this.setTest('mock_test');
+        this.setTestModule();
     }
 
-    
-    makeQuestionWIseGraph(){
-        let label = [];
-        let data = [[],[],[]];
-        for(let i in this.selectItem){
-            let attemptArray = this.selectedTest['result'][this.selectItem[i]['value']]['response'];
-            this.questionWiseGraph2.labels[i] = 'Attempt '+(parseInt(i)+1);
-            this.questionWiseGraph2.datasets[0]['data'][i] = this.selectedTest['result'][this.selectItem[i]['value']]['correct']
-            for(let j in attemptArray){
-                if(i=='0'){
-                    label.push('Q'+(parseInt(j)+1))
-                }
-                switch (attemptArray[j]['state']) {
-                    case "m":
-                        data[i].push(2)
-                        break;
-                    
-                    case "i":
-                        data[i].push(1)
-                        break;
-                    
-                    case "c":
-                        data[i].push(3)
-                        break;
-
-                    case "u":
-                        data[i].push(0);
-                }
-            }
+    setTestModule(){
+        this.tests = [{label:'Chapterwise Test',value:'c'}]
+        if(this.isSampleAttmempted){
+            this.tests.push({label:'Sample Test',value:'s'})
         }
-        this.questionWiseGraph = {
-            labels:label,
-            datasets: [
-                {
-                    label: 'Attempt 1',
-                    data: data[0],
-                    fill: false,
-                    borderColor: '#177DB6',
-                    backgroundColor: '#177DB6'
-                },
-                {
-                    label: 'Attempt 2',
-                    data: data[1],
-                    fill: false,
-                    borderColor: '#A184F6',
-                    backgroundColor: '#A184F6'
-                },
-                {
-                    label: 'Attempt 3',
-                    data: data[2],
-                    fill: false,
-                    borderColor: '#565656',
-                    backgroundColor: '#565656'
-                }
-                ]
+        if(this.isMockAttempted){
+            this.tests.push({label:'Mock Test',value:'m'})
         }
-        this.tu=true
-
+        if(this.isDemoAttempted){
+            this.tests.push({label:'Demo Test',value:'d'})
+        }
+        this.selectedTestType = 'c';
     }
-
 
     makeGraph(){
         let ref = {0:'Unattempted',1:'Incorrect', 2:'Marked For Review', 3:'Correct'}
@@ -132,7 +113,51 @@ chapterCols:any;
                     borderColor: '#177DB6',
                     backgroundColor: '#177DB6'
                 }
-                ]
+            ]
+        }
+
+        this.testwiseGraph = {
+            labels:[],
+            datasets:[]
+        }
+
+        this.sampleTestGraph = {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Score',
+                    data: [],
+                    fill: false,
+                    borderColor: '#177DB6',
+                    backgroundColor: '#177DB6'
+                }
+            ]
+        }
+
+        this.mockTestGraph = {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Score',
+                    data: [],
+                    fill: false,
+                    borderColor: '#177DB6',
+                    backgroundColor: '#177DB6'
+                }
+            ]
+        }
+
+        this.demoTestGraph = {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Score',
+                    data: [],
+                    fill: false,
+                    borderColor: '#177DB6',
+                    backgroundColor: '#177DB6'
+                }
+            ]
         }
 
         this.ChapterwiseGraphOptions = {
@@ -164,30 +189,6 @@ chapterCols:any;
             }
         }
 
-        this.questionWiseGraph2 = {
-            labels: ['Attempt 1','Attempt 2', 'Attempt 3'],
-            datasets: [
-                {
-                    label: 'Score',
-                    data: [23,32,42],
-                    fill: false,
-                    borderColor: '#4BC0C0',
-                    backgroundColor: '#4BC0C0'
-                }
-                ]
-        }
-
-        // this.options2 = {
-        //     scales:{
-        //         yAxes:[
-        //         {ticks:{
-        //             min:0,
-        //             label:'Score'
-        //         }}
-        //         ]
-        //     }
-        // }
-
         this.options2 = {
             scales:{
                 yAxes:[
@@ -195,35 +196,31 @@ chapterCols:any;
                     min:0,
                     stepSize:1,
                 },
-            scaleLabel: {
-        display: true,
-        labelString: 'Score'
-      }}
+                scaleLabel: {
+                display: true,
+                labelString: 'Score'
+                }}
                 ]
             }
         }
     }
-            
 
     setChapters(){
-        let obj = this.result.science.chapters;
-        for(let i=0; i<obj.length; i++){
-            if(obj[i].hasOwnProperty('tests')){
-                this.chapterArray.push(obj[i]);
-                this.chapterwiseGraph.labels[i] = 'CH-'+(i+1);
-                this.chapterwiseGraph.datasets[0]['data'][i] = obj[i]['total_correct'];
-            }
-        }
-        if(this.chapterArray.length==0){
+        var cleanChapter = this.result.chapterwiseObject.selectiveChapters(this.result.science.chapters);
+        
+        if(cleanChapter.chapters.length==0){
             return false;
         }
-        this.selectedChapter = []
+        this.chapterArray = cleanChapter.chapters;
+        this.chapterwiseGraph.labels = cleanChapter.labels;
+        this.chapterwiseGraph.datasets[0]['data'] = cleanChapter.datasets;
+        this.selectedChapter = [];
         this.selectedChapter[0] = this.chapterArray[0];
         this.selectChapter();
     }
 
     onChapterUnselect(){
-        this.tu = false;
+        this.isTestSelected = false;
         this.testArray = [];
         this.testArray2 = []
     }
@@ -255,28 +252,28 @@ chapterCols:any;
         this.selectTest();
     }
 
-    selectTest(e=null){
+    selectTest(e=null,sample=false){
         setTimeout(()=>{
-        this.selectedTest = this.selectedTest2[this.selectedTest2.length-1];
-        if(this.selectedTest==null){
-            this.tu=false
-            return false;
-        }
-        this.selectItem = [];
-        if(this.selectedTest.result.hasOwnProperty('attempt_1')){
-            this.selectItem.push({label:'Attempt 1',value:'attempt_1'});
-        }
-        if(this.selectedTest.result.hasOwnProperty('attempt_2')){
-            this.selectItem.push({label:'Attempt 2',value:'attempt_2'});
-        }
-        if(this.selectedTest.result.hasOwnProperty('attempt_3')){
-            this.selectItem.push({label:'Attempt 3',value:'attempt_3'});
-        }
-        this.chooseAttempt();
-        this.selectedAttempt = 'attempt_1';
-        this.makeQuestionWIseGraph();
+            this.selectedTest = this.selectedTest2[this.selectedTest2.length-1];
+            if(this.selectedTest==null){
+                this.isTestSelected=false
+                return false;
+            }
+            this.selectItem = [];
+            if(this.selectedTest.result.hasOwnProperty('attempt_1')){
+                this.selectItem.push({label:'Attempt 1',value:'attempt_1'});
+            }
+            if(this.selectedTest.result.hasOwnProperty('attempt_2')){
+                this.selectItem.push({label:'Attempt 2',value:'attempt_2'});
+            }
+            if(this.selectedTest.result.hasOwnProperty('attempt_3')){
+                this.selectItem.push({label:'Attempt 3',value:'attempt_3'});
+            }
+            this.chooseAttempt();
+            this.selectedAttempt = 'attempt_1';
+            this.isTestSelected = true;
             this.multiSelectTest();
-        },10)
+        },0)
     }
 
     multiSelectTest(){
@@ -288,74 +285,50 @@ chapterCols:any;
             'Test 3':'#4BC0C0',
             'Test 4':'#FFCE56',
             'Test 5':'#B3B5C6',
+            'Sample Test 1':'#177DB6',
+            'Sample Test 2':'#FF6384',
+            'Sample Test 3':'#4BC0C0',
+            'Sample Test 4':'#FFCE56',
+            'Sample Test 5':'#B3B5C6',
+            'Sample Test 6':'#573423',
+            'Sample Test 7':'#57797D',
+            'Sample Test 8':'#CBAC85',
+            'Sample Test 9':'#B6D548',
+            'Sample Test 10':'#CEC500',
+            'Demo Test':'#177DB6',
+            'Mock Test 1':'#177DB6',
+            'Mock Test 2':'#FF6384',
+            'Mock Test 3':'#4BC0C0',
         }
-        // this.questionWiseGraph3 = {
-        //     labels : ['Attempt 1', 'Attempt 2', 'Attempt 3'],
-        //     datasets:[
-        //     {
-        //         label: '',
-        //         data: [0,0,0],
-        //         fill: false,
-        //         borderColor: 'white',
-        //         backgroundColor: 'white'
-        //     },
-        //     {
-        //         label: '',
-        //         data: [0,0,0],
-        //         fill: false,
-        //         borderColor: 'white',
-        //         backgroundColor: 'white'
-        //     },
-        //     {
-        //         label: '',
-        //         data: [0,0,0],
-        //         fill: false,
-        //         borderColor: 'white',
-        //         backgroundColor: 'white'
-        //     },
-        //     {
-        //         label: '',
-        //         data: [0,0,0],
-        //         fill: false,
-        //         borderColor: 'white',
-        //         backgroundColor: 'white'
-        //     },
-        //     {
-        //         label: '',
-        //         data: [0,0,0],
-        //         fill: false,
-        //         borderColor: 'white',
-        //         backgroundColor: 'white'
-        //     }
-        //     ]
-        // }
-            this.questionWiseGraph3 = {
-                labels:[],
-                datasets:[]
-            }
-            let labels = ['Attempt 1','Attempt 2', 'Attempt 3'];
-            let datasets = [];
+        this.testwiseGraph = {
+            labels:[],
+            datasets:[]
+        }
+        let labels = ['Attempt 1','Attempt 2', 'Attempt 3'];
+        let datasets = [];
         for(let i in this.selectedTest2){
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_1')){
-                // this.questionWiseGraph3.datasets[i]['data'][0] = this.selectedTest2[i]['result']['attempt_1']['correct'];
-                // this.questionWiseGraph3.datasets[i]['label'] = this.selectedTest2[i]['name'];
                 datasets.push({
                     label:this.selectedTest2[i]['name'],
-                    data:[this.selectedTest2[i]['result']['attempt_1']['correct'],0,0],
+                    data:[this.selectedTest2[i]['result']['attempt_1']['score'],0,0],
                     borderColor:color[this.selectedTest2[i]['name']],
                     backgroundColor:color[this.selectedTest2[i]['name']],
                     fill:false
                 })
             }
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_2')){
-                datasets[i]['data'][1] = this.selectedTest2[i]['result']['attempt_2']['correct'];
+                datasets[i]['data'][1] = this.selectedTest2[i]['result']['attempt_2']['score'];
             }
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_3')){
-                datasets[i]['data'][2] = this.selectedTest2[i]['result']['attempt_3']['correct'];
+                datasets[i]['data'][2] = this.selectedTest2[i]['result']['attempt_3']['score'];
             }
         }
-        this.questionWiseGraph3.labels = labels;
-        this.questionWiseGraph3.datasets = datasets;
+        this.testwiseGraph.labels = labels;
+        this.testwiseGraph.datasets = datasets;
+
+        if(this.prevTabIndex===2){
+            this.testwiseGraph.labels = ['Attempted'];
+        }
     }
 
     shade(i){
@@ -375,6 +348,165 @@ chapterCols:any;
         }
         let object = this.selectedTest['result'][attempt];
         this.selectedAttemptObject = object;
+    }
+
+    setSampleTest(){
+        var testArray = this.result.science;
+        var filteredArray = [];
+        var labels = [];
+        var datasets = [];
+        if(testArray.hasOwnProperty('sample_test')){
+            this.sampleTestObject = {};
+            this.sampleTestObject['attempts'] = 0;
+            this.sampleTestObject['score'] = testArray['sample_test']['score'];
+            this.sampleTestObject['total_correct'] = testArray['sample_test']['total_correct'];
+            this.sampleTestObject['total_incorrect'] = testArray['sample_test']['total_incorrect'];
+            this.sampleTestObject['total_marked'] = testArray['sample_test']['total_marked'];
+            this.sampleTestObject['total_attempted'] = testArray['sample_test']['total_marked']+testArray['sample_test']['total_incorrect']+testArray['sample_test']['total_correct']
+            for(let i in testArray['sample_test']['tests']){
+                if(testArray['sample_test']['tests'][i]['attempted']>0){
+                    datasets.push(testArray['sample_test']['tests'][i]['score']);
+                    labels.push('Test '+(parseInt(i)+1));
+                    this.sampleTestObject['attempts'] += parseInt(testArray['sample_test']['tests'][i]['attempted']);
+                    filteredArray.push(testArray['sample_test']['tests'][i]);
+                    filteredArray[filteredArray.length-1]['testIndex'] = parseInt(i)+1;
+                    this.isSampleAttmempted = true;
+                }
+            }
+        }
+        if(filteredArray.length==0){
+           return false; 
+        }
+        this.sampleTestArray = filteredArray;
+        this.sampleTestGraph.labels = labels;
+        this.sampleTestGraph.datasets[0]['data'] = datasets;
+    }
+
+
+    setTest(test){
+        var object = {}
+        var testArray = this.result.science;
+        var filteredArray = [];
+        var labels = [];
+        var datasets = [];
+        if(testArray.hasOwnProperty(test)){
+            object[test] = {};
+            object[test] = {};
+
+            object[test]['attempts'] = 0;
+            object[test]['score'] = testArray[test]['score'];
+            object[test]['total_correct'] = testArray[test]['total_correct'];
+            object[test]['total_incorrect'] = testArray[test]['total_incorrect'];
+            object[test]['total_marked'] = testArray[test]['total_marked'];
+            object[test]['total_attempted'] = testArray[test]['total_marked']+testArray[test]['total_incorrect']+testArray[test]['total_correct']
+            for(let i in testArray[test]['tests']){
+                if(testArray[test]['tests'][i]['attempted']>0){
+                    datasets.push(testArray[test]['tests'][i]['score']);
+                    labels.push('Test '+(parseInt(i)+1));
+                    object[test]['attempts'] += parseInt(testArray[test]['tests'][i]['attempted']);
+                    filteredArray.push(testArray[test]['tests'][i]);
+                    filteredArray[filteredArray.length-1]['testIndex'] = parseInt(i)+1;
+                    // this.isSampleAttmempted = true;
+                }
+            }
+            switch (test) {
+                case "sample_test":
+                    this.sampleTestObject = object[test];
+                    this.sampleTestArray = filteredArray;
+                    this.sampleTestGraph.labels = labels;
+                    this.sampleTestGraph.datasets[0]['data'] = datasets;
+                    if(this.sampleTestArray.length>0){
+                        this.isSampleAttmempted = true;
+                    }
+                    break;
+                
+                case "mock_test":
+                    this.mockTestObject = object[test];
+                    this.mockTestArray = filteredArray;
+                    this.mockTestGraph.labels = labels;
+                    this.mockTestGraph.datasets[0]['data'] = datasets;
+                    if(this.mockTestArray.length>0){
+                        this.isMockAttempted = true;
+                    }
+                    break;
+
+                case "demo_test":
+                    this.demoTestObject = object[test];
+                    this.demoTestArray = filteredArray;
+                    this.demoTestGraph.labels = labels;
+                    this.demoTestGraph.datasets[0]['data'] = datasets;
+                    if(this.demoTestArray.length>0){
+                        this.isDemoAttempted = true;
+                    }
+                    break;
+            }
+        }
+    }
+
+    onTabChange(e){
+        var val = e.value;
+        var indexMap = {'s':1,'c':0,'m':2,'d':3}
+        e = {};
+        e['index'] = indexMap[val];
+        this.buffer[this.prevTabIndex] = {}
+        this.buffer[this.prevTabIndex]['selectedTest2'] = this.selectedTest2;
+        this.selectedTest2 = [];
+
+        this.testwiseGraph.datasets = [];
+        if(e.index==0){
+            this.selectedTest2 = this.buffer[e.index]['selectedTest2'];
+            if(this.selectedTest2!=null){
+                this.selectTest();
+            }
+        }
+        if(e.index==1){
+            if(!this.firstSampleChange){
+                if(this.sampleTestArray!=null){
+                    this.selectedTest2[0] = this.sampleTestArray[0];
+                    if(this.selectedTest2!=null){
+                        this.selectTest();
+                    }
+                }
+                this.firstSampleChange = true;
+            }
+            else {
+                this.selectedTest2 = this.buffer[e.index]['selectedTest2'];
+                this.selectTest();
+            }
+        }
+
+        if(e.index==2){
+            if(!this.firstMockChange){
+                if(this.mockTestArray!=null){
+                    this.selectedTest2[0] = this.mockTestArray[0];
+                    if(this.selectedTest2!=null){
+                        this.selectTest();
+                    }
+                }
+                this.firstMockChange = true;
+            }
+            else {
+                this.selectedTest2 = this.buffer[e.index]['selectedTest2'];
+                this.selectTest();
+            }
+        }
+
+        if(e.index==3){
+            if(!this.firstDemoChange){
+                if(this.demoTestArray!=null){
+                    this.selectedTest2[0] = this.demoTestArray[0];
+                    if(this.selectedTest2!=null){
+                        this.selectTest();
+                    }
+                }
+                this.firstDemoChange = true;
+            }
+            else {
+                this.selectedTest2 = this.buffer[e.index]['selectedTest2'];
+                this.selectTest();
+            }
+        }
+        this.prevTabIndex = e.index
     }
 
 }

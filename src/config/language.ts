@@ -52,7 +52,7 @@ export const growlResponse = {
 export const testIntro = {
 	demoTest:"Some <span style='color:red'>guidelines</span> and <strong>rules</strong> goes here........... Ipsum is simply dummy\
 	 text of the printing and typesetting industryly dummy text of the printing and t\
-	 ypesetting industryly<em> dummy text of the printing and </em>typesetting industryly dumm\
+	 ypesetting industryly<em> dummy $2^3$text of the printing and </em>typesetting industryly dumm\
 	 y text of the printing and typesetting \
 	industryly dummy text",
 

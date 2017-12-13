@@ -28,7 +28,7 @@
             <p-chart type="doughnut" [data]="sampleTestData"></p-chart>
         </p-panel>
     </div>
-    <div class="ui-g-6 ui-sm-12">
+    <!-- <div class="ui-g-6 ui-sm-12">
         <p-panel>
             <p-header>Sample Test
                 <p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown>
@@ -38,6 +38,59 @@
                     <span class="long">{{test.key}}</span>
                     <button type="submit" class="ui-button-success rightgap" pButton [ngClass]="{'ui-button-warning':test.value=='Resume', 'ui-button-danger':test.value=='Start'}" label="{{test.value}}"></button>
                     <button pButton type="button" style="width:40px;" pTooltip="Retake {{test.key}}" tooltipPosition="bottom" icon="fa fa-refresh fa-spin fa-fw" *ngIf="!(test.value=='Start'||test.value=='Resume')"></button>
+                </div>
+            </div>
+        </p-panel>
+    </div> -->
+    <div class="ui-g-6 ui-sm-12">
+        <p-panel>
+            <p-header>Sample Test
+                <p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown>
+            </p-header>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-sm-12 container" *ngIf="test.gk?.sample_test!=null">
+                    <div class="table-responsive">
+                        <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Sample Test</th>
+                            <th>Attempt</th>
+                            <th>Action</th>
+                            <th>Completed</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let test of test.gk.sample_test.tests;let k=index">
+                            <td><span [ngClass]="shade(k)">{{k+1}}</span></td>
+                            <td><span class="blue">{{test?.attempted}}</span></td>
+                            <td>
+                                <span *ngIf="test.attempted==0" class="low">
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
+                                    <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" [disabled]="false" type="button" pButton></button>
+                                </span>
+
+                                <span *ngIf="test.completed==1" class="low">
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Start" [disabled]="spinner2!=null||test.attempted>=3" type="button" pButton></button>
+                                    <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
+                                </span>
+
+                                <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
+                                    <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="low">
+                                    <span class="round" *ngIf="test.attempted==0">0</span>
+                                    <span class="round" *ngIf="test.attempted!=0&&test.completed==0">{{test.attempted-1}}</span>
+                                    <span class="round" *ngIf="test.attempted!=0&&test.completed==1">{{test.attempted}}</span>
+                                </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </p-panel>

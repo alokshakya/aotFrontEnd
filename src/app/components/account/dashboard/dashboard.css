@@ -190,3 +190,7 @@
     display: inline-block;
     margin-right: 28%;
 }
+
+.fixed-height{
+    height:264px;
+}

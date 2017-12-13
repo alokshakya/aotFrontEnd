@@ -32,8 +32,12 @@
     font-size: 17px;
 }
 
+ul{
+    list-style-type: none;
+    padding-left: 25px;
+}
 
-.low button {
-    width: 70px;
-    margin-right: 4px;
+li i{
+    color: #5CB85C;
+    margin-right: 10px;
 }

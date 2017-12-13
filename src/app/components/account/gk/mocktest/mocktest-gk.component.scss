@@ -24,12 +24,6 @@
     overflow-y: auto;
 }
 
-#dropdown {
-    margin-left: 40%;
-    height: auto;
-}
-
-
 .chapter {
     font-size: 17px;
 }
@@ -40,5 +34,47 @@
 }
 
 .rightmargin {
-    margin-right: 20%;
+    margin-right: 55%;
+}
+
+
+.low button {
+    width: 70px;
+    margin-right: 4px;
+}
+
+
+.dark, .light, .blue{
+    margin-left: 1%;
+        display: inline-block;
+    color: white;
+    text-align: center;
+    width: 22px;
+    height: 21px;
+    border-radius: 20%;
+    margin-top: 6%
+}
+
+.dark{
+    background-color: #5A5955;
+}
+
+.light{
+    background-color: #A4A5AA;
+}
+
+.blue{
+    background-color: #4F1B4C;
+}
+
+
+.table td,th{
+    text-align: center;
+    border:none;
+}
+
+
+.container{
+    padding-left: 3%;
+    padding-right: 5%;
 }

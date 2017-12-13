@@ -101,13 +101,15 @@ export class DashboardComponent implements OnInit {
         var total = 3;
         if(sample){
             total = 10;
+            let comp = parseInt(completed)*10;
+            let rem = (total-comp)*10;
+            return [comp,rem];
         }
-        var comp = parseInt(completed)*10;
-        var rem = (total-parseInt(completed))*10;
         if(!sample){
-            rem = rem*10/(total);
+            let comp = Math.floor(parseInt(completed)*100/total);
+            let rem = 100 - comp;
+            return [comp,rem];
         }
-        return [comp,rem];
     }
 //test summary----------------------------------------------------------------------------
 

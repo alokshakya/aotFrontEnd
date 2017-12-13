@@ -449,18 +449,12 @@
                         <p-panel header="Attempted Test History">
                             <p-dataTable [value]="mockTestArray" (onRowSelect)="selectTest($event,true)" (onHeaderCheckboxToggle)="selectTest($event,true)" (onRowUnselect)="selectTest($event,true)" [responsive]="true" selectionMode="multiple" dataKey="id" [(selection)]="selectedTest2">
                                 <p-column selectionMode="multiple" [style]="{'width':'10%'}"></p-column>
-                                <p-column *ngFor="let item of testCols;let i = index" [field]="item.field" [header]="item.header">
+                                <p-column *ngFor="let item of mockTestCols;let i = index" [field]="item.field" [header]="item.header">
                                     <ng-template pTemplate="header">
                                         <span class="theme-text" [ngClass]="{'attempted':item.header=='Attempted'}">{{item.header}}</span>
                                     </ng-template>
                                     <ng-template let-col let-data="rowData" let-ri="rowIndex" *ngIf="item.header=='Test'" header="Test" pTemplate="body">
                                         <span class="test" [ngClass]="shade(data.testIndex)">{{data.testIndex}}</span>
-                                    </ng-template>
-                                    <ng-template let-col let-data="rowData" *ngIf="item.header=='Attempted'" pTemplate="body">
-                                        <span *ngIf="data.attempted=='0'">None</span>
-                                        <span *ngIf="data.attempted=='1'">Once</span>
-                                        <span *ngIf="data.attempted=='2'">Twice</span>
-                                        <span *ngIf="data.attempted=='3'">Thrice</span>
                                     </ng-template>
                                 </p-column>
                                 <p-footerColumnGroup>
@@ -470,7 +464,7 @@
                                                 <span class="theme-text"><strong>Total</strong></span>
                                             </ng-template>
                                         </p-column>
-                                        <p-column [style]="{'text-align':'left'}" footer="{{mockTestObject['attempts']}}"></p-column>
+                                        <!-- <p-column [style]="{'text-align':'left'}" footer="{{mockTestObject['attempts']}}"></p-column> -->
                                         <p-column [style]="{'text-align':'left'}" footer="{{mockTestObject['total_correct']}}"></p-column>
                                         <p-column [style]="{'text-align':'left'}" footer="{{mockTestObject['total_incorrect']}}"></p-column>
                                         <p-column [style]="{'text-align':'left'}" footer="{{mockTestObject['total_marked']}}"></p-column>
@@ -497,7 +491,7 @@
                     <div class="ui-g-12" *ngIf="selectedTest!=null">
                         <p-panel header="Result Analysis">
                             <div class="ui-g">
-                                <div class="ui-g-12 text-center" *ngIf="selectItem!=null">
+                                <div class="ui-g-12 text-center" *ngIf="false">
                                     <p-selectButton [options]="selectItem" (onOptionClick)="chooseAttempt($event)" [(ngModel)]="selectedAttempt"></p-selectButton>
                                 </div>
                                 <div class="ui-g-12 container">
@@ -530,7 +524,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><span>Score</span></th>
-                                                    <td>{{selectedAttemptObject?.correct}}</td>
+                                                    <td>{{selectedAttemptObject?.score}}</td>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -679,7 +673,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><span>Score</span></th>
-                                                    <td>{{selectedAttemptObject?.correct}}</td>
+                                                    <td>{{selectedAttemptObject?.score}}</td>
                                                 </tr>
                                             </thead>
                                         </table>

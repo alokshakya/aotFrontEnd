@@ -29,9 +29,7 @@ export class ChapterwisetestGkComponent implements OnInit {
 
     spinner:boolean;
     spinner2:string;
-
     currentTabIndex;
-
 
     constructor(
         public router: Router,
@@ -66,6 +64,7 @@ export class ChapterwisetestGkComponent implements OnInit {
             'class_id': this.personalInfo.studentInfo['class_id'],
             'topic_id': null
         }
+
         this.generatedPanel();
     }
 
@@ -93,6 +92,11 @@ export class ChapterwisetestGkComponent implements OnInit {
         };
     }
 
+    onTabOpen(e){
+        //generated chapters tab event
+        this.currentTabIndex = e.index; 
+    }
+ 
     generatedPanel() {
         this.generatedChapters = [];
         this.generatedChapterIds = [];
@@ -179,7 +183,7 @@ export class ChapterwisetestGkComponent implements OnInit {
             })
     }
 
-startTest(testId, chapterId, attempted, completed, chapter) {
+    startTest(testId, chapterId, attempted, completed, chapter) {
         this.spinner2 = testId;
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
@@ -188,8 +192,6 @@ startTest(testId, chapterId, attempted, completed, chapter) {
             "attempt":attempted,
             "completed":completed.toString()
         }
-
-
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('General-Knowledge',chapter);
         this.masterhttp.beginTest(wrapper)
@@ -211,16 +213,10 @@ startTest(testId, chapterId, attempted, completed, chapter) {
             });
     }
 
-    onTabOpen(e){
-        //generated chapters tab event
-        this.currentTabIndex = e.index; 
-    }
-
     checkGeneratedTest() {
         if (this.chapterwiseTest.qaSet.length == 15) {
             return true;
         }
         return false;
     }
-
 }

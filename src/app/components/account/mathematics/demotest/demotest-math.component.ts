@@ -23,6 +23,7 @@ export class DemotestMathComponent implements OnInit {
     dummyChapters: Array<string>;
     growlMsg:Message[];
     displayTest:boolean;
+    testCountObject:any;
 
     syllabus: any;
 
@@ -75,6 +76,11 @@ export class DemotestMathComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.testCountObject = {
+            chapterwiseTest:this.chapterwiseTest.math['total_tests'],
+            sampleTest:10,
+            mockTest:3
+        }
         this.growlMsg = [];
         this.growlMsg.push(language.growlResponse.warning);
         this.misc.setCurrentRoute(["Mathematics","Demo Test"]);

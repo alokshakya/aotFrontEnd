@@ -327,7 +327,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.spinner = false;
                 }
                 else if(data['status']==777){
-                    this.generateMsg('error','Limit Reached','You Cannot Add More Achievements');
+                    this.generateMsg('error','Limit Reached','You Cannot Add More Than 3 Achievements');
                     this.spinner = false;
 
                 }
@@ -492,6 +492,9 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     checkMobile(){
         let pattern = new RegExp("^[7-9]{1}[0-9]{9}$");
         let mobile = this.dummyBasicInfo['mobile'];
+        if(mobile==this.personalInfo.userInfo['mobile']){
+            return true;
+        }
         if(!pattern.test(mobile)){
             return true;
         }

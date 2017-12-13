@@ -29,7 +29,6 @@ export class ChapterwisetestComputersComponent implements OnInit {
 
     spinner:boolean;
     spinner2:string;
-
     currentTabIndex;
 
     constructor(
@@ -50,6 +49,7 @@ export class ChapterwisetestComputersComponent implements OnInit {
     ngOnInit() {
         this.misc.setCurrentRoute(["Computers","Chapterwise Test"]);
         this.misc.setLocalRoute('account/computers/chapterwisetest');
+
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{
@@ -64,7 +64,16 @@ export class ChapterwisetestComputersComponent implements OnInit {
             'class_id': this.personalInfo.studentInfo['class_id'],
             'topic_id': null
         }
+
         this.generatedPanel();
+    }
+
+    
+    shade(index){
+        if(index==0||index==2||index==4){
+            return 'dark';
+        }
+        return 'light';
     }
 
     makeGraph(){
@@ -83,6 +92,11 @@ export class ChapterwisetestComputersComponent implements OnInit {
         };
     }
 
+    onTabOpen(e){
+        //generated chapters tab event
+        this.currentTabIndex = e.index; 
+    }
+ 
     generatedPanel() {
         this.generatedChapters = [];
         this.generatedChapterIds = [];
@@ -97,7 +111,6 @@ export class ChapterwisetestComputersComponent implements OnInit {
     }
 
     tabOpen(e) {
-        this.selectedChapter = null;    
         if (this.check(e)) {
             this.selectedChapter = this.subjectInfo.computerChapters['chapters'][e.index]['id'];
             this.wrapper['chapter_id'] = this.selectedChapter;
@@ -124,11 +137,20 @@ export class ChapterwisetestComputersComponent implements OnInit {
     tabClose(e) {
         this.generatedFlag = true;
         this.generateMsg = [];
+        this.selectedChapter = null;
     }
 
     updatePanel() {
         this.generateMsg = []
         this.masterhttp.getTestDetails()
+        // this.chapterwiseTest.testEvent.subscribe((data)=>{
+        //     if(data){
+        //         this.generatedPanel();
+        //         this.generatedFlag = false;
+        //         this.selectedChapter = null;
+        //         this.spinner = false;
+        //     }
+        // })
         this.event.testEvent.subscribe((data)=>{
             if(data){
                 this.generatedPanel();
@@ -161,7 +183,7 @@ export class ChapterwisetestComputersComponent implements OnInit {
             })
     }
 
-    startTest(testId, chapterId, attempted, completed,chapter) {
+    startTest(testId, chapterId, attempted, completed, chapter) {
         this.spinner2 = testId;
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
@@ -176,7 +198,6 @@ export class ChapterwisetestComputersComponent implements OnInit {
         .subscribe((data) => {
                 if (data['status'] == 200){
                     this.chapterwiseTest.setQuesAnswerSet(data['message']);
-
                     this.router.navigate(['test']);
                 }else{
                     this.generateMsg = [];
@@ -192,19 +213,6 @@ export class ChapterwisetestComputersComponent implements OnInit {
             });
     }
 
-    onTabOpen(e){
-        //generated chapters tab event
-        this.currentTabIndex = e.index; 
-    }
-
-
-    shade(index){
-        if(index==0||index==2||index==4){
-            return 'dark';
-        }
-        return 'light';
-    }
-
     checkGeneratedTest() {
         if (this.chapterwiseTest.qaSet.length == 15) {
             return true;
@@ -212,5 +220,3 @@ export class ChapterwisetestComputersComponent implements OnInit {
         return false;
     }
 }
-
-

@@ -24,6 +24,7 @@ export class ResultMathComponent implements OnInit {
     isMockAttempted:boolean;
     isSampleAttmempted:boolean;
     mockTestArray:Array<any>;
+    mockTestCols:any
     mockTestGraph:any;
     mockTestObject:any;
     options:any;
@@ -65,6 +66,14 @@ export class ResultMathComponent implements OnInit {
         this.testCols = [
             {header:'Test',field:null},
             {header:'Attempted',field:'attempted'},
+            {header:'Total Correct',field:'total_correct'},
+            {header:'Total Incorrect',field:'total_incorrect'},
+            {header:'Total Marked',field:'total_marked'},
+            {header:'Score',field:'score'}
+        ]
+
+        this.mockTestCols = [
+            {header:'Test',field:null},
             {header:'Total Correct',field:'total_correct'},
             {header:'Total Incorrect',field:'total_incorrect'},
             {header:'Total Marked',field:'total_marked'},
@@ -301,21 +310,25 @@ export class ResultMathComponent implements OnInit {
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_1')){
                 datasets.push({
                     label:this.selectedTest2[i]['name'],
-                    data:[this.selectedTest2[i]['result']['attempt_1']['correct'],0,0],
+                    data:[this.selectedTest2[i]['result']['attempt_1']['score'],0,0],
                     borderColor:color[this.selectedTest2[i]['name']],
                     backgroundColor:color[this.selectedTest2[i]['name']],
                     fill:false
                 })
             }
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_2')){
-                datasets[i]['data'][1] = this.selectedTest2[i]['result']['attempt_2']['correct'];
+                datasets[i]['data'][1] = this.selectedTest2[i]['result']['attempt_2']['score'];
             }
             if(this.selectedTest2[i].result.hasOwnProperty('attempt_3')){
-                datasets[i]['data'][2] = this.selectedTest2[i]['result']['attempt_3']['correct'];
+                datasets[i]['data'][2] = this.selectedTest2[i]['result']['attempt_3']['score'];
             }
         }
         this.testwiseGraph.labels = labels;
         this.testwiseGraph.datasets = datasets;
+
+        if(this.prevTabIndex===2){
+            this.testwiseGraph.labels = ['Attempted'];
+        }
     }
 
     shade(i){

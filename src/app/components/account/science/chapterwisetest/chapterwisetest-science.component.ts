@@ -30,7 +30,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
     spinner2:string;
     currentTabIndex;
 
-
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
@@ -64,6 +63,7 @@ export class ChapterwisetestScienceComponent implements OnInit {
             'class_id': this.personalInfo.studentInfo['class_id'],
             'topic_id': null
         }
+
         this.generatedPanel();
     }
 
@@ -91,6 +91,11 @@ export class ChapterwisetestScienceComponent implements OnInit {
         };
     }
 
+    onTabOpen(e){
+        //generated chapters tab event
+        this.currentTabIndex = e.index; 
+    }
+ 
     generatedPanel() {
         this.generatedChapters = [];
         this.generatedChapterIds = [];
@@ -186,9 +191,8 @@ export class ChapterwisetestScienceComponent implements OnInit {
             "attempt":attempted,
             "completed":completed.toString()
         }
-
         this.chapterwiseTest.activateTestRoute();
-        this.chapterwiseTest.setSubject('Computers',chapter);
+        this.chapterwiseTest.setSubject('Science',chapter);
         this.masterhttp.beginTest(wrapper)
         .subscribe((data) => {
                 if (data['status'] == 200){
@@ -206,11 +210,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
                     this.generateMsg.push({ severity: 'info', summary: 'Could Not Start Test', detail: 'Please Try Again'});
                     this.spinner2 = null;
             });
-    }
-
-    onTabOpen(e){
-        //generated chapters tab event
-        this.currentTabIndex = e.index; 
     }
 
     checkGeneratedTest() {

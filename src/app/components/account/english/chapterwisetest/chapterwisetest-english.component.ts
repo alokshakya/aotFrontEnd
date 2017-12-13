@@ -29,7 +29,6 @@ export class ChapterwisetestEnglishComponent implements OnInit {
 
     spinner:boolean;
     spinner2:string;
-
     currentTabIndex;
 
     constructor(
@@ -50,6 +49,7 @@ export class ChapterwisetestEnglishComponent implements OnInit {
     ngOnInit() {
         this.misc.setCurrentRoute(["English","Chapterwise Test"]);
         this.misc.setLocalRoute('account/english/chapterwisetest');
+
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{
@@ -64,7 +64,16 @@ export class ChapterwisetestEnglishComponent implements OnInit {
             'class_id': this.personalInfo.studentInfo['class_id'],
             'topic_id': null
         }
+
         this.generatedPanel();
+    }
+
+    
+    shade(index){
+        if(index==0||index==2||index==4){
+            return 'dark';
+        }
+        return 'light';
     }
 
     makeGraph(){
@@ -83,6 +92,11 @@ export class ChapterwisetestEnglishComponent implements OnInit {
         };
     }
 
+    onTabOpen(e){
+        //generated chapters tab event
+        this.currentTabIndex = e.index; 
+    }
+ 
     generatedPanel() {
         this.generatedChapters = [];
         this.generatedChapterIds = [];
@@ -96,19 +110,12 @@ export class ChapterwisetestEnglishComponent implements OnInit {
         this.makeGraph();
     }
 
-    
-    shade(index){
-        if(index==0||index==2||index==4){
-            return 'dark';
-        }
-        return 'light';
-    }
-
     tabOpen(e) {
         if (this.check(e)) {
             this.selectedChapter = this.subjectInfo.englishChapters['chapters'][e.index]['id'];
             this.wrapper['chapter_id'] = this.selectedChapter;
             this.wrapper['topic_id'] = this.subjectInfo.englishChapters['chapters'][0]['topics'][0]['id'];
+
             this.generatedFlag = false;
             this.generateMsg = []
             this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.englishChapters['chapters'][e.index]['name'] + ' Test' });
@@ -156,7 +163,6 @@ export class ChapterwisetestEnglishComponent implements OnInit {
 
     generate() {
         this.spinner = true;
-
         this.masterhttp.generateTest(this.wrapper)
             .subscribe((data) => {
                 if (data['status'] == 200) {
@@ -177,7 +183,7 @@ export class ChapterwisetestEnglishComponent implements OnInit {
             })
     }
 
-    startTest(testId, chapterId, attempted, completed,chapter) {
+    startTest(testId, chapterId, attempted, completed, chapter) {
         this.spinner2 = testId;
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
@@ -186,7 +192,6 @@ export class ChapterwisetestEnglishComponent implements OnInit {
             "attempt":attempted,
             "completed":completed.toString()
         }
-
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('English',chapter);
         this.masterhttp.beginTest(wrapper)
@@ -214,10 +219,4 @@ export class ChapterwisetestEnglishComponent implements OnInit {
         }
         return false;
     }
-
-    onTabOpen(e){
-        //generated chapters tab event
-        this.currentTabIndex = e.index; 
-    }
-
 }

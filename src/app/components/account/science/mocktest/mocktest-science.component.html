@@ -1,15 +1,15 @@
 <div class="ui-g">
     <div class="ui-g-12" *ngIf="!subjectInfo.subscribedSubjects['Science']">
-            <p-panel header="Subscribe">
-                <div class="ui-g">
-                    <div class="ui-g-12 text-center">
-                        <h1>No Test Available</h1>
-                        <br>
-                        <button pButton (click)="redirect()" type="text" class="ui-button-info" label="Subscribe Now"></button>
-                    </div>
+        <p-panel header="Subscribe">
+            <div class="ui-g">
+                <div class="ui-g-12 text-center">
+                    <h1>No Test Available</h1>
+                    <br>
+                    <button pButton (click)="redirect()" type="text" class="ui-button-info" label="Subscribe Now"></button>
                 </div>
-            </p-panel>
-        </div>
+            </div>
+        </p-panel>
+    </div>
     <div class="ui-g-6 ui-sm-12">
         <p-panel header="Introduction">
             <div id="intro">
@@ -26,30 +26,6 @@
     <div class="ui-g-6 ui-sm-12">
         <p-panel header="Progress">
             <p-chart type="doughnut" [data]="mockTestData"></p-chart>
-        </p-panel>
-    </div>
-    <div class="ui-g-6 ui-sm-12">
-        <p-panel>
-            <p-header><span class="rightmargin">Mock Test</span>
-                <p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown>
-            </p-header>
-            <div class="ui-g">
-                <p-dataTable [value]="mockTestTableData" [responsive]="true">
-                    <p-column [style]="{'width':'150px'}" header="Test Number" field="Test"></p-column>
-                    <p-column [style]="{'width':'100px'}" header="Slot 1" field="Slot 1">
-                        <ng-template pTemplate="body">
-                            <div class="text-center">
-                                <button pButton label="40/50" class="ui-button-warning"></button>
-                            </div>
-                        </ng-template>
-                    </p-column>
-                    <p-column header="Slot 2" field="Slot 2">
-                        <ng-template pTemplate="body">
-                            <p-checkbox label="{{date|date}} - {{date|date:'shortTime'}}"></p-checkbox>
-                        </ng-template>
-                    </p-column>
-                </p-dataTable>
-            </div>
         </p-panel>
     </div>
     <div class="ui-g-6 ui-sm-12">
@@ -70,6 +46,64 @@
                             </div>
                         </div>
                     </p-accordion>
+                </div>
+            </div>
+        </p-panel>
+    </div>
+    <div class="ui-g-6 ui-sm-12">
+        <p-panel>
+            <p-header><span class="rightmargin">Mock Test</span>
+                <p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown>
+            </p-header>
+            <div class="ui-g">
+                <div class="ui-g-12 ui-sm-12 container" *ngIf="test.science?.mock_test!=null">
+                    <div class="table-responsive">
+                        <table class="table">
+                        <thead>
+                          <tr>
+                            <th style="width:27%">Mock Test</th>
+                            <th>Slot 1</th>
+                            <th>Slot 2</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let test of test.science.mock_test.tests;let k=index">
+                            <td><span [ngClass]="shade(k)">{{k+1}}</span></td>
+                            <td *ngIf="true"> <button label=" {{dateNow|date:'medium'}} " pButton class="ui-button-warning"></button> </td>
+
+
+                            <td *ngIf="true">
+                                <span class="low" *ngIf="test.attempted==0">
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-success" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
+                                    <button *ngIf="spinner2==test.id" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward" [disabled]="false" type="button" pButton></button>
+                                </span>
+
+                                <span class="low" *ngIf="test.attempted==1&&test.completed==1">
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-success" label="{{result.science['mock_test']['tests'][k]['score']}}/{{result.science['mock_test']['tests'][k]['marks']}}" type="button" pButton></button>
+                                </span>
+
+                                <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
+                                    <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
+                                </span>
+                            </td>
+
+                            <td *ngIf="false"> <button label=" {{dateNow|date:'medium'}} " pButton class="ui-button-warning"></button> </td>
+                            <td *ngIf="false">
+                                <span class="low" *ngIf="test.attempted==0">
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
+                                    <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" [disabled]="false" type="button" pButton></button>
+                                </span>
+
+                                <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
+                                    <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
+                                </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </p-panel>

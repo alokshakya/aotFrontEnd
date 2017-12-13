@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/primeng';
 import { Response } from '@angular/http';
-import { TreeModule, TreeNode } from 'primeng/primeng';
+import { Message } from 'primeng/primeng';
 import { Router } from '@angular/router';
-import { SubjectInfo, Misc } from '../../../../services/data.service';
+import { SubjectInfo, Misc, PersonalInfo, chapterwiseTest } from '../../../../services/data.service';
+import { MasterHttpService } from '../../../../services/masterhttp.service';
+
 
 @Component({
   selector: 'app-sampletest-science',
@@ -11,10 +13,10 @@ import { SubjectInfo, Misc } from '../../../../services/data.service';
   styleUrls: ['./sampletest-science.component.scss']
 })
 export class SampletestScienceComponent implements OnInit {
-
     examPattern: SelectItem[];
-
+    spinner2;
     testData: any;
+    generateMsg:Message[];
 
     sampleTestData: any; //for chart
 
@@ -25,7 +27,10 @@ export class SampletestScienceComponent implements OnInit {
     constructor(
         private router: Router,
         private misc: Misc,
-        public subjectInfo: SubjectInfo) {
+        private masterhttp:MasterHttpService,
+        public subjectInfo: SubjectInfo,
+        public test:chapterwiseTest,
+        public personalInfo:PersonalInfo) {
 
         this.testData = {
             "Sample Test 1": "35/50",
@@ -41,52 +46,67 @@ export class SampletestScienceComponent implements OnInit {
         }
 
         this.examPattern = [];
-        this.examPattern.push({ label: "SOF", value: "null" }, { label: "SELECT EXAM", value: "null" }, )
+        this.examPattern.push({ label: "SOF", value: "null" }, { label: "SELECT EXAM", value: "null" })
 
+    }
+
+    shade(index){
+        if(index%2==0){
+            return 'dark';
+        }
+        return 'light';
     }
 
     ngOnInit() {
         this.misc.setCurrentRoute(["Science","Sample Test"]);
         this.misc.setLocalRoute('account/science/sampletest');
+        this.makeGraph();
+    }
 
+    makeGraph(){
 
-        //for chart
         this.sampleTestData = {
             labels: ['Completed', 'Remaining'],
             datasets: [{
-                data: [4, 10],
+                data:[0,10],
                 backgroundColor: ["#5CB85C", "#D9534F"],
                 hoverBackgroundColor: ["#5CB85C", "#D9534F"]
             }]
         };
-        //   this.chapterNames = []
-        //   this.subject.getChapters(1).subscribe((data: Response) =>{
-        //       data = data['resource'];
-        //       for(let i in data){
-        //           this.chapterNames.push(data[i]['name']);
-        //       }
-        //   })
+        if(this.test.science.hasOwnProperty('sample_test')){
+            let completed = parseInt(this.test.science['sample_test']['total_completed']);
+            this.sampleTestData.datasets[0]['data'] = [completed,10-completed];
+        }
+    }
 
-        //temporary service used
-        // this.dummyChapters=[]
-        // this.masterhttp.getChapters()
-        // .subscribe(data=>{
-        //   data = data['chapters']['records'];
-        //   for(let i in data){
-        //     this.dummyChapters.push(data[i][1])
-        //   }
-        // })
+    startTest(testId, chapterId, attempted, completed, chapter) {
+    this.spinner2 = testId;
+    let wrapper = {
+        "student_id": this.personalInfo.studentInfo['student_id'],
+        "chapter_id": chapterId,
+        "test_id": testId,
+        "attempt":attempted,
+        "completed":completed.toString()
+    }
+    this.test.activateTestRoute();
+    this.test.setSubject('Science',chapter);
+    this.masterhttp.beginTest(wrapper)
+    .subscribe((data) => {
+            if (data['status'] == 200){
+                this.test.setQuesAnswerSet(data['message']);
+                this.router.navigate(['test']);
+            }else{
+                this.generateMsg = [];
+                this.generateMsg.push({ severity: 'info', summary: 'Could Not Start Test', detail: 'Please Try Again'});
+            }
+            this.spinner2 = null;
 
-        // //temporary service used
-        // this.dummyTopics = [];
-        // this.masterhttp.getTopics()
-        // .subscribe(data=>{
-        //   data = data['topics']['records'];
-        //   for(let i in data){
-        //     this.dummyTopics.push(data[i][1])
-        //   }
-        // })
-
+        },
+        err => {
+                this.generateMsg = [];
+                this.generateMsg.push({ severity: 'info', summary: 'Could Not Start Test', detail: 'Please Try Again'});
+                this.spinner2 = null;
+        });
     }
 
     redirect() {

@@ -32,7 +32,6 @@ export class ChapterwisetestReasoningComponent implements OnInit {
     spinner2:string;
     currentTabIndex;
 
-
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
@@ -70,7 +69,15 @@ export class ChapterwisetestReasoningComponent implements OnInit {
         this.generatedPanel();
     }
 
-makeGraph(){
+    
+    shade(index){
+        if(index==0||index==2||index==4){
+            return 'dark';
+        }
+        return 'light';
+    }
+
+    makeGraph(){
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{
@@ -86,6 +93,11 @@ makeGraph(){
         };
     }
 
+    onTabOpen(e){
+        //generated chapters tab event
+        this.currentTabIndex = e.index; 
+    }
+ 
     generatedPanel() {
         this.generatedChapters = [];
         this.generatedChapterIds = [];
@@ -97,14 +109,6 @@ makeGraph(){
             }
         }
         this.makeGraph();
-    }
-
-    
-    shade(index){
-        if(index==0||index==2||index==4){
-            return 'dark';
-        }
-        return 'light';
     }
 
     tabOpen(e) {
@@ -180,7 +184,7 @@ makeGraph(){
             })
     }
 
-startTest(testId, chapterId, attempted, completed, chapter) {
+    startTest(testId, chapterId, attempted, completed, chapter) {
         this.spinner2 = testId;
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
@@ -189,7 +193,6 @@ startTest(testId, chapterId, attempted, completed, chapter) {
             "attempt":attempted,
             "completed":completed.toString()
         }
-
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('Reasoning',chapter);
         this.masterhttp.beginTest(wrapper)
@@ -217,11 +220,4 @@ startTest(testId, chapterId, attempted, completed, chapter) {
         }
         return false;
     }
-
-    onTabOpen(e){
-        //generated chapters tab event
-        this.currentTabIndex = e.index; 
-    }
-
-
 }
