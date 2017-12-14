@@ -34,8 +34,9 @@
             <p-panel>
                 <p-header>
                     Chapterwise Test & Syllabus<span class="toright"></span>
-                    <button *ngIf="!spinner" [disabled]="generatedFlag" (click)="generate()" id="inlinebutton" pButton type="text" class="ui-button-success" label="Generate"></button>
-                    <button *ngIf="spinner" style="width:82px" [disabled]="false" id="inlinebutton" pButton type="text" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
+                    <button *ngIf="!subjectInfo.subscribedSubjects['General-Knowledge']" label="Generate" [disabled]="true" pButton id="inlinebutton"></button>
+                    <button *ngIf="!spinner&&subjectInfo.subscribedSubjects['General-Knowledge']" [disabled]="generatedFlag" (click)="generate()" id="inlinebutton" pButton class="ui-button-success" label="Generate"></button>
+                    <button *ngIf="spinner&&subjectInfo.subscribedSubjects['General-Knowledge']" style="width:82px" [disabled]="false" id="inlinebutton" pButton class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
                 </p-header>
                 <p-accordion (onOpen)="tabOpen($event)" (onClose)="tabClose($event)">
                     <div class="ui-g">
@@ -79,7 +80,7 @@
             <p-panel header="Generated">
                 <p-accordion (onOpen)="onTabOpen($event)" (onClose)="currentTabIndex=null">
                     <div class="ui-g">
-                        <div class="ui-g-12">
+                        <div class="ui-g-12" *ngIf="subjectInfo.subscribedSubjects['General-Knowledge']">
                             <p-accordionTab *ngFor="let data of generatedChapters; let k=index">
                                 <p-header>
                                             <span class="chapter">{{data?.name}}</span>
@@ -155,6 +156,10 @@
                                     </div>
                                 </div>
                             </p-accordionTab>
+                        </div>
+                        <div class="ui-g-12 text-center" *ngIf="!subjectInfo.subscribedSubjects['General-Knowledge']">
+                            <h4>Please Subscribe To Generate Test</h4><br>
+                            <button class="ui-button-info" pButton label="Subscribe" [routerLink]="['/account/subscribe']"></button>
                         </div>
                     </div>
                 </p-accordion>

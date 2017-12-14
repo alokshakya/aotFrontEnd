@@ -118,7 +118,11 @@ export class ChapterwisetestEnglishComponent implements OnInit {
 
             this.generatedFlag = false;
             this.generateMsg = []
-            this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.englishChapters['chapters'][e.index]['name'] + ' Test' });
+            if(!this.subjectInfo.subscribedSubjects['English']){
+                this.generateMsg.push({ severity: 'warn', summary: 'Please Subscribe', detail: 'To Generate Test'});
+            } else {
+                this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.englishChapters['chapters'][e.index]['name'] + ' Test' });
+            }
         }
         else {
             this.generateMsg = []

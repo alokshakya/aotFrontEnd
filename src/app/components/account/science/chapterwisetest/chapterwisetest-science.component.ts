@@ -116,8 +116,12 @@ export class ChapterwisetestScienceComponent implements OnInit {
             this.wrapper['topic_id'] = this.subjectInfo.scienceChapters['chapters'][0]['topics'][0]['id'];
 
             this.generatedFlag = false;
-            this.generateMsg = []
-            this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.scienceChapters['chapters'][e.index]['name'] + ' Test' });
+            this.generateMsg = [];
+            if(!this.subjectInfo.subscribedSubjects['Science']){
+                this.generateMsg.push({ severity: 'warn', summary: 'Please Subscribe', detail: 'To Generate Test'});
+            } else {
+                this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.scienceChapters['chapters'][e.index]['name'] + ' Test' });
+            }
         }
         else {
             this.generateMsg = []

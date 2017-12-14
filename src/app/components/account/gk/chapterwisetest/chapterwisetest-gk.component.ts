@@ -118,7 +118,11 @@ export class ChapterwisetestGkComponent implements OnInit {
 
             this.generatedFlag = false;
             this.generateMsg = []
-            this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.gkChapters['chapters'][e.index]['name'] + ' Test' });
+            if(!this.subjectInfo.subscribedSubjects['General-Knowledge']){
+                this.generateMsg.push({ severity: 'warn', summary: 'Please Subscribe', detail: 'To Generate Test'});
+            } else {
+                this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.gkChapters['chapters'][e.index]['name'] + ' Test' });
+            }
         }
         else {
             this.generateMsg = []

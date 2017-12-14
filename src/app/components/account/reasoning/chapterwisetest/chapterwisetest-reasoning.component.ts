@@ -118,8 +118,12 @@ export class ChapterwisetestReasoningComponent implements OnInit {
             this.wrapper['topic_id'] = this.subjectInfo.reasoningChapters['chapters'][0]['topics'][0]['id'];
 
             this.generatedFlag = false;
-            this.generateMsg = []
-            this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.reasoningChapters['chapters'][e.index]['name'] + ' Test' });
+            this.generateMsg = [];
+            if(!this.subjectInfo.subscribedSubjects['Reasoning']){
+                this.generateMsg.push({ severity: 'warn', summary: 'Please Subscribe', detail: 'To Generate Test'});
+            } else {
+                this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: 'Click Generate To Create ' + this.subjectInfo.reasoningChapters['chapters'][e.index]['name'] + ' Test' });
+            }
         }
         else {
             this.generateMsg = []
