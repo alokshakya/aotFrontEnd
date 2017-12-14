@@ -42,13 +42,33 @@
             </div>
         </p-panel>
     </div> -->
+    
+    <div class="ui-g-6 ui-sm-12">
+        <p-panel>
+            <p-header>Syllabus</p-header>
+            <p-accordion>
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p-accordionTab *ngFor="let data of subjectInfo.mathChapters['chapters']">
+                            <p-header><span class="chapter"> {{data.name}} </span> </p-header>
+                            <div class="ui-g">
+                                <div class="ui-g-12" *ngFor="let topic of data['topics']">
+                                    <span class="">{{topic.name}}<br></span>
+                                </div>
+                            </div>
+                        </p-accordionTab>
+                    </div>
+                </div>
+            </p-accordion>
+        </p-panel>
+    </div>
     <div class="ui-g-6 ui-sm-12">
         <p-panel>
             <p-header>Sample Test
                 <p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown>
             </p-header>
             <div class="ui-g">
-                <div class="ui-g-12 ui-sm-12 container" *ngIf="test.math?.sample_test!=null">
+                <div class="ui-g-12 ui-sm-12 container" *ngIf="test.math?.sample_test!=null&&subjectInfo.subscribedSubjects['Mathematics']">
                     <div class="table-responsive">
                         <table class="table">
                         <thead>
@@ -92,26 +112,11 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </p-panel>
-    </div>
-    <div class="ui-g-6 ui-sm-12">
-        <p-panel>
-            <p-header>Syllabus</p-header>
-            <p-accordion>
-                <div class="ui-g">
-                    <div class="ui-g-12">
-                        <p-accordionTab *ngFor="let data of subjectInfo.mathChapters['chapters']">
-                            <p-header><span class="chapter"> {{data.name}} </span> </p-header>
-                            <div class="ui-g">
-                                <div class="ui-g-12" *ngFor="let topic of data['topics']">
-                                    <span class="">{{topic.name}}<br></span>
-                                </div>
-                            </div>
-                        </p-accordionTab>
-                    </div>
+                <div class="ui-g-12 ui-sm-12 text-center" *ngIf="!subjectInfo.subscribedSubjects['Mathematics']">
+                    <h4>Please Subscribe To Take Test</h4><br>
+                    <button pButton class="ui-button-info" label="Subscribe" [routerLink]="['/account/subscribe']"></button>
                 </div>
-            </p-accordion>
+            </div>
         </p-panel>
     </div>
 </div>
