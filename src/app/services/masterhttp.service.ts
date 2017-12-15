@@ -248,4 +248,10 @@ export class MasterHttpService {
         })
     }
 
+
+    updateRating(requestBody){
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/updaterating',requestBody,{headers:this.queryHeaders})
+        .map((resp:Response)=>resp.json());
+    }
+
 }

@@ -37,7 +37,7 @@ import { EventService } from '../../services/event.service'
 export class LoginComponent implements OnInit {
 
     loginRegToggle: boolean;
-
+    tog:boolean;
     //login section
     userLoginCreds: any;
 
@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
     dummyConfirmPassword: string;
 
     passwordObj: any;
+    dummyGender:SelectItem[];
 
     //register section
     userRegCreds: any;
@@ -96,14 +97,16 @@ export class LoginComponent implements OnInit {
         this.event.control = 0;
         this.wrapper = { 'email':null,'verify_mobile':false,'verify_email':false };
         this.userLoginCreds = { "username": null, "password": null };
-        this.userRegCreds = { "firstname": "", "lastname": "", "email": "", "password": "", "class": "", "mobile": "" };
+        this.userRegCreds = { "firstname": "", "lastname": "", "email": "", "password": "", "class": "", "mobile": "" ,"gender":""};
         this.passwordObj = { "new_password": "", "email": "" };
         //temporary
         this.dummyClass = []
         this.dummyClass.push(
             { label: "Select Class", value: null }, { label: "I", value: "I" },
             { label: "II", value: "II" }, { label: "III", value: "III" }, { label: "IV", value: "IV" }, { label: "V", value: "V" },
-            { label: "VI", value: "VI" }, { label: "VII", value: "VII" }, { label: "VIII", value: "VIII" })
+            { label: "VI", value: "VI" }, { label: "VII", value: "VII" }, { label: "VIII", value: "VIII" });
+        this.dummyGender = [{label:'Select Gender',value:null},{label:'Male',value:'Male'},{label:'Female',value:'Female'}];
+
         this.reset();
     
     }
