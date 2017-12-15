@@ -24,6 +24,9 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     dummyIncorrectOtp: boolean;
     actualOTP = 123456;
     dummyOtp: number;
+    examCity:string;
+    rollNo:string;
+
 
 
     //basic info tab
@@ -112,7 +115,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         this.misc.setCurrentRoute(["Profile"]);
         this.misc.setLocalRoute('account/profile');
         this.onStateSelect(null);
-        this.rating = 0;
+        this.rating = parseInt(this.personalInfo.userInfo['user_rating']);
         this.dec = [];
         this.exam.push(
             { label: "Select Exam", value: "null" }, { label: "NCO 2016-17 - Level 2", value: "NCO-16-17" },
@@ -140,6 +143,8 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             { label: "VI", value: "VI" },
             { label: "VII", value: "VII" },
             { label: "VIII", value: "VIII" },
+            { label: "IX", value: "IX" },
+            { label: "X", value: "X" },
         )
 
         this.dummySchoolInfo = {
@@ -318,23 +323,37 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     addAchievement() {
         this.spinner = true;
-        let requestBody = { 'text': this.achievement, 'student_id': this.personalInfo.studentInfo['student_id'] }
+        if(this.dec[0]!='dec1'||this.dec[1]!='dec2'){
+            this.spinner = false
+            return false
+        }
+        let requestBody = { 
+            'text': this.achievement, 
+            'student_id': this.personalInfo.studentInfo['student_id'],
+            'exam_city':this.examCity, 
+            'exam':this.selectedExam,
+            'exam_roll_no':this.rollNo,
+            'class':this.selectedClass
+        }
         this.masterhtttp.addAchievement(requestBody)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
                     this.achievement = null;
                     this.generateMsg('success','Success','Achievement Added Successfully');
+                    this.cancelAchievement();
                     this.spinner = false;
                 }
                 else if(data['status']==777){
                     this.generateMsg('error','Limit Reached','You Cannot Add More Than 3 Achievements');
+                    this.dec = [];
                     this.spinner = false;
-
+                    this.cancelAchievement();
                 }
                 else{
                     this.generateMsg('error','Error','Unable To Add Testimonial');
+                    
                     this.spinner = false;
-
+                    this.cancelAchievement();
                 }
             },
             err=>{
@@ -359,6 +378,10 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     cancelAchievement() {
         this.achievement = null;
         this.dec = [];
+        this.selectedClass = null;
+        this.selectedExam = null,
+        this.rollNo = null;
+        this.examCity = null;
     }
 
     updateMobile(){
@@ -537,23 +560,22 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         this.editSchool = false;
         this.editPassword = false;
         this.editTestimonial = false;
+        this.updateRating();
     }
 
-    // decode(){
-    //     var json = constants.con;
-    //     let q = {};
-    //     let state;
-    //     let city;
-    //     for(let i=0; i<json.length; i++){
-    //         state = json[i]['state']
-    //         city = json[i]['name']
-    //         if(!q.hasOwnProperty(state)){
-    //             q[state]=[]
-    //         }
-    //         else{
-    //             q[state].push(city)
-    //         }
-    //     }
-    // }
+    updateRating(){
+        var wrapper = {rating:this.rating};
+        this.masterhtttp.updateRating(wrapper).subscribe((data)=>{
+            if(data['status']==200){
+                this.personalInfo.userInfo['user_rating'] = this.rating;
+            }
+            else{
+                this.rating = this.personalInfo.userInfo['user_rating'];
+            }
+        },err =>{
+                this.rating = this.personalInfo.userInfo['user_rating'];
+            
+        })
+    }
 
 }

@@ -122,7 +122,7 @@
                         <div class="col-md-4 userinfo col-xs-12">
                             <h4><i class="fa fa-sticky-note-o"></i> School Code </h4>
                             <p><span *ngIf="!editSchool" class="userdetails schoolcode"> {{personalInfo.schoolInfo['coupon_code']}}</span> &nbsp;
-                                <input class="longinput" placeholder="Coupon Code" [(ngModel)]="couponCode" maxlength="30" pInputText *ngIf="editSchool" type="text">
+                                <input class="longinput" placeholder="School Code" [(ngModel)]="couponCode" maxlength="30" pInputText *ngIf="editSchool" type="text">
                             </p>
                         </div>
                         <div class="col-md-4 col-xs-12 userinfo">
@@ -250,20 +250,20 @@
                 <p-panel header="Tell us about your Achievement">
                     <div class="ui-g">
                         <div class="ui-g-4 ui-sm-12">
-                            <label>Class*</label>
+                            <label>Class</label>
                             <p-dropdown [options]="classList" [style]="{'width':'50%'}" [(ngModel)]="selectedClass"></p-dropdown>
                             <br>
                             <br>
-                            <label>Exam City*</label>
-                            <input class="achieve" type="text" pInputText placeholder="Exam City">
+                            <label>Exam City</label>
+                            <input class="achieve" type="text" maxlength="30" pInputText [(ngModel)]="examCity" placeholder="Exam City">
                         </div>
                         <div class="ui-g-4 ui-sm-12">
-                            <label>Exam*</label>
+                            <label>Exam</label>
                             <p-dropdown [options]="exam" [style]="{'width':'50%'}" [(ngModel)]="selectedExam"></p-dropdown>
                             <br>
                             <br>
-                            <label>Exam Roll No.*</label>
-                            <input class="achieve" type="number" pInputText placeholder="Roll number">
+                            <label>Exam Roll No.</label>
+                            <input class="achieve" type="number" maxlength="30" [(ngModel)]="rollNo" pInputText placeholder="Roll number">
                         </div>
                         <div class="ui-g-4 ui-sm-12">
                             <p class="guidelines">Submission Guidelines</p>
@@ -287,9 +287,9 @@
                             <br>
                             <br>
                             <div class="text-center">
-                                <button pButton *ngIf="!spinner" style="width:145px" class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''" label="Add Achievement" (click)="addAchievement()"></button>
+                                <button pButton *ngIf="!spinner" style="width:145px" class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''||selectedExam==null||selectedClass==null||examCity==null||examCity==''||rollNo==null||rollNo==''" label="Add Achievement" (click)="addAchievement()"></button>
                                 <button pButton *ngIf="spinner" style="width:145px" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
-                                <button pButton class="ui-button-danger" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''" (click)="cancelAchievement()" label="Not Now"></button>
+                                <button pButton class="ui-button-danger" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''||selectedExam==null||selectedClass==null||examCity==null||examCity==''||rollNo==null||rollNo==''" (click)="cancelAchievement()" label="Not Now"></button>
                             </div>
                         </div>
                         </div>
