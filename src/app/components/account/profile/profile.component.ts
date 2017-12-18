@@ -224,12 +224,12 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     editSchoolInfo() {
-        this.couponCode = this.personalInfo.schoolInfo['coupon_code'];
+        this.couponCode = this.personalInfo.schoolInfo['school_code'];
         this.editSchool = true;
     }
 
     cancelSchoolInfo() {
-        this.couponCode = this.personalInfo.schoolInfo['coupon_code'];
+        this.couponCode = this.personalInfo.schoolInfo['school_code'];
         // if (this.personalInfo.schoolInfo == null) {
         //     this.personalInfo.schoolInfo = JSON.parse(JSON.stringify(this.personalInfo.dummySchoolInfo));
         // }
@@ -247,17 +247,17 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     saveSchoolInfo() {
         this.spinner=true;
-        let wrapper = { 'coupon_code': this.couponCode };
+        let wrapper = { 'school_code': this.couponCode };
         this.masterhtttp.getSchool(wrapper)
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
                     this.personalInfo.setSchoolInfo(data['message'])
                     this.generateMsg('success','Success','School Info Saved');
                     this.editSchool = false;
+                    this.updateSchool();
                 } else {
-                    this.generateMsg('info','Invalid Coupon Code','Please Try Again');
+                    this.generateMsg('info','Invalid School Code','Please Try Again');
                 }
-                this.updateSchool();
                 this.spinner = false;
             },
             err=>{

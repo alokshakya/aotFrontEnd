@@ -254,4 +254,9 @@ export class MasterHttpService {
         .map((resp:Response)=>resp.json());
     }
 
+    applyDicountCoupon(requestBody){
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/payment/applycoupon',requestBody,{headers:this.queryHeaders})
+        .map((resp:Response)=>resp.json());
+    }
+
 }

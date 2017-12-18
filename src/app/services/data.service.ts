@@ -226,6 +226,7 @@ export class Misc {
     testDetails: any;
     login:boolean;
     paymentData:any;
+    profileTabIndex:number = 0;
     // currentRoute: EventEmitter<[string]> = new EventEmitter();
 
     constructor(private event:EventService, private subjectInfo:SubjectInfo, private PersonalInfo:PersonalInfo){}

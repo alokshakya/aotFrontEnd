@@ -27,6 +27,9 @@ export class SubscribeComponent implements OnInit {
     subjects: Array<string>;
     coupon: string;
     subPriceTable: any;
+    discount:number;
+    discountApplied:boolean;
+    discountedAmount:number;
 
 
     //temporary
@@ -96,6 +99,9 @@ export class SubscribeComponent implements OnInit {
             wrapper['amount'] += parseInt(this.selectedPackage[i]['amount']);
             wrapper['fee_id'] += this.selectedPackage[i]['fee_id']+',';
         }
+        if(this.discountApplied){
+            wrapper['amount']=this.discountedAmount;
+        }
         this.http.subscribe(wrapper).subscribe((data)=>{
             if(data['status']==200){
                 this.redirect(data['url']);
@@ -110,16 +116,51 @@ export class SubscribeComponent implements OnInit {
         })
     }
 
-    confirm() {
+    confirm(coupon=false) {
+        var message = 'Please complete profile in order to continue.';
+        var route = 'account/profile';
+        if(coupon){
+            message = 'Please Update school code to avail this coupon.';
+            this.misc.profileTabIndex = 1;
+        }
         this.confirmationService.confirm({
-            message: 'Please complete profile in order to continue.',
+            message: message,
             accept: () => {
-                this.router.navigate(['profile']);
+                this.router.navigate([route]);
             },
             reject: () =>{
                 return false;
             }
         });
+    }
+
+    displayDiscount(val){
+        this.discount = val;
+        this.discountedAmount = this.sum - (this.sum*this.discount)/100;
+        this.discountApplied = true;        
+    }
+
+    applyCoupon(){
+        var wrapper = {coupon_code:this.coupon}
+        this.reset();
+        this.http.applyDicountCoupon(wrapper).subscribe((data)=>{
+            if(data['status']===200){-
+                this.displayDiscount(parseInt(data['message']));
+            }
+            if(data['status']===710){
+                this.growlDisplay('error','Invalid Coupon','Enter Valid Coupon Code');
+            }
+            if(data['status']===711){
+                this.confirm(true);
+            }
+        })
+    }
+
+    reset(){
+        this.discountApplied = false;
+        this.discount = null;
+        this.coupon = null;
+        this.discountedAmount = 0;
     }
 
     download(e){

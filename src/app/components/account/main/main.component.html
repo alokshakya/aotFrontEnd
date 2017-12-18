@@ -47,7 +47,9 @@
             <div class="nano-content menu-scroll-content">
                 <div class="ui-g">
                     <div class="ui-g-12 ui-g-nopad" id="menu-block">
-                        <img class="img-responsive profile-img" *ngIf="personalInfo.userInfo['image_path']==null" src="../../../assets/layout/images/Profile_picture.png">
+                        <img class="img-responsive profile-img" *ngIf="personalInfo.userInfo['image_path']==null&&personalInfo.userInfo['gender']=='Male'" src="../../../assets/layout/images/Profile_picture.png">
+                        <img class="img-responsive profile-img" *ngIf="personalInfo.userInfo['image_path']==null&&personalInfo.userInfo['gender']!='Male'" src="../../../assets/layout/images/picF.png">
+
                         <img class="img-responsive profile-img" *ngIf="personalInfo.userInfo['image_path']!=null" src="{{imgPath}}{{personalInfo.userInfo['image_path']}}?{{imgTimeStamp}}">
                         <!-- <img class="img-responsive" src="../../../assets/layout/images/21.jpg"> -->
                         <!-- <img class="img-responsive profile-img" src="../../../assets/layout/images/favicon.png"> -->
