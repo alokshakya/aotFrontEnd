@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
-import { TreeModule, TreeNode } from 'primeng/primeng';
+
+import { Message } from 'primeng/primeng';
+
 import { PersonalInfo, SubjectInfo, Misc, chapterwiseTest } from '../../../../services/data.service';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
-import { Message } from 'primeng/primeng';
+
 import * as language from '../../../../../config/language';
 
 @Component({
@@ -13,27 +15,26 @@ import * as language from '../../../../../config/language';
   styleUrls: ['./demotest-math.component.scss']
 })
 export class DemotestMathComponent implements OnInit {
-    spinner2:string;
-    //for donut chart
-    demoTestData: any;
-    options: any;
-
-    //temporary
-    dummyTopics: Array<string>;
     dummyChapters: Array<string>;
-    growlMsg:Message[];
     displayTest:boolean;
-    testCountObject:any;
-
+    demoTestData: any;
+    dummyTopics: Array<string>;
+    growlMsg:Message[];
+    lang:any;
+    options: any;
+    spinner2:string;
     syllabus: any;
-
+    testCountObject:any;
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
         public misc: Misc,
         public chapterwiseTest: chapterwiseTest,
         public personalInfo: PersonalInfo,
-        public masterhttp: MasterHttpService) { }
+        public masterhttp: MasterHttpService) 
+        {
+        this.lang = language; 
+    }
 
     startTest(testId, chapterId, attempted, completed, chapter) {
         this.spinner2 = testId;

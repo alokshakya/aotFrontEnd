@@ -1,15 +1,7 @@
 <div class="ui-g">
     <div class="ui-g-6 ui-sm-12">
         <p-panel header="Introduction">
-            <div id="intro">
-                <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting , remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    <p>
-                        <br>
-                        <br>
-                        <br>
-                        <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting , remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                            <p>
-            </div>
+            <div id="intro" [MathJax]="lang.testIntro.demoTest"></div>
         </p-panel>
     </div>
     <div class="ui-g-6 ui-sm-12">
@@ -44,7 +36,7 @@
     <div class="ui-g-6 ui-sm-12" *ngIf="displayTest">
         <p-panel header="Demo Test">
             <div class="ui-g">
-                <div class="ui-g-12">
+                <div class="ui-g-12 ul">
                     <h4 *ngIf="!subjectInfo.subscribedSubjects.Computers">Subscribe now to get...</h4>
                     <h4 *ngIf="subjectInfo.subscribedSubjects.Computers">You can now give...</h4>
 
