@@ -14,15 +14,7 @@
         </div>
         <div class="ui-g-6 ui-sm-12 ui-lg-6">
             <p-panel header="Introduction">
-                <div id="intro">
-                    <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting , remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                        <p>
-                            <br>
-                            <br>
-                            <br>
-                            <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting , remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                <p>
-                </div>
+                <div id="intro" [MathJax]="lang.testIntro.chapterwiseTest"></div>
             </p-panel>
         </div>
         <div class="ui-g-6 ui-sm-12 ui-lg-6">
@@ -83,7 +75,7 @@
                         <div class="ui-g-12" *ngIf="subjectInfo.subscribedSubjects['Computers']">
                             <p-accordionTab *ngFor="let data of generatedChapters; let k=index">
                                 <p-header>
-                                            <span class="chapter">{{data?.name}}</span>
+                                    <span class="chapter">{{data?.name}}</span>
                                 </p-header>
                                 <!-- <div class="ui-g">
                                     <div class="ui-g-12 ui-sm-12" *ngFor="let test of data['tests'];let i = index">
@@ -114,43 +106,41 @@
                                     <div class="ui-g-12 ui-sm-12 container">
                                         <div class="table-responsive">
                                             <table class="table">
-                                            <thead>
-                                              <tr>
-                                                <th>Test</th>
-                                                <th>Attempt</th>
-                                                <th>Action</th>
-                                                <th>Completed</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr *ngFor="let test of data['tests'];let k=index">
-                                                <td><span [ngClass]="shade(k)">{{k+1}}</span></td>
-                                                <td><span class="blue">{{test?.attempted}}</span></td>
-                                                <td>
-                                                    <span *ngIf="test.attempted==0" class="low">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Test</th>
+                                                        <th>Attempt</th>
+                                                        <th>Action</th>
+                                                        <th>Completed</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let test of data['tests'];let k=index">
+                                                        <td><span [ngClass]="shade(k)">{{k+1}}</span></td>
+                                                        <td><span class="blue">{{test?.attempted}}</span></td>
+                                                        <td>
+                                                            <span *ngIf="test.attempted==0" class="low">
                                                         <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed,data.name)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
                                                         <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" [disabled]="false" type="button" pButton></button>
                                                     </span>
-
-                                                    <span *ngIf="test.completed==1" class="low">
+                                                            <span *ngIf="test.completed==1" class="low">
                                                         <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,data.id,test.attempted,test.completed,data.name)" label="Start" [disabled]="spinner2!=null||test.attempted>=3" type="button" pButton></button>
                                                         <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
                                                     </span>
-
-                                                    <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
+                                                            <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
                                                         <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,data.id,test.attempted,test.completed,data.name)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
                                                         <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
                                                     </span>
-                                                </td>
-                                                <td>
-                                                    <span class="low">
+                                                        </td>
+                                                        <td>
+                                                            <span class="low">
                                                         <span class="round" *ngIf="test.attempted==0">0</span>
-                                                        <span class="round" *ngIf="test.attempted!=0&&test.completed==0">{{test.attempted-1}}</span>
-                                                        <span class="round" *ngIf="test.attempted!=0&&test.completed==1">{{test.attempted}}</span>
-                                                    </span>
-                                                </td>
-                                              </tr>
-                                            </tbody>
+                                                            <span class="round" *ngIf="test.attempted!=0&&test.completed==0">{{test.attempted-1}}</span>
+                                                            <span class="round" *ngIf="test.attempted!=0&&test.completed==1">{{test.attempted}}</span>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>
@@ -158,7 +148,8 @@
                             </p-accordionTab>
                         </div>
                         <div class="ui-g-12 text-center" *ngIf="!subjectInfo.subscribedSubjects['Computers']">
-                            <h4>Please Subscribe To Generate Test</h4><br>
+                            <h4>Please Subscribe To Generate Test</h4>
+                            <br>
                             <button class="ui-button-info" pButton label="Subscribe" [routerLink]="['/account/subscribe']"></button>
                         </div>
                     </div>

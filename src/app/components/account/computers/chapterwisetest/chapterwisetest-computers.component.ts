@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { TreeModule, TreeNode } from 'primeng/primeng';
+
 import { Message } from 'primeng/primeng';
-import { MessagesModule } from 'primeng/primeng';
 
 import { SubjectInfo, PersonalInfo, Result, Misc, chapterwiseTest } from '../../../../services/data.service';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
 import { EventService } from '../../../../services/event.service';
+
+import * as language from '../../../../../config/language';
 
 @Component({
     selector: 'app-chapterwisetest-computers',
@@ -16,21 +17,19 @@ import { EventService } from '../../../../services/event.service';
 })
 export class ChapterwisetestComputersComponent implements OnInit {
 
-    subscribed = false;
-    selectedChapter: string;
-    generateMsg: Message[] = [];
     chapterwiseTestData: any;  //chart data
-    generatedFlag = true;
-    wrapper: any;
-
-    generatedTest: any;
+    currentTabIndex;
     generatedChapters;
     generatedChapterIds;
-
+    generatedFlag = true;
+    generateMsg: Message[] = [];
+    generatedTest: any;
+    lang:any;
+    selectedChapter: string;
     spinner:boolean;
     spinner2:string;
-    currentTabIndex;
-
+    subscribed = false;
+    wrapper: any;
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
@@ -40,14 +39,16 @@ export class ChapterwisetestComputersComponent implements OnInit {
         public personalInfo: PersonalInfo,
         public masterhttp: MasterHttpService,
         private event:EventService)
-    { }
+        {
+            this.lang = language; 
+        }
 
     redirect() {
         this.router.navigate(['account/subscribe'])
     }
 
     ngOnInit() {
-        this.misc.setCurrentRoute(["Computers","Chapterwise Test"]);
+        this.misc.setCurrentRoute(["Computers","Chapter-wise Test"]);
         this.misc.setLocalRoute('account/computers/chapterwisetest');
 
         this.chapterwiseTestData = {
@@ -93,7 +94,6 @@ export class ChapterwisetestComputersComponent implements OnInit {
     }
 
     onTabOpen(e){
-        //generated chapters tab event
         this.currentTabIndex = e.index; 
     }
  
@@ -104,7 +104,6 @@ export class ChapterwisetestComputersComponent implements OnInit {
             if (this.chapterwiseTest.computers['chapters'][i].hasOwnProperty('tests')) {
                 this.generatedChapters.push(this.chapterwiseTest.computers['chapters'][i]);
                 this.generatedChapterIds.push(this.chapterwiseTest.computers['chapters'][i]['id'])
-                // this.generatedChapters[i]['resultIndex'] = i;
             }
         }
         this.makeGraph();
@@ -147,14 +146,6 @@ export class ChapterwisetestComputersComponent implements OnInit {
     updatePanel() {
         this.generateMsg = []
         this.masterhttp.getTestDetails()
-        // this.chapterwiseTest.testEvent.subscribe((data)=>{
-        //     if(data){
-        //         this.generatedPanel();
-        //         this.generatedFlag = false;
-        //         this.selectedChapter = null;
-        //         this.spinner = false;
-        //     }
-        // })
         this.event.testEvent.subscribe((data)=>{
             if(data){
                 this.generatedPanel();

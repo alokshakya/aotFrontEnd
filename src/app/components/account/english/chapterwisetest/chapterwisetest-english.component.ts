@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { TreeModule, TreeNode } from 'primeng/primeng';
+
 import { Message } from 'primeng/primeng';
-import { MessagesModule } from 'primeng/primeng';
 
 import { SubjectInfo, PersonalInfo, Result, Misc, chapterwiseTest } from '../../../../services/data.service';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
 import { EventService } from '../../../../services/event.service';
+
+import * as language from '../../../../../config/language';
 
 @Component({
   selector: 'app-chapterwisetest-english',
@@ -15,22 +16,19 @@ import { EventService } from '../../../../services/event.service';
   styleUrls: ['./chapterwisetest-english.component.scss']
 })
 export class ChapterwisetestEnglishComponent implements OnInit {
-
-    subscribed = false;
-    selectedChapter: string;
-    generateMsg: Message[] = [];
     chapterwiseTestData: any;  //chart data
+    currentTabIndex;
     generatedFlag = true;
-    wrapper: any;
-
-    generatedTest: any;
+    generateMsg: Message[] = [];
     generatedChapters;
     generatedChapterIds;
-
+    generatedTest: any;
+    lang:any;
+    selectedChapter: string;
+    subscribed = false;
     spinner:boolean;
     spinner2:string;
-    currentTabIndex;
-
+    wrapper: any;
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
@@ -40,7 +38,9 @@ export class ChapterwisetestEnglishComponent implements OnInit {
         public personalInfo: PersonalInfo,
         public masterhttp: MasterHttpService,
         private event:EventService)
-    { }
+        {
+            this.lang = language;
+        }
 
     redirect() {
         this.router.navigate(['account/subscribe'])
@@ -147,14 +147,6 @@ export class ChapterwisetestEnglishComponent implements OnInit {
     updatePanel() {
         this.generateMsg = []
         this.masterhttp.getTestDetails()
-        // this.chapterwiseTest.testEvent.subscribe((data)=>{
-        //     if(data){
-        //         this.generatedPanel();
-        //         this.generatedFlag = false;
-        //         this.selectedChapter = null;
-        //         this.spinner = false;
-        //     }
-        // })
         this.event.testEvent.subscribe((data)=>{
             if(data){
                 this.generatedPanel();

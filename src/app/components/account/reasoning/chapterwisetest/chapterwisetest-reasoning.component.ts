@@ -1,37 +1,33 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { TreeModule, TreeNode } from 'primeng/primeng';
+
 import { Message } from 'primeng/primeng';
-import { MessagesModule } from 'primeng/primeng';
 
 import { SubjectInfo, PersonalInfo, Result, Misc, chapterwiseTest } from '../../../../services/data.service';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
 import { EventService } from '../../../../services/event.service';
 
+import * as language from '../../../../../config/language';
 @Component({
   selector: 'app-chapterwisetest-reasoning',
   templateUrl: './chapterwisetest-reasoning.component.html',
   styleUrls: ['./chapterwisetest-reasoning.component.scss']
 })
 export class ChapterwisetestReasoningComponent implements OnInit {
-
-
-    subscribed = false;
-    selectedChapter: string;
-    generateMsg: Message[] = [];
     chapterwiseTestData: any;  //chart data
-    generatedFlag = true;
-    wrapper: any;
-
-    generatedTest: any;
+    currentTabIndex;
     generatedChapters;
     generatedChapterIds;
-
+    generatedFlag = true;
+    generateMsg: Message[] = [];
+    generatedTest: any;
+    lang:any;
+    selectedChapter: string;
     spinner:boolean;
     spinner2:string;
-    currentTabIndex;
-
+    subscribed = false;
+    wrapper: any;
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
@@ -41,7 +37,10 @@ export class ChapterwisetestReasoningComponent implements OnInit {
         public personalInfo: PersonalInfo,
         public masterhttp: MasterHttpService,
         private event:EventService)
-    { }
+    { 
+        this.lang = language; 
+
+    }
 
     redirect() {
         this.router.navigate(['account/subscribe'])

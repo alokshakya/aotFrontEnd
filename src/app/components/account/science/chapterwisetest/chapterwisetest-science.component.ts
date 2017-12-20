@@ -1,35 +1,33 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { TreeModule, TreeNode } from 'primeng/primeng';
+
 import { Message } from 'primeng/primeng';
-import { MessagesModule } from 'primeng/primeng';
 
 import { SubjectInfo, PersonalInfo, Result, Misc, chapterwiseTest } from '../../../../services/data.service';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
 import { EventService } from '../../../../services/event.service';
 
+import * as language from '../../../../../config/language';
 @Component({
   selector: 'app-chapterwisetest-science',
   templateUrl: './chapterwisetest-science.component.html',
   styleUrls: ['./chapterwisetest-science.component.scss']
 })
 export class ChapterwisetestScienceComponent implements OnInit {
-    subscribed = false;
-    selectedChapter: string;
-    generateMsg: Message[] = [];
     chapterwiseTestData: any;  //chart data
-    generatedFlag = true;
-    wrapper: any;
-
-    generatedTest: any;
+    currentTabIndex;
     generatedChapters;
     generatedChapterIds;
-
+    generatedFlag = true;
+    generateMsg: Message[] = [];
+    generatedTest: any;
+    lang:any;
+    selectedChapter: string;
     spinner:boolean;
     spinner2:string;
-    currentTabIndex;
-
+    subscribed = false;
+    wrapper: any;
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
@@ -38,8 +36,9 @@ export class ChapterwisetestScienceComponent implements OnInit {
         public chapterwiseTest: chapterwiseTest,
         public personalInfo: PersonalInfo,
         public masterhttp: MasterHttpService,
-        private event:EventService)
-    { }
+        private event:EventService){
+        this.lang = language; 
+    }
 
     redirect() {
         this.router.navigate(['account/subscribe'])
@@ -48,7 +47,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
     ngOnInit() {
         this.misc.setCurrentRoute(["Science","Chapterwise Test"]);
         this.misc.setLocalRoute('account/science/chapterwisetest');
-
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{
@@ -63,7 +61,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
             'class_id': this.personalInfo.studentInfo['class_id'],
             'topic_id': null
         }
-
         this.generatedPanel();
     }
 
@@ -92,7 +89,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
     }
 
     onTabOpen(e){
-        //generated chapters tab event
         this.currentTabIndex = e.index; 
     }
  
@@ -103,7 +99,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
             if (this.chapterwiseTest.science['chapters'][i].hasOwnProperty('tests')) {
                 this.generatedChapters.push(this.chapterwiseTest.science['chapters'][i]);
                 this.generatedChapterIds.push(this.chapterwiseTest.science['chapters'][i]['id'])
-                // this.generatedChapters[i]['resultIndex'] = i;
             }
         }
         this.makeGraph();
@@ -114,7 +109,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
             this.selectedChapter = this.subjectInfo.scienceChapters['chapters'][e.index]['id'];
             this.wrapper['chapter_id'] = this.selectedChapter;
             this.wrapper['topic_id'] = this.subjectInfo.scienceChapters['chapters'][0]['topics'][0]['id'];
-
             this.generatedFlag = false;
             this.generateMsg = [];
             if(!this.subjectInfo.subscribedSubjects['Science']){
@@ -128,7 +122,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
             this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: this.subjectInfo.scienceChapters['chapters'][e.index]['name'] + ' Test Is Already Generated' });
         }
     }
-
 
     check(e) {
         if (this.generatedChapterIds.indexOf(this.subjectInfo.scienceChapters['chapters'][e.index]['id']) == -1) {
@@ -146,14 +139,6 @@ export class ChapterwisetestScienceComponent implements OnInit {
     updatePanel() {
         this.generateMsg = []
         this.masterhttp.getTestDetails()
-        // this.chapterwiseTest.testEvent.subscribe((data)=>{
-        //     if(data){
-        //         this.generatedPanel();
-        //         this.generatedFlag = false;
-        //         this.selectedChapter = null;
-        //         this.spinner = false;
-        //     }
-        // })
         this.event.testEvent.subscribe((data)=>{
             if(data){
                 this.generatedPanel();

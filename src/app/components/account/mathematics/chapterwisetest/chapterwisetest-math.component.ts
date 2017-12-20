@@ -1,36 +1,33 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Response } from '@angular/http';
 import { Router } from '@angular/router';
-import { TreeModule, TreeNode } from 'primeng/primeng';
+
 import { Message } from 'primeng/primeng';
-import { MessagesModule } from 'primeng/primeng';
 
 import { SubjectInfo, PersonalInfo, Result, Misc, chapterwiseTest } from '../../../../services/data.service';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
 import { EventService } from '../../../../services/event.service';
 
+import * as language from '../../../../../config/language';
 @Component({
   selector: 'app-chapterwisetest-math',
   templateUrl: './chapterwisetest-math.component.html',
   styleUrls: ['./chapterwisetest-math.component.scss']
 })
 export class ChapterwisetestMathComponent implements OnInit {
-
-    subscribed = false;
-    selectedChapter: string;
-    generateMsg: Message[] = [];
     chapterwiseTestData: any;  //chart data
     generatedFlag = true;
-    wrapper: any;
-
+    generateMsg: Message[] = [];
+    lang:any;
+    selectedChapter: string;
     generatedTest: any;
     generatedChapters;
     generatedChapterIds;
-
     spinner:boolean;
     spinner2:string;
     currentTabIndex;
-
+    subscribed = false;
+    wrapper: any;
     constructor(
         public router: Router,
         public subjectInfo: SubjectInfo,
@@ -40,7 +37,9 @@ export class ChapterwisetestMathComponent implements OnInit {
         public personalInfo: PersonalInfo,
         public masterhttp: MasterHttpService,
         private event:EventService)
-    { }
+        {
+            this.lang = language;
+    }
 
     redirect() {
         this.router.navigate(['account/subscribe'])
@@ -49,7 +48,6 @@ export class ChapterwisetestMathComponent implements OnInit {
     ngOnInit() {
         this.misc.setCurrentRoute(["Mathematics","Chapterwise Test"]);
         this.misc.setLocalRoute('account/math/chapterwisetest');
-
         this.chapterwiseTestData = {
             labels: ['Remaining', 'Completed', 'Generated'],
             datasets: [{
@@ -64,7 +62,6 @@ export class ChapterwisetestMathComponent implements OnInit {
             'class_id': this.personalInfo.studentInfo['class_id'],
             'topic_id': null
         }
-
         this.generatedPanel();
     }
 
@@ -93,7 +90,6 @@ export class ChapterwisetestMathComponent implements OnInit {
     }
 
     onTabOpen(e){
-        //generated chapters tab event
         this.currentTabIndex = e.index; 
     }
  
@@ -104,7 +100,6 @@ export class ChapterwisetestMathComponent implements OnInit {
             if (this.chapterwiseTest.math['chapters'][i].hasOwnProperty('tests')) {
                 this.generatedChapters.push(this.chapterwiseTest.math['chapters'][i]);
                 this.generatedChapterIds.push(this.chapterwiseTest.math['chapters'][i]['id'])
-                // this.generatedChapters[i]['resultIndex'] = i;
             }
         }
         this.makeGraph();
@@ -115,7 +110,6 @@ export class ChapterwisetestMathComponent implements OnInit {
             this.selectedChapter = this.subjectInfo.mathChapters['chapters'][e.index]['id'];
             this.wrapper['chapter_id'] = this.selectedChapter;
             this.wrapper['topic_id'] = this.subjectInfo.mathChapters['chapters'][0]['topics'][0]['id'];
-
             this.generatedFlag = false;
             this.generateMsg = [];
             if(!this.subjectInfo.subscribedSubjects['Mathematics']){
@@ -147,14 +141,6 @@ export class ChapterwisetestMathComponent implements OnInit {
     updatePanel() {
         this.generateMsg = []
         this.masterhttp.getTestDetails()
-        // this.chapterwiseTest.testEvent.subscribe((data)=>{
-        //     if(data){
-        //         this.generatedPanel();
-        //         this.generatedFlag = false;
-        //         this.selectedChapter = null;
-        //         this.spinner = false;
-        //     }
-        // })
         this.event.testEvent.subscribe((data)=>{
             if(data){
                 this.generatedPanel();
