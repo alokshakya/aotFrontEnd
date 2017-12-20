@@ -94,13 +94,13 @@ export class SubscribeComponent implements OnInit {
             this.spinner = false;
             return false
         }
-        let wrapper = {amount:0, fee_id:''};
+        let wrapper = {amount:0, fee_id:'',discount:0};
         for(let i in this.selectedPackage){
             wrapper['amount'] += parseInt(this.selectedPackage[i]['amount']);
             wrapper['fee_id'] += this.selectedPackage[i]['fee_id']+',';
         }
         if(this.discountApplied){
-            wrapper['amount']=this.discountedAmount;
+            wrapper['discount']=this.discount;
         }
         this.http.subscribe(wrapper).subscribe((data)=>{
             if(data['status']==200){
