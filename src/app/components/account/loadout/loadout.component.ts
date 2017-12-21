@@ -39,7 +39,7 @@ export class LoadoutComponent implements OnInit {
 
     eventAction(){
         this.event.dataEvent.subscribe((data)=>{
-            if(data==7){
+            if(data==8){
                 let previousRoute = sessionStorage.getItem('route')
                 if(previousRoute!=null){
                     if(this.personalInfo.userInfo.email_verified==1&&this.personalInfo.userInfo.mobile_verified==1){
@@ -60,6 +60,7 @@ export class LoadoutComponent implements OnInit {
         this.http.getNotices(); //
         this.http.getTestDetails();//
         this.http.getTestimonials(); //
+        this.http.getPattern();
         this.http.getFee();
         this.misc.logIn();
     }

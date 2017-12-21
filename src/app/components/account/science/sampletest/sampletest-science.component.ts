@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/primeng';
 import { Response } from '@angular/http';
-import { Message } from 'primeng/primeng';
 import { Router } from '@angular/router';
+
+import { Message ,SelectItem } from 'primeng/primeng';
+
 import { SubjectInfo, Misc, PersonalInfo, chapterwiseTest } from '../../../../services/data.service';
 import { MasterHttpService } from '../../../../services/masterhttp.service';
 
-
+import * as language from '../../../../../config/language';
 @Component({
   selector: 'app-sampletest-science',
   templateUrl: './sampletest-science.component.html',
@@ -14,15 +15,15 @@ import { MasterHttpService } from '../../../../services/masterhttp.service';
 })
 export class SampletestScienceComponent implements OnInit {
     examPattern: SelectItem[];
-    spinner2;
-    testData: any;
-    generateMsg:Message[];
-
-    sampleTestData: any; //for chart
-
-    //temporary service
     dummyChapters: Array<any>;
     dummyTopics: Array<any>;
+    generateMsg:Message[];
+    lang:any;
+    sampleTestData: any; //for chart
+    spinner2;
+    testData: any;
+    patternCols:any;
+    patternArray:Array<any>;
 
     constructor(
         private router: Router,
@@ -31,7 +32,7 @@ export class SampletestScienceComponent implements OnInit {
         public subjectInfo: SubjectInfo,
         public test:chapterwiseTest,
         public personalInfo:PersonalInfo) {
-
+        this.lang = language; 
         this.testData = {
             "Sample Test 1": "35/50",
             "Sample Test 2": "Start",
@@ -44,9 +45,9 @@ export class SampletestScienceComponent implements OnInit {
             "Sample Test 9": "23/50",
             "Sample Test 10": "Start"
         }
-
         this.examPattern = [];
         this.examPattern.push({ label: "SOF", value: "null" }, { label: "SELECT EXAM", value: "null" })
+        this.patternCols = [{header:'Section',field:'pattern'},{header:'No. Of Questions',field:'no_of_questions'},{header:'Marks/Ques.',field:'marks_per_question'},{header:'Total Marks',field:'total_marks'}]
 
     }
 
@@ -61,10 +62,15 @@ export class SampletestScienceComponent implements OnInit {
         this.misc.setCurrentRoute(["Science","Sample Test"]);
         this.misc.setLocalRoute('account/science/sampletest');
         this.makeGraph();
+        this.setSofPattern();
+
+    }
+
+    setSofPattern(){
+        this.patternArray = this.subjectInfo.patternObject['Science'];
     }
 
     makeGraph(){
-
         this.sampleTestData = {
             labels: ['Completed', 'Remaining'],
             datasets: [{

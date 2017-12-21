@@ -259,4 +259,14 @@ export class MasterHttpService {
         .map((resp:Response)=>resp.json());
     }
 
+    getPattern(){
+        return this.http.get(constants.OLYMPIADBOX_INSTANCE_URL+'/misc/pattern',{headers:this.queryHeaders})
+        .map((resp:Response)=>resp.json()).subscribe((data)=>{
+            if(data['status']==200){
+                this.subjectInfo.setPattern(data['message'])
+            }
+            else this.httpError();
+        },err=>this.httpError());
+    }
+
 }

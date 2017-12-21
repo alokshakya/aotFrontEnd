@@ -5,7 +5,8 @@ import { TreeModule, TreeNode } from 'primeng/primeng';
 import { Router } from '@angular/router';
 import { Message } from 'primeng/primeng';
 import { PersonalInfo, SubjectInfo, Misc, chapterwiseTest } from '../../../../services/data.service';
-import { MasterHttpService } from '../../../../services/masterhttp.service'
+import { MasterHttpService } from '../../../../services/masterhttp.service';
+import * as language from '../../../../../config/language';
 
 @Component({
     selector: 'app-sampletest-computers',
@@ -13,7 +14,7 @@ import { MasterHttpService } from '../../../../services/masterhttp.service'
     styleUrls: ['./sampletest-computers.component.scss']
 })
 export class SampletestComputersComponent implements OnInit {
-examPattern: SelectItem[];
+    examPattern: SelectItem[];
     spinner2;
     testData: any;
     generateMsg:Message[];
@@ -23,6 +24,9 @@ examPattern: SelectItem[];
     //temporary service
     dummyChapters: Array<any>;
     dummyTopics: Array<any>;
+    patternArray:Array<any>;
+    patternCols:any;
+    lang:any;
 
     constructor(
         private router: Router,
@@ -31,6 +35,7 @@ examPattern: SelectItem[];
         public subjectInfo: SubjectInfo,
         public test:chapterwiseTest,
         public personalInfo:PersonalInfo) {
+        this.lang = language;
 
         this.testData = {
             "Sample Test 1": "35/50",
@@ -47,7 +52,7 @@ examPattern: SelectItem[];
 
         this.examPattern = [];
         this.examPattern.push({ label: "SOF", value: "null" }, { label: "SELECT EXAM", value: "null" })
-
+        this.patternCols = [{header:'Section',field:'pattern'},{header:'No. Of Questions',field:'no_of_questions'},{header:'Marks/Ques.',field:'marks_per_question'},{header:'Total Marks',field:'total_marks'}]
     }
 
     shade(index){
@@ -61,6 +66,10 @@ examPattern: SelectItem[];
         this.misc.setCurrentRoute(["Computers","Sample Test"]);
         this.misc.setLocalRoute('account/computers/sampletest');
         this.makeGraph();
+        this.setSofPattern();
+    }
+    setSofPattern(){
+        this.patternArray = this.subjectInfo.patternObject['Computers'];
     }
 
     makeGraph(){

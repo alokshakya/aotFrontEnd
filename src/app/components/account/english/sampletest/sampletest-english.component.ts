@@ -1,29 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/primeng';
 import { Response } from '@angular/http';
-import { TreeModule, TreeNode } from 'primeng/primeng';
 import { Router } from '@angular/router';
-import { Message } from 'primeng/primeng';
+
+import { SelectItem, Message } from 'primeng/primeng';
+
 import { PersonalInfo, SubjectInfo, Misc, chapterwiseTest } from '../../../../services/data.service';
-import { MasterHttpService } from '../../../../services/masterhttp.service'
+import { MasterHttpService } from '../../../../services/masterhttp.service';
 
-
+import * as language from '../../../../../config/language';
 @Component({
   selector: 'app-sampletest-english',
   templateUrl: './sampletest-english.component.html',
   styleUrls: ['./sampletest-english.component.scss']
 })
 export class SampletestEnglishComponent implements OnInit {
-      examPattern: SelectItem[];
-    spinner2;
-    testData: any;
-    generateMsg:Message[];
-
-    sampleTestData: any; //for chart
-
-    //temporary service
     dummyChapters: Array<any>;
     dummyTopics: Array<any>;
+    examPattern: SelectItem[];
+    generateMsg:Message[];
+    lang:any;
+    sampleTestData: any;
+    spinner2;
+    testData: any;
+    patternArray:Array<any>;
+    patternCols:any;
 
     constructor(
         private router: Router,
@@ -32,7 +32,7 @@ export class SampletestEnglishComponent implements OnInit {
         public subjectInfo: SubjectInfo,
         public test:chapterwiseTest,
         public personalInfo:PersonalInfo) {
-
+        this.lang = language; 
         this.testData = {
             "Sample Test 1": "35/50",
             "Sample Test 2": "Start",
@@ -45,10 +45,9 @@ export class SampletestEnglishComponent implements OnInit {
             "Sample Test 9": "23/50",
             "Sample Test 10": "Start"
         }
-
         this.examPattern = [];
-        this.examPattern.push({ label: "SOF", value: "null" }, { label: "SELECT EXAM", value: "null" })
-
+        this.examPattern.push({ label: "SOF", value: "null" }, { label: "SELECT EXAM", value: "null" });
+        this.patternCols = [{header:'Section',field:'pattern'},{header:'No. Of Questions',field:'no_of_questions'},{header:'Marks/Ques.',field:'marks_per_question'},{header:'Total Marks',field:'total_marks'}]
     }
 
     shade(index){
@@ -62,14 +61,17 @@ export class SampletestEnglishComponent implements OnInit {
         this.misc.setCurrentRoute(["English","Sample Test"]);
         this.misc.setLocalRoute('account/english/sampletest');
         this.makeGraph();
+        this.setSofPattern();
+    }
+
+    setSofPattern(){
+        this.patternArray = this.subjectInfo.patternObject['English'];
     }
 
     makeGraph(){
-
         this.sampleTestData = {
             labels: ['Completed', 'Remaining'],
             datasets: [{
-                // data: [this.test.english['sample_test']['total_completed'],this.test.english['sample_test']['total_attempted']-this.test.english['sample_test']['total_completed']],
                 data:[0,10],
                 backgroundColor: ["#5CB85C", "#D9534F"],
                 hoverBackgroundColor: ["#5CB85C", "#D9534F"]

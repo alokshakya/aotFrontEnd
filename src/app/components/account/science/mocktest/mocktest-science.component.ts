@@ -1,30 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem, Message } from 'primeng/primeng';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
-import { SubjectInfo, Misc, chapterwiseTest, PersonalInfo, Result } from '../../../../services/data.service';
-import { MasterHttpService } from '../../../../services/masterhttp.service'
 
+import { SelectItem, Message } from 'primeng/primeng';
+
+import { SubjectInfo, Misc, chapterwiseTest, PersonalInfo, Result } from '../../../../services/data.service';
+import { MasterHttpService } from '../../../../services/masterhttp.service';
+
+import * as language from '../../../../../config/language'
 @Component({
   selector: 'app-mocktest-science',
   templateUrl: './mocktest-science.component.html',
   styleUrls: ['./mocktest-science.component.scss']
 })
 export class MocktestScienceComponent implements OnInit {
-
-date: number = Date.now();
-
-    mockTestTableData: any;
-
-    mockTestData: any;  //for chart
-
-    examPattern: SelectItem[];
-
-    spinner2:string;
-
-    generateMsg:Message[];
-
+    date: number = Date.now();
     dateNow;
+    examPattern: SelectItem[];
+    generateMsg:Message[];
+    lang:any;
+    mockTestData: any;  //for chart
+    mockTestTableData: any;
+    spinner2:string;
+    patternArray:Array<any>;
+    patternCols:any;
 
     constructor(
         public router: Router,
@@ -34,9 +33,11 @@ date: number = Date.now();
         public personalInfo:PersonalInfo,
         public result:Result,
         private masterhttp:MasterHttpService) {
+        this.lang = language;
         this.mockTestTableData = [];
-
         this.examPattern = [{ label: "SOF", value: "null" },{ label: "Select Pattern", value: "null" }]
+        this.patternCols = [{header:'Section',field:'pattern'},{header:'No. Of Questions',field:'no_of_questions'},{header:'Marks/Ques.',field:'marks_per_question'},{header:'Total Marks',field:'total_marks'}]
+
     }
 
     redirect() {
@@ -52,7 +53,12 @@ date: number = Date.now();
             datasets: [{ data: [0,3], backgroundColor: ["#5CB85C", "#D9534F"], hoverBackgroundColor: ["#5CB85C", "#D9534F",] }]
         };
         this.setMockTest();
+        this.setSofPattern();
 
+    }
+
+    setSofPattern(){
+        this.patternArray = this.subjectInfo.patternObject['Science'];
     }
 
     setMockTest(){
@@ -60,7 +66,6 @@ date: number = Date.now();
             var completed = this.test.science['mock_test']['total_completed'];
             this.mockTestData.datasets[0]['data'] = [completed,(3-completed)]
         }
-
     }
 
     startTest(testId, chapterId, attempted, completed, chapter) {

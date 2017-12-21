@@ -12,15 +12,7 @@
     </div>
     <div class="ui-g-6 ui-sm-12">
         <p-panel header="Introduction">
-            <div id="intro">
-                <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting , remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    <p>
-                        <br>
-                        <br>
-                        <br>
-                        <p><strong>Some guidelines and rules goes here...........</strong> Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting , remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                            <p>
-            </div>
+            <div id="intro" [MathJax]="lang.testIntro.mockTest"></div>
         </p-panel>
     </div>
     <div class="ui-g-6 ui-sm-12">
@@ -29,25 +21,17 @@
         </p-panel>
     </div>
     <div class="ui-g-6 ui-sm-12">
-        <p-panel header="Syllabus">
-            <div class="ui-g">
-                <div class="ui-g-12">
-                    <p-accordion>
-                        <div class="ui-g">
-                            <div class="ui-g-12">
-                                <p-accordionTab *ngFor="let data of subjectInfo.computerChapters['chapters']">
-                                    <p-header><span class="chapter"> {{data.name}} </span> </p-header>
-                                    <div class="ui-g">
-                                        <div class="ui-g-12" *ngFor="let topic of data['topics']">
-                                            <span class="">{{topic.name}}<br></span>
-                                        </div>
-                                    </div>
-                                </p-accordionTab>
-                            </div>
-                        </div>
-                    </p-accordion>
+        <p-panel>
+            <p-header>Syllabus</p-header>
+            <p-accordion>
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p-dataTable [value]="patternArray">
+                            <p-column [style]="{'border':'1px solid lightgrey'}" *ngFor="let col of patternCols" [header]="col.header" [field]="col.field"></p-column>
+                        </p-dataTable>
+                    </div>
                 </div>
-            </div>
+            </p-accordion>
         </p-panel>
     </div>
     <div class="ui-g-6 ui-sm-12">
@@ -59,49 +43,47 @@
                 <div class="ui-g-12 ui-sm-12 container" *ngIf="test.computers?.mock_test!=null">
                     <div class="table-responsive">
                         <table class="table">
-                        <thead>
-                          <tr>
-                            <th style="width:27%">Mock Test</th>
-                            <th>Slot 1</th>
-                            <th>Slot 2</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let test of test.computers.mock_test.tests;let k=index">
-                            <td><span [ngClass]="shade(k)">{{k+1}}</span></td>
-                            <td *ngIf="true"> <button label=" {{dateNow|date:'medium'}} " pButton class="ui-button-warning"></button> </td>
-
-
-                            <td *ngIf="true">
-                                <span class="low" *ngIf="test.attempted==0">
+                            <thead>
+                                <tr>
+                                    <th style="width:27%">Mock Test</th>
+                                    <th>Slot 1</th>
+                                    <th>Slot 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let test of test.computers.mock_test.tests;let k=index">
+                                    <td><span [ngClass]="shade(k)">{{k+1}}</span></td>
+                                    <td *ngIf="true">
+                                        <button label=" {{dateNow|date:'medium'}} " pButton class="ui-button-warning"></button>
+                                    </td>
+                                    <td *ngIf="true">
+                                        <span class="low" *ngIf="test.attempted==0">
                                     <button *ngIf="spinner2!=test.id" class="ui-button-success" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
                                     <button *ngIf="spinner2==test.id" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward" [disabled]="false" type="button" pButton></button>
                                 </span>
-
-                                <span class="low" *ngIf="test.attempted==1&&test.completed==1">
+                                        <span class="low" *ngIf="test.attempted==1&&test.completed==1">
                                     <button *ngIf="spinner2!=test.id" class="ui-button-success" label="{{result.computers['mock_test']['tests'][k]['score']}}/{{result.computers['mock_test']['tests'][k]['marks']}}" type="button" pButton></button>
                                 </span>
-
-                                <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
+                                        <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
                                     <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
                                     <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
                                 </span>
-                            </td>
-
-                            <td *ngIf="false"> <button label=" {{dateNow|date:'medium'}} " pButton class="ui-button-warning"></button> </td>
-                            <td *ngIf="false">
-                                <span class="low" *ngIf="test.attempted==0">
+                                    </td>
+                                    <td *ngIf="false">
+                                        <button label=" {{dateNow|date:'medium'}} " pButton class="ui-button-warning"></button>
+                                    </td>
+                                    <td *ngIf="false">
+                                        <span class="low" *ngIf="test.attempted==0">
                                     <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
                                     <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" [disabled]="false" type="button" pButton></button>
                                 </span>
-
-                                <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
+                                        <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
                                     <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
                                     <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
                                 </span>
-                            </td>
-                          </tr>
-                        </tbody>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>

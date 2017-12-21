@@ -70,6 +70,7 @@ export class SubjectInfo {
     scienceChapters: Array<any>;
     gkChapters: Array<any>;
     mathChapters: Array<any>;
+    patternObject:object;
 
     subscribedSubjects = {};
     attemptedDemo = { "Computers": false, "Science": false, "Mathematics": false, "English": false, "General-Knowledge": false, "Reasoning": false }
@@ -110,6 +111,14 @@ export class SubjectInfo {
                     break;
             }
 
+        }
+        this.event.emitDataEvent();
+    }
+
+    setPattern(data){
+        this.patternObject = {};
+        for(let i in data){
+            this.patternObject[data[i]['subject']] = data[i]['pattern'];
         }
         this.event.emitDataEvent();
     }

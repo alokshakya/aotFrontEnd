@@ -1,27 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/primeng';
 import { Response } from '@angular/http';
-import { TreeModule, TreeNode } from 'primeng/primeng';
 import { Router } from '@angular/router';
-import { Message } from 'primeng/primeng';
+
+import { Message, SelectItem } from 'primeng/primeng';
+
 import { PersonalInfo, SubjectInfo, Misc, chapterwiseTest } from '../../../../services/data.service';
-import { MasterHttpService } from '../../../../services/masterhttp.service'
+import { MasterHttpService } from '../../../../services/masterhttp.service';
+
+import * as language from '../../../../../config/language';
+
 @Component({
   selector: 'app-sampletest-reasoning',
   templateUrl: './sampletest-reasoning.component.html',
   styleUrls: ['./sampletest-reasoning.component.scss']
 })
 export class SampletestReasoningComponent implements OnInit {
- examPattern: SelectItem[];
-    spinner2;
-    testData: any;
-    generateMsg:Message[];
-
-    sampleTestData: any; //for chart
-
-    //temporary service
+    examPattern: SelectItem[];
     dummyChapters: Array<any>;
     dummyTopics: Array<any>;
+    generateMsg:Message[];
+    lang:any;
+    sampleTestData: any; //for chart
+    spinner2;
+    testData: any;
+    patternArray:Array<any>;
+    patternCols:any;
 
     constructor(
         private router: Router,
@@ -30,7 +33,7 @@ export class SampletestReasoningComponent implements OnInit {
         public subjectInfo: SubjectInfo,
         public test:chapterwiseTest,
         public personalInfo:PersonalInfo) {
-
+        this.lang = language; 
         this.testData = {
             "Sample Test 1": "35/50",
             "Sample Test 2": "Start",
@@ -43,9 +46,9 @@ export class SampletestReasoningComponent implements OnInit {
             "Sample Test 9": "23/50",
             "Sample Test 10": "Start"
         }
-
         this.examPattern = [];
         this.examPattern.push({ label: "SOF", value: "null" }, { label: "SELECT EXAM", value: "null" })
+        this.patternCols = [{header:'Section',field:'pattern'},{header:'No. Of Questions',field:'no_of_questions'},{header:'Marks/Ques.',field:'marks_per_question'},{header:'Total Marks',field:'total_marks'}]
 
     }
 
@@ -60,10 +63,14 @@ export class SampletestReasoningComponent implements OnInit {
         this.misc.setCurrentRoute(["Reasoning","Sample Test"]);
         this.misc.setLocalRoute('account/reasoning/sampletest');
         this.makeGraph();
+        this.setSofPattern();
+    }
+
+    setSofPattern(){
+        this.patternArray = this.subjectInfo.patternObject['Reasoning'];
     }
 
     makeGraph(){
-
         this.sampleTestData = {
             labels: ['Completed', 'Remaining'],
             datasets: [{
