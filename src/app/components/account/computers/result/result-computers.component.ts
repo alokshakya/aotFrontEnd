@@ -5,9 +5,7 @@ import { Misc, Result, SubjectInfo } from '../../../../services/data.service';
 
 @Component({
     selector: 'app-result-computers',
-    // templateUrl: './result-computers.component.html',
     templateUrl: './result-computers.component.html',
-
     styleUrls: ['./result-computers.component.scss']
 })
 export class ResultComputersComponent implements OnInit {

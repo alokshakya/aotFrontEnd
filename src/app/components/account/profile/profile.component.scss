@@ -47,7 +47,7 @@
 }
 
 .address {
-    margin-left: .5%;
+    margin-left: -3%;
 }
 
 .withbtn {
@@ -220,4 +220,13 @@ label {
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+
+.inline-b{
+    margin-left: 21px;
+}
+
+.right{
+    margin-left: 2.5%;
 }

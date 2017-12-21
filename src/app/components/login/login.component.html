@@ -6,7 +6,7 @@
     </div>
     <div class=" module form-module" *ngIf="!loginRegToggle" [@fadeInOut]>
         <div class="toggle" pTooltip=" Login" (click)="conditionalDisplay();reset();clearFlags()" *ngIf="loginForgotToggle||verifyForgotToggle">
-            <i class="fa fa-user-plus fa-lg"></i>
+            <i class="fa fa-sign-in fa-lg"></i>
         </div>
         <div class="toggle" pTooltip=" Register" (click)="conditionalDisplay();reset();clearFlags()" *ngIf="!(verifyForgotToggle||loginForgotToggle)">
             <i class="fa fa-user-plus fa-lg"></i>
@@ -35,7 +35,7 @@
             </div>
             <form #formCtrl="ngForm" novalidate>
                 <!--Email Validator-->
-                <input type="text" maxlength="31" name="email" #email="ngModel" [(ngModel)]="userLoginCreds.username" pInputText placeholder="Username" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required/>
+                <input type="text" maxlength="31" name="email" #email="ngModel" [(ngModel)]="userLoginCreds.username" pInputText placeholder="Email" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required/>
                 <div class="text-center">
                     <p class="error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">Please Enter Valid Email Id</p>
                 </div>

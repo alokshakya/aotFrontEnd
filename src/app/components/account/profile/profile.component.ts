@@ -333,7 +333,16 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             'exam_city':this.examCity, 
             'exam':this.selectedExam,
             'exam_roll_no':this.rollNo,
-            'class':this.selectedClass
+            'class':this.selectedClass,
+            'declaration_authenticity':0,
+            'declaration_share_info':0
+        }
+
+        if(this.dec[0]==='dec1'){
+            requestBody['declaration_authenticity']=1;
+        }
+        if(this.dec[1]==='dec2'){
+            requestBody['declaration_share_info']=1;
         }
         this.masterhtttp.addAchievement(requestBody)
             .subscribe((data: Response) => {
@@ -362,14 +371,28 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     invalidName(){
-        let arr = [false,false];
+        let arr = [false,false,false];
         let pattern = new RegExp("^[a-zA-Z]+$");
+        let dobPattern = new RegExp("^[1-2]{1}[0-9]{3}-[1]{1}[1-2]{1}-[0-3]{1}[0-9]{1}$");
+        let zipPattern = new RegExp("^[0-9]{6}");
+        let addressPattern = new RegExp("^[0-9A-Za-z]{1,}[a-zA-Z0-9]+$");
         if(this.editBasic){
-            if(!pattern.test(this.dummyBasicInfo.firstname)){
+            if(this.dummyBasicInfo.firstname==null||this.dummyBasicInfo.firstname==''){
                 arr[0] = true;
             }
-            if(!pattern.test(this.dummyBasicInfo.lastname)){
+            // if(!pattern.test(this.dummyBasicInfo.lastname)){
+            if(this.dummyBasicInfo.lastname==null||this.dummyBasicInfo.lastname==''){
                 arr[1] = true;
+            }
+            if(!dobPattern.test(this.dummyBasicInfo.birthdate)){
+                arr[2] = true;
+            }
+            if(this.dummyBasicInfo.address==null||this.dummyBasicInfo.address==''){
+            // if(!addressPattern.test(this.dummyBasicInfo.address||this.dummyBasicInfo.address=='')){
+                arr[3] = true;
+            }
+            if(!zipPattern.test(this.dummyBasicInfo.pincode)){
+                arr[4] = true;
             }
         }
         return arr;
@@ -512,10 +535,10 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         else return true;
     }
 
-    checkMobile(){
+    checkMobile(view=false){
         let pattern = new RegExp("^[7-9]{1}[0-9]{9}$");
         let mobile = this.dummyBasicInfo['mobile'];
-        if(mobile==this.personalInfo.userInfo['mobile']){
+        if(mobile==this.personalInfo.userInfo['mobile']&&!view){
             return true;
         }
         if(!pattern.test(mobile)){

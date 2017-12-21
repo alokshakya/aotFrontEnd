@@ -58,10 +58,23 @@
 
 .wrapper i {
     position: absolute;
-    top: 1%;
-    left: 88%;
-    font-size: 25px;
-    color: #2D353C;
+    top: -1%;
+    left: 91%;
+    font-size: 32px;
+    color: white;
+    -webkit-transition: transform .25s;
+       -moz-transition: transform .25s;
+        -ms-transition: transform .25s;
+         -o-transition: transform .25s;
+            transition: transform .25s;
+}
+
+.wrapper i:hover{
+    -webkit-transform: scale(1.5);
+       -moz-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+         -o-transform: scale(1.5);
+            transform: scale(1.5);
 }
 
 .hover:hover {
