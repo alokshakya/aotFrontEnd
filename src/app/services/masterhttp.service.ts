@@ -168,7 +168,7 @@ export class MasterHttpService {
     }
 
     getFee(){
-        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/payment/fee', {headers:this.queryHeaders})
+        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/prepayment/fee', {headers:this.queryHeaders})
         .map((resp:Response)=>resp.json())
         .subscribe((data)=>{
             if(data['status']==200){
@@ -232,12 +232,12 @@ export class MasterHttpService {
     // }
 
     subscribe(requestBody){
-        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/payment/pay', requestBody, {headers:this.queryHeaders})
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/prepayment/pay', requestBody, {headers:this.queryHeaders})
         .map((resp:Response)=>resp.json())
     }
 
     getPaymentHistory(){
-        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL+'/payment/history',{headers:this.queryHeaders})
+        this.http.get(constants.OLYMPIADBOX_INSTANCE_URL+'/prepayment/history',{headers:this.queryHeaders})
         .map((resp:Response)=>resp.json()).subscribe((data)=>{
             if(data['status']==200){
                 this.misc.setPaymentDetails(data['message']['payments_history']);
@@ -255,7 +255,7 @@ export class MasterHttpService {
     }
 
     applyDicountCoupon(requestBody){
-        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/payment/applycoupon',requestBody,{headers:this.queryHeaders})
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/prepayment/applycoupon',requestBody,{headers:this.queryHeaders})
         .map((resp:Response)=>resp.json());
     }
 
