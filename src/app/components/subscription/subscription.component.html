@@ -1,0 +1,135 @@
+<p-growl [(value)]="msg"></p-growl>
+
+<div class="container">
+    <div class="logo">
+        <!--Olympiadbox logo-->
+        <a href="http://olympiadbox.com"><img src="../../assets/layout/images/Olympiadbox-logo.png" id="oblogo" height="100px" width="100px"></a>
+    </div>
+    <!--Registration Box-->
+    <div class="form-module register" style="border-color:#2BBF61">
+        <div class="form">
+            <h2 *ngIf="index==0">Subscribe Now</h2>
+            <h2 *ngIf="index==1">Verification</h2>
+            <h2 *ngIf="index==2">Select Subject(s)</h2>
+
+            <div class="ui-g" *ngIf="index==0">
+                <div class="ui-g-6 ui-sm-6">
+                    <!--FirstName Validator -->
+                    <input type="text" maxlength="30" name="firstname" #firstname="ngModel" [(ngModel)]="userRegCreds.firstname" pInputText placeholder="Firstname" pattern="^[a-zA-Z]+" />
+                    <p class="error" [hidden]="firstname.untouched" *ngIf="firstname.errors && firstname.errors.pattern">
+                        Invalid Firstname
+                    </p>
+                </div>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--LastName Validator -->
+                    <input type="text" maxlength="30" name="lastname" #lastname="ngModel" [(ngModel)]="userRegCreds.lastname" pInputText placeholder="Lastname" pattern="^[a-zA-Z]+" />
+                    <p class="error" [hidden]="lastname.untouched" *ngIf="lastname.errors && lastname.errors.pattern">
+                        Invalid Lastname
+                    </p>
+                </div>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--Email Validators -->
+                    <input type="text" maxlength="31" name="regEmail" #regEmail="ngModel" [(ngModel)]="userRegCreds.email" pInputText placeholder="Email" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" />
+                    <p class="error" [hidden]="regEmail.untouched" *ngIf="regEmail.errors && regEmail.errors.pattern">
+                        Invalid Email Id
+                    </p>
+                </div>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--Mobile Validator -->
+                    <input name="number" placeholder="Mobile Number" #number="ngModel" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="userRegCreds.mobile" pInputText type="number">
+                    <p class="error" [hidden]="number.untouched" *ngIf="number.errors && number.errors.pattern">
+                        Invalid Mobile Number
+                    </p>
+                </div>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--Password validator-->
+                    <input type="password" name="regPassword" pPassword [feedback]="true" promptLabel="Atleast 6 Characters" indicator="false" #regPassword="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password" pattern="^[^\s]{6,}" />
+                </div>
+                <div class="ui-g-6 ui-sm-6">
+                    <!--Password validator(confirm password)-->
+                    <input type="password" name="regPassword" #regPassword="ngModel" [(ngModel)]="confirmPassword" placeholder="Confirm Password" pattern="^[^\s]{6,}" />
+                    <p [hidden]="regPassword.untouched" *ngIf="confirmPassword!=userRegCreds.password" class="error">Password doesn't match</p>
+                </div>
+                <div class="ui-g-6 ui-sm-12">
+                    <p-dropdown scrollHeight="120px" [style]="{'width':'195px'}" [options]="class" [(ngModel)]="userRegCreds.class"></p-dropdown>
+                </div>
+                <div class="ui-g-6 ui-sm-12">
+                    <p-dropdown scrollHeight="120px" [style]="{'width':'195px'}" [options]="gender" [(ngModel)]="userRegCreds.gender"></p-dropdown>
+                </div>
+                <div class="ui-g-12 ui-sm-12 text-center">
+                    <button id="reg" type="button" *ngIf="!spinner" pButton label="Next" [disabled]="regEmail.errors ||spinner ||firstname.errors
+                    || lastname.errors || regPassword.errors || number.errors
+                    || userRegCreds.mobile==''||userRegCreds.mobile==null ||userRegCreds.password==''
+                    || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''
+                    || userRegCreds.class==''||userRegCreds.class==null || userRegCreds.password==''
+                    || confirmPassword=='' || confirmPassword!=userRegCreds.password||userRegCreds.gender==null||userRegCreds.gender==''" (click)="signUp()"></button>
+                    <button id="reg" pButton icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" *ngIf="spinner"></button>
+
+                </div>
+            </div>
+            <div class="ui-g" *ngIf="index==1">
+                <div class="ui-g-12 text-left min-width">
+                    <p>Enter OTP Sent On <strong>{{userRegCreds.email}}</strong></p>
+                    <p-inputMask [style]="{'width':'51%'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
+                    <button pButton *ngIf="!emailSpinner" label="Verify" (click)="setWrapper('verify_email');verify('verify_email')" class="ui-button-success" [disabled]="emailSpinner||emailVerified||otpPattern()[1]"></button>
+                    <button pButton *ngIf="emailSpinner" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
+
+                    <button pButton *ngIf="!emailSpinner2" [disabled]="emailSpinner2||emailVerified" label="Resend" (click)="setWrapper('verify_email');sendOtp()" class="ui-button-info"></button>
+                    <button pButton *ngIf="emailSpinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
+                    <p class="green-text" *ngIf="emailVerified">Email Verified Successfully.</p>
+                </div><span><br></span>
+                <div class="ui-g-12 text-left min-width">
+                    <p>Enter OTP Sent On <strong>{{userRegCreds.mobile}}</strong></p>
+                    <p-inputMask [style]="{'width':'51%'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="mobileOtp"></p-inputMask>
+                    <button pButton *ngIf="!mobileSpinner" label="Verify" (click)="setWrapper('verify_mobile');verify('verify_mobile')" class="ui-button-success" [disabled]="mobileSpinner||mobileVerified||otpPattern()[0]"></button>
+                    <button pButton *ngIf="mobileSpinner" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
+
+                    <button pButton *ngIf="!mobileSpinner2" [disabled]="mobileSpinner2||mobileVerified" label="Resend" (click)="setWrapper('verify_mobile');sendOtp()" class="ui-button-info"></button>
+                    <button pButton *ngIf="mobileSpinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
+                    <p class="green-text" *ngIf="mobileVerified">Mobile Verified Successfully.</p>
+
+                </div>
+
+                <div class="ui-g-12 text-center pad-top"><button pButton (click)="skip()" label="Skip Verification"></button></div>
+            </div>
+
+            <div class="ui-g" *ngIf="index==2">
+                <div class="ui-g-12 ui-sm-12">
+                        <p-dataTable (onHeaderCheckboxToggle)="reset()" [value]="feeArray" [(selection)]="selectedPackage" (onHeaderCheckboxToggle)="updateAmount()" (onRowSelect)="updateAmount();reset()" (onRowUnselect)="updateAmount();reset()" dataKey="subject_name" [responsive]="true">
+                            <p-column [style]="{'width':'11.3%','padding-left':'3%'}" selectionMode="multiple"></p-column>
+                            <p-column [style]="{'text-align':'center'}" *ngFor="let i of feeCols" field="{{i.field}}">
+                                <ng-template pTemplate="header">
+                                    {{i.header}}<span *ngIf="i.header=='Price'"> (&#8377;) </span>
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </div>
+                    <div class="ui-g-12 ui-sm-12">
+                        <div class="ui-g">
+                            <div class="ui-g-8 ui-sm-8">
+                                <input type="text" maxlength="30" id="pay-btn" placeholder="Enter Coupon Code" [(ngModel)]="coupon" pInputText>
+                                <button type="button" *ngIf="index==2&&!emailSpinner" style="width:23%;display:inline-block" class="ui-button-info" (click)="applyCoupon()" [disabled]="coupon==null||coupon==''||selectedPackage[0]==null" pButton label="Apply"></button>
+                                <button type="button" pButton *ngIf="index==2&&emailSpinner" icon="fa fa-circle-o-notch fa-spin fa-forward" style="width:23%;display:inline-block" class="ui-button-info"></button>
+
+                            </div>
+                            <div class="ui-g-4 ui-sm-4">
+                                <label class="left-margin" *ngIf="!discountApplied">Total Amount:<br> &#x20B9; {{sum}} </label>
+                                <label class="left-margin" *ngIf="discountApplied">Amount: &#x20B9; {{sum}} </label>
+                                <label class="left-margin" *ngIf="discountApplied">Discount: {{discount}} % </label>
+                                <label class="left-margin green-text" *ngIf="discountApplied">Total Amount:<br> &#x20B9;{{discountedAmount}}</label>
+                            </div>
+                            <div class="ui-g-12 text-center ui-sm-12">
+                                <button type="button" *ngIf="!spinner" class="ui-button-success" (click)="pay()" [disabled]="selectedPackage[0]==null" pButton label="Pay Now"></button>
+                                <button type="button" *ngIf="spinner" pButton class="ui-button-success fifty" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g fill">
+        <div class="ui-g-12 ui-sm-12 footer">
+            Copyright <i class="fa fa-copyright"></i> Olympiadbox. All rights reserved
+        </div>
+    </div>
+</div>

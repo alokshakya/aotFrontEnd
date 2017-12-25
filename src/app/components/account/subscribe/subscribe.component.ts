@@ -83,17 +83,17 @@ export class SubscribeComponent implements OnInit {
 
     pay() {
         this.spinner=true;
-        if(
-            this.userInfo.userInfo['address']==null||this.userInfo.userInfo['address']==''||
-            this.userInfo.userInfo['state']==null||this.userInfo.userInfo['state']==''||
-            this.userInfo.userInfo['country']==null||this.userInfo.userInfo['country']==''||
-            this.userInfo.userInfo['pincode']==null||this.userInfo.userInfo['pincode']==0||
-            this.userInfo.userInfo['state']==null||this.userInfo.userInfo['state']==''||
-            this.userInfo.userInfo['city']==null||this.userInfo.userInfo['city']==''){
-            this.confirm();
-            this.spinner = false;
-            return false
-        }
+        // if(
+        //     this.userInfo.userInfo['address']==null||this.userInfo.userInfo['address']==''||
+        //     this.userInfo.userInfo['state']==null||this.userInfo.userInfo['state']==''||
+        //     this.userInfo.userInfo['country']==null||this.userInfo.userInfo['country']==''||
+        //     this.userInfo.userInfo['pincode']==null||this.userInfo.userInfo['pincode']==0||
+        //     this.userInfo.userInfo['state']==null||this.userInfo.userInfo['state']==''||
+        //     this.userInfo.userInfo['city']==null||this.userInfo.userInfo['city']==''){
+        //     this.confirm();
+        //     this.spinner = false;
+        //     return false
+        // }
         let wrapper = {amount:0, fee_id:'',discount:0};
         for(let i in this.selectedPackage){
             wrapper['amount'] += parseInt(this.selectedPackage[i]['amount']);

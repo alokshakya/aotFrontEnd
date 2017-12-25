@@ -145,6 +145,7 @@ import { SampletestReasoningComponent } from './components/account/reasoning/sam
 import { DemotestReasoningComponent } from './components/account/reasoning/demotest/demotest-reasoning.component';
 import { MocktestReasoningComponent } from './components/account/reasoning/mocktest/mocktest-reasoning.component';
 import { ResultReasoningComponent } from './components/account/reasoning/result/result-reasoning.component';
+import { SubscriptionComponent } from './components/subscription/subscription.component';
 
 import {MathJaxDirective} from './directives/mathjax.directive';
 import { RoundPipe } from './pipes/round.pipe';
@@ -271,7 +272,8 @@ import { RoundPipe } from './pipes/round.pipe';
         MocktestReasoningComponent,
         ResultReasoningComponent,
         MathJaxDirective,
-        RoundPipe
+        RoundPipe,
+        SubscriptionComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

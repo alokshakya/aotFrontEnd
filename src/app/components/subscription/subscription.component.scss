@@ -1,0 +1,298 @@
+
+.to-right{
+    margin-right: 2%;
+}
+.container {
+    height: auto;
+    width: auto;
+    background: #2D353C;
+    color: #666666;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100%;
+}
+
+.loaderbtn{
+    width:65px;
+}
+
+.logo {
+    padding: 25px 0;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+#oblogo:hover {
+    cursor: pointer;
+    animation: bounce 2s ease-in-out infinite;
+    -webkit-animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    25% {
+        transform: translateY(-25%);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(-25%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes bounce {
+    25% {
+        transform: translateY(-25%);
+    }
+    50% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(-25%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+
+/* Form Module */
+
+.form-module {
+    position: relative;
+    background: #ffffff;
+    max-width: 320px;
+    width: 100%;
+    border-top: 5px solid #1D8ECD;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+}
+
+.form-module .toggle {
+    cursor: pointer;
+    position: absolute;
+    top: -0;
+    right: -0;
+    background: #1D8ECD;
+    width: 30px;
+    height: 30px;
+    margin: -5px 0 0;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.register .toggle {
+    cursor: pointer;
+    position: absolute;
+    top: -0;
+    right: -0;
+    background: #1D8ECD;
+    width: 30px;
+    height: 30px;
+    margin: -5px 0 0;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.form-module .form {
+    display: block;
+    padding: 40px;
+}
+
+.form-module .form:nth-child(2) {
+    display: block;
+}
+
+.form-module h2 {
+    margin: 0 0 20px;
+    color: #1D8ECD;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.form-module input {
+    outline: none;
+    display: block;
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    margin: 0 0 4px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    font-weight: 400;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.form button {
+    // background-color: #1D8ECD;
+    width: 240px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    padding-left: 76%;
+    background-color: #2D353C;
+    color: white;
+}
+
+.register {
+    text-align: center;
+    position: relative;
+    background: #ffffff;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    min-height: 450px;
+    max-height: auto;
+}
+
+.register .toggle {
+    cursor: pointer;
+    position: absolute;
+    top: -0;
+    right: -0;
+    background: #2D4;
+    width: 30px;
+    height: 30px;
+    margin: -5px 0 0;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+}
+
+#otpbtn button {
+    border: none;
+    background-color: #DC4E42;
+    margin-left: opx;
+    text-align: left;
+    width: 85px;
+    height: 42px;
+}
+
+#dialog {
+    text-align: center;
+}
+
+.otpfield,
+.btngrp {
+    padding-left: 20%;
+    margin-top: 5%
+}
+
+
+
+#reg {
+    width: 197px;
+    background-color: #2BBF61;
+}
+
+.withinput {
+    margin-left: 2%;
+}
+
+.verify {
+    text-align: left;
+    padding-left: 10%;
+    height: auto;
+}
+
+.verify input {
+    width: 200px;
+    height: 32px;
+}
+
+.success {
+    color: #2BBF61;
+    text-align: left;
+}
+
+.error {
+    text-align: left;
+    margin-top: 0px;
+    color: #F44336;
+}
+
+.aligned {
+    padding-left: 20px;
+}
+
+.empty {
+    height: 85px;
+}
+
+#lostpassword a:hover {
+    cursor: pointer;
+    color: red;
+    text-decoration: none;
+}
+
+#gap {
+    margin-right: 8%;
+}
+
+#med1,
+#med2 {
+    width: 95%;
+    height: 22%;
+    margin-bottom: 4px;
+}
+
+@media only screen and (max-width: 420px) {
+    .register {
+        height: auto;
+    }
+    .footer {
+        padding-left: 0;
+    }
+    #logbtn {
+        width: 20px;
+    }
+}
+
+.min-width input{
+    width: 40%;
+    height: 30px;
+    display: inline-table;
+    margin-right: 4%;
+}
+
+.min-width button{
+    display: inline-table;
+    width: 70px;
+    margin-right: 8px;
+}
+
+.pad-top{
+    padding-top: 20%
+}
+
+.green-text{
+    color: #5CB85C
+}
+
+#pay-btn{
+    width: 67%;
+    margin-left: -16%;
+    height: 33px;
+    display: inline-table;
+}

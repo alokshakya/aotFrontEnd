@@ -269,4 +269,31 @@ export class MasterHttpService {
         },err=>this.httpError());
     }
 
+    //--------------------------------------pre login service----------------------------------------------------------------------
+
+    getFeePre(requestBody){
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/subscription/fee', requestBody, {headers:headers})
+        .map((resp:Response)=>resp.json())
+    }
+
+    applyDiscountCouponPre(requestBody){
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/subscription/applycoupon',requestBody,{headers:headers})
+        .map((resp:Response)=>resp.json());
+    }
+
+    subscribePre(requestBody){
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Olympiadbox-Api-Key', constants.OLYMPIADBOX_API_KEY);
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/subscription/pay', requestBody, {headers:headers})
+        .map((resp:Response)=>resp.json())
+    }
+
+
 }

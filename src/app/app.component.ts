@@ -45,7 +45,7 @@ export class AppComponent implements AfterViewInit {
             }
             else this.router.navigate(['login']);
         }
-        else this.router.navigate(['login']);
+        // else this.router.navigate(['login']);
 
     }
 
