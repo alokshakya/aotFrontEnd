@@ -194,10 +194,10 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     saveBasicInfo() {
         this.spinner = true;
         let wrapper = {
-            'firstname': this.dummyBasicInfo['firstname'],
-            'lastname': this.dummyBasicInfo['lastname'],
+            'firstname': this.dummyBasicInfo['firstname'].toLowerCase(),
+            'lastname': this.dummyBasicInfo['lastname'].toLowerCase(),
             'country': this.dummyBasicInfo['country'],
-            'address': this.dummyBasicInfo['address'],
+            'address': this.dummyBasicInfo['address'].toLowerCase(),
             'state': this.dummyBasicInfo['state'],
             'city': this.dummyBasicInfo['city'],
             'birthdate': this.dummyBasicInfo['birthdate'],
@@ -210,6 +210,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
                     this.dummyBasicInfo.mobile = this.personalInfo.userInfo.mobile;
+                    // this.masterhtttp.getPersonalInfo();
                     this.personalInfo.userInfo = this.dummyBasicInfo;
                     this.editBasic = false;
                     this.generateMsg('success','Success','Profile Updated Successfully');

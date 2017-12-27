@@ -1,3 +1,4 @@
+<!-- <p-blockUI [blocked]="true" [target]="pnl"></p-blockUI> -->
 <div class="ui-g">
     <div class="ui-g-8 ui-sm-12 ui-md-8">
         <div class="ui-g">
@@ -24,7 +25,7 @@
             </div>
             <div class="ui-g-12">
                 <!--TEST SUMMARY PANEL-->
-                <p-panel header="Test Summary">
+                <p-panel #pnl header="Test Summary">
                     <p-tabView id="tab head">
                         <p-tabPanel *ngFor="let sub of chTest.completeTestDetails?.generated?.subjects;let index = index;let first = first" header="{{sub.name}}" [selected]="first">
                             <div class="ui-g" *ngIf="subjectInfo.subscribedSubjects[sub.name]">
@@ -80,8 +81,56 @@
                             </div>
                             <div class="ui-g fixed-height" *ngIf="!subjectInfo.subscribedSubjects[sub.name]">
                                 <div class="ui-g-12 text-center">
-                                    <h3>Subject Not Subscribed</h3>
-                                    <button pButton class="ui-button-info" (click)="redirect(sub.name,'settings')" label="Subscribe"></button>
+                                    <div class="ui-g-3">Chapterwise Test</div>
+                                    <div class="ui-g-9">
+                                        <div class="progress hover progmob" pTooltip="Go To Chapterwise Test" (click)="redirect(sub.name,'chapterwisetest')">
+                                            <div class="progress-bar progress-bar-success" [style.width.%]="0" role="progressbar">0%
+                                            </div>
+                                            <div class="progress-bar progress-bar-warning" [style.width.%]="0" role="progressbar">0%
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" [style.width.%]="100" role="progressbar">100%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui-g-3" *ngIf="sub?.demo_test!=null">Demo Test</div>
+                                    <div class="ui-g-9" *ngIf="sub?.demo_test!=null">
+                                        <div class="progress hover progmob" pTooltip="Go To Sample Test" (click)="redirect(sub.name,'demotest')">
+                                            <div *ngIf="sub['demo_test']['total_completed']==1" class="progress-bar progress-bar-success"  role="progressbar" style="width:100%">100%
+                                            </div>
+                                            <div *ngIf="sub['demo_test']['total_completed']==0" class="progress-bar progress-bar-danger" style="width:100%" role="progressbar">100%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui-g-3">Sample Test</div>
+                                    <div class="ui-g-9">
+                                        <div class="progress hover progmob" pTooltip="Go To Sample Test" (click)="redirect(sub.name,'sampletest')">
+                                             <div class="progress-bar progress-bar-success" [style.width.%]="0" role="progressbar">0%
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" [style.width.%]="100" role="progressbar">100%
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="ui-g-3">Mock Test</div>
+                                    <div class="ui-g-9">
+                                        <div class="progress hover progmob" pTooltip="Go To Mock Test" (click)="redirect(sub.name,'mocktest')">
+                                            <div class="progress-bar progress-bar-success" [style.width.%]="0" role="progressbar">0%
+                                            </div>
+                                            <div class="progress-bar progress-bar-danger" [style.width.%]="100" role="progressbar">100%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui-g-12">
+                                        <div class="ui-g">
+                                            <div class="ui-g-3 ui-sm-12"></div>
+                                            <div class="ui-g-9 ui-sm-12">
+                                                <span class="comp">Completed</span>
+                                                <span class="gen">Generated</span>
+                                                <span class="inc">Remaining</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <h3>Subject Not Subscribed</h3> -->
+                                    <!-- <button pButton class="ui-button-info" (click)="redirect(sub.name,'settings')" label="Subscribe"></button> -->
                                 </div>
                             </div>
                         </p-tabPanel>

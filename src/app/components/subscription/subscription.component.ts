@@ -20,7 +20,7 @@ import * as constants from '../../../config/constants';
 export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
 	userRegCreds:any;
 	class:SelectItem[];
-	sum:number;
+	sum:number = 0;
 	gender:SelectItem[];
 	confirmPassword:string;
 	index:number;

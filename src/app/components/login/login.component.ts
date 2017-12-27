@@ -338,11 +338,15 @@ export class LoginComponent implements OnInit {
     }
 
     signUp() {
+        var wrapper = JSON.parse(JSON.stringify(this.userRegCreds));
+        wrapper['email'] = wrapper['email'].toLowerCase();
+        wrapper['firstname'] = wrapper['firstname'].toLowerCase();
+        wrapper['lastname'] = wrapper['lastname'].toLowerCase();
         this.loginForgotToggle = false;
         this.spinner = true;
         this.emailVerified = false;
         this.mobileVerified = false;
-        this.httpService.register(this.userRegCreds)
+        this.httpService.register(wrapper)
             .subscribe((data) => {
                 if(data['status']==200){
                     this.wrapper = {'email':this.userRegCreds['email'],'verify_email':true,'verify_mobile':true}
