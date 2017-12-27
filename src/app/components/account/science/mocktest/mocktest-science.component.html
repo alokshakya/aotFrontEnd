@@ -41,7 +41,7 @@
                 <p-dropdown id="dropdown" [disabled]="true" [options]="examPattern"></p-dropdown>
             </p-header>
             <div class="ui-g">
-                <div class="ui-g-12 ui-sm-12 container" *ngIf="test.science?.mock_test!=null">
+                <div class="ui-g-12 ui-sm-12 container" *ngIf="subjectInfo.subscribedSubjects['Science']&&test.science?.mock_test!=null">
                     <div class="table-responsive">
                         <table class="table">
                         <thead>
@@ -89,6 +89,10 @@
                         </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="ui-g-12 text-center" *ngIf="!subjectInfo.subscribedSubjects['Science']">
+                    <h4>Please Subscribe To Take Test</h4><br>
+                    <button class="ui-button-info" pButton label="Subscribe" [routerLink]="['/account/subscribe']"></button>
                 </div>
             </div>
         </p-panel>
