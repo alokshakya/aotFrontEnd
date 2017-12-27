@@ -1,5 +1,5 @@
 body{
-    // background-color: #2D353C;
+    background-color: #2D353C;
 }
 
 .top-border{
@@ -58,6 +58,7 @@ body{
 .dark-theme{
     background-color: #2D353C;
     color: white;
+    // min-height: 100%;
 }
 
 .box{
@@ -159,7 +160,7 @@ body{
 
 .button-text{
     font-size: 20px;
-    line-height: 0;
+    line-height: 0.1;
 }
 
 
@@ -197,5 +198,22 @@ body{
 }
 
 .min-height{
-    min-height: 47%;
+    height: 276px;
+    overflow-y: auto; 
+}
+
+.box table{
+    background-color: red;
+}
+
+
+.rou{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 15px;
+}
+
+.full{
+    min-height: 100%;
 }

@@ -9,9 +9,9 @@
 </p-dialog>
 <p-growl [(value)]="errMsg"></p-growl>
 <!-- <body class="dark-theme"> -->
-<div class="ui-g dark-theme">
-    <div class="ui-g-9 white-theme long-width">
-        <div class="ui-g fixed-height">
+<div class="ui-g dark-theme full">
+    <div class="ui-g-9 ui-sm-9 white-theme long-width">
+        <div class="ui-g">
             <div class="ui-g-12 box">
                 <span class="question">Q{{clickListener+1}}. </span><span class="question" [MathJax]="selectedQuestion['question']"></span>
                 <div *ngIf="selectedQuestion['image']['image_path']!=null" class="text-center">
@@ -91,7 +91,7 @@
             </div>
         </div>
     </div>
-    <div class="ui-g-3 pad-less right-fixed short-width">
+    <div class="ui-g-3 ui-sm-3 pad-less right-fixed short-width">
         <div class="ui-g bottom-border">
             <div class="ui-g-3">
                 <img src="../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65">
@@ -143,7 +143,7 @@
                 <p-progressBar [value]="counter"></p-progressBar>
             </div>
         </div>
-        <div class="ui-g-12 padded min-height">
+        <div class="ui-g-12 padded dark-theme min-height">
             <!-- <div class="ui-g"> -->
             <div class="n" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
                 <div class="qnumber" [ngClass]="{'qnumbermark':questionStatus[n]=='Marked'||chapterwiseTest.qaSet[n]['state']=='m', 'qnumbercorrect':questionStatus[n]=='Correct'||chapterwiseTest.qaSet[n]['state']=='c', 'qnumberwrong':questionStatus[n]=='Wrong'||chapterwiseTest.qaSet[n]['state']=='w','qnumberclick':clickListener==n}">
@@ -151,16 +151,16 @@
                 </div>
             </div>
         </div>
-        <div class="ui-g-12 bottom-border top-border">
+        <div class="ui-g-12 bottom-border dark-theme top-border">
             <div class="ui-g text-center pad-left">
                 <div class="ui-g-3 text-center m-group pad-less">
                     <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>
-                    <button mat-mini-fab *ngIf="spinner2"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
+                    <button mat-mini-fab *ngIf="spinner2"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
                     <!-- <br>Mark For Review -->
                 </div>
                 <div class="ui-g-3 text-center v-group pad-less">
                     <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>
-                    <button mat-mini-fab *ngIf="spinner"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
+                    <button mat-mini-fab *ngIf="spinner"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
                     <!-- <br>Validate -->
                 </div>
                 <div class="ui-g-3 text-center n-group pad-less">

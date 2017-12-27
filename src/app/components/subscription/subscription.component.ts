@@ -105,7 +105,12 @@ export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
 
 	signUp(){
 		this.spinner = true;
-		this.http.register(this.userRegCreds).subscribe((data)=>{
+		var wrapper = JSON.parse(JSON.stringify(this.userRegCreds));
+		wrapper['email'] = wrapper['email'].toLowerCase();
+		wrapper['firstname'] = wrapper['firstname'].toLowerCase();
+		wrapper['lastname'] = wrapper['lastname'].toLowerCase();
+
+		this.http.register(wrapper).subscribe((data)=>{
 			if(data['status']==200){
 				this.sendOtp({email:this.userRegCreds.email,verify_mobile:true,verify_email:true});
 				this.getFee();
