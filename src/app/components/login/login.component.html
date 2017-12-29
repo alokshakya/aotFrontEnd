@@ -112,7 +112,7 @@
                 <button pButton class="ui-button-success" *ngIf="modeStr!='forgotVerifyMobile'||!spinner" [disabled]="mobileVerified||mobileOtp==null||mobileOtp==''||spinner||spinner2" (click)="setWrapper(true,'forgotMobile');verifyOtp();spinnerCondition('forgotVerifyMobile')" label="Verify"></button>
                 <button pButton *ngIf="modeStr=='forgotVerifyMobile'&&spinner" style="width:55px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
                 <button pButton *ngIf="modeStr=='forgotResendMobile'&&spinner" style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
-                <button pButton *ngIf="modeStr!='forgotResendMobile'||!spinner" [disabled]="mobileVerified||spinner||spinner2" (click)="setWrapper(true,'forgotMobile');sendOtp();spinnerCondition('forgotResendMobile')" class="ui-button-info" label="Resend"></button>
+                <button pButton *ngIf="modeStr!='forgotResendMobile'||!spinner" [disabled]="mobileVerified||spinner||spinner2" (click)="setWrapper(true,'forgotMobile');sendOtp();spinnerCondition('forgotResendMobile')" class="ui-button-info" label="Send" style="width:70px"></button>
                 <!-- <p class="success" *ngIf="mobileVerified">You can change your password below</p> -->
             </div>
             <div class="ui-g-12 text-center" *ngIf="(mode[0]=='verify_mobile'||mode[1]=='verify_mobile')&&(mode[0]=='verify_email'||mode[1]=='verify_email')&&!disappear">
@@ -124,7 +124,7 @@
                 <button *ngIf="modeStr!='forgotVerifyEmail'||!spinner2" pButton [disabled]="emailVerified||emailOtp==null||emailOtp==''||spinner||spinner2" class="ui-button-success" (click)="setWrapper(true,'forgotEmail');verifyOtp();spinnerCondition('forgotVerifyEmail')" label="Verify"></button>
                 <button *ngIf="modeStr=='forgotVerifyEmail'&&spinner2" pButton style="width:55px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
                 <button *ngIf="modeStr=='forgotResendEmail'&&spinner2" pButton style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
-                <button *ngIf="modeStr!='forgotResendEmail'||!spinner2" [disabled]="emailVerified||spinner2||spinner" (click)="setWrapper(true,'forgotEmail');sendOtp();spinnerCondition('forgotResendEmail')" pButton class="ui-button-info" label="Resend"></button>
+                <button *ngIf="modeStr!='forgotResendEmail'||!spinner2" [disabled]="emailVerified||spinner2||spinner" (click)="setWrapper(true,'forgotEmail');sendOtp();spinnerCondition('forgotResendEmail')" pButton class="ui-button-info" label="Send" style="width:70px"></button>
                 <!-- <p class="success" *ngIf="emailVerified">You can change your password below</p> -->
             </div>
             <div class="ui-g-12 empty" *ngIf="!(emailVerified||mobileVerified)"></div>
@@ -206,6 +206,15 @@
             </div>
             <div class="ui-g verify">
                 <div class="ui-g-12">
+                    <p>Enter Otp Sent On <strong>{{userRegCreds.mobile}}</strong></p>
+                    <span class="to-right"><p-inputMask slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="mobileOtp"></p-inputMask></span>
+                    <button pButton *ngIf="modeStr=='forgotVerifyMobile'&&spinner" style="width:60px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
+                    <button pButton *ngIf="modeStr!='forgotVerifyMobile'||!spinner" class="ui-button-success" [disabled]="mobileVerified||spinner||spinner2" (click)="setWrapper(true,'mobile');verifyOtp();spinnerCondition('forgotVerifyMobile')" label="Verify"></button>
+                    <button pButton *ngIf="modeStr=='forgotResendMobile'&&spinner" style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
+                    <button pButton *ngIf="modeStr!='forgotResendMobile'||!spinner" [disabled]="mobileVerified||spinner||spinner2" (click)="setWrapper(true,'mobile');sendOtp();spinnerCondition('forgotResendMobile')" class="ui-button-info" label="Send" style="width:70px"></button>
+                    <p class="success" *ngIf="mobileVerified">Mobile number verified.</p>
+                </div>
+                <div class="ui-g-12">
                     <p>Enter OTP sent on <strong>{{userRegCreds.email}}</strong></p>
                     <span class="to-right">
                         <p-inputMask slotChar=" " unmask="true" placeholder="Enter OTP" mask="999-999" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
@@ -213,17 +222,11 @@
                     <button *ngIf="modeStr=='forgotVerifyEmail'&&spinner2" pButton style="width:60px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
                     <button pButton *ngIf="modeStr!='forgotVerifyEmail'||!spinner2" [disabled]="emailVerified||spinner2||spinner" class="ui-button-success" (click)="setWrapper(true,'email');verifyOtp();spinnerCondition('forgotVerifyEmail')" label="Verify"></button>
                     <button *ngIf="modeStr=='forgotResendEmail'&&spinner2" pButton style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
-                    <button *ngIf="modeStr!='forgotResendEmail'||!spinner2" [disabled]="emailVerified||spinner2||spinner" (click)="setWrapper(true,'email');sendOtp();spinnerCondition('forgotResendEmail')" pButton class="ui-button-info" label="Resend"></button>
+                    <button *ngIf="modeStr!='forgotResendEmail'||!spinner2" [disabled]="emailVerified||spinner2||spinner" (click)="setWrapper(true,'email');sendOtp();spinnerCondition('forgotResendEmail')" pButton class="ui-button-info" label="Send" style="width:70px"></button>
                     <p class="success" *ngIf="emailVerified">Email address verified</p>
                 </div>
-                <div class="ui-g-12">
-                    <p>Enter Otp Sent On <strong>{{userRegCreds.mobile}}</strong></p>
-                    <span class="to-right"><p-inputMask slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="mobileOtp"></p-inputMask></span>
-                    <button pButton *ngIf="modeStr=='forgotVerifyMobile'&&spinner" style="width:60px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
-                    <button pButton *ngIf="modeStr!='forgotVerifyMobile'||!spinner" class="ui-button-success" [disabled]="mobileVerified||spinner||spinner2" (click)="setWrapper(true,'mobile');verifyOtp();spinnerCondition('forgotVerifyMobile')" label="Verify"></button>
-                    <button pButton *ngIf="modeStr=='forgotResendMobile'&&spinner" style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
-                    <button pButton *ngIf="modeStr!='forgotResendMobile'||!spinner" [disabled]="mobileVerified||spinner||spinner2" (click)="setWrapper(true,'mobile');sendOtp();spinnerCondition('forgotResendMobile')" class="ui-button-info" label="Resend"></button>
-                    <p class="success" *ngIf="mobileVerified">Mobile number verified.</p>
+                <div class="flip">
+                    <button id="wide-btn" (click)="skip()" pButton label="Skip Verification"></button>
                 </div>
                 <!--                 <div class="ui-g-6 ui-sm-12">
                     Enter OTP sent on {{userRegCreds.mobile}}
@@ -239,7 +242,7 @@
                 
                     <button pButton *ngIf="modeStr=='forgotResendMobile'&&spinner" style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
 
-                    <button pButton *ngIf="modeStr!='forgotResendMobile'||!spinner" [disabled]="mobileVerified||spinner||spinner2" (click)="setWrapper(true,'mobile');sendOtp();spinnerCondition('forgotResendMobile')" class="ui-button-info" label="Resend"></button>
+                    <button pButton *ngIf="modeStr!='forgotResendMobile'||!spinner" [disabled]="mobileVerified||spinner||spinner2" (click)="setWrapper(true,'mobile');sendOtp();spinnerCondition('forgotResendMobile')" class="ui-button-info" label="Send" style="width:70px"></button>
 
                 </div>
                 <div class="ui-g-6 ui-sm-12">
@@ -256,7 +259,7 @@
                 
                     <button *ngIf="modeStr=='forgotResendEmail'&&spinner2" pButton style="width:70px" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
 
-                    <button *ngIf="modeStr!='forgotResendEmail'||!spinner2" [disabled]="emailVerified||spinner2||spinner" (click)="setWrapper(true,'email');sendOtp();spinnerCondition('forgotResendEmail')" pButton class="ui-button-info" label="Resend"></button>
+                    <button *ngIf="modeStr!='forgotResendEmail'||!spinner2" [disabled]="emailVerified||spinner2||spinner" (click)="setWrapper(true,'email');sendOtp();spinnerCondition('forgotResendEmail')" pButton class="ui-button-info" label="Send" style="width:70px"></button>
                 </div> -->
             </div>
         </div>

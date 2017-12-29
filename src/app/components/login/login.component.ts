@@ -459,4 +459,12 @@ export class LoginComponent implements OnInit {
         else this.loginRegToggle = !this.loginRegToggle
     }
 
+    skip(){
+        this.reset();
+        this.clearFlags();
+        this.loginRegToggle = false;
+        this.message = [];
+        this.message.push({ severity: 'success', summary: 'Registration Complete', detail: 'Please Login'})
+    }
+
 }
