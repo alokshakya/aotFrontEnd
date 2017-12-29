@@ -415,6 +415,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                 this.generateMsg('success','Success','Mobile Number Updated Successfully');
                 this.otpDialog = false;
                 this.personalInfo.userInfo['mobile'] = this.dummyBasicInfo['mobile'];
+                this.personalInfo.userInfo['mobile_verified'] = 1;
             }
             else {
                 this.generateMsg('error','Server Error','Please Try Again');
@@ -539,7 +540,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     checkMobile(view=false){
         let pattern = new RegExp("^[7-9]{1}[0-9]{9}$");
         let mobile = this.dummyBasicInfo['mobile'];
-        if(mobile==this.personalInfo.userInfo['mobile']&&!view){
+        if(mobile==this.personalInfo.userInfo['mobile']&&!view&&this.personalInfo.userInfo['mobile_verified']==1){
             return true;
         }
         if(!pattern.test(mobile)){
