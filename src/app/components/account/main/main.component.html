@@ -1,4 +1,4 @@
-<p-blockUI [blocked]="unVerified"></p-blockUI>
+<!-- <p-blockUI [blocked]="unVerified"></p-blockUI> -->
 
 <p-dialog header="Change Profile Picture" [responsive]="true" [(visible)]="changeImg">
     <div class="ui-g">
@@ -8,7 +8,7 @@
         </div>
     </div>
 </p-dialog>
-<p-dialog [responsive]="true" [(visible)]="unVerified" [closeOnEscape]="false" [width]="400" [closable]="false">
+<!-- <p-dialog [responsive]="true" [(visible)]="unVerified" [closeOnEscape]="false" [width]="400" [closable]="false">
     <p-header>
         Verification<span class="to-right" (click)="logout()" ><a href=""><i pTooltip="Logout" class="fa fa-sign-out fa-lg"></i></a></span>
     </p-header>
@@ -34,7 +34,7 @@
             <p *ngIf="mobileVerified" class="success">Mobile Verified Successfully</p>
         </div>
     </div>
-</p-dialog>
+</p-dialog> -->
 <div #layoutWrapper class="layout-wrapper" [ngClass]="{'menu-layout-static': !isOverlay(),
         'menu-layout-overlay': isOverlay(),
         'layout-menu-overlay-active': overlayMenuActive,
@@ -77,6 +77,7 @@
             <p-growl [(value)]="growlMsg"></p-growl>
                 <router-outlet></router-outlet>
             </div>
+            <div class="fill"></div>
             <app-footer></app-footer>
         </div>
     </div>

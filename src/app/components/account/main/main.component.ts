@@ -114,123 +114,123 @@ export class AccountMainComponent implements AfterViewInit {
         if (this.email.length > 24) {
             this.shownEmail = this.email.slice(24, );
         }
-        this.setWrapper();
+        // this.setWrapper();
     }
 
-    setWrapper(mode=null){
-        let wrapper;
-        if(mode==null){
-            let status = {'0':false,'1':true}
-            this.userObject = {
-                email:this.email,
-                'mobile_verified':status[this.personalInfo.userInfo.mobile_verified], 
-                'email_verified':status[this.personalInfo.userInfo.email_verified],
-                'mobile_otp':null,
-                'email_otp':null,
-            };
-            if(!this.userObject.mobile_verified||!this.userObject.email_verified){
-                this.unVerified = true 
-            }
-            if(this.userObject.email_verified){
-                this.emailVerified = true;
-                this.uEvent.emitVerifiedUserEvent();
-            }
-            if(this.userObject.mobile_verified){
-                this.mobileVerified = true;
-                this.uEvent.emitVerifiedUserEvent();
-            }
-            if(this.uEvent.user>=2){
-                return false
-            }
-            wrapper = {email:this.userObject.email,verify_email:!this.userObject.email_verified, verify_mobile:!this.userObject.mobile_verified};
-        }
-        else{
-            this.modeStr = mode;
-            if(mode=='mobile'){
-                wrapper = {email:this.userObject.email,verify_email:false, verify_mobile:true};
-                this.spinner2 = true;
-            }
-            if(mode=='email'){
-                wrapper = {email:this.userObject.email,verify_email:true, verify_mobile:false};
-                this.spinner = true;
-            }
-        }
-        this.sendOtp(wrapper)
-    }
+    // setWrapper(mode=null){
+    //     let wrapper;
+    //     if(mode==null){
+    //         let status = {'0':false,'1':true}
+    //         this.userObject = {
+    //             email:this.email,
+    //             'mobile_verified':status[this.personalInfo.userInfo.mobile_verified], 
+    //             'email_verified':status[this.personalInfo.userInfo.email_verified],
+    //             'mobile_otp':null,
+    //             'email_otp':null,
+    //         };
+    //         if(!this.userObject.mobile_verified||!this.userObject.email_verified){
+    //             this.unVerified = true 
+    //         }
+    //         if(this.userObject.email_verified){
+    //             this.emailVerified = true;
+    //             this.uEvent.emitVerifiedUserEvent();
+    //         }
+    //         if(this.userObject.mobile_verified){
+    //             this.mobileVerified = true;
+    //             this.uEvent.emitVerifiedUserEvent();
+    //         }
+    //         if(this.uEvent.user>=2){
+    //             return false
+    //         }
+    //         wrapper = {email:this.userObject.email,verify_email:!this.userObject.email_verified, verify_mobile:!this.userObject.mobile_verified};
+    //     }
+    //     else{
+    //         this.modeStr = mode;
+    //         if(mode=='mobile'){
+    //             wrapper = {email:this.userObject.email,verify_email:false, verify_mobile:true};
+    //             this.spinner2 = true;
+    //         }
+    //         if(mode=='email'){
+    //             wrapper = {email:this.userObject.email,verify_email:true, verify_mobile:false};
+    //             this.spinner = true;
+    //         }
+    //     }
+    //     this.sendOtp(wrapper)
+    // }
 
-    check(mode){
-        if(mode=='mobile'){
-            this.personalInfo.userInfo.mobile_verified=1;
-            this.mobileVerified = true;
-        }
-        if(mode=='email'){
-            this.emailVerified = true;
-            this.personalInfo.userInfo.email_verified=1;
+    // check(mode){
+    //     if(mode=='mobile'){
+    //         this.personalInfo.userInfo.mobile_verified=1;
+    //         this.mobileVerified = true;
+    //     }
+    //     if(mode=='email'){
+    //         this.emailVerified = true;
+    //         this.personalInfo.userInfo.email_verified=1;
 
-        }
-        if(this.mobileVerified&&this.emailVerified){
-            this.unVerified = false;
-            this.messageDisplay('success','Verification Successful','')
-        }
-    }
+    //     }
+    //     if(this.mobileVerified&&this.emailVerified){
+    //         this.unVerified = false;
+    //         this.messageDisplay('success','Verification Successful','')
+    //     }
+    // }
 
-    verify(mode){
-        this.modeStr = 'verify'+mode;
-        let wrapper = {email:this.userObject.email,otp:null,verify_email:false,verify_mobile:false};
-        if(mode=='email'){
-            wrapper['otp'] = this.userObject['email_otp'];
-            wrapper['verify_email'] = true
-            this.spinner3 = true
-        }
+    // verify(mode){
+    //     this.modeStr = 'verify'+mode;
+    //     let wrapper = {email:this.userObject.email,otp:null,verify_email:false,verify_mobile:false};
+    //     if(mode=='email'){
+    //         wrapper['otp'] = this.userObject['email_otp'];
+    //         wrapper['verify_email'] = true
+    //         this.spinner3 = true
+    //     }
 
-        if(mode=='mobile'){
-            wrapper['otp'] = this.userObject['mobile_otp'];
-            wrapper['verify_mobile'] = true
-            this.spinner4 = true
-        }
-        this.masterhttp.verifyOtp(wrapper).subscribe((data)=>{
-            if(data['status']==200){
-                this.spinner3=false;
-                this.spinner4=false;
-                this.modeStr=null;
-                this.uEvent.emitVerifiedUserEvent();
-                this.check(mode)
-            }
-            else{
-                this.messageDisplay('error','Incorrect Otp','Please Try Again')
-                this.spinner3=false;
-                this.spinner4=false;
-                this.modeStr=null; 
-            }
-        },err=>{
-            this.messageDisplay('error','Incorrect Otp','Please Try Again')
-            this.spinner3=false;
-            this.spinner4=false;
-            this.modeStr=null;
-        })
-    }
+    //     if(mode=='mobile'){
+    //         wrapper['otp'] = this.userObject['mobile_otp'];
+    //         wrapper['verify_mobile'] = true
+    //         this.spinner4 = true
+    //     }
+    //     this.masterhttp.verifyOtp(wrapper).subscribe((data)=>{
+    //         if(data['status']==200){
+    //             this.spinner3=false;
+    //             this.spinner4=false;
+    //             this.modeStr=null;
+    //             this.uEvent.emitVerifiedUserEvent();
+    //             this.check(mode)
+    //         }
+    //         else{
+    //             this.messageDisplay('error','Incorrect Otp','Please Try Again')
+    //             this.spinner3=false;
+    //             this.spinner4=false;
+    //             this.modeStr=null; 
+    //         }
+    //     },err=>{
+    //         this.messageDisplay('error','Incorrect Otp','Please Try Again')
+    //         this.spinner3=false;
+    //         this.spinner4=false;
+    //         this.modeStr=null;
+    //     })
+    // }
 
-    sendOtp(wrapper){
-        this.masterhttp.sendOtp(wrapper).subscribe((data)=>{
-            if(data['status']!=200){
-                this.messageDisplay('info','Warning','Click Resend To Receive Otp');
-                this.spinner = false
-                this.spinner2 = false
-                this.modeStr = null
-            }
-            else{
-                this.spinner = false
-                this.spinner2 = false
-                this.modeStr = null
-            }
+    // sendOtp(wrapper){
+    //     this.masterhttp.sendOtp(wrapper).subscribe((data)=>{
+    //         if(data['status']!=200){
+    //             this.messageDisplay('info','Warning','Click Resend To Receive Otp');
+    //             this.spinner = false
+    //             this.spinner2 = false
+    //             this.modeStr = null
+    //         }
+    //         else{
+    //             this.spinner = false
+    //             this.spinner2 = false
+    //             this.modeStr = null
+    //         }
 
-        },err=>{
-            this.messageDisplay('info','Warning','Click Resend To Receive Otp');
-            this.spinner = false
-            this.spinner2 = false
-            this.modeStr = null
-        })
-    }
+    //     },err=>{
+    //         this.messageDisplay('info','Warning','Click Resend To Receive Otp');
+    //         this.spinner = false
+    //         this.spinner2 = false
+    //         this.modeStr = null
+    //     })
+    // }
 
     getDate(){
         this.imgTimeStamp = new Date().getTime();

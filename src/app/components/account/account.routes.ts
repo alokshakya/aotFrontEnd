@@ -46,7 +46,7 @@ import { TestComponent } from '../test/test.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoadoutComponent } from './loadout/loadout.component';
 
-import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from './account.guard';
+import { AccountGuard, TestAccountGuard, TestDeactivate} from './account.guard';
 
 export const AccountRoutes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -57,45 +57,45 @@ export const AccountRoutes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent, },
-            { path: 'subscribe', component: SubscribeComponent, canActivate:[verifiedGuard] },
+            { path: 'subscribe', component: SubscribeComponent },
             
-            { path: 'computers/demotest', component: DemotestComputersComponent, canActivate:[verifiedGuard] },
-            { path: 'computers/chapterwisetest', component: ChapterwisetestComputersComponent, canActivate:[verifiedGuard] },
-            { path: 'computers/sampletest', component: SampletestComputersComponent, canActivate:[verifiedGuard] },
-            { path: 'computers/mocktest', component: MocktestComputersComponent, canActivate:[verifiedGuard] },
-            { path: 'computers/result', component: ResultComputersComponent, canActivate:[verifiedGuard] },
+            { path: 'computers/demotest', component: DemotestComputersComponent },
+            { path: 'computers/chapterwisetest', component: ChapterwisetestComputersComponent },
+            { path: 'computers/sampletest', component: SampletestComputersComponent },
+            { path: 'computers/mocktest', component: MocktestComputersComponent },
+            { path: 'computers/result', component: ResultComputersComponent },
             
-            { path: 'english/demotest', component: DemotestEnglishComponent, canActivate:[verifiedGuard] },
-            { path: 'english/chapterwisetest', component: ChapterwisetestEnglishComponent, canActivate:[verifiedGuard] },
-            { path: 'english/sampletest', component: SampletestEnglishComponent, canActivate:[verifiedGuard] },
-            { path: 'english/mocktest', component: MocktestEnglishComponent, canActivate:[verifiedGuard] },
-            { path: 'english/result', component: ResultEnglishComponent, canActivate:[verifiedGuard] },
+            { path: 'english/demotest', component: DemotestEnglishComponent },
+            { path: 'english/chapterwisetest', component: ChapterwisetestEnglishComponent },
+            { path: 'english/sampletest', component: SampletestEnglishComponent },
+            { path: 'english/mocktest', component: MocktestEnglishComponent },
+            { path: 'english/result', component: ResultEnglishComponent },
 
-            { path: 'science/demotest', component: DemotestScienceComponent, canActivate:[verifiedGuard] },
-            { path: 'science/chapterwisetest', component: ChapterwisetestScienceComponent, canActivate:[verifiedGuard] },
-            { path: 'science/sampletest', component: SampletestScienceComponent, canActivate:[verifiedGuard] },
-            { path: 'science/mocktest', component: MocktestScienceComponent, canActivate:[verifiedGuard] },
-            { path: 'science/result', component: ResultScienceComponent, canActivate:[verifiedGuard] },
+            { path: 'science/demotest', component: DemotestScienceComponent },
+            { path: 'science/chapterwisetest', component: ChapterwisetestScienceComponent },
+            { path: 'science/sampletest', component: SampletestScienceComponent },
+            { path: 'science/mocktest', component: MocktestScienceComponent },
+            { path: 'science/result', component: ResultScienceComponent },
 
-            { path: 'math/demotest', component: DemotestMathComponent, canActivate:[verifiedGuard] },
-            { path: 'math/chapterwisetest', component: ChapterwisetestMathComponent, canActivate:[verifiedGuard] },
-            { path: 'math/sampletest', component: SampletestMathComponent, canActivate:[verifiedGuard] },
-            { path: 'math/mocktest', component: MocktestMathComponent, canActivate:[verifiedGuard] },
-            { path: 'math/result', component: ResultMathComponent, canActivate:[verifiedGuard] },
+            { path: 'math/demotest', component: DemotestMathComponent },
+            { path: 'math/chapterwisetest', component: ChapterwisetestMathComponent },
+            { path: 'math/sampletest', component: SampletestMathComponent },
+            { path: 'math/mocktest', component: MocktestMathComponent },
+            { path: 'math/result', component: ResultMathComponent },
 
-            { path: 'gk/demotest', component: DemotestGkComponent, canActivate:[verifiedGuard] },
-            { path: 'gk/chapterwisetest', component: ChapterwisetestGkComponent, canActivate:[verifiedGuard] },
-            { path: 'gk/sampletest', component: SampletestGkComponent, canActivate:[verifiedGuard] },
-            { path: 'gk/mocktest', component: MocktestGkComponent, canActivate:[verifiedGuard] },
-            { path: 'gk/result', component: ResultGkComponent, canActivate:[verifiedGuard] },
+            { path: 'gk/demotest', component: DemotestGkComponent },
+            { path: 'gk/chapterwisetest', component: ChapterwisetestGkComponent },
+            { path: 'gk/sampletest', component: SampletestGkComponent },
+            { path: 'gk/mocktest', component: MocktestGkComponent },
+            { path: 'gk/result', component: ResultGkComponent },
 
-            { path: 'reasoning/demotest', component: DemotestReasoningComponent, canActivate:[verifiedGuard] },
-            { path: 'reasoning/chapterwisetest', component: ChapterwisetestReasoningComponent, canActivate:[verifiedGuard] },
-            { path: 'reasoning/sampletest', component: SampletestReasoningComponent, canActivate:[verifiedGuard] },
-            { path: 'reasoning/mocktest', component: MocktestReasoningComponent, canActivate:[verifiedGuard] },
-            { path: 'reasoning/result', component: ResultReasoningComponent, canActivate:[verifiedGuard] },
+            { path: 'reasoning/demotest', component: DemotestReasoningComponent },
+            { path: 'reasoning/chapterwisetest', component: ChapterwisetestReasoningComponent },
+            { path: 'reasoning/sampletest', component: SampletestReasoningComponent },
+            { path: 'reasoning/mocktest', component: MocktestReasoningComponent },
+            { path: 'reasoning/result', component: ResultReasoningComponent },
             
-            { path: 'profile', component: ProfileComponent, canActivate:[verifiedGuard],canDeactivate:[TestDeactivate]}
+            { path: 'profile', component: ProfileComponent,canDeactivate:[TestDeactivate]}
         ],
     }
 ];
