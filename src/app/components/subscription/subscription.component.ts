@@ -192,6 +192,7 @@ export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
 		if(this.mobileVerified&&this.emailVerified){
 			this.index = 2;
 			this.reset();
+			this.growlDisplay('success','Success','Verification Successful');
 		}
 	}
 
@@ -297,7 +298,7 @@ export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
 	}
 
 	otpPattern(){
-		let pattern = new RegExp('^[1-6]{6}$');
+		let pattern = new RegExp('^[0-9]{6}$');
 		let a = [false,false];
 		if(!pattern.test(this.mobileOtp)){
 			a[0]=true;

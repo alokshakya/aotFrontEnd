@@ -69,27 +69,25 @@
             </div>
             <div class="ui-g" *ngIf="index==1">
                 <div class="ui-g-12 text-left min-width">
-                    <p>Enter OTP Sent On <strong>{{userRegCreds.email}}</strong></p>
-                    <p-inputMask [style]="{'width':'51%'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
-                    <button pButton *ngIf="!emailSpinner" label="Verify" (click)="setWrapper('verify_email');verify('verify_email')" class="ui-button-success" [disabled]="emailSpinner||emailVerified||otpPattern()[1]"></button>
-                    <button pButton *ngIf="emailSpinner" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
-
-                    <button pButton *ngIf="!emailSpinner2" [disabled]="emailSpinner2||emailVerified" label="Resend" (click)="setWrapper('verify_email');sendOtp()" class="ui-button-info"></button>
-                    <button pButton *ngIf="emailSpinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
-                    <p class="green-text" *ngIf="emailVerified">Email Verified Successfully.</p>
-                </div><span><br></span>
-                <div class="ui-g-12 text-left min-width">
                     <p>Enter OTP Sent On <strong>{{userRegCreds.mobile}}</strong></p>
                     <p-inputMask [style]="{'width':'51%'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="mobileVerified" [(ngModel)]="mobileOtp"></p-inputMask>
                     <button pButton *ngIf="!mobileSpinner" label="Verify" (click)="setWrapper('verify_mobile');verify('verify_mobile')" class="ui-button-success" [disabled]="mobileSpinner||mobileVerified||otpPattern()[0]"></button>
                     <button pButton *ngIf="mobileSpinner" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
 
-                    <button pButton *ngIf="!mobileSpinner2" [disabled]="mobileSpinner2||mobileVerified" label="Resend" (click)="setWrapper('verify_mobile');sendOtp()" class="ui-button-info"></button>
+                    <button pButton *ngIf="!mobileSpinner2" [disabled]="mobileSpinner2||mobileVerified" label="Send" (click)="setWrapper('verify_mobile');sendOtp()" class="ui-button-info"></button>
                     <button pButton *ngIf="mobileSpinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
                     <p class="green-text" *ngIf="mobileVerified">Mobile Verified Successfully.</p>
-
                 </div>
+                <div class="ui-g-12 text-left min-width">
+                    <p>Enter OTP Sent On <strong>{{userRegCreds.email}}</strong></p>
+                    <p-inputMask [style]="{'width':'51%'}" slotChar=" " unmask="true" mask="999-999" placeholder="Enter OTP" [disabled]="emailVerified" [(ngModel)]="emailOtp"></p-inputMask>
+                    <button pButton *ngIf="!emailSpinner" label="Verify" (click)="setWrapper('verify_email');verify('verify_email')" class="ui-button-success" [disabled]="emailSpinner||emailVerified||otpPattern()[1]"></button>
+                    <button pButton *ngIf="emailSpinner" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-success"></button>
 
+                    <button pButton *ngIf="!emailSpinner2" [disabled]="emailSpinner2||emailVerified" label="Send" (click)="setWrapper('verify_email');sendOtp()" class="ui-button-info"></button>
+                    <button pButton *ngIf="emailSpinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" class="ui-button-info"></button>
+                    <p class="green-text" *ngIf="emailVerified">Email Verified Successfully.</p>
+                </div><span><br></span>
                 <div class="ui-g-12 text-center pad-top"><button pButton (click)="skip()" label="Skip Verification"></button></div>
             </div>
 
