@@ -86,15 +86,16 @@ export class DemotestGkComponent implements OnInit {
         this.misc.setCurrentRoute(["General-Knowledge","Demo Test"]);
         this.misc.setLocalRoute('account/gk/demotest');
         this.demoTestData = {
-            labels: ['Remaining'],
-            datasets: [{ data: [1], backgroundColor: ["#D9534F"], hoverBackgroundColor: ["#D9534F"] }]
+            labels: ['Remaining','Completed'],
+            datasets: [{ data: [1,0], backgroundColor: ["#D9534F","#5CB85C"], hoverBackgroundColor: ["#D9534F","#5CB85C"] }]
         };
         if(this.chapterwiseTest.gk.hasOwnProperty('demo_test')){
             this.displayTest = true;
             if(this.chapterwiseTest.gk['demo_test']['total_completed']==1){
-                this.makeGraph(['Completed'],[1],'#5CB85C')
+            // this.makeGraph(['Completed'],[1],'#5CB85C')
+                this.demoTestData['datasets'][0]['data'] = [0,1];
             }
-            else this.makeGraph(['Remaining'],[1],'#D9534F');
+            // else this.makeGraph(['Remaining'],[1],'#D9534F');
         }
     }
 }

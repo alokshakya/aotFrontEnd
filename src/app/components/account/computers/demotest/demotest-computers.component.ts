@@ -87,15 +87,16 @@ export class DemotestComputersComponent implements OnInit {
         this.misc.setCurrentRoute(["Computers","Demo Test"]);
         this.misc.setLocalRoute('account/computers/demotest');
         this.demoTestData = {
-            labels: ['Remaining'],
-            datasets: [{ data: [1], backgroundColor: ["#D9534F"], hoverBackgroundColor: ["#D9534F"] }]
+            labels: ['Remaining','Completed'],
+            datasets: [{ data: [1,0], backgroundColor: ["#D9534F","#5CB85C"], hoverBackgroundColor: ["#D9534F","#5CB85C"] }]
         };
         if(this.chapterwiseTest.computers.hasOwnProperty('demo_test')){
             this.displayTest = true;
             if(this.chapterwiseTest.computers['demo_test']['total_completed']==1){
-                this.makeGraph(['Completed'],[1],'#5CB85C')
+                this.demoTestData['datasets'][0]['data'] = [0,1];
+                // this.makeGraph(['Completed'],[1],'#5CB85C')
             }
-            else this.makeGraph(['Remaining'],[1],'#D9534F');
+            // else this.makeGraph(['Remaining'],[1],'#D9534F');
         }
     }
 }
