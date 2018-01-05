@@ -210,6 +210,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             .subscribe((data: Response) => {
                 if (data['status'] == 200) {
                     this.dummyBasicInfo.mobile = this.personalInfo.userInfo.mobile;
+                    this.changeTheme(wrapper['gender']);
                     // this.masterhtttp.getPersonalInfo();
                     this.personalInfo.userInfo = this.dummyBasicInfo;
                     this.editBasic = false;
@@ -371,10 +372,22 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             })
     }
 
+    changeTheme(gender) {
+        let theme = {
+            Male:'ob',
+            Female:'pink'
+        }
+        let themeLink: HTMLLinkElement = <HTMLLinkElement> document.getElementById('theme-css');
+        let layoutLink: HTMLLinkElement = <HTMLLinkElement> document.getElementById('layout-css');
+        
+        themeLink.href = 'assets/theme/theme-' + theme[gender] +'.css';
+        layoutLink.href = 'assets/layout/css/layout-' + theme[gender] +'.css';
+    }
+
     invalidName(){
         let arr = [false,false,false];
         let pattern = new RegExp("^[a-zA-Z]+$");
-        let dobPattern = new RegExp("^[1-2]{1}[0-9]{3}-[1]{1}[1-2]{1}-[0-3]{1}[0-9]{1}$");
+        let dobPattern = new RegExp("^[1-2]{1}[0-9]{3}-[0-1]{1}[1-2]{1}-[0-3]{1}[0-9]{1}$");
         let zipPattern = new RegExp("^[0-9]{6}");
         let addressPattern = new RegExp("^[0-9A-Za-z]{1,}[a-zA-Z0-9]+$");
         if(this.editBasic){

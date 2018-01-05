@@ -40,12 +40,15 @@ export class LoadoutComponent implements OnInit {
     eventAction(){
         this.event.dataEvent.subscribe((data)=>{
             if(data==8){
-                let previousRoute = sessionStorage.getItem('route')
+                let previousRoute = sessionStorage.getItem('route');
+                this.changeTheme(this.personalInfo.userInfo['gender']);
                 if(previousRoute!=null){
-                    if(this.personalInfo.userInfo.email_verified==1&&this.personalInfo.userInfo.mobile_verified==1){
-                        this.router.navigate([previousRoute]);
-                    }
-                    else this.router.navigate(['account']);
+                    // if(this.personalInfo.userInfo.email_verified==1&&this.personalInfo.userInfo.mobile_verified==1){
+                        setTimeout(()=>{
+                            this.router.navigate([previousRoute]);
+                        },200)
+                    // }
+                    // else this.router.navigate(['account']);
                 }
                 else this.router.navigate(['account'])
             }
@@ -63,6 +66,7 @@ export class LoadoutComponent implements OnInit {
         this.http.getPattern();
         this.http.getFee();
         this.misc.logIn();
+
     }
 
     errorCheck(){
@@ -79,5 +83,16 @@ export class LoadoutComponent implements OnInit {
         this.http.updated = 0;
     }
 
-}
+    changeTheme(gender) {
+        let theme = {
+            Male:'ob',
+            Female:'pink'
+        }
+        let themeLink: HTMLLinkElement = <HTMLLinkElement> document.getElementById('theme-css');
+        let layoutLink: HTMLLinkElement = <HTMLLinkElement> document.getElementById('layout-css');
+        
+        themeLink.href = 'assets/theme/theme-' + theme[gender] +'.css';
+        layoutLink.href = 'assets/layout/css/layout-' + theme[gender] +'.css';
+    }
 
+}
