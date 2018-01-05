@@ -164,6 +164,10 @@ export class SubscribeComponent implements OnInit {
     }
 
     download(e){
+        if(e!==null){
+            let invoiceUrl = constants.OLYMPIADBOX_INVOICE_URL+e;
+            window.open(invoiceUrl,'_blank');
+        }
     }
 }
 
