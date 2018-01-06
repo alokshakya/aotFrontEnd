@@ -51,7 +51,7 @@ export class SubscribeComponent implements OnInit {
         this.selectedPackage = [];
 
         this.col = [{ "header": "Subject", "field": "subject_name" }, { "header": "Price", "field": "amount" }];
-        this.col2 = [{ "header": "Order Id", "field": "gateway_order_id" }, { "header": "Transaction Id", "field": "transaction_id" },{"header":"Date","field":"paid_date"},{"header":"Invoice","field":"payments_id"}];
+        this.col2 = [{ "header": "Order Id", "field": "gateway_order_id" }, { "header": "Transaction Id", "field": "transaction_id" },{"header":"Paid Date","field":"paid_date"},{"header":"Paid Time","field":"paid_time"},{"header":"Invoice","field":"payments_id"}];
     }
 
     ngOnInit() {
