@@ -46,7 +46,7 @@ export class LoadoutComponent implements OnInit {
                     // if(this.personalInfo.userInfo.email_verified==1&&this.personalInfo.userInfo.mobile_verified==1){
                         setTimeout(()=>{
                             this.router.navigate([previousRoute]);
-                        },200)
+                        },800)
                     // }
                     // else this.router.navigate(['account']);
                 }

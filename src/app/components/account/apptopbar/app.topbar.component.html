@@ -12,7 +12,22 @@
                 <i class="fa fa-bars"></i>
             </a>
             
-        <ul id="breadcrumb" *ngIf="!app.isMobile()">
+        <ul id="breadcrumb" *ngIf="!app.isMobile()&&personalInfo.userInfo.gender=='Male'">
+          <li [routerLink]="['/account/dashboard']"><a href="#"><i class="fa fa-home fa-lg"></i></a></li>
+          <li *ngIf="currentComponent[0]=='Science'"><a href="#"><i class="icon-science icon-2x"> &nbsp;</i><span> Science</span></a></li>
+          <li *ngIf="currentComponent[0]=='Computers'"><a href="#"><i class="icon-cyber icon-2x"> &nbsp;</i><span> Computers</span></a></li>
+          <li *ngIf="currentComponent[0]=='Mathematics'"><a href="#"><i class="icon-maths icon-2x"> &nbsp;</i><span> Mathematics</span></a></li>
+          <li *ngIf="currentComponent[0]=='General-Knowledge'"><a href="#"><i class="icon-gk icon-2x"> &nbsp;</i><span> General-Knowledge</span></a></li>
+          <li *ngIf="currentComponent[0]=='Reasoning'"><a href="#"><i class="icon-reasoning icon-2x"> &nbsp;</i><span> Reasoning</span></a></li>
+          <li *ngIf="currentComponent[0]=='English'"><a href="#"><i class="icon-english icon-2x"> &nbsp;</i><span> English</span></a></li>
+          <!-- <li *ngIf="currentComponent[0]=='English'"><a href="#"><i class="fa fa-user"> &nbsp;</i><span class="sub"> English</span></a></li> -->
+          
+          <li *ngIf="currentComponent[1]==null&&currentComponent[0]!='Dashboard'"><a href="#">{{currentComponent[0]}}</a></li>
+
+          <li *ngIf="currentComponent[1]!=null"><a href="#">{{currentComponent[1]}}</a></li>
+        </ul>
+
+        <ul id="breadcrumbF" *ngIf="!app.isMobile()&&personalInfo.userInfo.gender=='Female'">
           <li [routerLink]="['/account/dashboard']"><a href="#"><i class="fa fa-home fa-lg"></i></a></li>
           <li *ngIf="currentComponent[0]=='Science'"><a href="#"><i class="icon-science icon-2x"> &nbsp;</i><span> Science</span></a></li>
           <li *ngIf="currentComponent[0]=='Computers'"><a href="#"><i class="icon-cyber icon-2x"> &nbsp;</i><span> Computers</span></a></li>
