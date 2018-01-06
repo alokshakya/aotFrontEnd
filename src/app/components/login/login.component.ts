@@ -65,12 +65,12 @@ export class LoginComponent implements OnInit {
     //register subsection  mobile verify
     regVerifyToggle: boolean;
     actualOTP: number;
-    mobileOtp: number;
+    mobileOtp: any;
     mobileVerified: boolean;
 
     //register subsection  email verify
     actualCode: string;
-    emailOtp: number;
+    emailOtp: any;
     emailVerified: boolean;
 
     //misc
@@ -227,13 +227,24 @@ export class LoginComponent implements OnInit {
 
 
     sendOtp() {
+
+        var makeNull = (wrapper)=>{
+            if(wrapper['verify_email']){
+                this.emailOtp = null;
+            }
+            if(wrapper['verify_mobile']){
+                this.mobileOtp = null;
+            }
+        }
+
         this.masterhttp.sendOtp(this.wrapper)
             .subscribe((data: Response) => {
+                makeNull(this.wrapper);
                 if(data['status']==200){
                     this.generateResponse(data['message']);
                     this.modeStr = null;
                 }
-                else {
+                else if(data['status']==718) {
                     this.message = [];
                     this.message.push({severity:'error', summary:'Email Does Not Exists', detail:'Please Try Again With Different Email Address'})
                     this.spinner = false;
@@ -289,7 +300,7 @@ export class LoginComponent implements OnInit {
                 this.spinner = false;
                 this.spinner2 = false;
                 this.message = [];
-                this.message.push({severity:'error', summary:'Incorrect Otp', detail:'Please Try Again'});
+                this.message.push({severity:'error', summary:'Incorrect OTP', detail:'Please Try Again'});
                 this.modeStr = null;
 
             }
@@ -375,9 +386,9 @@ export class LoginComponent implements OnInit {
 
     //used to toggle loginRegister after successful registration
     check() {
-        if (this.mobileVerified && this.emailVerified) {
+        if (this.mobileVerified /*&& this.emailVerified*/) {
             this.message = []
-            this.message.push({ severity: 'success', summary: 'Registration Successful', detail: 'Please login' })
+            this.message.push({ severity: 'success', summary: 'Registration Successful', detail: 'Please Login' })
             this.reset();
             this.clearFlags();
             this.loginRegToggle = false;
@@ -398,6 +409,7 @@ export class LoginComponent implements OnInit {
         this.userRegCreds['lastname']=null;
         this.userRegCreds['class']=null;
         this.userRegCreds['password']=null;
+        this.userRegCreds['gender']=null;
         this.confirmPassword = null;
 
         // forgot password
@@ -450,6 +462,18 @@ export class LoginComponent implements OnInit {
     ngOnDestroy(){
         this.reset();
         this.clearFlags();
+    }
+
+    otpPattern(){
+        let pattern = new RegExp('^[0-9]{6}$');
+        let a = [false,false];
+        if(!pattern.test(this.mobileOtp)){
+            a[0]=true;
+        }
+        if(!pattern.test(this.emailOtp)){
+            a[1]=true;
+        }
+        return a;
     }
 
     conditionalDisplay(){
