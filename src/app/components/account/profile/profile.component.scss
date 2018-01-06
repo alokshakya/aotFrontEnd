@@ -230,3 +230,23 @@ label {
 .right{
     margin-left: 2.5%;
 }
+
+.wrap{
+    word-wrap:break-word;
+}
+
+.fixed i {
+    -webkit-transition: transform .25s;
+       -moz-transition: transform .25s;
+        -ms-transition: transform .25s;
+         -o-transition: transform .25s;
+            transition: transform .25s;
+}
+
+.fixed i:hover{
+    -webkit-transform: scale(1.5);
+       -moz-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+         -o-transform: scale(1.5);
+            transform: scale(1.5);
+}

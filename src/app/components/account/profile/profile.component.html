@@ -216,10 +216,10 @@
                                 <div class="fixed">
                                     <div class="row" *ngFor="let text of personalInfo.userTestimonials;let i=index;">
                                         <br>
-                                        <div class="col-md-10 col-xs-12">
+                                        <div class="col-md-10 col-xs-12 wrap">
                                             <p>{{text['text']}}</p>
                                         </div>
-                                        <div class="col-md-2"><i pTooltip="Edit" (click)="edit(i)" class="fa fa-pencil clickable"></i></div>
+                                        <div class="col-md-2"><i (click)="edit(i)" class="fa fa-pencil clickable"></i></div>
                                     </div>
                                 </div>
                             </p-panel>

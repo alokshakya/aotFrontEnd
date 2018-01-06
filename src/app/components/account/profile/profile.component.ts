@@ -212,6 +212,9 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.dummyBasicInfo.mobile = this.personalInfo.userInfo.mobile;
                     this.changeTheme(wrapper['gender']);
                     // this.masterhtttp.getPersonalInfo();
+                    this.dummyBasicInfo['firstname'] = this.dummyBasicInfo['firstname'].charAt(0).toUpperCase()+this.dummyBasicInfo['firstname'].slice(1);
+                    this.dummyBasicInfo['lastname'] = this.dummyBasicInfo['lastname'].charAt(0).toUpperCase()+this.dummyBasicInfo['lastname'].slice(1);
+
                     this.personalInfo.userInfo = this.dummyBasicInfo;
                     this.editBasic = false;
                     this.generateMsg('success','Success','Profile Updated Successfully');
