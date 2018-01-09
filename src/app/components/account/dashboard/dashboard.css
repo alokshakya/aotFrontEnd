@@ -198,3 +198,7 @@
 .fixed-height{
     height:264px;
 }
+
+.text-wrap{
+    word-wrap:break-word;
+}
