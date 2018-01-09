@@ -146,17 +146,19 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    setWrapper(resend=false, mode=null){
+    setWrapper(resend=false, mode=null,forgotPassword=false){
         if(mode=='selective'&&!resend){
             this.wrapper['email'] = this.registeredEmail;
             if(this.mode.indexOf('verify_email') > -1){
                 this.wrapper['verify_email'] = true;
                 this.spinner2 = true;
+                if(forgotPassword){
+                    this.wrapper['forgot_password'] = true;
+                }
             }
             if(this.mode.indexOf('verify_mobile') > -1){
                 this.wrapper['verify_mobile'] = true;
                 this.spinner = true;
-
             }
         }
         else if(mode=='forgotMobile'&&resend){
@@ -171,6 +173,9 @@ export class LoginComponent implements OnInit {
             this.wrapper['verify_mobile'] = false;
             this.wrapper['verify_email'] = true;
             this.spinner2 = true;
+            if(forgotPassword){
+                this.wrapper['forgot_password'] = true;
+            }
         }
 
         else if(mode=='mobile'&&resend){
