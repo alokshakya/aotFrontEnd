@@ -57,6 +57,21 @@ export class SubscribeComponent implements OnInit {
     ngOnInit() {
         this.misc.setCurrentRoute(["Subscribe"]);
         this.misc.setLocalRoute('account/subscribe');
+        this.preselectSubject();
+    }
+
+    preselectSubject(){
+        if(this.misc.selectedSub!=null){
+            for(let i in this.misc.fee){
+                if(this.misc.fee[i]['subject_name']===this.misc.selectedSub){
+                    this.selectedPackage.push(this.misc.fee[i]);
+                    this.updateAmount();
+                    this.reset();
+                    break;
+                }
+            }
+            this.misc.selectedSub = null;
+        }
     }
 
     redirect(url){

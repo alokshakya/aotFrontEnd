@@ -114,7 +114,8 @@ export class SampletestEnglishComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/subscribe'])
+        this.misc.selectedSub = "English";
+        this.router.navigate(['account/subscribe']);
     }
 
 }

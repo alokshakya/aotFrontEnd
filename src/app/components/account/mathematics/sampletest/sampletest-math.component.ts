@@ -113,7 +113,8 @@ export class SampletestMathComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/subscribe'])
+        this.misc.selectedSub = "Mathematics";
+        this.router.navigate(['account/subscribe']);
     }
 
 }

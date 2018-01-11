@@ -41,7 +41,8 @@ export class MocktestScienceComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/subscribe'])
+        this.misc.selectedSub = "Science";
+        this.router.navigate(['account/subscribe']);
     }
 
     ngOnInit() {

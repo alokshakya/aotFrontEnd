@@ -41,7 +41,8 @@ export class MocktestGkComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/subscribe'])
+        this.misc.selectedSub = "General-Knowledge";
+        this.router.navigate(['account/subscribe']);
     }
 
     ngOnInit() {

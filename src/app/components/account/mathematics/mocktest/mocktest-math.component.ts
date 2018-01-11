@@ -41,7 +41,8 @@ export class MocktestMathComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/subscribe'])
+        this.misc.selectedSub = "Mathematics";
+        this.router.navigate(['account/subscribe']);
     }
 
     ngOnInit() {

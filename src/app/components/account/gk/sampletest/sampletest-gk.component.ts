@@ -116,7 +116,8 @@ export class SampletestGkComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/subscribe'])
+        this.misc.selectedSub = "General-Knowledge";
+        this.router.navigate(['account/subscribe']);
     }
 
 }

@@ -74,6 +74,11 @@ export class DemotestScienceComponent implements OnInit {
         this.demoTestData.datasets[0]['hoverBackgroundColor'] = color;
     }
 
+    redirect() {
+        this.misc.selectedSub = "Science";
+        this.router.navigate(['account/subscribe']);
+    }
+
     ngOnInit() {
         this.testCountObject = {
             chapterwiseTest:this.chapterwiseTest.science['total_tests'],

@@ -55,6 +55,7 @@ export class DashboardComponent implements OnInit {
 
     redirect(sub,destination) {
         if(destination=='settings'){
+            this.misc.selectedSub = sub;
             this.router.navigate(['/account/subscribe']);
             return false;
         }

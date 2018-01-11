@@ -35,6 +35,11 @@ export class DemotestEnglishComponent implements OnInit {
         this.lang = language; 
     }
 
+    redirect() {
+        this.misc.selectedSub = "English";
+        this.router.navigate(['account/subscribe']);
+    }
+
     startTest(testId, chapterId, attempted, completed, chapter) {
         this.spinner2 = testId;
         let wrapper = {

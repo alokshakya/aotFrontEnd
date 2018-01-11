@@ -117,7 +117,8 @@ export class SampletestReasoningComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/subscribe'])
+        this.misc.selectedSub = "Reasoning";
+        this.router.navigate(['account/subscribe']);
     }
 
 }

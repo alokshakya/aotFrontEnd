@@ -41,10 +41,6 @@ export class ChapterwisetestMathComponent implements OnInit {
             this.lang = language;
     }
 
-    redirect() {
-        this.router.navigate(['account/subscribe'])
-    }
-
     ngOnInit() {
         this.misc.setCurrentRoute(["Mathematics","Chapterwise Test"]);
         this.misc.setLocalRoute('account/math/chapterwisetest');
@@ -208,5 +204,10 @@ export class ChapterwisetestMathComponent implements OnInit {
             return true;
         }
         return false;
+    }
+
+    redirect() {
+        this.misc.selectedSub = "Mathematics";
+        this.router.navigate(['account/subscribe']);
     }
 }

@@ -76,6 +76,11 @@ export class DemotestMathComponent implements OnInit {
         this.demoTestData.datasets[0]['hoverBackgroundColor'] = color;
     }
 
+    redirect() {
+        this.misc.selectedSub = "Mathematics";
+        this.router.navigate(['account/subscribe']);
+    }
+
     ngOnInit() {
         this.testCountObject = {
             chapterwiseTest:this.chapterwiseTest.math['total_tests'],

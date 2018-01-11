@@ -81,6 +81,7 @@ export class LoadoutComponent implements OnInit {
 
     ngOnDestroy() {
         this.http.updated = 0;
+        this.event.control = 0;
     }
 
     changeTheme(gender) {

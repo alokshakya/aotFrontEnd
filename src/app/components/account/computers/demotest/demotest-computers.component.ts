@@ -69,6 +69,11 @@ export class DemotestComputersComponent implements OnInit {
         this.router.navigate(['demotest']);
     }
 
+    redirect() {
+        this.misc.selectedSub = "Computers";
+        this.router.navigate(['account/subscribe']);
+    }
+
     makeGraph(label,data,color){
         this.demoTestData.labels = label;
         this.demoTestData.datasets[0]['data'] = data;

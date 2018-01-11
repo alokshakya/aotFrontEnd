@@ -73,6 +73,11 @@ export class DemotestReasoningComponent implements OnInit {
         this.demoTestData.datasets[0]['hoverBackgroundColor'] = color;
     }
 
+    redirect() {
+        this.misc.selectedSub = "Reasoning";
+        this.router.navigate(['account/subscribe']);
+    }
+
     ngOnInit() {
         this.testCountObject = {
             chapterwiseTest:this.chapterwiseTest.reasoning['total_tests'],

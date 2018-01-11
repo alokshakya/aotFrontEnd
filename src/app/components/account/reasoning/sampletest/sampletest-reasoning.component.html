@@ -88,7 +88,7 @@
                 </div>
                 <div class="ui-g-12 ui-sm-12 text-center" *ngIf="!subjectInfo.subscribedSubjects['Reasoning']">
                     <h4>Please Subscribe To Take Test</h4><br>
-                    <button pButton class="ui-button-info" label="Subscribe" [routerLink]="['/account/subscribe']"></button>
+                    <button pButton class="ui-button-info" label="Subscribe" (click)="redirect()"></button>
                 </div>
             </div>
         </p-panel>

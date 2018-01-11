@@ -81,7 +81,7 @@
                             <div class="ui-g text-center" *ngIf="!subjectInfo.subscribedSubjects[sub.name]">
                                 <div class="ui-g-3">Chapterwise Test</div>
                                 <div class="ui-g-9">
-                                    <div class="progress hover progmob" [routerLink]="['/account/subscribe']">
+                                    <div class="progress hover progmob" (click)="redirect(sub.name,'settings')">
                                         <div class="progress">
                                             <div class="progress-bar grey-back" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:100%">
                                               Subscribe Now
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="ui-g-3">Sample Test</div>
                                 <div class="ui-g-9">
-                                    <div class="progress hover progmob" [routerLink]="['/account/subscribe']">
+                                    <div class="progress hover progmob" (click)="redirect(sub.name,'settings')">
                                         <div class="progress">
                                             <div class="progress-bar grey-back" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:100%">
                                               Subscribe Now
@@ -111,7 +111,7 @@
                                 <div class="ui-g-3">Mock Test</div>
                                 <div class="ui-g-9">
                                 <div class="progress hover progmob" pTooltip="Subject Not Subscribed" (click)="redirect(sub.name,'mocktest')">
-                                    <div class="progress hover progmob" [routerLink]="['/account/subscribe']">
+                                    <div class="progress hover progmob" (click)="redirect(sub.name,'settings')">
                                         <div class="progress">
                                             <div class="progress-bar grey-back" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:100%">
                                               Subscribe Now

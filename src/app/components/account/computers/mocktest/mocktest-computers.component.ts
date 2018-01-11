@@ -40,7 +40,8 @@ export class MocktestComputersComponent implements OnInit {
     }
 
     redirect() {
-        this.router.navigate(['account/subscribe'])
+        this.misc.selectedSub = "Computers";
+        this.router.navigate(['account/subscribe']);
     }
 
     ngOnInit() {

@@ -43,7 +43,8 @@ export class ChapterwisetestEnglishComponent implements OnInit {
         }
 
     redirect() {
-        this.router.navigate(['account/subscribe'])
+        this.misc.selectedSub = "English";
+        this.router.navigate(['account/subscribe']);
     }
 
     ngOnInit() {

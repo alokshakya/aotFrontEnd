@@ -73,7 +73,7 @@
                         </span>
                 
                         <span>
-                            <button label="Subscribe" *ngIf="!subjectInfo.subscribedSubjects.English" [routerLink]="['/account/subscribe']" class="ui-button-info" pButton></button>
+                            <button label="Subscribe" *ngIf="!subjectInfo.subscribedSubjects.English" (click)="redirect()" class="ui-button-info" pButton></button>
                         </span>
                     </div>
                 </div>

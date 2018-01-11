@@ -75,6 +75,11 @@ export class DemotestGkComponent implements OnInit {
         this.demoTestData.datasets[0]['hoverBackgroundColor'] = color;
     }
 
+    redirect() {
+        this.misc.selectedSub = "General-Knowledge";
+        this.router.navigate(['account/subscribe']);
+    }
+
     ngOnInit() {
         this.testCountObject = {
             chapterwiseTest:this.chapterwiseTest.gk['total_tests'],
