@@ -11,9 +11,27 @@ body{
     padding-left: 18%;
 }
 
-.hover:hover{
-    cursor: pointer;
+.hover{
+    display: inline-block;
+    height: 25px;
 }
+
+.hover .fa:hover{
+    cursor: pointer;
+    -webkit-transform: scale(1.5);
+       -moz-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+         -o-transform: scale(1.5);
+            transform: scale(1.5);
+    
+    -webkit-transition: all .25s;
+       -moz-transition: all .25s;
+        -ms-transition: all .25s;
+         -o-transition: all .25s;
+            transition: all .25s;
+}
+
+
 
 .pad-less{
     padding-right: 0;
@@ -75,6 +93,7 @@ body{
 .footer{
     position: fixed;
     bottom: 0;
+    right: 0;
 }
 
 .inline{
@@ -95,12 +114,37 @@ body{
     padding: 3px;
 }
 
+.btn-grp button:hover{
+    -webkit-transform: scale(1.2) ;
+       -moz-transform: scale(1.2) ;
+        -ms-transform: scale(1.2) ;
+         -o-transform: scale(1.2) ;
+            transform: scale(1.2) ;
+
+    -webkit-transition: all .25s;
+       -moz-transition: all .25s;
+        -ms-transition: all .25s;
+         -o-transition: all .25s;
+            transition: all .25s;
+}
+
 
 .qnumber:hover {
     color: black;
     background-color: lightgray;
     border-color: lightgrey;
     cursor: pointer;
+    -webkit-transform: scale(1.2);
+       -moz-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+         -o-transform: scale(1.2);
+            transform: scale(1.2);
+
+    -webkit-transition: all .20s;
+       -moz-transition: all .20s;
+        -ms-transition: all .20s;
+         -o-transition: all .20s;
+            transition: all .20s;
 }
 
 .qnumberclick {
@@ -216,4 +260,27 @@ body{
 
 .full{
     min-height: 100%;
+}
+
+.inst{
+    margin-bottom: 12px;
+    display: inline-block;
+    margin-right: 20px
+}
+
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: lightgrey;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }

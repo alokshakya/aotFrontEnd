@@ -5,11 +5,99 @@
     </p-footer>
 </p-confirmDialog>
 <p-dialog header="Intsructions" [closable]="true" [(visible)]="help" [responsive]="true">
-    <h2>IMPORTANT INSTRUCTIONS</h2>
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <div class="qnumber qnumbermark inst">{{clickListener+1}}</div>Marked For Review<br>
+            <div class="qnumber qnumbercorrect inst">{{clickListener+1}}</div>Correct Answer<br>
+            <div class="qnumber qnumberwrong inst">{{clickListener+1}}</div>Incorrect Answer<br>
+        </div>
+    </div>
+
 </p-dialog>
 <p-growl [(value)]="errMsg"></p-growl>
 <!-- <body class="dark-theme"> -->
 <div class="ui-g dark-theme full">
+    <div class="ui-g-3 ui-sm-3 pad-less right-fixed short-width">
+        <div class="ui-g bottom-border">
+            <div class="ui-g-3">
+                <img src="../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65">
+            </div>
+            <div class="ui-g-9 text-right">
+                <br>
+                <span><i class="fa fa-user"></i> {{personalInfo.userInfo['firstname']}} {{personalInfo.userInfo['lastname']}}</span>
+                <br>
+                <!-- <br> -->
+                <div class="hover"><i style="margin-right: 17px"  (click)="quit()" class="fa fa-home fa-lg"></i></div>
+                <div class="hover">
+                <i  (click)="help=true" class="fa fa-question-circle fa-lg"></i>
+            </div>
+            </div>
+        </div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-6">
+                Class | {{personalInfo.classInfo['abbreviation']}}
+            </div>
+            <div class="ui-g-6 text-right">
+                {{chapterwiseTest.subject}}
+            </div>
+            <hr>
+        </div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-6">
+                {{chapterwiseTest.attemptDetails['name']}}
+            </div>
+            <div class="ui-g-6 text-right">
+                <i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s
+            </div>
+            <hr>
+        </div>
+        <div class="ui-g bottom-border" *ngIf="chapterwiseTest.chapter!=null">
+            <div class="ui-g-6">Chapter |</div>
+            <div class="ui-g-6 text-right">{{chapterwiseTest.chapter}}</div>
+        </div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-6">
+                Total Marks | {{chapterwiseTest.attemptDetails['total_marks']}}
+            </div>
+            <div class="ui-g-6 text-right">
+                Marks|{{selectedQuestion?.weight}}
+            </div>
+        </div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-6">
+                Attempted | {{attemptedQues}}/{{totalQues}}
+            </div>
+            <div class="ui-g-6 text-right">
+                <p-progressBar [value]="counter"></p-progressBar>
+            </div>
+        </div>
+        <div class="ui-g-12 padded dark-theme min-height">
+            <!-- <div class="ui-g"> -->
+            <div class="n" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
+                <div class="qnumber" [ngClass]="{'qnumbermark':questionStatus[n]=='Marked'||chapterwiseTest.qaSet[n]['state']=='m', 'qnumbercorrect':questionStatus[n]=='Correct'||chapterwiseTest.qaSet[n]['state']=='c', 'qnumberwrong':questionStatus[n]=='Wrong'||chapterwiseTest.qaSet[n]['state']=='w','qnumberclick':clickListener==n}">
+                    {{n+1}}
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-12 bottom-border dark-theme top-border btn-grp">
+            <div class="ui-g text-center pad-left">
+                <div class="ui-g-3 text-center m-group pad-less">
+                    <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>
+                    <button mat-mini-fab *ngIf="spinner2"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
+                    <!-- <br>Mark For Review -->
+                </div>
+                <div class="ui-g-3 text-center v-group pad-less">
+                    <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>
+                    <button mat-mini-fab *ngIf="spinner"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
+                    <!-- <br>Validate -->
+                </div>
+                <div class="ui-g-3 text-center n-group pad-less">
+                    <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>
+                    <!-- <br>Next Question -->
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="ui-g-9 ui-sm-9 white-theme long-width">
         <div class="ui-g">
             <div class="ui-g-12 box">
@@ -91,85 +179,7 @@
             </div>
         </div>
     </div>
-    <div class="ui-g-3 ui-sm-3 pad-less right-fixed short-width">
-        <div class="ui-g bottom-border">
-            <div class="ui-g-3">
-                <img src="../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65">
-            </div>
-            <div class="ui-g-9 text-right">
-                <br>
-                <span><i class="fa fa-user"></i> {{personalInfo.userInfo['firstname']}} {{personalInfo.userInfo['lastname']}}</span>
-                <br>
-                <!-- <br> -->
-                <span style="margin-right: 17px"><i pTooltip="Quit" tooltipPosition="left" (click)="quit()" class="fa fa-home fa-lg hover"></i></span>
-                <i pTooltip="Intsructions" tooltipPosition="left" (click)="help=true" class="fa fa-question-circle fa-lg hover"></i>
-            </div>
-        </div>
-        <div class="ui-g bottom-border">
-            <div class="ui-g-6">
-                Class | {{personalInfo.classInfo['abbreviation']}}
-            </div>
-            <div class="ui-g-6 text-right">
-                {{chapterwiseTest.subject}}
-            </div>
-            <hr>
-        </div>
-        <div class="ui-g bottom-border">
-            <div class="ui-g-6">
-                {{chapterwiseTest.attemptDetails['name']}}
-            </div>
-            <div class="ui-g-6 text-right">
-                <i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s
-            </div>
-            <hr>
-        </div>
-        <div class="ui-g bottom-border" *ngIf="chapterwiseTest.chapter!=null">
-            <div class="ui-g-6">Chapter |</div>
-            <div class="ui-g-6 text-right">{{chapterwiseTest.chapter}}</div>
-        </div>
-        <div class="ui-g bottom-border">
-            <div class="ui-g-6">
-                Total Marks | {{chapterwiseTest.attemptDetails['total_marks']}}
-            </div>
-            <div class="ui-g-6 text-right">
-                Marks|{{selectedQuestion?.weight}}
-            </div>
-        </div>
-        <div class="ui-g bottom-border">
-            <div class="ui-g-6">
-                Attempted | {{attemptedQues}}/{{totalQues}}
-            </div>
-            <div class="ui-g-6 text-right">
-                <p-progressBar [value]="counter"></p-progressBar>
-            </div>
-        </div>
-        <div class="ui-g-12 padded dark-theme min-height">
-            <!-- <div class="ui-g"> -->
-            <div class="n" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
-                <div class="qnumber" [ngClass]="{'qnumbermark':questionStatus[n]=='Marked'||chapterwiseTest.qaSet[n]['state']=='m', 'qnumbercorrect':questionStatus[n]=='Correct'||chapterwiseTest.qaSet[n]['state']=='c', 'qnumberwrong':questionStatus[n]=='Wrong'||chapterwiseTest.qaSet[n]['state']=='w','qnumberclick':clickListener==n}">
-                    {{n+1}}
-                </div>
-            </div>
-        </div>
-        <div class="ui-g-12 bottom-border dark-theme top-border">
-            <div class="ui-g text-center pad-left">
-                <div class="ui-g-3 text-center m-group pad-less">
-                    <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>
-                    <button mat-mini-fab *ngIf="spinner2"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
-                    <!-- <br>Mark For Review -->
-                </div>
-                <div class="ui-g-3 text-center v-group pad-less">
-                    <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>
-                    <button mat-mini-fab *ngIf="spinner"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
-                    <!-- <br>Validate -->
-                </div>
-                <div class="ui-g-3 text-center n-group pad-less">
-                    <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>
-                    <!-- <br>Next Question -->
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 <!--     <div class="ui-g fixed">
         <div class="ui-g-12 dark-theme footer">
