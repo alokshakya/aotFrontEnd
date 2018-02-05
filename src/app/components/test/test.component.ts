@@ -13,7 +13,7 @@ import * as constants from '../../../config/constants';
 declare var MathJax:any;
 @Component({
     selector: 'app-test',
-    templateUrl: './test.component.html',
+    templateUrl: './test.test.component.html',
     styleUrls: ['./test.component.scss'],
     animations: [
         trigger('fadeInOut', [
@@ -34,6 +34,8 @@ declare var MathJax:any;
 export class TestComponent implements OnInit, ComponentCanDeactivate {
 
     //header 
+    testCompleted:boolean;
+    countObj:any;
     test: string;
     subject: string;
     timer: number;
@@ -189,6 +191,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
             if (data['status'] == 200) {
                 this.attemptedQues += 1;
                 this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
+                this.isTestCompleted();
                 // this.counter+=Math.ceil(100/this.totalQues);
                 this.chapterwiseTest.qaSet[this.clickListener]['attempted_answer_id'] = this.answer;
                 if (this.selectedQuestion['correct_answer_id'] == this.answer) {
@@ -215,6 +218,32 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
             })
     }
 
+    isTestCompleted(){
+        let correct = 0;
+        let marked = 0;
+        let incorrect = 0;
+        if(this.counter===100){
+            this.testCompleted = true;
+            for(let i in this.questionStatus){
+                switch (this.questionStatus[i]) {
+                    case "Marked":
+                        marked++;
+                        break;
+                    
+                    case "Correct":
+                        correct++;
+                        break;
+                    
+                    case "Wrong":
+                        incorrect++;
+                        break;
+                    
+                }
+            }
+            this.countObj = {correct:correct,marked:marked,incorrect:incorrect};
+        }
+    }
+
 
     markForReview() {
         this.spinner2 = true;
@@ -228,6 +257,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
                 this.attemptedQues += 1;
                 this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
                 this.updateView();
+                this.isTestCompleted();
                 this.answer = null;
                 this.correctAnswer = null;
                 this.spinner2 = false;
@@ -248,7 +278,8 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
 
     nextQuestion() {
         if(parseInt(this.clickListener) == this.totalQues-1){
-            this.displayQuestion(0);
+            return null;
+            // this.displayQuestion(0);
         }
         else this.displayQuestion(this.clickListener+1);
     }
@@ -304,12 +335,15 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
         return true;
     }
 
-    goBack(){
+    goBack(dashboard=false){
         this.event.testEvent.subscribe((data=>{
             if(data){
                 this.event.resultEvent.subscribe(data=>{
                     if(data){
-                        this.router.navigate([sessionStorage['route']]);
+                        if(dashboard){
+                            this.router.navigate(['accout/dashboard']);
+                        }
+                        else this.router.navigate([sessionStorage['route']]);
                     }
                 })
             }
@@ -368,6 +402,11 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
 
     animationStarted(e){
         this.animate = false;
+    }
+
+    toDashboard(){
+        this.stopFlag = true;
+        this.goBack(true);
     }
 
 }

@@ -55,11 +55,6 @@ body{
     padding-bottom: 20px;
 }
 
-// .right-fixed{
-//     position: fixed;
-//     right: 0;
-// }
-
 .white-theme{
     background-color: white;
     color: #2D353C;
@@ -114,21 +109,6 @@ body{
     padding: 3px;
 }
 
-.btn-grp button:hover{
-    -webkit-transform: scale(1.2) ;
-       -moz-transform: scale(1.2) ;
-        -ms-transform: scale(1.2) ;
-         -o-transform: scale(1.2) ;
-            transform: scale(1.2) ;
-
-    -webkit-transition: all .25s;
-       -moz-transition: all .25s;
-        -ms-transition: all .25s;
-         -o-transition: all .25s;
-            transition: all .25s;
-}
-
-
 .qnumber:hover {
     color: black;
     background-color: lightgray;
@@ -177,12 +157,12 @@ body{
 .n-group button,
 .v-group button {
     color: white;
-    height: 32px;
-    width: 32px
+    // height: 32px;
+    // width: 32px
 }
 
 .m-group{
-    width: 25%;
+    // width: 25%;
 }
 
 .m-group button {
@@ -190,7 +170,7 @@ body{
 }
 
 .v-group{
-    margin: 0 9% 0 9%;
+    // margin: 0 9% 0 9%;
 }
 
 .v-group button {
@@ -203,8 +183,8 @@ body{
 }
 
 .button-text{
-    font-size: 20px;
-    line-height: 0.1;
+    font-size: 1.6em;
+    // line-height: 0.1;
 }
 
 
@@ -284,3 +264,54 @@ body{
     background-color: lightgrey;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
+
+
+.fixed-foot{
+    position: fixed;
+    bottom: 0;
+}
+
+.fixed-foot .to-left{
+    margin-left: 48%;
+}
+
+.empty-container{
+    height: 60px;
+}
+
+.fixed-foot button:hover{
+    cursor: pointer;
+}
+
+.fixed-foot button{
+    margin-right: .2em;
+}
+
+.grey-back{
+    // display: inline-block;
+    // background: lightgrey;
+    // width: 60px;
+}
+
+.fixed-foot .ui-g-2{
+    width: 14%;
+}
+
+.copy{
+    position: fixed;
+    bottom: 0;
+    right:41%
+}
+
+.green-text{
+    color: #2BBF61;
+}
+
+.orange-text{
+    color: #EEA236;
+}
+
+.red-text{
+    color: #DC4E42;
+}
+

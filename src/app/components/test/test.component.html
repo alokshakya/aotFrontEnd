@@ -37,7 +37,7 @@
             <div class="ui-g-6">
                 Class | {{personalInfo.classInfo['abbreviation']}}
             </div>
-            <div class="ui-g-6 text-right">
+            <div class="ui-g-6 text-left">
                 {{chapterwiseTest.subject}}
             </div>
             <hr>
@@ -46,20 +46,20 @@
             <div class="ui-g-6">
                 {{chapterwiseTest.attemptDetails['name']}}
             </div>
-            <div class="ui-g-6 text-right">
+            <div class="ui-g-6 text-left">
                 <i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s
             </div>
             <hr>
         </div>
         <div class="ui-g bottom-border" *ngIf="chapterwiseTest.chapter!=null">
             <div class="ui-g-6">Chapter |</div>
-            <div class="ui-g-6 text-right">{{chapterwiseTest.chapter}}</div>
+            <div class="ui-g-6 text-left">{{chapterwiseTest.chapter}}</div>
         </div>
         <div class="ui-g bottom-border">
             <div class="ui-g-6">
                 Total Marks | {{chapterwiseTest.attemptDetails['total_marks']}}
             </div>
-            <div class="ui-g-6 text-right">
+            <div class="ui-g-6 text-left">
                 Marks|{{selectedQuestion?.weight}}
             </div>
         </div>
@@ -67,7 +67,7 @@
             <div class="ui-g-6">
                 Attempted | {{attemptedQues}}/{{totalQues}}
             </div>
-            <div class="ui-g-6 text-right">
+            <div class="ui-g-6 text-left">
                 <p-progressBar [value]="counter"></p-progressBar>
             </div>
         </div>

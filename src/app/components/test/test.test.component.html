@@ -1,151 +1,202 @@
-<p-confirmDialog [responsive]="true" header="Quit Test" icon="fa fa-question-circle" width="425" #cd>
+<p-confirmDialog responsive="true" header="Quit Test" icon="fa fa-question-circle" width="425" #cd>
     <p-footer>
         <button type="button" pButton class="ui-button-success" icon="fa-check" label="Yes" (click)="cd.accept()"></button>
         <button type="button" pButton class="ui-button-danger" icon="fa-close" label="No" (click)="cd.reject()"></button>
     </p-footer>
 </p-confirmDialog>
 <p-dialog header="Intsructions" [closable]="true" [(visible)]="help" [responsive]="true">
-    <h2>IMPORTANT INSTRUCTIONS</h2>
-    <!-- <div class="text-center">
-        <button (click)="startTest()" pButton class="ui-button-success" label="start"></button>
-    </div> -->
+    <div class="ui-g">
+        <div class="ui-g-12">
+            <div class="qnumber qnumbermark inst">{{clickListener+1}}</div>Marked For Review<br>
+            <div class="qnumber qnumbercorrect inst">{{clickListener+1}}</div>Correct Answer<br>
+            <div class="qnumber qnumberwrong inst">{{clickListener+1}}</div>Incorrect Answer<br>
+        </div>
+    </div>
+
 </p-dialog>
 <p-growl [(value)]="errMsg"></p-growl>
-<div class="ui-g sidenav">
-    <div class="ui-g-1 ui-sm-2 dark-theme sidenav" *ngIf="!isMobile()">
-        <div class="ui-g">
-            <div class="ui-g-12 image"><img src="../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65"></div>
-            <div class="ui-g-4 ui-sm-6 icons">&nbsp;&nbsp;<i (click)="quit()" class="fa fa-home fa-lg"></i></div>
-            <div class="ui-g-4 ui-sm-6 icons"> &nbsp; <i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
-            <div class="ui-g-4 ui-sm-12" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
-                <div class="qnumber" [ngClass]="{'qnumbermark':questionStatus[n]=='Marked'||chapterwiseTest.qaSet[n]['state']=='m', 'qnumbercorrect':questionStatus[n]=='Correct'||chapterwiseTest.qaSet[n]['state']=='c', 'qnumberwrong':questionStatus[n]=='Wrong'||chapterwiseTest.qaSet[n]['state']=='w','qnumberclick':clickListener==n}">{{n+1}}</div>
+<!-- <body class="dark-theme"> -->
+<div class="ui-g dark-theme full">
+    <div class="ui-g-3 ui-sm-3 pad-less left-fixed short-width">
+        <div class="ui-g bottom-border">
+            <div class="ui-g-3">
+                <img src="../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65">
+            </div>
+            <div class="ui-g-9 text-right">
+                <br>
+                <span><i class="fa fa-user"></i> {{personalInfo.userInfo['firstname']}} {{personalInfo.userInfo['lastname']}}</span>
+                <br>
+                <!-- <br> -->
+                <div class="hover"><i style="margin-right: 17px"  (click)="quit()" class="fa fa-home fa-lg"></i></div>
+                <div class="hover">
+                <i  (click)="help=true" class="fa fa-question-circle fa-lg"></i>
+            </div>
             </div>
         </div>
-    </div>
-
-    <div class="ui-sm-5 dark-theme height-res" *ngIf="menuToggle&&isMobile()" [@fadeInOut] (@fadeInOut.done)="animationDone($event)" (@fadeInOut.start)="animationStarted($event)">
-        <div class="ui-g" *ngIf="menuToggle&&animate">
-            <div class="ui-g-12 image"><img src="../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65"></div>
-            <div class="ui-sm-4 icons"><i (click)="quit()" class="fa fa-home fa-lg"></i></div>
-            <div class="ui-sm-4 icons"><i (click)="help=true" class="fa fa-question-circle fa-lg"></i></div>
-            <div class="ui-sm-3 icons"><i class="fa fa-chevron-left fa-lg" (click)="toggle()"></i></div>
-            <div class="ui-sm-4" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
-                <div class="qnumber" [ngClass]="{'qnumbermark':questionStatus[n]=='Marked'||chapterwiseTest.qaSet[n]['state']=='m', 'qnumbercorrect':questionStatus[n]=='Correct'||chapterwiseTest.qaSet[n]['state']=='c', 'qnumberwrong':questionStatus[n]=='Wrong'||chapterwiseTest.qaSet[n]['state']=='w','qnumberclick':clickListener==n}">{{n+1}}</div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-6">
+                Class | <span class="grey-back">{{personalInfo.classInfo['abbreviation']}}</span>
+            </div>
+            <div class="ui-g-6 text-left">
+                {{chapterwiseTest.subject}}
+            </div>
+            <hr>
+        </div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-6">
+                {{chapterwiseTest.attemptDetails['name']}}
+            </div>
+            <div class="ui-g-6 text-left">
+                <i class="fa fa-clock-o"></i> {{hour}}h {{min}}m {{sec}}s
+            </div>
+            <hr>
+        </div>
+        <div class="ui-g bottom-border" *ngIf="chapterwiseTest.chapter!=null">
+            <div class="ui-g-6">Chapter |</div>
+            <div class="ui-g-6 text-left">{{chapterwiseTest.chapter}}</div>
+        </div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-6">
+                Total Marks | {{chapterwiseTest.attemptDetails['total_marks']}}
+            </div>
+            <div class="ui-g-6 text-left">
+                Marks/Ques. |{{selectedQuestion?.weight}}
             </div>
         </div>
-    </div>
-
-
-    <div class="ui-g-11 ui-sm-12 no-ltpad">
-        <div class="ui-g fixed-header">
-                <div class="ui-g-1 ui-sm-1" *ngIf="isMobile()"><i  class="fa fa-chevron-right fa-lg" (click)="toggle()"></i></div>
-                <div class="ui-g-2 ui-sm-9 test padtop lesswidth"><span id="test">{{chapterwiseTest.attemptDetails['name']}}</span></div>
-                <div class="ui-g-1 ui-sm-4 class zeropad text-center"><span id="class">Class {{personalInfo.classInfo['abbreviation']}}</span></div>
-                <div class="ui-g-1 ui-sm-4 subject zeropad"><span id="sub">{{chapterwiseTest.subject}}</span></div>
-                <div class="ui-g-1 ui-sm-4 timer zeropad"><span id="timer"><i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s</span></div>
-                <div class="ui-g-1 ui-sm-4 bar padtop"><span><p-progressBar [value]="counter"></p-progressBar></span></div>
-                <div class="ui-g-1 ui-sm-4 count padtop"><span id="count">{{attemptedQues}}/{{totalQues}} Attempted</span></div>
-                <div class="ui-g-2 ui-sm-4 person padtop"><span id="user"><i class="fa fa-user"></i> {{personalInfo.userInfo['firstname']}} {{personalInfo.userInfo['lastname']}}</span></div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-6">
+                Attempted | {{attemptedQues}}/{{totalQues}}
+            </div>
+            <div class="ui-g-6 text-left">
+                <p-progressBar [value]="counter"></p-progressBar>
+            </div>
         </div>
-        <div class="ui-g fixed-height">
-            <div class="ui-g-12 box"><span class="statement">Q{{clickListener+1}}. </span><span [MathJax]="selectedQuestion['question']" class="statement"></span>
-                    <div *ngIf="selectedQuestion['image']['image_path']!=null" class="image text-center">
-                        <img src="{{imageUrl}}{{selectedQuestion['image']['image_path']}}{{selectedQuestion['image']['file_name']}}">
-                    </div>
+        <div class="ui-g-12 padded dark-theme min-height">
+            <!-- <div class="ui-g"> -->
+            <div class="n" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
+                <div class="qnumber" [ngClass]="{'qnumbermark':questionStatus[n]=='Marked'||chapterwiseTest.qaSet[n]['state']=='m', 'qnumbercorrect':questionStatus[n]=='Correct'||chapterwiseTest.qaSet[n]['state']=='c', 'qnumberwrong':questionStatus[n]=='Wrong'||chapterwiseTest.qaSet[n]['state']=='w','qnumberclick':clickListener==n}">
+                    {{n+1}}
+                </div>
+            </div>
+        </div>
+        <div class="ui-g-12 text-center copy">Copyright &copy; Olympiadbox 2017</div>
+    </div>
+    <div class="ui-g-9 ui-sm-9 white-theme long-width">
+        <div class="ui-g" *ngIf="!testCompleted">
+            <div class="ui-g-12 box">
+                <span class="question">Q{{clickListener+1}}. </span><span class="question" [MathJax]="selectedQuestion['question']"></span>
+                <div *ngIf="selectedQuestion['image']['image_path']!=null" class="text-center">
+                    <img src="{{imageUrl}}{{selectedQuestion['image']['image_path']}}{{selectedQuestion['image']['file_name']}}">
+                </div>
             </div>
             <div class="ui-g-12 box">
-                    <div class="ui-g">
-                        <div class="ui-g-6 ui-sm-12">
-                            <span id="a">A</span>
-                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][0]['id']}}" [(ngModel)]="answer"></p-radioButton><span [MathJax]="selectedQuestion['answers'][0]['answer']"></span>
-                            <div class="image text-center" *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
-                                <img src="{{imageUrl}}{{selectedQuestion['answers'][0]['image']['image_path']}}{{selectedQuestion['answers'][0]['image']['file_name']}}">
-                            </div>
-                        </div>
-                        <div class="ui-g-6 ui-sm-12">
-                            <span id="b">B</span>
-                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][1]['id']}}" [(ngModel)]="answer"></p-radioButton>
-                            <span [MathJax]="selectedQuestion['answers'][1]['answer']"></span>
-                            <div class="image text-center" *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
-                                <img src="{{imageUrl}}{{selectedQuestion['answers'][1]['image']['image_path']}}{{selectedQuestion['answers'][1]['image']['file_name']}}">
-                            </div>
-                        </div>
-                        <div class="ui-g-6 ui-sm-12">
-                            <span id="c">C</span>
-                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][2]['id']}}" [(ngModel)]="answer"></p-radioButton>
-                            <span [MathJax]="selectedQuestion['answers'][2]['answer']"></span>
-                            <div class="image text-center" *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null">
-                                <img src="{{imageUrl}}{{selectedQuestion['answers'][2]['image']['image_path']}}{{selectedQuestion['answers'][2]['image']['file_name']}}">
-                            </div>
-                        </div>
-                        <div class="ui-g-6 ui-sm-12">
-                            <span id="d">D</span>
-                            <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][3]['id']}}" [(ngModel)]="answer"></p-radioButton>
-                            <span [MathJax]="selectedQuestion['answers'][3]['answer']"></span>
-                            <div class="image text-center" *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null">
-                                <img src="{{imageUrl}}{{selectedQuestion['answers'][3]['image']['image_path']}}{{selectedQuestion['answers'][3]['image']['file_name']}}">
-                            </div>
+                <div class="ui-g">
+                    <div class="ui-g-6 ui-sm-12">
+                        <span id="a">A</span>
+                        <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][0]['id']}}" [(ngModel)]="answer"></p-radioButton><span [MathJax]="selectedQuestion['answers'][0]['answer']"></span>
+                        <div *ngIf="selectedQuestion['answers']['0']['image']['image_path']!=null">
+                            <img src="{{imageUrl}}{{selectedQuestion['answers'][0]['image']['image_path']}}{{selectedQuestion['answers'][0]['image']['file_name']}}">
                         </div>
                     </div>
-                    <div class="ui-g-12" *ngIf="hintDisplay">
-                        <hr>
-                        <div class="ui-g">
-                            <div class="ui-g-6">
-                                <div>
-                                    <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br><br></span>
-                                    <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br><br></span>
-                                    <!-- <br *ngIf="correct"> -->
-                                    <!-- <br *ngIf="correct"> -->
-                                    <span class="correct" *ngIf="correctOptionIndex==0">Correct Answer: <span id="a">A</span><span [MathJax]="correctAnswer['answer']"></span>
-                                    <br>
-                                    <br>
-                                    </span>
-                                    <span class="correct" *ngIf="correctOptionIndex==1">Correct Answer: <span id="b">B</span> <span [MathJax]="correctAnswer['answer']"></span>
-                                    <br>
-                                    <br>
-                                    </span>
-                                    <span class="correct" *ngIf="correctOptionIndex==2">Correct Answer: <span id="c">C</span> <span [MathJax]="correctAnswer['answer']"></span>
-                                    <br>
-                                    <br>
-                                    </span>
-                                    <span class="correct" *ngIf="correctOptionIndex==3">Correct Answer: <span id="d">D</span> <span [MathJax]="correctAnswer['answer']"></span>
-                                    <br>
-                                    <br>
-                                    </span>
-                                </div>
-                                <div class="hintimg" *ngIf="correctAnswer['image']['image_path']!=null">
-                                    <img src="{{imageUrl}}{{correctAnswer['image']['image_path']}}{{correctAnswer['image']['file_name']}}">
-                                </div>
-                            </div>
-                            <div class="ui-g-6">
-                                <i class="fa fa-lightbulb-o fa-lg" style="color:#EEA236"></i> &nbsp; Hint: <span [MathJax]="selectedQuestion['hint']['name']"></span>
-                                <div class="valimg" *ngIf="selectedQuestion['hint']['image']['file_name']!=null">
-                                    <img src="{{imageUrl}}{{selectedQuestion['hint']['image']['image_path']}}{{selectedQuestion['hint']['image']['file_name']}}">
-                                </div>
-                            </div>
+                    <div class="ui-g-6 ui-sm-12">
+                        <span id="b">B</span>
+                        <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][1]['id']}}" [(ngModel)]="answer"></p-radioButton>
+                        <span [MathJax]="selectedQuestion['answers'][1]['answer']"></span>
+                        <div *ngIf="selectedQuestion['answers']['1']['image']['image_path']!=null">
+                            <img src="{{imageUrl}}{{selectedQuestion['answers'][1]['image']['image_path']}}{{selectedQuestion['answers'][1]['image']['file_name']}}">
                         </div>
                     </div>
-            </div>
-        </div>
-        <footer>
-                    <div class="ui-g dark-theme">
-                <div class="ui-g-12 footer">
-                    <div class="inline text-center m-group">
-                        <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()">M</button>
-                        <button mat-mini-fab *ngIf="spinner2"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
-                        <br>Mark For Review
+                    <div class="ui-g-6 ui-sm-12">
+                        <span id="c">C</span>
+                        <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][2]['id']}}" [(ngModel)]="answer"></p-radioButton>
+                        <span [MathJax]="selectedQuestion['answers'][2]['answer']"></span>
+                        <div *ngIf="selectedQuestion['answers']['2']['image']['image_path']!=null">
+                            <img src="{{imageUrl}}{{selectedQuestion['answers'][2]['image']['image_path']}}{{selectedQuestion['answers'][2]['image']['file_name']}}">
+                        </div>
                     </div>
-                    <div class="inline text-center v-group">
-                        <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()">V</button>
-                        <button mat-mini-fab *ngIf="spinner"><i class="fa fa-circle-o-notch fa-spin fa-forward"></i></button>
-                        <br>Validate
-                    </div>
-                    <div class="inline text-center n-group">
-                        <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><i class="fa fa-chevron-right"></i></button>
-                        <br>Next Question
+                    <div class="ui-g-6 ui-sm-12">
+                        <span id="d">D</span>
+                        <p-radioButton [disabled]="spinner||spinner2||validated()" name="ques" value="{{selectedQuestion['answers'][3]['id']}}" [(ngModel)]="answer"></p-radioButton>
+                        <span [MathJax]="selectedQuestion['answers'][3]['answer']"></span>
+                        <div *ngIf="selectedQuestion['answers']['3']['image']['image_path']!=null">
+                            <img src="{{imageUrl}}{{selectedQuestion['answers'][3]['image']['image_path']}}{{selectedQuestion['answers'][3]['image']['file_name']}}">
+                        </div>
                     </div>
                 </div>
+                <div class="ui-g-12" *ngIf="hintDisplay">
+                    <hr>
+                    <div class="ui-g">
+                        <div class="ui-g-6">
+                            <div>
+                                <span class="incorrect" *ngIf="!correct"><i class="fa fa-times"></i> Your answer is incorrect<br><br></span>
+                                <span class="correct" *ngIf="correct"><i class="fa fa-check"></i> Your answer is correct<br><br></span>
+                                <span class="correct" *ngIf="correctOptionIndex==0">Correct Answer: <span id="a">A</span><span [MathJax]="correctAnswer['answer']"></span>
+                                <br>
+                                <br>
+                                </span>
+                                <span class="correct" *ngIf="correctOptionIndex==1">Correct Answer: <span id="b">B</span> <span [MathJax]="correctAnswer['answer']"></span>
+                                <br>
+                                <br>
+                                </span>
+                                <span class="correct" *ngIf="correctOptionIndex==2">Correct Answer: <span id="c">C</span> <span [MathJax]="correctAnswer['answer']"></span>
+                                <br>
+                                <br>
+                                </span>
+                                <span class="correct" *ngIf="correctOptionIndex==3">Correct Answer: <span id="d">D</span> <span [MathJax]="correctAnswer['answer']"></span>
+                                <br>
+                                <br>
+                                </span>
+                            </div>
+                            <div *ngIf="correctAnswer['image']['image_path']!=null">
+                                <img src="{{imageUrl}}{{correctAnswer['image']['image_path']}}{{correctAnswer['image']['file_name']}}">
+                            </div>
+                        </div>
+                        <div class="ui-g-6">
+                            <i class="fa fa-lightbulb-o fa-lg" style="color:#EEA236"></i> &nbsp; Hint: <span [MathJax]="selectedQuestion['hint']['name']"></span>
+                            <div *ngIf="selectedQuestion['hint']['image']['file_name']!=null">
+                                <img src="{{imageUrl}}{{selectedQuestion['hint']['image']['image_path']}}{{selectedQuestion['hint']['image']['file_name']}}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 empty-container"></div>
         </div>
-        </footer>
+        <div class="ui-g" *ngIf="testCompleted">
+            <div class="ui-g-12 text-center">
+                <h2><i class="fa fa-smile"></i> Congratulations !!! <i class="fa fa-smile"></i> </h2>
+                <h3>You have completed the test</h3>
+                <p><span class="green-text">Total Correct {{countObj['correct']}}</span></p>
+                <p><span class="red-text">Total Incorrect {{countObj['incorrect']}}</span></p>
+                <p><span class="orange-text">Total Marked {{countObj['marked']}}</span></p>
+                <button pButton label="Go to dashboard" (click)="toDashboard()"></button>
+            </div>
+        </div>
     </div>
 </div>
+<div class="ui-g">
+    <div class="ui-g-12 fixed-foot">
+        <div class="ui-g to-left">
+            <div class="ui-g-2 text-center m-group">
+                <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>
+                <button mat-mini-fab *ngIf="spinner2"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
+                <!-- <br>Mark For Review -->
+            </div>
+            <div class="ui-g-2 text-center v-group">
+                <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>
+                <button mat-mini-fab *ngIf="spinner"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
+                <!-- <br>Validate -->
+            </div>
+            <div class="ui-g-2 text-center n-group">
+                <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>
+                <!-- <br>Next Question -->
+            </div>
+        </div>
+    </div>
+</div>
+<!--     <div class="ui-g fixed">
+        <div class="ui-g-12 dark-theme footer">
+            Copyright Olympiadbox. All Rights Reserved
+        </div>
+    </div> -->
+<!-- </body> -->

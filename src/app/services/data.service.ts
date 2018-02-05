@@ -38,7 +38,7 @@ export class PersonalInfo {
         }
         // this.userInfoEvent.emit(true);
         this.event.emitUserInfoEvent();
-        this.event.emitDataEvent;
+        this.event.emitDataEvent();
     }
 
     setSchoolInfo(data) {
