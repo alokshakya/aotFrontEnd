@@ -1,5 +1,5 @@
 body{
-    background-color: #2D353C;
+    // background-color: #2D353C;
 }
 
 .top-border{
@@ -300,7 +300,8 @@ body{
 .copy{
     position: fixed;
     bottom: 0;
-    right:41%
+    left:8%;
+    background: transparent;
 }
 
 .green-text{
@@ -315,3 +316,29 @@ body{
     color: #DC4E42;
 }
 
+.big-p p{
+    font-size: 19px
+}
+
+.float-right{
+    position: relative;
+    bottom: 35%;
+    left: 65%;
+    width: 20%
+}
+
+.fixed-buttons{
+    position: fixed;
+    bottom: 0;
+    width: 20%;
+    right: 30%
+}
+
+.badge{
+    background-color: white;
+    color: #2D353C;
+}
+
+.hover i{
+    color: #FFC057;
+}

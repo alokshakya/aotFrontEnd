@@ -34,6 +34,8 @@ declare var MathJax:any;
 export class TestComponent implements OnInit, ComponentCanDeactivate {
 
     //header 
+    options;
+    data:any;
     testCompleted:boolean;
     countObj:any;
     test: string;
@@ -123,6 +125,27 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
         this.displayQuestion(this.lastQuestion);
         this.wrapper = { 'student_test_id': this.chapterwiseTest.attemptDetails['students_test_id'], }
         this.masterhttp.getTestDetails();
+        this.data = {
+            labels: ['Correct','Incorrect','Marked'],
+            datasets: [
+                {
+                    data: [300, 50, 100],
+                    backgroundColor: [
+                        "#2BBF61",
+                        "#DC4E42",
+                        "#EEA236"
+                    ],
+                    hoverBackgroundColor: [
+                        "#2BBF61",
+                        "#DC4E42",
+                        "#EEA236"
+                    ]
+                }]    
+        };
+        this.options  = {
+          responsive: false,
+          maintainAspectRatio: false
+        };
     }
 
     displayQuestion(index) {
@@ -191,16 +214,17 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
             if (data['status'] == 200) {
                 this.attemptedQues += 1;
                 this.counter = Math.ceil(this.attemptedQues * 100 / this.totalQues);
-                this.isTestCompleted();
                 // this.counter+=Math.ceil(100/this.totalQues);
                 this.chapterwiseTest.qaSet[this.clickListener]['attempted_answer_id'] = this.answer;
                 if (this.selectedQuestion['correct_answer_id'] == this.answer) {
                     this.questionStatus[this.clickListener] = "Correct";
+                    this.isTestCompleted();
                     this.correct = true;
                 }
                 else {
                     this.correct = false;
                     this.questionStatus[this.clickListener] = "Wrong";
+                    this.isTestCompleted();
                 }
                 this.showHint();
                 this.spinner = false;
@@ -241,9 +265,10 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
                 }
             }
             this.countObj = {correct:correct,marked:marked,incorrect:incorrect};
+            let dataArr = [correct,incorrect,marked];
+            this.data['datasets'][0]['data'] = dataArr;
         }
     }
-
 
     markForReview() {
         this.spinner2 = true;
@@ -407,6 +432,10 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
     toDashboard(){
         this.stopFlag = true;
         this.goBack(true);
+    }
+
+    review(){
+        this.testCompleted = false;
     }
 
 }
