@@ -342,3 +342,13 @@ body{
 .hover i{
     color: #FFC057;
 }
+
+.hide-overflow{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 29px;
+}
+
+.hide-overflow :hover{
+    cursor: pointer;
+}

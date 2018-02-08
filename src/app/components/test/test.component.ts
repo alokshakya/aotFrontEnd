@@ -13,7 +13,7 @@ import * as constants from '../../../config/constants';
 declare var MathJax:any;
 @Component({
     selector: 'app-test',
-    templateUrl: './test.test.component.html',
+    templateUrl: './test.component.html',
     styleUrls: ['./test.component.scss'],
     animations: [
         trigger('fadeInOut', [
@@ -33,7 +33,7 @@ declare var MathJax:any;
 })
 export class TestComponent implements OnInit, ComponentCanDeactivate {
 
-    //header 
+    //header
     options;
     data:any;
     testCompleted:boolean;
@@ -366,6 +366,8 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
                 this.event.resultEvent.subscribe(data=>{
                     if(data){
                         if(dashboard){
+                            console.log("dashboard");
+                            sessionStorage.setItem('route','account/dashboard');
                             this.router.navigate(['accout/dashboard']);
                         }
                         else this.router.navigate([sessionStorage['route']]);

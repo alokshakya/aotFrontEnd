@@ -15,9 +15,8 @@
 
 </p-dialog>
 <p-growl [(value)]="errMsg"></p-growl>
-<!-- <body class="dark-theme"> -->
 <div class="ui-g dark-theme full">
-    <div class="ui-g-3 ui-sm-3 pad-less right-fixed short-width">
+    <div class="ui-g-3 ui-sm-3 pad-less left-fixed short-width">
         <div class="ui-g bottom-border">
             <div class="ui-g-3">
                 <img src="../../../assets/layout/images/Olympiadbox-logo.png" width="70px" height="65">
@@ -26,7 +25,6 @@
                 <br>
                 <span><i class="fa fa-user"></i> {{personalInfo.userInfo['firstname']}} {{personalInfo.userInfo['lastname']}}</span>
                 <br>
-                <!-- <br> -->
                 <div class="hover"><i style="margin-right: 17px"  (click)="quit()" class="fa fa-home fa-lg"></i></div>
                 <div class="hover">
                 <i  (click)="help=true" class="fa fa-question-circle fa-lg"></i>
@@ -34,72 +32,90 @@
             </div>
         </div>
         <div class="ui-g bottom-border">
-            <div class="ui-g-6">
-                Class | {{personalInfo.classInfo['abbreviation']}}
+            <div class="ui-g-4">
+                Class
             </div>
-            <div class="ui-g-6 text-left">
+            <div class="ui-g-2">
+                <span class="badge">{{personalInfo.classInfo['abbreviation']}}</span>
+            </div>
+            <div class="ui-g-4">
+                Test
+            </div>
+            <div class="ui-g-2">
+                <span class="badge">{{chapterwiseTest.testIndex}}</span>
+            </div>
+        </div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-4" style="padding-right:0">
+                Total Marks
+            </div>
+            <div class="ui-g-2">
+                <span class="badge">{{chapterwiseTest.attemptDetails['total_marks']}}</span>
+            </div>
+            <div class="ui-g-4">
+                Marks
+            </div>
+            <div class="ui-g-2">
+                <span class="badge">{{selectedQuestion?.weight}}</span>
+            </div>
+        </div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-4">
+                Attempted
+            </div>
+            <div class="ui-g-2">
+                <span class="badge">{{attemptedQues}}</span>
+            </div>
+            <div class="ui-g-4">
+                out of
+            </div>
+            <div class="ui-g-2">
+                <span class="badge">{{totalQues}}</span>
+            </div>
+        </div>
+        <div class="ui-g bottom-border">
+            <div class="ui-g-6">
+                Subject
+            </div>
+            <div class="ui-g-6">
                 {{chapterwiseTest.subject}}
             </div>
-            <hr>
-        </div>
-        <div class="ui-g bottom-border">
-            <div class="ui-g-6">
-                {{chapterwiseTest.attemptDetails['name']}}
-            </div>
-            <div class="ui-g-6 text-left">
-                <i class="fa fa-clock-o"> </i> {{hour}}h {{min}}m {{sec}}s
-            </div>
-            <hr>
         </div>
         <div class="ui-g bottom-border" *ngIf="chapterwiseTest.chapter!=null">
-            <div class="ui-g-6">Chapter |</div>
-            <div class="ui-g-6 text-left">{{chapterwiseTest.chapter}}</div>
+            <div class="ui-g-6">
+                Chapter
+            </div>
+            <div class="ui-g-6 hide-overflow" tooltipPosition="top" pTooltip="{{chapterwiseTest.chapter}}">
+                {{chapterwiseTest.chapter}}
+            </div>
         </div>
         <div class="ui-g bottom-border">
             <div class="ui-g-6">
-                Total Marks | {{chapterwiseTest.attemptDetails['total_marks']}}
+                Time Elapsed
             </div>
             <div class="ui-g-6 text-left">
-                Marks|{{selectedQuestion?.weight}}
+                <i class="fa fa-clock-o"></i> {{hour}}h {{min}}m {{sec}}s
             </div>
         </div>
         <div class="ui-g bottom-border">
             <div class="ui-g-6">
-                Attempted | {{attemptedQues}}/{{totalQues}}
+                Completed
             </div>
             <div class="ui-g-6 text-left">
                 <p-progressBar [value]="counter"></p-progressBar>
             </div>
         </div>
         <div class="ui-g-12 padded dark-theme min-height">
-            <!-- <div class="ui-g"> -->
             <div class="n" *ngFor="let number of chapterwiseTest.qaSet;let n = index" (click)="displayQuestion(n)">
                 <div class="qnumber" [ngClass]="{'qnumbermark':questionStatus[n]=='Marked'||chapterwiseTest.qaSet[n]['state']=='m', 'qnumbercorrect':questionStatus[n]=='Correct'||chapterwiseTest.qaSet[n]['state']=='c', 'qnumberwrong':questionStatus[n]=='Wrong'||chapterwiseTest.qaSet[n]['state']=='w','qnumberclick':clickListener==n}">
                     {{n+1}}
                 </div>
             </div>
         </div>
-        <div class="ui-g-12 bottom-border dark-theme top-border btn-grp">
-            <div class="ui-g text-center pad-left">
-                <div class="ui-g-3 text-center m-group pad-less">
-                    <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>
-                    <button mat-mini-fab *ngIf="spinner2"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
-                    <!-- <br>Mark For Review -->
-                </div>
-                <div class="ui-g-3 text-center v-group pad-less">
-                    <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>
-                    <button mat-mini-fab *ngIf="spinner"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
-                    <!-- <br>Validate -->
-                </div>
-                <div class="ui-g-3 text-center n-group pad-less">
-                    <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>
-                    <!-- <br>Next Question -->
-                </div>
-            </div>
-        </div>
+        <div class="ui-g-6 copy">&copy; Olympiadbox 2017</div>
     </div>
     <div class="ui-g-9 ui-sm-9 white-theme long-width">
-        <div class="ui-g">
+        <div class="ui-g" *ngIf="!testCompleted">
             <div class="ui-g-12 box">
                 <span class="question">Q{{clickListener+1}}. </span><span class="question" [MathJax]="selectedQuestion['question']"></span>
                 <div *ngIf="selectedQuestion['image']['image_path']!=null" class="text-center">
@@ -177,13 +193,56 @@
                     </div>
                 </div>
             </div>
+            <div class="ui-g-12 empty-container"></div>
+        </div>
+        <div class="ui-g" *ngIf="testCompleted">
+            <div class="ui-g-12 text-center">
+                <img src="../../../assets/layout/images/awsm_img.png"><br>
+                        <h3 class="text-mid">Your Score</h3>
+                        <p-chart [height]="300" [width]="300" [options]="options" type="pie" [data]="data"></p-chart>
+                    <div class="float-right">
+                        <button class="ui-button-info" pButton style="width:150px" (click)="toDashboard()" label="Back To Dashboard"></button><br><br>
+                        <button class="ui-button-warning" pButton style="width:150px" (click)="review()" label="Review Test"></button>
+                    </div>
+            </div>
+        </div>
+        <div class="ui-g-12">
+            <div class="ui-g fixed-buttons">
+                <div class="ui-g-4 text-center m-group">
+                    <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>
+                    <button mat-mini-fab *ngIf="spinner2"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
+                    <!-- <br>Mark For Review -->
+                </div>
+                <div class="ui-g-4 text-center v-group">
+                    <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>
+                    <button mat-mini-fab *ngIf="spinner"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
+                    <!-- <br>Validate -->
+                </div>
+                <div class="ui-g-4 text-center n-group">
+                    <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>
+                    <!-- <br>Next Question -->
+                </div>
+            </div>
         </div>
     </div>
-    
 </div>
-<!--     <div class="ui-g fixed">
-        <div class="ui-g-12 dark-theme footer">
-            Copyright Olympiadbox. All Rights Reserved
+<div class="ui-g" *ngIf="false">
+    <div class="ui-g-12 fixed-foot">
+        <div class="ui-g to-left">
+            <div class="ui-g-2 text-center m-group">
+                <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>
+                <button mat-mini-fab *ngIf="spinner2"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
+                <!-- <br>Mark For Review -->
+            </div>
+            <div class="ui-g-2 text-center v-group">
+                <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>
+                <button mat-mini-fab *ngIf="spinner"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
+                <!-- <br>Validate -->
+            </div>
+            <div class="ui-g-2 text-center n-group">
+                <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>
+                <!-- <br>Next Question -->
+            </div>
         </div>
-    </div> -->
-<!-- </body> -->
+    </div>
+</div>
