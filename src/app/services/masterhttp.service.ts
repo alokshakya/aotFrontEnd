@@ -217,6 +217,10 @@ export class MasterHttpService {
             })
     }
 
+    validateCaptcha(requestBody){
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/google/validatecaptcha',requestBody,{headers:this.queryHeaders}).map((resp:Response)=>resp.json());
+    }
+
     updateTestimoial(requestBody){
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/user/updatetestimonial', requestBody,{headers:this.queryHeaders})
         .map((resp:Response) => resp.json())

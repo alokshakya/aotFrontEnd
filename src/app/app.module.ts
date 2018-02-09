@@ -16,6 +16,7 @@ import { BreadcrumbModule } from 'primeng/primeng';
 import { ButtonModule } from 'primeng/primeng';
 import { BlockUIModule } from 'primeng/primeng';
 import { CalendarModule } from 'primeng/primeng';
+import { CaptchaModule } from 'primeng/primeng';
 import { CarouselModule } from 'primeng/primeng';
 import { ChartModule } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
@@ -56,6 +57,7 @@ import { PanelMenuModule } from 'primeng/primeng';
 import { PasswordModule } from 'primeng/primeng';
 import { PickListModule } from 'primeng/primeng';
 import { ProgressBarModule } from 'primeng/primeng';
+import { ProgressSpinnerModule } from 'primeng/primeng';
 import { RadioButtonModule } from 'primeng/primeng';
 import { RatingModule } from 'primeng/primeng';
 import { ScheduleModule } from 'primeng/primeng';
@@ -162,6 +164,7 @@ import { RoundPipe } from './pipes/round.pipe';
         ButtonModule,
         BlockUIModule,
         CalendarModule,
+        CaptchaModule,
         CarouselModule,
         ChartModule,
         CheckboxModule,
@@ -202,6 +205,7 @@ import { RoundPipe } from './pipes/round.pipe';
         PasswordModule,
         PickListModule,
         ProgressBarModule,
+        ProgressSpinnerModule,
         RadioButtonModule,
         RatingModule,
         ScheduleModule,

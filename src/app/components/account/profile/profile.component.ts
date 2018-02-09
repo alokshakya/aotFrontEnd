@@ -79,6 +79,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     couponCode: string;
     achievement;
+    isHuman:boolean;
     constructor(
         public confirmservice: ConfirmationService,
         public personalInfo: PersonalInfo,
@@ -327,6 +328,10 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     }
 
     addAchievement() {
+        if(!this.isHuman){
+            console.log(this.isHuman);
+            return false;
+        }
         this.spinner = true;
         if(this.dec[0]!='dec1'||this.dec[1]!='dec2'){
             this.spinner = false
@@ -394,11 +399,10 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         let zipPattern = new RegExp("^[0-9]{6}");
         let addressPattern = new RegExp("^[0-9A-Za-z]{1,}[a-zA-Z0-9]+$");
         if(this.editBasic){
-            if(this.dummyBasicInfo.firstname==null||this.dummyBasicInfo.firstname==''){
+            if(!pattern.test(this.dummyBasicInfo.firstname)){
                 arr[0] = true;
             }
-            // if(!pattern.test(this.dummyBasicInfo.lastname)){
-            if(this.dummyBasicInfo.lastname==null||this.dummyBasicInfo.lastname==''){
+            if(!pattern.test(this.dummyBasicInfo.lastname)){
                 arr[1] = true;
             }
             if(!dobPattern.test(this.dummyBasicInfo.birthdate)){
@@ -422,6 +426,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         this.selectedExam = null,
         this.rollNo = null;
         this.examCity = null;
+        this.isHuman = false;
     }
 
     updateMobile(){
@@ -580,6 +585,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
             if(data['status']==200){
                 this.otpDialog = true;
                 this.spinner2 = false;
+                this.dummyOtp = null;
             }
             else{
                 this.spinner2 = false;
@@ -616,6 +622,20 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
         },err =>{
                 this.rating = this.personalInfo.userInfo['user_rating'];
             
+        })
+    }
+
+    showResponse(event){
+        let wrapper = {response:event.response};
+        this.masterhtttp.validateCaptcha(wrapper).subscribe((data)=>{
+            if(data['status']==200){
+                let status = JSON.parse(data['message']);
+                if(status.success){
+                    this.isHuman = true;
+                    console.log(this.isHuman);
+                }
+                else this.isHuman = false;
+            }
         })
     }
 

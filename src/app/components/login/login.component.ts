@@ -83,6 +83,7 @@ export class LoginComponent implements OnInit {
     disappear:boolean;
 
     modeStr:string;
+    isHuman:boolean;
 
     constructor(
         public httpService: LoginRegisterService,
@@ -354,6 +355,10 @@ export class LoginComponent implements OnInit {
     }
 
     signUp() {
+        if(!this.isHuman){
+            return false;
+        }
+        else this.isHuman = false;
         var wrapper = JSON.parse(JSON.stringify(this.userRegCreds));
         wrapper['email'] = wrapper['email'].toLowerCase();
         wrapper['firstname'] = wrapper['firstname'].toLowerCase();
@@ -434,6 +439,7 @@ export class LoginComponent implements OnInit {
         this.disappear = false;
         this.emailVerified = false;
         this.mobileVerified = false;
+        this.isHuman = false;
     }
 
     //submit new password
@@ -494,6 +500,22 @@ export class LoginComponent implements OnInit {
         this.loginRegToggle = false;
         this.message = [];
         this.message.push({ severity: 'success', summary: 'Registration Complete', detail: 'Please Login'})
+    }
+
+    showResponse(event){
+        let wrapper = {response:event.response};
+        this.masterhttp.validateCaptcha(wrapper).subscribe((data)=>{
+            console.log(data);
+            if(data['status']==200){
+                let status = JSON.parse(data['message']);
+                console.log(status.success);
+                if(status.success){
+                    this.isHuman = true;
+                    console.log(this.isHuman);
+                }
+                else this.isHuman = false;
+            }
+        })
     }
 
 }

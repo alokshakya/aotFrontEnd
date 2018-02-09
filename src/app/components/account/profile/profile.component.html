@@ -40,8 +40,8 @@
                             <h4><i class="fa fa-user"></i> Name</h4>
                             <p><span class="userdetails" *ngIf="!editBasic">{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</span>
                                 <input pInputText maxlength="30" placeholder="Firstname" *ngIf="editBasic" type="text" [(ngModel)]="dummyBasicInfo.firstname">
-                                <input [(ngModel)]="dummyBasicInfo.lastname" maxlength="30" placeholder="Lastname" pInputText *ngIf="editBasic" type="text">
                                 <span class="red-text" *ngIf="invalidName()[0]&&editBasic"><br>Invalid Firstname</span>
+                                <input [(ngModel)]="dummyBasicInfo.lastname" maxlength="30" placeholder="Lastname" pInputText *ngIf="editBasic" type="text">
                                 <span class="red-text" *ngIf="invalidName()[1]&&editBasic"><br>Invalid Lastname</span>
                             </p>
                         </div>
@@ -66,8 +66,8 @@
                             <p><span *ngIf="!editBasic" class="userdetails withbtn">{{personalInfo.userInfo.mobile}}</span>
                                 <p-inputMask mask="9999999999" [style]="{'background-color':'#e1e1e1','width':'247px','border':'none', 'margin-left':'-2%','margin-right':'7px'}" slotChar=" " [(ngModel)]="dummyBasicInfo.mobile" *ngIf="editBasic" placeholder="Mobile Number"></p-inputMask>
 
-                                <button *ngIf="editBasic&&!spinner2" pButton [disabled]="checkMobile()||(spinner&&!otpDialog)" (click)="verify()" class="ui-button-warning" label="Update"></button>
-                                <button style="width:54px" *ngIf="editBasic&&!otpDialog&&spinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-warning"></button>
+                                <button *ngIf="editBasic&&!spinner2&&!otpDialog" pButton [disabled]="checkMobile()||(spinner&&!otpDialog)" (click)="verify()" class="ui-button-warning" label="Update"></button>
+                                <button style="width:54px" *ngIf="!otpDialog&&editBasic&&!otpDialog&&spinner2" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-warning"></button>
                                 <span *ngIf="editBasic"><span style="margin-left:-2.2%" class="red-text" *ngIf="checkMobile(true)"><br>Invalid Mobile</span></span>
 
                             </p>
@@ -186,23 +186,24 @@
                         </div>
                         <div class="col-md-4 col-xs-1"></div>
                         <div class="col-md-4 col-xs-2">
-                            <button type="button" [disabled]="confirmNewPassword==null||confirmNewPassword==''||oldPassword==null||oldPassword==''||newPassword==null||newPassword==''||newPassword!=confirmNewPassword||maxLength()" *ngIf="!spinner" pButton class="ui-button-success" label="Save" (click)="changePassword()"></button>
+                            <button type="button" style="width:52px" [disabled]="confirmNewPassword==null||(password.errors&&password.errors.pattern)||confirmNewPassword==''||oldPassword==null||oldPassword==''||newPassword==null||newPassword==''||newPassword!=confirmNewPassword" *ngIf="!spinner" pButton class="ui-button-success" label="Save" (click)="changePassword()"></button>
                             <button type="button" style="width:52px" *ngIf="spinner" icon="fa fa-circle-o-notch fa-spin fa-forward" pButton class="ui-button-success"></button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-key"></i> New Password</h4>
-                            <input class="xpassword" pInputText #password="ngModel" pPassword promptLabel="Atleast 6 characters" placeholder="Enter New Password" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}" /> &nbsp; <span style="color:red" *ngIf="newPassword!=confirmNewPassword"><i class="fa fa-exclamation-triangle"></i></span>
+                            <input class="xpassword" pInputText #password="ngModel" pPassword promptLabel="Atleast 6 characters with no spaces" placeholder="Enter New Password" weakLabel="Weak" mediumLabel="Medium" strongLabel="Strong" type="password" [(ngModel)]="newPassword" pattern="^[^\s]{6,}" /> &nbsp; <span class="red-text" [hidden]="password.untouched" *ngIf="newPassword!=confirmNewPassword"><i class="fa fa-exclamation-triangle"></i></span>
+                            <span class="xpassword red-text" [hidden]="password.untouched" *ngIf="password.errors&&password.errors.pattern">Password must have atleast 6 characters</span>
                         </div>
                         <div class="col-md-4 col-xs-12"></div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 col-xs-12 userinfo">
                             <h4><i class="fa fa-key"></i> Confirm Password</h4>
-                            <input class="xpassword" pInputText type="password" placeholder="Re-enter New Password" [(ngModel)]="confirmNewPassword"> &nbsp; <span style="color:red" *ngIf="newPassword!=confirmNewPassword"><i class="fa fa-exclamation-triangle"></i></span>
+                            <input class="xpassword" pInputText type="password" placeholder="Re-enter New Password" [(ngModel)]="confirmNewPassword"> &nbsp; <span [hidden]="password.untouched" class="red-text" *ngIf="newPassword!=confirmNewPassword"><i class="fa fa-exclamation-triangle"></i></span>
                             <br>
-                            <span class="xpassword" style="color:red" *ngIf="newPassword!=confirmNewPassword">Passwords Doesn't Match</span>
+                            <span class="xpassword red-text" [hidden]="password.untouched" *ngIf="newPassword!=confirmNewPassword">Passwords Doesn't Match</span>
                         </div>
                         <div class="col-md-4 col-xs-12"></div>
                     </div>
@@ -298,9 +299,10 @@
                                 <br>
                                 <br>
                                 <div class="text-center">
-                                    <button pButton *ngIf="!spinner" style="width:145px" class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''||selectedExam==null||selectedClass==null||examCity==null||examCity==''||rollNo==null||rollNo==''" label="Add Achievement" (click)="addAchievement()"></button>
+                                    <p-captcha #captcha siteKey="6LfVJUUUAAAAAGWXhy14h_D8Iw4AydIVKwhObjKb" (onResponse)="showResponse($event)"></p-captcha><br>
+                                    <button pButton *ngIf="!spinner" style="width:145px" class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''||selectedExam==null||selectedClass==null||examCity==null||examCity==''||rollNo==null||rollNo==''||!isHuman" label="Add Achievement" (click)="addAchievement();captcha.reset()"></button>
                                     <button pButton *ngIf="spinner" style="width:145px" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
-                                    <button pButton class="ui-button-danger" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''||selectedExam==null||selectedClass==null||examCity==null||examCity==''||rollNo==null||rollNo==''" (click)="cancelAchievement()" label="Not Now"></button>
+                                    <button pButton class="ui-button-danger" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''||selectedExam==null||selectedClass==null||examCity==null||examCity==''||rollNo==null||rollNo==''" (click)="cancelAchievement();captcha.reset()" label="Not Now"></button>
                                 </div>
                             </div>
                         </div>

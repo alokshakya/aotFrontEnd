@@ -157,6 +157,7 @@ export class chapterwiseTest {
     activateRoute:boolean;
     completeTestDetails;
     chapter:string;
+    testIndex;
 
     constructor(private event:EventService){}
 
@@ -167,6 +168,10 @@ export class chapterwiseTest {
 
     activateTestRoute(){
         this.activateRoute = true;
+    }
+
+    setTestIndex(index){
+        this.testIndex = index;
     }
 
     setTestDetails(data) {
