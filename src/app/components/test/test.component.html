@@ -15,7 +15,13 @@
 
 </p-dialog>
 <p-growl [(value)]="errMsg"></p-growl>
-<div class="ui-g dark-theme full">
+<div class="ui-g" *ngIf="masterSpinner">
+    <div class="ui-g-12 text-center spin">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</div>
+
+<div class="ui-g dark-theme full" *ngIf="!masterSpinner">
     <div class="ui-g-3 ui-sm-3 pad-less left-fixed short-width">
         <div class="ui-g bottom-border">
             <div class="ui-g-3">
@@ -193,34 +199,42 @@
                     </div>
                 </div>
             </div>
+            <div class="ui-g-12 fixed-buttons">
+                <div class="ui-g to-center">
+                    <div class="ui-g-4 text-center m-group">
+                        <span *ngIf="!spinner2">
+                            <button mat-mini-fab [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>Mark For Review
+                        </span>
+                        <span *ngIf="spinner2">
+                            <button mat-mini-fab><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward blob"></i></span></button>Mark For Review
+                        </span>
+                        <!-- <br>Mark For Review -->
+                    </div>
+                    <div class="ui-g-4 text-center v-group">
+                        <span *ngIf="!spinner">
+                            <button mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>Validate
+                        </span>
+                        <span *ngIf="spinner">
+                            <button mat-mini-fab ><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>Validate
+                        </span>
+                        <!-- <br>Validate -->
+                    </div>
+                    <div class="ui-g-4 text-center n-group">
+                        <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>Next Question
+                        <!-- <br>Next Question -->
+                    </div>
+                </div>
+            </div>
             <div class="ui-g-12 empty-container"></div>
         </div>
         <div class="ui-g" *ngIf="testCompleted">
             <div class="ui-g-12 text-center">
                 <img src="../../../assets/layout/images/awsm_img.png"><br>
-                        <h3 class="text-mid">Your Score</h3>
-                        <p-chart [height]="300" [width]="300" [options]="options" type="pie" [data]="data"></p-chart>
-                    <div class="float-right">
-                        <button class="ui-button-info" pButton style="width:150px" (click)="toDashboard()" label="Back To Dashboard"></button><br><br>
-                        <button class="ui-button-warning" pButton style="width:150px" (click)="review()" label="Review Test"></button>
-                    </div>
-            </div>
-        </div>
-        <div class="ui-g-12">
-            <div class="ui-g fixed-buttons">
-                <div class="ui-g-4 text-center m-group">
-                    <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>
-                    <button mat-mini-fab *ngIf="spinner2"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
-                    <!-- <br>Mark For Review -->
-                </div>
-                <div class="ui-g-4 text-center v-group">
-                    <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>
-                    <button mat-mini-fab *ngIf="spinner"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
-                    <!-- <br>Validate -->
-                </div>
-                <div class="ui-g-4 text-center n-group">
-                    <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>
-                    <!-- <br>Next Question -->
+                <h3 class="text-mid">Your Score</h3>
+                <p-chart [height]="300" [width]="300" [options]="options" type="pie" [data]="data"></p-chart>
+                <div class="float-right">
+                    <button class="ui-button-info" pButton style="width:150px" (click)="toDashboard()" label="Back To Dashboard"></button><br><br>
+                    <button class="ui-button-warning" pButton style="width:150px" (click)="review()" label="Review Test"></button>
                 </div>
             </div>
         </div>

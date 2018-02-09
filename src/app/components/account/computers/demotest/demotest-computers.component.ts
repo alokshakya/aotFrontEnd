@@ -36,7 +36,7 @@ export class DemotestComputersComponent implements OnInit {
             this.lang=language
         }
 
-    startTest(testId, chapterId, attempted, completed, chapter) {
+    startTest(testId, chapterId, attempted, completed, chapter, index) {
         this.spinner2 = testId;
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
@@ -45,6 +45,7 @@ export class DemotestComputersComponent implements OnInit {
             "attempt":attempted,
             "completed":completed.toString()
         }
+        this.chapterwiseTest.setTestIndex(index+1);
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('Computers',chapter);
         this.masterhttp.beginTest(wrapper)

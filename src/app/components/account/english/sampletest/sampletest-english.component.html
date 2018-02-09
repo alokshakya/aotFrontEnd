@@ -59,17 +59,17 @@
                             <td><span class="blue">{{test?.attempted}}</span></td>
                             <td>
                                 <span *ngIf="test.attempted==0" class="low">
-                                    <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,null,test.attempted,test.completed,null,k)" label="Start" [disabled]="spinner2!=null" type="button" pButton></button>
                                     <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" [disabled]="false" type="button" pButton></button>
                                 </span>
 
                                 <span *ngIf="test.completed==1" class="low">
-                                    <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Start" [disabled]="spinner2!=null||test.attempted>=3" type="button" pButton></button>
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-danger" (click)="startTest(test.id,null,test.attempted,test.completed,null,k)" label="Start" [disabled]="spinner2!=null||test.attempted>=3" type="button" pButton></button>
                                     <button *ngIf="spinner2==test.id" class="ui-button-danger" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
                                 </span>
 
                                 <span *ngIf="test.completed==0&&test.attempted!=0" class="low">
-                                    <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,null,test.attempted,test.completed,null)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
+                                    <button *ngIf="spinner2!=test.id" class="ui-button-warning" (click)="startTest(test.id,null,test.attempted,test.completed,null,k)" label="Resume" [disabled]="spinner2!=null" type="button" pButton></button>
                                     <button *ngIf="spinner2==test.id" class="ui-button-warning" icon="fa fa-circle-o-notch fa-spin fa-forward" type="button" pButton></button>
                                 </span>
                             </td>

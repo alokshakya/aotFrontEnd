@@ -121,6 +121,7 @@ export class ChapterwisetestGkComponent implements OnInit {
             }
         }
         else {
+            this.generatedFlag = true;
             this.generateMsg = []
             this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: this.subjectInfo.gkChapters['chapters'][e.index]['name'] + ' Test Is Already Generated' });
         }
@@ -175,7 +176,7 @@ export class ChapterwisetestGkComponent implements OnInit {
             })
     }
 
-    startTest(testId, chapterId, attempted, completed, chapter) {
+    startTest(testId, chapterId, attempted, completed, chapter, index) {
         this.spinner2 = testId;
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
@@ -184,6 +185,7 @@ export class ChapterwisetestGkComponent implements OnInit {
             "attempt":attempted,
             "completed":completed.toString()
         }
+        this.chapterwiseTest.setTestIndex(index+1);
         this.chapterwiseTest.activateTestRoute();
         this.chapterwiseTest.setSubject('General-Knowledge',chapter);
         this.masterhttp.beginTest(wrapper)

@@ -69,7 +69,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
 
     questionStatus: any;
     questionResponse:any;
-
+    masterSpinner:boolean;
     hintDisplay: any;
 
     totalQuestions: number;
@@ -361,12 +361,12 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     goBack(dashboard=false){
+        this.masterSpinner = true;
         this.event.testEvent.subscribe((data=>{
             if(data){
                 this.event.resultEvent.subscribe(data=>{
                     if(data){
                         if(dashboard){
-                            console.log("dashboard");
                             sessionStorage.setItem('route','account/dashboard');
                             this.router.navigate(['accout/dashboard']);
                         }
@@ -409,6 +409,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
     ngOnDestroy(){
         this.stopFlag = false;
         this.chapterwiseTest.activateRoute = false;
+        this.masterSpinner = false;
     }
 
     isMobile() {

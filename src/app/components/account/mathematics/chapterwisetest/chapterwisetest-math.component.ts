@@ -115,7 +115,8 @@ export class ChapterwisetestMathComponent implements OnInit {
             }
         }
         else {
-            this.generateMsg = []
+            this.generatedFlag = true;
+            this.generateMsg = [];
             this.generateMsg.push({ severity: 'info', summary: 'Instruction', detail: this.subjectInfo.mathChapters['chapters'][e.index]['name'] + ' Test Is Already Generated' });
         }
     }
@@ -169,8 +170,9 @@ export class ChapterwisetestMathComponent implements OnInit {
             })
     }
 
-    startTest(testId, chapterId, attempted, completed, chapter) {
+    startTest(testId, chapterId, attempted, completed, chapter,index) {
         this.spinner2 = testId;
+        this.chapterwiseTest.setTestIndex(index+1);
         let wrapper = {
             "student_id": this.personalInfo.studentInfo['student_id'],
             "chapter_id": chapterId,

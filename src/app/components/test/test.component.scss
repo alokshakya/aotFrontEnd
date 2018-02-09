@@ -183,8 +183,8 @@ body{
 }
 
 .button-text{
-    font-size: 1.6em;
-    // line-height: 0.1;
+    font-size: 200%;
+    vertical-align: middle;
 }
 
 
@@ -328,10 +328,20 @@ body{
 }
 
 .fixed-buttons{
+    height: 44px;
+    padding-top: 0;
+    margin-top: 0;
+    background-color: white;
     position: fixed;
     bottom: 0;
-    width: 20%;
-    right: 30%
+    // width: 20%;
+    width:100%;
+    // right: 30%
+    left: 20%;
+}
+
+.to-center .ui-g-4{
+    padding-top: 0;
 }
 
 .badge{
@@ -351,4 +361,25 @@ body{
 
 .hide-overflow :hover{
     cursor: pointer;
+}
+
+.spin{
+    padding-top: 14%; 
+}
+
+.fixed-buttons button{
+    margin-right: 5px;
+}
+
+.button-text .fa-circle-o-notch{
+    font-size: 25px;
+}
+
+.blob{
+    // background-color: blue;
+}
+
+.to-center{
+    width: 40%;
+    margin-left: 23%;
 }

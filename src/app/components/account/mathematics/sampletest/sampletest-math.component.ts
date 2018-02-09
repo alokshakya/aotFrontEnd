@@ -82,7 +82,7 @@ export class SampletestMathComponent implements OnInit {
         }
     }
 
-    startTest(testId, chapterId, attempted, completed, chapter) {
+    startTest(testId, chapterId, attempted, completed, chapter, index) {
     this.spinner2 = testId;
     let wrapper = {
         "student_id": this.personalInfo.studentInfo['student_id'],
@@ -90,7 +90,8 @@ export class SampletestMathComponent implements OnInit {
         "test_id": testId,
         "attempt":attempted,
         "completed":completed.toString()
-    }
+    };
+    this.test.setTestIndex(index+1);
     this.test.activateTestRoute();
     this.test.setSubject('Mathematics',chapter);
     this.masterhttp.beginTest(wrapper)
