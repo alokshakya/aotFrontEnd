@@ -370,9 +370,14 @@
                 <div id="testimonials">
                     <div class="testbox" *ngFor="let i of misc.testimonial">
                         <div class="ui-g">
-                            <div class="ui-g-7" *ngIf="i.imageUrl!=''"><img class="testimonialimg" src="{{imagePath}}{{i.imageUrl}}"></div>
-                            <div class="ui-g-5"></div>
-                            <div class="ui-g-12 text-wrap">{{i['text']}}</div>
+                            <div class="ui-g-4" *ngIf="i.imageUrl!=''"><img class="testimonialimg" src="{{imagePath}}{{i.imageUrl}}"></div>
+                            <div class="ui-g-8 to-mid">
+                                <p-rating readonly="true" [cancel]="false" [iconOffStyle]="{'font-size':'16px'}" [iconOnStyle]="{'font-size':'16px'}" [(ngModel)]="i['user_rating']"></p-rating>
+                                <p>- <em>{{i['fullname']}}</em></p>
+                            </div>
+                            <div class="ui-g-12 text-wrap">
+                                <p>{{i['text']}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
