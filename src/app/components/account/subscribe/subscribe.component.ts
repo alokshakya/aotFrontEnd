@@ -19,7 +19,7 @@ export class SubscribeComponent implements OnInit {
     //subscription details panel
     subscriptionTableData: any;
     subscriptionTableHeaders: any;
-
+    spinner2:boolean;
     //subscribe now panel
     selectAll: boolean;
     subjectsPrice: any;
@@ -30,6 +30,7 @@ export class SubscribeComponent implements OnInit {
     discount:number;
     discountApplied:boolean;
     discountedAmount:number;
+    appliedCoupon:string;
 
 
     //temporary
@@ -156,16 +157,21 @@ export class SubscribeComponent implements OnInit {
     }
 
     applyCoupon(){
-        var wrapper = {coupon_code:this.coupon}
+        var wrapper = {coupon_code:this.coupon};
+        this.spinner2 = true;
         this.reset();
         this.http.applyDicountCoupon(wrapper).subscribe((data)=>{
             if(data['status']===200){-
                 this.displayDiscount(parseInt(data['message']));
+                this.appliedCoupon = wrapper.coupon_code;
+                this.spinner2 = false;
             }
             if(data['status']===710){
+                this.spinner2 = false;
                 this.growlDisplay('error','Invalid Coupon','Enter Valid Coupon Code');
             }
             if(data['status']===711){
+                this.spinner2 = false;
                 this.confirm(true);
             }
         })
@@ -176,6 +182,7 @@ export class SubscribeComponent implements OnInit {
         this.discount = null;
         this.coupon = null;
         this.discountedAmount = 0;
+        this.appliedCoupon = null;
     }
 
     download(e){

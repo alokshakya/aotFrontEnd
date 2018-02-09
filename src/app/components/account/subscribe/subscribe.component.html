@@ -31,12 +31,13 @@
                                 <label>Enter Coupon Code &nbsp;
                                     <input type="text" maxlength="30" placeholder="Coupon Code" [(ngModel)]="coupon" pInputText> &nbsp;
                                 </label>
-                                <button type="button" class="ui-button-info" (click)="applyCoupon()" [disabled]="coupon==null||coupon==''||selectedPackage[0]==null" pButton label="Apply"></button>
+                                <button type="button" *ngIf="!spinner2" style="width:60px" class="ui-button-info" (click)="applyCoupon()" [disabled]="coupon==null||coupon==''||selectedPackage[0]==null" pButton label="Apply"></button>
+                                <button style="width:60px" class="ui-button-info" icon="fa fa-circle-o-notch fa-spin fa-forward" *ngIf="spinner2" pButton></button><br>
                             </div>
                             <div class="ui-g-4 ui-sm-4">
                                 <label class="left-margin" *ngIf="!discountApplied">Total Amount: &#x20B9; {{sum}} </label>
                                 <label class="left-margin" *ngIf="discountApplied">Amount: &#x20B9; {{sum}} </label>
-                                <label class="left-margin" *ngIf="discountApplied">Discount: {{discount}} % </label>
+                                <label class="left-margin" *ngIf="discountApplied">Discount: {{discount}} % ({{appliedCoupon}})</label>
                                 <label class="left-margin green-text" *ngIf="discountApplied">Total Amount: &#x20B9;{{discountedAmount}}</label>
                             </div>
                             <div class="ui-g-12 text-center ui-sm-12">

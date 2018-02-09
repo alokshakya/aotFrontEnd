@@ -59,13 +59,13 @@
                     <div class="wrapper">
                         <h5>{{personalInfo.userInfo.firstname}} {{personalInfo.userInfo.lastname}}</h5>
                         <h5>Class {{personalInfo.classInfo.abbreviation}}</h5>
-                        <h5 pTooltip="{{shownEmail}}" tooltipPosition="bottom">{{personalInfo.userInfo.email}}</h5>
+                        <h5 class="text-overflow" pTooltip="{{personalInfo.userInfo.email}}" tooltipPosition="bottom">{{personalInfo.userInfo.email}}</h5>
                         <i  class="fa fa-square  hover" style="color:#2D353C" (click)="changeImg=true"></i>
 
                         <i  class="fa fa-pencil-square hover" (click)="changeImg=true"></i>
                     </div>
                 </div>
-                <hr>
+                <hr id="hr">
                 <app-menu [reset]="resetMenu"></app-menu>
                 <div class="layout-menu-footer"></div>
             </div>

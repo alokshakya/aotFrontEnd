@@ -115,3 +115,14 @@ and (max-device-width : 1024px)  {
     position:fixed;
     bottom:0;
 }
+
+.text-overflow{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 20px;
+}
+
+#hr{
+    margin-top: 0;
+    margin-bottom: 7px;
+}

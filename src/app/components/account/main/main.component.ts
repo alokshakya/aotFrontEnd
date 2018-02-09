@@ -111,9 +111,6 @@ export class AccountMainComponent implements AfterViewInit {
         this.email = this.personalInfo.userInfo.email;
         this.shownEmail = this.email;
         this.class = this.personalInfo.classInfo.abbreviation;
-        if (this.email.length > 24) {
-            this.shownEmail = this.email.slice(24, );
-        }
         // this.setWrapper();
     }
 
