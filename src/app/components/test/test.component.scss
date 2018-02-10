@@ -109,7 +109,7 @@ body{
     padding: 3px;
 }
 
-.qnumber:hover {
+.dark-theme .qnumber:hover {
     color: black;
     background-color: lightgray;
     border-color: lightgrey;
@@ -243,9 +243,11 @@ body{
 }
 
 .inst{
-    margin-bottom: 12px;
+    // margin-bottom: 12px;
     display: inline-block;
-    margin-right: 20px
+    // margin-right: 20px;
+    font-weight: normal;
+    
 }
 
 
@@ -382,4 +384,28 @@ body{
 .to-center{
     width: 40%;
     margin-left: 23%;
+}
+
+.orange-back{
+    background: #DC4E42;
+}
+
+.green-back{
+    background: #2BBF61;
+}
+
+.blue-back{
+    background: #2196F5;
+}
+
+.inst-table table tr{
+    margin-bottom: 10%;
+}
+
+.inst-table th{
+    width: 52px;
+}
+
+.inst-table td{
+    width: 200px;
 }

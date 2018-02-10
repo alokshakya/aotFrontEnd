@@ -4,13 +4,97 @@
         <button type="button" pButton class="ui-button-danger" icon="fa-close" label="No" (click)="cd.reject()"></button>
     </p-footer>
 </p-confirmDialog>
-<p-dialog header="Intsructions" [closable]="true" [(visible)]="help" [responsive]="true">
+<p-dialog header="Intsructions" [closable]="true" [modal]="true" [(visible)]="help" [responsive]="true">
     <div class="ui-g">
-        <div class="ui-g-12">
-            <div class="qnumber qnumbermark inst">{{clickListener+1}}</div>Marked For Review<br>
-            <div class="qnumber qnumbercorrect inst">{{clickListener+1}}</div>Correct Answer<br>
-            <div class="qnumber qnumberwrong inst">{{clickListener+1}}</div>Incorrect Answer<br>
+        <div class="ui-g-12 container inst-table">
+            <ol>
+                <li>
+                Every question has only one correct answer. You can select only 1 option from the given 4 options.</li>
+                <li> 
+                    After selecting the option you can validate the answer by clicking  
+                        <button class="green-back" mat-mini-fab><span class="button-text">V</span></button> button<br>This will show whether your answer is correct or incorrect. You will see the correct answer and hint only after validation.
+                </li>
+                <li>If you are not confident about your choice you can mark the question by clicking 
+                    <button class="orange-back" mat-mini-fab><span class="button-text">M</span></button> button
+                </li>
+                <li>
+                   If you want to go to the next question, you can click  
+                    <button class="blue-back" mat-mini-fab><span class="button-text"><i class="fa fa-chevron-right"></i></span></button> to display the next question.
+                </li>
+                <li>
+                    You can jump to any question by selecting the question number from the question pallete displayed on the left panel. 
+                </li>
+            </ol>
+            <br>
+            <h4>Question Status- Left Panel</h4>
+            <table class="table">
+                <tr>
+                    <th class="text-center" colspan="2">
+                        <strong>Questions that are marked for review are displayed as</strong>
+                    </th>
+                    <td>
+                        <div class="qnumber qnumbermark inst">{{clickListener+1}}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-center" colspan="2">
+                        <strong>Questions that are answered correctly are shown as</strong>
+                    </th>
+                    <td>
+                        <div class="qnumber qnumbercorrect inst">{{clickListener+1}}</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-center" colspan="2">
+                        <strong>Questions that are answered incorrectly are shown as</strong>
+                    </th>
+                    <td>
+                        <div class="qnumber qnumberwrong inst">{{clickListener+1}}</div>
+                    </td>
+                </tr>
+            </table>
+            <ul>
+                <li>
+                    You can quit the test anytime by clicking <i class="fa fa-home fa-lg orange-text"></i> icon on the left panel.<strong> Note:-</strong> You can resume the test anytime.
+                </li>
+                <li>
+                    You can review these instructions by clicking on <i class="fa fa-question-circle fa-lg orange-text"></i> icon.
+                </li>
+            </ul>
         </div>
+        <div class="ui-g-12 text-center">
+            <button pButton (click)="help=false" label="Close" class="ui-button-success"></button>
+        </div>
+
+<!--         <div class="ui-g-12 container inst-table">
+            <h4>Buttons</h4>
+            <table class="table">
+                <tr>
+                    <th>
+                        <button class="orange-back" mat-mini-fab><span class="button-text">M</span></button>
+                    </th>
+                    <td>
+                        <strong>Mark For Review</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <button class="green-back" mat-mini-fab><span class="button-text">V</span></button>
+                    </th>
+                    <td>
+                        <strong>Validate</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <button class="blue-back" mat-mini-fab><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>
+                    </th>
+                    <td>
+                        <strong>Next Question</strong>
+                    </td>
+                </tr>
+            </table>
+        </div> -->
     </div>
 
 </p-dialog>
@@ -203,24 +287,24 @@
                 <div class="ui-g to-center">
                     <div class="ui-g-4 text-center m-group">
                         <span *ngIf="!spinner2">
-                            <button mat-mini-fab [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>Mark For Review
+                            <button mat-mini-fab [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button><strong>Mark For Review</strong>
                         </span>
                         <span *ngIf="spinner2">
-                            <button mat-mini-fab><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward blob"></i></span></button>Mark For Review
+                            <button mat-mini-fab><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward blob"></i></span></button><strong>Mark For Review</strong>
                         </span>
                         <!-- <br>Mark For Review -->
                     </div>
                     <div class="ui-g-4 text-center v-group">
                         <span *ngIf="!spinner">
-                            <button mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>Validate
+                            <button mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button><strong>Validate</strong>
                         </span>
                         <span *ngIf="spinner">
-                            <button mat-mini-fab ><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>Validate
+                            <button mat-mini-fab ><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button><strong>Validate</strong>
                         </span>
                         <!-- <br>Validate -->
                     </div>
                     <div class="ui-g-4 text-center n-group">
-                        <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>Next Question
+                        <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button><strong>Next Question</strong>
                         <!-- <br>Next Question -->
                     </div>
                 </div>
@@ -240,23 +324,23 @@
         </div>
     </div>
 </div>
-<div class="ui-g" *ngIf="false">
+<!-- <div class="ui-g" *ngIf="false">
     <div class="ui-g-12 fixed-foot">
         <div class="ui-g to-left">
             <div class="ui-g-2 text-center m-group">
                 <button mat-mini-fab *ngIf="!spinner2" [disabled]="spinner||spinner2||validated()||this.selectedQuestion['state']!='u'" (click)="markForReview()"><span class="button-text">M</span></button>
                 <button mat-mini-fab *ngIf="spinner2"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
-                <!-- <br>Mark For Review -->
+                <br>Mark For Review
             </div>
             <div class="ui-g-2 text-center v-group">
                 <button *ngIf="!spinner" mat-mini-fab [disabled]="spinner||spinner2||answer==null||validated()||this.selectedQuestion['state']!='u'" (click)="validate()"><span class="button-text">V</span></button>
                 <button mat-mini-fab *ngIf="spinner"><span class="button-text"><i class="fa fa-circle-o-notch fa-spin fa-forward "></i></span></button>
-                <!-- <br>Validate -->
+                <br>Validate
             </div>
             <div class="ui-g-2 text-center n-group">
                 <button mat-mini-fab [disabled]="spinner2||spinner" (click)="nextQuestion()"><span class="button-text"><i class="fa fa-chevron-right"></i></span></button>
-                <!-- <br>Next Question -->
+                <br>Next Question
             </div>
         </div>
     </div>
-</div>
+</div> -->

@@ -116,6 +116,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     ngOnInit() {
+        console.log(this.chapterwiseTest.attemptDetails);
         this.imageUrl = constants.OLYMPIADBOX_IMG_URL;
         this.counter = 0;
         this.totalQues = this.chapterwiseTest.qaSet.length;
@@ -339,13 +340,15 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
     startTest() {
         if (this.start == false) {
             let timer = Observable.timer(0, 1000); //initiate timer
-            this.help = false;
             timer.subscribe(t => {
                 this.sec += 1;
                 if (this.sec == 60) { this.sec = 0; this.min += 1; }
                 if (this.min == 60) { this.min = 0; this.hour += 1; }
                 if (this.hour == 24) { this.hour = 0; }
             });
+        }
+        if(this.chapterwiseTest.attemptDetails.last_question==0){
+            this.help = true;
         }
     }
 
