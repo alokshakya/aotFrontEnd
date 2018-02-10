@@ -116,7 +116,6 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
     }
 
     ngOnInit() {
-        console.log(this.chapterwiseTest.attemptDetails);
         this.imageUrl = constants.OLYMPIADBOX_IMG_URL;
         this.counter = 0;
         this.totalQues = this.chapterwiseTest.qaSet.length;

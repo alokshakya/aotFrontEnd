@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="ui-g-3" *ngIf="sub?.demo_test!=null">Demo Test</div>
                                 <div class="ui-g-9" *ngIf="sub?.demo_test!=null">
-                                    <div class="progress hover progmob" pTooltip="Go To Sample Test" (click)="redirect(sub.name,'demotest')">
+                                    <div class="progress hover progmob" pTooltip="Go To Demo Test" (click)="redirect(sub.name,'demotest')">
                                         <div *ngIf="sub['demo_test']['total_completed']==1" class="progress-bar progress-bar-success"  role="progressbar" style="width:100%">100%
                                         </div>
                                         <div *ngIf="sub['demo_test']['total_completed']==0" class="progress-bar progress-bar-warning" style="width:100%" role="progressbar">100%
