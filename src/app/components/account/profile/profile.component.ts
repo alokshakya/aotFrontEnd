@@ -80,6 +80,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     couponCode: string;
     achievement;
     isHuman:boolean;
+    @ViewChild('captcha') captcha;
     constructor(
         public confirmservice: ConfirmationService,
         public personalInfo: PersonalInfo,
@@ -329,7 +330,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
 
     addAchievement() {
         if(!this.isHuman){
-            console.log(this.isHuman);
             return false;
         }
         this.spinner = true;
@@ -374,9 +374,12 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                     this.spinner = false;
                     this.cancelAchievement();
                 }
+                this.captcha.reset();
             },
             err=>{
                 this.generateMsg('error','Server Error','Please Try Again');
+                this.captcha.reset();
+                
             })
     }
 
@@ -395,7 +398,7 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
     invalidName(){
         let arr = [false,false,false];
         let pattern = new RegExp("^[a-zA-Z]+$");
-        let dobPattern = new RegExp("^[1-2]{1}[0-9]{3}-[0-1]{1}[1-2]{1}-[0-3]{1}[0-9]{1}$");
+        let dobPattern = new RegExp("^[0-9]{4}-[0-9]{2}-[0-9]{2}$");
         let zipPattern = new RegExp("^[0-9]{6}");
         let addressPattern = new RegExp("^[0-9A-Za-z]{1,}[a-zA-Z0-9]+$");
         if(this.editBasic){
@@ -632,7 +635,6 @@ export class ProfileComponent implements OnInit, ComponentCanDeactivate {
                 let status = JSON.parse(data['message']);
                 if(status.success){
                     this.isHuman = true;
-                    console.log(this.isHuman);
                 }
                 else this.isHuman = false;
             }

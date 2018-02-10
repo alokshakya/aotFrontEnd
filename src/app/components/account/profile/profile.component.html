@@ -300,7 +300,7 @@
                                 <br>
                                 <div class="text-center">
                                     <p-captcha #captcha siteKey="6LfVJUUUAAAAAGWXhy14h_D8Iw4AydIVKwhObjKb" (onResponse)="showResponse($event)"></p-captcha><br>
-                                    <button pButton *ngIf="!spinner" style="width:145px" class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''||selectedExam==null||selectedClass==null||examCity==null||examCity==''||rollNo==null||rollNo==''||!isHuman" label="Add Achievement" (click)="addAchievement();captcha.reset()"></button>
+                                    <button pButton *ngIf="!spinner" style="width:145px" class="ui-button-success" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''||selectedExam==null||selectedClass==null||examCity==null||examCity==''||rollNo==null||rollNo==''||!isHuman" label="Add Achievement" (click)="addAchievement()"></button>
                                     <button pButton *ngIf="spinner" style="width:145px" class="ui-button-success" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
                                     <button pButton class="ui-button-danger" [disabled]="dec[0]==null||dec[1]==null||achievement==null||achievement==''||selectedExam==null||selectedClass==null||examCity==null||examCity==''||rollNo==null||rollNo==''" (click)="cancelAchievement();captcha.reset()" label="Not Now"></button>
                                 </div>

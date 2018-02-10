@@ -191,7 +191,7 @@
                     <p-dropdown scrollHeight="120px" [style]="{'width':'195px'}" [options]="dummyGender" [(ngModel)]="userRegCreds.gender"></p-dropdown>
                 </div>
                 <div class="ui-g-12 ui-sm-12">
-                    <p-captcha siteKey="6LfVJUUUAAAAAGWXhy14h_D8Iw4AydIVKwhObjKb" (onResponse)="showResponse($event)"></p-captcha>
+                    <p-captcha #captcha siteKey="6LfVJUUUAAAAAGWXhy14h_D8Iw4AydIVKwhObjKb" (onResponse)="showResponse($event)"></p-captcha>
                 </div>
                 <div class="ui-g-12 ui-sm-12 text-center">
                     <button id="reg" type="button" *ngIf="!spinner" pButton label="Register" [disabled]="regEmail.errors ||spinner ||firstname.errors

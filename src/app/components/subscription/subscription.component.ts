@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Message, SelectItem } from 'primeng/primeng';
@@ -19,6 +19,7 @@ import * as constants from '../../../config/constants';
 })
 export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
 	userRegCreds:any;
+	isHuman:boolean;
 	class:SelectItem[];
 	sum:number = 0;
 	gender:SelectItem[];
@@ -42,6 +43,8 @@ export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
 	mobileSpinner2:boolean;
 	spinner:boolean;
 	feeCols:Array<any>;
+	appliedCoupon;
+	@ViewChild('captcha') captcha;
 	constructor(
 		private http:LoginRegisterService,
 		private masterhttp:MasterHttpService,
@@ -109,7 +112,7 @@ export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
 		wrapper['email'] = wrapper['email'].toLowerCase();
 		wrapper['firstname'] = wrapper['firstname'].toLowerCase();
 		wrapper['lastname'] = wrapper['lastname'].toLowerCase();
-
+		this.captcha.reset();
 		this.http.register(wrapper).subscribe((data)=>{
 			if(data['status']==200){
 				this.sendOtp({email:this.userRegCreds.email,verify_mobile:true,verify_email:true});
@@ -159,6 +162,7 @@ export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
         this.masterhttp.applyDiscountCouponPre(wrapper).subscribe((data)=>{
             if(data['status']===200){
                 this.displayDiscount(parseInt(data['message']));
+                this.appliedCoupon = wrapper['coupon_code'];
             }
             if(data['status']===710){
                 this.growlDisplay('error','Invalid Coupon','Enter Valid Coupon Code');
@@ -308,5 +312,18 @@ export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
 		}
 		return a;
 	}
+
+	showResponse(event){
+        let wrapper = {response:event.response};
+        this.masterhttp.validateCaptcha(wrapper).subscribe((data)=>{
+            if(data['status']==200){
+                let status = JSON.parse(data['message']);
+                if(status.success){
+                    this.isHuman = true;
+                }
+                else this.isHuman = false;
+            }
+        })
+    }
 
 }

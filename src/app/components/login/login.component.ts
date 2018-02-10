@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnChanges, AfterViewInit, ViewChild } from '@angular/core';
 import { style, state, animate, transition, trigger } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginRegisterService } from '../../services/loginRegister.service';
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
 
     modeStr:string;
     isHuman:boolean;
-
+    @ViewChild('captcha') captcha;
     constructor(
         public httpService: LoginRegisterService,
         public masterhttp: MasterHttpService,
@@ -378,10 +378,13 @@ export class LoginComponent implements OnInit {
                     this.message = [];
                     this.message.push({ severity: 'info', summary: 'Email Already Exists', detail: 'Please Login' });
                 }
+                this.captcha.reset();
             }, err => {
                 this.message = [];
                 this.message.push({ severity: 'error', summary: 'Server Error', detail: 'Please Try Again'});
                 this.spinner = false;
+                this.captcha.reset();
+
                 }
             )
     }
@@ -505,13 +508,10 @@ export class LoginComponent implements OnInit {
     showResponse(event){
         let wrapper = {response:event.response};
         this.masterhttp.validateCaptcha(wrapper).subscribe((data)=>{
-            console.log(data);
             if(data['status']==200){
                 let status = JSON.parse(data['message']);
-                console.log(status.success);
                 if(status.success){
                     this.isHuman = true;
-                    console.log(this.isHuman);
                 }
                 else this.isHuman = false;
             }
