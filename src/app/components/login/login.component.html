@@ -129,7 +129,7 @@
             </div>
             <div class="ui-g-12 empty" *ngIf="!(emailVerified||mobileVerified)"></div>
             <div class="ui-g-12 text-center aligned" *ngIf="emailVerified||mobileVerified">
-                <input pPassword promptLabel="Atleast 6 characters" #newpassword=ngModel type="password" name="newpassword" id="med1" [(ngModel)]="passwordObj.new_password" placeholder="Enter New Password" pattern="^[^\s]{6,}">
+                <input pPassword promptLabel="Atleast 6 Characters With No Spaces" #newpassword=ngModel type="password" name="newpassword" id="med1" [(ngModel)]="passwordObj.new_password" placeholder="Enter New Password" pattern="^[^\s]{6,}">
                 <p [hidden]="newpassword.untouched" *ngIf="newpassword.errors&&newpassword.errors.pattern" class="error">Password must have atleast 6 characters</p>
                 <br>
                 <input pInputText id="med2" type="password" [(ngModel)]="dummyPassword" placeholder="Confirm Password">
@@ -174,9 +174,9 @@
                 </div>
                 <div class="ui-g-6 ui-sm-6">
                     <!--Password validator-->
-                    <input type="password" name="pass" pPassword [feedback]="true" promptLabel="Atleast 6 Characters And No Spaces" indicator="false" #pass="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password" pattern="^[^\s]{6,}" />
-                    <p class="error" [hidden]="pass.untouched" *ngIf="pass.errors && pass.errors.pattern">
-                        Must have atleast 6 characters
+                    <input type="password" name="pass" pPassword [feedback]="true" promptLabel="Atleast 6 Characters With No Spaces" indicator="false" #pass="ngModel" [(ngModel)]="userRegCreds.password" placeholder="Password" pattern="^[^\s]{6,}" />
+                    <p class="error" [hidden]="pass.untouched" *ngIf="pass.errors && pass.errors.pattern">Password
+                        Must Have Atleast 6 Characters
                     </p>
                 </div>
                 <div class="ui-g-6 ui-sm-6">
@@ -184,10 +184,10 @@
                     <input type="password" name="regPassword1" #regPassword="ngModel" [(ngModel)]="confirmPassword" placeholder="Confirm Password" pattern="^[^\s]{6,}" />
                     <p [hidden]="regPassword.untouched" *ngIf="confirmPassword!=userRegCreds.password" class="error">Password doesn't match</p>
                 </div>
-                <div class="ui-g-6 ui-sm-6">
+                <div class="ui-g-6 ui-sm-12">
                     <p-dropdown scrollHeight="120px" [style]="{'width':'195px'}" [options]="dummyClass" [(ngModel)]="userRegCreds.class"></p-dropdown>
                 </div>
-                <div class="ui-g-6 ui-sm-6">
+                <div class="ui-g-6 ui-sm-12">
                     <p-dropdown scrollHeight="120px" [style]="{'width':'195px'}" [options]="dummyGender" [(ngModel)]="userRegCreds.gender"></p-dropdown>
                 </div>
                 <div class="ui-g-12 ui-sm-12">

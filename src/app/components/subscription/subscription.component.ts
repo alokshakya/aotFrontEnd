@@ -107,6 +107,10 @@ export class SubscriptionComponent implements OnInit, ComponentCanDeactivate {
     }
 
 	signUp(){
+		if(!this.isHuman){
+			return false;
+		}
+		else this.isHuman = false;
 		this.spinner = true;
 		var wrapper = JSON.parse(JSON.stringify(this.userRegCreds));
 		wrapper['email'] = wrapper['email'].toLowerCase();
