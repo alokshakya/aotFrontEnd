@@ -16,7 +16,7 @@
                                 </div>
                                 <div class="ui-g-9">
                                     <span class="number">{{result.reasoning.total_correct+result.reasoning.total_marked+result.reasoning.total_incorrect}}</span>
-                                    <br> Questions Attempted
+                                    <br> Total Attempted
                                 </div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><span>Attempted</span></th>
-                                                    <td>{{selectedTest?.attempted}}</td>
+                                                    <td>{{selectedAttemptObject?.correct + selectedAttemptObject?.incorrect + selectedAttemptObject?.marked}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th><span>Correct</span></th>
@@ -215,7 +215,7 @@
                                 </div>
                                 <div class="ui-g-9">
                                     <span class="number">{{sampleTestObject['total_attempted']}}</span>
-                                    <br> Questions Attempted
+                                    <br> Total Attempted
                                 </div>
                             </div>
                         </div>
@@ -326,7 +326,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><span>Attempted</span></th>
-                                                    <td>{{selectedTest?.attempted}}</td>
+                                                    <td>{{selectedAttemptObject?.correct + selectedAttemptObject?.incorrect + selectedAttemptObject?.marked}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th><span>Correct</span></th>
@@ -403,7 +403,7 @@
                                 </div>
                                 <div class="ui-g-9">
                                     <span class="number">{{mockTestObject['total_attempted']}}</span>
-                                    <br> Questions Attempted
+                                    <br> Total Attempted
                                 </div>
                             </div>
                         </div>
@@ -508,7 +508,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><span>Attempted</span></th>
-                                                    <td>{{selectedTest?.attempted}}</td>
+                                                    <td>{{selectedAttemptObject?.correct + selectedAttemptObject?.incorrect + selectedAttemptObject?.marked}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th><span>Correct</span></th>
@@ -585,7 +585,7 @@
                                 </div>
                                 <div class="ui-g-9">
                                     <span class="number">{{demoTestObject['total_attempted']}}</span>
-                                    <br> Questions Attempted
+                                    <br> Total Attempted
                                 </div>
                             </div>
                         </div>
@@ -657,7 +657,7 @@
                                                 </tr>
                                                 <tr>
                                                     <th><span>Attempted</span></th>
-                                                    <td>{{selectedTest?.attempted}}</td>
+                                                    <td>{{selectedAttemptObject?.correct + selectedAttemptObject?.incorrect + selectedAttemptObject?.marked}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th><span>Correct</span></th>
