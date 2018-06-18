@@ -110,7 +110,7 @@ export class SubscribeComponent implements OnInit {
         //     this.spinner = false;
         //     return false
         // }
-        let wrapper = {amount:0, fee_id:'',discount:0};
+        let wrapper = {amount:0, fee_id:'', discount:0, deviceType:'Desktop'};
         for(let i in this.selectedPackage){
             wrapper['amount'] += parseInt(this.selectedPackage[i]['amount']);
             wrapper['fee_id'] += this.selectedPackage[i]['fee_id']+',';
@@ -161,7 +161,7 @@ export class SubscribeComponent implements OnInit {
         this.spinner2 = true;
         this.reset();
         this.http.applyDicountCoupon(wrapper).subscribe((data)=>{
-            if(data['status']===200){-
+            if(data['status']===200){
                 this.displayDiscount(parseInt(data['message']));
                 this.appliedCoupon = wrapper.coupon_code;
                 this.spinner2 = false;
