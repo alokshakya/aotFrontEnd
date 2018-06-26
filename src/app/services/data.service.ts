@@ -12,7 +12,7 @@ export class PersonalInfo {
     schoolInfo = { 'name': null, 'contact_person': null, 'contact_mobile': null };
     couponCode: string;
     userTestimonials:any;
-
+    ticketDetails= [];
     dummySchoolInfo = { 'school_id': null };
 
     getUserTestimonials():Observable<any>{
@@ -24,6 +24,11 @@ export class PersonalInfo {
     setUserTestimonials(data){
         this.userTestimonials = data;
 
+    }
+
+    setTickets(data){
+        this.ticketDetails = data;
+        this.event.emitDataEvent();
     }
 
     setInfo(data) {

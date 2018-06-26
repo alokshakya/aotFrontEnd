@@ -201,6 +201,20 @@ export class AppMenuComponent implements OnInit {
                     routerLink: ['reasoning/result']
                 }
                 ]
+            },
+            { 
+                label: 'Support',
+                icon: 'fa fa-question-circle',
+                items:[{
+                    label:'Create Ticket',
+                    icon: 'fa fa-sticky-note-o',
+                    routerLink:['support/createticket']
+                },
+                {
+                    label:'View Tickets',
+                    icon:'fa fa-table',
+                    routerLink:['support/viewticket']
+                }]
             }
         ]
     }

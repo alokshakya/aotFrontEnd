@@ -13,8 +13,9 @@ export class EventService {
     dataEvent:EventEmitter<number> = new EventEmitter();
     userVerifiedEvent: EventEmitter<number> = new EventEmitter();
     control:number=0;
-    user:number=0;
-
+	user:number=0;
+	showSpinner: boolean;
+	ticketRaised:boolean;
 	constructor() { }
 
 	emitVerifiedUserEvent(){

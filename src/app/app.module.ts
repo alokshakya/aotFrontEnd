@@ -29,6 +29,7 @@ import { DataGridModule } from 'primeng/primeng';
 import { DataListModule } from 'primeng/primeng';
 import { DataScrollerModule } from 'primeng/primeng';
 import { DataTableModule } from 'primeng/primeng';
+import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/primeng';
 import { DragDropModule } from 'primeng/primeng';
 import { DropdownModule } from 'primeng/primeng';
@@ -149,6 +150,9 @@ import { MocktestReasoningComponent } from './components/account/reasoning/mockt
 import { ResultReasoningComponent } from './components/account/reasoning/result/result-reasoning.component';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 
+import { CreateticketComponent } from './components/support/createticket/createticket.component';
+import { ViewticketComponent } from './components/support/viewticket/viewticket.component';
+
 import {MathJaxDirective} from './directives/mathjax.directive';
 import { RoundPipe } from './pipes/round.pipe';
 @NgModule({
@@ -218,6 +222,7 @@ import { RoundPipe } from './pipes/round.pipe';
         StepsModule,
         TabMenuModule,
         TabViewModule,
+        TableModule,
         TerminalModule,
         TieredMenuModule,
         ToggleButtonModule,
@@ -277,7 +282,9 @@ import { RoundPipe } from './pipes/round.pipe';
         ResultReasoningComponent,
         MathJaxDirective,
         RoundPipe,
-        SubscriptionComponent
+        SubscriptionComponent,
+        CreateticketComponent,
+        ViewticketComponent
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },

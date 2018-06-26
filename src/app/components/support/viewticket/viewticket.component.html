@@ -1,0 +1,75 @@
+<div class="ui-g">
+	<div class="ui-g-12">
+		<p-panel header="Ticket Details">
+				<div class="ui-g" *ngIf="event.showSpinner">
+						<div class="ui-g-12 text-center spin">
+							<p-progressSpinner></p-progressSpinner>
+						</div>
+					</div>
+			<div class="ui-g" *ngIf="!event.showSpinner">
+				<div class="ui-g-12 table">
+					<p-table [columns]="ticketCols" [paginator]="true" [value]="personalInfo.ticketDetails" [rows]="10" dataKey="case_id" selectionMode="single" [(selection)]="selectedTicket">
+					    <ng-template pTemplate="header" let-columns>
+					        <tr>
+					            <th style="width: 2.5em"></th>
+					            <th *ngFor="let col of columns">
+					                {{col.header}}
+					            </th>
+					            <th> Action </th>
+					        </tr>
+					    </ng-template>
+					    <ng-template pTemplate="emptymessage" let-columns>
+							<tr>
+								<td [attr.colspan]="columns.length">
+									<h4>No records found</h4>
+								</td>
+							</tr>
+			    		</ng-template>
+					    <ng-template pTemplate="body" let-rowData let-expanded="expanded" let-rowIndex="rowIndex" let-columns="columns">
+					        <tr>
+					            <td>
+					                <a href="#" [pRowToggler]="rowData" class="chev" >
+					                    <i [ngClass]="expanded ? 'fa fa-fw fa-chevron-circle-down fa-lg' : 'fa fa-fw fa-chevron-circle-right fa-lg'"></i>
+					                </a>
+					            </td>
+					            <td *ngFor="let col of columns">
+					                <span *ngIf="col.field=='date'">{{rowData[col.field]|date:'short'}}</span>
+					                <span *ngIf="col.field!='date'">{{rowData[col.field]}}</span>
+					            </td>
+					            <td>
+					            	<!-- <i class="fa fa-times fa-lg" (click)="delete(rowIndex)" ></i> -->
+					            	<button pButton class="ui-button-success" label="Open Ticket" *ngIf="rowData['ticket_status']==0" (click)="update(rowIndex,1)"></button>
+					            	<button pButton class="ui-button-danger" label="Close Ticket" *ngIf="rowData['ticket_status']==1" (click)="update(rowIndex,0)"></button>
+					            </td>
+					        </tr>
+					    </ng-template>
+						<ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+						    <tr>
+						        <td [attr.colspan]="columns.length + 2">
+						            <div class="ui-g ui-fluid">
+						                <div class="ui-g-12">
+						                    <div class="ui-g">
+						                        <div class="ui-g-4">
+						                            <label class="det">Category:</label>{{rowData.category}}
+						                        </div>
+						                        <div class="ui-g-4">
+						                            <label class="det">Contact Method:</label>
+						                            <span *ngIf="rowData.contact_method=='web'"><i class="fa fa-envelope"></i> Email</span>
+						                            <span *ngIf="rowData.contact_method=='mob'"><i class="fa fa-mobile fa-lg"></i> Mobile</span>
+						                        </div>
+						                        <div class="ui-g-12">
+						                            <label class="det">Description:</label>{{rowData.description}}
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						        </td>
+						    </tr>
+						</ng-template>
+					</p-table>
+				</div>
+			</div>
+		</p-panel>
+	</div>
+</div>
+

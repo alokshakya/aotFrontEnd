@@ -1,0 +1,26 @@
+<p-growl [(value)]="msgs"></p-growl>
+<div class="ui-g">
+	<div class="ui-g-12">
+		<p-panel header="Support">
+			<div class="ui-g no-pad">
+				<div class="ui-g-12 write">
+					<h3 id="top">Create Ticket</h3>
+					<hr style="padding:0 0 0 0 ; margin: 0 0 0 0">
+					<label> Name: </label>{{personalInfo.userInfo['firstname']}} {{personalInfo.userInfo['lastname']}}<br>
+					<label> Email: </label>{{personalInfo.userInfo['email']}}<br>
+					<label> Category: </label><p-dropdown [style]="{'width':'250px'}" [options]="category" [(ngModel)]="ticketObject.category" editable="true" placeholder="Select or Search Category"></p-dropdown><br>
+					<label> Subject: </label><input [(ngModel)]="ticketObject.subject" placeholder="Subject" pInput type="text"><br>
+					<p class="align"><label> Description: </label><textarea [(ngModel)]="ticketObject.description" placeholder="Enter Your Message..." pInputTextarea></textarea></p>
+					<label> Contact Method: </label>
+					<p-radioButton name="contactMethod" value="web" [(ngModel)]="ticketObject.contact_method"></p-radioButton>
+					 &nbsp; 	<i class="fa fa-envelope fa-lg"></i>&nbsp; Email
+					 &nbsp; &nbsp; 
+					<p-radioButton name="contactMethod" value="mob" [(ngModel)]="ticketObject.contact_method"></p-radioButton>
+					 &nbsp; 	<i class="fa fa-phone fa-lg"></i> Phone <button [disabled]="validator()" pButton label="Submit Ticket" class="ui-button-info" (click)="submitTicket()" style="width:110px" *ngIf="!spinner" ></button>
+					 <button class="ui-button-info" pButton style="width:110px" *ngIf="spinner" icon="fa fa-circle-o-notch fa-spin fa-forward"></button>
+					<br>
+				</div>
+			</div>
+		</p-panel>
+	</div>
+</div>

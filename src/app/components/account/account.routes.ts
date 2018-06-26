@@ -45,7 +45,8 @@ import { SampletestReasoningComponent } from './reasoning/sampletest/sampletest-
 import { TestComponent } from '../test/test.component';
 import { ProfileComponent } from './profile/profile.component';
 import { LoadoutComponent } from './loadout/loadout.component';
-
+import { CreateticketComponent } from '../support/createticket/createticket.component';
+import { ViewticketComponent } from '../support/viewticket/viewticket.component';
 import { AccountGuard, TestAccountGuard, TestDeactivate} from './account.guard';
 
 export const AccountRoutes: Routes = [
@@ -58,7 +59,7 @@ export const AccountRoutes: Routes = [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent, },
             { path: 'subscribe', component: SubscribeComponent },
-            
+
             { path: 'computers/demotest', component: DemotestComputersComponent },
             { path: 'computers/chapterwisetest', component: ChapterwisetestComputersComponent },
             { path: 'computers/sampletest', component: SampletestComputersComponent },
@@ -95,7 +96,10 @@ export const AccountRoutes: Routes = [
             { path: 'reasoning/mocktest', component: MocktestReasoningComponent },
             { path: 'reasoning/result', component: ResultReasoningComponent },
             
-            { path: 'profile', component: ProfileComponent,canDeactivate:[TestDeactivate]}
+            { path: 'profile', component: ProfileComponent,canDeactivate:[TestDeactivate]},
+
+            { path: 'support/createticket', component:CreateticketComponent},
+            { path: 'support/viewticket', component:ViewticketComponent}
         ],
     }
 ];

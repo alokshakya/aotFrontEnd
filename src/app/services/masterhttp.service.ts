@@ -217,6 +217,37 @@ export class MasterHttpService {
             })
     }
 
+    getTickets(){
+        return this.http.get(constants.OLYMPIADBOX_INSTANCE_URL + '/ticket/tickets',{headers:this.queryHeaders})
+        .map((resp:Response)=>resp.json())
+        .subscribe((data)=>{
+            if(data['status']==200){
+                this.personalInfo.setTickets(data['message']);
+                this.event.showSpinner = false;
+                this.event.ticketRaised = false;
+            }
+            else{
+                this.httpError();
+                this.event.showSpinner = false;
+                this.event.ticketRaised = false;
+                }
+            },
+            err=>{this.httpError()
+                this.event.showSpinner = false;
+                this.event.ticketRaised = false;
+            })
+    }
+    
+    raiseTicket(requestBody){
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/ticket/raiseticket/',requestBody,{headers:this.queryHeaders})
+        .map((resp:Response)=>resp.json());
+    }
+
+    updateTicket(requestBody){
+        return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL + '/ticket/ticketstatus/',requestBody,{headers:this.queryHeaders})
+        .map((resp:Response)=>resp.json());
+    }
+
     validateCaptcha(requestBody){
         return this.http.post(constants.OLYMPIADBOX_INSTANCE_URL+'/google/validatecaptcha',requestBody,{headers:this.queryHeaders}).map((resp:Response)=>resp.json());
     }
