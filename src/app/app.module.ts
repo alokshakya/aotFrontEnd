@@ -144,9 +144,7 @@ import { ResultGkComponent } from './components/account/gk/result/result-gk.comp
 
 
 import { ChapterwisetestReasoningComponent } from './components/account/reasoning/chapterwisetest/chapterwisetest-reasoning.component';
-import { SampletestReasoningComponent } from './components/account/reasoning/sampletest/sampletest-reasoning.component';
 import { DemotestReasoningComponent } from './components/account/reasoning/demotest/demotest-reasoning.component';
-import { MocktestReasoningComponent } from './components/account/reasoning/mocktest/mocktest-reasoning.component';
 import { ResultReasoningComponent } from './components/account/reasoning/result/result-reasoning.component';
 import { SubscriptionComponent } from './components/subscription/subscription.component';
 
@@ -276,9 +274,7 @@ import { RoundPipe } from './pipes/round.pipe';
         DemotestGkComponent,
         ResultGkComponent,
         ChapterwisetestReasoningComponent,
-        SampletestReasoningComponent,
         DemotestReasoningComponent,
-        MocktestReasoningComponent,
         ResultReasoningComponent,
         MathJaxDirective,
         RoundPipe,

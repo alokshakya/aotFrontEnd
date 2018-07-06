@@ -26,7 +26,7 @@ export class AppMenuComponent implements OnInit {
     ) {
 
         this.model = [
-            { label: 'Dashboard', icon: 'fa fa-fw fa-home', routerLink: ['dashboard'] },
+            { label: 'Dashboard', icon: 'fa fa-home', routerLink: ['dashboard'] },
             { label: 'Subscribe', icon: 'fa fa-pencil-square-o', routerLink: ['subscribe'] },
             {
                 label: 'Computers', icon: 'icon-cyber',
@@ -184,16 +184,6 @@ export class AppMenuComponent implements OnInit {
                     label: 'Chapterwise Test',
                     icon: 'fa fa-circle-o',
                     routerLink: ['reasoning/chapterwisetest']
-                },
-                {
-                    label: 'Sample Test',
-                    icon: 'fa fa-circle-o',
-                    routerLink: ['reasoning/sampletest']
-                },
-                {
-                    label: 'Mock Test',
-                    icon: 'fa fa-circle-o',
-                    routerLink: ['reasoning/mocktest']
                 },
                 {
                     label: 'Result',
