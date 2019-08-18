@@ -4,12 +4,12 @@ import { AccountMainComponent } from "./main/main.component";
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { SubscribeComponent } from './subscribe/subscribe.component'
 
-//Computers
-import { DemotestComputersComponent } from './computers/demotest/demotest-computers.component'
-import { ChapterwisetestComputersComponent } from './computers/chapterwisetest/chapterwisetest-computers.component'
-import { SampletestComputersComponent } from './computers/sampletest/sampletest-computers.component';
-import { MocktestComputersComponent } from './computers/mocktest/mocktest-computers.component';
-import { ResultComputersComponent } from './computers/result/result-computers.component';
+// //Computers
+// import { DemotestComputersComponent } from './computers/demotest/demotest-computers.component'
+// import { ChapterwisetestComputersComponent } from './computers/chapterwisetest/chapterwisetest-computers.component'
+// import { SampletestComputersComponent } from './computers/sampletest/sampletest-computers.component';
+// import { MocktestComputersComponent } from './computers/mocktest/mocktest-computers.component';
+// import { ResultComputersComponent } from './computers/result/result-computers.component';
 
 import { DemotestEnglishComponent } from './english/demotest/demotest-english.component';
 import { ChapterwisetestEnglishComponent } from './english/chapterwisetest/chapterwisetest-english.component';
@@ -55,11 +55,12 @@ const routes: Routes = [
             { path: 'dashboard', component: DashboardComponent, },
             { path: 'subscribe', component: SubscribeComponent },
 
-            { path: 'computers/demotest', component: DemotestComputersComponent },
-            { path: 'computers/chapterwisetest', component: ChapterwisetestComputersComponent },
-            { path: 'computers/sampletest', component: SampletestComputersComponent },
-            { path: 'computers/mocktest', component: MocktestComputersComponent },
-            { path: 'computers/result', component: ResultComputersComponent },
+            // { path: 'computers/demotest', component: DemotestComputersComponent },
+            // { path: 'computers/chapterwisetest', component: ChapterwisetestComputersComponent },
+            // { path: 'computers/sampletest', component: SampletestComputersComponent },
+            // { path: 'computers/mocktest', component: MocktestComputersComponent },
+            // { path: 'computers/result', component: ResultComputersComponent },
+            {path:'computers', loadChildren:'./computers/computers.module#ComputersModule'}
             
             { path: 'english/demotest', component: DemotestEnglishComponent },
             { path: 'english/chapterwisetest', component: ChapterwisetestEnglishComponent },
