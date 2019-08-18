@@ -17,11 +17,11 @@ import { SampletestEnglishComponent } from './english/sampletest/sampletest-engl
 import { MocktestEnglishComponent } from './english/mocktest/mocktest-english.component';
 import { ResultEnglishComponent } from './english/result/result-english.component';
 
-import { ChapterwisetestScienceComponent } from './science/chapterwisetest/chapterwisetest-science.component';
-import { DemotestScienceComponent } from './science/demotest/demotest-science.component';
-import { MocktestScienceComponent } from './science/mocktest/mocktest-science.component';
-import { SampletestScienceComponent } from './science/sampletest/sampletest-science.component';
-import { ResultScienceComponent } from './science/result/result-science.component';
+// import { ChapterwisetestScienceComponent } from './science/chapterwisetest/chapterwisetest-science.component';
+// import { DemotestScienceComponent } from './science/demotest/demotest-science.component';
+// import { MocktestScienceComponent } from './science/mocktest/mocktest-science.component';
+// import { SampletestScienceComponent } from './science/sampletest/sampletest-science.component';
+// import { ResultScienceComponent } from './science/result/result-science.component';
 
 // import { ChapterwisetestMathComponent } from './mathematics/chapterwisetest/chapterwisetest-math.component';
 // import { DemotestMathComponent } from './mathematics/demotest/demotest-math.component';
@@ -69,11 +69,12 @@ const routes: Routes = [
             // { path: 'english/result', component: ResultEnglishComponent },
             {path: 'english', loadChildren: './english/english.module#EnglishModule'},
 
-            { path: 'science/demotest', component: DemotestScienceComponent },
-            { path: 'science/chapterwisetest', component: ChapterwisetestScienceComponent },
-            { path: 'science/sampletest', component: SampletestScienceComponent },
-            { path: 'science/mocktest', component: MocktestScienceComponent },
-            { path: 'science/result', component: ResultScienceComponent },
+            // { path: 'science/demotest', component: DemotestScienceComponent },
+            // { path: 'science/chapterwisetest', component: ChapterwisetestScienceComponent },
+            // { path: 'science/sampletest', component: SampletestScienceComponent },
+            // { path: 'science/mocktest', component: MocktestScienceComponent },
+            // { path: 'science/result', component: ResultScienceComponent },
+            {path:'science', loadChildren:'./science/science.module#ScienceModule'},
 
             // { path: 'math/demotest', component: DemotestMathComponent },
             // { path: 'math/chapterwisetest', component: ChapterwisetestMathComponent },
