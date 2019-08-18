@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccountMainComponent } from "./main/main.component";
-import { DashboardComponent } from './dashboard/dashboard.component'
-import { SubscribeComponent } from './subscribe/subscribe.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SubscribeComponent } from './subscribe/subscribe.component';
 
 // //Computers
 // import { DemotestComputersComponent } from './computers/demotest/demotest-computers.component'
@@ -11,11 +11,11 @@ import { SubscribeComponent } from './subscribe/subscribe.component'
 // import { MocktestComputersComponent } from './computers/mocktest/mocktest-computers.component';
 // import { ResultComputersComponent } from './computers/result/result-computers.component';
 
-import { DemotestEnglishComponent } from './english/demotest/demotest-english.component';
-import { ChapterwisetestEnglishComponent } from './english/chapterwisetest/chapterwisetest-english.component';
-import { SampletestEnglishComponent } from './english/sampletest/sampletest-english.component';
-import { MocktestEnglishComponent } from './english/mocktest/mocktest-english.component';
-import { ResultEnglishComponent } from './english/result/result-english.component';
+// import { DemotestEnglishComponent } from './english/demotest/demotest-english.component';
+// import { ChapterwisetestEnglishComponent } from './english/chapterwisetest/chapterwisetest-english.component';
+// import { SampletestEnglishComponent } from './english/sampletest/sampletest-english.component';
+// import { MocktestEnglishComponent } from './english/mocktest/mocktest-english.component';
+// import { ResultEnglishComponent } from './english/result/result-english.component';
 
 // import { ChapterwisetestScienceComponent } from './science/chapterwisetest/chapterwisetest-science.component';
 // import { DemotestScienceComponent } from './science/demotest/demotest-science.component';
@@ -35,11 +35,11 @@ import { ResultEnglishComponent } from './english/result/result-english.componen
 // import { ResultGkComponent } from './gk/result/result-gk.component';
 // import { SampletestGkComponent } from './gk/sampletest/sampletest-gk.component';
 
-import { ChapterwisetestReasoningComponent } from './reasoning/chapterwisetest/chapterwisetest-reasoning.component';
-import { DemotestReasoningComponent } from './reasoning/demotest/demotest-reasoning.component';
-import { ResultReasoningComponent } from './reasoning/result/result-reasoning.component';
-import { SampletestReasoningComponent } from './reasoning/sampletest/sampletest-reasoning.component';
-import { MocktestReasoningComponent } from './reasoning/mocktest/mocktest-reasoning.component';
+// import { ChapterwisetestReasoningComponent } from './reasoning/chapterwisetest/chapterwisetest-reasoning.component';
+// import { DemotestReasoningComponent } from './reasoning/demotest/demotest-reasoning.component';
+// import { ResultReasoningComponent } from './reasoning/result/result-reasoning.component';
+// import { SampletestReasoningComponent } from './reasoning/sampletest/sampletest-reasoning.component';
+// import { MocktestReasoningComponent } from './reasoning/mocktest/mocktest-reasoning.component';
 
 
 // import { ProfileComponent } from './profile/profile.component';
@@ -53,7 +53,7 @@ const routes: Routes = [
   {path:'', component: AccountMainComponent, children:[
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent, },
-            { path: 'subscribe', component: SubscribeComponent },
+            { path: 'subscribe', loadChildren: './subscribe/subscribe.module#SubscribeModule' },
 
             // { path: 'computers/demotest', component: DemotestComputersComponent },
             // { path: 'computers/chapterwisetest', component: ChapterwisetestComputersComponent },
@@ -98,7 +98,7 @@ const routes: Routes = [
             {path:'reasoning', loadChildren:'./reasoning/reasoning.module#ReasoningModule'},
             
             // { path: 'profile', component: ProfileComponent,canDeactivate:[TestDeactivate]},
-            {path:'profile', loadChildren:'./profile/profile.module#ProfileModule', canDeactivate:[TestDeactivate]},
+            {path:'profile', loadChildren:'./profile/profile.module#ProfileModule'},
 
             { path: 'support/createticket', component:CreateticketComponent},
             { path: 'support/viewticket', component:ViewticketComponent},
