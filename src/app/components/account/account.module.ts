@@ -8,11 +8,11 @@ import { CommonModule } from '@angular/common';
 // import { MocktestComputersComponent } from './computers/mocktest/mocktest-computers.component';
 // import { ResultComputersComponent } from './computers/result/result-computers.component';
 
-import { DemotestEnglishComponent } from './english/demotest/demotest-english.component';
-import { ChapterwisetestEnglishComponent } from './english/chapterwisetest/chapterwisetest-english.component';
-import { SampletestEnglishComponent } from './english/sampletest/sampletest-english.component';
-import { MocktestEnglishComponent } from './english/mocktest/mocktest-english.component';
-import { ResultEnglishComponent } from './english/result/result-english.component';
+// import { DemotestEnglishComponent } from './english/demotest/demotest-english.component';
+// import { ChapterwisetestEnglishComponent } from './english/chapterwisetest/chapterwisetest-english.component';
+// import { SampletestEnglishComponent } from './english/sampletest/sampletest-english.component';
+// import { MocktestEnglishComponent } from './english/mocktest/mocktest-english.component';
+// import { ResultEnglishComponent } from './english/result/result-english.component';
 
 import { ChapterwisetestScienceComponent } from './science/chapterwisetest/chapterwisetest-science.component';
 import { DemotestScienceComponent } from './science/demotest/demotest-science.component';
@@ -83,11 +83,11 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     // MocktestComputersComponent,
     // ResultComputersComponent,
 
-    DemotestEnglishComponent,
-    ChapterwisetestEnglishComponent,
-    SampletestEnglishComponent,
-    MocktestEnglishComponent,
-    ResultEnglishComponent,
+    // DemotestEnglishComponent,
+    // ChapterwisetestEnglishComponent,
+    // SampletestEnglishComponent,
+    // MocktestEnglishComponent,
+    // ResultEnglishComponent,
 
     ChapterwisetestScienceComponent,
     DemotestScienceComponent,
