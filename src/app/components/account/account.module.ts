@@ -50,7 +50,7 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
 import { LoginComponent } from '../login/login.component';
 import { SharedComponentsModule } from '././../../shared-components/shared-components.module';
 
-import { ProfileComponent } from './profile/profile.component';
+// import { ProfileComponent } from './profile/profile.component';
 // add account-routing module for routing of all components
 import { AccountRoutingModule } from './account-routing.module';
 //import AppPrimeNgModule to add all prime ng modules
@@ -115,7 +115,7 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     CreateticketComponent,
     ViewticketComponent,
     SubscribeComponent,
-    ProfileComponent,
+    // ProfileComponent,
     LoginComponent,
     // KeysPipe,
     // CssIdPipe,
