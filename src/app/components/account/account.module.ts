@@ -76,54 +76,11 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     SharedComponentsModule
   ],
   declarations: [
-    // ChapterwisetestComputersComponent,
 
-    // DemotestComputersComponent,
-    // SampletestComputersComponent,
-    // MocktestComputersComponent,
-    // ResultComputersComponent,
-
-    // DemotestEnglishComponent,
-    // ChapterwisetestEnglishComponent,
-    // SampletestEnglishComponent,
-    // MocktestEnglishComponent,
-    // ResultEnglishComponent,
-
-    // ChapterwisetestScienceComponent,
-    // DemotestScienceComponent,
-    // MocktestScienceComponent,
-    // SampletestScienceComponent,
-    // ResultScienceComponent,
-
-    // ChapterwisetestMathComponent,
-    // DemotestMathComponent,
-    // MocktestMathComponent,
-    // ResultMathComponent,
-    // SampletestMathComponent,
-
-    // ChapterwisetestGkComponent,
-    // SampletestGkComponent,
-    // MocktestGkComponent,
-    // DemotestGkComponent,
-    // ResultGkComponent,
-
-    // ChapterwisetestReasoningComponent,
-    // DemotestReasoningComponent,
-    // ResultReasoningComponent,
-    // SampletestReasoningComponent,
-    // MocktestReasoningComponent,
-    // CreateticketComponent,
-    // ViewticketComponent,
-    // SubscribeComponent,
-    // ProfileComponent,
     LoginComponent,
-    // KeysPipe,
-    // CssIdPipe,
-    // RoundPipe
   ],
   providers: [
-    AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard,
-    // MasterHttpService, PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest
+    AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard
 ],
 })
 export class AccountModule { }
