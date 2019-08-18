@@ -23,11 +23,11 @@ import { MocktestScienceComponent } from './science/mocktest/mocktest-science.co
 import { SampletestScienceComponent } from './science/sampletest/sampletest-science.component';
 import { ResultScienceComponent } from './science/result/result-science.component';
 
-import { ChapterwisetestMathComponent } from './mathematics/chapterwisetest/chapterwisetest-math.component';
-import { DemotestMathComponent } from './mathematics/demotest/demotest-math.component';
-import { MocktestMathComponent } from './mathematics/mocktest/mocktest-math.component';
-import { ResultMathComponent } from './mathematics/result/result-math.component';
-import { SampletestMathComponent } from './mathematics/sampletest/sampletest-math.component';
+// import { ChapterwisetestMathComponent } from './mathematics/chapterwisetest/chapterwisetest-math.component';
+// import { DemotestMathComponent } from './mathematics/demotest/demotest-math.component';
+// import { MocktestMathComponent } from './mathematics/mocktest/mocktest-math.component';
+// import { ResultMathComponent } from './mathematics/result/result-math.component';
+// import { SampletestMathComponent } from './mathematics/sampletest/sampletest-math.component';
 
 import { ChapterwisetestGkComponent } from './gk/chapterwisetest/chapterwisetest-gk.component';
 import { DemotestGkComponent } from './gk/demotest/demotest-gk.component';
@@ -75,11 +75,12 @@ const routes: Routes = [
             { path: 'science/mocktest', component: MocktestScienceComponent },
             { path: 'science/result', component: ResultScienceComponent },
 
-            { path: 'math/demotest', component: DemotestMathComponent },
-            { path: 'math/chapterwisetest', component: ChapterwisetestMathComponent },
-            { path: 'math/sampletest', component: SampletestMathComponent },
-            { path: 'math/mocktest', component: MocktestMathComponent },
-            { path: 'math/result', component: ResultMathComponent },
+            // { path: 'math/demotest', component: DemotestMathComponent },
+            // { path: 'math/chapterwisetest', component: ChapterwisetestMathComponent },
+            // { path: 'math/sampletest', component: SampletestMathComponent },
+            // { path: 'math/mocktest', component: MocktestMathComponent },
+            // { path: 'math/result', component: ResultMathComponent },
+            {path:'math', loadChildren:'./mathematics/math.module#MathModule'},
 
             { path: 'gk/demotest', component: DemotestGkComponent },
             { path: 'gk/chapterwisetest', component: ChapterwisetestGkComponent },
