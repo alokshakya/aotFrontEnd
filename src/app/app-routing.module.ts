@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
+import { AppCustomPreloding } from './app-custom-preloading';
 // import { LoginComponent } from './components/login/login.component';
 import { LoadoutComponent } from './components/account/loadout/loadout.component';
 // import { AccountMainComponent } from "./components/account/main/main.component";
@@ -17,11 +18,13 @@ const routes: Routes = [
   { path: 'loadout', component: LoadoutComponent},
   {
     path: 'account',
-    loadChildren: './components/account/account.module#AccountModule'
+    loadChildren: './components/account/account.module#AccountModule',
+    data:{preloading:true}
   },
   {
     path: 'test',
     loadChildren: './components/test/test.module#TestModule'
+    
   },
   {
     path: 'subscription',
@@ -35,7 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}) 
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: AppCustomPreloding}) 
   ],
   exports: [RouterModule]
 })
