@@ -33,7 +33,7 @@ export const growlResponse = {
 	loginFalse:{
 		severity:'error',
 		summary:'Invalid credentials',
-		detail:'Please sign up Olympiadbox'
+		detail:'Please sign up SwastickBookBox'
 	},
 
 	success:{
@@ -52,11 +52,11 @@ export const growlResponse = {
 export const testIntro = {
 	demoTest:`<h3>Demo Tests</h3>
                 <p>
-                    Our demo tests are designed with an aim to provide you a overview into the tool and features available on Olympiad Box. It provides you a clear view of what to expect when you sign up for the subjects, whether it is the syllabus/course coverage or the tests set-up.
+                    Our demo tests are designed with an aim to provide you a overview into the tool and features available on Swastick Book Box. It provides you a clear view of what to expect when you sign up for the subjects, whether it is the syllabus/course coverage or the tests set-up.
                 </p>
                 <h4><u>Understand this Section:</u></h4>
                 <ul>
-                    <li>Demo test are auto generated and already available for you to take your first step towards understanding Olympiad Box.</li>
+                    <li>Demo test are auto generated and already available for you to take your first step towards understanding Swastick Book Box.</li>
                     <li>You could take Demo test only once without signing up for any subject.</li>
                     <li>There is no time limit to solve the paper. You can leave a test at any point of time and can resume the test from the last submitted question later.</li>
                     <li>You would be required to answer each question in order to move forward to the next question.</li>
