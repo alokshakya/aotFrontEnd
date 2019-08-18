@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SampletestEnglishComponent } from './sampletest/sampletest-english.component'
-import { ResultEnglishComponent } from './result/result-english.component';
-import { MocktestEnglishComponent } from './mocktest/mocktest-english.component';
-import { DemotestEnglishComponent } from './demotest/demotest-english.component';
-import { ChapterwisetestEnglishComponent } from './chapterwisetest/chapterwisetest-english.component';
+import { SampletestGkComponent } from './sampletest/sampletest-gk.component';
+import { ResultGkComponent } from './result/result-gk.component';
+import { MocktestGkComponent } from './mocktest/mocktest-gk.component';
+import { DemotestGkComponent } from './demotest/demotest-gk.component';
+import { ChapterwisetestGkComponent } from './chapterwisetest/chapterwisetest-gk.component';
 
 const routes: Routes = [
-  {path:'demotest', component: DemotestEnglishComponent},
-  {path:'chapterwisetest', component: ChapterwisetestEnglishComponent},
-  {path:'sampletest', component: SampletestEnglishComponent},
-  {path:'mocktest', component: MocktestEnglishComponent},
-  {path:'result', component: ResultEnglishComponent}
+  {path:'demotest', component: DemotestGkComponent},
+  {path:'chapterwisetest', component: ChapterwisetestGkComponent},
+  {path:'sampletest', component: SampletestGkComponent},
+  {path:'mocktest', component: MocktestGkComponent},
+  {path:'result', component: ResultGkComponent}
 ];
 
 @NgModule({
