@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ChapterwisetestComputersComponent } from './computers/chapterwisetest/chapterwisetest-computers.component';
+// import { ChapterwisetestComputersComponent } from './computers/chapterwisetest/chapterwisetest-computers.component';
 
-import { DemotestComputersComponent } from './computers/demotest/demotest-computers.component';
-import { SampletestComputersComponent } from './computers/sampletest/sampletest-computers.component';
-import { MocktestComputersComponent } from './computers/mocktest/mocktest-computers.component';
-import { ResultComputersComponent } from './computers/result/result-computers.component';
+// import { DemotestComputersComponent } from './computers/demotest/demotest-computers.component';
+// import { SampletestComputersComponent } from './computers/sampletest/sampletest-computers.component';
+// import { MocktestComputersComponent } from './computers/mocktest/mocktest-computers.component';
+// import { ResultComputersComponent } from './computers/result/result-computers.component';
 
 import { DemotestEnglishComponent } from './english/demotest/demotest-english.component';
 import { ChapterwisetestEnglishComponent } from './english/chapterwisetest/chapterwisetest-english.component';
@@ -76,12 +76,12 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     SharedComponentsModule
   ],
   declarations: [
-    ChapterwisetestComputersComponent,
+    // ChapterwisetestComputersComponent,
 
-    DemotestComputersComponent,
-    SampletestComputersComponent,
-    MocktestComputersComponent,
-    ResultComputersComponent,
+    // DemotestComputersComponent,
+    // SampletestComputersComponent,
+    // MocktestComputersComponent,
+    // ResultComputersComponent,
 
     DemotestEnglishComponent,
     ChapterwisetestEnglishComponent,
