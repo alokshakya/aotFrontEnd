@@ -33,11 +33,11 @@ import { DemotestGkComponent } from './gk/demotest/demotest-gk.component';
 import { ResultGkComponent } from './gk/result/result-gk.component';
 
 
-import { ChapterwisetestReasoningComponent } from './reasoning/chapterwisetest/chapterwisetest-reasoning.component';
-import { DemotestReasoningComponent } from './reasoning/demotest/demotest-reasoning.component';
-import { ResultReasoningComponent } from './reasoning/result/result-reasoning.component';
-import { SampletestReasoningComponent } from './reasoning/sampletest/sampletest-reasoning.component';
-import { MocktestReasoningComponent } from './reasoning/mocktest/mocktest-reasoning.component';
+// import { ChapterwisetestReasoningComponent } from './reasoning/chapterwisetest/chapterwisetest-reasoning.component';
+// import { DemotestReasoningComponent } from './reasoning/demotest/demotest-reasoning.component';
+// import { ResultReasoningComponent } from './reasoning/result/result-reasoning.component';
+// import { SampletestReasoningComponent } from './reasoning/sampletest/sampletest-reasoning.component';
+// import { MocktestReasoningComponent } from './reasoning/mocktest/mocktest-reasoning.component';
 
 
 
@@ -107,11 +107,11 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     DemotestGkComponent,
     ResultGkComponent,
 
-    ChapterwisetestReasoningComponent,
-    DemotestReasoningComponent,
-    ResultReasoningComponent,
-    SampletestReasoningComponent,
-    MocktestReasoningComponent,
+    // ChapterwisetestReasoningComponent,
+    // DemotestReasoningComponent,
+    // ResultReasoningComponent,
+    // SampletestReasoningComponent,
+    // MocktestReasoningComponent,
     CreateticketComponent,
     ViewticketComponent,
     SubscribeComponent,
