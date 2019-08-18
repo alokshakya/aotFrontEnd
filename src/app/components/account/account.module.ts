@@ -45,7 +45,7 @@ import { CommonModule } from '@angular/common';
 import { CreateticketComponent } from '../../components/support/createticket/createticket.component';
 import { ViewticketComponent } from '../../components/support/viewticket/viewticket.component';
 
-import { SubscribeComponent } from './subscribe/subscribe.component';
+// import { SubscribeComponent } from './subscribe/subscribe.component';
 
 import { LoginComponent } from '../login/login.component';
 import { SharedComponentsModule } from '././../../shared-components/shared-components.module';
@@ -114,7 +114,7 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     // MocktestReasoningComponent,
     CreateticketComponent,
     ViewticketComponent,
-    SubscribeComponent,
+    // SubscribeComponent,
     // ProfileComponent,
     LoginComponent,
     // KeysPipe,
