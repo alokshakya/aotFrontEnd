@@ -73,6 +73,7 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
 // import { ChartModule } from 'primeng/primeng';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserloginComponent } from './components/userlogin/userlogin.component';
+import { AppCustomPreloding } from './app-custom-preloading';
 @NgModule({
     imports: [
         BrowserModule,
@@ -130,7 +131,7 @@ import { UserloginComponent } from './components/userlogin/userlogin.component';
         ConfirmationService,
         PersonalInfo, SubjectInfo, Result, Misc, chapterwiseTest, 
         AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard,
-        EventService
+        EventService, AppCustomPreloding
     ],
     bootstrap: [AppComponent]
 })
