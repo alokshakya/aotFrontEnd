@@ -20,11 +20,11 @@ import { MocktestScienceComponent } from './science/mocktest/mocktest-science.co
 import { SampletestScienceComponent } from './science/sampletest/sampletest-science.component';
 import { ResultScienceComponent } from './science/result/result-science.component';
 
-import { ChapterwisetestMathComponent } from './mathematics/chapterwisetest/chapterwisetest-math.component';
-import { DemotestMathComponent } from './mathematics/demotest/demotest-math.component';
-import { MocktestMathComponent } from './mathematics/mocktest/mocktest-math.component';
-import { ResultMathComponent } from './mathematics/result/result-math.component';
-import { SampletestMathComponent } from './mathematics/sampletest/sampletest-math.component';
+// import { ChapterwisetestMathComponent } from './mathematics/chapterwisetest/chapterwisetest-math.component';
+// import { DemotestMathComponent } from './mathematics/demotest/demotest-math.component';
+// import { MocktestMathComponent } from './mathematics/mocktest/mocktest-math.component';
+// import { ResultMathComponent } from './mathematics/result/result-math.component';
+// import { SampletestMathComponent } from './mathematics/sampletest/sampletest-math.component';
 
 import { ChapterwisetestGkComponent } from './gk/chapterwisetest/chapterwisetest-gk.component';
 import { SampletestGkComponent } from './gk/sampletest/sampletest-gk.component';
@@ -95,11 +95,11 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     SampletestScienceComponent,
     ResultScienceComponent,
 
-    ChapterwisetestMathComponent,
-    DemotestMathComponent,
-    MocktestMathComponent,
-    ResultMathComponent,
-    SampletestMathComponent,
+    // ChapterwisetestMathComponent,
+    // DemotestMathComponent,
+    // MocktestMathComponent,
+    // ResultMathComponent,
+    // SampletestMathComponent,
 
     ChapterwisetestGkComponent,
     SampletestGkComponent,
