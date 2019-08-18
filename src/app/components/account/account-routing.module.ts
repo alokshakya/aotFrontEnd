@@ -60,13 +60,14 @@ const routes: Routes = [
             // { path: 'computers/sampletest', component: SampletestComputersComponent },
             // { path: 'computers/mocktest', component: MocktestComputersComponent },
             // { path: 'computers/result', component: ResultComputersComponent },
-            {path:'computers', loadChildren:'./computers/computers.module#ComputersModule'}
+            {path:'computers', loadChildren:'./computers/computers.module#ComputersModule'},
             
-            { path: 'english/demotest', component: DemotestEnglishComponent },
-            { path: 'english/chapterwisetest', component: ChapterwisetestEnglishComponent },
-            { path: 'english/sampletest', component: SampletestEnglishComponent },
-            { path: 'english/mocktest', component: MocktestEnglishComponent },
-            { path: 'english/result', component: ResultEnglishComponent },
+            // { path: 'english/demotest', component: DemotestEnglishComponent },
+            // { path: 'english/chapterwisetest', component: ChapterwisetestEnglishComponent },
+            // { path: 'english/sampletest', component: SampletestEnglishComponent },
+            // { path: 'english/mocktest', component: MocktestEnglishComponent },
+            // { path: 'english/result', component: ResultEnglishComponent },
+            {path: 'english', loadChildren: './english/english.module#EnglishModule'},
 
             { path: 'science/demotest', component: DemotestScienceComponent },
             { path: 'science/chapterwisetest', component: ChapterwisetestScienceComponent },
