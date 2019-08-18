@@ -43,8 +43,8 @@ import { SubscribeComponent } from './subscribe/subscribe.component';
 
 
 // import { ProfileComponent } from './profile/profile.component';
-import { CreateticketComponent } from '../support/createticket/createticket.component';
-import { ViewticketComponent } from '../support/viewticket/viewticket.component';
+// import { CreateticketComponent } from '../support/createticket/createticket.component';
+// import { ViewticketComponent } from '../support/viewticket/viewticket.component';
 import { AccountGuard, TestAccountGuard, TestDeactivate} from './account.guard';
 
 
@@ -100,8 +100,9 @@ const routes: Routes = [
             // { path: 'profile', component: ProfileComponent,canDeactivate:[TestDeactivate]},
             {path:'profile', loadChildren:'./profile/profile.module#ProfileModule'},
 
-            { path: 'support/createticket', component:CreateticketComponent},
-            { path: 'support/viewticket', component:ViewticketComponent},
+            // { path: 'support/createticket', component:CreateticketComponent},
+            // { path: 'support/viewticket', component:ViewticketComponent},
+            {path:'support', loadChildren: './support/support.module#SupportModule'},
 
             {path:'', redirectTo:'dashboard', pathMatch:'full'}
   ]},
