@@ -29,11 +29,11 @@ import { ResultEnglishComponent } from './english/result/result-english.componen
 // import { ResultMathComponent } from './mathematics/result/result-math.component';
 // import { SampletestMathComponent } from './mathematics/sampletest/sampletest-math.component';
 
-import { ChapterwisetestGkComponent } from './gk/chapterwisetest/chapterwisetest-gk.component';
-import { DemotestGkComponent } from './gk/demotest/demotest-gk.component';
-import { MocktestGkComponent } from './gk/mocktest/mocktest-gk.component';
-import { ResultGkComponent } from './gk/result/result-gk.component';
-import { SampletestGkComponent } from './gk/sampletest/sampletest-gk.component';
+// import { ChapterwisetestGkComponent } from './gk/chapterwisetest/chapterwisetest-gk.component';
+// import { DemotestGkComponent } from './gk/demotest/demotest-gk.component';
+// import { MocktestGkComponent } from './gk/mocktest/mocktest-gk.component';
+// import { ResultGkComponent } from './gk/result/result-gk.component';
+// import { SampletestGkComponent } from './gk/sampletest/sampletest-gk.component';
 
 import { ChapterwisetestReasoningComponent } from './reasoning/chapterwisetest/chapterwisetest-reasoning.component';
 import { DemotestReasoningComponent } from './reasoning/demotest/demotest-reasoning.component';
@@ -83,11 +83,12 @@ const routes: Routes = [
             // { path: 'math/result', component: ResultMathComponent },
             {path:'math', loadChildren:'./mathematics/math.module#MathModule'},
 
-            { path: 'gk/demotest', component: DemotestGkComponent },
-            { path: 'gk/chapterwisetest', component: ChapterwisetestGkComponent },
-            { path: 'gk/sampletest', component: SampletestGkComponent },
-            { path: 'gk/mocktest', component: MocktestGkComponent },
-            { path: 'gk/result', component: ResultGkComponent },
+            // { path: 'gk/demotest', component: DemotestGkComponent },
+            // { path: 'gk/chapterwisetest', component: ChapterwisetestGkComponent },
+            // { path: 'gk/sampletest', component: SampletestGkComponent },
+            // { path: 'gk/mocktest', component: MocktestGkComponent },
+            // { path: 'gk/result', component: ResultGkComponent },
+            {path:'gk', loadChildren:'./gk/gk.module#GkModule'},
 
             // { path: 'reasoning/demotest', component: DemotestReasoningComponent },
             // { path: 'reasoning/chapterwisetest', component: ChapterwisetestReasoningComponent },
