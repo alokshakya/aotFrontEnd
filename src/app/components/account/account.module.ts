@@ -26,11 +26,11 @@ import { CommonModule } from '@angular/common';
 // import { ResultMathComponent } from './mathematics/result/result-math.component';
 // import { SampletestMathComponent } from './mathematics/sampletest/sampletest-math.component';
 
-import { ChapterwisetestGkComponent } from './gk/chapterwisetest/chapterwisetest-gk.component';
-import { SampletestGkComponent } from './gk/sampletest/sampletest-gk.component';
-import { MocktestGkComponent } from './gk/mocktest/mocktest-gk.component';
-import { DemotestGkComponent } from './gk/demotest/demotest-gk.component';
-import { ResultGkComponent } from './gk/result/result-gk.component';
+// import { ChapterwisetestGkComponent } from './gk/chapterwisetest/chapterwisetest-gk.component';
+// import { SampletestGkComponent } from './gk/sampletest/sampletest-gk.component';
+// import { MocktestGkComponent } from './gk/mocktest/mocktest-gk.component';
+// import { DemotestGkComponent } from './gk/demotest/demotest-gk.component';
+// import { ResultGkComponent } from './gk/result/result-gk.component';
 
 
 // import { ChapterwisetestReasoningComponent } from './reasoning/chapterwisetest/chapterwisetest-reasoning.component';
@@ -101,11 +101,11 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     // ResultMathComponent,
     // SampletestMathComponent,
 
-    ChapterwisetestGkComponent,
-    SampletestGkComponent,
-    MocktestGkComponent,
-    DemotestGkComponent,
-    ResultGkComponent,
+    // ChapterwisetestGkComponent,
+    // SampletestGkComponent,
+    // MocktestGkComponent,
+    // DemotestGkComponent,
+    // ResultGkComponent,
 
     // ChapterwisetestReasoningComponent,
     // DemotestReasoningComponent,
