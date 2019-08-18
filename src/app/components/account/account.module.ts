@@ -14,11 +14,11 @@ import { CommonModule } from '@angular/common';
 // import { MocktestEnglishComponent } from './english/mocktest/mocktest-english.component';
 // import { ResultEnglishComponent } from './english/result/result-english.component';
 
-import { ChapterwisetestScienceComponent } from './science/chapterwisetest/chapterwisetest-science.component';
-import { DemotestScienceComponent } from './science/demotest/demotest-science.component';
-import { MocktestScienceComponent } from './science/mocktest/mocktest-science.component';
-import { SampletestScienceComponent } from './science/sampletest/sampletest-science.component';
-import { ResultScienceComponent } from './science/result/result-science.component';
+// import { ChapterwisetestScienceComponent } from './science/chapterwisetest/chapterwisetest-science.component';
+// import { DemotestScienceComponent } from './science/demotest/demotest-science.component';
+// import { MocktestScienceComponent } from './science/mocktest/mocktest-science.component';
+// import { SampletestScienceComponent } from './science/sampletest/sampletest-science.component';
+// import { ResultScienceComponent } from './science/result/result-science.component';
 
 // import { ChapterwisetestMathComponent } from './mathematics/chapterwisetest/chapterwisetest-math.component';
 // import { DemotestMathComponent } from './mathematics/demotest/demotest-math.component';
@@ -89,11 +89,11 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     // MocktestEnglishComponent,
     // ResultEnglishComponent,
 
-    ChapterwisetestScienceComponent,
-    DemotestScienceComponent,
-    MocktestScienceComponent,
-    SampletestScienceComponent,
-    ResultScienceComponent,
+    // ChapterwisetestScienceComponent,
+    // DemotestScienceComponent,
+    // MocktestScienceComponent,
+    // SampletestScienceComponent,
+    // ResultScienceComponent,
 
     // ChapterwisetestMathComponent,
     // DemotestMathComponent,
