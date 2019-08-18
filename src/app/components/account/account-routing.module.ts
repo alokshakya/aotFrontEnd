@@ -88,11 +88,12 @@ const routes: Routes = [
             { path: 'gk/mocktest', component: MocktestGkComponent },
             { path: 'gk/result', component: ResultGkComponent },
 
-            { path: 'reasoning/demotest', component: DemotestReasoningComponent },
-            { path: 'reasoning/chapterwisetest', component: ChapterwisetestReasoningComponent },
-            { path: 'reasoning/result', component: ResultReasoningComponent },
-            { path: 'reasoning/sampletest', component: SampletestReasoningComponent },
-            { path: 'reasoning/mocktest', component: MocktestReasoningComponent },
+            // { path: 'reasoning/demotest', component: DemotestReasoningComponent },
+            // { path: 'reasoning/chapterwisetest', component: ChapterwisetestReasoningComponent },
+            // { path: 'reasoning/result', component: ResultReasoningComponent },
+            // { path: 'reasoning/sampletest', component: SampletestReasoningComponent },
+            // { path: 'reasoning/mocktest', component: MocktestReasoningComponent },
+            {path:'reasoning', loadChildren:'./reasoning/reasoning.module#ReasoningModule'},
             
             { path: 'profile', component: ProfileComponent,canDeactivate:[TestDeactivate]},
 
