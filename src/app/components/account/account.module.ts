@@ -42,8 +42,8 @@ import { CommonModule } from '@angular/common';
 
 
 
-import { CreateticketComponent } from '../../components/support/createticket/createticket.component';
-import { ViewticketComponent } from '../../components/support/viewticket/viewticket.component';
+// import { CreateticketComponent } from '../../components/support/createticket/createticket.component';
+// import { ViewticketComponent } from '../../components/support/viewticket/viewticket.component';
 
 // import { SubscribeComponent } from './subscribe/subscribe.component';
 
@@ -112,8 +112,8 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     // ResultReasoningComponent,
     // SampletestReasoningComponent,
     // MocktestReasoningComponent,
-    CreateticketComponent,
-    ViewticketComponent,
+    // CreateticketComponent,
+    // ViewticketComponent,
     // SubscribeComponent,
     // ProfileComponent,
     LoginComponent,
