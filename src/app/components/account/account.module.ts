@@ -48,7 +48,6 @@ import { ViewticketComponent } from '../../components/support/viewticket/viewtic
 import { SubscribeComponent } from './subscribe/subscribe.component';
 
 import { LoginComponent } from '../login/login.component';
-import { SubscriptionComponent } from '../subscription/subscription.component';
 import { SharedComponentsModule } from '././../../shared-components/shared-components.module';
 
 import { ProfileComponent } from './profile/profile.component';
@@ -118,7 +117,6 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
     SubscribeComponent,
     ProfileComponent,
     LoginComponent,
-    SubscriptionComponent,
     // KeysPipe,
     // CssIdPipe,
     // RoundPipe
