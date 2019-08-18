@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'test',
-    loadChildren: './components/test/test.module#TestModule'
+    loadChildren: './components/test/test.module#TestModule',
+    data:{preloading:true}
     
   },
   {
