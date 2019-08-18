@@ -102,7 +102,7 @@ const routes: Routes = [
 
             // { path: 'support/createticket', component:CreateticketComponent},
             // { path: 'support/viewticket', component:ViewticketComponent},
-            {path:'support', loadChildren: './support/support.module#SupportModule'},
+            {path:'support', loadChildren: '../support/support.module#SupportModule'},
 
             {path:'', redirectTo:'dashboard', pathMatch:'full'}
   ]},
