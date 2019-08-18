@@ -42,7 +42,7 @@ import { SampletestReasoningComponent } from './reasoning/sampletest/sampletest-
 import { MocktestReasoningComponent } from './reasoning/mocktest/mocktest-reasoning.component';
 
 
-import { ProfileComponent } from './profile/profile.component';
+// import { ProfileComponent } from './profile/profile.component';
 import { CreateticketComponent } from '../support/createticket/createticket.component';
 import { ViewticketComponent } from '../support/viewticket/viewticket.component';
 import { AccountGuard, TestAccountGuard, TestDeactivate} from './account.guard';
@@ -97,7 +97,8 @@ const routes: Routes = [
             // { path: 'reasoning/mocktest', component: MocktestReasoningComponent },
             {path:'reasoning', loadChildren:'./reasoning/reasoning.module#ReasoningModule'},
             
-            { path: 'profile', component: ProfileComponent,canDeactivate:[TestDeactivate]},
+            // { path: 'profile', component: ProfileComponent,canDeactivate:[TestDeactivate]},
+            {path:'profile', loadChildren:'./profile/profile.module#ProfileModule', canDeactivate:[TestDeactivate]},
 
             { path: 'support/createticket', component:CreateticketComponent},
             { path: 'support/viewticket', component:ViewticketComponent},
