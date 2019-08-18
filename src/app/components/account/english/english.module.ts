@@ -29,4 +29,4 @@ import { ChapterwisetestEnglishComponent } from './chapterwisetest/chapterwisete
   providers: [
 ],
 })
-export class ComputersModule { }
+export class EnglishModule { }
