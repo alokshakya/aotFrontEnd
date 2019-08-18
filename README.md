@@ -9,7 +9,7 @@ Run `ng build` to build the project. The build  will be stored in the `dist/` di
 
 ## Build Production
 
-Run `ng build -prod` to build the project. The build  will be stored in the `dist/` directory.
+Run `ng build -prod --aot` to build the project. The build  will be stored in the `dist/` directory.
 
 ## Running unit tests
 
