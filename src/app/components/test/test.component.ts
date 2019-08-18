@@ -44,7 +44,11 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
     sec: number;
     min: number;
     hour: number;
-
+    ques_issue_report: string;
+    qwrong: boolean;
+    qoclear: boolean;
+    optwrong: boolean;
+    imgissue: boolean;
     menuToggle:boolean;
     animate:boolean;    
 
@@ -112,6 +116,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
         this.response = {};
         this.imageUrl = constants.OLYMPIADBOX_IMG_URL;
         this.questionStatus = {};
+        this.ques_issue_report='';
 
     }
 
@@ -152,6 +157,7 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
         this.clickListener = index;
         this.selectedQuestion = this.chapterwiseTest.qaSet[index];
         this.answer = null;
+        
         this.hintDisplay = false;
         this.history = false;
         this.setCorrectAnswer();
@@ -241,6 +247,45 @@ export class TestComponent implements OnInit, ComponentCanDeactivate {
                 this.spinner = false;
             })
     }
+
+
+    reportQuesIssue() {
+        this.spinner = true;
+        this.wrapper['question_id'] = this.selectedQuestion['id'];
+        this.wrapper['raised_issue'] = this.ques_issue_report;
+        this.wrapper['qwrong'] = (this.qwrong)?'Question is Wrong':'';
+        this.wrapper['qoclear'] = (this.qoclear)?'Question is not clear':'';
+        this.wrapper['optwrong'] = (this.optwrong)?'Options is wrong':'';
+        this.wrapper['imgissue'] = (this.imgissue)?'Image related issue':'';
+        this.masterhttp.reportIssueInQUes(this.wrapper).subscribe((data) => {
+            if (data['status'] == 200) {
+                this.ques_issue_report= '';
+                this.qwrong= false;
+                this.qoclear= false;
+                this.optwrong= false;
+                this.imgissue= false;
+                this.errMsg = [];
+                this.errMsg.push({severity:'success',summary:'Issue Reporting Success.',detail:'Issue has been reported successfully.'});
+                this.spinner = false;
+            }
+            else if (data['status'] == 731) {
+                this.errMsg = [];
+                this.errMsg.push({severity:'error',summary:'Error While Saving Response',detail:data['message']});
+                this.spinner = false;
+            }
+            else{
+                this.errMsg = [];
+                this.errMsg.push({severity:'error',summary:'Error While Saving Response',detail:'Please Try Again'});
+                this.spinner = false;
+            }
+        },
+        err=>{
+                this.errMsg = [];
+                this.errMsg.push({severity:'error',summary:'Server Error',detail:'Please Try Again'});
+                this.spinner = false;
+            })
+    }
+
 
     isTestCompleted(){
         let correct = 0;

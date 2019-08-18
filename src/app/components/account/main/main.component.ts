@@ -94,6 +94,8 @@ export class AccountMainComponent implements AfterViewInit {
 
     @ViewChild('layoutMenuScroller') layoutMenuScrollerViewChild: ElementRef;
 
+    @ViewChild('closeChangeprofile') closeChangeprofile: ElementRef;
+
     loader: boolean;
     constructor(
         public renderer: Renderer,
@@ -332,6 +334,7 @@ export class AccountMainComponent implements AfterViewInit {
             this.masterhttp.getPersonalInfo();
             this.changeImg = false;
             this.messageDisplay('success','Success','Profile Updated Successfully');
+           this.closeChangeprofile.nativeElement.click();
         }
         else{
             this.messageDisplay('error','Error','Could Not Update Image');
