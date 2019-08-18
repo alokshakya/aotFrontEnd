@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ProfileComponent } from './profile.component';
 
+import { TestDeactivate } from '../account.guard';
 
 const routes: Routes = [
-  {path:'', component: ProfileComponent}
+  {path:'', component: ProfileComponent, canDeactivate: [TestDeactivate]}
 ];
 
 @NgModule({
