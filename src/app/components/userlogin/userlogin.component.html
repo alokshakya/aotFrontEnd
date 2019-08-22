@@ -23,3 +23,145 @@
   </div>
   
 </div>
+
+<div class="container prelogin">
+  <div class="align-self-center">
+  <div class="card"></div>
+  <div class="card">
+      <div class="tab-div">
+        <ul class="tabs">
+          <li id="loginTab" class="active"><a href="#" id="1">LOGIN</a></li>
+          <li id="registerTab"><a href="#" id="2">SIGN UP</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-12">
+        <div class="form row" id="login">
+          <form class="col-sm-12">
+            <div class="input-container">
+              <input type="text" id="#{label}" required="required"/>
+              <label for="#{label}">Username/Email</label>
+              <div class="bar"></div>
+            </div>
+            <div class="input-container">
+              <input type="password" id="#{label}" required="required"/>
+              <label for="#{label}">Password</label>
+              <div class="bar"></div>
+            </div>
+            <div class="button-container">
+              <button><span>Login</span></button>
+            </div>
+            <div class="input text-center">
+              <!-- <label class="pull-left">
+                <input type="checkbox">Remember me
+              </label> -->
+              <label class="text-center">
+                <a href="#" id="3" class="forget-password">Forgot password ?</a>
+              </label>
+            </div>
+          </form>
+        </div>
+        <div class="form row" id="forgetP" style="display: none;">
+        <div class="col-sm-12">
+          <div class="input-container">
+            <p>To reset your password enter your email we'll send you a link to reset your password.</p>
+          </div>
+          <div class="input-container">
+            <input type="text" id="#{label}" required="required"/>
+            <label for="#{label}">User Id</label>
+            <div class="bar"></div>
+          </div>
+          <div class="button-container">
+            <button type="reset"><span>Reset</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- </div>
+  <div class="card">
+    <div class="toggle"></div> -->
+    <div class="col-sm-12">
+    <div class="form row"  id="register" style="display: none;">
+      
+      <form class="col-sm-12">
+        <div class="title">Register
+        <!-- <div class="close"></div> -->
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <div class="input-container">
+              <input type="text" id="#{label}" required="required"/>
+              <label for="#{label}">First Name</label>
+              <div class="bar"></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <div class="input-container">
+              <input type="text" id="#{label}" required="required"/>
+              <label for="#{label}">Last Name</label>
+              <div class="bar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="input-container">
+          <input type="text" id="#{label}" required="required"/>
+          <label for="#{label}">Contact No.</label>
+          <div class="bar"></div>
+        </div>
+        <div class="input-container">
+          <input type="text" id="#{label}" required="required"/>
+          <label for="#{label}">Email ID</label>
+          <div class="bar"></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <div class="input-container">
+              <!-- <input type="text" id="#{label}" required="required"/>
+              <label for="#{label}">Class</label>
+              <div class="bar"></div> -->
+              <select data-placeholder="Select Your Class" class="chosen-select" required="required">
+                <option selected="selected">Select Your Class</option>
+                <option value="class1">Class 1</option>
+                <option value="class2">Class 2</option>
+                <option value="class3">Class 3</option>
+                <option value="class4">Class 4</option>
+                <option value="class5">Class 5</option>
+                <option value="class6">Class 6</option>
+                <option value="class7">Class 7</option>
+                <option value="class8">Class 8</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <div class="input-gender">
+              <input type='radio' id='male' checked='checked' name='radio'>
+              <label for='male'>Male</label>
+              <input type='radio' id='female' name='radio'>
+              <label for='female'>Female</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-12">
+            <div class="input-container">
+              <input type="password" id="#{label}" required="required"/>
+              <label for="#{label}">Password</label>
+              <div class="bar"></div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-xs-12">
+            <div class="input-container">
+              <input type="password" id="#{label}" required="required"/>
+              <label for="#{label}">Confirm Password</label>
+              <div class="bar"></div>
+            </div>
+          </div>
+        </div>
+        <div class="button-container">
+          <button type="submit"><span>Register</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
