@@ -32,6 +32,7 @@
     <script src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
     <link id="globle-css-main" rel="stylesheet" type="text/css" href="assets/layout/css/globle-style.css">
+    <link id="globle-css-main" rel="stylesheet" type="text/css" href="assets/custom/css/prelogin.css">
 </head>
 
 <body>
@@ -42,6 +43,52 @@
             </div>
         </div>
     </app-root>
+    <script type="text/javascript">
+        $(".tabs a").on("click", function(){
+          var id = $(this).attr("id");
+          if(id == 2){
+            $("#register").css("display","flex");
+            $("#login").css("display","none");
+            $("#forgetP").css("display","none");
+          }
+          else{
+            $("#register").css("display","none");
+            $("#forgetP").css("display","none");
+            $("#login").css("display","flex");
+          }
+        });
+        $(".reset").on("click", function(){
+          $("#login").css("display","flex");
+          $("#forgetP").css("display","none");
+        });
+        $(".forget-password").on("click", function(){
+          $("#register").css("display","none");
+          $("#login").css("display","none");
+          $("#forgetP").css("display","flex");
+        });
+        $("#1").on("click", function(){
+          $("#loginTab").addClass("active");
+          $("#registerTab").removeClass("active");
+        });
+        $("#2").on("click", function(){
+          $("#loginTab").removeClass("active");
+          $("#registerTab").addClass("active");
+        });
+        function animationHover(element, animation){
+          element = $(element);
+          element.hover(
+            function() {
+              element.addClass('animated ' + animation);
+    //wait for animation to finish before removing classes
+    window.setTimeout( function(){
+      element.removeClass('animated ' + animation);
+    }, 2000);
+    }
+    );
+        };
+        animationHover("input[type=button]", "shake");
+      </script>
+
 </body>
 
 </html>
