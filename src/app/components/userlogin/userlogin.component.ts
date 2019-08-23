@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked  } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginRegisterService } from '../../services/loginRegister.service';
 import { Misc, PersonalInfo } from '../../services/data.service';
 import { MasterHttpService } from '../../services/masterhttp.service';
 
+declare var $:any;
 import { EventService } from '../../services/event.service'
 @Component({
   selector: 'app-userlogin',
   templateUrl: './userlogin.component.html',
   styleUrls: ['./userlogin.component.scss']
 })
-export class UserloginComponent implements OnInit {
+export class UserloginComponent implements OnInit, AfterViewChecked {
 
   constructor(
     public httpService: LoginRegisterService,
@@ -25,6 +26,51 @@ export class UserloginComponent implements OnInit {
     this.userLoginCreds = { "username": null, "password": null };
   }
 
+  ngAfterViewChecked (){
+    $(".tabs a").on("click", function(){
+      var id = $(this).attr("id");
+      if(id == 2){
+        $("#register").css("display","flex");
+        $("#login").css("display","none");
+        $("#forgetP").css("display","none");
+      }
+      else{
+        $("#register").css("display","none");
+        $("#forgetP").css("display","none");
+        $("#login").css("display","flex");
+      }
+    });
+    $(".reset").on("click", function(){
+      $("#login").css("display","flex");
+      $("#forgetP").css("display","none");
+    });
+    $(".forget-password").on("click", function(){
+      $("#register").css("display","none");
+      $("#login").css("display","none");
+      $("#forgetP").css("display","flex");
+    });
+    $("#1").on("click", function(){
+      $("#loginTab").addClass("active");
+      $("#registerTab").removeClass("active");
+    });
+    $("#2").on("click", function(){
+      $("#loginTab").removeClass("active");
+      $("#registerTab").addClass("active");
+    });
+    function animationHover(element, animation){
+      element = $(element);
+      element.hover(
+        function() {
+          element.addClass('animated ' + animation);
+      //wait for animation to finish before removing classes
+      window.setTimeout( function(){
+        element.removeClass('animated ' + animation);
+      }, 2000);
+      }
+      );
+    };
+    animationHover("input[type=button]", "shake");
+  }
   signIn() {
     this.spinner = true;
     this.httpService.login(this.userLoginCreds)
