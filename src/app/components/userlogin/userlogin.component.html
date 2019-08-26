@@ -1,10 +1,10 @@
-
+<!-- 
 
 <div class="container">
   <div class="row">
     <div class="col-md-6 offset-md-4 col-lg-4 offset-lg-4 col-sm-8 offset-sm-2 col-xs-12">
         <form #formCtrl="ngForm" novalidate>
-            <!--Email Validator-->
+            
             <input type="text" maxlength="31" name="email" #email="ngModel" [(ngModel)]="userLoginCreds.username" pInputText placeholder="Email" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required/>
             <div class="text-center">
                 <p class="error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">Please Enter Valid Email Id</p>
@@ -22,7 +22,7 @@
     </div>
   </div>
   
-</div>
+</div> -->
 
 <div class="container prelogin">
   <div class="align-self-center">
@@ -36,19 +36,22 @@
       </div>
       <div class="col-sm-12">
         <div class="form row" id="login">
-          <form class="col-sm-12">
+          <form #formCtrl="ngForm" novalidate class="col-sm-12">
             <div class="input-container">
-              <input type="text" id="#{label}" required="required"/>
-              <label for="#{label}">Username/Email</label>
+              <input type="text" id="email" #email="ngModel" [(ngModel)]="userLoginCreds.username" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required/>
+              <label for="email">Username/Email</label>
+              <div class="text-center">
+                <p class="error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">Please Enter Valid Email Id</p>
+            </div>
               <div class="bar"></div>
             </div>
             <div class="input-container">
-              <input type="password" id="#{label}" required="required"/>
-              <label for="#{label}">Password</label>
+              <input type="password" #password="ngModel" [(ngModel)]="userLoginCreds.password" id="password" required="required"/>
+              <label for="password">Password</label>
               <div class="bar"></div>
             </div>
             <div class="button-container">
-              <button><span>Login</span></button>
+              <button (click)="signIn()" [disabled]="password.errors||email.errors" type="submit"><span>Login</span></button>
             </div>
             <div class="input text-center">
               <!-- <label class="pull-left">
