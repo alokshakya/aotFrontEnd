@@ -1,3 +1,4 @@
+
 <!-- <p-blockUI [blocked]="true" [target]="pnl"></p-blockUI> -->
 <div class="ui-g">
   <div class="ui-g-8 ui-sm-12 ui-md-8">
@@ -17,20 +18,28 @@
                   
                   <i class="icon-gk icon-4x" *ngIf="sub=='General-Knowledge'"></i>
                   <i class="icon-english icon-4x" *ngIf="sub=='English'"></i>
-                  
                   <i class="icon-cyber icon-4x" *ngIf="sub=='Computers'"></i>
                 </div>
                 <div class="col-sm-9" style="display:inline-flex;height:40px;">
                   <div style="align-items:center;display:flex;">{{sub|uppercase}}
                   </div>
-                   <div *ngIf="sub=='Reasoning'"><i class="fa fa-check"></i>{{ subjectInfo.reasoningChapters.chapters.length * 5}} Chapterwise Tests</div>
-                  <div *ngIf="sub=='Mathematics'"><i class="fa fa-check"></i>{{ subjectInfo.mathChapters.chapters.length * 5}} Chapterwise Tests</div>
-                  <div *ngIf="sub=='Science'"><i class="fa fa-check"></i>{{ subjectInfo.scienceChapters.chapters.length * 5}} Chapterwise Tests</div>
-                  <div *ngIf="sub=='General-Knowledge'"><i class="fa fa-check"></i>{{ subjectInfo.gkChapters.chapters.length * 5}} Chapterwise Tests</div>
-                  <div *ngIf="sub=='English'"><i class="fa fa-check"></i>{{ subjectInfo.englishChapters.chapters.length * 5}} Chapterwise Tests</div>
-                  <div><i class="fa fa-check"></i>10 Sample Tests</div>
-                  <div><i class="fa fa-check"></i>3 Mock Tests</div> 
-                    
+                    <div class="popover__wrapper">
+                      <a href="#">
+                        <span class="popover__title"><i class="glyphicon glyphicon-question-sign"></i></span>
+                      </a>
+                      <div class="popover__content">
+                        <div class="popover__message">
+                          <div *ngIf="sub=='Reasoning'"><i class="fa fa-check"></i> {{ subjectInfo.reasoningChapters.chapters.length * 5}} Chapterwise Tests</div>
+                          <div *ngIf="sub=='Mathematics'"><i class="fa fa-check"></i> {{ subjectInfo.mathChapters.chapters.length * 5}} Chapterwise Tests</div>
+                          <div *ngIf="sub=='Science'"><i class="fa fa-check"></i> {{ subjectInfo.scienceChapters.chapters.length * 5}} Chapterwise Tests</div>
+                          <div *ngIf="sub=='General-Knowledge'"><i class="fa fa-check"></i> {{ subjectInfo.gkChapters.chapters.length * 5}} Chapterwise Tests</div>
+                          <div *ngIf="sub=='English'"><i class="fa fa-check"></i> {{ subjectInfo.englishChapters.chapters.length * 5}} Chapterwise Tests</div>
+                          <div><i class="fa fa-check"></i> 10 Sample Tests</div>
+                          <div><i class="fa fa-check"></i> 3 Mock Tests</div> 
+                        </div>
+                      </div>
+                    </div>
+
                 </div>
               </div>
               <span *ngIf="sub=='Computers'">
