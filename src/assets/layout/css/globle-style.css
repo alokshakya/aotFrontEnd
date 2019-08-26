@@ -47,7 +47,7 @@
     background: #fff;
     max-height: 150px;
 }
-.form button{border:none!important;}
+.form button{/*border:none!important;*/}
 .profile-img{height: 100% !important;margin: auto;}
 .wrapper {display: relative;}
 .wrapper i {
@@ -493,6 +493,56 @@ div.box span{
 .m-group .mat-mini-fab .mat-button-wrapper strong{color:#DA5451;}
 .v-group .mat-mini-fab .mat-button-wrapper strong{color:#5BB85D;}
 .n-group .mat-mini-fab .mat-button-wrapper strong{color:#24346d;}
+
+.popover__title {
+  font-size: 17px;
+  line-height: 30px;
+  text-decoration: none;
+  color: #3a83c4;
+  text-align: left;
+  padding: 10px 0;
+}
+
+.popover__wrapper {
+  position: absolute;
+  right: 16px;
+  top: -4px;
+  display: inline-block;
+}
+.popover__content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  left: -150px;
+  transform: translate(0, 10px);
+  background-color: #e6ecf8 ;
+  padding: 1.5rem .5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  width: auto;
+}
+.popover__content:before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  right: calc(6% - 10px);
+  top: -8px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #e6ecf8 transparent;
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+.popover__wrapper a:hover{cursor: help;}
+.popover__wrapper:hover .popover__content {
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, 0px);
+  transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}
+.popover__message {
+  text-align: left;
+}
 @media only screen and (max-width: 767px){
     .info-side-box{top:150px}
     .n{width:12%;}
