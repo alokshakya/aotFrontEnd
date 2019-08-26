@@ -131,7 +131,7 @@
               <!-- <input type="text" id="#{label}" required="required"/>
               <label for="#{label}">Class</label>
               <div class="bar"></div> -->
-              <select [(ngModel)]="userRegCreds.class" name="class"  class="chosen-select" required="required">
+              <select [(ngModel)]="userRegCreds.class" #class="ngModel" name="class"  class="chosen-select" required="required">
                 <option selected="selected" >Select Your Class</option>
                 <option value="class1">Class 1</option>
                 <option value="class2">Class 2</option>
@@ -146,7 +146,7 @@
           </div>
           <div class="col-sm-6 col-xs-12">
             <div class="input-gender">
-              <input type='radio' id='male' value="male" [(ngModel)]="userRegCreds.gender" checked='checked' name="gender" #genderControl="ngModel">
+              <input type='radio' id='male' value="male" [(ngModel)]="userRegCreds.gender" name="gender" #genderControl="ngModel" checked="checked">
               <label for='male'>Male</label>
               <input type='radio' id='female' value="female" [(ngModel)]="userRegCreds.gender" name="gender">
               <label for='female'>Female</label>
@@ -180,13 +180,16 @@
         </div>
         <br>
         <div class="button-container">
-          <button type="submit" (click)="signUp()">Register</button>
-          <!-- <button type="submit" [disabled]="regEmail.errors ||spinner ||firstname.errors
-          || lastname.errors || pass.errors || number.errors
+          <button *ngIf="spinner">Registering ...</button>
+          <button type="submit" [disabled]="regEmail.errors ||spinner ||firstname.errors
+          || lastname.errors || pass.errors
           || userRegCreds.mobile==''||userRegCreds.mobile==null ||userRegCreds.password==''
           || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''
-          || userRegCreds.class==''||userRegCreds.class==null || userRegCreds.password==''
-          || confirmPassword=='' || confirmPassword!=userRegCreds.password||userRegCreds.gender==null||genderControl.errors" (click)="signUp()"><span>Register</span></button> -->
+          || userRegCreds.password==''
+          || confirmPassword=='' || confirmPassword!=userRegCreds.password
+          ||genderControl.errors 
+          ||!isHuman
+          || class.errors" (click)="signUp()"><span>Register</span></button>
         </div>
       </form>
     </div>
