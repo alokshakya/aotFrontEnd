@@ -36,17 +36,17 @@
       </div>
       <div class="col-sm-12">
         <div class="form row" id="login">
-          <form #formCtrl="ngForm" novalidate class="col-sm-12">
+          <form #formCtrl="ngForm" class="col-sm-12" novalidate>
             <div class="input-container">
-              <input type="text" id="email" #email="ngModel" [(ngModel)]="userLoginCreds.username" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required/>
-              <label for="email">Username/Email</label>
+              <input type="text" id="email1" name="email" #email="ngModel" [(ngModel)]="userLoginCreds.username" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" required/>
+              <label for="email1">Email</label>
               <div class="text-center">
                 <p class="error" [hidden]="email.untouched" *ngIf="email.errors && email.errors.pattern">Please Enter Valid Email Id</p>
-            </div>
+              </div>
               <div class="bar"></div>
             </div>
             <div class="input-container">
-              <input type="password" #password="ngModel" [(ngModel)]="userLoginCreds.password" id="password" required="required"/>
+              <input type="password" name="password" #password="ngModel" [(ngModel)]="userLoginCreds.password" id="password" required="required"/>
               <label for="password">Password</label>
               <div class="bar"></div>
             </div>
