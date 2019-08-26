@@ -92,27 +92,36 @@
         <div class="row">
           <div class="col-sm-6 col-xs-12">
             <div class="input-container">
-              <input type="text" id="#{label}" required="required"/>
-              <label for="#{label}">First Name</label>
+              <input type="text" name="firstname" #firstname="ngModel" [(ngModel)]="userRegCreds.firstname" id="regFirstName" required="required"/>
+              <p class="error" [hidden]="firstname.untouched" *ngIf="firstname.errors && firstname.errors.pattern">
+                Invalid Firstname
+              </p>
+              <label for="regFirstName">First Name</label>
               <div class="bar"></div>
             </div>
           </div>
           <div class="col-sm-6 col-xs-12">
             <div class="input-container">
-              <input type="text" id="#{label}" required="required"/>
-              <label for="#{label}">Last Name</label>
+              <input type="text" name="lastname" #lastname="ngModel" [(ngModel)]="userRegCreds.lastname" id="regLastName" required="required"/>
+              <p class="error" [hidden]="lastname.untouched" *ngIf="lastname.errors && lastname.errors.pattern">
+                Invalid Lastname
+              </p>
+              <label for="regLastName">Last Name</label>
               <div class="bar"></div>
             </div>
           </div>
         </div>
         <div class="input-container">
-          <input type="text" id="#{label}" required="required"/>
-          <label for="#{label}">Contact No.</label>
+          <input type="number" name="number" #number="ngModel" pattern="^[7-9]{1}[0-9]{9}" [(ngModel)]="userRegCreds.mobile" id="regMobile" required="required"/>
+          <label for="regMobile">Contact No.</label>
           <div class="bar"></div>
         </div>
         <div class="input-container">
-          <input type="text" id="#{label}" required="required"/>
-          <label for="#{label}">Email ID</label>
+          <input type="text" name="regEmail" #regEmail="ngModel" [(ngModel)]="userRegCreds.email" id="regEmail" required="required"/>
+          <p class="error" [hidden]="regEmail.untouched" *ngIf="regEmail.errors && regEmail.errors.pattern">
+            Invalid Email Id
+          </p>
+          <label for="regEmail">Email ID</label>
           <div class="bar"></div>
         </div>
         <div class="row">
@@ -121,7 +130,7 @@
               <!-- <input type="text" id="#{label}" required="required"/>
               <label for="#{label}">Class</label>
               <div class="bar"></div> -->
-              <select data-placeholder="Select Your Class" class="chosen-select" required="required">
+              <select  class="chosen-select" required="required">
                 <option selected="selected">Select Your Class</option>
                 <option value="class1">Class 1</option>
                 <option value="class2">Class 2</option>
@@ -146,21 +155,33 @@
         <div class="row">
           <div class="col-sm-6 col-xs-12">
             <div class="input-container">
-              <input type="password" id="#{label}" required="required"/>
-              <label for="#{label}">Password</label>
+              <input id="regPass" type="password" name="pass" promptLabel="Atleast 6 Characters With No Spaces" indicator="false" #pass="ngModel" [(ngModel)]="userRegCreds.password" pattern="^[^\s]{6,}" required="required"/>
+              <p class="error" [hidden]="pass.untouched" *ngIf="pass.errors && pass.errors.pattern">Password
+                Must Have Atleast 6 Characters
+              </p>
+              <label for="regPass">Password</label>
               <div class="bar"></div>
             </div>
           </div>
           <div class="col-sm-6 col-xs-12">
             <div class="input-container">
-              <input type="password" id="#{label}" required="required"/>
-              <label for="#{label}">Confirm Password</label>
+              <input type="password" id="regPassC" name="regPassword1" #regPassword="ngModel" [(ngModel)]="confirmPassword" pattern="^[^\s]{6,}"  required="required"/>
+              <p [hidden]="regPassword.untouched" *ngIf="confirmPassword!=userRegCreds.password" class="error">Password doesn't match</p>
+              <label for="regPassC">Confirm Password</label>
               <div class="bar"></div>
             </div>
           </div>
         </div>
+        <!-- <div class="ui-g-12 ui-sm-12">
+          <p-captcha #captcha siteKey="6LfVJUUUAAAAAGWXhy14h_D8Iw4AydIVKwhObjKb" (onResponse)="showResponse($event)"></p-captcha>
+      </div> -->
         <div class="button-container">
-          <button type="submit"><span>Register</span></button>
+          <button type="submit" [disabled]="regEmail.errors ||spinner ||firstname.errors
+          || lastname.errors || pass.errors || number.errors
+          || userRegCreds.mobile==''||userRegCreds.mobile==null ||userRegCreds.password==''
+          || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''
+          || userRegCreds.class==''||userRegCreds.class==null || userRegCreds.password==''
+          || confirmPassword=='' || confirmPassword!=userRegCreds.password||userRegCreds.gender==null||userRegCreds.gender==''" (click)="signUp()"><span>Register</span></button>
         </div>
       </form>
     </div>
