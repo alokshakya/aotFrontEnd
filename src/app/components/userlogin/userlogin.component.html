@@ -70,12 +70,13 @@
             <p>To reset your password enter your email we'll send you a link to reset your password.</p>
           </div>
           <div class="input-container">
-            <input type="text" id="#{label}" required="required"/>
-            <label for="#{label}">User Id</label>
+            <input type="text" #forgot="ngModel" maxlength="31" [(ngModel)]="registeredEmail" placeholder="Email Address" pattern="^[A-Za-z0-9]+(\.[A-Za-z0-9]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,4})$" id="forgetEmail" required="required"/>
+            <!-- <label for="forgetEmail">Email</label> -->
             <div class="bar"></div>
           </div>
           <div class="button-container">
-            <button type="reset"><span>Reset</span></button>
+            <button type="reset" *ngIf="!spinner" [disabled]="forgot.errors" (click)="sendOtp()"><span>Reset</span></button>
+            <button type="reset" *ngIf="spinner"><span>Reseting ...</span></button>
           </div>
         </div>
       </div>
