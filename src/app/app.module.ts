@@ -51,7 +51,7 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
 
 // import { RoundPipe } from './pipes/round.pipe';
 
-// import { GrowlModule } from 'primeng/primeng'; // this is being used in appcomponent html
+import { GrowlModule } from 'primeng/primeng'; // this is being used in appcomponent html
 // import { DialogModule } from 'primeng/primeng';
 // import { FileUploadModule } from 'primeng/primeng';
 // import { TooltipModule } from 'primeng/primeng';
@@ -67,7 +67,7 @@ import { AccountGuard, TestAccountGuard, TestDeactivate, verifiedGuard } from '.
 // import { RadioButtonModule } from 'primeng/primeng';
 // import { DropdownModule } from 'primeng/primeng';
 // import { CheckboxModule } from 'primeng/primeng';
-// import { CaptchaModule } from 'primeng/primeng';
+import { CaptchaModule } from 'primeng/primeng'; // this is being used in register part of login
 // import { PasswordModule } from 'primeng/primeng';
 // import { ProgressSpinnerModule } from 'primeng/primeng';
 // import { ChartModule } from 'primeng/primeng';
@@ -82,7 +82,7 @@ import { AppCustomPreloding } from './app-custom-preloading';
         AppRoutingModule,
         HttpModule,
         MatButtonModule,
-        // GrowlModule,
+        GrowlModule,
         // DialogModule,
         // FileUploadModule,
         // TooltipModule,
@@ -98,7 +98,7 @@ import { AppCustomPreloding } from './app-custom-preloading';
         // RadioButtonModule,
         // DropdownModule,
         // CheckboxModule,
-        // CaptchaModule,
+        CaptchaModule,
         // PasswordModule,
         // ProgressSpinnerModule,
         // ChartModule,
