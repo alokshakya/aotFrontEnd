@@ -24,6 +24,7 @@
   
 </div> -->
 
+<p-growl [value]="message" life="4000"></p-growl>
 <div class="container prelogin">
   <div class="align-self-center">
   <div class="card"></div>
@@ -130,8 +131,8 @@
               <!-- <input type="text" id="#{label}" required="required"/>
               <label for="#{label}">Class</label>
               <div class="bar"></div> -->
-              <select  class="chosen-select" required="required">
-                <option selected="selected">Select Your Class</option>
+              <select [(ngModel)]="userRegCreds.class" name="class"  class="chosen-select" required="required">
+                <option selected="selected" >Select Your Class</option>
                 <option value="class1">Class 1</option>
                 <option value="class2">Class 2</option>
                 <option value="class3">Class 3</option>
@@ -145,9 +146,9 @@
           </div>
           <div class="col-sm-6 col-xs-12">
             <div class="input-gender">
-              <input type='radio' id='male' checked='checked' name='radio'>
+              <input type='radio' id='male' value="male" [(ngModel)]="userRegCreds.gender" checked='checked' name="gender" #genderControl="ngModel">
               <label for='male'>Male</label>
-              <input type='radio' id='female' name='radio'>
+              <input type='radio' id='female' value="female" [(ngModel)]="userRegCreds.gender" name="gender">
               <label for='female'>Female</label>
             </div>
           </div>
@@ -166,22 +167,26 @@
           <div class="col-sm-6 col-xs-12">
             <div class="input-container">
               <input type="password" id="regPassC" name="regPassword1" #regPassword="ngModel" [(ngModel)]="confirmPassword" pattern="^[^\s]{6,}"  required="required"/>
-              <p [hidden]="regPassword.untouched" *ngIf="confirmPassword!=userRegCreds.password" class="error">Password doesn't match</p>
+              <p [hidden]="regPassword.untouched" *ngIf="(confirmPassword !='') && confirmPassword!=userRegCreds.password" class="error">Password doesn't match</p>
               <label for="regPassC">Confirm Password</label>
               <div class="bar"></div>
             </div>
           </div>
         </div>
-        <!-- <div class="ui-g-12 ui-sm-12">
-          <p-captcha #captcha siteKey="6LfVJUUUAAAAAGWXhy14h_D8Iw4AydIVKwhObjKb" (onResponse)="showResponse($event)"></p-captcha>
-      </div> -->
+        <div class="row">
+          <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+            <p-captcha #captcha siteKey="6LfVJUUUAAAAAGWXhy14h_D8Iw4AydIVKwhObjKb" (onResponse)="showResponse($event)"></p-captcha>
+          </div>
+        </div>
+        <br>
         <div class="button-container">
-          <button type="submit" [disabled]="regEmail.errors ||spinner ||firstname.errors
+          <button type="submit" (click)="signUp()">Register</button>
+          <!-- <button type="submit" [disabled]="regEmail.errors ||spinner ||firstname.errors
           || lastname.errors || pass.errors || number.errors
           || userRegCreds.mobile==''||userRegCreds.mobile==null ||userRegCreds.password==''
           || userRegCreds.firstname=='' || userRegCreds.lastname=='' || userRegCreds.email==''
           || userRegCreds.class==''||userRegCreds.class==null || userRegCreds.password==''
-          || confirmPassword=='' || confirmPassword!=userRegCreds.password||userRegCreds.gender==null||userRegCreds.gender==''" (click)="signUp()"><span>Register</span></button>
+          || confirmPassword=='' || confirmPassword!=userRegCreds.password||userRegCreds.gender==null||genderControl.errors" (click)="signUp()"><span>Register</span></button> -->
         </div>
       </form>
     </div>

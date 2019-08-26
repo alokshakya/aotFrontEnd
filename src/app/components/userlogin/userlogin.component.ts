@@ -400,6 +400,8 @@ export class UserloginComponent implements OnInit, AfterViewChecked {
     }
 
     signUp() {
+      console.log('user details json object');
+      console.log(this.userRegCreds);
         if(!this.isHuman){
             return false;
         }
